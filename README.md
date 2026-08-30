@@ -1,4 +1,6 @@
+```markdown
 عنوان شغلی| توضیح وظایف| نقش
+
 Founder / مؤسس| ایجاد ایده، تعیین جهت کلی کسب‌وکار و تصمیم‌های کلان| ناظر
 Product Visionary| تعریف چشم‌انداز محصول و اینکه محصول قرار است چه مسئله‌ای را حل کند| ناظر
 Investor / سرمایه‌گذار| تأمین سرمایه و نظارت بر بازگشت سرمایه| ناظر
@@ -130,4 +132,5 @@ Backup Administrator| مدیریت Backup و Restore| مجری
 Business Continuity Manager| تضمین تداوم فعالیت کسب‌وکار| ناظر
 Product Owner پس از Release| مدیریت Evolution محصول و Backlog آینده| ناظر
 End-of-Life Manager| برنامه‌ریزی برای پایان عمر محصول| ناظر
-Decommission Engineer| خاموش‌کردن امن سرویس‌ها و انتقال/حذف داده‌ها| مجری
+Decommission Engineer| خاموش‌کردن امن سرویس‌هاو انتقال/حذف داده‌ها| مجری
+```
