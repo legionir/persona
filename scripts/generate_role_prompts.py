@@ -18,6 +18,19 @@ ROOT = Path(__file__).resolve().parent.parent
 README = ROOT / "README.md"
 AUDIT_DIR = ROOT / "prompts" / "audit"
 IMPL_DIR = ROOT / "prompts" / "implementation"
+DETAILS = ROOT / "details.md"
+
+
+DETAIL_COLS = 23
+
+
+DETAIL_KEYS = [
+    "mission", "responsibilities", "scope", "required", "optional",
+    "context", "preconditions", "procedure", "decision", "allowed",
+    "restricted", "outputs", "quality", "evidence", "handoff",
+    "escalation", "permissions", "lifecycle", "memory", "kpi", "duties",
+]
+
 
 
 # --------------------------------------------------------------------------
@@ -3100,45 +3113,102 @@ GROUP_OF = {
 # Prompt builders (structure stays stable; body comes from bespoke spec)
 # --------------------------------------------------------------------------
 
-def audit_prompt(title: str, duties: str, slug: str) -> str:
+def _norm_text(value: str) -> str:
+    """Normalize separators and whitespace in a single cell."""
+    value = value.replace("،", ", ").replace("、", ", ")
+    value = value.replace("‌", "").strip()
+    value = re.sub(r"\s+", " ", value)
+    return value.strip()
+
+
+def _norm_persona(persona: dict) -> dict:
+    return {k: _norm_text(v) for k, v in persona.items()}
+
+
+def _bullets(value: str) -> str:
+    value = _norm_text(value)
+    parts = [x.strip() for x in re.split(r"[,،]", value) if x.strip()]
+    if not parts:
+        return "- —"
+    return "\n".join(f"- {x}" for x in parts)
+
+
+def _bullets(value: str) -> str:
+    parts = [x.strip() for x in re.split(r"[,،]", value) if x.strip()]
+    if not parts:
+        return "- —"
+    return "\n".join(f"- {x}" for x in parts)
+
+
+def _steps(value: str) -> str:
+    parts = [x.strip() for x in re.split(r"→", value) if x.strip()]
+    if not parts:
+        return "- —"
+    return "\n".join(f"{i}. {x}" for i, x in enumerate(parts, 1))
+
+
+def _decisions(value: str) -> str:
+    parts = [x.strip() for x in re.split(r"[,،/]", value) if x.strip()]
+    if not parts:
+        return "- —"
+    return "\n".join(f"- {x}" for x in parts)
+
+
+def audit_prompt(title: str, persona: dict, slug: str) -> str:
     s = spec_for(slug)
+    p = persona
     return f"""# سیستم پرامپت — ممیزی «{title}»
 
 ## نقش
-تو به‌عنوان «{title}» و در قالب یک **ناظر متخصص و مستقل** عمل می‌کنی. وظیفه‌ات *اجرا نیست*؛ تو کیفیت، کامل‌بودن، صحت و انطباق را بر اساس شواهد واقعی ارزیابی و حکم/پیشنهاد می‌کنی.
+تو «{title}» هستی و در قالب یک **ناظر متخصص و مستقل** عمل می‌کنی. اجرا نمی‌کنی؛ کیفیت، کامل‌بودن، صحت و انطباق را بر اساس شواهد واقعی ارزیابی و حکم/پیشنهاد می‌دهی.
 
-## هدف این ممیزی
-{s["mission"]}
+## مأموریت
+{p['mission']}
 
-## مسئولیت‌های اصلی (از README)
-- {duties}
+## مسئولیت‌ها
+{_bullets(p['responsibilities'])}
+
+## محدوده و اختیار
+- **محدوده (Scope)**: {p['scope']}
+- **سطح دسترسی**: {p['permissions']}
+- **وضعیت‌های چرخه**: {p['lifecycle']}
+- **حافظه کاری**: {p['memory']}
+
+## ورودی‌ها و پیش‌شرط‌ها
+- **ورودی الزامی**: {p['required']}
+- **ورودی اختیاری**: {p['optional']}
+- **Context**: {p['context']}
+- **پیش‌شرط‌ها**: {p['preconditions']}
+
+## فرآیند اجرا (Procedure)
+{_steps(p['procedure'])}
+
+## قواعد تصمیم‌گیری
+{_decisions(p['decision'])}
+
+## ابزار
+- **مجاز**: {p['allowed']}
+- **ممنوع/محدود**: {p['restricted']}
+
+## خروجی و کیفیت
+- **خروجی‌ها**: {p['outputs']}
+- **معیار پذیرش (Quality Gate)**: {p['quality']}
+- **شواهد لازم**: {p['evidence']}
+
+## تحویل و اسکالیشن
+- **تحویل به**: {p['handoff']}
+- **شرایط Escalation**: {p['escalation']}
+- **KPI / معیار عملکرد**: {p['kpi']}
 
 ## محورهای ممیزی مختص این نقش
-{_lines(s["audit"])}
+{_lines(s['audit'])}
 
-## قانون طلایی
-- هر یافته باید به **فایل/کامپوننت/درخواست/سند/متریک مشخص** ارجاع داشته باشد؛ بدون ارجاع، یافته معتبر نیست.
-- اگر کد/سند در دسترس است ولی امکان اجرا/رندر واقعی وجود ندارد، یافته را `POTENTIAL` علامت بزن و محدودیت را اعلام کن.
-- اگر ابزار اجرا/رندر/تست موجود است، یافته‌های Static را cross-check کن (حالت HYBRID)؛ در غیر این صورت حالت STATIC.
-- ادعای «همه‌چیز بررسی شد» بدون فهرست واقعی موارد بررسی‌شده پذیرفته نیست.
-- یافته‌های با ریشه‌ی مشترک را دقیقاً یک **Root Finding** با فهرست `Affected` ثبت کن؛ یافته‌ی تکراری نساز.
-- اگر شواهد کافی نیست، بنویس: «شواهد کافی برای اثبات این مورد وجود ندارد» و از حدس پرهیز کن.
-
-## گام‌های اجرا
-### گام ۱ — شناخت دامنه
-- Scope را با فهرست دقیق ورودی/خروجی/محیط‌ها تعیین کن.
-- منابع شواهد (فایل/مسیر/خط/داده) را ثبت کن.
-
-### گام ۲ — ارزیابی مورد به مورد
-- هر مورد را در برابر محورهای بالا و الگوهای موجود در خود پروژه بسنج.
-- برای حالت‌های معنادار (موفق/خطا/خالی/ایمن/ناایمن/توقعات) نتیجه ثبت کن.
-
-### گام ۳ — Deduplication
-- یافته‌های هم‌ریشه را یک `Root Finding` با `Affected` نمایندگی کن.
-
-### گام ۴ — گزارش و حکم
-- اولویت‌بندی: Consistency-breaking > Security/Accessibility > UX/ریسک بحرانی > DRY/Reusability > جزئیات ظاهری > سلیقه‌ای.
-- ترتیب: SEVERITY → CONFIDENCE → EVIDENCE_STATUS.
+## قواعد ممیزی (الزامی)
+- هر یافته باید به **فایل/کامپوننت/داده/سند/متریک مشخص** ارجاع بدهد؛ بدون ارجاع، یافته معتبر نیست.
+- اگر امکان رندر یا اجرای واقعی وجود ندارد، یافته را با `POTENTIAL` علامت بزن و محدودیت را اعلام کن.
+- یافته‌های با ریشه‌ی مشترک را یک **Root Finding** با فهرست `Affected` ثبت کن؛ یافته‌ی تکراری نساز.
+- اگر شواهد کافی نیست بنویس: «شواهد کافی برای اثبات این مورد وجود ندارد» و حدس نزن.
+- خروجی را فقط بر اساس شواهد موجود بده؛ هیچ ادعای بدون فهرست واقعی پذیرفته نیست.
 
 ## قالب هر یافته
 ```
@@ -3157,89 +3227,91 @@ IMPACT:
 RECOMMENDED FIX:
 REGRESSION RISK:
 ```
-برای `POTENTIAL`/`UNVERIFIED` دو خط `MISSING EVIDENCE` و `WHAT WOULD CONFIRM IT` هم اضافه کن.
+برای `POTENTIAL` / `UNVERIFIED`، دو خط `MISSING EVIDENCE` و `WHAT WOULD CONFIRM IT` هم اضافه کن.
+
+## خروجی نهایی ممیزی
+1. خلاصه اجرایی (وضعیت کلی، مهم‌ترین ریسک‌ها، آمادگی)
+2. جدول پوشش (مورد | منبع شواهد | وضعیت)
+3. یافته‌ها با قالب بالا و پس از Deduplication
+4. حکم نهایی + اولویت اقدامات (SEVERITY → CONFIDENCE → EVIDENCE_STATUS)
 
 ## معیارهای پذیرش ممیزی «{title}»
-{_lines(s["accept"])}
+{_lines(s['accept'])}
 - هر یافته دارای SEVERITY / CONFIDENCE / EVIDENCE_STATUS جدا باشد.
-- جدول Coverage شامل همه‌ی موارد بررسی‌شده/ردشده + دلیل باشد.
-- هیچ یافته‌ی تکراری بدون Deduplication نمانده باشد.
+- همه‌ی موارد با ارجاع واقعی ثبت شوند و هیچ یافته‌ی تکراری نمانده باشد.
 - حکم نهایی فقط بر اساس یافته‌های مستند باشد.
 """
 
 
-def impl_prompt(title: str, duties: str, slug: str) -> str:
+def impl_prompt(title: str, persona: dict, slug: str) -> str:
     s = spec_for(slug)
-    return f"""# سیستم پرامپت — راهنمای پیاده‌سازی «{title}»
+    p = persona
+    return f"""# سیستم پرامپت — اجرا/پیاده‌سازی «{title}»
 
 ## نقش
-تو به‌عنوان «{title}» و در قالب یک **Senior Implementation Planner / Orchestrator** عمل می‌کنی. وظیفه‌ات ساختن یک **پلن اجرایی دقیق، وابستگی‌آگاه و قابل ردیابی** است تا پیاده‌ساز، تسک را بدون بازتفسیر و بدون ازدست‌دادن Scope اجرا کند.
+تو «{title}» هستی و وظایف تعریف‌شده‌ی این نقش را به‌صورت کامل، دقیق و قابل تحویل اجرا می‌کنی.
 
-## هدف این راهنما
-{s["mission"]}
+## مأموریت
+{p['mission']}
 
-## مسئولیت‌های اصلی (از README)
-- {duties}
+## مسئولیت‌ها
+{_bullets(p['responsibilities'])}
 
-## حوزه‌ی پیاده‌سازی مختص این نقش
-{_lines(s["impl"])}
+## محدوده و اختیار
+- **محدوده (Scope)**: {p['scope']}
+- **سطح دسترسی**: {p['permissions']}
+- **وضعیت‌های چرخه**: {p['lifecycle']}
+- **حافظه کاری**: {p['memory']}
 
-## اصول طراحی پلن (الزامی)
-- **تجزیه‌وتحلیل قبل از پلان**: Functional، Non-functional، معماری، وابستگی‌ها، دیتا/API/UI، امنیت، کارایی، تست، مهاجرت و ریسک.
-- **وابستگی اول**: اگر B به A وابسته است، A قبل از B. اجزای مستقل فقط اگر عملی و بدون کاهش کیفیت باشند در یک فاز می‌آیند.
-- **هر فاز واحد کامل است**: Cohesive، قابل اجرا در یک stage، با حالت میانی پایدار و معیار پذیرش قابل سنجش.
-- **شکنش مصنوعی ممنوع** و **Over-merge ممنوع**: صرفاً به‌خاطر تعداد کم فاز، کارهای پرریسک/نامرتبط را یکی نکن.
-- **Do Not Guess**: اگر اطلاعات لازم نیست، «Unknown / Requires Verification: ...» یا «Assumption: ...» بنویس؛ هرگز API/فایل/اسکیمای موجود را اختراع نکن.
-- **Hidden Work را بیاب**: validation، auth، error handling، schema، serialization، تست، مستندات، integration، backward compatibility.
-- **No Scope Loss**: قبل از نهایی‌کردن، ممیزی Scope انجام بده؛ هر نیاز تسک اصلی در جای مشخصی از پلن باشد.
+## ورودی‌ها و پیش‌شرط‌ها
+- **ورودی الزامی**: {p['required']}
+- **ورودی اختیاری**: {p['optional']}
+- **Context**: {p['context']}
+- **پیش‌شرط‌ها**: {p['preconditions']}
 
-## ساختار خروجی (الزامی)
-```markdown
-# قوانین ثابت انجام پروژه
-[قواعد دائمی.]
+## فرآیند اجرا (Procedure)
+{_steps(p['procedure'])}
 
-# پلن اجرایی
+## قواعد تصمیم‌گیری
+{_decisions(p['decision'])}
 
-## [🔴] فاز ۱: عنوان فاز
-[شرح هدف/scope/خروجی فاز]
+## ابزار
+- **مجاز**: {p['allowed']}
+- **ممنوع/محدود**: {p['restricted']}
 
-### [🔴] گام ۱: عنوان گام
-[مسئولیت دقیق implementation]
+## خروجی و کیفیت
+- **خروجی‌ها**: {p['outputs']}
+- **معیار پذیرش (Quality Gate)**: {p['quality']}
+- **شواهد لازم**: {p['evidence']}
 
-### [🔴] گام ۲: عنوان گام
-...
+## تحویل و اسکالیشن
+- **تحویل به**: {p['handoff']}
+- **شرایط Escalation**: {p['escalation']}
+- **KPI / معیار عملکرد**: {p['kpi']}
 
-**معیار پذیرش:**
-- ...
----
-...
-```
+## محورهای پیاده‌سازی مختص این نقش
+{_lines(s['impl'])}
 
-## سیستم وضعیت
-- 🔴 Not Implemented
-- 🟡 Partially Implemented
-- 🟢 Fully Implemented
+## قواعد اجرا (الزامی)
+- تسک را بر اساس فرآیند بالا اجرا کن و ترتیب وابستگی‌ها را حفظ کن.
+- هر خروجی باید معیار پذیرش را برآورده کند؛ بدون تأیید، ادعای اتمام نکن.
+- اگر اطلاعات لازم نیست، «Unknown / Requires Verification: ...» یا «Assumption: ...» بنویس و حدس نزن.
+- کار را به‌شدت تجزیه نکن و کارهای پرریسک/نامرتبط را در یک قدم ادغام نکن.
+- هنگام گزارش وضعیت فقط از 🔴 (Not Implemented) / 🟡 (Partially Implemented) / 🟢 (Fully Implemented) استفاده کن و فاز را فقط وقتی 🟢 بگذار که همه‌ی گام‌ها و معیارهای پذیرش تأیید شده باشند.
+- عملکرد موجود را حفظ کن مگر عمداً در حال تغییرش باشی؛ هر تغییر را مستند کن.
 
-فازی 🟢 است که **همه‌ی گام‌ها 🟢** و **تکتک معیارهای پذیرش** محقق باشند.
+## خروجی نهایی
+1. خروجی‌های تعریف‌شده برای این نقش
+2. شواهد لازم برای اثبات کیفیت
+3. وضعیت هر بخش + مستندات/زنجیره‌ی ردیابی
+4. در صورت وجود بلوکر یا نیاز به تصمیم، طبق شرایط Escalation مطرح کن
 
-## قواعد دائمی (در خروجی درج شود)
-- الزام را حذف نکن؛ در صورت تغییر دلیل را بنویس.
-- اطلاعات ناقص را حدس نزن.
-- ناقص را کامل علامت نزن.
-- عملکرد موجود را حفظ کن مگر عمداً تغییر کنی.
-- هر فاز را راستی‌آزمایی کن؛ پیاده‌سازی production-quality.
-- بعد از هر stage وضعیت را به‌روز کن؛ پلن و پیاده‌سازی هم‌گام بمانند.
-- Scope اضافه نگذار؛ فازها را مصنوعی ریز نکن و کارهای نامرتبط را ادغام نکن.
-- ترتیب وابستگی را نگه دار؛ بدون تأیید، ادعای پایان نکن.
-
-## معیارهای پذیرش پلن «{title}»
-{_lines(s["accept"])}
-- تمام نیازمندی‌ها به‌صورت ردیابی‌پذیر در فازها بازنمایی شده باشند.
-- ترتیب فازها با گراف وابستگی سازگار باشد.
-- هر فاز دارای معیار پذیرش قابل سنجش و وضعیت دقیق باشد.
-- هیچ گام مبهمی مثل «بهتر کردن سیستم» وجود نداشته باشد.
+## معیارهای پذیرش اجرا «{title}»
+{_lines(s['accept'])}
+- خروجی‌ها با معیار پذیرش (Quality Gate) مطابقت داشته باشند.
+- همه‌ی مراحل فرآیند، بدون حذف، انجام و مستند شده باشند.
+- تحویل به ذی‌نفع مشخص و شواهد مورد نیاز ثبت شده باشد.
 """
-
 
 # --------------------------------------------------------------------------
 # README handling
@@ -3294,6 +3366,50 @@ def rewrite_readme(links: dict[str, str]) -> None:
 # Main
 # --------------------------------------------------------------------------
 
+def load_details() -> dict[str, dict]:
+    """Return title -> persona dict from details.md (after header + separator)."""
+    result: dict[str, dict] = {}
+    lines = DETAILS.read_text(encoding="utf-8").splitlines()
+    # line 0 = header, line 1 = separator, data starts line 2
+    for ln in lines[2:]:
+        s = ln.strip()
+        if not s.startswith("|"):
+            continue
+        cells = [c.strip() for c in s.strip("|").split("|")]
+        if cells and cells[0] == "":
+            cells = cells[1:]
+        if cells and cells[-1] == "":
+            cells = cells[:-1]
+        if len(cells) != DETAIL_COLS:
+            continue
+        title = cells[0]
+        data = {
+            "duties": cells[1],
+            "mission": cells[3],
+            "responsibilities": cells[4],
+            "scope": cells[5],
+            "required": cells[6],
+            "optional": cells[7],
+            "context": cells[8],
+            "preconditions": cells[9],
+            "procedure": cells[10],
+            "decision": cells[11],
+            "allowed": cells[12],
+            "restricted": cells[13],
+            "outputs": cells[14],
+            "quality": cells[15],
+            "evidence": cells[16],
+            "handoff": cells[17],
+            "escalation": cells[18],
+            "permissions": cells[19],
+            "lifecycle": cells[20],
+            "memory": cells[21],
+            "kpi": cells[22],
+        }
+        result[title] = data
+    return result
+
+
 def main() -> None:
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     IMPL_DIR.mkdir(parents=True, exist_ok=True)
@@ -3303,8 +3419,12 @@ def main() -> None:
     data_rows = [r for r in rows if r[0] != header[0]]
     print(f"Role rows found: {len(data_rows)}")
 
+    details = load_details()
+    print(f"Detail rows found: {len(details)}")
+
     links: dict[str, str] = {}
     missing_spec = []
+    missing_detail = []
     for r in data_rows:
         title, duties, role_type = r[0], r[1], r[2]
         slug = _slug(title)
@@ -3314,15 +3434,44 @@ def main() -> None:
         else:
             missing_spec.append(slug)
 
+        persona = details.get(title)
+        if persona is None:
+            missing_detail.append(title)
+            persona = {
+                "duties": duties,
+                "mission": spec["mission"],
+                "responsibilities": duties,
+                "scope": "—",
+                "required": "—",
+                "optional": "—",
+                "context": "—",
+                "preconditions": "—",
+                "procedure": "—",
+                "decision": "—",
+                "allowed": "—",
+                "restricted": "—",
+                "outputs": "—",
+                "quality": "—",
+                "evidence": "—",
+                "handoff": "—",
+                "escalation": "—",
+                "permissions": "—",
+                "lifecycle": "—",
+                "memory": "—",
+                "kpi": "—",
+            }
+
+        persona = _norm_persona(persona)
+
         if role_type == "ناظر":
             rel = f"prompts/audit/{slug}.md"
             path = ROOT / rel
-            path.write_text(audit_prompt(title, duties, slug), encoding="utf-8")
+            path.write_text(audit_prompt(title, persona, slug), encoding="utf-8")
             label = "Audit"
         else:
             rel = f"prompts/implementation/{slug}.md"
             path = ROOT / rel
-            path.write_text(impl_prompt(title, duties, slug), encoding="utf-8")
+            path.write_text(impl_prompt(title, persona, slug), encoding="utf-8")
             label = "Implementation"
         links[title] = f"[{label}]({rel})"
 
