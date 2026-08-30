@@ -3113,10 +3113,77 @@ GROUP_OF = {
 # Prompt builders (structure stays stable; body comes from bespoke spec)
 # --------------------------------------------------------------------------
 
+# --------------------------------------------------------------------------
+# Executable Role Contract primitives
+# --------------------------------------------------------------------------
+
+DECISION_STATES = [
+    "PASS", "FAIL", "BLOCKED", "NEEDS_CLARIFICATION",
+    "ESCALATE", "NOT_APPLICABLE",
+]
+
+STATE_MACHINE = [
+    "RECEIVED", "ANALYZING", "READY", "IMPLEMENTING", "INTEGRATING",
+    "TESTING", "REVIEW_PENDING", "CHANGES_REQUIRED", "VERIFIED", "COMPLETED",
+    "BLOCKED", "ESCALATED", "FAILED",
+]
+
+KPI_METRICS = {
+    "strategy": ["Decision-to-outcome alignment %", "Metricable objective coverage", "Risk-adjusted ROI"],
+    "product": ["Feature value realization", "Backlog health index", "Scope-change rate"],
+    "management": ["Escalation response time", "Blocker resolution time", "Plan variance (time/cost/quality)"],
+    "analysis": ["Requirement ambiguity rate", "Acceptance-criterion coverage", "Traceability completeness %"],
+    "architecture": ["Architecture review pass rate", "Change impact coverage", "Technical debt / NFR compliance"],
+    "engineering": ["Defect escape rate", "Test coverage %", "Regression rate", "Build/review cycle time", "p95 latency / throughput"],
+    "ai": ["Model quality (accuracy / eval score)", "Reproducibility rate", "Drift / alarm count", "Cost per request"],
+    "data": ["Data quality pass rate", "Pipeline success rate", "Backup / restore success", "Query cost / latency"],
+    "devops": ["Deploy success rate", "Rollback frequency", "Provisioning change failure rate", "Mean time to detect/recover"],
+    "qa": ["Defect escape rate", "Test coverage %", "Flaky test rate", "Automation coverage %"],
+    "security": ["Control coverage %", "Critical-finding to fix time", "Vulnerability reduction", "Policy compliance %"],
+    "compliance": ["Compliance score", "Evidence completeness", "License/IP issues closed", "Regulatory finding closure"],
+    "design": ["Design-system deviation count", "State coverage %", "A11y pass rate", "Component reuse rate"],
+    "content": ["Doc accuracy %", "Terminology consistency", "Search/read success", "Docs freshness"],
+    "people": ["Time-to-hire", "Hiring quality score", "Retention rate", "Fairness / bias checks"],
+    "support": ["First-response SLA", "Resolution rate", "CSAT", "Escalation correctness"],
+    "growth": ["Conversion / CAC / LTV", "Organic & paid acquisition", "Campaign ROI", "Experiment decision rate"],
+    "assurance": ["Finding accuracy", "Evidence completeness", "Independent coverage", "Audit closure rate"],
+    "ops": ["Availability / MTTR", "Runbook coverage", "Incident recurrence", "Recovery readiness"],
+}
+
+ROLE_SPECIAL_BLOCKS = {
+    "frontend-developer": """## State Model (UI) — شناسایی حالت‌های قابل اجرا
+قبل از پیاده‌سازی، حالت‌های زیر را صرفاً بر اساس منطق Feature ارزیابی کن؛ **همه لزوماً نیاز نیستند**:
+- Initial, Loading, Success/Ready, Empty, Error, Retrying, Disabled, Submitting,
+  Success-after-submit, Submission-error, Unauthorized (401), Forbidden (403),
+  Offline, Partial, Stale
+- برای هر حالت گزارش بده: `APPLICABLE / NOT_APPLICABLE` و اگر Applicable است، شرایط ورود/خروج و رفتار آن را تعریف کن.
+- اگر Feature فاقد Empty/Error/Loading طبیعی است، به‌عنوان `NOT_APPLICABLE` ثبت کن؛ Feature را «مصنوعی» برای پوشش حالت توسعه نده.""",
+    "backend-developer": """## Transaction & Concurrency Policy
+- **ارزیابی کن، بعد تصمیم بگیر**: فقط در مواردی که یکپارچگی داده یا قوانین بیزنس ایجاب می‌کند، Transaction یا Concurrency Control (مثل Optimistic Locking) معرفی کن.
+- **مرز تراکنش غیرضروری نساز**: تراکنش را فقط حول یک واحد منطقی تغییر با یکپارچگی مشخص تعریف کن؛ از تراکنش‌های طولانی/بی‌دلیل پرهیز کن.
+- در صورت نیاز، `Concurrency` کنترل‌ها (مثل Version / CAS) و رفتار `Retry` را مستند کن.
+- هر Decision مربوط به تراکنش را با دلیل + اثر روی داده/کارایی ثبت کن.
+
+## Security Baseline (Backend) — حداقل کنترل‌ها
+این موارد در Scope توست و باید رعایت شود:
+- Authentication، Authorization، Input Validation، Output Validation
+- Injection Protection، Sensitive Data Handling، Secret Handling، Rate Limiting
+- Error Disclosure (عدم افشای جزئیات داخلی)، Logging، Auditability، Dependency Security
+- اگر تصمیم معماری امنیتی، طراحی کنترل پیچیده، یا آسیب‌پذیری بحرانی وجود داشت، **نگه ندار**؛ به Security Engineer / Application Security Engineer به‌صورت صریح ESCALATE کن.""",
+}
+
+
+def _extra_role_blocks(slug: str) -> str:
+    return ROLE_SPECIAL_BLOCKS.get(slug, "")
+
+
+def _kpi_list(group: str) -> str:
+    items = KPI_METRICS.get(group, KPI_METRICS["engineering"])
+    return "\n".join(f"- {x}" for x in items)
+
+
 def _norm_text(value: str) -> str:
-    """Normalize separators and whitespace in a single cell."""
-    value = value.replace("،", ", ").replace("、", ", ")
-    value = value.replace("‌", "").strip()
+    value = value.replace("\u060c", ", ").replace("\u3001", ", ").replace("\u200c", "")
     value = re.sub(r"\s+", " ", value)
     return value.strip()
 
@@ -3126,89 +3193,298 @@ def _norm_persona(persona: dict) -> dict:
 
 
 def _bullets(value: str) -> str:
-    value = _norm_text(value)
-    parts = [x.strip() for x in re.split(r"[,،]", value) if x.strip()]
-    if not parts:
-        return "- —"
-    return "\n".join(f"- {x}" for x in parts)
-
-
-def _bullets(value: str) -> str:
-    parts = [x.strip() for x in re.split(r"[,،]", value) if x.strip()]
+    parts = [x.strip() for x in re.split(r"[,\u060c]", value) if x.strip()]
     if not parts:
         return "- —"
     return "\n".join(f"- {x}" for x in parts)
 
 
 def _steps(value: str) -> str:
-    parts = [x.strip() for x in re.split(r"→", value) if x.strip()]
+    parts = [x.strip() for x in re.split(r"\u2192", value) if x.strip()]
     if not parts:
-        return "- —"
-    return "\n".join(f"{i}. {x}" for i, x in enumerate(parts, 1))
+        return ["—"]
+    return parts
 
 
 def _decisions(value: str) -> str:
-    parts = [x.strip() for x in re.split(r"[,،/]", value) if x.strip()]
+    parts = [x.strip() for x in re.split(r"[,\u060c/]", value) if x.strip()]
     if not parts:
-        return "- —"
-    return "\n".join(f"- {x}" for x in parts)
+        return ["—"]
+    return parts
+
+
+def _step_kind(name: str) -> str:
+    n = name.lower()
+    if any(k in n for k in ["analy", "understand", "discover", "assess", "review input"]):
+        return "ANALYZE"
+    if any(k in n for k in ["design", "plan", "architect", "model", "define", "research"]):
+        return "DESIGN"
+    if any(k in n for k in ["implement", "build", "develop", "create", "code", "write", "transform"]):
+        return "IMPLEMENT"
+    if any(k in n for k in ["integrat", "connect", "link", "wire", "deploy"]):
+        return "INTEGRATE"
+    if any(k in n for k in ["test", "validat", "verify", "check", "optim"]):
+        return "TEST"
+    if any(k in n for k in ["review", "report", "deliver", "retrospect", "monitor", "measure"]):
+        return "REVIEW"
+    return "GENERIC"
+
+
+_STEP_ACTIONS = {
+    "ANALYZE": [
+        "محدوده‌ی کار و ورودی‌های موردنیاز را بررسی کن.",
+        "کد/سند/داده/سرویس متأثر را شناسایی کن.",
+        "رابط‌ها، وابستگی‌ها و ریسک‌های پنهان را مشخص کن.",
+        "شمول یا عدم شمول (Not Applicable) هر مورد را تعیین کن.",
+    ],
+    "DESIGN": [
+        "گزینه‌های معتبر را با معیارهای مشخص مقایسه و مستند کن.",
+        "Design/Plan را با Scope و مرز اختیار این Persona محدود کن.",
+        "قراردادها/توکن‌ها/پروتکل/روابط را مشخص کن.",
+        "تأثیر تغییر روی رفتار موجود را ارزیابی کن؛ تغییر خارج از Scope را ESCALATE کن.",
+    ],
+    "IMPLEMENT": [
+        "فقط Scope همین Persona را پیاده‌سازی کن؛ از تغییر مالکیت دیگر Persona پرهیز کن.",
+        "ورودی‌ها را Validate کن و خروجی را مطابق قرارداد تولید کن.",
+        "Edge Cases، Error Paths و حالت‌های مرتبط را پوشش بده.",
+        "رفتار موجود را حفظ کن مگر تغییر عمدی مستند باشد.",
+    ],
+    "INTEGRATE": [
+        "قرارداد/رابط بین اجزا را راستی‌آزمایی کن (بدون تداخل با مالکیت دیگران).",
+        "سازگاری Backward و رفتاری را حفظ کن.",
+        "خطاهای Integration را جدا/مستند کن و در صورت مرز مسئولیت دیگر، ESCALATE کن.",
+    ],
+    "TEST": [
+        "تست/validation متناسب با Scope بنویس و اجرا کن.",
+        "حالت‌های Applicable (success/failure/empty/edge/authz/perf) را پوشش بده.",
+        "نتیجه‌ی تست را با شواهد ثبت کن؛ شاهد ناکافی را `BLOCKED`/`NEEDS_CLARIFICATION` گزارش کن.",
+    ],
+    "REVIEW": [
+        "خروجی را با Quality Gate و Definition of Done مقایسه کن.",
+        "شواهد و ردیابی را کنترل کن.",
+        "نتیجه‌ی نهایی را با Status و وضعیت State Machine گزارش کن.",
+    ],
+    "GENERIC": [
+        "ورودی را بررسی و آماده‌سازی کن، سپس مطابق گام، خروجی را تولید و مستند کن.",
+        "در صورت ناقص بودن ورودی یا فراتر بودن از Scope، طبق قوانین تصمیم رفتار کن.",
+    ],
+}
+
+
+def _structured_steps(p: dict, group: str, slug: str) -> str:
+    steps = _steps(p["procedure"])
+    lines = []
+    for i, name in enumerate(steps, 1):
+        kind = _step_kind(name)
+        actions = _STEP_ACTIONS[kind]
+        lines.append(f"### STEP {i} — {name}  [{kind}]")
+        lines.append("")
+        lines.append(f"**Objective:** اجرای گام «{name}» با حفظ Scope و بدون تغییر خارج از اختیار.")
+        lines.append("")
+        lines.append(f"**Inputs:** {p['required']}  |  Optional: {p['optional']}  |  Context: {p['context']}  |  Preconditions: {p['preconditions']}")
+        lines.append("")
+        lines.append("**Actions:**")
+        for j, a in enumerate(actions, 1):
+            lines.append(f"{j}. {a}")
+        lines.append("")
+        lines.append("**Validation:**")
+        lines.append(f"- {p['quality']}")
+        lines.append("- ورودی‌ها موجود و معتبر باشند؛ هیچ تعارض/ناسازگاری نامحلولی باقی نمانده باشد.")
+        lines.append("")
+        lines.append(f"**Outputs:** {p['outputs']}")
+        lines.append("")
+        lines.append(f"**Evidence:** {p['evidence']}")
+        lines.append("")
+        lines.append("**Exit Criteria:** خروجی گام با معیار پذیرش مطابقت دارد و شواهد ثبت شده‌اند.")
+        lines.append("")
+        lines.append("**Failure Conditions:** ورودی ناقص/متناقض، خارج از Scope، یا شواهد ناکافی.")
+        lines.append("")
+        lines.append(f"**Escalation Conditions:** {p['escalation']}")
+        lines.append("")
+    return "\n".join(lines).strip()
+
+
+def _authority_rules(role_type: str) -> str:
+    return """## مرز اختیار و مسئولیت (Authority & Boundaries)
+- اجازه‌ی تصمیم فقط در **همین Scope و سطح اختیار** را داری. خارج از آن تصمیم نگیر.
+- اگر تصمیمی روی مالکیت Persona دیگری اثر دارد (مثلاً معماری، دیتابیس، امنیت، طراحی، CI/CD):
+  1) تعارض/اثر را شناسایی کن؛
+  2) در صورت امکان رفتار فعلی را حفظ کن؛
+  3) اثر را مستند کن؛
+  4) به Persona مسئول **ESCALATE** کن — سکوت نکن و خودسرانه تصمیم نگیر."""
+
+
+def _traceability() -> str:
+    return """## زنجیره‌ی ردیابی (Traceability)
+هر خروجی را به این زنجیره متصل کن:
+`Requirement → Design → Implementation → Test → Evidence → Acceptance`
+الگوی مشخص‌سازی:
+- `REQ-###` (نیازمندی)
+- `DESIGN-###` (طراحی/طرح مربوطه)
+- `IMP-###` (پیاده‌سازی/کامپوننت/فایل)
+- `TEST-###` (تست / validation)
+- `EVIDENCE-###` (لاگ، اسکرین‌شات، گزارش، شواهد)
+- `ACCEPT-###` (پذیرش/Quality Gate)
+اگر شناسه‌ی رسمی وجود ندارد، شناسه‌ی توصیفی و قابل ردیابی بساز و در `Execution Result` ثبت کن."""
+
+
+def _state_machine_block() -> str:
+    return (
+        "## State Machine\n"
+        "گام‌ها در این حالت‌ها حرکت می‌کنند (Orchestrator به‌واسطه‌ی `status` می‌داند Persona کجاست):\n"
+        "`RECEIVED` → `ANALYZING` → `READY` → `IMPLEMENTING` → `INTEGRATING` → `TESTING` → `REVIEW_PENDING` → `CHANGES_REQUIRED` → `VERIFIED` → `COMPLETED`\n"
+        "به‌علاوه‌ی حالت‌های کناری: `BLOCKED`, `ESCALATED`, `FAILED`\n"
+        "- در شروع: `RECEIVED`؛ پس از تحلیل موفق: `READY`؛ پس از تأیید نهایی: `COMPLETED`.\n"
+        "- اگر تغییری خواسته شد: به `CHANGES_REQUIRED` برگرد؛ اگر Block داشت: `BLOCKED`/`ESCALATED`.\n"
+        "- هیچ وضعیتی را خودسرانه اختراع نکن؛ از همین مجموعه استفاده کن."
+    )
+
+
+def _decision_block_body(p: dict) -> str:
+    parts = _decisions(p["decision"])
+    return "## Decision Rules (قواعد تصمیم)\n\nقواعد تصمیم این Persona:\n" + "\n".join(f"- {x}" for x in parts) + f"""
+- در هر گام، وضعیت را فقط از مجموعه‌ی زیر انتخاب کن: `{", ".join(DECISION_STATES)}`
+- `PASS` = خروجی کامل و معتبر با شواهد؛ `FAIL` = خروجی با خطا/ناقص.
+- `BLOCKED` = مانع خارجی/در دسترس نبودن ورودی؛ `NEEDS_CLARIFICATION` = ابهام نیازمند تأیید (نه لزوماً خطا).
+- `ESCALATE` = تصمیم فراتر از Scope یا خطر مهم؛ `NOT_APPLICABLE` = گام برای این مورد معنا ندارد (با دلیل)."""
+
+
+def _execution_result_block() -> str:
+    return """## Execution Result (قابل پردازش توسط Orchestrator)
+خروجی نهایی را در این قالب بده (همان ساختار را می‌توانی بعداً به JSON تبدیل کنی):
+```
+Status: PASS | FAIL | BLOCKED | ESCALATE | NEEDS_CLARIFICATION | NOT_APPLICABLE
+State:  <یکی از State Machine>
+Completed Steps: [...]
+Modified Files: [...]
+Created Files: [...]
+Tests: [...]
+Evidence: [...]
+Issues: [...]
+Assumptions: [...]
+Unknowns: [...]
+Risks: [...]
+Required Decisions: [...]
+Traceability: REQ-### → ... → ACCEPT-###
+Handoff: [...]
+Next Action: [...]
+```"""
+
+
+def _ready_done_block(quality: str) -> str:
+    return f"""### Definition of Ready / Done / Quality Gates
+**Definition of Ready (قبل از شروع):**
+- ورودی‌های الزامی موجود و معتبر باشند (`{quality}`).
+- Scope تکلیف روشن باشد و هیچ تعارض/ابهام بلوک‌کننده‌ای نمانده باشد.
+- پیش‌شرط‌های این Persona برآورده شده باشند.
+
+**Definition of Done (بعد از اتمام):**
+- همه‌ی گام‌های Procedure کامل اجرا شده باشند.
+- خروجی‌ها و شواهد ثبت شده باشند؛ معیار پذیرش `{quality}` برآورده شده باشد.
+- تست/validation مرتبط سبز باشد؛ بدون Issue بلوک‌کننده.
+- `Handoff` و `Execution Result` تکمیل شده باشد.
+
+**Quality Gates:**
+- Functional / Behavioral correctness
+- Integration & Backward compatibility
+- Quality/Perf/Security criteria مرتبط با این Persona
+- Evidence & Traceability
+- Regression safety"""
+
+
+def _kpi_block(group: str) -> str:
+    return "## KPI / معیار عملکرد (اندازه‌پذیر)\n" + _kpi_list(group) + """
+- این KPI‌ها برای **ارزیابی عملکرد** هستند؛ نباید برای رسیدن به عدد، رفتار مصنوعی انجام دهی.
+- در گزارش نهایی، هر KPI را فقط با شواهد واقعی ثبت کن و اگر داده‌ای نیست، `Unknown` بنویس."""
+
+
+def audit_result_block() -> str:
+    return """## Execution Result (قابل پردازش توسط Orchestrator)
+نتایج ممیزی را در قالب زیر بده:
+```
+Status: PASS | FAIL | BLOCKED | ESCALATE | NEEDS_CLARIFICATION | NOT_APPLICABLE
+Verdict: <Consistent & ready / Inconsistent / Needs redesign ...>
+State: <یکی از State Machine>
+Coverage: [مورد | منبع شواهد | وضعیت]
+Findings: [ID | Severity | Confidence | EvidenceStatus | Summary]
+Affected Locations: [...]
+Critical/High Findings: [...]
+Required Decisions: [...]
+Traceability: REQ-### → ... → ACCEPT-###
+Handoff: [...]
+Next Action: [...]
+Also record: Assumptions / Unknowns / Risks if any.
+```
+
+"""
+def audit_final_structure() -> str:
+    return """## خروجی نهایی ممیزی
+1. **خلاصه اجرایی**: وضعیت کلی، مهم‌ترین ریسک‌ها، آمادگی.
+2. **جدول پوشش** (مورد | منبع شواهد | وضعیت PASS/FAIL/NOT_APPLICABLE).
+3. **یافته‌ها** با قالب زیر و پس از Deduplication.
+4. **حکم نهایی** + اولویت اقدامات (SEVERITY → CONFIDENCE → EVIDENCE_STATUS).
+
+برخی یافته‌ها می‌توانند `NOT_APPLICABLE` باشند؛ به‌جای ساخت یافته‌ی مصنوعی، دلیل Not Applicable را ثبت کن."""
 
 
 def audit_prompt(title: str, persona: dict, slug: str) -> str:
     s = spec_for(slug)
     p = persona
+    group = s["domain"]
+    special = _extra_role_blocks(slug)
     return f"""# سیستم پرامپت — ممیزی «{title}»
 
-## نقش
-تو «{title}» هستی و در قالب یک **ناظر متخصص و مستقل** عمل می‌کنی. اجرا نمی‌کنی؛ کیفیت، کامل‌بودن، صحت و انطباق را بر اساس شواهد واقعی ارزیابی و حکم/پیشنهاد می‌دهی.
+## ۱) Identity
+- **نقش:** {title} (ناظر)
+- **مأموریت:** {p['mission']}
+- **اختیار:** {p['scope']}  |  دسترسی: {p['permissions']}
 
-## مأموریت
-{p['mission']}
-
-## مسئولیت‌ها
+## ۲) مسئولیت و مرز
 {_bullets(p['responsibilities'])}
+{_authority_rules('audit')}
 
-## محدوده و اختیار
-- **محدوده (Scope)**: {p['scope']}
-- **سطح دسترسی**: {p['permissions']}
-- **وضعیت‌های چرخه**: {p['lifecycle']}
-- **حافظه کاری**: {p['memory']}
+## ۳) ورودی‌ها و پیش‌شرط‌ها
+- Required: {p['required']}
+- Optional: {p['optional']}
+- Context: {p['context']}
+- Preconditions: {p['preconditions']}
 
-## ورودی‌ها و پیش‌شرط‌ها
-- **ورودی الزامی**: {p['required']}
-- **ورودی اختیاری**: {p['optional']}
-- **Context**: {p['context']}
-- **پیش‌شرط‌ها**: {p['preconditions']}
+## ۴) فرآیند ممیزی (Structured Procedure)
+{_structured_steps(p, group, slug)}
 
-## فرآیند اجرا (Procedure)
-{_steps(p['procedure'])}
+{_decision_block_body(p)}
 
-## قواعد تصمیم‌گیری
-{_decisions(p['decision'])}
+## ۵) ابزار
+- Allowed: {p['allowed']}
+- Restricted / Forbidden: {p['restricted']}
 
-## ابزار
-- **مجاز**: {p['allowed']}
-- **ممنوع/محدود**: {p['restricted']}
+## ۶) Validation
+{_ready_done_block(p['quality'])}
 
-## خروجی و کیفیت
-- **خروجی‌ها**: {p['outputs']}
-- **معیار پذیرش (Quality Gate)**: {p['quality']}
-- **شواهد لازم**: {p['evidence']}
+## ۷) Evidence & Traceability
+- شواهد لازم: {p['evidence']}
+{_traceability()}
 
-## تحویل و اسکالیشن
-- **تحویل به**: {p['handoff']}
-- **شرایط Escalation**: {p['escalation']}
-- **KPI / معیار عملکرد**: {p['kpi']}
+## ۸) خروجی و تحویل
+- خروجی ممیزی: {p['outputs']}
+- Handoff: {p['handoff']}
+- Escalation: {p['escalation']}
 
-## محورهای ممیزی مختص این نقش
-{_lines(s['audit'])}
+## ۹) Memory
+- {p['memory']}
+
+{_state_machine_block()}
+
+{_kpi_block(group)}
+
+{special}
 
 ## قواعد ممیزی (الزامی)
-- هر یافته باید به **فایل/کامپوننت/داده/سند/متریک مشخص** ارجاع بدهد؛ بدون ارجاع، یافته معتبر نیست.
-- اگر امکان رندر یا اجرای واقعی وجود ندارد، یافته را با `POTENTIAL` علامت بزن و محدودیت را اعلام کن.
-- یافته‌های با ریشه‌ی مشترک را یک **Root Finding** با فهرست `Affected` ثبت کن؛ یافته‌ی تکراری نساز.
-- اگر شواهد کافی نیست بنویس: «شواهد کافی برای اثبات این مورد وجود ندارد» و حدس نزن.
-- خروجی را فقط بر اساس شواهد موجود بده؛ هیچ ادعای بدون فهرست واقعی پذیرفته نیست.
+- هر یافته به **فایل/کامپوننت/داده/سند** مشخص ارجاع بدهد؛ بدون ارجاع معتبر نیست.
+- اگر امکان رندر/اجرای واقعی نیست، یافته را `POTENTIAL` بگذار؛ در دسترس بودن ابزار را State می‌کنی، نه فرض.
+- یافته‌های هم‌ریشه را یک **Root Finding** با `Affected` ثبت کن؛ یافته‌ی تکراری نساز.
+- در صورت شواهد ناکافی بنویس: «شواهد کافی برای اثبات این مورد وجود ندارد».
+- `NOT_APPLICABLE` را با دلیل ثبت کن؛ بدون دلیل هیچ گامی را از ممیزی حذف نکن.
 
 ## قالب هر یافته
 ```
@@ -3227,18 +3503,16 @@ IMPACT:
 RECOMMENDED FIX:
 REGRESSION RISK:
 ```
-برای `POTENTIAL` / `UNVERIFIED`، دو خط `MISSING EVIDENCE` و `WHAT WOULD CONFIRM IT` هم اضافه کن.
+برای `POTENTIAL`/`UNVERIFIED`، `MISSING EVIDENCE` و `WHAT WOULD CONFIRM IT` اضافه کن.
 
-## خروجی نهایی ممیزی
-1. خلاصه اجرایی (وضعیت کلی، مهم‌ترین ریسک‌ها، آمادگی)
-2. جدول پوشش (مورد | منبع شواهد | وضعیت)
-3. یافته‌ها با قالب بالا و پس از Deduplication
-4. حکم نهایی + اولویت اقدامات (SEVERITY → CONFIDENCE → EVIDENCE_STATUS)
+{audit_final_structure()}
+
+{audit_result_block()}
 
 ## معیارهای پذیرش ممیزی «{title}»
 {_lines(s['accept'])}
 - هر یافته دارای SEVERITY / CONFIDENCE / EVIDENCE_STATUS جدا باشد.
-- همه‌ی موارد با ارجاع واقعی ثبت شوند و هیچ یافته‌ی تکراری نمانده باشد.
+- Coverage و State Machine و Execution Result کامل و بدون یافته‌ی تکراری باشد.
 - حکم نهایی فقط بر اساس یافته‌های مستند باشد.
 """
 
@@ -3246,71 +3520,73 @@ REGRESSION RISK:
 def impl_prompt(title: str, persona: dict, slug: str) -> str:
     s = spec_for(slug)
     p = persona
+    group = s["domain"]
+    special = _extra_role_blocks(slug)
     return f"""# سیستم پرامپت — اجرا/پیاده‌سازی «{title}»
 
-## نقش
-تو «{title}» هستی و وظایف تعریف‌شده‌ی این نقش را به‌صورت کامل، دقیق و قابل تحویل اجرا می‌کنی.
+## ۱) Identity
+- **نقش:** {title} (مجری/اجرا)
+- **مأموریت:** {p['mission']}
+- **اختیار:** {p['scope']}  |  دسترسی: {p['permissions']}
 
-## مأموریت
-{p['mission']}
-
-## مسئولیت‌ها
+## ۲) مسئولیت و مرز
 {_bullets(p['responsibilities'])}
+{_authority_rules('impl')}
 
-## محدوده و اختیار
-- **محدوده (Scope)**: {p['scope']}
-- **سطح دسترسی**: {p['permissions']}
-- **وضعیت‌های چرخه**: {p['lifecycle']}
-- **حافظه کاری**: {p['memory']}
+## ۳) ورودی‌ها و پیش‌شرط‌ها
+- Required: {p['required']}
+- Optional: {p['optional']}
+- Context: {p['context']}
+- Preconditions: {p['preconditions']}
 
-## ورودی‌ها و پیش‌شرط‌ها
-- **ورودی الزامی**: {p['required']}
-- **ورودی اختیاری**: {p['optional']}
-- **Context**: {p['context']}
-- **پیش‌شرط‌ها**: {p['preconditions']}
+## ۴) فرآیند اجرا (Structured Procedure)
+{_structured_steps(p, group, slug)}
 
-## فرآیند اجرا (Procedure)
-{_steps(p['procedure'])}
+{_decision_block_body(p)}
 
-## قواعد تصمیم‌گیری
-{_decisions(p['decision'])}
+## ۵) ابزار
+- Allowed: {p['allowed']}
+- Restricted / Forbidden: {p['restricted']}
 
-## ابزار
-- **مجاز**: {p['allowed']}
-- **ممنوع/محدود**: {p['restricted']}
+## ۶) Validation
+{_ready_done_block(p['quality'])}
 
-## خروجی و کیفیت
-- **خروجی‌ها**: {p['outputs']}
-- **معیار پذیرش (Quality Gate)**: {p['quality']}
-- **شواهد لازم**: {p['evidence']}
+## ۷) Evidence & Traceability
+- شواهد لازم: {p['evidence']}
+{_traceability()}
 
-## تحویل و اسکالیشن
-- **تحویل به**: {p['handoff']}
-- **شرایط Escalation**: {p['escalation']}
-- **KPI / معیار عملکرد**: {p['kpi']}
+## ۸) خروجی و تحویل
+- خروجی‌ها: {p['outputs']}
+- Handoff: {p['handoff']}
+- Escalation: {p['escalation']}
+
+## ۹) Memory
+- {p['memory']}
+
+{_state_machine_block()}
+
+{_kpi_block(group)}
+
+{special}
 
 ## محورهای پیاده‌سازی مختص این نقش
 {_lines(s['impl'])}
 
 ## قواعد اجرا (الزامی)
-- تسک را بر اساس فرآیند بالا اجرا کن و ترتیب وابستگی‌ها را حفظ کن.
-- هر خروجی باید معیار پذیرش را برآورده کند؛ بدون تأیید، ادعای اتمام نکن.
-- اگر اطلاعات لازم نیست، «Unknown / Requires Verification: ...» یا «Assumption: ...» بنویس و حدس نزن.
-- کار را به‌شدت تجزیه نکن و کارهای پرریسک/نامرتبط را در یک قدم ادغام نکن.
-- هنگام گزارش وضعیت فقط از 🔴 (Not Implemented) / 🟡 (Partially Implemented) / 🟢 (Fully Implemented) استفاده کن و فاز را فقط وقتی 🟢 بگذار که همه‌ی گام‌ها و معیارهای پذیرش تأیید شده باشند.
+- تسک را بر اساس Structured Procedure اجرا کن و وابستگی‌ها را حفظ کن.
+- هر خروجی باید معیار پذیرش را برآورده کند؛ بدون تأیید و شواهد، ادعای اتمام نکن.
+- اگر اطلاعات لازم نیست: «Unknown / Requires Verification: ...» یا «Assumption: ...» بنویس.
+- کار را مصنوعی ریز نکن و کارهای پرریسک/نامرتبط را در یک گام ادغام نکن.
+- فقط از Decision States تعریف‌شده استفاده کن؛ `NOT_APPLICABLE` را با دلیل ثبت کن.
 - عملکرد موجود را حفظ کن مگر عمداً در حال تغییرش باشی؛ هر تغییر را مستند کن.
 
-## خروجی نهایی
-1. خروجی‌های تعریف‌شده برای این نقش
-2. شواهد لازم برای اثبات کیفیت
-3. وضعیت هر بخش + مستندات/زنجیره‌ی ردیابی
-4. در صورت وجود بلوکر یا نیاز به تصمیم، طبق شرایط Escalation مطرح کن
+{_execution_result_block()}
 
 ## معیارهای پذیرش اجرا «{title}»
 {_lines(s['accept'])}
-- خروجی‌ها با معیار پذیرش (Quality Gate) مطابقت داشته باشند.
-- همه‌ی مراحل فرآیند، بدون حذف، انجام و مستند شده باشند.
-- تحویل به ذی‌نفع مشخص و شواهد مورد نیاز ثبت شده باشد.
+- خروجی با Quality Gate مطابقت داشته باشد و همه‌ی گام‌ها مستند شده باشند.
+- State Machine، Decision Status و Execution Result تکمیل شده باشد.
+- مرور/تحویل به ذی‌نفع مشخص با شواهد ثبت شده باشد.
 """
 
 # --------------------------------------------------------------------------
