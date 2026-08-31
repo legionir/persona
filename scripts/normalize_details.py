@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Normalize details.md into a valid Markdown table + controlled vocabulary.
+"""Normalize the 23-column details table embedded in README.md.
+
+The details table (previously a separate details.md file) now lives inside
+README.md as its own 23-column table; this script normalizes it in place.
 
 Changes:
-1. Converts the pipe-delimited plain text into a real Markdown table
-   (leading/trailing pipes + header separator row).
+1. Rebuilds the table with leading/trailing pipes + header separator row.
 2. Harmonizes the "SRE" title with README's "SRE (Site Reliability Engineer)".
 3. Applies a controlled vocabulary to the tooling / permissions / lifecycle /
    restricted-tools columns and normalizes list separators everywhere.
@@ -19,7 +21,6 @@ from collections import OrderedDict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DETAILS = ROOT / "details.md"
 README = ROOT / "README.md"
 
 N_COLS = 23
@@ -519,20 +520,25 @@ HEADER = (
 HEADER_CELLS = [c.strip() for c in HEADER.split("|")]
 
 
+def _cells(s: str) -> list[str]:
+    s = s.strip()
+    if not s.startswith("|"):
+        return []
+    cells = [c.strip() for c in s.strip("|").split("|")]
+    if cells and cells[0] == "":
+        cells = cells[1:]
+    if cells and cells[-1] == "":
+        cells = cells[:-1]
+    return cells
+
+
 def parse_rows() -> list[list[str]]:
-    lines = DETAILS.read_text(encoding="utf-8").splitlines()
     rows: list[list[str]] = []
-    for ln in lines:
+    for ln in README.read_text(encoding="utf-8").splitlines():
         s = ln.strip()
-        if not s:
+        if not s.startswith("|"):
             continue
-        if s.startswith("|"):
-            s = s.strip("|")
-        cells = [c.strip() for c in s.split("|")]
-        if cells and cells[0] == "":
-            cells = cells[1:]
-        if cells and cells[-1] == "":
-            cells = cells[:-1]
+        cells = _cells(s)
         # strip markdown header + any separator row
         if cells == HEADER_CELLS:
             continue
@@ -540,8 +546,7 @@ def parse_rows() -> list[list[str]]:
             continue
         if len(cells) == N_COLS:
             rows.append(cells)
-        else:
-            print(f"WARNING skipping row with {len(cells)} cols: {s[:80]}")
+        # rows with a different column count belong to other README tables
     return rows
 
 
@@ -586,15 +591,20 @@ def main() -> None:
     print(f"Parsed rows: {len(rows)}")
     transformed = [transform(r) for r in rows]
 
-    out: list[str] = []
-    out.append("| " + " | ".join(esc(c) for c in HEADER_CELLS) + " |")
-    out.append("|" + "---|" * N_COLS)
+    table: list[str] = []
+    table.append("| " + " | ".join(esc(c) for c in HEADER_CELLS) + " |")
+    table.append("|" + "---|" * N_COLS)
     for r in transformed:
-        out.append("| " + " | ".join(esc(c) for c in r) + " |")
-    out.append("")
+        table.append("| " + " | ".join(esc(c) for c in r) + " |")
 
-    DETAILS.write_text("\n".join(out), encoding="utf-8")
-    print(f"Wrote {len(out)} lines to {DETAILS.name}")
+    # Replace the 23-column details table inside README.md in-place.
+    lines = README.read_text(encoding="utf-8").splitlines()
+    start = next(i for i, ln in enumerate(lines) if _cells(ln) == HEADER_CELLS)
+    end = start + 1
+    while end < len(lines) and lines[end].strip().startswith("|"):
+        end += 1
+    README.write_text("\n".join(lines[:start] + table + lines[end:]) + "\n", encoding="utf-8")
+    print(f"Wrote {len(table)} lines into README.md")
 
     # verify roundtrip
     re_rows = parse_rows()

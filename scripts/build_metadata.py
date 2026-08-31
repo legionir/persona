@@ -171,9 +171,9 @@ def main() -> None:
         "$schema": "personas-metadata/v1",
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": {
-            "schema": "Master Persona Schema & Generator Prompt.md",
+            "schema": "README.md (جدول جزئیات نقش‌ها)",
             "readme": "README.md",
-            "details": "details.md",
+            "details": "README.md (جدول جزئیات)",
             "generator": "scripts/generate_personas.py",
             "metadata_builder": "scripts/build_metadata.py",
         },

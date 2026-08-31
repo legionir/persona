@@ -3711,47 +3711,65 @@ def impl_prompt(title: str, persona: dict, slug: str) -> str:
 # --------------------------------------------------------------------------
 
 def read_rows() -> list[dict]:
+    """Return the rows of the FIRST (quick overview) table in README.md.
+
+    The merged README contains several tables (quick overview, 23-column
+    details, category tables); only the first contiguous table block is the
+    role registry consumed by the generators.
+    """
     data: list[dict] = []
+    started = False
     for ln in README.read_text(encoding="utf-8").splitlines():
         s = ln.strip()
-        if not s.startswith("|"):
-            continue
-        cells = [c.strip() for c in s.split("|")]
-        if cells and cells[0] == "":
-            cells = cells[1:]
-        if cells and cells[-1] == "":
-            cells = cells[:-1]
-        if len(cells) < 3:
-            continue
-        data.append(cells)
+        if s.startswith("|"):
+            started = True
+            cells = [c.strip() for c in s.split("|")]
+            if cells and cells[0] == "":
+                cells = cells[1:]
+            if cells and cells[-1] == "":
+                cells = cells[:-1]
+            if len(cells) < 3:
+                continue
+            data.append(cells)
+        elif started:
+            break
     return [r for r in data if not all(set(c) <= set("-: ") for c in r)]
 
 
 def rewrite_readme(links: dict[str, str]) -> None:
+    """Refresh the links of the FIRST (quick overview) table in README.md.
+
+    Only the first contiguous table block is rewritten; every other line
+    (details table, category tables, prose) passes through untouched.
+    """
     out: list[str] = []
+    in_table = False
     for ln in README.read_text(encoding="utf-8").splitlines():
         s = ln.strip()
-        if s.startswith("#") or not s.startswith("|"):
-            out.append(ln)
+        if s.startswith("|"):
+            in_table = True
+            cells = [c.strip() for c in s.split("|")]
+            if cells and cells[0] == "":
+                stem = cells[1:]
+            else:
+                stem = cells
+            stem = [c for c in stem if c != ""]
+            if all(set(c) <= set("-: ") for c in stem):
+                out.append("|---|---|---|---|")
+                continue
+            if len(stem) < 3:
+                out.append(ln)
+                continue
+            title, _duty, role = stem[0], stem[1], stem[2]
+            link = links.get(title, "")
+            if role == "نقش (مجری/ناظر)":
+                out.append("| عنوان شغلی | توضیح وظایف | نقش (مجری/ناظر) | پرامپت |")
+            else:
+                out.append(f"| {title} | {stem[1]} | {role} | {link} |")
             continue
-        cells = [c.strip() for c in s.split("|")]
-        if cells and cells[0] == "":
-            stem = cells[1:]
-        else:
-            stem = cells
-        stem = [c for c in stem if c != ""]
-        if all(set(c) <= set("-: ") for c in stem):
-            out.append("|---|---|---|---|")
-            continue
-        if len(stem) < 3:
-            out.append(ln)
-            continue
-        title, _duty, role = stem[0], stem[1], stem[2]
-        link = links.get(title, "")
-        if role == "نقش (مجری/ناظر)":
-            out.append("| عنوان شغلی | توضیح وظایف | نقش (مجری/ناظر) | پرامپت |")
-        else:
-            out.append(f"| {title} | {stem[1]} | {role} | {link} |")
+        if in_table:
+            in_table = False
+        out.append(ln)
     README.write_text("\n".join(out) + "\n", encoding="utf-8")
 
 
@@ -3760,11 +3778,24 @@ def rewrite_readme(links: dict[str, str]) -> None:
 # --------------------------------------------------------------------------
 
 def load_details() -> dict[str, dict]:
-    """Return title -> persona dict from details.md (after header + separator)."""
+    """Return title -> persona dict from the 23-column details table.
+
+    Reads details.md when present; otherwise falls back to the 23-column
+    details table embedded in README.md (single-source layout used since the
+    details.md file was merged into README.md).
+    """
     result: dict[str, dict] = {}
-    lines = DETAILS.read_text(encoding="utf-8").splitlines()
-    # line 0 = header, line 1 = separator, data starts line 2
-    for ln in lines[2:]:
+    if DETAILS.exists():
+        lines = DETAILS.read_text(encoding="utf-8").splitlines()
+        # line 0 = header, line 1 = separator, data starts line 2
+        iterable = lines[2:]
+    else:
+        # parse the 23-column table from README.md
+        iterable = [
+            ln for ln in README.read_text(encoding="utf-8").splitlines()
+            if len([c.strip() for c in ln.strip().strip("|").split("|")]) == DETAIL_COLS
+        ]
+    for ln in iterable:
         s = ln.strip()
         if not s.startswith("|"):
             continue
@@ -3774,6 +3805,8 @@ def load_details() -> dict[str, dict]:
         if cells and cells[-1] == "":
             cells = cells[:-1]
         if len(cells) != DETAIL_COLS:
+            continue
+        if cells[0] == "عنوان شغلی" or all(set(c) <= set("-: ") for c in cells):
             continue
         title = cells[0]
         data = {

@@ -2,17 +2,17 @@
 # -*- coding: utf-8 -*-
 """Master-schema-compliant persona generator.
 
-Generates every persona under prompts/ with the exact contract of
-"Master Persona Schema & Generator Prompt.md":
+Generates every persona under prompts/ with the exact persona-schema contract:
 
   * 01. Identity  ..  29. Mandatory Rules          (section 61)
   * 10 extra headings for SUPERVISOR personas      (section 62)
   * 12 extra headings for EXECUTOR personas        (section 63)
   * Role registry + executor->supervisor map       (sections 62..65)
 
-Per-role content comes from details.md (bespoke per role), merged with the
-bespoke per-role specs (SPECS + role_extras.EXTRA_SPECS).  Roles never fall
-back to silently generic content: missing data is rendered as
+Per-role content comes from the 23-column details table (previously details.md,
+now merged into README.md), merged with the bespoke per-role specs
+(SPECS + role_extras.EXTRA_SPECS).  Roles never fall back to silently generic
+content: missing data is rendered as
 "Unknown / Requires Verification: ..." (Master rule 3 of section 67).
 
 Usage:
@@ -21,6 +21,7 @@ Usage:
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -63,7 +64,13 @@ def _bullets_of(text: str) -> list[str]:
 
 
 def load_master_registry() -> tuple[dict[str, str], dict[str, str]]:
-    """Return (supervisor_titles_by_slug, executor_titles_by_slug) from Master 64."""
+    """Return (supervisor_titles_by_slug, executor_titles_by_slug) from Master 64.
+
+    Returns empty dicts when the Master file is not present (its role registry
+    is derived from the README role table instead).
+    """
+    if not MASTER.exists():
+        return {}, {}
     text = MASTER.read_text(encoding="utf-8")
     sup = _bullets_of(_between(text, r"SUPERVISOR_ROLES:\s*\n", r"\n---\n\n64\.2"))
     exe = _bullets_of(_between(text, r"EXECUTOR_ROLES:\s*\n", r"\n---\n\n64\.3"))
@@ -93,23 +100,33 @@ def load_master_registry() -> tuple[dict[str, str], dict[str, str]]:
 
 
 def load_master_map() -> dict[str, list[str]]:
-    """Parse section 65: executor title -> [supervisor titles]."""
-    text = MASTER.read_text(encoding="utf-8")
-    body = _between(text, r"SUPERVISOR_MAP:\s*\n", r"\n«توجه:")
-    result: dict[str, list[str]] = {}
-    cur = None
-    for ln in body.splitlines():
-        ln = ln.strip()
-        if not ln:
-            continue
-        if re.match(r"^[^-\s].*:$", ln):
-            cur = ln[:-1].strip()
-            result.setdefault(cur, [])
-            continue
-        m = re.match(r"^-\s+(.+)$", ln)
-        if m and cur:
-            result[cur].append(m.group(1).strip())
-    return result
+    """Parse section 65: executor title -> [supervisor titles].
+
+    When the Master file is absent (it was removed from the repo), the map is
+    derived from the generated personas.json so regeneration stays idempotent.
+    """
+    if MASTER.exists():
+        text = MASTER.read_text(encoding="utf-8")
+        body = _between(text, r"SUPERVISOR_MAP:\s*\n", r"\n«توجه:")
+        result: dict[str, list[str]] = {}
+        cur = None
+        for ln in body.splitlines():
+            ln = ln.strip()
+            if not ln:
+                continue
+            if re.match(r"^[^-\s].*:$", ln):
+                cur = ln[:-1].strip()
+                result.setdefault(cur, [])
+                continue
+            m = re.match(r"^-\s+(.+)$", ln)
+            if m and cur:
+                result[cur].append(m.group(1).strip())
+        return result
+    pj = ROOT / "personas.json"
+    if pj.exists():
+        data = json.loads(pj.read_text(encoding="utf-8"))
+        return {r["title"]: list(r["supervisors"]) for r in data["roles"] if r["supervisors"]}
+    return {}
 
 
 # Executor roles used by Master 65 as supervisors but registered as EXECUTOR:

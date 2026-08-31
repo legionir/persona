@@ -1,10 +1,10 @@
 {
   "$schema": "personas-metadata/v1",
-  "generated_at": "2026-08-31T15:32:01+00:00",
+  "generated_at": "2026-08-31T16:05:26+00:00",
   "source": {
-    "schema": "Master Persona Schema & Generator Prompt.md",
+    "schema": "README.md (جدول جزئیات نقش‌ها)",
     "readme": "README.md",
-    "details": "details.md",
+    "details": "README.md (جدول جزئیات)",
     "generator": "scripts/generate_personas.py",
     "metadata_builder": "scripts/build_metadata.py"
   },
