@@ -22,7 +22,9 @@
 | Enterprise Architect | هماهنگ‌کردن معماری نرم‌افزار با معماری کل سازمان | ناظر | [Audit](prompts/audit/enterprise-architect.md) |
 | System Architect | طراحی معماری کل سیستم شامل نرم‌افزار، سخت‌افزار و زیرساخت | مجری | [Implementation](prompts/implementation/system-architect.md) |
 | Technical Lead / Tech Lead | هدایت فنی تیم و تصمیم‌گیری درباره پیاده‌سازی | ناظر | [Audit](prompts/audit/technical-lead-tech-lead.md) |
+| Development Manager | مدیریت تیم توسعه نرم‌افزار و منابع فنی | ناظر | [Audit](prompts/audit/development-manager.md) |
 | Engineering Manager | مدیریت تیم مهندسی، افراد، ظرفیت و فرآیند توسعه | ناظر | [Audit](prompts/audit/engineering-manager.md) |
+| Chief Technology Officer (CTO) | هدایت استراتژیک فناوری و تصمیم‌گیری‌های معماری کلان | ناظر | [Audit](prompts/audit/cto.md) |
 | Staff Engineer | حل مسائل پیچیده فنی و هدایت معماری در مقیاس بزرگ | مجری | [Implementation](prompts/implementation/staff-engineer.md) |
 | Principal Engineer | تصمیم‌گیری‌های فنی سطح سازمان و معماری‌های پیچیده | ناظر | [Audit](prompts/audit/principal-engineer.md) |
 | Software Engineer | طراحی و پیاده‌سازی قابلیت‌های نرم‌افزار | مجری | [Implementation](prompts/implementation/software-engineer.md) |
@@ -41,6 +43,7 @@
 | MLOps Engineer | Deployment، Monitoring و Lifecycle مدل‌های ML | مجری | [Implementation](prompts/implementation/mlops-engineer.md) |
 | Prompt Engineer | طراحی Prompt و تعامل ساختاریافته با مدل‌های AI | مجری | [Implementation](prompts/implementation/prompt-engineer.md) |
 | AI Engineer | طراحی سیستم‌های مبتنی بر LLM، Agent، RAG و AI Services | مجری | [Implementation](prompts/implementation/ai-engineer.md) |
+| AI Engineer Lead | هدایت فنی تیم AI/Agent و Orchestration پروژه‌های Agent | ناظر | [Audit](prompts/audit/ai-engineer-lead.md) |
 | Database Administrator (DBA) | مدیریت Database، Backup، Performance و Security | مجری | [Implementation](prompts/implementation/database-administrator-dba.md) |
 | Database Engineer | طراحی Schema، Query، Index و معماری داده | مجری | [Implementation](prompts/implementation/database-engineer.md) |
 | Data Architect | طراحی معماری کلان داده | ناظر | [Audit](prompts/audit/data-architect.md) |
@@ -119,6 +122,7 @@
 | Data Analyst | تحلیل رفتار کاربران و KPIهای محصول | مجری | [Implementation](prompts/implementation/data-analyst.md) |
 | BI Analyst | ساخت گزارش‌ها و داشبوردهای مدیریتی | مجری | [Implementation](prompts/implementation/bi-analyst.md) |
 | Product Analyst | تحلیل استفاده کاربران برای تصمیم‌های Product | مجری | [Implementation](prompts/implementation/product-analyst.md) |
+| Product Analyst Lead | هدایت تیم تحلیل محصول و تصمیم‌گیری داده‌محور | ناظر | [Audit](prompts/audit/product-analyst-lead.md) |
 | Risk Manager | شناسایی و مدیریت ریسک‌های پروژه | ناظر | [Audit](prompts/audit/risk-manager.md) |
 | Change Manager | مدیریت تغییرات Scope، فرآیند و سازمان | ناظر | [Audit](prompts/audit/change-manager.md) |
 | Quality Manager | کنترل کیفیت کل فرآیند تولید محصول | ناظر | [Audit](prompts/audit/quality-manager.md) |
@@ -134,3 +138,11 @@
 | Product Owner پس از Release | مدیریت Evolution محصول و Backlog آینده | ناظر | [Audit](prompts/audit/product-owner-release.md) |
 | End-of-Life Manager | برنامه‌ریزی برای پایان عمر محصول | ناظر | [Audit](prompts/audit/end-of-life-manager.md) |
 | Decommission Engineer | خاموش‌کردن امن سرویس‌ها و انتقال/حذف داده‌ها | مجری | [Implementation](prompts/implementation/decommission-engineer.md) |
+| Agent Architect | طراحی معماری Agent، Orchestration و Workflow Management | مجری | [Implementation](prompts/implementation/agent-architect.md) |
+| Agent Integration Engineer | پیاده‌سازی و Integration Agent‌ها در سیستم | مجری | [Implementation](prompts/implementation/agent-integration-engineer.md) |
+| Tool Developer | ایجاد و maintenance Tools و API Wrapper برای Agent | مجری | [Implementation](prompts/implementation/tool-developer.md) |
+| Agent Evaluator | بررسی رفتار Agent، Hallucination Detection و Safety Validation | مجری | [Implementation](prompts/implementation/agent-evaluator.md) |
+| Agentic Prompt Specialist | طراحی Prompt مختص Agent و Few-Shot Examples | مجری | [Implementation](prompts/implementation/agentic-prompt-specialist.md) |
+| Agent Safety Engineer | Implement Guardrail، Jailbreak Detection و Budget Control | مجری | [Implementation](prompts/implementation/agent-safety-engineer.md) |
+| Chief Information Officer (CIO) | هدایت استراتژیک فناوری اطلاعات و IT Infrastructure | ناظر | [Audit](prompts/audit/cio.md) |
+| Chief Audit Officer (CAO) | رهبری ممیزی و کنترل داخلی | ناظر | [Audit](prompts/audit/cao.md) |
