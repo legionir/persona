@@ -22,7 +22,8 @@ AUDITS_DIR = ROOT / "audits"
 DETAILS = ROOT / "details.md"
 
 
-DETAIL_COLS = 23
+DETAIL_COLS = 23  # legacy details.md layout (kept for backward compat)
+MAIN_COLS = 28    # width of the merged main role table in README.md
 
 
 DETAIL_KEYS = [
@@ -3737,10 +3738,11 @@ def read_rows() -> list[dict]:
 
 
 def rewrite_readme(links: dict[str, str]) -> None:
-    """Refresh the links of the FIRST (quick overview) table in README.md.
+    """Refresh the prompt links of the FIRST (merged main) table in README.md.
 
-    Only the first contiguous table block is rewritten; every other line
-    (details table, category tables, prose) passes through untouched.
+    Only the first contiguous table block is rewritten — its 8th column holds
+    the prompt link; every other line (domain-grouping tables, mapping, stats,
+    prose) passes through untouched.
     """
     out: list[str] = []
     in_table = False
@@ -3750,22 +3752,20 @@ def rewrite_readme(links: dict[str, str]) -> None:
             in_table = True
             cells = [c.strip() for c in s.split("|")]
             if cells and cells[0] == "":
-                stem = cells[1:]
-            else:
-                stem = cells
-            stem = [c for c in stem if c != ""]
-            if all(set(c) <= set("-: ") for c in stem):
-                out.append("|---|---|---|---|")
-                continue
-            if len(stem) < 3:
+                cells = cells[1:]
+            if cells and cells[-1] == "":
+                cells = cells[:-1]
+            if cells and cells[0] == "عنوان شغلی":
                 out.append(ln)
                 continue
-            title, _duty, role = stem[0], stem[1], stem[2]
-            link = links.get(title, "")
-            if role == "نقش (مجری/ناظر)":
-                out.append("| عنوان شغلی | توضیح وظایف | نقش (مجری/ناظر) | پرامپت |")
-            else:
-                out.append(f"| {title} | {stem[1]} | {role} | {link} |")
+            if cells and all(set(c) <= set("-: ") for c in cells):
+                out.append("|" + "---|" * MAIN_COLS)
+                continue
+            if len(cells) < MAIN_COLS:
+                out.append(ln)
+                continue
+            cells[7] = links.get(cells[0], "")
+            out.append("| " + " | ".join(cells) + " |")
             continue
         if in_table:
             in_table = False
@@ -3778,23 +3778,30 @@ def rewrite_readme(links: dict[str, str]) -> None:
 # --------------------------------------------------------------------------
 
 def load_details() -> dict[str, dict]:
-    """Return title -> persona dict from the 23-column details table.
+    """Return title -> persona dict (the 23-column detail data per role).
 
-    Reads details.md when present; otherwise falls back to the 23-column
-    details table embedded in README.md (single-source layout used since the
-    details.md file was merged into README.md).
+    Reads details.md when present (legacy layout, 23 columns, detail data
+    starting at column 3); otherwise reads the merged 28-column main table in
+    README.md, where the detail columns (mission..kpi) start at column 8.
     """
     result: dict[str, dict] = {}
     if DETAILS.exists():
-        lines = DETAILS.read_text(encoding="utf-8").splitlines()
-        # line 0 = header, line 1 = separator, data starts line 2
-        iterable = lines[2:]
+        iterable = DETAILS.read_text(encoding="utf-8").splitlines()[2:]
+        width, base = DETAIL_COLS, 3
     else:
-        # parse the 23-column table from README.md
         iterable = [
             ln for ln in README.read_text(encoding="utf-8").splitlines()
-            if len([c.strip() for c in ln.strip().strip("|").split("|")]) == DETAIL_COLS
+            if ln.strip().startswith("|")
         ]
+        # only keep the first contiguous table block (the merged main table)
+        first: list[str] = []
+        for ln in iterable:
+            if ln.strip().startswith("|"):
+                first.append(ln)
+            elif first:
+                break
+        iterable = first
+        width, base = MAIN_COLS, 8
     for ln in iterable:
         s = ln.strip()
         if not s.startswith("|"):
@@ -3804,35 +3811,34 @@ def load_details() -> dict[str, dict]:
             cells = cells[1:]
         if cells and cells[-1] == "":
             cells = cells[:-1]
-        if len(cells) != DETAIL_COLS:
+        if len(cells) != width:
             continue
         if cells[0] == "عنوان شغلی" or all(set(c) <= set("-: ") for c in cells):
             continue
         title = cells[0]
-        data = {
+        result[title] = {
             "duties": cells[1],
-            "mission": cells[3],
-            "responsibilities": cells[4],
-            "scope": cells[5],
-            "required": cells[6],
-            "optional": cells[7],
-            "context": cells[8],
-            "preconditions": cells[9],
-            "procedure": cells[10],
-            "decision": cells[11],
-            "allowed": cells[12],
-            "restricted": cells[13],
-            "outputs": cells[14],
-            "quality": cells[15],
-            "evidence": cells[16],
-            "handoff": cells[17],
-            "escalation": cells[18],
-            "permissions": cells[19],
-            "lifecycle": cells[20],
-            "memory": cells[21],
-            "kpi": cells[22],
+            "mission": cells[base + 0],
+            "responsibilities": cells[base + 1],
+            "scope": cells[base + 2],
+            "required": cells[base + 3],
+            "optional": cells[base + 4],
+            "context": cells[base + 5],
+            "preconditions": cells[base + 6],
+            "procedure": cells[base + 7],
+            "decision": cells[base + 8],
+            "allowed": cells[base + 9],
+            "restricted": cells[base + 10],
+            "outputs": cells[base + 11],
+            "quality": cells[base + 12],
+            "evidence": cells[base + 13],
+            "handoff": cells[base + 14],
+            "escalation": cells[base + 15],
+            "permissions": cells[base + 16],
+            "lifecycle": cells[base + 17],
+            "memory": cells[base + 18],
+            "kpi": cells[base + 19],
         }
-        result[title] = data
     return result
 
 

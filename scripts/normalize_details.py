@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Normalize the 23-column details table embedded in README.md.
+"""Normalize the merged main role table in README.md.
 
-The details table (previously a separate details.md file) now lives inside
-README.md as its own 23-column table; this script normalizes it in place.
+The 23-column per-role details (previously a separate details.md file) now
+live inside the single 28-column main table of README.md; this script
+normalizes that table in place.
 
 Changes:
 1. Rebuilds the table with leading/trailing pipes + header separator row.
@@ -23,7 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 README = ROOT / "README.md"
 
-N_COLS = 23
+N_COLS = 28  # width of the merged main role table in README.md
 
 # ---------------------------------------------------------------------------
 # Title harmonization
@@ -506,7 +507,8 @@ def clean(value: str) -> str:
 # ---------------------------------------------------------------------------
 
 HEADER = (
-    "عنوان شغلی| توضیح وظایف| نقش| مأموریت اصلی (Mission)| مسئولیت‌ها (Responsibilities)| "
+    "عنوان شغلی| توضیح وظایف| نقش (مجری/ناظر)| حوزه اصلی| حوزه فرعی| توضیح مختصر| ناظر مربوطه| پرامپت| "
+    "مأموریت اصلی (Mission)| مسئولیت‌ها (Responsibilities)| "
     "محدوده اختیار (Scope)| ورودی‌های الزامی (Required Inputs)| ورودی‌های اختیاری (Optional Inputs)| "
     "Context موردنیاز| پیش‌شرط‌ها (Preconditions)| گام‌های اجرایی (Procedure)| "
     "تصمیم‌ها و قوانین (Decision Rules)| ابزارهای مجاز (Allowed Tools)| "
@@ -564,20 +566,21 @@ def transform(row: list[str]) -> list[str]:
     r[0] = title
 
     # 2. tooling / lifecycle / permissions / restricted controlled vocab
-    r[12] = normalize_tools(r[12])
-    r[13] = normalize_restricted(r[13])
-    r[19] = normalize_permissions(r[19])
-    r[20] = normalize_lifecycle(r[20])
+    #    (detail columns start at index 8 in the merged main table)
+    r[17] = normalize_tools(r[17])
+    r[18] = normalize_restricted(r[18])
+    r[24] = normalize_permissions(r[24])
+    r[25] = normalize_lifecycle(r[25])
 
     # 3. normal list separators on remaining mostly-list cells
-    for idx in (4, 5, 6, 7, 8, 14, 17, 18, 22):
+    for idx in (9, 10, 11, 12, 13, 19, 22, 23, 27):
         r[idx] = normalize_list_separator(r[idx])
 
     # 4. remove whitespace-only duplicates artifacts
-    r[12] = normalize_list_separator(r[12])
-    r[13] = normalize_list_separator(r[13])
-    r[19] = normalize_list_separator(r[19])
-    r[20] = normalize_list_separator(r[20])
+    r[17] = normalize_list_separator(r[17])
+    r[18] = normalize_list_separator(r[18])
+    r[24] = normalize_list_separator(r[24])
+    r[25] = normalize_list_separator(r[25])
     return r
 
 
@@ -597,7 +600,7 @@ def main() -> None:
     for r in transformed:
         table.append("| " + " | ".join(esc(c) for c in r) + " |")
 
-    # Replace the 23-column details table inside README.md in-place.
+    # Replace the merged main role table inside README.md in-place.
     lines = README.read_text(encoding="utf-8").splitlines()
     start = next(i for i, ln in enumerate(lines) if _cells(ln) == HEADER_CELLS)
     end = start + 1
