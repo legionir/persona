@@ -1,5 +1,11 @@
 ### AI Personas
 
+> 🔍 **یافتن سریع Persona:** [`index.html`](index.html) را در مرورگر باز کن (یا `python3 -m http.server 8000` و سپس `http://localhost:8000/index.html`). این صفحه فایل [`personas.json`](personas.json) را می‌خواند و با جستجو/فیلتر (نوع، حوزه، دسته، سطح) فایل پرامپت هر نقش را نشان می‌دهد.
+>
+> 🌐 **نسخهٔ آنلاین (GitHub Pages):** پس از فعال‌سازی Pages (تنظیمات → Pages → Deploy from a branch → `main` → `/ (root)`)، سایت در `https://legionir.github.io/persona/` در دسترس خواهد بود. فایل `.nojekyll` در ریشهٔ مخزن اضافه شده تا فایل‌های Markdown/JSON بدون پردازش Jekyll دقیقاً همان‌طور که هستند سرو شوند.
+>
+> 📦 **متادیتای API-ready:** [`personas.json`](personas.json) — بین ۱۷۰ نقش با فیلدهای `id`، `roleId`، `type`، `domain`، `category`، `seniority`، `mission`، `duties`، `supervisors`، `consumers`، `capabilities`، `path` و `facets` برای جستجو/دسته‌بندی. بازتولید: `python3 scripts/build_metadata.py`
+
 | عنوان شغلی | توضیح وظایف | نقش (مجری/ناظر) | پرامپت |
 |---|---|---|---|
 | Founder / مؤسس | ایجاد ایده، تعیین جهت کلی کسب‌وکار و تصمیم‌های کلان | ناظر | [Audit](prompts/audit/founder.md) |
@@ -146,3 +152,29 @@
 | Agent Safety Engineer | Implement Guardrail، Jailbreak Detection و Budget Control | مجری | [Implementation](prompts/implementation/agent-safety-engineer.md) |
 | Chief Information Officer (CIO) | هدایت استراتژیک فناوری اطلاعات و IT Infrastructure | ناظر | [Audit](prompts/audit/cio.md) |
 | Chief Audit Officer (CAO) | رهبری ممیزی و کنترل داخلی | ناظر | [Audit](prompts/audit/cao.md) |
+| Chief Information Security Officer (CISO) | هدایت استراتژیک امنیت اطلاعات و حکمرانی امنیتی | ناظر | [Audit](prompts/audit/ciso.md) |
+| Chief Privacy Officer | هدایت استراتژیک حریم خصوصی و انطباق داده | ناظر | [Audit](prompts/audit/chief-privacy-officer.md) |
+| Chief Design Officer (CDO) | هدایت استراتژیک طراحی و تجربه کاربر | ناظر | [Audit](prompts/audit/chief-design-officer.md) |
+| Community Director | هدایت استراتژیک جامعه و مشارکت اعضا | ناظر | [Audit](prompts/audit/community-director.md) |
+| Design Manager | مدیریت تیم طراحی و کیفیت خروجی‌ها | ناظر | [Audit](prompts/audit/design-manager.md) |
+| DevOps Manager | مدیریت تیم DevOps و فرایند تحویل | ناظر | [Audit](prompts/audit/devops-manager.md) |
+| Documentation Manager | مدیریت تیم مستندسازی و کیفیت اسناد | ناظر | [Audit](prompts/audit/documentation-manager.md) |
+| Embedded Systems Lead | هدایت تیم Embedded/IoT | ناظر | [Audit](prompts/audit/embedded-systems-lead.md) |
+| Infrastructure Manager | مدیریت زیرساخت و عملیات | ناظر | [Audit](prompts/audit/infrastructure-manager.md) |
+| Localization Manager | مدیریت تیم Localization و کیفیت ترجمه | ناظر | [Audit](prompts/audit/localization-manager.md) |
+| Performance Engineering Lead | هدایت تیم بهینه‌سازی عملکرد | ناظر | [Audit](prompts/audit/performance-engineering-lead.md) |
+| Procurement Manager | مدیریت خرید و تامین | ناظر | [Audit](prompts/audit/procurement-manager.md) |
+| Recruitment Manager | مدیریت فرآیند جذب | ناظر | [Audit](prompts/audit/recruitment-manager.md) |
+| Support Manager | مدیریت تیم پشتیبانی و رعایت SLA | ناظر | [Audit](prompts/audit/support-manager.md) |
+| Architecture Review Board | بازبینی و تأیید تصمیم‌های معماری | ناظر | [Audit](prompts/audit/architecture-review-board.md) |
+| Data Governance Manager | مدیریت حاکمیت داده | ناظر | [Audit](prompts/audit/data-governance-manager.md) |
+| Security Governance Manager | مدیریت حاکمیت امنیت | ناظر | [Audit](prompts/audit/security-governance-manager.md) |
+| Release Manager | مدیریت انتشار نسخه‌ها | ناظر | [Audit](prompts/audit/release-manager.md) |
+| Service Owner | مالک سرویس | ناظر | [Audit](prompts/audit/service-owner.md) |
+| Platform Owner | مالک پلتفرم | ناظر | [Audit](prompts/audit/platform-owner.md) |
+| Cloud Security Engineer | امنیت سرویس‌های Cloud | مجری | [Implementation](prompts/implementation/cloud-security-engineer.md) |
+| Database Security Specialist | امنیت پایگاه داده | مجری | [Implementation](prompts/implementation/database-security-specialist.md) |
+| SOC Analyst | تحلیل و پاسخ اولیه به هشدارهای امنیتی | مجری | [Implementation](prompts/implementation/soc-analyst.md) |
+| Incident Response Engineer | پاسخ به رخداد امنیتی | مجری | [Implementation](prompts/implementation/incident-response-engineer.md) |
+| Vulnerability Management Specialist | مدیریت آسیب‌پذیری‌ها | مجری | [Implementation](prompts/implementation/vulnerability-management-specialist.md) |
+| Security Auditor | ممیزی مستقل امنیت | مجری | [Implementation](prompts/implementation/security-auditor.md) |

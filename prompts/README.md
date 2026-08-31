@@ -16,11 +16,25 @@
 
 ## Regeneration
 
-پرامپت‌ها از جدول `README.md` و با قالب‌های موجود در `scripts/generate_role_prompts.py` تولید می‌شوند. برای بازتولید:
+پرامپت‌ها از جدول `README.md` + `details.md` + `scripts/role_extras.py` و دقیقاً مطابق ساختار «Master Persona Schema & Generator Prompt.md» (۲۹ سکشن + سکشن‌های ویژه ناظر/مجری) با ژنراتور زیر تولید می‌شوند:
 
 ```bash
-python3 scripts/generate_role_prompts.py
+python3 scripts/generate_personas.py
 ```
+
+اعتبارسنجی ساختار همهٔ فایل‌ها:
+
+```bash
+python3 scripts/validate_personas.py
+```
+
+ساخت متادیتای جستجو/API (`personas.json`):
+
+```bash
+python3 scripts/build_metadata.py
+```
+
+جستجوگر تعاملی: [`index.html`](../index.html)
 
 این اسکریپت هم فایل‌های پرامپت را بازنویسی می‌کند و هم ستون `پرامپت` و لینک‌های README را به‌روز نگه می‌دارد.
 
@@ -40,7 +54,7 @@ python3 scripts/generate_role_prompts.py
 
 ## دسته‌بندی بر اساس نقش
 
-### ناظرها (65 نقش)
+### ناظرها (74 نقش)
 
 | عنوان شغلی | حوزه اصلی | حوزه فرعی | توضیح مختصر |
 |---|---|---|---|
@@ -107,11 +121,21 @@ python3 scripts/generate_role_prompts.py
 | **Chief Design Officer (CDO)** | طراحی و تجربه کاربری | استراتژیک | هدایت استراتژیک طراحی |
 | **Documentation Manager** | مستندسازی | مدیریت | مدیریت تیم مستندسازی |
 | **Localization Manager** | Localization و ترجمه | مدیریت | مدیریت تیم Localization |
-| **Embedded Systems Lead** | سخت‌افزار و Embedded | رهبری | هدایت تیم Embedded/IoT |
+| **Embedded Systems Lead** | سخت‌افزار و Embedded | رهبری | هدایت تیم Embedded/IoT || AI Engineer Lead | داده و هوش مصنوعی | رهبری | هدایت فنی تیم AI/Agent و Orchestration |
+| Product Analyst Lead | تحقیق و آنالیز | رهبری | هدایت تیم تحلیل محصول و تصمیم‌گیری داده‌محور |
+| Chief Information Officer (CIO) | مدیریت و استراتژی | فناوری | هدایت استراتژیک IT و زیرساخت |
+| Chief Audit Officer (CAO) | حقوقی و انطباق | ممیزی داخلی | رهبری ممیزی و کنترل داخلی |
+| Architecture Review Board | معماری نرم‌افزاری | حکمرانی | بازبینی و تأیید تصمیم‌های معماری |
+| Data Governance Manager | پایگاه داده | حکمرانی | مدیریت حاکمیت داده |
+| Security Governance Manager | امنیتی | حکمرانی | مدیریت حاکمیت امنیت |
+| Release Manager | DevOps و SRE | Release | مدیریت انتشار نسخه‌ها |
+| Service Owner | عملیاتی و زیرساخت | مالکیت سرویس | مالک سرویس و SLA آن |
+| Platform Owner | ابری | مالکیت پلتفرم | مالک پلتفرم و قراردادهای آن |
+
 
 ---
 
-### مجری‌ها (90 نقش)
+### مجری‌ها (96 نقش)
 
 | عنوان شغلی | حوزه اصلی | حوزه فرعی | توضیح مختصر | ناظر مربوطه |
 |---|---|---|---|---|
@@ -198,7 +222,19 @@ python3 scripts/generate_role_prompts.py
 | Deployment Engineer | DevOps و SRE | Deployment | استقرار نسخه‌ها | DevOps Manager |
 | Disaster Recovery Specialist | Incident و Disaster Recovery | DR | طراحی و تست بازیابی | Business Continuity Manager |
 | Backup Administrator | Incident و Disaster Recovery | Backup | مدیریت Backup و Restore | Infrastructure Manager |
-| Decommission Engineer | Migration و Modernization | Decommission | خاموش‌کردن امن سرویس‌ها | Infrastructure Manager |
+| Decommission Engineer | Migration و Modernization | Decommission | خاموش‌کردن امن سرویس‌ها | Infrastructure Manager || Agent Architect | داده و هوش مصنوعی | Agent | طراحی معماری Agent | AI Engineer Lead |
+| Agent Integration Engineer | داده و هوش مصنوعی | Agent | پیاده‌سازی Integration Agent | AI Engineer Lead |
+| Tool Developer | داده و هوش مصنوعی | Agent | ابزارها و API Wrapper برای Agent | AI Engineer Lead |
+| Agent Evaluator | داده و هوش مصنوعی | Agent | ارزیابی رفتار Agent و Safety | AI Engineer Lead |
+| Agentic Prompt Specialist | داده و هوش مصنوعی | Agent | طراحی Prompt و Few-Shot | AI Engineer Lead |
+| Agent Safety Engineer | داده و هوش مصنوعی | Agent | گاردریل، Jailbreak و Budget | AI Engineer Lead |
+| Cloud Security Engineer | امنیتی | Cloud | امنیت سرویس‌های Cloud | Security Architect |
+| Database Security Specialist | امنیتی | پایگاه داده | امنیت پایگاه داده | Security Architect |
+| SOC Analyst | امنیتی | SOC | تحلیل و پاسخ اولیه هشدارها | CISO |
+| Incident Response Engineer | امنیتی | پاسخ رخداد | پاسخ به رخداد امنیتی | Incident Manager |
+| Vulnerability Management Specialist | امنیتی | آسیب‌پذیری | مدیریت آسیب‌پذیری‌ها | Security Governance Manager |
+| Security Auditor | امنیتی | ممیزی | ممیزی مستقل امنیت | Security Governance Manager |
+
 
 ---
 
@@ -630,52 +666,69 @@ python3 scripts/generate_role_prompts.py
 
 ### تیم سخت‌افزار و Embedded
 - **Embedded Systems Lead** → Embedded Developer, Firmware Engineer, IoT Engineer
+### تیم Agent و هوش مصنوعی
+- **AI Engineer Lead** → Agent Architect, Agent Integration Engineer, Tool Developer, Agent Evaluator, Agentic Prompt Specialist, Agent Safety Engineer
+- **Agent Architect** → Agent Evaluator (هماهنگی فنی)
+
+### تیم امنیتی تکمیلی (§۶۴.۳)
+- **Security Governance Manager** → Vulnerability Management Specialist, Security Auditor
+- **CISO** → Cloud Security Engineer, SOC Analyst, Incident Response Engineer
+- **Security Architect** → Cloud Security Engineer, Database Security Specialist
+- **Incident Manager** → Incident Response Engineer
+
+### تیم انتشار و مالکیت
+- **Release Manager** → Release Engineer, Deployment Engineer
+- **Platform Owner** → Infrastructure Engineer (هم‌سویی پلتفرم)
+- **Service Owner** → SRE (Site Reliability Engineer)
 
 ---
 
 ## آمار و خلاصه
 
 ### بر اساس نقش
-- **ناظرها:** 65 نقش (15 نقش جدید اضافه شد)
-- **مجری‌ها:** 90 نقش
-- **کل نقش‌ها:** 155 نقش
+- **ناظرها:** 74 نقش (شامل نقش‌های تکمیلی §۶۴.۳ و نقش‌های IT/Agent)
+- **مجری‌ها:** 96 نقش
+- **کل نقش‌ها:** 170 نقش
 
 ### بر اساس حوزه
 
 | حوزه | ناظر | مجری | مجموع |
 |---|---|---|---|
-| مدیریت و استراتژی | 18 | 0 | 18 |
-| محصول | 10 | 5 | 15 |
-| معماری نرم‌افزاری | 9 | 2 | 11 |
-| توسعه نرم‌افزار | 1 | 15 | 16 |
-| داده و هوش مصنوعی | 2 | 6 | 8 |
-| امنیتی | 2 | 6 | 8 |
-| کیفیت و تست | 3 | 7 | 10 |
-| طراحی و تجربه کاربری | 2 | 10 | 12 |
-| عملیاتی و زیرساخت | 3 | 7 | 10 |
-| ابری | 3 | 2 | 5 |
-| شبکه | 0 | 1 | 1 |
-| پایگاه داده | 1 | 2 | 3 |
-| DevOps و SRE | 3 | 6 | 9 |
-| بازاریابی و فروش | 11 | 7 | 18 |
-| پشتیبانی مشتری | 1 | 2 | 3 |
-| حقوقی و انطباق | 6 | 1 | 7 |
-| مالی و تجاری | 4 | 1 | 5 |
-| منابع انسانی | 2 | 3 | 5 |
-| تحقیق و آنالیز | 1 | 6 | 7 |
-| مستندسازی | 1 | 2 | 3 |
+| --- | 1 | 1 | 2 |
+| DevOps و SRE | 2 | 6 | 8 |
+| Incident و Disaster Recovery | 2 | 3 | 5 |
+| Integration و Third-Party | 0 | 1 | 1 |
 | Localization و ترجمه | 1 | 2 | 3 |
+| Migration و Modernization | 0 | 3 | 3 |
+| ابری | 3 | 1 | 4 |
+| امنیتی | 3 | 11 | 14 |
+| بازاریابی و فروش | 8 | 7 | 15 |
+| تحقیق و آنالیز | 2 | 7 | 9 |
+| توسعه بازی | 0 | 1 | 1 |
+| توسعه نرم‌افزار | 2 | 9 | 11 |
+| حقوقی و انطباق | 8 | 1 | 9 |
+| داده و هوش مصنوعی | 0 | 11 | 11 |
 | سخت‌افزار و Embedded | 1 | 3 | 4 |
-| Integration و Third-Party | 0 | 2 | 2 |
-| Migration و Modernization | 0 | 2 | 2 |
-| Incident و Disaster Recovery | 2 | 4 | 6 |
-| **جمع** | **65** | **90** | **155** |
+| شبکه | 0 | 1 | 1 |
+| طراحی و تجربه کاربری | 2 | 8 | 10 |
+| عملیاتی و زیرساخت | 3 | 3 | 6 |
+| مالی و تجاری | 4 | 1 | 5 |
+| محصول | 5 | 0 | 5 |
+| مدیریت و استراتژی | 13 | 0 | 13 |
+| مستندسازی | 1 | 2 | 3 |
+| معماری نرم‌افزاری | 6 | 2 | 8 |
+| منابع انسانی | 2 | 2 | 4 |
+| پایگاه داده | 1 | 2 | 3 |
+| پشتیبانی مشتری | 1 | 2 | 3 |
+| کیفیت و تست | 3 | 6 | 9 |
+| **جمع** | **74** | **96** | **170** |
+
 
 ---
 
 ### نکات کلیدی:
-✅ **تمام 90 نقش مجری اکنون حداقل یک ناظر دارند**
-✅ **15 نقش ناظر جدید اضافه شد**
+✅ **تمام 96 نقش مجری اکنون حداقل یک ناظر دارند**
+✅ **نقش‌های ناظر به 74 و مجری به 96 رسید (۱۲ نقش §۶۴.۳ اضافه شد + نقش‌های Agent/IT)**
 ✅ **ساختار سازمانی کامل و متوازن**
 ✅ **مپینگ کامل ناظر-مجری برای هر تیم**
 
