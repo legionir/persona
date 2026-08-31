@@ -339,6 +339,12 @@ Master را به‌عنوان «منبع حقیقت» نگه دار و Generator
 
 **تعداد نهایی:** ۱۷۰ فایل = ۷۴ ممیزی + ۹۶ اجرا — `python3 scripts/validate_personas.py` → ALL CHECKS PASSED.
 
-**باقی‌مانده (اختیاری):**
-- افزودن ۲۴ نقش «اضافی» (۱۸ ناظر + ۶ مجری Agent) به خود فایل Master §۶۴/§۶۵ برای هم‌مرجع‌سازی کامل؛ ژنراتور هم‌اکنون آن‌ها را در Registry پروژه ثبت می‌کند.
-- همراستاسازی جدول‌های حوزه-به-حوزهٔ `prompts/README.md` (بخش «دسته‌بندی بر اساس حوزه») با فهرست جدید — آمار کل و جدول‌های اصلی همگام شده‌اند.
+**باقی‌مانده (اختیاری):** ~~افزودن ۲۴ نقش «اضافی» به Master~~ ✅ **انجام شد.**
+
+## ۶) تکمیل هم‌مرجع‌سازی + متادیتا و جستجوگر (2026-08-31)
+
+1. **Master §۶۴.۳ به‌روزرسانی شد:** ۱۸ ناظر (CIO، CAO، Chief Privacy Officer، CDO، AI Engineer Lead، Product Analyst Lead، Development Manager، DevOps Manager، Infrastructure Manager، Support Manager، Community Director، Design Manager، Documentation Manager، Localization Manager، Performance Engineering Lead، Procurement Manager، Recruitment Manager، Embedded Systems Lead) و ۶ مجری Agent/Tooling (Agent Architect، Agent Integration Engineer، Tool Developer، Agent Evaluator، Agentic Prompt Specialist، Agent Safety Engineer) به ADDITIONAL_ROLES اضافه شدند؛ Registry Master اکنون **۷۴ ناظر + ۹۶ مجری = ۱۷۰ نقش** — دقیقاً برابر فایل‌های prompt.
+2. **Master §۶۵ هم‌راستا شد:** نگاشت‌های Agent/Tooling اضافه شد؛ ارجاع‌های قبلی به نقش‌های مجری به‌عنوان ناظر با نقش‌های ثبت‌شده جایگزین شدند (AI Engineer → AI Engineer Lead، Product Analyst → Product Analyst Lead، Infrastructure Owner → Platform Owner، Performance Owner → Performance Engineering Lead، Marketing Manager → Product Marketing Manager، Developer Relations Manager → Community Director، DBA → Database Administrator (DBA)).
+3. **متادیتای API-ready:** `personas.json` (تولید با `scripts/build_metadata.py`) — ۱۷۰ رکورد با `id/roleId/type/title/mission/duties/domain/category/seniority/supervisors/consumers/capabilities/path/keywords` + `facets` برای فیلتر و `totals`؛ قابل مصرف به‌عنوان API استاتیک.
+4. **جستجوگر:** `index.html` — `personas.json` را با fetch می‌خواند؛ جستجوی فارسی/انگلیسی، فیلتر نوع/گروه/حوزه/دسته/سطح، مرتب‌سازی، کارت با لینک مستقیم فایل و GitHub؛ بدون وابستگی خارجی.
+5. ژنراتور و اعتبارسنجی پس از تغییرات Master دوباره اجرا شدند: **170 فایل، ALL CHECKS PASSED**؛ خروجی persona بدون تغییر ماند (فقط Master، متادیتا و جستجوگر اضافه شدند).

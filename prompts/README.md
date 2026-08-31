@@ -28,6 +28,14 @@ python3 scripts/generate_personas.py
 python3 scripts/validate_personas.py
 ```
 
+ساخت متادیتای جستجو/API (`personas.json`):
+
+```bash
+python3 scripts/build_metadata.py
+```
+
+جستجوگر تعاملی: [`index.html`](../index.html)
+
 این اسکریپت هم فایل‌های پرامپت را بازنویسی می‌کند و هم ستون `پرامپت` و لینک‌های README را به‌روز نگه می‌دارد.
 
 ---

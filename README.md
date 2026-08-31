@@ -1,5 +1,9 @@
 ### AI Personas
 
+> 🔍 **یافتن سریع Persona:** [`index.html`](index.html) را در مرورگر باز کن (یا `python3 -m http.server 8000` و سپس `http://localhost:8000/index.html`). این صفحه فایل [`personas.json`](personas.json) را می‌خواند و با جستجو/فیلتر (نوع، حوزه، دسته، سطح) فایل پرامپت هر نقش را نشان می‌دهد.
+>
+> 📦 **متادیتای API-ready:** [`personas.json`](personas.json) — بین ۱۷۰ نقش با فیلدهای `id`، `roleId`، `type`، `domain`، `category`، `seniority`، `mission`، `duties`، `supervisors`، `consumers`، `capabilities`، `path` و `facets` برای جستجو/دسته‌بندی. بازتولید: `python3 scripts/build_metadata.py`
+
 | عنوان شغلی | توضیح وظایف | نقش (مجری/ناظر) | پرامپت |
 |---|---|---|---|
 | Founder / مؤسس | ایجاد ایده، تعیین جهت کلی کسب‌وکار و تصمیم‌های کلان | ناظر | [Audit](prompts/audit/founder.md) |

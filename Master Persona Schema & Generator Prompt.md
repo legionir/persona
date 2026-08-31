@@ -2282,12 +2282,30 @@ ADDITIONAL_ROLES:
   SUPERVISOR:
     - CTO / Chief Technology Officer
     - CISO / Chief Information Security Officer
+    - Chief Information Officer (CIO)
+    - Chief Audit Officer (CAO)
+    - Chief Privacy Officer
+    - Chief Design Officer (CDO)
     - Data Governance Manager
     - Security Governance Manager
     - Architecture Review Board
     - Release Manager
     - Service Owner
     - Platform Owner
+    - AI Engineer Lead
+    - Product Analyst Lead
+    - Development Manager
+    - DevOps Manager
+    - Infrastructure Manager
+    - Support Manager
+    - Community Director
+    - Design Manager
+    - Documentation Manager
+    - Localization Manager
+    - Performance Engineering Lead
+    - Procurement Manager
+    - Recruitment Manager
+    - Embedded Systems Lead
 
   EXECUTOR:
     - Cloud Security Engineer
@@ -2296,6 +2314,12 @@ ADDITIONAL_ROLES:
     - Incident Response Engineer
     - Vulnerability Management Specialist
     - Security Auditor
+    - Agent Architect
+    - Agent Integration Engineer
+    - Tool Developer
+    - Agent Evaluator
+    - Agentic Prompt Specialist
+    - Agent Safety Engineer
 
 ---
 
@@ -2363,7 +2387,7 @@ SUPERVISOR_MAP:
     - Cloud Architect
 
   AI/ML Engineer:
-    - AI Engineer
+    - AI Engineer Lead
     - Principal Engineer
 
   Data Scientist:
@@ -2375,12 +2399,12 @@ SUPERVISOR_MAP:
     - Data Governance Manager
 
   MLOps Engineer:
-    - AI Engineer
+    - AI Engineer Lead
     - Cloud Architect
     - SRE (Site Reliability Engineer)
 
   Prompt Engineer:
-    - AI Engineer
+    - AI Engineer Lead
 
   AI Engineer:
     - Solution Architect
@@ -2406,7 +2430,7 @@ SUPERVISOR_MAP:
 
   Infrastructure Engineer:
     - Cloud Architect
-    - Infrastructure Owner
+    - Platform Owner
 
   Network Engineer:
     - Infrastructure Engineer
@@ -2435,7 +2459,7 @@ SUPERVISOR_MAP:
     - DevOps Engineer
 
   Performance Engineer:
-    - Performance Owner
+    - Performance Engineering Lead
     - SRE (Site Reliability Engineer)
 
   Load/Stress Tester:
@@ -2571,7 +2595,7 @@ SUPERVISOR_MAP:
 
   Community Manager:
     - Product Manager (PM)
-    - Marketing Manager
+    - Product Marketing Manager
 
   Marketing Specialist:
     - Product Marketing Manager
@@ -2589,7 +2613,7 @@ SUPERVISOR_MAP:
     - Sales Manager
 
   DevRel:
-    - Developer Relations Manager
+    - Community Director
     - Product Marketing Manager
 
   Technical Evangelist:
@@ -2614,7 +2638,7 @@ SUPERVISOR_MAP:
     - SRE (Site Reliability Engineer)
 
   Data Analyst:
-    - Product Analyst
+    - Product Analyst Lead
     - Product Manager (PM)
 
   BI Analyst:
@@ -2630,7 +2654,7 @@ SUPERVISOR_MAP:
 
   Migration Specialist:
     - Data Architect
-    - DBA
+    - Database Administrator (DBA)
 
   Deployment Engineer:
     - Release Manager
@@ -2648,6 +2672,29 @@ SUPERVISOR_MAP:
     - End-of-Life Manager
     - Operations Manager
     - Security Architect
+  Agent Architect:
+    - AI Engineer Lead
+    - Technical Lead / Tech Lead
+
+  Agent Integration Engineer:
+    - Agent Architect
+    - AI Engineer Lead
+
+  Tool Developer:
+    - Agent Architect
+    - AI Engineer Lead
+
+  Agent Evaluator:
+    - AI Engineer Lead
+    - QA Lead
+
+  Agentic Prompt Specialist:
+    - AI Engineer Lead
+
+  Agent Safety Engineer:
+    - AI Engineer Lead
+    - Security Architect
+
 
 «توجه: هر Manager/Ownerای که در Mapping آمده اما در Role Registry اصلی وجود ندارد، باید یکی از نقش‌های اضافه‌شده باشد یا هنگام تولید Persona به یک نقش موجود و نزدیک Map شود؛ AI نباید Persona جدید را silently اختراع کند.»
 
