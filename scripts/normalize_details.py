@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Normalize details.md into a valid Markdown table + controlled vocabulary.
+"""Normalize the merged main role table in README.md.
+
+The 23-column per-role details (previously a separate details.md file) now
+live inside the single 28-column main table of README.md; this script
+normalizes that table in place.
 
 Changes:
-1. Converts the pipe-delimited plain text into a real Markdown table
-   (leading/trailing pipes + header separator row).
+1. Rebuilds the table with leading/trailing pipes + header separator row.
 2. Harmonizes the "SRE" title with README's "SRE (Site Reliability Engineer)".
 3. Applies a controlled vocabulary to the tooling / permissions / lifecycle /
    restricted-tools columns and normalizes list separators everywhere.
@@ -19,10 +22,9 @@ from collections import OrderedDict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DETAILS = ROOT / "details.md"
 README = ROOT / "README.md"
 
-N_COLS = 23
+N_COLS = 28  # width of the merged main role table in README.md
 
 # ---------------------------------------------------------------------------
 # Title harmonization
@@ -505,7 +507,8 @@ def clean(value: str) -> str:
 # ---------------------------------------------------------------------------
 
 HEADER = (
-    "عنوان شغلی| توضیح وظایف| نقش| مأموریت اصلی (Mission)| مسئولیت‌ها (Responsibilities)| "
+    "عنوان شغلی| توضیح وظایف| نقش (مجری/ناظر)| حوزه اصلی| حوزه فرعی| توضیح مختصر| ناظر مربوطه| پرامپت| "
+    "مأموریت اصلی (Mission)| مسئولیت‌ها (Responsibilities)| "
     "محدوده اختیار (Scope)| ورودی‌های الزامی (Required Inputs)| ورودی‌های اختیاری (Optional Inputs)| "
     "Context موردنیاز| پیش‌شرط‌ها (Preconditions)| گام‌های اجرایی (Procedure)| "
     "تصمیم‌ها و قوانین (Decision Rules)| ابزارهای مجاز (Allowed Tools)| "
@@ -519,20 +522,25 @@ HEADER = (
 HEADER_CELLS = [c.strip() for c in HEADER.split("|")]
 
 
+def _cells(s: str) -> list[str]:
+    s = s.strip()
+    if not s.startswith("|"):
+        return []
+    cells = [c.strip() for c in s.strip("|").split("|")]
+    if cells and cells[0] == "":
+        cells = cells[1:]
+    if cells and cells[-1] == "":
+        cells = cells[:-1]
+    return cells
+
+
 def parse_rows() -> list[list[str]]:
-    lines = DETAILS.read_text(encoding="utf-8").splitlines()
     rows: list[list[str]] = []
-    for ln in lines:
+    for ln in README.read_text(encoding="utf-8").splitlines():
         s = ln.strip()
-        if not s:
+        if not s.startswith("|"):
             continue
-        if s.startswith("|"):
-            s = s.strip("|")
-        cells = [c.strip() for c in s.split("|")]
-        if cells and cells[0] == "":
-            cells = cells[1:]
-        if cells and cells[-1] == "":
-            cells = cells[:-1]
+        cells = _cells(s)
         # strip markdown header + any separator row
         if cells == HEADER_CELLS:
             continue
@@ -540,8 +548,7 @@ def parse_rows() -> list[list[str]]:
             continue
         if len(cells) == N_COLS:
             rows.append(cells)
-        else:
-            print(f"WARNING skipping row with {len(cells)} cols: {s[:80]}")
+        # rows with a different column count belong to other README tables
     return rows
 
 
@@ -559,20 +566,21 @@ def transform(row: list[str]) -> list[str]:
     r[0] = title
 
     # 2. tooling / lifecycle / permissions / restricted controlled vocab
-    r[12] = normalize_tools(r[12])
-    r[13] = normalize_restricted(r[13])
-    r[19] = normalize_permissions(r[19])
-    r[20] = normalize_lifecycle(r[20])
+    #    (detail columns start at index 8 in the merged main table)
+    r[17] = normalize_tools(r[17])
+    r[18] = normalize_restricted(r[18])
+    r[24] = normalize_permissions(r[24])
+    r[25] = normalize_lifecycle(r[25])
 
     # 3. normal list separators on remaining mostly-list cells
-    for idx in (4, 5, 6, 7, 8, 14, 17, 18, 22):
+    for idx in (9, 10, 11, 12, 13, 19, 22, 23, 27):
         r[idx] = normalize_list_separator(r[idx])
 
     # 4. remove whitespace-only duplicates artifacts
-    r[12] = normalize_list_separator(r[12])
-    r[13] = normalize_list_separator(r[13])
-    r[19] = normalize_list_separator(r[19])
-    r[20] = normalize_list_separator(r[20])
+    r[17] = normalize_list_separator(r[17])
+    r[18] = normalize_list_separator(r[18])
+    r[24] = normalize_list_separator(r[24])
+    r[25] = normalize_list_separator(r[25])
     return r
 
 
@@ -586,15 +594,20 @@ def main() -> None:
     print(f"Parsed rows: {len(rows)}")
     transformed = [transform(r) for r in rows]
 
-    out: list[str] = []
-    out.append("| " + " | ".join(esc(c) for c in HEADER_CELLS) + " |")
-    out.append("|" + "---|" * N_COLS)
+    table: list[str] = []
+    table.append("| " + " | ".join(esc(c) for c in HEADER_CELLS) + " |")
+    table.append("|" + "---|" * N_COLS)
     for r in transformed:
-        out.append("| " + " | ".join(esc(c) for c in r) + " |")
-    out.append("")
+        table.append("| " + " | ".join(esc(c) for c in r) + " |")
 
-    DETAILS.write_text("\n".join(out), encoding="utf-8")
-    print(f"Wrote {len(out)} lines to {DETAILS.name}")
+    # Replace the merged main role table inside README.md in-place.
+    lines = README.read_text(encoding="utf-8").splitlines()
+    start = next(i for i, ln in enumerate(lines) if _cells(ln) == HEADER_CELLS)
+    end = start + 1
+    while end < len(lines) and lines[end].strip().startswith("|"):
+        end += 1
+    README.write_text("\n".join(lines[:start] + table + lines[end:]) + "\n", encoding="utf-8")
+    print(f"Wrote {len(table)} lines into README.md")
 
     # verify roundtrip
     re_rows = parse_rows()

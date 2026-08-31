@@ -1,10 +1,10 @@
 {
   "$schema": "personas-metadata/v1",
-  "generated_at": "2026-08-31T15:32:01+00:00",
+  "generated_at": "2026-08-31T16:41:23+00:00",
   "source": {
-    "schema": "Master Persona Schema & Generator Prompt.md",
+    "schema": "README.md (جدول کامل نقش‌ها)",
     "readme": "README.md",
-    "details": "details.md",
+    "details": "README.md (جدول کامل نقش‌ها)",
     "generator": "scripts/generate_personas.py",
     "metadata_builder": "scripts/build_metadata.py"
   },
@@ -362,7 +362,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "تعیین اینکه محصول چه ارزشی ایجاد می‌کند",
-      "duties": "تعریف چشم‌انداز محصول",
+      "duties": "تعریف چشم‌انداز محصول و اینکه محصول قرار است چه مسئله‌ای را حل کند",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -391,13 +391,20 @@
         "چشم",
         "انداز",
         "محصول",
-        "تعیین",
+        "و",
         "اینکه",
+        "قرار",
+        "است",
         "چه",
+        "مسئله",
+        "ای",
+        "را",
+        "حل",
+        "کند",
+        "تعیین",
         "ارزشی",
         "ایجاد",
-        "می",
-        "کند"
+        "می"
       ]
     },
     {
@@ -464,7 +471,7 @@
       "seniority": "Executive",
       "seniorityLabel": "اجرایی",
       "mission": "Governance و کنترل استراتژیک",
-      "duties": "تصمیم‌گیری‌های استراتژیک و نظارت",
+      "duties": "تصمیم‌گیری‌های استراتژیک و نظارت بر مدیریت پروژه/شرکت",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -498,6 +505,10 @@
         "استراتژیک",
         "و",
         "نظارت",
+        "بر",
+        "مدیریت",
+        "پروژه",
+        "شرکت",
         "governance",
         "کنترل"
       ]
@@ -517,7 +528,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "تضمین حمایت پروژه",
-      "duties": "حمایت مالی و سازمانی و رفع موانع کلان",
+      "duties": "مالک حمایت مالی و سازمانی پروژه و رفع موانع کلان",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -542,15 +553,16 @@
       "keywords": [
         "project",
         "sponsor",
+        "مالک",
         "حمایت",
         "مالی",
         "و",
         "سازمانی",
+        "پروژه",
         "رفع",
         "موانع",
         "کلان",
-        "تضمین",
-        "پروژه"
+        "تضمین"
       ]
     },
     {
@@ -568,7 +580,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "تبدیل Business Need به Requirement",
-      "duties": "استخراج نیازهای کسب‌وکار و تبدیل به نیازمندی",
+      "duties": "استخراج نیازهای کسب‌وکار و تبدیل آن‌ها به نیازمندی‌های قابل اجرا",
       "supervisors": [
         "Product Owner (PO)",
         "Product Manager (PM)"
@@ -607,8 +619,13 @@
         "وکار",
         "و",
         "تبدیل",
+        "آن",
+        "ها",
         "به",
         "نیازمندی",
+        "های",
+        "قابل",
+        "اجرا",
         "need",
         "requirement"
       ]
@@ -628,7 +645,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "تضمین صحت Domain Logic",
-      "duties": "ارائه دانش تخصصی حوزه",
+      "duties": "ارائه دانش تخصصی حوزه‌ای که نرم‌افزار در آن استفاده می‌شود",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -661,6 +678,15 @@
         "دانش",
         "تخصصی",
         "حوزه",
+        "ای",
+        "که",
+        "نرم",
+        "افزار",
+        "در",
+        "آن",
+        "استفاده",
+        "می",
+        "شود",
         "تضمین",
         "صحت",
         "logic"
@@ -681,7 +707,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "Maximize Product Value",
-      "duties": "مدیریت محصول و اولویت‌بندی قابلیت‌ها",
+      "duties": "مدیریت محصول، اولویت‌بندی قابلیت‌ها و تصمیم‌گیری درباره Scope",
       "supervisors": [],
       "consumers": [
         "Business Analyst (BA)",
@@ -728,11 +754,15 @@
         "pm",
         "مدیریت",
         "محصول",
-        "و",
         "اولویت",
         "بندی",
         "قابلیت",
         "ها",
+        "و",
+        "تصمیم",
+        "گیری",
+        "درباره",
+        "scope",
         "maximize",
         "value"
       ]
@@ -752,7 +782,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "تبدیل Product Strategy به Work Items",
-      "duties": "مدیریت Product Backlog",
+      "duties": "مدیریت Product Backlog و تعیین اولویت نیازمندی‌ها",
       "supervisors": [],
       "consumers": [
         "Business Analyst (BA)",
@@ -785,6 +815,11 @@
         "po",
         "مدیریت",
         "backlog",
+        "و",
+        "تعیین",
+        "اولویت",
+        "نیازمندی",
+        "ها",
         "تبدیل",
         "strategy",
         "به",
@@ -807,7 +842,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "تحویل موفق پروژه",
-      "duties": "مدیریت زمان، منابع، Scope، ریسک و هماهنگی",
+      "duties": "مدیریت زمان، منابع، Scope، ریسک، هزینه و هماهنگی تیم",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -837,8 +872,10 @@
         "منابع",
         "scope",
         "ریسک",
+        "هزینه",
         "و",
         "هماهنگی",
+        "تیم",
         "تحویل",
         "موفق",
         "پروژه"
@@ -859,7 +896,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "هماهنگی Portfolio/Program",
-      "duties": "مدیریت چند پروژه مرتبط",
+      "duties": "مدیریت چند پروژه مرتبط با یکدیگر",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -890,6 +927,8 @@
         "چند",
         "پروژه",
         "مرتبط",
+        "با",
+        "یکدیگر",
         "هماهنگی",
         "portfolio"
       ]
@@ -909,7 +948,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "Governance و Standardization",
-      "duties": "استانداردسازی و کنترل فرآیند مدیریت پروژه",
+      "duties": "استانداردسازی و کنترل فرآیندهای مدیریت پروژه",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -937,7 +976,7 @@
         "استانداردسازی",
         "و",
         "کنترل",
-        "فرآیند",
+        "فرآیندهای",
         "مدیریت",
         "پروژه",
         "governance",
@@ -959,7 +998,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "Optimize Team Flow",
-      "duties": "تسهیل Agile/Scrum و رفع موانع",
+      "duties": "تسهیل فرآیند Agile/Scrum و رفع موانع تیم",
       "supervisors": [],
       "consumers": [
         "Scrum Product Team"
@@ -987,10 +1026,12 @@
         "scrum",
         "master",
         "تسهیل",
+        "فرآیند",
         "agile",
         "و",
         "رفع",
         "موانع",
+        "تیم",
         "optimize",
         "team",
         "flow"
@@ -1011,7 +1052,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "Improve Organizational Agility",
-      "duties": "بهبود فرآیند Agile",
+      "duties": "بهبود فرآیند Agile در سطح تیم یا سازمان",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -1038,6 +1079,11 @@
         "coach",
         "بهبود",
         "فرآیند",
+        "در",
+        "سطح",
+        "تیم",
+        "یا",
+        "سازمان",
         "improve",
         "organizational",
         "agility"
@@ -1058,7 +1104,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "هماهنگی Technical Delivery",
-      "duties": "مدیریت پروژه با تمرکز فنی",
+      "duties": "مدیریت پروژه با تمرکز عمیق‌تر روی مسائل فنی",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -1090,6 +1136,10 @@
         "پروژه",
         "با",
         "تمرکز",
+        "عمیق",
+        "تر",
+        "روی",
+        "مسائل",
         "فنی",
         "هماهنگی",
         "delivery"
@@ -1110,7 +1160,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "انتخاب بهترین راهکار فنی",
-      "duties": "طراحی راهکار کلان سیستم",
+      "duties": "طراحی راهکار کلان سیستم و انتخاب تکنولوژی‌ها",
       "supervisors": [],
       "consumers": [
         "AI Engineer",
@@ -1154,7 +1204,10 @@
         "راهکار",
         "کلان",
         "سیستم",
+        "و",
         "انتخاب",
+        "تکنولوژی",
+        "ها",
         "بهترین",
         "فنی"
       ]
@@ -1174,7 +1227,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "طراحی ساختار داخلی نرم‌افزار",
-      "duties": "طراحی معماری نرم‌افزار",
+      "duties": "طراحی معماری نرم‌افزار، ماژول‌ها و ارتباطات آن‌ها",
       "supervisors": [
         "Solution Architect",
         "Technical Lead / Tech Lead"
@@ -1213,6 +1266,11 @@
         "معماری",
         "نرم",
         "افزار",
+        "ماژول",
+        "ها",
+        "و",
+        "ارتباطات",
+        "آن",
         "ساختار",
         "داخلی"
       ]
@@ -1232,7 +1290,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "Alignment با Enterprise Architecture",
-      "duties": "هماهنگی معماری با سازمان",
+      "duties": "هماهنگ‌کردن معماری نرم‌افزار با معماری کل سازمان",
       "supervisors": [],
       "consumers": [
         "Legacy Modernization Engineer",
@@ -1261,9 +1319,13 @@
       "keywords": [
         "enterprise",
         "architect",
-        "هماهنگی",
+        "هماهنگ",
+        "کردن",
         "معماری",
+        "نرم",
+        "افزار",
         "با",
+        "کل",
         "سازمان",
         "alignment",
         "architecture"
@@ -1284,7 +1346,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "طراحی System-level Architecture",
-      "duties": "طراحی معماری کل سیستم",
+      "duties": "طراحی معماری کل سیستم شامل نرم‌افزار، سخت‌افزار و زیرساخت",
       "supervisors": [
         "Solution Architect",
         "Enterprise Architect"
@@ -1322,6 +1384,12 @@
         "معماری",
         "کل",
         "سیستم",
+        "شامل",
+        "نرم",
+        "افزار",
+        "سخت",
+        "و",
+        "زیرساخت",
         "level",
         "architecture"
       ]
@@ -1341,7 +1409,7 @@
       "seniority": "Lead",
       "seniorityLabel": "Lead",
       "mission": "تضمین کیفیت اجرای فنی",
-      "duties": "هدایت فنی تیم",
+      "duties": "هدایت فنی تیم و تصمیم‌گیری درباره پیاده‌سازی",
       "supervisors": [],
       "consumers": [
         "Agent Architect",
@@ -1394,6 +1462,12 @@
         "هدایت",
         "فنی",
         "تیم",
+        "و",
+        "تصمیم",
+        "گیری",
+        "درباره",
+        "پیاده",
+        "سازی",
         "تضمین",
         "کیفیت",
         "اجرای"
@@ -1471,7 +1545,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "ایجاد ظرفیت و عملکرد مهندسی",
-      "duties": "مدیریت تیم مهندسی",
+      "duties": "مدیریت تیم مهندسی، افراد، ظرفیت و فرآیند توسعه",
       "supervisors": [],
       "consumers": [
         "Maintenance Engineer",
@@ -1504,9 +1578,12 @@
         "مدیریت",
         "تیم",
         "مهندسی",
-        "ایجاد",
+        "افراد",
         "ظرفیت",
         "و",
+        "فرآیند",
+        "توسعه",
+        "ایجاد",
         "عملکرد"
       ]
     },
@@ -1591,7 +1668,7 @@
       "seniority": "Staff",
       "seniorityLabel": "Staff",
       "mission": "حل Technical Problems پیچیده",
-      "duties": "حل مسائل پیچیده فنی",
+      "duties": "حل مسائل پیچیده فنی و هدایت معماری در مقیاس بزرگ",
       "supervisors": [
         "Technical Lead / Tech Lead",
         "Principal Engineer"
@@ -1628,6 +1705,12 @@
         "مسائل",
         "پیچیده",
         "فنی",
+        "و",
+        "هدایت",
+        "معماری",
+        "در",
+        "مقیاس",
+        "بزرگ",
         "technical",
         "problems"
       ]
@@ -1647,7 +1730,7 @@
       "seniority": "Principal",
       "seniorityLabel": "Principal",
       "mission": "Technical Strategy",
-      "duties": "هدایت فنی در سطح سازمان",
+      "duties": "تصمیم‌گیری‌های فنی سطح سازمان و معماری‌های پیچیده",
       "supervisors": [],
       "consumers": [
         "AI Engineer",
@@ -1683,11 +1766,15 @@
       "keywords": [
         "principal",
         "engineer",
-        "هدایت",
+        "تصمیم",
+        "گیری",
+        "های",
         "فنی",
-        "در",
         "سطح",
         "سازمان",
+        "و",
+        "معماری",
+        "پیچیده",
         "technical",
         "strategy"
       ]
@@ -1770,7 +1857,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "پیاده‌سازی Backend",
-      "duties": "توسعه API و Backend",
+      "duties": "توسعه API، Business Logic، سرویس‌ها و Backend",
       "supervisors": [
         "Technical Lead / Tech Lead",
         "Solution Architect"
@@ -1804,6 +1891,10 @@
         "developer",
         "توسعه",
         "api",
+        "business",
+        "logic",
+        "سرویس",
+        "ها",
         "و",
         "پیاده",
         "سازی"
@@ -1824,7 +1915,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "پیاده‌سازی UI/UX",
-      "duties": "توسعه رابط کاربری",
+      "duties": "توسعه رابط کاربری و منطق سمت Client",
       "supervisors": [
         "Technical Lead / Tech Lead",
         "Product Owner (PO)"
@@ -1860,6 +1951,10 @@
         "توسعه",
         "رابط",
         "کاربری",
+        "و",
+        "منطق",
+        "سمت",
+        "client",
         "پیاده",
         "سازی",
         "ui",
@@ -1881,7 +1976,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "تحویل End-to-End قابلیت",
-      "duties": "توسعه Frontend و Backend",
+      "duties": "توسعه همزمان Frontend و Backend",
       "supervisors": [
         "Technical Lead / Tech Lead",
         "Solution Architect"
@@ -1916,6 +2011,7 @@
         "stack",
         "developer",
         "توسعه",
+        "همزمان",
         "frontend",
         "و",
         "backend",
@@ -1940,7 +2036,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "پیاده‌سازی Mobile Product",
-      "duties": "توسعه Mobile Application",
+      "duties": "توسعه Android/iOS یا Cross-platform",
       "supervisors": [
         "Technical Lead / Tech Lead",
         "Product Manager (PM)"
@@ -1974,7 +2070,11 @@
         "mobile",
         "developer",
         "توسعه",
-        "application",
+        "android",
+        "ios",
+        "یا",
+        "cross",
+        "platform",
         "پیاده",
         "سازی",
         "product"
@@ -1995,7 +2095,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "تولید Desktop Application",
-      "duties": "توسعه Desktop Application",
+      "duties": "توسعه نرم‌افزارهای Desktop",
       "supervisors": [
         "Technical Lead / Tech Lead"
       ],
@@ -2028,8 +2128,10 @@
         "desktop",
         "developer",
         "توسعه",
-        "application",
-        "تولید"
+        "نرم",
+        "افزارهای",
+        "تولید",
+        "application"
       ]
     },
     {
@@ -2047,7 +2149,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "تولید Game Systems",
-      "duties": "توسعه Gameplay و Game Systems",
+      "duties": "توسعه منطق، Gameplay و سیستم‌های بازی",
       "supervisors": [
         "Technical Lead / Tech Lead",
         "Product Manager (PM)"
@@ -2079,10 +2181,14 @@
         "game",
         "developer",
         "توسعه",
+        "منطق",
         "gameplay",
         "و",
-        "systems",
-        "تولید"
+        "سیستم",
+        "های",
+        "بازی",
+        "تولید",
+        "systems"
       ]
     },
     {
@@ -2100,7 +2206,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "اجرای منطق دستگاه",
-      "duties": "توسعه نرم‌افزار Embedded",
+      "duties": "توسعه نرم‌افزار برای دستگاه‌ها و سخت‌افزارهای Embedded",
       "supervisors": [
         "Solution Architect",
         "Technical Lead / Tech Lead"
@@ -2136,9 +2242,14 @@
         "توسعه",
         "نرم",
         "افزار",
+        "برای",
+        "دستگاه",
+        "ها",
+        "و",
+        "سخت",
+        "افزارهای",
         "اجرای",
-        "منطق",
-        "دستگاه"
+        "منطق"
       ]
     },
     {
@@ -2156,7 +2267,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "کنترل Hardware از طریق Firmware",
-      "duties": "توسعه Firmware",
+      "duties": "توسعه Firmware و ارتباط مستقیم با سخت‌افزار",
       "supervisors": [
         "Solution Architect",
         "Technical Lead / Tech Lead"
@@ -2189,6 +2300,12 @@
         "firmware",
         "engineer",
         "توسعه",
+        "و",
+        "ارتباط",
+        "مستقیم",
+        "با",
+        "سخت",
+        "افزار",
         "کنترل",
         "hardware",
         "از",
@@ -2210,7 +2327,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "اتصال Device به Platform",
-      "duties": "توسعه سیستم‌های IoT",
+      "duties": "توسعه سیستم‌های متصل به اینترنت و تجهیزات IoT",
       "supervisors": [
         "Solution Architect",
         "Cloud Architect"
@@ -2247,9 +2364,13 @@
         "توسعه",
         "سیستم",
         "های",
+        "متصل",
+        "به",
+        "اینترنت",
+        "و",
+        "تجهیزات",
         "اتصال",
         "device",
-        "به",
         "platform"
       ]
     },
@@ -2268,7 +2389,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "ساخت و Integration مدل",
-      "duties": "توسعه مدل‌های AI/ML",
+      "duties": "توسعه و Integration مدل‌های AI/ML",
       "supervisors": [
         "AI Engineer Lead",
         "Principal Engineer"
@@ -2303,11 +2424,11 @@
         "ml",
         "engineer",
         "توسعه",
+        "و",
+        "integration",
         "مدل",
         "های",
-        "ساخت",
-        "و",
-        "integration"
+        "ساخت"
       ]
     },
     {
@@ -2325,7 +2446,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "استخراج Insight و Predictive Model",
-      "duties": "تحلیل داده و ساخت مدل",
+      "duties": "تحلیل داده و ساخت مدل‌های آماری/پیش‌بینی",
       "supervisors": [
         "Data Architect",
         "Product Manager (PM)"
@@ -2365,6 +2486,10 @@
         "و",
         "ساخت",
         "مدل",
+        "های",
+        "آماری",
+        "پیش",
+        "بینی",
         "استخراج",
         "insight",
         "predictive",
@@ -2386,7 +2511,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "تأمین داده قابل اعتماد",
-      "duties": "ساخت Data Pipeline",
+      "duties": "ساخت Pipelineها و زیرساخت پردازش داده",
       "supervisors": [
         "Data Architect",
         "Data Governance Manager"
@@ -2420,9 +2545,12 @@
         "data",
         "engineer",
         "ساخت",
-        "pipeline",
-        "تأمین",
+        "pipelineها",
+        "و",
+        "زیرساخت",
+        "پردازش",
         "داده",
+        "تأمین",
         "قابل",
         "اعتماد"
       ]
@@ -2442,7 +2570,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "عملیاتی‌کردن ML",
-      "duties": "Deployment و Lifecycle مدل ML",
+      "duties": "Deployment، Monitoring و Lifecycle مدل‌های ML",
       "supervisors": [
         "AI Engineer Lead",
         "Cloud Architect",
@@ -2477,9 +2605,11 @@
         "mlops",
         "engineer",
         "deployment",
+        "monitoring",
         "و",
         "lifecycle",
         "مدل",
+        "های",
         "ml",
         "عملیاتی",
         "کردن"
@@ -2500,7 +2630,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "بهینه‌سازی رفتار مدل",
-      "duties": "طراحی Prompt و تعامل با AI",
+      "duties": "طراحی Prompt و تعامل ساختاریافته با مدل‌های AI",
       "supervisors": [
         "AI Engineer Lead"
       ],
@@ -2536,12 +2666,14 @@
         "طراحی",
         "و",
         "تعامل",
+        "ساختاریافته",
         "با",
+        "مدل",
+        "های",
         "ai",
         "بهینه",
         "سازی",
-        "رفتار",
-        "مدل"
+        "رفتار"
       ]
     },
     {
@@ -2559,7 +2691,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "ساخت AI System",
-      "duties": "طراحی LLM، Agent، RAG و AI Services",
+      "duties": "طراحی سیستم‌های مبتنی بر LLM، Agent، RAG و AI Services",
       "supervisors": [
         "Solution Architect",
         "Principal Engineer"
@@ -2594,6 +2726,10 @@
         "ai",
         "engineer",
         "طراحی",
+        "سیستم",
+        "های",
+        "مبتنی",
+        "بر",
         "llm",
         "agent",
         "rag",
@@ -2688,7 +2824,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "Availability و Integrity دیتابیس",
-      "duties": "مدیریت Database و Backup",
+      "duties": "مدیریت Database، Backup، Performance و Security",
       "supervisors": [
         "Data Architect"
       ],
@@ -2722,8 +2858,10 @@
         "administrator",
         "dba",
         "مدیریت",
-        "و",
         "backup",
+        "performance",
+        "و",
+        "security",
         "availability",
         "integrity",
         "دیتابیس"
@@ -2744,7 +2882,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "طراحی Data Layer",
-      "duties": "طراحی Schema و Query",
+      "duties": "طراحی Schema، Query، Index و معماری داده",
       "supervisors": [
         "Data Architect"
       ],
@@ -2778,8 +2916,11 @@
         "engineer",
         "طراحی",
         "schema",
-        "و",
         "query",
+        "index",
+        "و",
+        "معماری",
+        "داده",
         "data",
         "layer"
       ]
@@ -2856,7 +2997,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "Automate Delivery",
-      "duties": "CI/CD، Deployment و Automation",
+      "duties": "CI/CD، Deployment، Automation و Infrastructure",
       "supervisors": [
         "Technical Lead / Tech Lead",
         "Cloud Architect"
@@ -2891,8 +3032,9 @@
         "ci",
         "cd",
         "deployment",
-        "و",
         "automation",
+        "و",
+        "infrastructure",
         "automate",
         "delivery"
       ]
@@ -2912,7 +3054,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "حفظ سلامت Production",
-      "duties": "تضمین Reliability و Availability",
+      "duties": "تضمین Reliability، Availability و Performance سیستم",
       "supervisors": [
         "Service Owner",
         "Engineering Manager"
@@ -2948,8 +3090,10 @@
         "reliability",
         "engineer",
         "تضمین",
-        "و",
         "availability",
+        "و",
+        "performance",
+        "سیستم",
         "حفظ",
         "سلامت",
         "production"
@@ -2970,7 +3114,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "ساخت و نگهداری Cloud",
-      "duties": "مدیریت Cloud Infrastructure",
+      "duties": "طراحی و مدیریت زیرساخت Cloud",
       "supervisors": [
         "Cloud Architect"
       ],
@@ -3001,10 +3145,11 @@
       "keywords": [
         "cloud",
         "engineer",
-        "مدیریت",
-        "infrastructure",
-        "ساخت",
+        "طراحی",
         "و",
+        "مدیریت",
+        "زیرساخت",
+        "ساخت",
         "نگهداری"
       ]
     },
@@ -3023,7 +3168,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "طراحی Cloud Strategy",
-      "duties": "طراحی معماری Cloud",
+      "duties": "طراحی معماری Cloud و انتخاب سرویس‌ها",
       "supervisors": [],
       "consumers": [
         "Cloud Engineer",
@@ -3060,6 +3205,10 @@
         "architect",
         "طراحی",
         "معماری",
+        "و",
+        "انتخاب",
+        "سرویس",
+        "ها",
         "strategy"
       ]
     },
@@ -3078,7 +3227,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "تأمین Infrastructure پایدار",
-      "duties": "مدیریت Server، Storage و Infrastructure",
+      "duties": "مدیریت Server، Network، Storage و Infrastructure",
       "supervisors": [
         "Cloud Architect",
         "Platform Owner"
@@ -3112,6 +3261,7 @@
         "engineer",
         "مدیریت",
         "server",
+        "network",
         "storage",
         "و",
         "تأمین",
@@ -3189,7 +3339,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "سلامت سیستم‌های پایه",
-      "duties": "مدیریت OS و Server Services",
+      "duties": "مدیریت سیستم‌عامل‌ها، Serverها و سرویس‌های پایه",
       "supervisors": [
         "Infrastructure Manager",
         "Security Architect"
@@ -3222,14 +3372,15 @@
         "system",
         "administrator",
         "مدیریت",
-        "os",
-        "و",
-        "server",
-        "services",
-        "سلامت",
         "سیستم",
+        "عامل",
+        "ها",
+        "serverها",
+        "و",
+        "سرویس",
         "های",
-        "پایه"
+        "پایه",
+        "سلامت"
       ]
     },
     {
@@ -3247,7 +3398,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "انتشار کنترل‌شده نرم‌افزار",
-      "duties": "مدیریت Build و Release",
+      "duties": "مدیریت فرآیند Build و Release نرم‌افزار",
       "supervisors": [
         "Release Manager",
         "QA Lead"
@@ -3280,13 +3431,14 @@
         "release",
         "engineer",
         "مدیریت",
+        "فرآیند",
         "build",
         "و",
+        "نرم",
+        "افزار",
         "انتشار",
         "کنترل",
-        "شده",
-        "نرم",
-        "افزار"
+        "شده"
       ]
     },
     {
@@ -3304,7 +3456,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "تولید Artifact قابل انتشار",
-      "duties": "مدیریت Build و Package",
+      "duties": "مدیریت Build، Package و Dependencyها",
       "supervisors": [
         "Release Manager",
         "Technical Lead / Tech Lead"
@@ -3337,8 +3489,9 @@
         "build",
         "engineer",
         "مدیریت",
-        "و",
         "package",
+        "و",
+        "dependencyها",
         "تولید",
         "artifact",
         "قابل",
@@ -3360,7 +3513,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "تضمین کیفیت محصول",
-      "duties": "طراحی و اجرای تست نرم‌افزار",
+      "duties": "طراحی و اجرای تست‌های نرم‌افزار",
       "supervisors": [
         "QA Lead"
       ],
@@ -3398,6 +3551,7 @@
         "و",
         "اجرای",
         "تست",
+        "های",
         "نرم",
         "افزار",
         "تضمین",
@@ -3420,7 +3574,7 @@
       "seniority": "Lead",
       "seniorityLabel": "Lead",
       "mission": "تضمین QA Strategy",
-      "duties": "مدیریت تیم و فرآیند QA",
+      "duties": "مدیریت فرآیند و تیم QA",
       "supervisors": [],
       "consumers": [
         "Accessibility Specialist",
@@ -3455,9 +3609,9 @@
         "qa",
         "lead",
         "مدیریت",
-        "تیم",
-        "و",
         "فرآیند",
+        "و",
+        "تیم",
         "تضمین",
         "strategy"
       ]
@@ -3477,7 +3631,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "کشف Defect",
-      "duties": "اجرای Functional/Technical Tests",
+      "duties": "اجرای تست‌های Functional و Technical",
       "supervisors": [
         "QA Lead"
       ],
@@ -3509,9 +3663,11 @@
         "test",
         "engineer",
         "اجرای",
+        "تست",
+        "های",
         "functional",
+        "و",
         "technical",
-        "tests",
         "کشف",
         "defect"
       ]
@@ -3642,7 +3798,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "کشف ظرفیت و Failure Point",
-      "duties": "تست سیستم تحت فشار",
+      "duties": "تست سیستم تحت Load و فشار بالا",
       "supervisors": [
         "Performance Engineering Lead",
         "QA Lead"
@@ -3680,10 +3836,11 @@
         "تست",
         "سیستم",
         "تحت",
+        "و",
         "فشار",
+        "بالا",
         "کشف",
         "ظرفیت",
-        "و",
         "failure",
         "point"
       ]
@@ -3760,7 +3917,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "کشف و کاهش Application Vulnerabilities",
-      "duties": "بررسی امنیت Application",
+      "duties": "بررسی امنیت خود Application",
       "supervisors": [
         "Security Architect",
         "Chief Information Security Officer (CISO)"
@@ -3797,6 +3954,7 @@
         "engineer",
         "بررسی",
         "امنیت",
+        "خود",
         "کشف",
         "و",
         "کاهش",
@@ -3818,7 +3976,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "کاهش Cyber Risk",
-      "duties": "حفاظت کلی سیستم و زیرساخت",
+      "duties": "حفاظت کلی سیستم‌ها و زیرساخت در برابر حملات",
       "supervisors": [
         "Chief Information Security Officer (CISO)",
         "Security Governance Manager"
@@ -3855,8 +4013,12 @@
         "حفاظت",
         "کلی",
         "سیستم",
+        "ها",
         "و",
         "زیرساخت",
+        "در",
+        "برابر",
+        "حملات",
         "کاهش",
         "cyber",
         "risk"
@@ -3877,7 +4039,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "شناسایی قابل‌سوءاستفاده بودن آسیب‌پذیری‌ها",
-      "duties": "تست نفوذ مجاز",
+      "duties": "شناسایی آسیب‌پذیری با تست نفوذ مجاز",
       "supervisors": [
         "Security Architect",
         "Chief Information Security Officer (CISO)"
@@ -3911,15 +4073,16 @@
       "keywords": [
         "penetration",
         "tester",
+        "شناسایی",
+        "آسیب",
+        "پذیری",
+        "با",
         "تست",
         "نفوذ",
         "مجاز",
-        "شناسایی",
         "قابل",
         "سوءاستفاده",
         "بودن",
-        "آسیب",
-        "پذیری",
         "ها"
       ]
     },
@@ -3938,7 +4101,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "ایجاد Secure-by-Design Architecture",
-      "duties": "طراحی و بررسی معماری امنیتی",
+      "duties": "طراحی معماری امنیتی",
       "supervisors": [],
       "consumers": [
         "Agent Safety Engineer",
@@ -3978,8 +4141,6 @@
         "security",
         "architect",
         "طراحی",
-        "و",
-        "بررسی",
         "معماری",
         "امنیتی",
         "ایجاد",
@@ -4004,7 +4165,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "Automated Security Verification",
-      "duties": "ادغام Security در CI/CD",
+      "duties": "ادغام Security در چرخه CI/CD",
       "supervisors": [
         "Security Architect",
         "DevOps Manager"
@@ -4040,6 +4201,7 @@
         "ادغام",
         "security",
         "در",
+        "چرخه",
         "ci",
         "cd",
         "automated",
@@ -4061,7 +4223,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "Privacy-by-Design",
-      "duties": "طراحی Privacy و حفاظت داده",
+      "duties": "طراحی سیستم مطابق الزامات Privacy و حفاظت داده",
       "supervisors": [
         "Privacy / Compliance Officer"
       ],
@@ -4095,6 +4257,9 @@
         "privacy",
         "engineer",
         "طراحی",
+        "سیستم",
+        "مطابق",
+        "الزامات",
         "و",
         "حفاظت",
         "داده",
@@ -4117,7 +4282,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "ایجاد UI قابل استفاده و Consistent",
-      "duties": "طراحی ظاهر رابط",
+      "duties": "طراحی ظاهر و اجزای رابط کاربری",
       "supervisors": [
         "Design Manager",
         "Product Manager (PM)"
@@ -4153,11 +4318,13 @@
         "designer",
         "طراحی",
         "ظاهر",
+        "و",
+        "اجزای",
         "رابط",
+        "کاربری",
         "ایجاد",
         "قابل",
         "استفاده",
-        "و",
         "consistent"
       ]
     },
@@ -4176,7 +4343,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "ایجاد User Experience مناسب",
-      "duties": "طراحی تجربه کاربر",
+      "duties": "طراحی تجربه کاربر و جریان‌های تعامل",
       "supervisors": [
         "Design Manager",
         "Product Manager (PM)"
@@ -4213,6 +4380,10 @@
         "طراحی",
         "تجربه",
         "کاربر",
+        "و",
+        "جریان",
+        "های",
+        "تعامل",
         "ایجاد",
         "user",
         "experience",
@@ -4234,7 +4405,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "طراحی End-to-End Product Experience",
-      "duties": "ترکیب UX/UI و Product Needs",
+      "duties": "ترکیب UX/UI و نیازهای محصول برای طراحی محصول",
       "supervisors": [
         "Product Manager (PM)"
       ],
@@ -4272,7 +4443,9 @@
         "ux",
         "ui",
         "و",
-        "needs",
+        "نیازهای",
+        "محصول",
+        "برای",
         "طراحی",
         "end",
         "to",
@@ -4294,7 +4467,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "کشف User Needs",
-      "duties": "تحقیق درباره رفتار کاربران",
+      "duties": "تحقیق درباره رفتار و نیاز کاربران",
       "supervisors": [
         "Product Manager (PM)",
         "Design Manager"
@@ -4333,6 +4506,8 @@
         "تحقیق",
         "درباره",
         "رفتار",
+        "و",
+        "نیاز",
         "کاربران",
         "کشف",
         "user",
@@ -4354,7 +4529,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "ایجاد Clear Product Communication",
-      "duties": "طراحی متن‌های داخل محصول",
+      "duties": "طراحی متن‌ها و Microcopyهای داخل محصول",
       "supervisors": [
         "Design Manager",
         "Product Manager (PM)"
@@ -4390,7 +4565,9 @@
         "designer",
         "طراحی",
         "متن",
-        "های",
+        "ها",
+        "و",
+        "microcopyهای",
         "داخل",
         "محصول",
         "ایجاد",
@@ -4473,7 +4650,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "ایجاد Visual Assets",
-      "duties": "طراحی Assetهای گرافیکی",
+      "duties": "طراحی تصاویر، بنرها، Iconها و Assetهای گرافیکی",
       "supervisors": [
         "Product Marketing Manager",
         "Design Manager"
@@ -4508,6 +4685,10 @@
         "graphic",
         "designer",
         "طراحی",
+        "تصاویر",
+        "بنرها",
+        "iconها",
+        "و",
         "assetهای",
         "گرافیکی",
         "ایجاد",
@@ -4587,7 +4768,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "تضمین دسترسی‌پذیری",
-      "duties": "بررسی Accessibility",
+      "duties": "بررسی دسترسی‌پذیری محصول برای کاربران مختلف",
       "supervisors": [
         "Design Manager",
         "QA Lead"
@@ -4623,9 +4804,13 @@
         "accessibility",
         "specialist",
         "بررسی",
-        "تضمین",
         "دسترسی",
-        "پذیری"
+        "پذیری",
+        "محصول",
+        "برای",
+        "کاربران",
+        "مختلف",
+        "تضمین"
       ]
     },
     {
@@ -4643,7 +4828,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "انتقال دانش فنی",
-      "duties": "مستندسازی فنی",
+      "duties": "مستندسازی فنی، API، Installation و Developer Docs",
       "supervisors": [
         "Technical Lead / Tech Lead",
         "Product Manager (PM)"
@@ -4677,6 +4862,11 @@
         "writer",
         "مستندسازی",
         "فنی",
+        "api",
+        "installation",
+        "و",
+        "developer",
+        "docs",
         "انتقال",
         "دانش"
       ]
@@ -4696,7 +4886,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "قابل‌فهم کردن Product",
-      "duties": "مستندات کاربر و محصول",
+      "duties": "تهیه مستندات کاربران و محصول",
       "supervisors": [
         "Product Manager (PM)"
       ],
@@ -4728,8 +4918,9 @@
       "keywords": [
         "documentation",
         "specialist",
+        "تهیه",
         "مستندات",
-        "کاربر",
+        "کاربران",
         "و",
         "محصول",
         "قابل",
@@ -4753,7 +4944,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "تطبیق محصول با بازار هدف",
-      "duties": "بومی‌سازی محصول",
+      "duties": "ترجمه و بومی‌سازی محصول",
       "supervisors": [
         "Product Manager (PM)",
         "Product Marketing Manager"
@@ -4785,6 +4976,8 @@
       "keywords": [
         "localization",
         "specialist",
+        "ترجمه",
+        "و",
         "بومی",
         "سازی",
         "محصول",
@@ -4862,7 +5055,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "کاهش Legal Risk",
-      "duties": "بررسی مسائل حقوقی",
+      "duties": "بررسی مسائل حقوقی پروژه و قراردادها",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -4890,6 +5083,9 @@
         "بررسی",
         "مسائل",
         "حقوقی",
+        "پروژه",
+        "و",
+        "قراردادها",
         "کاهش",
         "risk"
       ]
@@ -4909,7 +5105,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "حفاظت IP",
-      "duties": "مدیریت مالکیت فکری",
+      "duties": "مدیریت مالکیت فکری، License و Copyright",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -4940,6 +5136,8 @@
         "مدیریت",
         "مالکیت",
         "فکری",
+        "license",
+        "و",
         "حفاظت"
       ]
     },
@@ -4958,7 +5156,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "Regulatory Compliance",
-      "duties": "تطابق با قوانین و مقررات",
+      "duties": "اطمینان از رعایت قوانین و مقررات",
       "supervisors": [],
       "consumers": [
         "Privacy Engineer"
@@ -4988,8 +5186,9 @@
         "privacy",
         "compliance",
         "officer",
-        "تطابق",
-        "با",
+        "اطمینان",
+        "از",
+        "رعایت",
         "قوانین",
         "و",
         "مقررات",
@@ -5011,7 +5210,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "کنترل تعهدات قراردادی",
-      "duties": "مدیریت قراردادها",
+      "duties": "مدیریت قراردادها و تعهدات طرفین",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -5039,8 +5238,10 @@
         "manager",
         "مدیریت",
         "قراردادها",
-        "کنترل",
+        "و",
         "تعهدات",
+        "طرفین",
+        "کنترل",
         "قراردادی"
       ]
     },
@@ -5059,7 +5260,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "کنترل Financial Health",
-      "duties": "مدیریت بودجه و هزینه",
+      "duties": "مدیریت بودجه، هزینه و مسائل مالی",
       "supervisors": [],
       "consumers": [
         "BI Analyst"
@@ -5088,8 +5289,10 @@
         "manager",
         "مدیریت",
         "بودجه",
-        "و",
         "هزینه",
+        "و",
+        "مسائل",
+        "مالی",
         "کنترل",
         "financial",
         "health"
@@ -5110,7 +5313,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "تأمین منابع موردنیاز",
-      "duties": "خرید سرویس و تجهیزات",
+      "duties": "خرید سرویس، Hardware، Software و خدمات مورد نیاز",
       "supervisors": [
         "Procurement Manager"
       ],
@@ -5146,8 +5349,12 @@
         "specialist",
         "خرید",
         "سرویس",
+        "hardware",
+        "software",
         "و",
-        "تجهیزات",
+        "خدمات",
+        "مورد",
+        "نیاز",
         "تأمین",
         "منابع",
         "موردنیاز"
@@ -5168,7 +5375,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "ایجاد تیم مناسب",
-      "duties": "مدیریت نیروی انسانی",
+      "duties": "جذب، مدیریت و توسعه نیروی انسانی",
       "supervisors": [],
       "consumers": [
         "Recruiter",
@@ -5201,7 +5408,10 @@
         "hr",
         "people",
         "manager",
+        "جذب",
         "مدیریت",
+        "و",
+        "توسعه",
         "نیروی",
         "انسانی",
         "ایجاد",
@@ -5224,7 +5434,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "تأمین نیروی موردنیاز",
-      "duties": "جذب نیرو",
+      "duties": "پیدا کردن و جذب اعضای تیم",
       "supervisors": [
         "HR / People Manager"
       ],
@@ -5255,8 +5465,12 @@
       "file": "recruiter.md",
       "keywords": [
         "recruiter",
+        "پیدا",
+        "کردن",
+        "و",
         "جذب",
-        "نیرو",
+        "اعضای",
+        "تیم",
         "تأمین",
         "نیروی",
         "موردنیاز"
@@ -5332,7 +5546,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "تحویل Increment ارزشمند",
-      "duties": "اجرای توسعه Iterative",
+      "duties": "اجرای فرآیندهای توسعه Iterative",
       "supervisors": [
         "Product Owner (PO)",
         "Scrum Master"
@@ -5368,6 +5582,7 @@
         "product",
         "team",
         "اجرای",
+        "فرآیندهای",
         "توسعه",
         "iterative",
         "تحویل",
@@ -5390,7 +5605,7 @@
       "seniority": "Junior",
       "seniorityLabel": "جونیور",
       "mission": "ارائه User Feedback",
-      "duties": "شرکت در تحقیقات کاربری",
+      "duties": "شرکت در تست و تحقیقات کاربری",
       "supervisors": [
         "Design Manager"
       ],
@@ -5425,6 +5640,8 @@
         "participants",
         "شرکت",
         "در",
+        "تست",
+        "و",
         "تحقیقات",
         "کاربری",
         "ارائه",
@@ -5447,7 +5664,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "کشف مشکلات قبل از Release",
-      "duties": "استفاده آزمایشی",
+      "duties": "استفاده آزمایشی از محصول قبل از Release عمومی",
       "supervisors": [
         "QA Lead"
       ],
@@ -5481,11 +5698,13 @@
         "tester",
         "استفاده",
         "آزمایشی",
-        "کشف",
-        "مشکلات",
-        "قبل",
         "از",
-        "release"
+        "محصول",
+        "قبل",
+        "release",
+        "عمومی",
+        "کشف",
+        "مشکلات"
       ]
     },
     {
@@ -5503,7 +5722,7 @@
       "seniority": "Junior",
       "seniorityLabel": "جونیور",
       "mission": "ایجاد Signal واقعی از Product Usage",
-      "duties": "استفاده واقعی و Feedback",
+      "duties": "استفاده واقعی از محصول و ارائه Feedback",
       "supervisors": [
         "Product Owner پس از Release"
       ],
@@ -5537,11 +5756,13 @@
         "user",
         "استفاده",
         "واقعی",
+        "از",
+        "محصول",
         "و",
+        "ارائه",
         "feedback",
         "ایجاد",
         "signal",
-        "از",
         "product",
         "usage"
       ]
@@ -5561,7 +5782,7 @@
       "seniority": "Mid",
       "seniorityLabel": "میانی",
       "mission": "حل User Issues",
-      "duties": "پاسخ به مشکلات کاربران",
+      "duties": "پاسخ به مشکلات و درخواست‌های کاربران",
       "supervisors": [
         "Customer Success Manager",
         "Operations Manager"
@@ -5597,6 +5818,9 @@
         "پاسخ",
         "به",
         "مشکلات",
+        "و",
+        "درخواست",
+        "های",
         "کاربران",
         "حل",
         "user",
@@ -5674,7 +5898,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "Maximize Customer Value",
-      "duties": "موفقیت مشتری در استفاده از محصول",
+      "duties": "کمک به موفقیت مشتری در استفاده از محصول",
       "supervisors": [],
       "consumers": [
         "Customer Support Agent"
@@ -5706,6 +5930,8 @@
         "customer",
         "success",
         "manager",
+        "کمک",
+        "به",
         "موفقیت",
         "مشتری",
         "در",
@@ -5731,7 +5957,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "ایجاد تعامل سالم با کاربران",
-      "duties": "مدیریت Community",
+      "duties": "مدیریت Community و ارتباط با کاربران",
       "supervisors": [
         "Product Manager (PM)",
         "Product Marketing Manager"
@@ -5765,11 +5991,13 @@
         "community",
         "manager",
         "مدیریت",
+        "و",
+        "ارتباط",
+        "با",
+        "کاربران",
         "ایجاد",
         "تعامل",
-        "سالم",
-        "با",
-        "کاربران"
+        "سالم"
       ]
     },
     {
@@ -5787,7 +6015,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "Positioning و Go-to-Market",
-      "duties": "استراتژی بازاریابی محصول",
+      "duties": "تعیین استراتژی بازاریابی محصول",
       "supervisors": [],
       "consumers": [
         "ASO Specialist",
@@ -5823,6 +6051,7 @@
         "product",
         "marketing",
         "manager",
+        "تعیین",
         "استراتژی",
         "بازاریابی",
         "محصول",
@@ -5848,7 +6077,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "جذب و فعال‌سازی کاربران",
-      "duties": "اجرای کمپین‌های Marketing",
+      "duties": "اجرای کمپین‌ها و فعالیت‌های Marketing",
       "supervisors": [
         "Product Marketing Manager",
         "Growth Manager"
@@ -5884,9 +6113,11 @@
         "specialist",
         "اجرای",
         "کمپین",
+        "ها",
+        "و",
+        "فعالیت",
         "های",
         "جذب",
-        "و",
         "فعال",
         "سازی",
         "کاربران"
@@ -5907,7 +6138,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "افزایش Organic Acquisition",
-      "duties": "بهینه‌سازی Search",
+      "duties": "بهینه‌سازی محصول و محتوا برای Search Engine",
       "supervisors": [
         "Product Marketing Manager",
         "Growth Manager"
@@ -5945,7 +6176,12 @@
         "specialist",
         "بهینه",
         "سازی",
+        "محصول",
+        "و",
+        "محتوا",
+        "برای",
         "search",
+        "engine",
         "افزایش",
         "organic",
         "acquisition"
@@ -5966,7 +6202,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "افزایش App Discovery",
-      "duties": "بهینه‌سازی App Store",
+      "duties": "بهینه‌سازی محصول برای App Storeها",
       "supervisors": [
         "Product Marketing Manager",
         "Growth Manager"
@@ -6004,8 +6240,10 @@
         "specialist",
         "بهینه",
         "سازی",
+        "محصول",
+        "برای",
         "app",
-        "store",
+        "storeها",
         "افزایش",
         "discovery"
       ]
@@ -6025,7 +6263,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "افزایش Sustainable Growth",
-      "duties": "طراحی استراتژی رشد",
+      "duties": "طراحی و اجرای استراتژی رشد محصول",
       "supervisors": [],
       "consumers": [
         "ASO Specialist",
@@ -6058,8 +6296,11 @@
         "growth",
         "manager",
         "طراحی",
+        "و",
+        "اجرای",
         "استراتژی",
         "رشد",
+        "محصول",
         "افزایش",
         "sustainable"
       ]
@@ -6079,7 +6320,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "افزایش Revenue",
-      "duties": "مدیریت فروش",
+      "duties": "مدیریت فرآیند فروش",
       "supervisors": [],
       "consumers": [
         "Sales Representative"
@@ -6109,6 +6350,7 @@
         "sales",
         "manager",
         "مدیریت",
+        "فرآیند",
         "فروش",
         "افزایش",
         "revenue"
@@ -6129,7 +6371,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "تبدیل Lead به Customer",
-      "duties": "فروش محصول",
+      "duties": "فروش محصول/سرویس به مشتری",
       "supervisors": [
         "Sales Manager"
       ],
@@ -6163,9 +6405,11 @@
         "representative",
         "فروش",
         "محصول",
+        "سرویس",
+        "به",
+        "مشتری",
         "تبدیل",
         "lead",
-        "به",
         "customer"
       ]
     },
@@ -6184,7 +6428,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "حفظ و توسعه Accounts",
-      "duties": "مدیریت مشتریان کلیدی",
+      "duties": "مدیریت ارتباط با مشتریان کلیدی",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -6212,6 +6456,8 @@
         "account",
         "manager",
         "مدیریت",
+        "ارتباط",
+        "با",
         "مشتریان",
         "کلیدی",
         "حفظ",
@@ -6235,7 +6481,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "توسعه Business Opportunities",
-      "duties": "ایجاد فرصت‌های تجاری",
+      "duties": "ایجاد Partnership و فرصت‌های تجاری",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -6265,6 +6511,8 @@
         "development",
         "manager",
         "ایجاد",
+        "partnership",
+        "و",
         "فرصت",
         "های",
         "تجاری",
@@ -6287,7 +6535,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "ایجاد Partnership پایدار",
-      "duties": "مدیریت همکاری با شرکت‌ها",
+      "duties": "مدیریت همکاری با شرکت‌ها و سرویس‌های دیگر",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -6319,6 +6567,10 @@
         "با",
         "شرکت",
         "ها",
+        "و",
+        "سرویس",
+        "های",
+        "دیگر",
         "ایجاد",
         "پایدار"
       ]
@@ -6338,7 +6590,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "حفظ Operational Continuity",
-      "duties": "مدیریت عملیات جاری محصول",
+      "duties": "مدیریت عملیات جاری محصول پس از راه‌اندازی",
       "supervisors": [],
       "consumers": [
         "Customer Support Agent",
@@ -6371,6 +6623,10 @@
         "عملیات",
         "جاری",
         "محصول",
+        "پس",
+        "از",
+        "راه",
+        "اندازی",
         "حفظ",
         "operational",
         "continuity"
@@ -6391,7 +6647,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "رشد Developer Ecosystem",
-      "duties": "ارتباط با Developer Community",
+      "duties": "ارتباط با Developerها و جامعه فنی",
       "supervisors": [
         "Community Director",
         "Product Marketing Manager"
@@ -6424,9 +6680,12 @@
         "devrel",
         "ارتباط",
         "با",
-        "developer",
-        "community",
+        "developerها",
+        "و",
+        "جامعه",
+        "فنی",
         "رشد",
+        "developer",
         "ecosystem"
       ]
     },
@@ -6445,7 +6704,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "افزایش Technical Adoption",
-      "duties": "معرفی تکنولوژی/محصول",
+      "duties": "معرفی تکنولوژی/محصول به جامعه فنی",
       "supervisors": [
         "Community Director"
       ],
@@ -6478,6 +6737,9 @@
         "معرفی",
         "تکنولوژی",
         "محصول",
+        "به",
+        "جامعه",
+        "فنی",
         "افزایش",
         "adoption"
       ]
@@ -6497,7 +6759,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "Restore Service Safely",
-      "duties": "مدیریت رخدادهای بحرانی",
+      "duties": "مدیریت رخدادهای بحرانی Production",
       "supervisors": [],
       "consumers": [
         "Incident Response Engineer",
@@ -6529,6 +6791,7 @@
         "مدیریت",
         "رخدادهای",
         "بحرانی",
+        "production",
         "restore",
         "service",
         "safely"
@@ -6549,7 +6812,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "Restore Service",
-      "duties": "رسیدگی فوری به Production",
+      "duties": "رسیدگی فوری به مشکلات Production",
       "supervisors": [
         "Incident Manager",
         "DevOps Manager"
@@ -6585,6 +6848,7 @@
         "رسیدگی",
         "فوری",
         "به",
+        "مشکلات",
         "production",
         "restore",
         "service"
@@ -6605,7 +6869,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "حفظ سلامت سیستم",
-      "duties": "نگهداری و Bug Fix",
+      "duties": "نگهداری، Bug Fix و بهبود سیستم",
       "supervisors": [
         "Technical Lead / Tech Lead",
         "Engineering Manager"
@@ -6637,12 +6901,13 @@
         "maintenance",
         "engineer",
         "نگهداری",
-        "و",
         "bug",
         "fix",
+        "و",
+        "بهبود",
+        "سیستم",
         "حفظ",
-        "سلامت",
-        "سیستم"
+        "سلامت"
       ]
     },
     {
@@ -6660,7 +6925,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "کاهش Technical Debt",
-      "duties": "بهبود ساختار کد",
+      "duties": "بهبود ساختار و کیفیت کد موجود",
       "supervisors": [
         "Technical Lead / Tech Lead"
       ],
@@ -6694,7 +6959,10 @@
         "engineer",
         "بهبود",
         "ساختار",
+        "و",
+        "کیفیت",
         "کد",
+        "موجود",
         "کاهش",
         "technical",
         "debt"
@@ -6715,7 +6983,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "کاهش Legacy Risk",
-      "duties": "نوسازی سیستم قدیمی",
+      "duties": "مهاجرت و نوسازی سیستم‌های قدیمی",
       "supervisors": [
         "Solution Architect",
         "Enterprise Architect"
@@ -6749,8 +7017,11 @@
         "legacy",
         "modernization",
         "engineer",
+        "مهاجرت",
+        "و",
         "نوسازی",
         "سیستم",
+        "های",
         "قدیمی",
         "کاهش",
         "risk"
@@ -6771,7 +7042,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "بهینه‌سازی Cloud Cost",
-      "duties": "کنترل هزینه Cloud",
+      "duties": "کنترل و بهینه‌سازی هزینه زیرساخت Cloud",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -6802,10 +7073,12 @@
         "finops",
         "specialist",
         "کنترل",
-        "هزینه",
-        "cloud",
+        "و",
         "بهینه",
         "سازی",
+        "هزینه",
+        "زیرساخت",
+        "cloud",
         "cost"
       ]
     },
@@ -6882,7 +7155,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "تبدیل Data به Insight",
-      "duties": "تحلیل رفتار کاربران و KPIها",
+      "duties": "تحلیل رفتار کاربران و KPIهای محصول",
       "supervisors": [
         "Product Analyst Lead",
         "Product Manager (PM)"
@@ -6919,7 +7192,8 @@
         "رفتار",
         "کاربران",
         "و",
-        "kpiها",
+        "kpiهای",
+        "محصول",
         "تبدیل",
         "به",
         "insight"
@@ -6940,7 +7214,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "ارائه Management Visibility",
-      "duties": "ساخت گزارش و Dashboard مدیریتی",
+      "duties": "ساخت گزارش‌ها و داشبوردهای مدیریتی",
       "supervisors": [
         "Data Architect",
         "Finance Manager"
@@ -6976,8 +7250,9 @@
         "analyst",
         "ساخت",
         "گزارش",
+        "ها",
         "و",
-        "dashboard",
+        "داشبوردهای",
         "مدیریتی",
         "ارائه",
         "management",
@@ -6999,7 +7274,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "کمک به Product Decisions",
-      "duties": "تحلیل Product Usage",
+      "duties": "تحلیل استفاده کاربران برای تصمیم‌های Product",
       "supervisors": [
         "Product Manager (PM)"
       ],
@@ -7032,7 +7307,11 @@
         "product",
         "analyst",
         "تحلیل",
-        "usage",
+        "استفاده",
+        "کاربران",
+        "برای",
+        "تصمیم",
+        "های",
         "کمک",
         "به",
         "decisions"
@@ -7118,7 +7397,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "کاهش Project Risk",
-      "duties": "شناسایی و مدیریت ریسک",
+      "duties": "شناسایی و مدیریت ریسک‌های پروژه",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -7147,6 +7426,8 @@
         "و",
         "مدیریت",
         "ریسک",
+        "های",
+        "پروژه",
         "کاهش",
         "project"
       ]
@@ -7166,7 +7447,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "کنترل Change Impact",
-      "duties": "مدیریت تغییرات Scope و سازمان",
+      "duties": "مدیریت تغییرات Scope، فرآیند و سازمان",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -7196,6 +7477,7 @@
         "مدیریت",
         "تغییرات",
         "scope",
+        "فرآیند",
         "و",
         "سازمان",
         "کنترل",
@@ -7217,7 +7499,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "تضمین Quality System",
-      "duties": "کنترل کیفیت کل فرآیند",
+      "duties": "کنترل کیفیت کل فرآیند تولید محصول",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -7249,6 +7531,8 @@
         "کیفیت",
         "کل",
         "فرآیند",
+        "تولید",
+        "محصول",
         "تضمین",
         "system"
       ]
@@ -7373,7 +7657,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "کنترل عملکرد Vendor",
-      "duties": "مدیریت Vendorها",
+      "duties": "مدیریت شرکت‌ها و سرویس‌دهندگان خارجی",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -7399,7 +7683,12 @@
         "vendor",
         "manager",
         "مدیریت",
-        "vendorها",
+        "شرکت",
+        "ها",
+        "و",
+        "سرویس",
+        "دهندگان",
+        "خارجی",
         "کنترل",
         "عملکرد"
       ]
@@ -7419,7 +7708,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "اتصال پایدار سرویس‌ها",
-      "duties": "Integration با سرویس‌های خارجی",
+      "duties": "Integration با سرویس‌ها و APIهای خارجی",
       "supervisors": [
         "Solution Architect",
         "Technical Lead / Tech Lead"
@@ -7455,11 +7744,12 @@
         "specialist",
         "با",
         "سرویس",
-        "های",
+        "ها",
+        "و",
+        "apiهای",
         "خارجی",
         "اتصال",
-        "پایدار",
-        "ها"
+        "پایدار"
       ]
     },
     {
@@ -7477,7 +7767,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "انتقال بدون Loss/Corruption",
-      "duties": "انتقال داده و سیستم",
+      "duties": "انتقال داده و سیستم از محیط قبلی",
       "supervisors": [
         "Data Architect"
       ],
@@ -7511,6 +7801,9 @@
         "داده",
         "و",
         "سیستم",
+        "از",
+        "محیط",
+        "قبلی",
         "بدون",
         "loss",
         "corruption"
@@ -7531,7 +7824,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "Deploy Safe and Repeatable",
-      "duties": "استقرار نسخه‌ها",
+      "duties": "استقرار نسخه‌ها در محیط‌های مختلف",
       "supervisors": [
         "Release Manager",
         "DevOps Manager"
@@ -7567,6 +7860,10 @@
         "استقرار",
         "نسخه",
         "ها",
+        "در",
+        "محیط",
+        "های",
+        "مختلف",
         "deploy",
         "safe",
         "and",
@@ -7588,7 +7885,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "Recover System After Disaster",
-      "duties": "طراحی و تست بازیابی",
+      "duties": "طراحی و تست بازیابی پس از Disaster",
       "supervisors": [
         "Business Continuity Manager",
         "DevOps Manager"
@@ -7628,6 +7925,8 @@
         "و",
         "تست",
         "بازیابی",
+        "پس",
+        "از",
         "recover",
         "system",
         "after"
@@ -7701,7 +8000,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "حفظ Business Operations",
-      "duties": "تضمین تداوم کسب‌وکار",
+      "duties": "تضمین تداوم فعالیت کسب‌وکار",
       "supervisors": [],
       "consumers": [
         "Backup Administrator",
@@ -7733,6 +8032,7 @@
         "manager",
         "تضمین",
         "تداوم",
+        "فعالیت",
         "کسب",
         "وکار",
         "حفظ",
@@ -7754,7 +8054,7 @@
       "seniority": "Specialist",
       "seniorityLabel": "متخصص",
       "mission": "مدیریت ارزش محصول در Production",
-      "duties": "مدیریت Evolution محصول",
+      "duties": "مدیریت Evolution محصول و Backlog آینده",
       "supervisors": [],
       "consumers": [
         "End User"
@@ -7790,6 +8090,9 @@
         "مدیریت",
         "evolution",
         "محصول",
+        "و",
+        "backlog",
+        "آینده",
         "ارزش",
         "در",
         "production"
@@ -7810,7 +8113,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "مدیریت امن Product Retirement",
-      "duties": "برنامه‌ریزی پایان عمر محصول",
+      "duties": "برنامه‌ریزی برای پایان عمر محصول",
       "supervisors": [],
       "consumers": [
         "Decommission Engineer"
@@ -7841,6 +8144,7 @@
         "manager",
         "برنامه",
         "ریزی",
+        "برای",
         "پایان",
         "عمر",
         "محصول",
@@ -8251,7 +8555,7 @@
       "seniority": "Senior",
       "seniorityLabel": "سینیور",
       "mission": "استقرار گاردریل‌ها و کنترل‌های ایمنی Agent",
-      "duties": "پیاده‌سازی Guardrail، Jailbreak Detection و Budget Control",
+      "duties": "Implement Guardrail، Jailbreak Detection و Budget Control",
       "supervisors": [
         "AI Engineer Lead",
         "Security Architect"
@@ -8286,8 +8590,7 @@
         "agent",
         "safety",
         "engineer",
-        "پیاده",
-        "سازی",
+        "implement",
         "guardrail",
         "jailbreak",
         "detection",
@@ -8434,7 +8737,7 @@
       "seniority": "Executive",
       "seniorityLabel": "اجرایی",
       "mission": "تضمین پوشش و اثربخشی کنترل‌های امنیتی سازمان",
-      "duties": "هدایت استراتژیک امنیت اطلاعات",
+      "duties": "هدایت استراتژیک امنیت اطلاعات و حکمرانی امنیتی",
       "supervisors": [],
       "consumers": [
         "Application Security Engineer",
@@ -8479,13 +8782,14 @@
         "استراتژیک",
         "امنیت",
         "اطلاعات",
+        "و",
+        "حکمرانی",
+        "امنیتی",
         "تضمین",
         "پوشش",
-        "و",
         "اثربخشی",
         "کنترل",
         "های",
-        "امنیتی",
         "سازمان"
       ]
     },
@@ -8504,7 +8808,7 @@
       "seniority": "Executive",
       "seniorityLabel": "اجرایی",
       "mission": "تضمین انطباق پردازش داده با قوانین و تعهدات حریم خصوصی",
-      "duties": "هدایت استراتژیک حریم خصوصی",
+      "duties": "هدایت استراتژیک حریم خصوصی و انطباق داده",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -8535,13 +8839,13 @@
         "استراتژیک",
         "حریم",
         "خصوصی",
-        "تضمین",
+        "و",
         "انطباق",
-        "پردازش",
         "داده",
+        "تضمین",
+        "پردازش",
         "با",
         "قوانین",
-        "و",
         "تعهدات"
       ]
     },
@@ -8560,7 +8864,7 @@
       "seniority": "Executive",
       "seniorityLabel": "اجرایی",
       "mission": "تضمین هم‌سویی استراتژی طراحی و کیفیت تجربه با محصول",
-      "duties": "هدایت استراتژیک طراحی",
+      "duties": "هدایت استراتژیک طراحی و تجربه کاربر",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -8591,13 +8895,14 @@
         "هدایت",
         "استراتژیک",
         "طراحی",
+        "و",
+        "تجربه",
+        "کاربر",
         "تضمین",
         "هم",
         "سویی",
         "استراتژی",
-        "و",
         "کیفیت",
-        "تجربه",
         "با",
         "محصول"
       ]
@@ -8617,7 +8922,7 @@
       "seniority": "Director",
       "seniorityLabel": "مدیر ارشد",
       "mission": "تضمین اثر استراتژی جامعه بر رشد و اعتماد محصول",
-      "duties": "هدایت استراتژیک جامعه",
+      "duties": "هدایت استراتژیک جامعه و مشارکت اعضا",
       "supervisors": [],
       "consumers": [
         "DevRel",
@@ -8651,12 +8956,14 @@
         "هدایت",
         "استراتژیک",
         "جامعه",
+        "و",
+        "مشارکت",
+        "اعضا",
         "تضمین",
         "اثر",
         "استراتژی",
         "بر",
         "رشد",
-        "و",
         "اعتماد",
         "محصول"
       ]
@@ -8676,7 +8983,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "تضمین کیفیت و به‌موقع بودن خروجی‌های تیم طراحی",
-      "duties": "مدیریت تیم طراحی",
+      "duties": "مدیریت تیم طراحی و کیفیت خروجی‌ها",
       "supervisors": [],
       "consumers": [
         "Accessibility Specialist",
@@ -8715,13 +9022,14 @@
         "مدیریت",
         "تیم",
         "طراحی",
-        "تضمین",
-        "کیفیت",
         "و",
+        "کیفیت",
+        "خروجی",
+        "ها",
+        "تضمین",
         "به",
         "موقع",
         "بودن",
-        "خروجی",
         "های"
       ]
     },
@@ -8740,7 +9048,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "تضمین تحویل پایدار، امن و تکرارپذیر در فرایند DevOps",
-      "duties": "مدیریت تیم DevOps",
+      "duties": "مدیریت تیم DevOps و فرایند تحویل",
       "supervisors": [],
       "consumers": [
         "Deployment Engineer",
@@ -8779,14 +9087,14 @@
         "manager",
         "مدیریت",
         "تیم",
-        "تضمین",
+        "و",
+        "فرایند",
         "تحویل",
+        "تضمین",
         "پایدار",
         "امن",
-        "و",
         "تکرارپذیر",
-        "در",
-        "فرایند"
+        "در"
       ]
     },
     {
@@ -8804,7 +9112,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "تضمین دقت، کامل بودن و به‌روز بودن مستندات",
-      "duties": "مدیریت تیم مستندسازی",
+      "duties": "مدیریت تیم مستندسازی و کیفیت اسناد",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -8834,11 +9142,13 @@
         "مدیریت",
         "تیم",
         "مستندسازی",
+        "و",
+        "کیفیت",
+        "اسناد",
         "تضمین",
         "دقت",
         "کامل",
         "بودن",
-        "و",
         "به",
         "روز",
         "مستندات"
@@ -8973,7 +9283,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "تضمین کیفیت، یکدستی و سازگاری محلی ترجمه‌ها",
-      "duties": "مدیریت تیم Localization",
+      "duties": "مدیریت تیم Localization و کیفیت ترجمه",
       "supervisors": [],
       "consumers": [
         "Translator"
@@ -9004,13 +9314,13 @@
         "manager",
         "مدیریت",
         "تیم",
-        "تضمین",
-        "کیفیت",
-        "یکدستی",
         "و",
+        "کیفیت",
+        "ترجمه",
+        "تضمین",
+        "یکدستی",
         "سازگاری",
         "محلی",
-        "ترجمه",
         "ها"
       ]
     },
@@ -9202,7 +9512,7 @@
       "seniority": "Manager",
       "seniorityLabel": "مدیر",
       "mission": "تضمین رعایت SLA و کیفیت پاسخ پشتیبانی",
-      "duties": "مدیریت تیم پشتیبانی",
+      "duties": "مدیریت تیم پشتیبانی و رعایت SLA",
       "supervisors": [],
       "consumers": [],
       "capabilities": [
@@ -9232,10 +9542,10 @@
         "مدیریت",
         "تیم",
         "پشتیبانی",
-        "تضمین",
+        "و",
         "رعایت",
         "sla",
-        "و",
+        "تضمین",
         "کیفیت",
         "پاسخ"
       ]

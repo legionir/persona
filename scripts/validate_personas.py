@@ -43,14 +43,18 @@ def read_rows(path: Path) -> list[tuple[str, str, str, str]]:
         if not s.startswith("|"):
             continue
         cells = [c.strip() for c in s.strip("|").split("|")]
-        if len(cells) < 4:
+        if len(cells) < 3:
             continue
-        title, role, link = cells[0], cells[2], cells[3]
+        title = cells[0]
         if title == "عنوان شغلی" or set(title) <= set("-: "):
             continue
-        m = re.search(r"(audit|implementation)/([\w\-]+)\.md", link)
-        if m:
-            rows.append((title, role, m.group(1), m.group(2)))
+        # the merged main table carries the prompt link in one of its cells;
+        # scan for it instead of assuming a fixed column index
+        for c in cells:
+            m = re.search(r"(audit|implementation)/([\w\-]+)\.md", c)
+            if m:
+                rows.append((title, cells[2], m.group(1), m.group(2)))
+                break
     return rows
 
 
