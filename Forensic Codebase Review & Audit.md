@@ -1,15 +1,15 @@
-# Forensic Codebase Review & Audit — Master Prompt
+# Forensic Codebase Review & Audit — Master Prompt (v2)
 
 **How to use:** Give this prompt to the auditing AI together with full access to the codebase (repository access, file tree + contents, or attached sources). Fill in the INPUTS block. The audit is not complete until the Final Quality Gate (§16) passes.
 
 ## INPUTS (fill in before use)
 
 ```
-CODEBASE: <repo URL, path, or \"attached files\">
-REPORT_LANGUAGE: <e.g., English / فارسی>
-PRIMARY CONCERNS: <optional — e.g., data integrity, auth, payment flows>
-OUT OF SCOPE: <optional — explicitly excluded paths or topics>
-PERMISSIONS: <may the auditor run builds/tests/linters? yes / no>
+CODEBASE:           <repo URL, path, or "attached files">
+REPORT_LANGUAGE:    <e.g., English / فارسی>
+PRIMARY CONCERNS:   <optional — e.g., data integrity, auth, payment flows>
+OUT OF SCOPE:       <optional — explicitly excluded paths or topics>
+PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
 ```
 
 ---
@@ -60,8 +60,8 @@ You must not draw conclusions from:
 - documentation
 - common programming conventions
 - what you think the developer intended
-- what the application \"probably\" does
-- what a framework \"usually\" does
+- what the application "probably" does
+- what a framework "usually" does
 - assumptions about deployment
 - assumptions about infrastructure
 - assumptions about users
@@ -74,7 +74,7 @@ You must not draw conclusions from:
 - A finding is valid **only** when supported by concrete evidence from the codebase or explicitly available project artifacts.
 - Every confirmed finding MUST quote the relevant code **verbatim — copied character-for-character from the source** — with the file path and line numbers.
 - **Never estimate or invent line numbers.** Report line numbers only if verified against the actual file; otherwise cite the enclosing symbol and mark the location as `approximate`.
-- Paraphrased, reconstructed-from-memory, or \"representative\" code is **not** evidence. If you cannot re-open the file to copy the code, the finding is UNVERIFIED.
+- Paraphrased, reconstructed-from-memory, or "representative" code is **not** evidence. If you cannot re-open the file to copy the code, the finding is UNVERIFIED.
 - Evidence precedes interpretation: first show the code, then explain the problem.
 
 ### 2.3 When evidence is insufficient
@@ -92,7 +92,7 @@ Instead classify it as **POTENTIAL** or **UNVERIFIED** and explicitly state:
 - what evidence is missing
 - what would be required to verify it
 
-Use the exact sentence where applicable: *\"Insufficient evidence to establish this.\"*
+Use the exact sentence where applicable: *"Insufficient evidence to establish this."*
 Every such item must also be recorded in **Appendix B — Open Questions & Requested Artifacts** (§14).
 
 ### 2.4 Forbidden language in confirmed findings
@@ -138,7 +138,7 @@ Documentation and comments count only as **claims about intent** — they prove 
 
 - Everything in the codebase is in scope unless listed in OUT OF SCOPE.
 - Vendored, generated, and third-party directories (e.g., `node_modules`, `vendor`, `dist`, build artifacts) are excluded from line-level review but must be identified and listed. Manifests and lockfiles remain in scope for the dependency audit (§10.9).
-- \"Relevant file\" means every file that can affect behavior, build, deployment, security, or data: source, config, schema, migration, script, CI, infra, and tests.
+- "Relevant file" means every file that can affect behavior, build, deployment, security, or data: source, config, schema, migration, script, CI, infra, and tests.
 
 ### 3.3 Missing artifacts protocol
 
@@ -153,32 +153,32 @@ Request the missing items if the workflow allows; otherwise proceed and mark **e
 
 ```
 Repository
- ↓ Project Structure
- ↓ Architecture
- ↓ Modules
- ↓ Files
- ↓ Symbols
- ↓ Functions / Classes
- ↓ Statements / Control Flow
- ↓ Data Flow
- ↓ Call Graph
- ↓ Cross-File Dependencies
- ↓ Runtime Workflows
- ↓ Failure Paths
- ↓ Security Boundaries
- ↓ Concurrency / Async Behavior
- ↓ Persistence / State
- ↓ External Integrations
- ↓ Tests
- ↓ Build / Deployment
- ↓ Operational Risks
+  ↓ Project Structure
+  ↓ Architecture
+  ↓ Modules
+  ↓ Files
+  ↓ Symbols
+  ↓ Functions / Classes
+  ↓ Statements / Control Flow
+  ↓ Data Flow
+  ↓ Call Graph
+  ↓ Cross-File Dependencies
+  ↓ Runtime Workflows
+  ↓ Failure Paths
+  ↓ Security Boundaries
+  ↓ Concurrency / Async Behavior
+  ↓ Persistence / State
+  ↓ External Integrations
+  ↓ Tests
+  ↓ Build / Deployment
+  ↓ Operational Risks
 ```
 
 ### 4.2 No superficial review — anti-sampling rules
 
 - Do NOT perform a repository summary followed by generic recommendations. That is not an audit.
-- Generic statements like *\"the backend appears well structured\"* are forbidden. Inspect the backend file by file.
-- Reviewing \"representative samples\" and generalizing is forbidden. The sentence *\"the rest follows the same pattern\"* may only be written if every instance was individually checked.
+- Generic statements like *"the backend appears well structured"* are forbidden. Inspect the backend file by file.
+- Reviewing "representative samples" and generalizing is forbidden. The sentence *"the rest follows the same pattern"* may only be written if every instance was individually checked.
 - Do not stop until coverage is complete or you explicitly hit a stated limit — in which case follow §4.4.
 
 ### 4.3 Phases — perform in this exact order
@@ -552,9 +552,9 @@ TITLE:
 LOCATION:
 - File:
 - Symbol:
-- Line(s): # verified only; otherwise \"approximate (symbol-level)\"
+- Line(s):            # verified only; otherwise "approximate (symbol-level)"
 
-EVIDENCE: # verbatim code, copied character-for-character
+EVIDENCE:             # verbatim code, copied character-for-character
 ```
 <exact code from the source>
 ```
@@ -639,18 +639,18 @@ Write the report in `REPORT_LANGUAGE`. The report must contain, in order:
 14. **Workflow Analysis** — the enumerated workflows and defects discovered in them.
 15. **Risk Matrix** — `Finding | Severity | Confidence | Likelihood | Impact | Area | Location`.
 16. **Prioritized Remediation Plan** — grouped into:
- - **Immediate** (fix before further development or deployment)
- - **Short Term**
- - **Medium Term** (architecture & maintainability)
- - **Long Term** (strategic debt reduction)
+    - **Immediate** (fix before further development or deployment)
+    - **Short Term**
+    - **Medium Term** (architecture & maintainability)
+    - **Long Term** (strategic debt reduction)
 17. **Final Verdict** — exactly one of:
- - NOT READY FOR PRODUCTION
- - HIGH RISK
- - NEEDS MAJOR REMEDIATION
- - ACCEPTABLE WITH REQUIRED FIXES
- - PRODUCTION READY WITH MINOR ISSUES
+    - NOT READY FOR PRODUCTION
+    - HIGH RISK
+    - NEEDS MAJOR REMEDIATION
+    - ACCEPTABLE WITH REQUIRED FIXES
+    - PRODUCTION READY WITH MINOR ISSUES
 
- The verdict must be justified only by findings discovered during this audit.
+    The verdict must be justified only by findings discovered during this audit.
 18. **Appendix A — Coverage Matrix** (§13)
 19. **Appendix B — Open Questions & Requested Artifacts** — every point where you were tempted to assume becomes an entry here instead.
 
