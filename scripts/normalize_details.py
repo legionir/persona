@@ -210,7 +210,7 @@ TOOL_NOUN_ALIASES = {
 
 def normalize_tools(value: str) -> str:
     # NOTE: do NOT split on '/' so tokens like CI/CD and AI/ML stay intact.
-    parts = [p.strip() for p in re.split(r"[,،、]", value)]
+    parts = [p.strip() for p in re.split(r"[,]", value)]
     parts = [p for p in parts if p]
     out = []
     for p in parts:
@@ -285,7 +285,7 @@ def _classify_restricted(value: str) -> str:
 
 def normalize_restricted(value: str) -> str:
     # some cells are conceptual (e.g. one restriction) but may be comma lists
-    parts = [p.strip() for p in re.split(r"[،、/]", value)]
+    parts = [p.strip() for p in re.split(r"[/]", value)]
     parts = [p for p in parts if p]
     keys = [_classify_restricted(p) for p in parts]
     # dedupe preserving order
@@ -387,7 +387,7 @@ PERM_ALIASES = {
 
 def normalize_permissions(value: str) -> str:
     # NOTE: do NOT split on '/' so tokens like CI/CD and Security/Test stay intact.
-    parts = [p.strip() for p in re.split(r"[،、]", value)]
+    parts = [p.strip() for p in re.split(r"[,]", value)]
     parts = [p for p in parts if p]
     out = []
     for p in parts:
@@ -469,7 +469,7 @@ def _norm_state_token(tok: str) -> str:
 
 def normalize_lifecycle(value: str) -> str:
     # normalize separators and stray full-stop / comma fragments
-    value = value.replace("、", ",").replace("،", ",")
+    value = value.replace("、", ",").replace(r",", ",")
     tokens = [t.strip() for t in value.split(",")]
     tokens = [t for t in tokens if t]
     out = []
@@ -490,7 +490,7 @@ def normalize_lifecycle(value: str) -> str:
 
 def normalize_list_separator(value: str) -> str:
     """Normalize Persian/Chinese separators to ASCII commas + space."""
-    value = value.replace("،", ", ").replace("、", ", ").replace("،", ", ")
+    value = value.replace(r",", ", ").replace("、", ", ").replace(r",", ", ")
     value = re.sub(r"\s*,\s*", ", ", value)
     value = re.sub(r"\s+", " ", value)
     return value.strip()
@@ -507,15 +507,7 @@ def clean(value: str) -> str:
 # ---------------------------------------------------------------------------
 
 HEADER = (
-    "عنوان شغلی| توضیح وظایف| نقش (مجری/ناظر)| حوزه اصلی| حوزه فرعی| توضیح مختصر| ناظر مربوطه| پرامپت| "
-    "مأموریت اصلی (Mission)| مسئولیت‌ها (Responsibilities)| "
-    "محدوده اختیار (Scope)| ورودی‌های الزامی (Required Inputs)| ورودی‌های اختیاری (Optional Inputs)| "
-    "Context موردنیاز| پیش‌شرط‌ها (Preconditions)| گام‌های اجرایی (Procedure)| "
-    "تصمیم‌ها و قوانین (Decision Rules)| ابزارهای مجاز (Allowed Tools)| "
-    "ابزارهای ممنوع/محدود (Restricted/Forbidden Tools)| خروجی‌ها (Outputs)| "
-    "معیار پذیرش خروجی (Quality Gate)| شواهد موردنیاز (Evidence)| تحویل به (Handoff)| "
-    "شرایط Escalation| سطح دسترسی (Permissions)| وضعیت‌های Lifecycle| "
-    "حافظه موردنیاز (Memory)| KPI / معیار عملکرد"
+    r"Job Title| Duties Summary| Role (EXECUTOR / SUPERVISOR)| Primary Domain| Sub-Domain| Short Description| Supervisor| Prompt| Mission| Responsibilities| Scope of Authority| Required Inputs| Optional Inputs| Required Context| Preconditions| Procedure| Decision Rules| Allowed Tools| Restricted / Forbidden Tools| Outputs| Quality Gate| Required Evidence| Handoff| Escalation Conditions| Permissions| Lifecycle States| Required Memory| KPI / Performance Metric"
 )
 
 

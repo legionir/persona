@@ -16,7 +16,7 @@
     {"name": "PAIN_POINTS", "hint": "optional: where screens or components drift apart, or what the team keeps re-implementing"},
     {"name": "OUT_OF_SCOPE", "hint": "optional: paths, modules, or topics excluded"},
     {"name": "PERMISSIONS", "hint": "may the auditor run builds/tests/lint? yes / no"},
-    {"name": "REPORT_LANGUAGE", "hint": "e.g., English / فارسی"}
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English"}
   ],
   "lenses": [
     "prompts/implementation/frontend-developer.md",
@@ -38,7 +38,7 @@
     "System coherence outranks local convenience: a page that is faster to hack together but breaks the token, component, or template system is a defect, not a shortcut.",
     "Reuse outranks recreation: extend an existing component or token instead of creating a parallel one, unless the concept is genuinely new and is promoted into the shared system immediately.",
     "Project conventions and the team's existing design system outrank generic preference; where a convention conflicts with the Frontend Design System contract, the conflict is reported, not silently resolved.",
-    "Evidence outranks taste: «it looks better this way» is not a finding; the cited rule plus the quoted code is.",
+    "Evidence outranks taste: \"it looks better this way\" is not a finding; the cited rule plus the quoted code is.",
     "Accessibility and state coverage are not polish: a missing focus treatment or a skipped empty state is a defect at the same severity as a broken layout.",
     "Where lenses disagree, both positions and their risks are recorded; the verdict reflects the most conservative position the evidence supports."
   ],

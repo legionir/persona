@@ -16,7 +16,7 @@
     {"name": "RECENT_ADVISORIES", "hint": "optional: dependency advisories, CVE IDs, vendor notices"},
     {"name": "OUT_OF_SCOPE", "hint": "optional: paths, modules, or topics excluded"},
     {"name": "PERMISSIONS", "hint": "may the auditor run builds/tests/read-only scans? yes / no"},
-    {"name": "REPORT_LANGUAGE", "hint": "e.g., English / فارسی"}
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English"}
   ],
   "lenses": [
     "prompts/audit/security-architect.md",

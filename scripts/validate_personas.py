@@ -46,7 +46,7 @@ def read_rows(path: Path) -> list[tuple[str, str, str, str]]:
         if len(cells) < 3:
             continue
         title = cells[0]
-        if title == "عنوان شغلی" or set(title) <= set("-: "):
+        if title == r"Job Title" or set(title) <= set("-: "):
             continue
         # the merged main table carries the prompt link in one of its cells;
         # scan for it instead of assuming a fixed column index. The `prompts/`
@@ -72,7 +72,7 @@ def main() -> int:
         rel = str(p.relative_to(ROOT))
         if "# Persona — " not in text:
             problems.append(f"{rel}: missing '# Persona — <Role>' title")
-        if "سیستم پرامپت" in text:
+        if r"Prompt System" in text:
             problems.append(f"{rel}: legacy header found")
         nums = re.findall(r"^## (\d+)\. ", text, re.M)
         expected = [str(i) for i in range(1, 30)]

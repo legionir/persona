@@ -16,7 +16,7 @@
     {"name": "CI_GATE", "hint": "what blocks a release: suite result, coverage threshold, manual QA"},
     {"name": "OUT_OF_SCOPE", "hint": "optional: paths, modules, or topics excluded"},
     {"name": "PERMISSIONS", "hint": "may the auditor run the suite? yes / no (output counts as evidence)"},
-    {"name": "REPORT_LANGUAGE", "hint": "e.g., English / فارسی"}
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English"}
   ],
   "lenses": [
     "prompts/audit/qa-lead.md",

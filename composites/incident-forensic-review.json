@@ -16,7 +16,7 @@
     {"name": "PRIOR_INCIDENTS", "hint": "optional: related incidents or near-misses"},
     {"name": "OUT_OF_SCOPE", "hint": "optional: topics excluded (e.g. HR/performance matters)"},
     {"name": "PERMISSIONS", "hint": "may the auditor read logs/metrics/repo? yes / no"},
-    {"name": "REPORT_LANGUAGE", "hint": "e.g., English / فارسی"}
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English"}
   ],
   "lenses": [
     "prompts/audit/incident-manager.md",

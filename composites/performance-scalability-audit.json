@@ -17,7 +17,7 @@
     {"name": "INFRA_LIMITS", "hint": "optional: instance sizes, pool sizes, quotas, rate limits"},
     {"name": "OUT_OF_SCOPE", "hint": "optional: paths, modules, or topics excluded"},
     {"name": "PERMISSIONS", "hint": "may the auditor run builds/tests/read-only benchmarks? yes / no"},
-    {"name": "REPORT_LANGUAGE", "hint": "e.g., English / فارسی"}
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English"}
   ],
   "lenses": [
     "prompts/implementation/performance-engineer.md",

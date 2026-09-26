@@ -17,7 +17,7 @@
     {"name": "THIRD_PARTIES", "hint": "optional: external APIs/queues this system depends on"},
     {"name": "OUT_OF_SCOPE", "hint": "optional: paths, modules, or topics excluded"},
     {"name": "PERMISSIONS", "hint": "may the auditor run builds/tests/contract tests? yes / no"},
-    {"name": "REPORT_LANGUAGE", "hint": "e.g., English / فارسی"}
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English"}
   ],
   "lenses": [
     "prompts/implementation/backend-developer.md",

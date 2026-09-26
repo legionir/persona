@@ -16,7 +16,7 @@
     {"name": "CONSTRAINTS", "hint": "optional: freeze windows, compliance, compatibility, staffing"},
     {"name": "OUT_OF_SCOPE", "hint": "optional: paths, modules, or topics excluded"},
     {"name": "PERMISSIONS", "hint": "may the auditor run builds/tests/vcs history queries? yes / no"},
-    {"name": "REPORT_LANGUAGE", "hint": "e.g., English / فارسی"}
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English"}
   ],
   "lenses": [
     "prompts/implementation/refactoring-engineer.md",

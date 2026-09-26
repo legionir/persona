@@ -17,7 +17,7 @@
     {"name": "MANUAL_STEPS", "hint": "optional: infra changes made outside IaC/console-only"},
     {"name": "OUT_OF_SCOPE", "hint": "optional: paths, modules, or topics excluded"},
     {"name": "PERMISSIONS", "hint": "may the auditor run read-only cloud/CLI queries? yes / no"},
-    {"name": "REPORT_LANGUAGE", "hint": "e.g., English / فارسی"}
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English"}
   ],
   "lenses": [
     "prompts/audit/cloud-architect.md",

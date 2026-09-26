@@ -8,7 +8,7 @@ can pull only when needed (progressive disclosure).
 
 Sources
   - prompts/audit/*.md, prompts/implementation/*.md  -> one skill per role persona
-  - <root>/*.md (composite / ترکیبی master prompts)  -> one skill per composite
+  - <root>/*.md (composite master prompts)           -> one skill per composite
 
 Output layout (per skill):
     skills/<name>/SKILL.md              frontmatter + operating core (< ~300 lines)
@@ -54,14 +54,15 @@ BODY_BUDGET = 18           # max lines kept per extracted section
 def role_description(rp: RolePersona) -> str:
     mission = clip(rp.mission or rp.title, 220)
     duties = clip(rp.fld(r"^3\.", "Primary") or "", 220)
-    outcome = rp.fld(r"^2\.", "ExpectedOutcome") or "خروجی شواهدمحور"
+    outcome = rp.fld(r"^2\.", "ExpectedOutcome") or r"Evidence-based output"
     allowed = clip(rp.fld(r"^5\.", "AllowedDecisions") or rp.fld(r"^14\.", "Decision Values"), 90)
     steps = len(rp.steps)
+    duties_txt = duties or "this role's duties"
     desc = (
-        f"Persona «{rp.title}» ({rp.type_label}) در حوزه {rp.domain or '—'}: {mission}. "
-        f"استفاده کن وقتی تسک به {duties or 'حرفیت این نقش'} نیاز دارد و خروجی باید "
-        f"«{outcome}» باشد؛ این skill دامنه، اختیار ({allowed or '—'})، "
-        f"{steps} گام اجرایی و Quality Gate نهایی را اجبار می‌کند. "
+        f"Persona \"{rp.title}\" ({rp.type_label}) in the {rp.domain or '—'}: {mission}. "
+        f"Use when the task needs {duties_txt} and the output must be "
+        f"\"{outcome}\"; this skill enforces the domain, the authority ({allowed or '—'}), "
+        f"the {steps} execution steps, and the final Quality Gate. "
         f"Use when you need {rp.title}-level judgment with evidence and a fixed scope."
     )
     return clip(desc, DESC_MAX)
@@ -72,7 +73,7 @@ def master_description(mp: MasterPersona, spec: dict | None) -> str:
         return clip(spec["description"], DESC_MAX)
     mission = clip(re.sub(r"\s+", " ", mp.first_paragraph()), 320)
     return clip(
-        f"{mp.title} — composite (ترکیبی) master persona. {mission} "
+        f"{mp.title} — composite master persona. {mission} "
         f"Use when you need a deep, structured, evidence-only run of this persona and a "
         f"generic checklist answer is not acceptable.",
         DESC_MAX,
@@ -85,17 +86,17 @@ def master_description(mp: MasterPersona, spec: dict | None) -> str:
 def role_skill_body(rp: RolePersona, bundle: bool = True) -> str:
     f = rp.f
     out: list[str] = [f"# {rp.title} — Persona Skill", ""]
-    out.append(f"> نوع: **{rp.type_label}** ({rp.role_type}) | حوزه: {rp.domain or '—'} | "
-               f"سطح: {rp.seniority or '—'} | منبع: [`{rel(rp.path)}`](../../{rel(rp.path)})")
+    out.append(f"> Type: **{rp.type_label}** ({rp.role_type}) | Domain: {rp.domain or '—'} | "
+               f"Level: {rp.seniority or '—'} | Source: [`{rel(rp.path)}`](../../{rel(rp.path)})")
     out.append("")
 
     # trigger
-    outcome = rp.fld(r"^2\.", "ExpectedOutcome") or "شواهدمحور"
-    success = clip(rp.fld(r"^2\.", "SuccessDefinition") or "شواهد کافی", 160)
-    out.append("## چه وقت استفاده شود (Trigger)")
-    out.append(f"- وقتی تسک به قضاوت «{rp.title}» و خروجی **{outcome}** نیاز دارد.")
-    out.append("- وقتی دامنه و اختیار باید پیش از هر کاری تثبیت شود؛ این persona بدون Evidence تصمیم نمی‌گیرد.")
-    out.append(f"- وقتی خروجی باید قابل راستی‌آزمایی باشد: {success}.")
+    outcome = rp.fld(r"^2\.", "ExpectedOutcome") or r"Evidence-based"
+    success = clip(rp.fld(r"^2\.", "SuccessDefinition") or r"Sufficient evidence", 160)
+    out.append(r"## When to Use (Trigger)")
+    out.append(f"- When the task requires the judgement \"{rp.title}\" and the output **{outcome}** is needed.")
+    out.append(r"- When the domain and authority must be settled before anything else; this persona does not decide without Evidence.")
+    out.append(f"- When the output must be verifiable: {success}.")
     out.append("")
 
     def block(title: str, section_pattern: str, keys: list[str] | None = None,
@@ -119,22 +120,22 @@ def role_skill_body(rp: RolePersona, bundle: bool = True) -> str:
             out.extend(lines)
             out.append("")
 
-    block("مأموریت و معیار موفقیت", r"^2\.", ["PrimaryGoal", "ExpectedOutcome", "SuccessDefinition", "FailureDefinition"])
-    block("اختیار و مرزها", r"^5\.", ["AllowedDecisions", "AllowedActions", "ForbiddenDecisions",
+    block(r"Mission and success criteria", r"^2\.", ["PrimaryGoal", "ExpectedOutcome", "SuccessDefinition", "FailureDefinition"])
+    block(r"Authority and boundaries", r"^5\.", ["AllowedDecisions", "AllowedActions", "ForbiddenDecisions",
                                      "ForbiddenActions", "ProductionAuthority", "ApprovalRequiredFor",
                                      "CrossDomainRules"])
-    block("ورودی‌ها", r"^7\.", ["Required", "Optional", "Prohibited", "Validation"])
-    block("پیش‌شرط‌ها", r"^8\.", ["Required", "Blocking", "Authorization"])
-    block("دامنه (Scope)", r"^11\.", ["InScope", "OutOfScope", "AffectedAreas", "ScopeExpansionPolicy"])
-    block("ابزارها", r"^15\.", ["Allowed", "Restricted", "Forbidden", "ApprovalRequired", "ReadOnly"])
-    block("شواهد و راستی‌آزمایی", r"^16\.", ["Evidence", "Verification"])
-    block("ریسک", r"^19\.", ["Risks", "Mitigation", "Residual"])
+    block(r"Inputs", r"^7\.", ["Required", "Optional", "Prohibited", "Validation"])
+    block(r"Preconditions", r"^8\.", ["Required", "Blocking", "Authorization"])
+    block(r"Scope", r"^11\.", ["InScope", "OutOfScope", "AffectedAreas", "ScopeExpansionPolicy"])
+    block(r"Tools", r"^15\.", ["Allowed", "Restricted", "Forbidden", "ApprovalRequired", "ReadOnly"])
+    block(r"Evidence and verification", r"^16\.", ["Evidence", "Verification"])
+    block(r"Risk", r"^19\.", ["Risks", "Mitigation", "Residual"])
     block("KPI", r"^28\.", ["Metrics", "Targets"])
 
     # procedure
     steps = rp.step_bodies()
     if steps:
-        out.append("## گام‌های اجرایی (Procedure)")
+        out.append(r"## Execution Steps (Procedure)")
         out.append("")
         for header, body in steps:
             vals = fields_of(body)
@@ -147,8 +148,8 @@ def role_skill_body(rp: RolePersona, bundle: bool = True) -> str:
                 out.append(f"- **Preconditions:** {clip(vals['Preconditions'], 160)}")
             actions = fields_of(body).get("Actions", "")
             if actions:
-                parts = [x.strip().rstrip(",،") for x in
-                         re.split(r"\s+(?=\d+\.\s)|؛\s*", actions) if x.strip()]
+                parts = [x.strip().rstrip(r",") for x in
+                         re.split(r"\s+(?=\d+\.\s)|;\s*", actions) if x.strip()]
                 if parts:
                     out.append("- **Actions:**")
                     for a in parts[:5]:
@@ -159,13 +160,13 @@ def role_skill_body(rp: RolePersona, bundle: bool = True) -> str:
                 out.append(f"- **Escalation:** {clip(vals['EscalationConditions'], 160)}")
             out.append("")
 
-    block("قواعد تصمیم", r"^14\.", ["Status Values (همهٔ Persona)", "Decision Values", "Rules"])
-    block("معیار پذیرش (Quality Gate)", r"^21\.", budget=BODY_BUDGET)
-    block("قواعد مطلق", r"^29\.", budget=BODY_BUDGET)
+    block(r"Decision rules", r"^14\.", [r"Status Values (all Personas)", "Decision Values", "Rules"])
+    block(r"Acceptance criteria (quality gate)", r"^21\.", budget=BODY_BUDGET)
+    block(r"Non-negotiable rules", r"^29\.", budget=BODY_BUDGET)
 
     # type-specific report skeleton
-    for title, pattern in (("ساختار گزارش / خروجی نهایی", r"^(Audit|Implementation) (Scope|Criteria|Procedure)"),
-                           ("تحویل، Escalation و پلن اجرایی", r"^2[456]\.")):
+    for title, pattern in ((r"Report structure / final output", r"^(Audit|Implementation) (Scope|Criteria|Procedure)"),
+                           (r"Delivery, Escalation, and Execution Plan", r"^2[456]\.")):
         secs = rp.doc.find_all(pattern, regex=True)
         if not secs:
             continue
@@ -177,16 +178,16 @@ def role_skill_body(rp: RolePersona, bundle: bool = True) -> str:
             out.append("")
 
     ref_link = "references/persona.md" if bundle else f"../../{rel(rp.path)}"
-    ref_label = ("پرامپت کامل این persona (۲۹ بخش قرارداد Master)" if bundle
-                 else "پرامپت کامل این persona در مخزن (کپی نشده — حالت `--no-bundle`)")
-    out.append("## مرجع کامل (Progressive Disclosure)")
+    ref_label = (r"Full prompt of this persona (29 sections of the Master contract)" if bundle
+                 else r"Full prompt of this persona in the repository (not copied — `--no-bundle` mode)")
+    out.append(r"## Full Reference (Progressive Disclosure)")
     out.append("")
-    out.append(f"- [`{ref_link}`]({ref_link}) — {ref_label}. وقتی به جزئیات قالب یافته، "
-               f"State Machine، Traceability یا Execution Plan نیاز داری، همین فایل را بخوان.")
+    out.append(f"- [`{ref_link}`]({ref_link}) — {ref_label}. When you need finding-format details, "
+               f"the state machine, traceability, or the execution plan, read this file.")
     out.append("")
     out.append("---")
     out.append("")
-    out.append(f"_ساخته‌شده توسط `scripts/build_skills.py` از `{rel(rp.path)}` — {today()}_")
+    out.append(f"_Generated by `scripts/build_skills.py` from `{rel(rp.path)}` — {today()}_")
     return "\n".join(out)
 
 
@@ -198,44 +199,44 @@ def master_skill_body(mp: MasterPersona, spec: dict | None, bundle: bool = True)
     out: list[str] = [f"# {mp.title} — Composite Persona Skill", ""]
     src = rel(mp.path)
     lenses = len((spec or {}).get("lenses", []))
-    badge = f"> نوع: **ترکیبی (Composite)** | عدسی‌ها: {lenses or '—'} | منبع: [`{src}`](../../{src})"
+    badge = f"> Type: **composite (Composite)** | lenses: {lenses or '—'} | Source: [`{src}`](../../{src})"
     out += [badge, ""]
 
     mission = re.sub(r"\s+", " ", mp.first_paragraph()).strip()
-    out.append("## چه وقت استفاده شود (Trigger)")
+    out.append(r"## When to Use (Trigger)")
     if mission:
-        out.append(f"- وقتی مأموریت تسک این است: {clip(mission.split('. ')[0], 220).rstrip('.…')}.")
-    out.append("- وقتی خروجی باید ساخت‌یافته، شواهدمحور و قابل راستی‌آزمایی باشد — نه یک چک‌لیست عمومی.")
-    out.append("- وقتی باید پیش از تصمیم یا اجرا بدانی دقیقاً چه چیزی ناقص، نادرست یا خطرناک است.")
+        out.append(f"- When the task's mission is: {clip(mission.split('. ')[0], 220).rstrip('.…')}.")
+    out.append(r"- When the output must be structured, evidence-based, and verifiable — not a generic checklist.")
+    out.append(r"- When you must know precisely what is missing, incorrect, or dangerous before deciding or acting.")
     out.append("")
 
     if mission:
-        out += ["## مأموریت", "", clip(mission, 900), ""]
+        out += [r"## Mission", "", clip(mission, 900), ""]
 
     # inputs block
     inputs = section_block(doc, r"INPUTS", regex=True)
     blocks = code_blocks(inputs) or code_blocks(doc.preamble)
     if blocks:
-        out += ["## ورودی‌های الزامی (قبل از شروع پر کن)", "", "```"]
+        out += [r"## Required Inputs (fill in before starting)", "", "```"]
         out += blocks[0].splitlines()[:16] + ["```", ""]
 
     # non-negotiable rules (section + children)
     rules = section_block(doc, r"PRIME DIRECTIVE|CORE CONTRACT|ABSOLUTE RULES|non-negotiable", regex=True)
     rule_lines = key_rules(rules) or (bullets_of(rules) + numbered_of(rules))[:10]
     if rule_lines:
-        out += ["## قواعد غیرقابل‌مذاکره", ""]
+        out += [r"## Non-Negotiable Rules", ""]
         out += [f"- {clip(b, 240)}" for b in rule_lines] + [""]
 
     phases = mp.phase_lines()
     if phases:
-        out += ["## فازهای اجرا (به این ترتیب)", ""]
+        out += [r"## Execution Phases (in this order)", ""]
         out += [f"- {clip(p, 220)}" for p in phases[:16]] + [""]
 
     sev = section_block(doc, r"SEVERITY", regex=True)
     sev_rows = [ln for ln in sev.splitlines() if ln.strip().startswith("|")]
     sev_bullets = bullets_of(sev)[:8]
     if sev_rows or sev_bullets:
-        out += ["## شدت (Severity)", ""]
+        out += [r"## Severity", ""]
         out += sev_rows[:9] if sev_rows else [f"- {clip(b, 220)}" for b in sev_bullets]
         out.append("")
 
@@ -243,13 +244,13 @@ def master_skill_body(mp: MasterPersona, spec: dict | None, bundle: bool = True)
     tmpl = next((blk for blk in code_blocks(finding)
                  if sum(1 for ln in blk.splitlines() if "**" in ln and ":" in ln) >= 3), "")
     if tmpl:
-        out += ["## قالب یافته (اجباری)", "", "````"]
+        out += [r"## Finding Format (mandatory)", "", "````"]
         out += tmpl.splitlines()[:34] + ["````", ""]
 
     report = section_block(doc, r"REPORT STRUCTURE|Final Report|Report Emission", regex=True)
     items = numbered_of(report)[:20]
     if items:
-        out += ["## ساختار گزارش نهایی", ""]
+        out += [r"## Final Report Structure", ""]
         out += [f"{i}. {clip(it, 200)}" for i, it in enumerate(items, 1)] + [""]
 
     gate = section_block(doc, r"QUALITY GATE|Pre-Flight|Final Gate", regex=True)
@@ -257,7 +258,7 @@ def master_skill_body(mp: MasterPersona, spec: dict | None, bundle: bool = True)
     if not boxes:
         boxes = [q.strip() for q in re.split(r"(?<=\?)\s+", gate) if "?" in q][:10]
     if boxes:
-        out += ["## Quality Gate نهایی (بدون پاس شدن آن، گزارش نهایی نباید داده شود)", ""]
+        out += [r"## Final Quality Gate (the final report must not be issued without passing it)", ""]
         out += [f"- [ ] {clip(b, 200)}" for b in boxes] + [""]
 
     principle_src = section_block(doc, r"CORE PRINCIPLE|PRINCIPLE|Final Objective|OBJECTIVE", regex=True)
@@ -272,7 +273,7 @@ def master_skill_body(mp: MasterPersona, spec: dict | None, bundle: bool = True)
         if s:
             principle.append(f"> {s}")
     if principle:
-        out += ["## اصل حاکم", ""] + principle[-6:] + [""]
+        out += [r"## Governing Principle", ""] + principle[-6:] + [""]
 
     ref_link = f"references/{mp.slug}.md" if bundle else f"../../{rel(mp.path)}"
     # map of the master prompt's sections, with the composite's own sections marked.
@@ -288,14 +289,14 @@ def master_skill_body(mp: MasterPersona, spec: dict | None, bundle: bool = True)
         own = any(title.startswith(x[:18]) for x in extra_titles)
         toc.append(f"- {'◆' if own else ''} {title}".replace("-  ", "- "))
     if toc:
-        out += ["## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)", ""]
+        out += [r"## Master Prompt Map (in the reference — `◆` = section specific to this persona)", ""]
         out += toc + [""]
 
-    out += ["## مرجع کامل (Progressive Disclosure)", ""]
-    out += [f"- [`{ref_link}`]({ref_link}) — متن کامل master prompt "
-            f"({len(mp.text.splitlines())} خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، "
-            f"یا قالب‌های خروجی نیاز داری باز کن.", ""]
-    out += ["---", "", f"_ساخته‌شده توسط `scripts/build_skills.py` از `{src}` — {today()}_"]
+    out += [r"## Full Reference (Progressive Disclosure)", ""]
+    out += [f"- [`{ref_link}`]({ref_link}) — the full master prompt text "
+            f"({len(mp.text.splitlines())} lines). Open it only when you need protocol details, "
+            f"the assessment scope, or the output formats.", ""]
+    out += ["---", "", f"_Generated by `scripts/build_skills.py` from `{src}` — {today()}_"]
     return "\n".join(out)
 
 
@@ -344,7 +345,7 @@ def build_one(source: Path, bundle: bool = True) -> tuple[str, dict, list[str]]:
         meta = {
             "version": (spec or {}).get("version", "1"),
             "type": "COMPOSITE",
-            "typeLabel": "ترکیبی",
+            "typeLabel": r"Composite",
             "lenses": len((spec or {}).get("lenses", [])) or None,
             "source": rel(source),
             "language": (spec or {}).get("language", "en"),
@@ -435,31 +436,31 @@ def write_skills_readme(entries: dict[str, dict]) -> None:
     lines = [
         "# Persona Skills",
         "",
-        "هر پوشه یک **Agent Skill** است: `SKILL.md` هستهٔ عملیاتی (وقتی تسک مطابقت کرد خوانده می‌شود) و",
-        "`references/` متن کامل persona برای وقتی که به جزئیات قرارداد نیاز است.",
+        r"Each folder is one **Agent Skill**: `SKILL.md` is the operating core (read when the task matches) and",
+        r"`references/` holds the full persona text for when contract details are needed.",
         "",
-        "نصب در Claude Code (پروژه):",
+        r"Install in Claude Code (project):",
         "",
         "```bash",
-        "# کل کتابخانه",
+        r"# The whole library",
         "cp -r skills/<name> .claude/skills/",
         "",
-        "# یا همهٔ skillها",
+        r"# Or all skills",
         "for d in skills/*/; do cp -r \"$d\" .claude/skills/; done",
         "```",
         "",
-        "بازتولید: `python3 scripts/build_skills.py` — اعتبارسنجی: `python3 scripts/validate_skills.py`",
+        r"Regenerate: `python3 scripts/build_skills.py` — validate: `python3 scripts/validate_skills.py`",
         "",
-        f"فهرست کامل و متادیتای ماشین‌خوان: [`index.json`](index.json)",
+        f"Full index and machine-readable metadata: [`index.json`](index.json)",
         "",
-        "| Skill | نوع | حوزه | منبع | خطوط SKILL.md |",
+        r"| Skill | Type | Domain | Source | SKILL.md lines |",
         "|---|---|---|---|---|",
     ]
     for name, e in rows:
-        domain = e["meta"].get("domain") or ("ترکیبی" if e["meta"].get("type") == "COMPOSITE" else "—")
+        domain = e["meta"].get("domain") or (r"Composite" if e["meta"].get("type") == "COMPOSITE" else "—")
         lines.append(f"| [`{name}`]({name}/SKILL.md) | {e['meta'].get('typeLabel', '—')} | "
                      f"{domain} | `{e['source']}` | {e['lines']} |")
-    lines += ["", f"_تعداد: {len(entries)} skill — ساخته‌شده در {today()} توسط `scripts/build_skills.py`_", ""]
+    lines += ["", f"_Count: {len(entries)} skills — generated on {today()} by `scripts/build_skills.py`_", ""]
     (SKILLS / "README.md").write_text("\n".join(lines), encoding="utf-8")
 
 

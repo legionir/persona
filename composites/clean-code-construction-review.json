@@ -35,7 +35,7 @@
     },
     {
       "name": "REPORT_LANGUAGE",
-      "hint": "e.g., English / فارسی"
+      "hint": "e.g., English"
     }
   ],
   "lenses": [
@@ -58,7 +58,7 @@
     "Behaviour preservation outranks elegance: any proposed change that cannot be verified against existing behaviour is reported as risk, not as improvement.",
     "Project conventions outrank generic preference; where a convention conflicts with the Construction Contract, the conflict is reported, not silently resolved.",
     "Cost to the next reader outranks aesthetics: ugly code nobody touches ranks below clean-looking code that blocks every change.",
-    "Evidence outranks taste: «I would write it differently» is not a finding; the cited rule plus the quoted code is.",
+    "Evidence outranks taste: \"I would write it differently\" is not a finding; the cited rule plus the quoted code is.",
     "Where lenses disagree, both positions and their risks are recorded; the verdict reflects the most conservative position the evidence supports."
   ],
   "blocks": [

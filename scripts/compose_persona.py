@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Build a composite (ترکیبی) persona from reusable blocks + role lenses.
+"""Build a composite persona from reusable blocks + role lenses.
 
 A composite persona is a single master prompt that acts as several roles at once
 (e.g. "Forensic Codebase Review & Audit"). It is assembled from three sources:
@@ -21,8 +21,7 @@ Usage:
     python3 scripts/compose_persona.py --list
     python3 scripts/compose_persona.py --spec composites/<slug>.json
     python3 scripts/compose_persona.py --all
-    python3 scripts/compose_persona.py --all --check      # validate only
-"""
+    python3 scripts/compose_persona.py --all --check      # validate only"""
 
 from __future__ import annotations
 

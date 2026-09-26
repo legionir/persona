@@ -3,7 +3,7 @@
 """Shared helpers for persona tooling.
 
 Used by:
-  - scripts/compose_persona.py   (build a composite / ترکیبی persona from blocks + lenses)
+  - scripts/compose_persona.py   (build a composite persona from blocks + lenses)
   - scripts/build_skills.py      (turn personas into Agent Skills)
   - scripts/validate_skills.py   (validate the generated skills)
 
@@ -13,10 +13,9 @@ files come in two shapes and neither is guaranteed to be complete.
 Two persona shapes are recognised:
 
   kind = "role"    ->  prompts/<audit|implementation>/<slug>.md
-                       Persian, numbered sections 1..29, `# Persona — <Role>`.
+                       numbered sections 1..29, `# Persona — <Role>`.
   kind = "master"  ->  <Root>/*.md  (e.g. "Forensic Codebase Review & Audit.md")
-                       English composite master prompt: free-form headings.
-"""
+                       English composite master prompt: free-form headings."""
 
 from __future__ import annotations
 
@@ -311,7 +310,7 @@ def truncate(text: str, max_lines: int, note: str = "") -> str:
     if len(lines) <= max_lines:
         return text
     kept = "\n".join(lines[:max_lines]).rstrip()
-    tail = note or f"… (+{len(lines) - max_lines} خط دیگر — متن کامل در `references/`)"
+    tail = note or f"… (+{len(lines) - max_lines} more lines — the full text is in `references/`)"
     return f"{kept}\n\n> {tail}"
 
 
@@ -358,7 +357,7 @@ class RolePersona:
 
     @property
     def type_label(self) -> str:
-        return "ناظر" if self.role_type == "SUPERVISOR" else "مجری"
+        return r"SUPERVISOR" if self.role_type == "SUPERVISOR" else r"EXECUTOR"
 
     @property
     def domain(self) -> str:
@@ -398,7 +397,7 @@ class RolePersona:
 
 
 class MasterPersona:
-    """Structured view over a composite (ترکیبی) master prompt at repo root."""
+    r"Structured view over a composite master prompt at repo root."
 
     def __init__(self, path: Path):
         self.path = path

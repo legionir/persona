@@ -35,31 +35,31 @@ OUT = ROOT / "personas.json"
 # ---------------------------------------------------------------------------
 # Persian display labels
 # ---------------------------------------------------------------------------
-TYPE_LABEL_FA = {"SUPERVISOR": "ناظر", "EXECUTOR": "مجری"}
+TYPE_LABEL_FA = {"SUPERVISOR": r"SUPERVISOR", "EXECUTOR": r"EXECUTOR"}
 
 DOMAIN_LABEL_FA = {
-    "Business": "کسب‌وکار", "Product": "محصول", "Project": "پروژه",
-    "Analytics": "تحلیل", "Architecture": "معماری", "Software": "نرم‌افزار",
-    "AI": "هوش مصنوعی", "Data": "داده", "DevOps": "DevOps", "Testing": "تست و کیفیت",
-    "Security": "امنیت", "Compliance": "انطباق", "Design": "طراحی",
-    "Documentation": "مستندسازی", "HR": "منابع انسانی", "Support": "پشتیبانی",
-    "Growth": "رشد و بازاریابی", "Audit": "ممیزی", "Operations": "عملیات",
+    "Business": r"Business", "Product": r"Product", "Project": r"Project",
+    "Analytics": r"Analysis", "Architecture": r"Architecture", "Software": r"Software",
+    "AI": r"AI", "Data": r"Data", "DevOps": "DevOps", "Testing": r"Testing & Quality",
+    "Security": r"Security", "Compliance": r"Compliance", "Design": r"Design",
+    "Documentation": r"Documentation", "HR": r"Human Resources", "Support": r"Support",
+    "Growth": r"Growth & Marketing", "Audit": r"Audit", "Operations": r"Operations",
 }
 
 CATEGORY_LABEL_FA = {
-    "Strategy": "استراتژی", "Management": "مدیریت", "Analysis": "تحلیل",
-    "Architecture": "معماری", "Engineering": "مهندسی", "Data": "داده",
-    "Infrastructure": "زیرساخت", "Testing": "تست", "Security": "امنیت",
-    "Compliance": "انطباق", "Design": "طراحی", "Documentation": "مستندسازی",
-    "Commercial": "تجاری", "Support": "پشتیبانی", "Operations": "عملیات",
-    "Audit": "ممیزی",
+    "Strategy": r"Strategy", "Management": r"Management", "Analysis": r"Analysis",
+    "Architecture": r"Architecture", "Engineering": r"Engineering", "Data": r"Data",
+    "Infrastructure": r"Infrastructure", "Testing": r"Testing", "Security": r"Security",
+    "Compliance": r"Compliance", "Design": r"Design", "Documentation": r"Documentation",
+    "Commercial": r"Commercial", "Support": r"Support", "Operations": r"Operations",
+    "Audit": r"Audit",
 }
 
 SENIORITY_LABEL_FA = {
-    "Junior": "جونیور", "Mid": "میانی", "Senior": "سینیور", "Staff": "Staff",
-    "Principal": "Principal", "Lead": "Lead", "Manager": "مدیر",
-    "Director": "مدیر ارشد", "Executive": "اجرایی", "Expert": "متخصص",
-    "Specialist": "متخصص",
+    "Junior": r"Junior", "Mid": r"Mid", "Senior": r"Senior", "Staff": "Staff",
+    "Principal": "Principal", "Lead": "Lead", "Manager": r"Manager",
+    "Director": r"Senior Manager", "Executive": r"Executive", "Expert": r"Specialist",
+    "Specialist": r"Specialist",
 }
 
 
@@ -84,7 +84,7 @@ def capabilities_of(role_type: str, group: str, procedure: str) -> list[str]:
 def keywords_of(title: str, duties: str, mission: str) -> list[str]:
     raw = f"{title} {duties} {mission} {_slug(title)}"
     raw = raw.replace("\u200c", " ")
-    tokens = re.split(r"[\s،,؛;/()\-–—|]+", raw)
+    tokens = re.split(r"[\s,;/()\-–—|]+", raw)
     words = []
     seen = set()
     for tk in tokens:
@@ -103,7 +103,7 @@ def main() -> None:
     data_rows = [r for r in rows[1:]]
     details = load_details()
     _ms, _me = load_master_registry()
-    sup_titles = {r[0] for r in data_rows if r[2] == "ناظر"}
+    sup_titles = {r[0] for r in data_rows if r[2] == r"SUPERVISOR"}
     sup_map = build_supervisor_map(sup_titles)
     by_supervisor: dict[str, list[str]] = {}
     for exe_title, sups in sup_map.items():
@@ -114,7 +114,7 @@ def main() -> None:
     sup_i = exe_i = 0
     for title, _duty, role_type in [(r[0], r[1], r[2]) for r in data_rows]:
         slug = SLUG_OVERRIDES.get(title, _slug(title))
-        ptype = "SUPERVISOR" if role_type == "ناظر" else "EXECUTOR"
+        ptype = "SUPERVISOR" if role_type == r"SUPERVISOR" else "EXECUTOR"
         spec = spec_for(slug)
         group = spec["domain"]
         persona = details.get(title, {})
@@ -159,8 +159,8 @@ def main() -> None:
         })
 
     facets = {
-        "types": [{"id": "SUPERVISOR", "label": "ناظر"},
-                  {"id": "EXECUTOR", "label": "مجری"}],
+        "types": [{"id": "SUPERVISOR", "label": r"SUPERVISOR"},
+                  {"id": "EXECUTOR", "label": r"EXECUTOR"}],
         "groups": sorted({(r["group"], r["groupLabel"]) for r in roles}),
         "domains": sorted({(r["domain"], r["domainLabel"]) for r in roles}),
         "categories": sorted({(r["category"], r["categoryLabel"]) for r in roles}),
@@ -171,9 +171,9 @@ def main() -> None:
         "$schema": "personas-metadata/v1",
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": {
-            "schema": "README.md (جدول کامل نقش‌ها)",
+            "schema": r"README.md (full role table)",
             "readme": "README.md",
-            "details": "README.md (جدول کامل نقش‌ها)",
+            "details": r"README.md (full role table)",
             "generator": "scripts/generate_personas.py",
             "metadata_builder": "scripts/build_metadata.py",
         },
