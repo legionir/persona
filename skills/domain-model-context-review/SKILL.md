@@ -111,6 +111,8 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 - CONSTRUCTION CONTRACT — Clean Code + Code Complete (binding)
 - ARCHITECTURE BOUNDARIES CONTRACT — Clean Architecture (binding)
 - DOMAIN MODEL CONTRACT — Domain-Driven Design (binding)
+- PRAGMATIC CONTRACT — The Pragmatic Programmer (binding)
+- ENTERPRISE PATTERNS CONTRACT — Patterns of Enterprise Application Architecture (binding)
 - CHANGE FINDINGS — REQUIRED EVIDENCE AND CHANGE PLAN (binding)
 - COVERAGE CONTROL — AUDIT MATRIX
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
@@ -122,7 +124,7 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/domain-model-context-review.md`](references/domain-model-context-review.md) — متن کامل master prompt (1083 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/domain-model-context-review.md`](references/domain-model-context-review.md) — متن کامل master prompt (1293 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 

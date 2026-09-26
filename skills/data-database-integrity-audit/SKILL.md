@@ -112,6 +112,7 @@ REPORT_LANGUAGE    <e.g., English / فارسی>
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
 - ARCHITECTURE BOUNDARIES CONTRACT — Clean Architecture (binding)
 - DOMAIN MODEL CONTRACT — Domain-Driven Design (binding)
+- ENTERPRISE PATTERNS CONTRACT — Patterns of Enterprise Application Architecture (binding)
 - ◆ Invariant Register — one row per invariant the system depends on
 - ◆ Data Passes — run after the unit-by-unit review
 - BEHAVIOURAL RULES AND FINAL QUALITY GATE
@@ -120,7 +121,7 @@ REPORT_LANGUAGE    <e.g., English / فارسی>
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/data-database-integrity-audit.md`](references/data-database-integrity-audit.md) — متن کامل master prompt (857 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/data-database-integrity-audit.md`](references/data-database-integrity-audit.md) — متن کامل master prompt (979 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 

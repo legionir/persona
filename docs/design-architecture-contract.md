@@ -11,6 +11,9 @@
 > قرارداد قبلی (Clean Code + Code Complete) در [`docs/construction-contract.md`](construction-contract.md) مستند شده است.
 > یک کتاب دیگر («Domain-Driven Design») جداگانه مستند شده است:
 > [`docs/domain-driven-design-contract.md`](domain-driven-design-contract.md).
+> الگوهای سازمانی (Fowler) و انضباط پراگماتیک (Hunt & Thomas):
+> [`docs/enterprise-patterns-contract.md`](enterprise-patterns-contract.md) ·
+> [`docs/pragmatic-programmer-contract.md`](pragmatic-programmer-contract.md).
 
 ---
 

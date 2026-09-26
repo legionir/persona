@@ -109,6 +109,7 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 - TECHNICAL DEBT, DEAD CODE, SUSPICIOUS CODE
 - CONSTRUCTION CONTRACT — Clean Code + Code Complete (binding)
 - DESIGN DEPTH CONTRACT — A Philosophy of Software Design (binding)
+- PRAGMATIC CONTRACT — The Pragmatic Programmer (binding)
 - CHANGE FINDINGS — REQUIRED EVIDENCE AND CHANGE PLAN (binding)
 - COVERAGE CONTROL — AUDIT MATRIX
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
@@ -118,7 +119,7 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/clean-code-construction-review.md`](references/clean-code-construction-review.md) — متن کامل master prompt (894 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/clean-code-construction-review.md`](references/clean-code-construction-review.md) — متن کامل master prompt (982 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 

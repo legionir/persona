@@ -55,7 +55,9 @@
     "91-design-depth-contract.md",
     "92-clean-architecture-contract.md",
     "93-domain-model-contract.md",
-    "95-change-findings.md",
+    "95-pragmatic-contract.md",
+    "94-enterprise-patterns-contract.md",
+    "96-change-findings.md",
     "50-coverage.md",
     "60-findings.md",
     "80-quality-gate.md"

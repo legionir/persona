@@ -953,14 +953,18 @@ mkdir -p .claude/skills && cp -r skills/backend-developer .claude/skills/
 - `composites/blocks/91-` / `92-` — قرارداد عمق طراحی (Ousterhout) و مرزهای معماری (Clean Architecture).
 - `composites/blocks/95-change-findings.md` — شواهد الزامی برای یافته‌های «تغییر» (مشترک بین compositeهای تغییرمحور).
 - `composites/blocks/93-domain-model-contract.md` — قرارداد مدل دامنه (ادغام یگانهٔ DDD: زبان مشترک، bounded context، aggregate، …).
+- `composites/blocks/94-enterprise-patterns-contract.md` — قرارداد الگوهای سازمانی (ادغام یگانهٔ PoEAA: الگوی منطق کسب‌وکار، persistence، تراکنش، ORM، presentation).
+- `composites/blocks/95-pragmatic-contract.md` — قرارداد پراگماتیک (ادغام یگانهٔ The Pragmatic Programmer: DRY، orthogonality، خودکارسازی، بازخورد).
 - `composites/*.json` — spec هر persona ترکیبی (مأموریت، ورودی‌ها، عدسی‌ها، پیشتازی، بخش‌های اختصاصی).
 - `skills/<name>/SKILL.md` و `skills/<name>/references/` — خروجی تبدیل persona به Agent Skill.
-- `docs/` — راهنمای ساخت persona ترکیبی، تبدیل به skill، و قراردادهای فنی
-  ([`docs/composite-personas.md`](docs/composite-personas.md) ·
-   [`docs/persona-skills.md`](docs/persona-skills.md) ·
-   [`docs/construction-contract.md`](docs/construction-contract.md) ·
-   [`docs/design-architecture-contract.md`](docs/design-architecture-contract.md) ·
-   [`docs/domain-driven-design-contract.md`](docs/domain-driven-design-contract.md)).
+- `docs/` — راهنماهای فارسی: ساخت persona ترکیبی، تبدیل به skill، و قراردادهای فنی
+  - [`docs/composite-personas.md`](docs/composite-personas.md) — سازندهٔ persona ترکیبی (بلوک + spec)
+  - [`docs/persona-skills.md`](docs/persona-skills.md) — تبدیل persona به Agent Skill
+  - [`docs/construction-contract.md`](docs/construction-contract.md) — قرارداد ساخت کد (Clean Code + Code Complete)
+  - [`docs/design-architecture-contract.md`](docs/design-architecture-contract.md) — قرارداد طراحی و معماری (Ousterhout + Clean Architecture)
+  - [`docs/domain-driven-design-contract.md`](docs/domain-driven-design-contract.md) — قرارداد مدل دامنه (DDD: Evans + Vernon)
+  - [`docs/enterprise-patterns-contract.md`](docs/enterprise-patterns-contract.md) — قرارداد الگوهای سازمانی (PoEAA)
+  - [`docs/pragmatic-programmer-contract.md`](docs/pragmatic-programmer-contract.md) — قرارداد پراگماتیک (The Pragmatic Programmer)
 
 > همهٔ پرامپت‌های ناظر شامل بخش الزامی «قواعد تحلیل کد و کدبیس» هستند: ممنوعیت حدس و گمان، بررسی فایل‌به‌فایل و خط‌به‌خط، تحلیل دقیق ورکفلوها، مستندسازی کامل یافته‌ها (هر یافته با `FILE / LINE`)، و تقسیم پروژه‌های بزرگ به بخش‌های کوچک‌ترِ قابل بررسی (از طریق Coverage Manifest و Decomposition Table).
 

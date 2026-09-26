@@ -56,6 +56,7 @@
     "60-findings.md",
     "92-clean-architecture-contract.md",
     "93-domain-model-contract.md",
+    "94-enterprise-patterns-contract.md",
     "80-quality-gate.md"
   ],
   "insert_before": "80-quality-gate.md",

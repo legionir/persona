@@ -9,6 +9,9 @@
 > (به انگلیسی، هم‌سبک با بقیهٔ بلوک‌ها). این سند فقط نقشهٔ ادغام و نحوهٔ اتصال است.
 > قراردادهای قبلی: [`docs/construction-contract.md`](construction-contract.md) (Clean Code + Code Complete) و
 > [`docs/design-architecture-contract.md`](design-architecture-contract.md) (Ousterhout + Clean Architecture).
+> الگوهای سازمانی (Fowler) و انضباط پراگماتیک (Hunt & Thomas):
+> [`docs/enterprise-patterns-contract.md`](enterprise-patterns-contract.md) ·
+> [`docs/pragmatic-programmer-contract.md`](pragmatic-programmer-contract.md).
 
 ---
 

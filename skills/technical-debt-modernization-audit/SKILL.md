@@ -112,6 +112,8 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 - CHANGE FINDINGS — REQUIRED EVIDENCE AND CHANGE PLAN (binding)
 - ARCHITECTURE BOUNDARIES CONTRACT — Clean Architecture (binding)
 - DOMAIN MODEL CONTRACT — Domain-Driven Design (binding)
+- PRAGMATIC CONTRACT — The Pragmatic Programmer (binding)
+- ENTERPRISE PATTERNS CONTRACT — Patterns of Enterprise Application Architecture (binding)
 - DESIGN DEPTH CONTRACT — A Philosophy of Software Design (binding)
 - COVERAGE CONTROL — AUDIT MATRIX
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
@@ -123,7 +125,7 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/technical-debt-modernization-audit.md`](references/technical-debt-modernization-audit.md) — متن کامل master prompt (1204 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/technical-debt-modernization-audit.md`](references/technical-debt-modernization-audit.md) — متن کامل master prompt (1414 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 

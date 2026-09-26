@@ -20,13 +20,13 @@ for d in skills/*/; do cp -r "$d" .claude/skills/; done
 | Skill | نوع | حوزه | منبع | خطوط SKILL.md |
 |---|---|---|---|---|
 | [`ai-agent-system-audit-hardening`](ai-agent-system-audit-hardening/SKILL.md) | ترکیبی | ترکیبی | `AI Agent System Audit & Hardening.md` | 125 |
-| [`api-integration-contract-audit`](api-integration-contract-audit/SKILL.md) | ترکیبی | ترکیبی | `API & Integration Contract Audit.md` | 126 |
+| [`api-integration-contract-audit`](api-integration-contract-audit/SKILL.md) | ترکیبی | ترکیبی | `API & Integration Contract Audit.md` | 127 |
 | [`architecture-review-architecture-audit`](architecture-review-architecture-audit/SKILL.md) | ترکیبی | ترکیبی | `Architecture Review & Architecture Audit.md` | 148 |
-| [`clean-code-construction-review`](clean-code-construction-review/SKILL.md) | ترکیبی | ترکیبی | `Clean Code & Construction Review.md` | 125 |
+| [`clean-code-construction-review`](clean-code-construction-review/SKILL.md) | ترکیبی | ترکیبی | `Clean Code & Construction Review.md` | 126 |
 | [`cloud-infrastructure-audit`](cloud-infrastructure-audit/SKILL.md) | ترکیبی | ترکیبی | `Cloud & Infrastructure Audit.md` | 125 |
 | [`codebase-integrity-audit-protocol`](codebase-integrity-audit-protocol/SKILL.md) | ترکیبی | ترکیبی | `codebase-integrity-audit-protocol.md` | 118 |
-| [`data-database-integrity-audit`](data-database-integrity-audit/SKILL.md) | ترکیبی | ترکیبی | `Data & Database Integrity Audit.md` | 127 |
-| [`domain-model-context-review`](domain-model-context-review/SKILL.md) | ترکیبی | ترکیبی | `Domain Model & Context Review.md` | 129 |
+| [`data-database-integrity-audit`](data-database-integrity-audit/SKILL.md) | ترکیبی | ترکیبی | `Data & Database Integrity Audit.md` | 128 |
+| [`domain-model-context-review`](domain-model-context-review/SKILL.md) | ترکیبی | ترکیبی | `Domain Model & Context Review.md` | 131 |
 | [`execution-plan-generator`](execution-plan-generator/SKILL.md) | ترکیبی | ترکیبی | `Execution Plan Generator.md` | 72 |
 | [`forensic-codebase-review-audit`](forensic-codebase-review-audit/SKILL.md) | ترکیبی | ترکیبی | `Forensic Codebase Review & Audit.md` | 154 |
 | [`forensic-security-threat-audit`](forensic-security-threat-audit/SKILL.md) | ترکیبی | ترکیبی | `Forensic Security & Threat Audit.md` | 124 |
@@ -34,9 +34,9 @@ for d in skills/*/; do cp -r "$d" .claude/skills/; done
 | [`performance-scalability-audit`](performance-scalability-audit/SKILL.md) | ترکیبی | ترکیبی | `Performance & Scalability Audit.md` | 125 |
 | [`privacy-compliance-audit`](privacy-compliance-audit/SKILL.md) | ترکیبی | ترکیبی | `Privacy & Compliance Audit.md` | 124 |
 | [`production-readiness-reliability-audit`](production-readiness-reliability-audit/SKILL.md) | ترکیبی | ترکیبی | `Production Readiness & Reliability Audit.md` | 120 |
-| [`software-design-architecture-review`](software-design-architecture-review/SKILL.md) | ترکیبی | ترکیبی | `Software Design & Architecture Review.md` | 129 |
-| [`technical-debt-modernization-audit`](technical-debt-modernization-audit/SKILL.md) | ترکیبی | ترکیبی | `Technical Debt & Modernization Audit.md` | 130 |
-| [`testing-quality-assurance-audit`](testing-quality-assurance-audit/SKILL.md) | ترکیبی | ترکیبی | `Testing & Quality Assurance Audit.md` | 127 |
+| [`software-design-architecture-review`](software-design-architecture-review/SKILL.md) | ترکیبی | ترکیبی | `Software Design & Architecture Review.md` | 131 |
+| [`technical-debt-modernization-audit`](technical-debt-modernization-audit/SKILL.md) | ترکیبی | ترکیبی | `Technical Debt & Modernization Audit.md` | 132 |
+| [`testing-quality-assurance-audit`](testing-quality-assurance-audit/SKILL.md) | ترکیبی | ترکیبی | `Testing & Quality Assurance Audit.md` | 128 |
 | [`accessibility-specialist`](accessibility-specialist/SKILL.md) | مجری | Design | `prompts/implementation/accessibility-specialist.md` | 236 |
 | [`account-manager`](account-manager/SKILL.md) | ناظر | Support | `prompts/audit/account-manager.md` | 244 |
 | [`agent-architect`](agent-architect/SKILL.md) | مجری | AI | `prompts/implementation/agent-architect.md` | 253 |

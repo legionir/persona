@@ -80,8 +80,10 @@
 | `90-construction-contract.md` | قرارداد ساخت کد: ادغام یگانهٔ Clean Code + Code Complete (نام‌گذاری، روال، کامنت، داده، جریان کنترل، خطا، بوها، تست، رفکتور، همزمانی، گیت بازبینی) |
 | `91-design-depth-contract.md` | قرارداد عمق طراحی: ادغام یگانهٔ A Philosophy of Software Design (پیچیدگی، عمق ماژول، پنهان‌سازی اطلاعات، رابط، استراتژیک در مقابل تاکتیکی، حذف استثناها، کشیدن پیچیدگی به پایین، تجزیهٔ زمانی، ترکیب/جدایی، طراحی comments-first) |
 | `92-clean-architecture-contract.md` | قرارداد مرزهای معماری: ادغام یگانهٔ Clean Architecture (قانون وابستگی، مسئولیت لایه‌ها، use case و entity، port و adapter، ساختار بر پایهٔ use case، قواعد کامپوننت، هزینهٔ مرز، تست از مسیر مرز، الگوهای ممنوع) |
-| `95-change-findings.md` | شواهد الزامی برای هر یافتهٔ «تغییر» + قواعد پلن تغییر (severity را به روبیک پایهٔ Findings map می‌کند، دوباره نمی‌نویسد) |
 | `93-domain-model-contract.md` | قرارداد مدل دامنه: ادغام یگانهٔ DDD (زبان مشترک، bounded context و context map، subdomain و distillation، entity/value object/aggregate، domain service و specification، repository/factory، domain event و event sourcing، ترجمه در مرزها، DDD انتخاب‌محور) |
+| `94-enterprise-patterns-contract.md` | قرارداد الگوهای سازمانی: ادغام یگانهٔ PoEAA (انتخاب الگوی منطق کسب‌وکار، الگوی persistence، Unit of Work/Identity Map/Lazy Load، الگوهای ORM، قفل آفلاین و مرز تراکنش، الگوهای presentation، الگوهای پایه) |
+| `95-pragmatic-contract.md` | قرارداد پراگماتیک: ادغام یگانهٔ The Pragmatic Programmer (DRY یعنی دانش نه متن، orthogonality، tracer bullet، خودکارسازی، حلقهٔ بازخورد، قرارداد و منابع، ارتباطات) |
+| `96-change-findings.md` | شواهد الزامی برای هر یافتهٔ «تغییر» + قواعد پلن تغییر (severity را به روبیک پایهٔ Findings map می‌کند، دوباره نمی‌نویسد) |
 
 ترتیب پیشنهادی یک ممیزی forensic کامل:
 
@@ -169,7 +171,7 @@ python3 scripts/compose_persona.py --all --check
 - [ ] اگر موضوع ممیزی به طراحی/معماری مربوط است، بلوک‌های `91-` و/یا `92-` include شده‌اند.
 - [ ] اگر موضوع ممیزی به مدل دامنه مربوط است، بلوک `93-domain-model-contract.md` include شده
       (و قواعد لایه/وابرسی که در `92-` هستند دوباره نوشته نشده‌اند).
-- [ ] اگر خروجی composite «تغییر» پیشنهاد می‌دهد، بلوک `95-change-findings.md` include شده است
+- [ ] اگر خروجی composite «تغییر» پیشنهاد می‌دهد، بلوک `96-change-findings.md` include شده است
       (به‌جای نوشتن دوبارهٔ شواهد یافته در `extra_sections`).
 
 ---
