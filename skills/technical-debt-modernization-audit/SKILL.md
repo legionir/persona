@@ -109,6 +109,7 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 - SPECIALIZED AUDITS
 - TECHNICAL DEBT, DEAD CODE, SUSPICIOUS CODE
 - CONSTRUCTION CONTRACT — Clean Code + Code Complete (binding)
+- REFACTORING CONTRACT — Refactoring.Guru (binding)
 - CHANGE FINDINGS — REQUIRED EVIDENCE AND CHANGE PLAN (binding)
 - ARCHITECTURE BOUNDARIES CONTRACT — Clean Architecture (binding)
 - DOMAIN MODEL CONTRACT — Domain-Driven Design (binding)
@@ -125,7 +126,7 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/technical-debt-modernization-audit.md`](references/technical-debt-modernization-audit.md) — متن کامل master prompt (1414 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/technical-debt-modernization-audit.md`](references/technical-debt-modernization-audit.md) — متن کامل master prompt (1614 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 

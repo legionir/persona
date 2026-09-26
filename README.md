@@ -955,6 +955,7 @@ mkdir -p .claude/skills && cp -r skills/backend-developer .claude/skills/
 - `composites/blocks/93-domain-model-contract.md` — قرارداد مدل دامنه (ادغام یگانهٔ DDD: زبان مشترک، bounded context، aggregate، …).
 - `composites/blocks/94-enterprise-patterns-contract.md` — قرارداد الگوهای سازمانی (ادغام یگانهٔ PoEAA: الگوی منطق کسب‌وکار، persistence، تراکنش، ORM، presentation).
 - `composites/blocks/95-pragmatic-contract.md` — قرارداد پراگماتیک (ادغام یگانهٔ The Pragmatic Programmer: DRY، orthogonality، خودکارسازی، بازخورد).
+- `composites/blocks/97-refactoring-contract.md` — قرارداد رفکتورینگ (ادغام یگانهٔ Refactoring.Guru: کاتالوگ بو با محرک→درمان، قواعد استثنا، شرط توقف).
 - `composites/*.json` — spec هر persona ترکیبی (مأموریت، ورودی‌ها، عدسی‌ها، پیشتازی، بخش‌های اختصاصی).
 - `skills/<name>/SKILL.md` و `skills/<name>/references/` — خروجی تبدیل persona به Agent Skill.
 - `docs/` — راهنماهای فارسی: ساخت persona ترکیبی، تبدیل به skill، و قراردادهای فنی
@@ -965,6 +966,7 @@ mkdir -p .claude/skills && cp -r skills/backend-developer .claude/skills/
   - [`docs/domain-driven-design-contract.md`](docs/domain-driven-design-contract.md) — قرارداد مدل دامنه (DDD: Evans + Vernon)
   - [`docs/enterprise-patterns-contract.md`](docs/enterprise-patterns-contract.md) — قرارداد الگوهای سازمانی (PoEAA)
   - [`docs/pragmatic-programmer-contract.md`](docs/pragmatic-programmer-contract.md) — قرارداد پراگماتیک (The Pragmatic Programmer)
+  - [`docs/refactoring-contract.md`](docs/refactoring-contract.md) — قرارداد رفکتورینگ (Refactoring.Guru)
 
 > همهٔ پرامپت‌های ناظر شامل بخش الزامی «قواعد تحلیل کد و کدبیس» هستند: ممنوعیت حدس و گمان، بررسی فایل‌به‌فایل و خط‌به‌خط، تحلیل دقیق ورکفلوها، مستندسازی کامل یافته‌ها (هر یافته با `FILE / LINE`)، و تقسیم پروژه‌های بزرگ به بخش‌های کوچک‌ترِ قابل بررسی (از طریق Coverage Manifest و Decomposition Table).
 

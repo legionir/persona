@@ -113,6 +113,7 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 - ARCHITECTURE BOUNDARIES CONTRACT — Clean Architecture (binding)
 - DOMAIN MODEL CONTRACT — Domain-Driven Design (binding)
 - PRAGMATIC CONTRACT — The Pragmatic Programmer (binding)
+- REFACTORING CONTRACT — Refactoring.Guru (binding)
 - ◆ Risk-to-Test Matrix — the deliverable of this audit
 - ◆ Test-Integrity Passes — run after the unit-by-unit review
 - BEHAVIOURAL RULES AND FINAL QUALITY GATE
@@ -121,7 +122,7 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/testing-quality-assurance-audit.md`](references/testing-quality-assurance-audit.md) — متن کامل master prompt (1092 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/testing-quality-assurance-audit.md`](references/testing-quality-assurance-audit.md) — متن کامل master prompt (1292 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 

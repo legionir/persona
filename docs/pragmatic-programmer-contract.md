@@ -6,6 +6,7 @@
 > خودِ قواعد اینجا تکرار **نشده‌اند**. منبع یگانه:
 > [`composites/blocks/95-pragmatic-contract.md`](../composites/blocks/95-pragmatic-contract.md)
 > (به انگلیسی، هم‌سبک با بقیهٔ بلوک‌ها). این سند فقط نقشهٔ استخراج و نحوهٔ اتصال است.
+> قرارداد رفکتورینگ (Refactoring.Guru): [`docs/refactoring-contract.md`](refactoring-contract.md).
 
 ---
 

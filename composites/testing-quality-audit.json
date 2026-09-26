@@ -57,6 +57,7 @@
     "92-clean-architecture-contract.md",
     "93-domain-model-contract.md",
     "95-pragmatic-contract.md",
+    "97-refactoring-contract.md",
     "80-quality-gate.md"
   ],
   "insert_before": "80-quality-gate.md",

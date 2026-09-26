@@ -12,6 +12,7 @@
 > الگوهای سازمانی (Fowler) و انضباط پراگماتیک (Hunt & Thomas):
 > [`docs/enterprise-patterns-contract.md`](enterprise-patterns-contract.md) ·
 > [`docs/pragmatic-programmer-contract.md`](pragmatic-programmer-contract.md).
+> قرارداد رفکتورینگ (Refactoring.Guru): [`docs/refactoring-contract.md`](refactoring-contract.md).
 
 ---
 

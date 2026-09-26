@@ -11,7 +11,8 @@
 > [`docs/design-architecture-contract.md`](design-architecture-contract.md).
 > الگوهای سازمانی (Fowler) و انضباط پراگماتیک (Hunt & Thomas):
 > [`docs/enterprise-patterns-contract.md`](enterprise-patterns-contract.md) ·
-> [`docs/pragmatic-programmer-contract.md`](pragmatic-programmer-contract.md). شواهد الزامی برای یافته‌های
+> [`docs/pragmatic-programmer-contract.md`](pragmatic-programmer-contract.md).
+> قرارداد رفکتورینگ (Refactoring.Guru): [`docs/refactoring-contract.md`](refactoring-contract.md). شواهد الزامی برای یافته‌های
 > «تغییر» هم در بلوک مشترک `95-change-findings.md` زندگی می‌کند.
 
 ---

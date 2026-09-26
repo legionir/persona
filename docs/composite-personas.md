@@ -84,6 +84,7 @@
 | `94-enterprise-patterns-contract.md` | قرارداد الگوهای سازمانی: ادغام یگانهٔ PoEAA (انتخاب الگوی منطق کسب‌وکار، الگوی persistence، Unit of Work/Identity Map/Lazy Load، الگوهای ORM، قفل آفلاین و مرز تراکنش، الگوهای presentation، الگوهای پایه) |
 | `95-pragmatic-contract.md` | قرارداد پراگماتیک: ادغام یگانهٔ The Pragmatic Programmer (DRY یعنی دانش نه متن، orthogonality، tracer bullet، خودکارسازی، حلقهٔ بازخورد، قرارداد و منابع، ارتباطات) |
 | `96-change-findings.md` | شواهد الزامی برای هر یافتهٔ «تغییر» + قواعد پلن تغییر (severity را به روبیک پایهٔ Findings map می‌کند، دوباره نمی‌نویسد) |
+| `97-refactoring-contract.md` | قرارداد رفکتورینگ: ادغام یگانهٔ Refactoring.Guru (جداسازی از کار feature/bug، گام‌های کوچک، راستی‌آزمایی و شرط توقف، قاعدهٔ سه، شش دستهٔ بو با محرک→درمان→جایگزین، قواعد استثنای بو، انتخاب و ایمنی تکنیک، آنتی‌الگوهای تصمیم، ورکفلو agent) |
 
 ترتیب پیشنهادی یک ممیزی forensic کامل:
 
@@ -173,6 +174,8 @@ python3 scripts/compose_persona.py --all --check
       (و قواعد لایه/وابرسی که در `92-` هستند دوباره نوشته نشده‌اند).
 - [ ] اگر خروجی composite «تغییر» پیشنهاد می‌دهد، بلوک `96-change-findings.md` include شده است
       (به‌جای نوشتن دوبارهٔ شواهد یافته در `extra_sections`).
+- [ ] اگر composite تغییر ساختاری/رفکتورینگ پیشنهاد می‌دهد، بلوک `97-refactoring-contract.md` include شده
+      (و فرایند تغییر و قواعد پلن از `90-`/`96-` تکرار نشده‌اند).
 
 ---
 

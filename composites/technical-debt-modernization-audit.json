@@ -53,6 +53,7 @@
     "55-specialized.md",
     "65-debt.md",
     "90-construction-contract.md",
+    "97-refactoring-contract.md",
     "96-change-findings.md",
     "92-clean-architecture-contract.md",
     "93-domain-model-contract.md",
