@@ -19,21 +19,22 @@ for d in skills/*/; do cp -r "$d" .claude/skills/; done
 
 | Skill | نوع | حوزه | منبع | خطوط SKILL.md |
 |---|---|---|---|---|
-| [`ai-agent-system-audit-hardening`](ai-agent-system-audit-hardening/SKILL.md) | ترکیبی | ترکیبی | `AI Agent System Audit & Hardening.md` | 110 |
-| [`api-integration-contract-audit`](api-integration-contract-audit/SKILL.md) | ترکیبی | ترکیبی | `API & Integration Contract Audit.md` | 109 |
-| [`architecture-review-architecture-audit`](architecture-review-architecture-audit/SKILL.md) | ترکیبی | ترکیبی | `Architecture Review & Architecture Audit.md` | 135 |
-| [`cloud-infrastructure-audit`](cloud-infrastructure-audit/SKILL.md) | ترکیبی | ترکیبی | `Cloud & Infrastructure Audit.md` | 110 |
-| [`codebase-integrity-audit-protocol`](codebase-integrity-audit-protocol/SKILL.md) | ترکیبی | ترکیبی | `codebase-integrity-audit-protocol.md` | 71 |
-| [`data-database-integrity-audit`](data-database-integrity-audit/SKILL.md) | ترکیبی | ترکیبی | `Data & Database Integrity Audit.md` | 110 |
-| [`execution-plan-generator`](execution-plan-generator/SKILL.md) | ترکیبی | ترکیبی | `Execution Plan Generator.md` | 48 |
-| [`forensic-codebase-review-audit`](forensic-codebase-review-audit/SKILL.md) | ترکیبی | ترکیبی | `Forensic Codebase Review & Audit.md` | 133 |
-| [`forensic-security-threat-audit`](forensic-security-threat-audit/SKILL.md) | ترکیبی | ترکیبی | `Forensic Security & Threat Audit.md` | 109 |
-| [`incident-forensic-review-postmortem`](incident-forensic-review-postmortem/SKILL.md) | ترکیبی | ترکیبی | `Incident Forensic Review & Postmortem.md` | 109 |
-| [`performance-scalability-audit`](performance-scalability-audit/SKILL.md) | ترکیبی | ترکیبی | `Performance & Scalability Audit.md` | 110 |
-| [`privacy-compliance-audit`](privacy-compliance-audit/SKILL.md) | ترکیبی | ترکیبی | `Privacy & Compliance Audit.md` | 109 |
-| [`production-readiness-reliability-audit`](production-readiness-reliability-audit/SKILL.md) | ترکیبی | ترکیبی | `Production Readiness & Reliability Audit.md` | 109 |
-| [`technical-debt-modernization-audit`](technical-debt-modernization-audit/SKILL.md) | ترکیبی | ترکیبی | `Technical Debt & Modernization Audit.md` | 109 |
-| [`testing-quality-assurance-audit`](testing-quality-assurance-audit/SKILL.md) | ترکیبی | ترکیبی | `Testing & Quality Assurance Audit.md` | 109 |
+| [`ai-agent-system-audit-hardening`](ai-agent-system-audit-hardening/SKILL.md) | ترکیبی | ترکیبی | `AI Agent System Audit & Hardening.md` | 125 |
+| [`api-integration-contract-audit`](api-integration-contract-audit/SKILL.md) | ترکیبی | ترکیبی | `API & Integration Contract Audit.md` | 124 |
+| [`architecture-review-architecture-audit`](architecture-review-architecture-audit/SKILL.md) | ترکیبی | ترکیبی | `Architecture Review & Architecture Audit.md` | 148 |
+| [`clean-code-construction-review`](clean-code-construction-review/SKILL.md) | ترکیبی | ترکیبی | `Clean Code & Construction Review.md` | 125 |
+| [`cloud-infrastructure-audit`](cloud-infrastructure-audit/SKILL.md) | ترکیبی | ترکیبی | `Cloud & Infrastructure Audit.md` | 125 |
+| [`codebase-integrity-audit-protocol`](codebase-integrity-audit-protocol/SKILL.md) | ترکیبی | ترکیبی | `codebase-integrity-audit-protocol.md` | 118 |
+| [`data-database-integrity-audit`](data-database-integrity-audit/SKILL.md) | ترکیبی | ترکیبی | `Data & Database Integrity Audit.md` | 125 |
+| [`execution-plan-generator`](execution-plan-generator/SKILL.md) | ترکیبی | ترکیبی | `Execution Plan Generator.md` | 72 |
+| [`forensic-codebase-review-audit`](forensic-codebase-review-audit/SKILL.md) | ترکیبی | ترکیبی | `Forensic Codebase Review & Audit.md` | 154 |
+| [`forensic-security-threat-audit`](forensic-security-threat-audit/SKILL.md) | ترکیبی | ترکیبی | `Forensic Security & Threat Audit.md` | 124 |
+| [`incident-forensic-review-postmortem`](incident-forensic-review-postmortem/SKILL.md) | ترکیبی | ترکیبی | `Incident Forensic Review & Postmortem.md` | 124 |
+| [`performance-scalability-audit`](performance-scalability-audit/SKILL.md) | ترکیبی | ترکیبی | `Performance & Scalability Audit.md` | 125 |
+| [`privacy-compliance-audit`](privacy-compliance-audit/SKILL.md) | ترکیبی | ترکیبی | `Privacy & Compliance Audit.md` | 124 |
+| [`production-readiness-reliability-audit`](production-readiness-reliability-audit/SKILL.md) | ترکیبی | ترکیبی | `Production Readiness & Reliability Audit.md` | 120 |
+| [`technical-debt-modernization-audit`](technical-debt-modernization-audit/SKILL.md) | ترکیبی | ترکیبی | `Technical Debt & Modernization Audit.md` | 126 |
+| [`testing-quality-assurance-audit`](testing-quality-assurance-audit/SKILL.md) | ترکیبی | ترکیبی | `Testing & Quality Assurance Audit.md` | 125 |
 | [`accessibility-specialist`](accessibility-specialist/SKILL.md) | مجری | Design | `prompts/implementation/accessibility-specialist.md` | 236 |
 | [`account-manager`](account-manager/SKILL.md) | ناظر | Support | `prompts/audit/account-manager.md` | 244 |
 | [`agent-architect`](agent-architect/SKILL.md) | مجری | AI | `prompts/implementation/agent-architect.md` | 253 |
@@ -205,4 +206,4 @@ for d in skills/*/; do cp -r "$d" .claude/skills/; done
 | [`vendor-manager`](vendor-manager/SKILL.md) | ناظر | Project | `prompts/audit/vendor-manager.md` | 244 |
 | [`vulnerability-management-specialist`](vulnerability-management-specialist/SKILL.md) | مجری | Security | `prompts/implementation/vulnerability-management-specialist.md` | 252 |
 
-_تعداد: 185 skill — ساخته‌شده در 2026-09-26 توسط `scripts/build_skills.py`_
+_تعداد: 186 skill — ساخته‌شده در 2026-09-26 توسط `scripts/build_skills.py`_

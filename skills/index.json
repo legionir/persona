@@ -6,9 +6,9 @@
     "personas": "prompts/**/*.md + composite master prompts"
   },
   "totals": {
-    "skills": 185,
+    "skills": 186,
     "roles": 170,
-    "composites": 15
+    "composites": 16
   },
   "skills": [
     {
@@ -340,6 +340,16 @@
       "source": "prompts/audit/ciso.md",
       "skill": "skills/ciso/SKILL.md",
       "description": "Persona «Chief Information Security Officer (CISO)» (ناظر) در حوزه Security: تضمین پوشش و اثربخشی کنترلهای امنیتی سازمان. استفاده کن وقتی تسک به استراتژی و سیاست امنیت, حاکمیت کنترلها, هماهنگی انطباق, پاسخ به ریسک و حادثه, گزارش به مدیریت نیاز دارد و خروجی باید «استراتژی, سیاستها, ماتریس ریسک, گزارش امنیت» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Chief Information Security Officer (CISO)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "clean-code-construction-review",
+      "title": "Clean Code & Construction Review — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "ترکیبی",
+      "domain": null,
+      "source": "Clean Code & Construction Review.md",
+      "skill": "skills/clean-code-construction-review/SKILL.md",
+      "description": "Forensic review of construction quality: naming, routine boundaries, data and control flow, error handling, boundaries and coupling, test quality, and complexity — judged against the Clean Code + Code Complete construction contract. Use for code review, before merging a large change, when a refactor feels unsafe, when naming/structure is argued about, or when review comments need evidence instead of taste. Read-only."
     },
     {
       "name": "cloud-architect",

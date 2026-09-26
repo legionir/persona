@@ -884,9 +884,9 @@
 
 ## Personaهای ترکیبی (Master Prompt)
 
-علاوه بر ۱۷۰ persona تک‌نقش، مخزن **۱۵ persona ترکیبی** دارد: master promptهایی که چند نقش را
+علاوه بر ۱۷۰ persona تک‌نقش، مخزن **۱۶ persona ترکیبی** دارد: master promptهایی که چند نقش را
 همزمان (به‌عنوان «عدسی») اجرا می‌کنند و یک پروتکل مشترکِ شواهدمحور روی آن‌ها حاکم است.
-۱۱ تا از این ۱۵ تا با `scripts/compose_persona.py` از بلوک‌های آماده ساخته می‌شوند.
+۱۲ تا از این ۱۶ تا با `scripts/compose_persona.py` از بلوک‌های آماده ساخته می‌شوند.
 
 | Persona ترکیبی | عدسی | محور | فایل | Skill |
 |---|---|---|---|---|
@@ -894,6 +894,7 @@
 | Architecture Review & Architecture Audit | — | بازبینی معماری با طبقه‌بندی Tier/Size، سنجش ۰–۱۰۰ و verdict | [`Architecture Review & Architecture Audit.md`](Architecture%20Review%20%26%20Architecture%20Audit.md) | [`architecture-review-architecture-audit`](skills/architecture-review-architecture-audit/SKILL.md) |
 | Codebase Integration & Workflow Integrity Audit Protocol (v2, single file) | — | یکپارچگی و ورکفلو، فازبه‌فاز (P0–P10) و قابل ادامه در کدبیس بزرگ | [`codebase-integrity-audit-protocol.md`](codebase-integrity-audit-protocol.md) | [`codebase-integrity-audit-protocol`](skills/codebase-integrity-audit-protocol/SKILL.md) |
 | Execution Plan Generator | — | تبدیل تسک بزرگ به پلن اجرایی فازبه‌فاز و قابل راستی‌آزمایی | [`Execution Plan Generator.md`](Execution%20Plan%20Generator.md) | [`execution-plan-generator`](skills/execution-plan-generator/SKILL.md) |
+| Clean Code & Construction Review | 6 | کیفیت ساخت کد بر اساس قرارداد Clean Code + Code Complete | [`Clean Code & Construction Review.md`](Clean%20Code%20%26%20Construction%20Review.md) | [`clean-code-construction-review`](skills/clean-code-construction-review/SKILL.md) |
 | Production Readiness & Reliability Audit | 7 | آمادگی production: Rollback/Restore/Migration/Observability/SLO | [`Production Readiness & Reliability Audit.md`](Production%20Readiness%20%26%20Reliability%20Audit.md) | [`production-readiness-reliability-audit`](skills/production-readiness-reliability-audit/SKILL.md) |
 | Forensic Security & Threat Audit | 8 | سطح حمله و مرزهای اعتماد؛ تفک exploitable از theoretical | [`Forensic Security & Threat Audit.md`](Forensic%20Security%20%26%20Threat%20Audit.md) | [`forensic-security-threat-audit`](skills/forensic-security-threat-audit/SKILL.md) |
 | Data & Database Integrity Audit | 6 | ثبات داده، invariant، migration، تراکنش، backup/restore | [`Data & Database Integrity Audit.md`](Data%20%26%20Database%20Integrity%20Audit.md) | [`data-database-integrity-audit`](skills/data-database-integrity-audit/SKILL.md) |
@@ -923,7 +924,7 @@ python3 scripts/compose_persona.py --all --check                           # ا�
 به‌علاوهٔ متن کامل persona در `references/` (progressive disclosure).
 
 ```bash
-python3 scripts/build_skills.py                 # ساخت ۱۸۵ skill (۱۷۰ نقش + ۱۵ ترکیبی)
+python3 scripts/build_skills.py                 # ساخت ۱۸۶ skill (۱۷۰ نقش + ۱۶ ترکیبی)
 python3 scripts/build_skills.py --only backend-developer
 python3 scripts/build_skills.py --source "prompts/audit/*.md"
 python3 scripts/validate_skills.py              # اعتبارسنجی frontmatter/لینک/اندازه
@@ -946,9 +947,13 @@ mkdir -p .claude/skills && cp -r skills/backend-developer .claude/skills/
 - `prompts/implementation/` — پرامپت‌های راهنمای پیاده‌سازی برای نقش‌های **مجری**. هدف: تبدیل تسک به یک پلن اجرایی دقیق، فاز‌به‌فاز، وابستگی‌آگاه و دارای معیار پذیرش.
 - `<ریشه>/*.md` — personaهای **ترکیبی** (master prompt): چند نقش با یک پروتکل مشترک.
 - `composites/blocks/` — بلوک‌های قابل استفادهٔ مجدد برای ساخت persona ترکیبی.
+- `composites/blocks/90-construction-contract.md` — قرارداد ساخت کد (ادغام یگانهٔ Clean Code و Code Complete).
 - `composites/*.json` — spec هر persona ترکیبی (مأموریت، ورودی‌ها، عدسی‌ها، پیشتازی، بخش‌های اختصاصی).
 - `skills/<name>/SKILL.md` و `skills/<name>/references/` — خروجی تبدیل persona به Agent Skill.
-- `docs/` — راهنمای ساخت persona ترکیبی و تبدیل به skill.
+- `docs/` — راهنمای ساخت persona ترکیبی، تبدیل به skill، و قرارداد ساخت کد
+  ([`docs/composite-personas.md`](docs/composite-personas.md) ·
+   [`docs/persona-skills.md`](docs/persona-skills.md) ·
+   [`docs/construction-contract.md`](docs/construction-contract.md)).
 
 > همهٔ پرامپت‌های ناظر شامل بخش الزامی «قواعد تحلیل کد و کدبیس» هستند: ممنوعیت حدس و گمان، بررسی فایل‌به‌فایل و خط‌به‌خط، تحلیل دقیق ورکفلوها، مستندسازی کامل یافته‌ها (هر یافته با `FILE / LINE`)، و تقسیم پروژه‌های بزرگ به بخش‌های کوچک‌ترِ قابل بررسی (از طریق Coverage Manifest و Decomposition Table).
 

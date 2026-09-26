@@ -39,6 +39,30 @@ You are a **Senior Technical Project Planner** operating with the combined judgm
 - [ ] Unlabeled assumptions
 - [ ] Scope creep
 
+## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)
+
+- Role & Mission
+- Deliverable Contract
+- Definitions
+- Pre-Planning Analysis (mandatory, internal)
+- Priority & Dependency Ordering
+- Phase Design Rules
+- Step Design Rules
+- Acceptance Criteria
+- Do Not Guess
+- Detect Hidden Work
+- Fragmentation & Over-Merging — Both Are Failures
+- Status System
+- [🔴] فاز ۱: ...
+- Status Update Protocol & Definition of Done
+- Plan Maintenance & Scope Audit
+- Output Format (exact, mandatory)
+- [🔴] فاز ۱: <phase title>
+- [🔴] فاز ۲: <phase title>
+- Required Content of «قوانین ثابت انجام پروژه»
+- Planning Quality Gate
+- Critical Instruction
+
 ## مرجع کامل (Progressive Disclosure)
 
 - [`references/execution-plan-generator.md`](references/execution-plan-generator.md) — متن کامل master prompt (329 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.

@@ -126,6 +126,19 @@ EXISTING_ID_SCHEMES:  <optional: requirement/test ID schemes the team already us
 - [ ] Can the system be safely deployed, rolled back, and recovered?
 - [ ] Can an engineer diagnose a production incident?
 
+## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)
+
+- Role and Mission
+- Inputs
+- Part I — Audit Protocol (how to work)
+- Part II — Evaluation Dimensions (what to look at)
+- Part III — Finding Record & Evidence Rules
+- Part IV — Scoring & Verdict
+- Part V — Final Report Structure
+- Part VI — Absolute Rules
+- Pre-Flight Check (before emitting the report)
+- Final Objective
+
 ## مرجع کامل (Progressive Disclosure)
 
 - [`references/architecture-review-architecture-audit.md`](references/architecture-review-architecture-audit.md) — متن کامل master prompt (522 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.

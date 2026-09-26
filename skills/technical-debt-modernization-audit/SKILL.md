@@ -95,14 +95,31 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 > Root cause over symptoms.
 > Concrete findings over generic advice.
 
-## بخش‌های اختصاصی این persona (در مرجع)
+## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)
 
-- Debt Register — ranked by cost of change, not by ugliness
-- Modernization Passes — run after the unit-by-unit review
+- INPUTS (fill in before use)
+- MISSION
+- PRIME DIRECTIVE — ZERO ASSUMPTIONS
+- SCOPE, INPUTS, AND MISSING ARTIFACTS
+- AUDIT PROTOCOL
+- LENS SWEEP AND PRECEDENCE
+- FILE-BY-FILE AUDIT (mandatory)
+- LINE-LEVEL VERIFICATION
+- CROSS-FILE AND WORKFLOW ANALYSIS
+- SPECIALIZED AUDITS
+- TECHNICAL DEBT, DEAD CODE, SUSPICIOUS CODE
+- CONSTRUCTION CONTRACT — Clean Code + Code Complete (binding)
+- COVERAGE CONTROL — AUDIT MATRIX
+- FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
+- ◆ Debt Register — ranked by cost of change, not by ugliness
+- ◆ Modernization Passes — run after the unit-by-unit review
+- BEHAVIOURAL RULES AND FINAL QUALITY GATE
+- CORE PRINCIPLE
+- Appendix C — Source Personas (lenses)
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/technical-debt-modernization-audit.md`](references/technical-debt-modernization-audit.md) — متن کامل master prompt (607 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/technical-debt-modernization-audit.md`](references/technical-debt-modernization-audit.md) — متن کامل master prompt (754 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 

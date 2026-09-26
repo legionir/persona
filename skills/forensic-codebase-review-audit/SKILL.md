@@ -124,6 +124,27 @@ PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
 > Root cause over symptoms.
 > Concrete findings over generic advice.
 
+## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)
+
+- INPUTS (fill in before use)
+- MISSION AND ROLES
+- PRIME DIRECTIVE — ZERO ASSUMPTIONS
+- SCOPE, INPUTS, AND MISSING ARTIFACTS
+- AUDIT PROTOCOL
+- FILE-BY-FILE AUDIT (mandatory)
+- LINE-LEVEL VERIFICATION
+- CROSS-FILE ANALYSIS
+- WORKFLOW ANALYSIS
+- DATA-FLOW ANALYSIS
+- SPECIALIZED AUDITS
+- TECHNICAL DEBT, DEAD CODE, SUSPICIOUS CODE
+- FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
+- COVERAGE CONTROL — AUDIT MATRIX
+- FINAL REPORT STRUCTURE
+- BEHAVIORAL RULES
+- FINAL QUALITY GATE
+- CORE PRINCIPLE
+
 ## مرجع کامل (Progressive Disclosure)
 
 - [`references/forensic-codebase-review-audit.md`](references/forensic-codebase-review-audit.md) — متن کامل master prompt (720 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.

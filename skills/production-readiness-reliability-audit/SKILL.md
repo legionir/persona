@@ -95,10 +95,21 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 > Root cause over symptoms.
 > Concrete findings over generic advice.
 
-## بخش‌های اختصاصی این persona (در مرجع)
+## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)
 
-- Readiness Gates — one verdict per gate, evidence only
-- Specialised Passes — run after the unit-by-unit review
+- INPUTS (fill in before use)
+- MISSION
+- PRIME DIRECTIVE — ZERO ASSUMPTIONS
+- SCOPE, INPUTS, AND MISSING ARTIFACTS
+- AUDIT PROTOCOL
+- LENS SWEEP AND PRECEDENCE
+- COVERAGE CONTROL — AUDIT MATRIX
+- FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
+- ◆ Readiness Gates — one verdict per gate, evidence only
+- ◆ Specialised Passes — run after the unit-by-unit review
+- BEHAVIOURAL RULES AND FINAL QUALITY GATE
+- CORE PRINCIPLE
+- Appendix C — Source Personas (lenses)
 
 ## مرجع کامل (Progressive Disclosure)
 

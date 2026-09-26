@@ -201,7 +201,7 @@ def renumber(text: str) -> str:
             out.append(f"## {n}. {title}")
             continue
         if not inside_fence and ln.startswith("### "):
-            title = re.sub(r"^###\s+(?:\d+\.\d+\s+)?", "", ln).strip()
+            title = re.sub(r"^###\s+(?:\d+(?:\.\d+)?\.?\s+)?", "", ln).strip()
             if title.lower().startswith("appendix"):
                 out.append(f"### {title}")
                 continue

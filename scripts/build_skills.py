@@ -275,12 +275,21 @@ def master_skill_body(mp: MasterPersona, spec: dict | None, bundle: bool = True)
         out += ["## اصل حاکم", ""] + principle[-6:] + [""]
 
     ref_link = f"references/{mp.slug}.md" if bundle else f"../../{rel(mp.path)}"
-    # domain-specific sections of this composite (from its spec) -> tell the model
-    # what extra material lives in the reference file
-    extras = [e.get("title", "") for e in (spec or {}).get("extra_sections", []) if e.get("title")]
-    if extras:
-        out += ["## بخش‌های اختصاصی این persona (در مرجع)", ""]
-        out += [f"- {x}" for x in extras] + [""]
+    # map of the master prompt's sections, with the composite's own sections marked.
+    # A table of contents only — never a copy of the content (progressive disclosure).
+    extra_titles = [e.get("title", "") for e in (spec or {}).get("extra_sections", []) if e.get("title")]
+    toc: list[str] = []
+    for sec in doc.sections:
+        if sec.level != 2:
+            continue
+        title = re.sub(r"^\d+\.\s*", "", sec.title).strip()
+        if not title:
+            continue
+        own = any(title.startswith(x[:18]) for x in extra_titles)
+        toc.append(f"- {'◆' if own else ''} {title}".replace("-  ", "- "))
+    if toc:
+        out += ["## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)", ""]
+        out += toc + [""]
 
     out += ["## مرجع کامل (Progressive Disclosure)", ""]
     out += [f"- [`{ref_link}`]({ref_link}) — متن کامل master prompt "

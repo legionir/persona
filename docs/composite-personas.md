@@ -77,6 +77,7 @@
 | `45-cross-file.md` | تحلیل بین‌فایلی + بازسازی ورکفلو (موفق/شکست) + جریان داده |
 | `55-specialized.md` | ۱۲ دامنهٔ ممیزی تخصصی (security، error، concurrency، DB، API، testing، architecture، config، deps، perf، observability، build/deploy) |
 | `65-debt.md` | بدهی فنی (۱۳ کلاس) + کد مرده و مشکوک + قاعدهٔ بررسی repository-wide قبل از اعلام dead |
+| `90-construction-contract.md` | قرارداد ساخت کد: ادغام یگانهٔ Clean Code + Code Complete (نام‌گذاری، روال، کامنت، داده، جریان کنترل، خطا، بوها، تست، رفکتور، همزمانی، گیت بازبینی) |
 
 ترتیب پیشنهادی یک ممیزی forensic کامل:
 
@@ -157,6 +158,8 @@ python3 scripts/compose_persona.py --all --check
 - [ ] Quality Gate نهایی با چک‌باکس‌های قابل بررسی وجود دارد.
 - [ ] هیچ ارجاع عددی به بخش‌ها نیست (فقط نام).
 - [ ] Appendix منبعِ lensها ثبت شده (ردیابی به personaهای مبدأ).
+- [ ] اگر موضوع ممیزی به کیفیت ساخت کد مربوط است، بلوک `90-construction-contract.md` include شده
+      (و بلوک دیگری قواعد مشابه را کپی نمی‌کند).
 
 ---
 
@@ -179,6 +182,7 @@ DevOps Engineer، Observability Engineer، DBA)، ۱۲ «گیت آمادگی» (
 | Composite | عدسی‌ها | تمرکز |
 |---|---|---|
 | `forensic-codebase-review-audit` | — | ممیزی forensic کدبیس (فایل‌به‌فایل، خط‌به‌خط، بدون حدس) |
+| `clean-code-construction-review` | ۶ | کیفیت ساخت کد بر اساس قرارداد Clean Code + Code Complete |
 | `architecture-review-architecture-audit` | — | بازبینی معماری با Tier/Size و سنجش ۰–۱۰۰ |
 | `codebase-integrity-audit-protocol` | — | یکپارچگی و ورکفلو، فازبه‌فاز و قابل ادامه (P0–P10) |
 | `execution-plan-generator` | — | تبدیل تسک بزرگ به پلن اجرایی فازبه‌فاز |

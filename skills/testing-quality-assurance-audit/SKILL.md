@@ -95,14 +95,30 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 > Root cause over symptoms.
 > Concrete findings over generic advice.
 
-## بخش‌های اختصاصی این persona (در مرجع)
+## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)
 
-- Risk-to-Test Matrix — the deliverable of this audit
-- Test-Integrity Passes — run after the unit-by-unit review
+- INPUTS (fill in before use)
+- MISSION
+- PRIME DIRECTIVE — ZERO ASSUMPTIONS
+- SCOPE, INPUTS, AND MISSING ARTIFACTS
+- AUDIT PROTOCOL
+- LENS SWEEP AND PRECEDENCE
+- FILE-BY-FILE AUDIT (mandatory)
+- LINE-LEVEL VERIFICATION
+- CROSS-FILE AND WORKFLOW ANALYSIS
+- SPECIALIZED AUDITS
+- CONSTRUCTION CONTRACT — Clean Code + Code Complete (binding)
+- COVERAGE CONTROL — AUDIT MATRIX
+- FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
+- ◆ Risk-to-Test Matrix — the deliverable of this audit
+- ◆ Test-Integrity Passes — run after the unit-by-unit review
+- BEHAVIOURAL RULES AND FINAL QUALITY GATE
+- CORE PRINCIPLE
+- Appendix C — Source Personas (lenses)
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/testing-quality-assurance-audit.md`](references/testing-quality-assurance-audit.md) — متن کامل master prompt (583 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/testing-quality-assurance-audit.md`](references/testing-quality-assurance-audit.md) — متن کامل master prompt (730 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 
