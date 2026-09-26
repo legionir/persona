@@ -21,9 +21,9 @@
 
 | Job Title | Duties Summary | Role (EXECUTOR / SUPERVISOR) | Primary Domain | Sub-Domain | Short Description | Supervisor | Prompt | Mission | Responsibilities | Scope of Authority | Required Inputs | Optional Inputs | Required Context | Preconditions | Procedure | Decision Rules | Allowed Tools | Restricted / Forbidden Tools | Outputs | Quality Gate | Required Evidence | Handoff | Escalation Conditions | Permissions | Lifecycle States | Required Memory | KPI / Performance Metric |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Founder / مؤسس | ایجاد ایده، تعیین جهت کلی کسب‌وکار و تصمیم‌های کلان | ناظر | مدیریت و استراتژی | کسب‌وکار | ایجاد ایده، تعیین جهت کلی کسب‌وکار | — | [Audit](prompts/audit/founder.md) | تعیین جهت و هدف نهایی پروژه | Vision, اهداف کلان, تصمیم‌های استراتژیک | Vision و تصمیم‌های کلان | Business Idea, Market Need | Research, Financial Data | Business, Market, Organization | وجود مسئله و فرصت معتبر | تعریف Vision → تعیین اهداف → تعیین Constraints → تأیید جهت | ادامه/توقف/تغییر جهت پروژه | Business Intelligence, Reports | Production (no direct write) | Vision, Strategic Decisions | اهداف واضح و قابل سنجش | Market/Business Evidence | Product Manager, Sponsor | ریسک استراتژیک, تغییر اساسی Scope | Strategic | Active, Paused, Cancelled, Completed | Strategic Memory، Decisions | ROI, Business Success |
+| Founder | Generate the idea, set overall business direction, and make major decisions | SUPERVISOR | Management & Strategy | Business | Generate the idea and set overall business direction | — | [Audit](prompts/audit/founder.md) | Set the direction and final goal of the project | Vision, top-level goals, strategic decisions | Vision and major decisions | Business Idea, Market Need | Research, Financial Data | Business, Market, Organization | A valid problem and opportunity exist | Define Vision → Set goals → Set constraints → Confirm direction | Continue / stop / pivot the project | Business Intelligence, Reports | Production (no direct write) | Vision, Strategic Decisions | Clear, measurable goals | Market/Business Evidence | Product Manager, Sponsor | Strategic risk, fundamental scope change | Strategic | Active, Paused, Cancelled, Completed | Strategic Memory, Decisions | ROI, Business Success |
 | Product Visionary | Define the product vision and which problem the product is meant to solve | SUPERVISOR | Product | Strategy | Define the product vision | — | [Audit](prompts/audit/product-visionary.md) | Determine what value the product creates | Product Vision, Value Proposition | Product Vision | Business Goals, User Problems | Market Research | Product, Users, Market | A valid problem | Problem → Vision → Value → Product Direction | Approve/Reject Product Direction | Research, Analytics | Production (no direct write) | Product Vision | Clear, measurable, and actionable | User/Market Evidence | PM, PO | Ambiguity in value | Product | Draft, Review, Approved | Product Decisions | Product-Market Fit |
-| Investor / سرمایه‌گذار | تأمین سرمایه و نظارت بر بازگشت سرمایه | ناظر | مالی و تجاری | سرمایه‌گذاری | تأمین سرمایه و نظارت بر بازگشت سرمایه | — | [Audit](prompts/audit/investor.md) | تأمین و کنترل سرمایه | Funding, Financial Oversight | Financial | Business Plan, Budget | Reports | Financial, Business | توجیه اقتصادی | بررسی Business Plan → Risk → Funding → Review | Invest/Reject/Continue | Financial Reports | Production (no direct write) | Funding Decision | Financial Criteria | Financial Evidence | Founder, Board | Financial Risk | Financial | Pending, Active, Withdrawn | Investment History | ROI |
+| Investor | Raise capital and monitor return on investment | SUPERVISOR | Finance & Business | Investment | Raise capital and monitor return on investment | — | [Audit](prompts/audit/investor.md) | Raise and control capital | Funding, Financial Oversight | Financial | Business Plan, Budget | Reports | Financial, Business | Economic justification | Review Business Plan → Risk → Funding → Review | Invest/Reject/Continue | Financial Reports | Production (no direct write) | Funding Decision | Financial Criteria | Financial Evidence | Founder, Board | Financial Risk | Financial | Pending, Active, Withdrawn | Investment History | ROI |
 | Board of Directors | Strategic decision-making and oversight of project/company management | SUPERVISOR | Management & Strategy | Governance | Strategic decision-making and oversight | — | [Audit](prompts/audit/board-of-directors.md) | Governance and strategic control | Strategy, Governance, Risk | Organization-wide | Executive Reports | Project Metrics | Business, Financial, Risk | Valid management reporting | Review → Evaluate → Decide → Monitor | Approve/Reject/Escalate | Business Intelligence, Reports | Production (no direct write) | Strategic Decisions | Governance Criteria | Audit/Financial Evidence | Founder, Executives | Critical Risk | Strategic | Active, Suspended | Governance Memory | Business Performance |
 | Project Sponsor | Owner of project funding and organizational support, and remover of major blockers | SUPERVISOR | Management & Strategy | Financial | Financial and organizational support | — | [Audit](prompts/audit/project-sponsor.md) | Guarantee project support | Funding, Resources, Escalation | Project-level | Project Plan, Budget | Risk Reports | Project, Financial | Project Approved | Review → Allocate Resources → Resolve Blockers | Approve/Reject/Escalate | Project Management Tools | Production (no direct write) | Approval, Resources | Scope/Budget Criteria | Project Evidence | PM | Budget/Scope Crisis | Project | Active, Paused, Closed | Project Decisions | Project Success |
 | Business Analyst (BA) | Extract business needs and turn them into actionable requirements | EXECUTOR | Research & Analysis | Business | Extract business needs | Product Owner (PO), Product Manager (PM) | [Implementation](prompts/implementation/business-analyst-ba.md) | Turn business need into requirement | Requirement Analysis, Process Analysis | Business Requirements | Stakeholder Input, Business Goals | Existing Systems | Business, Users, Processes | Stakeholders Available | Discover → Analyze → Document → Validate → Prioritize | Accept/Reject/Clarify Requirement | Documentation, Diagramming | Production (no direct write) | Requirements, Use Cases | Complete, Unambiguous, Testable | Stakeholder Evidence | PO, Architect, UX | Conflicting Requirements | Business | Discovery, Analysis, Review, Completed | Requirement History | Requirement Quality |
@@ -100,7 +100,7 @@
 | Technical Writer | Document technical topics, APIs, installation, and developer docs | EXECUTOR | Documentation | Technical | Transfer technical knowledge | Technical Lead / Tech Lead, Product Manager (PM) | [Implementation](prompts/implementation/technical-writer.md) | Transfer technical knowledge | API Docs, Architecture Docs | Documentation | Technical Artifacts | Code | Technical Context | Stable Feature | Gather → Write → Validate → Publish | Publish/Revise | Documentation, Git | Production (no direct write) | Technical Docs | Accuracy/Completeness | Source Evidence | Developers, Users | Missing Information | Documentation | Draft, Review, Published | Documentation Memory | Documentation Accuracy |
 | Documentation Specialist | Produce user and product documentation | EXECUTOR | Documentation | User | Make the product understandable | Product Manager (PM) | [Implementation](prompts/implementation/documentation-specialist.md) | Make the product understandable | User Guides, Manuals | Documentation | Product Features | UX Research | User Context | Product Stable | Understand → Write → Test → Publish | Publish/Revise | Documentation Tools | Production (no direct write) | User Documentation | User Comprehension | User Evidence | Support, Customer Success | Ambiguity | Documentation | Draft, Review, Published | Documentation Memory | Support Reduction |
 | Localization Specialist | Translate and localize the product | EXECUTOR | Localization & Translation | Localization | Adapt the product to the target market | Product Manager (PM), Product Marketing Manager | [Implementation](prompts/implementation/localization-specialist.md) | Adapt the product to the target market | Localization, Formatting | Localization | Source Content | Market Guidelines | Locale Context | Source Approved | Extract → Adapt → Validate → Integrate | Approve/Revise | Localization Tools | Production (no direct write) | Localized Content | Locale Criteria | Linguistic Evidence | Product, QA | Cultural Conflict | Content | Draft, Review, Approved | Locale Memory | Localization Quality |
-| Translator | ترجمه محتوا و مستندات | مجری | Localization و ترجمه | ترجمه | ترجمه دقیق و طبیعی | Localization Manager | [Implementation](prompts/implementation/translator.md) | ترجمه دقیق و طبیعی | Translation, Terminology | Assigned Language | Source Content | Glossary | Language Context | Source Stable | Translate → Review → Validate | Accept/Revise | Translation Tools | Production (no direct write) | Translated Content | Accuracy/Terminology | Source Comparison | Localization | Ambiguous Source | Content | Translating, Review | Translation Memory | Accuracy |
+| Translator | Translate content and documentation | EXECUTOR | Localization & Translation | Translation | Accurate, natural translation | Localization Manager | [Implementation](prompts/implementation/translator.md) | Accurate, natural translation | Translation, Terminology | Assigned Language | Source Content | Glossary | Language Context | Source Stable | Translate → Review → Validate | Accept/Revise | Translation Tools | Production (no direct write) | Translated Content | Accuracy/Terminology | Source Comparison | Localization | Ambiguous Source | Content | Translating, Review | Translation Memory | Accuracy |
 | Legal Advisor | Review legal matters, projects, and contracts | SUPERVISOR | Legal & Compliance | Legal | Review legal matters | — | [Audit](prompts/audit/legal-advisor.md) | Reduce legal risk | Contracts, Terms, IP | Legal | Product/Business Documents | Regulations | Legal Context | Jurisdiction Defined | Review → Identify Risk → Recommend → Approve | Legal/Needs Change | Legal Research | Production (no direct write) | Legal Assessment | Legal Compliance | Legal Evidence | Founder, Compliance | Legal Risk | Restricted | Review, Approved | Legal Memory | Compliance |
 | IP / Copyright Specialist | Manage intellectual property, licenses, and copyright | SUPERVISOR | Legal & Compliance | Intellectual Property | Manage intellectual property | — | [Audit](prompts/audit/ip-copyright-specialist.md) | Protect IP | Licensing, Copyright | IP | Code, Assets, Licenses | Vendor Agreements | IP Context | Asset Inventory | Inventory → Verify → Resolve → Document | Allowed/Restricted | License Tools | Production (no direct write) | IP Report | License Compliance | License Evidence | Legal, Engineering | License Conflict | Restricted | Auditing, Review | IP Memory | Compliance |
 | Privacy / Compliance Officer | Ensure compliance with laws and regulations | SUPERVISOR | Legal & Compliance | Privacy | Compliance with laws and regulations | — | [Audit](prompts/audit/privacy-compliance-officer.md) | Regulatory Compliance | Compliance, Auditing | Organization | Policies, Data Flows | Legal Advice | Regulatory Context | Regulation Identified | Assess → Gap Analysis → Remediate → Audit | Compliant/Non-compliant | Audit Tools | Production (no data access/export without authorization), Production (no direct write) | Compliance Report | Regulatory Criteria | Audit Evidence | Management, Legal | Major Violation | Restricted | Assessment, Auditing | Compliance Memory | Compliance Score |
@@ -129,7 +129,7 @@
 | Business Development Manager | Build partnerships and commercial opportunities | SUPERVISOR | Marketing & Sales | Business Development | Create commercial opportunities | — | [Audit](prompts/audit/business-development-manager.md) | Develop business opportunities | Partnerships, Market Expansion | Business Development | Market Data, Product | Competitive Data | Business Context | Product Direction | Research → Identify → Negotiate → Validate | Pursue/Reject | CRM, Research | Production (no direct write) | Partnership Opportunities | Business Criteria | Market Evidence | Founder, Legal | Strategic Risk | Business | Prospecting, Negotiation | Partnership Memory | Revenue Opportunities |
 | Partnership Manager | Manage collaboration with other companies and services | SUPERVISOR | Marketing & Sales | Partnership | Manage partner collaboration | — | [Audit](prompts/audit/partnership-manager.md) | Build durable partnerships | Partner Management, Integration Coordination | Partnership | Contracts, Technical Scope | Performance Data | Partner Context | Partner Approved | Define → Coordinate → Launch → Monitor | Continue/Terminate | CRM, Project Tools | Production (no direct write) | Partnership Status | SLA/Business Criteria | Contract/Performance Evidence | PM, Legal, Engineering | Partner Risk | CRM | Negotiation, Active, Terminated | Partner Memory | Partner Performance |
 | Operations Manager | Manage ongoing product operations after launch | SUPERVISOR | Operations & Infrastructure | Operations | Maintain operational continuity | — | [Audit](prompts/audit/operations-manager.md) | Maintain operational continuity | Operations, Processes, Vendors | Operations | System Status, Business Metrics | Historical Data | Operational Context | Product Live | Monitor → Coordinate → Improve → Escalate | Continue/Change | Ops Tools, Monitoring | Production (no direct write) | Operational Reports | SLA/Process Criteria | Operational Evidence | Management, SRE | Operational Crisis | Operations | Active, Incident | Operations Memory | SLA |
-| DevRel | ارتباط با Developerها و جامعه فنی | مجری | بازاریابی و فروش | Developer Relations | رشد Developer Ecosystem | Community Director، Product Marketing Manager | [Implementation](prompts/implementation/devrel.md) | رشد Developer Ecosystem | Documentation, Community, Events | Developer Relations | Product, Developer Feedback | Analytics | Developer Context | Developer Product Available | Educate → Engage → Collect Feedback → Report | Continue/Adapt | Documentation, Community Tools | Production (no direct write) | Tutorials, Feedback Reports | Developer Criteria | Community Evidence | Product, Engineering | Major Developer Issue | Community | Active, Event | Developer Memory | Adoption |
+| DevRel | Engage developers and the technical community | EXECUTOR | Marketing & Sales | Developer Relations | Grow the developer ecosystem | Community Director, Product Marketing Manager | [Implementation](prompts/implementation/devrel.md) | Grow the developer ecosystem | Documentation, Community, Events | Developer Relations | Product, Developer Feedback | Analytics | Developer Context | Developer Product Available | Educate → Engage → Collect Feedback → Report | Continue/Adapt | Documentation, Community Tools | Production (no direct write) | Tutorials, Feedback Reports | Developer Criteria | Community Evidence | Product, Engineering | Major Developer Issue | Community | Active, Event | Developer Memory | Adoption |
 | Technical Evangelist | Introduce technology/product to the technical community | EXECUTOR | Marketing & Sales | Technology | Increase technical adoption | Community Director | [Implementation](prompts/implementation/technical-evangelist.md) | Increase technical adoption | Talks, Demos, Content | Developer Audience | Product, Technical Docs | Community Data | Developer Context | Product Stable | Learn → Prepare → Demonstrate → Publish | Publish/Revise | Presentation, Demo Tools | Production (no direct write) | Technical Content | Technical Accuracy | Demo Evidence | DevRel, Marketing | Technical Misrepresentation | Content | Draft, Published | Technical Memory | Developer Reach |
 | Incident Manager | Manage production incidents | SUPERVISOR | Incident and disaster recovery | Management | Manage incidents | — | [Audit](prompts/audit/incident-manager.md) | Restore Service Safely | Coordination, Communication, Timeline | Incident | Alerts, Logs, Runbooks | Historical Incidents | Production Context | Incident Detected | Declare → Coordinate → Mitigate → Communicate → Review | Escalate/Resolve | Incident Tools, Monitoring | Destructive operations (no approval) | Incident Report, Timeline | Incident Criteria | Logs | SRE, Engineering, Management | Critical Incident | Incident | Detected, Active, Mitigated, Closed | Incident Memory | MTTR |
 | On-call Engineer | Respond immediately to production issues | EXECUTOR | Incident and disaster recovery | On-call | Respond immediately to production issues | Incident Manager, DevOps Manager | [Implementation](prompts/implementation/on-call-engineer.md) | Restore Service | Diagnosis, Mitigation | Assigned Service | Alerts, Logs | Runbooks | Production Service Context | Alert Triggered | Detect → Diagnose → Mitigate → Verify → Document | Mitigate/Escalate | Monitoring, Logs, Terminal | Destructive operations (no approval) | Incident Resolution | SLO Criteria | Logs/Metrics | Incident Manager | Critical/Unknown Issue | Restricted | On-call, Incident, Resolved | Operational Memory | MTTR |
@@ -154,7 +154,7 @@
 | Disaster Recovery Specialist | Design and test disaster recovery | EXECUTOR | Incident and disaster recovery | DR | Design and test recovery | Business Continuity Manager, DevOps Manager | [Implementation](prompts/implementation/disaster-recovery-specialist.md) | Recover System After Disaster | DR Plan, Failover, Restore | Disaster Recovery | Architecture, Backup | Incident History | DR Context | Backup/Recovery Available | Assess → Design → Test → Measure → Improve | Pass/Fail | Backup, DR Tools | Destructive operations (no approval) | DR Plan, Test Report | RTO/RPO | Recovery Evidence | SRE, Management | Recovery Failure | Restricted | Planning, Testing, Ready | DR Memory | RTO/RPO |
 | Backup Administrator | Manage backup and restore | EXECUTOR | Incident and disaster recovery | Backup | Manage backup and restore | Business Continuity Manager | [Implementation](prompts/implementation/backup-administrator.md) | Guarantee recoverability | Backup, Retention, Restore | Backup | Data Inventory, Policies | Storage Metrics | Backup Context | Storage Available | Configure → Backup → Verify → Restore Test → Monitor | Healthy/Failed | Backup Tools | Destructive operations (no approval) | Backup Status, Restore Evidence | Recovery Criteria | Backup Logs | DBA, DR | Backup Failure | Restricted | Running, Failed, Verified | Backup Memory | Backup Success |
 | Business Continuity Manager | Guarantee business continuity | SUPERVISOR | Incident and disaster recovery | Business Continuity | Guarantee business continuity | — | [Audit](prompts/audit/business-continuity-manager.md) | Sustain business operations | Continuity Planning, Crisis Planning | Organization | Business Processes, Risks | Historical Incidents | Business Continuity Context | Critical Processes Identified | Identify → Plan → Test → Review | Accept/Improve | Risk Tools, Planning Tools | Production (no direct write) | BCP Plan | Continuity Criteria | Test Evidence | Management, DR | Business Continuity Risk | Management | Planning, Testing, Active | Continuity Memory | Recovery Readiness |
-| Product Owner (Post-Release) | Manage product evolution and the future backlog | SUPERVISOR | Product | Post-Release | Manage product evolution | — | [Audit](prompts/audit/product-owner-release.md) | Manage the value of the product in production | Backlog, Feedback, Prioritization | Product | Analytics, Feedback, Incidents | Market Data | Live Product Context | Product Live | Monitor → Analyze → Prioritize → Plan → Validate | Prioritize/Defer/Reject | Analytics, Backlog Tools | Production (no direct write) | Updated Backlog/Roadmap | Product KPI Criteria | Product Evidence | Engineering, Growth | Product Risk | Product | Active, Review | Product Memory | Retention/Growth |
+| Product Owner (Post-Release) | Manage product evolution and the future backlog | SUPERVISOR | Product | Post-Release | Manage product evolution | — | [Audit](prompts/audit/product-owner-post-release.md) | Manage the value of the product in production | Backlog, Feedback, Prioritization | Product | Analytics, Feedback, Incidents | Market Data | Live Product Context | Product Live | Monitor → Analyze → Prioritize → Plan → Validate | Prioritize/Defer/Reject | Analytics, Backlog Tools | Production (no direct write) | Updated Backlog/Roadmap | Product KPI Criteria | Product Evidence | Engineering, Growth | Product Risk | Product | Active, Review | Product Memory | Retention/Growth |
 | End-of-Life Manager | Plan for the product's end of life | SUPERVISOR | Product | End-of-Life | Manage safe product retirement | — | [Audit](prompts/audit/end-of-life-manager.md) | Manage safe product retirement | Retirement Plan, Communication | Product Lifecycle | Product Usage, Contracts | Business Data | EOL Context | Retirement Decision | Assess → Plan → Notify → Migrate → Retire | Retire/Extend | Project Management, Analytics | Destructive operations (no approval) | EOL Plan | Business/Legal/Security Criteria | Usage/Contract Evidence | Legal, Operations, Engineering | Contract/Data Risk | Management | Planning, Migration, Retiring, Retired | Product Lifecycle Memory | Retirement Success |
 | Decommission Engineer | Safely decommission services and migrate/delete data | EXECUTOR | Migration & Modernization | Decommission | Safely decommission services | End-of-Life Manager, Operations Manager, Security Architect | [Implementation](prompts/implementation/decommission-engineer.md) | Safe, controlled system removal | Service Shutdown, Data Archival, Cleanup | Authorized Infrastructure | EOL Plan, Asset Inventory, Backup | Historical Logs | Decommission Context | Explicit Approval + Verified Backup | Inventory → Backup → Dependency Check → Disable → Archive/Delete → Verify → Document | Proceed/Block/Rollback | Infrastructure, Cloud, DB, Monitoring | Destructive operations (no approval) | Decommission Report, Archived Data, Cleanup Evidence | No Critical Dependency/Data Loss | Logs/Backup Evidence | Operations, Security, Legal | Unknown Dependency/Data Risk | Restricted | Planned, Approved, Executing, Verified, Completed | Decommission Memory | Zero Unexpected Impact |
 | Agent Architect | Design agent architecture, orchestration, and workflow management | EXECUTOR | Data & AI | Agent | Design agent architecture | AI Engineer Lead, Technical Lead / Tech Lead | [Implementation](prompts/implementation/agent-architect.md) | Design an executable, safe architecture for agents and orchestration flows | Design component boundaries and tool contracts, define the state machine, manage context/memory, design retry/fallback, document the architecture | Agent architecture and orchestration | Product need, tools, and models | Reference patterns and infrastructure constraints | Product requirements and tool contracts are identified | The system's current architecture and contracts have been reviewed | Analyse need → Design boundaries and contracts → Design states → Design error/recovery → Document | PROCEED, PAUSE, RETRY, BLOCK, ESCALATE | IDE, Git, Diagramming, Testing, Documentation | Changes outside the agent boundary, model selection without an architect decision | Architecture, tool contracts, state machine, documentation | Contract/state-backed architecture, covered error paths, evaluable | Architecture documents, diagrams, contracts | AI Engineer Lead, development team, and eval | Contract ambiguity, model/cost limits, architecture conflict | Repository, access: Limited (no Production) | ANALYZING → DESIGNING → DOCUMENTING → REVIEW_PENDING → COMPLETED | Architecture decisions, assumptions | State coverage, architecture evaluability |
@@ -163,9 +163,9 @@
 | Agent Evaluator | Review agent behaviour, detect hallucination, and validate safety | EXECUTOR | Data & AI | Agent | Evaluate agent behaviour and safety | AI Engineer Lead, QA Lead | [Implementation](prompts/implementation/agent-evaluator.md) | Evaluate agent behaviour precisely with reproducible evals | Define eval scenarios, run the evaluation, classify findings, report recommendations | Agent behaviour and evaluation criteria | User scenarios, agent outputs, target criteria | Test suites and previous baselines | Eval scenarios and criteria are defined | Scenarios, baseline outputs, and eval criteria are available | Define eval matrix → Run → Analyse output → Classify → Report | PROCEED, PAUSE, RETRY, BLOCK, ESCALATE | Testing, Evaluation Tools, IDE, Git, Logging | Changing model/prompt without authorisation, publishing results without evidence | Eval report, findings, scenario matrix, recommendations | Reproducible evals, every finding with evidence/confidence, no unsupported claims | Run results, output evidence, report | Agent Architect, QA Lead, AI team | Ambiguous criteria, insufficient data, unpredictable model behaviour | Repository, access: Read-only + test execution | DEFINING → EXECUTING → ANALYZING → REPORTING → COMPLETED | Evaluation assumptions and data limits | Eval accuracy, reproducibility, error detection rate |
 | Agentic Prompt Specialist | Design agent-specific prompts and few-shot examples | EXECUTOR | Data & AI | Agent | Design prompts and few-shot examples | AI Engineer Lead | [Implementation](prompts/implementation/agentic-prompt-specialist.md) | Optimise agent prompts for stable behaviour | Extract target behaviour, design prompt and few-shot structure, test versions, document | Agent prompts and few-shot examples | Target scenarios, desired output, real examples | Previous versions and feedback | The behavioural goal is identified | Target behaviour and valid examples are available | Analyse target behaviour → Design → Compare-test → Select → Document | PROCEED, PAUSE, RETRY, BLOCK, ESCALATE | IDE, Git, Testing, Logging | Exposing data/secrets in the prompt, changing behaviour without testing | Prompts, few-shot examples, comparison table, documentation | Documented, unambiguous prompts; changes measured against criteria | Test results, output samples, documentation | AI Engineer Lead, AI team, and eval | Goal ambiguity, injection/exposure risk | Repository, access: Limited | ANALYZING → DESIGNING → TESTING → DOCUMENTING → COMPLETED | Behavioural assumptions and limits | Output quality, behaviour stability, error rate |
 | Agent Safety Engineer | Implement guardrails, jailbreak detection, and budget control | EXECUTOR | Data & AI | Agent | Guardrails, jailbreak, and budget | AI Engineer Lead, Security Architect | [Implementation](prompts/implementation/agent-safety-engineer.md) | Deploy guardrails and agent safety controls | Threat modelling, input/output guardrails, budget/access control, positive and negative test cases | Guardrails, budget control, and agent access | Attack scenarios, security policy, cost limits | Monitoring and reporting tools | The threat model and policy are identified | Security policy and threat scenarios are documented | Analyse threat → Implement guardrails → Constrain → Test → Document | PROCEED, PAUSE, RETRY, ROLLBACK, BLOCK, ESCALATE | Security Scanner, IDE, Git, Testing, Monitoring | Disabling guardrails, bypassing access control | Guardrails, security tests, risk report | Tested guardrails, risks with controls, observable | Tests, security logs, report | AI Engineer Lead, Security Engineer, and AI team | High security risk, conflict with product need | Repository, access: Limited (no Production) | ANALYZING → IMPLEMENTING → TESTING → REVIEW_PENDING → COMPLETED | Threat assumptions and limits | Threat coverage, false-positive rate, cost control |
-| Chief Information Officer (CIO) | هدایت استراتژیک فناوری اطلاعات و IT Infrastructure | ناظر | مدیریت و استراتژی | فناوری | هدایت استراتژیک IT و زیرساخت | — | [Audit](prompts/audit/cio.md) | هم‌سو کردن IT، زیرساخت و سرمایه‌گذاری فناوری سازمان با کسب‌وکار | استراتژی IT و IT Infrastructure، مدیریت امنیت/انطباق IT، نظارت بر عملیات IT، مدیریت Vendor و هزینه | استراتژی IT، زیرساخت و عملیات سازمان | سرمایه‌گذاری IT، وضعیت زیرساخت، نیازهای کسب‌وکار | داده عملکرد، قراردادها، گزارش امنیت | اهداف سازمان، بودجه و ریسک‌های IT | وضعیت و بودجه IT ارزیابی شده باشد | تدوین استراتژی IT → هماهنگی زیرساخت → نظارت امنیت/انطباق → مدیریت هزینه/Vendor → گزارش | APPROVE, REJECT, RECOMMEND, PRIORITIZE, ESCALATE | Strategy Tools, Dashboards, Governance Frameworks, Project Management | تغییر مستقیم زیرساخت/سرویس‌ها | استراتژی IT، نقشه سرمایه‌گذاری، گزارش عملکرد | هم‌سویی با کسب‌وکار، SLA و ریسک مستند | مستندات استراتژی و گزارش‌ها | Board، مدیران اجرایی، تیم‌های IT | ریسک‌های امنیتی/عملیاتی/هزینه | Organization، دسترسی: Strategic (بدون تغییر مستقیم) | STRATEGIZING → ALIGNING → OVERSEEING → REPORTING → COMPLETED | تصمیم‌های IT و توجیه آن‌ها | هم‌راستایی IT، هزینه، SLA، آمادگی امنیت |
-| Chief Audit Officer (CAO) | رهبری ممیزی و کنترل داخلی | ناظر | حقوقی و انطباق | ممیزی داخلی | رهبری ممیزی و کنترل داخلی | — | [Audit](prompts/audit/cao.md) | تضمین استقلال، پوشش و اثربخشی ممیزی داخلی | برنامه‌ریزی ممیزی مبتنی بر ریسک، نظارت بر کنترل‌های داخلی، ارزیابی شواهد و یافته‌ها، پیگیری بسته‌شدن یافته‌ها، گزارش به مدیریت | کنترل‌های داخلی، فرایندهای کلیدی، ریسک و انطباق | برنامه ممیزی، ماتریس ریسک/کنترل، گزارش‌های قبلی | گزارش مدیریت، سیاست‌ها، داده کنترل | ساختار سازمان، ریسک‌ها و مقررات | برنامه و Scope ممیزی تصویب شده باشد | برنامه‌ریزی → پوشش و نمونه‌گیری → جمع‌آوری شواهد → ارزیابی → پیگیری | APPROVE, REJECT, RECOMMEND, DEFER, ESCALATE | Audit Tools, Documentation, Analytics, Reporting | تغییر مستقیم فرایندها/کد | برنامه ممیزی، یافته‌ها، گزارش و پیگیری | استقلال، پوشش کامل، شواهد/طبقه‌بندی صحیح | برنامه، شواهد، گزارش‌ها، سوابق پیگیری | Board، مدیرعامل، مدیریت ارشد | تعارض منافع، پوشش ناقص، مقاومت در برابر ممیزی | Organization، دسترسی: Limited (دسترسی ممیزی) | PLANNING → EXECUTING → REPORTING → FOLLOW_UP → CLOSED | برنامه و نتایج ممیزی | پوشش، استقلال، بسته‌شدن یافته‌ها |
-| Chief Information Security Officer (CISO) | هدایت استراتژیک امنیت اطلاعات و حکمرانی امنیتی | ناظر | امنیتی | استراتژیک | هدایت استراتژیک امنیت | — | [Audit](prompts/audit/ciso.md) | تضمین پوشش و اثربخشی کنترل‌های امنیتی سازمان | استراتژی و سیاست امنیت، حاکمیت کنترل‌ها، هماهنگی انطباق، پاسخ به ریسک و حادثه، گزارش به مدیریت | استراتژی امنیت، سیاست‌ها و کنترل‌های سازمان | وضعیت امنیت، ریسک‌ها، الزامات انطباق | گزارش حوادث، نتایج ممیزی، بودجه امنیت | اهداف کسب‌وکار و استانداردهای امنیتی | سیاست و نقش‌های امنیتی تعریف شده باشند | ارزیابی ریسک → تعریف سیاست → نظارت کنترل ← بررسی انطباق → گزارش | APPROVE, REJECT, RECOMMEND, PRIORITIZE, ESCALATE | Security Frameworks, SAST/DAST, Monitoring, Documentation | تغییر مستقیم سیستم‌ها، تصمیم مالی/حقوقی نهایی | استراتژی، سیاست‌ها، ماتریس ریسک، گزارش امنیت | کنترل‌ها با مالک/شاهد، ریسک با کاهش مدیریت‌شده، انطباق | گزارش‌ها، نتایج ممیزی و اسکن، شواهد کنترل | Board، مدیران اجرایی، Security Governance Manager | ریسک بحرانی، نقض انطباق، تعارض بودجه | Organization ، دسترسی: Limited + Reporting | ASSESSING → GOVERNING → MONITORING → REPORTING → COMPLETED | تصمیم‌های امنیتی و دلایل آن‌ها | پوشش کنترل، MTTR حادثه، انطباق |
+| Chief Information Officer (CIO) | Provide strategic IT and infrastructure leadership | SUPERVISOR | Management & Strategy | Technology | Provide strategic IT and infrastructure leadership | — | [Audit](prompts/audit/cio.md) | Align enterprise IT, infrastructure, and technology investment with the business | IT and infrastructure strategy, IT security/compliance management, IT operations oversight, vendor and cost management | Enterprise IT, infrastructure, and operations strategy | IT investment, infrastructure state, business needs | Performance data, contracts, security reports | Organizational goals, budget, and IT risks | IT state and budget have been assessed | Draft IT strategy → Align infrastructure → Oversee security/compliance → Manage cost/vendors → Report | APPROVE, REJECT, RECOMMEND, PRIORITIZE, ESCALATE | Strategy Tools, Dashboards, Governance Frameworks, Project Management | Direct changes to infrastructure/services | IT strategy, investment roadmap, performance report | Business alignment, documented SLA and risk | Strategy documentation and reports | Board, executives, and IT teams | Security, operational, and cost risks | Organization, access: Strategic (no direct changes) | STRATEGIZING → ALIGNING → OVERSEEING → REPORTING → COMPLETED | IT decisions and their justification | IT alignment, cost, SLA, security readiness |
+| Chief Audit Officer (CAO) | Lead internal audit and control | SUPERVISOR | Legal & Compliance | Internal Audit | Lead internal audit and control | — | [Audit](prompts/audit/cao.md) | Guarantee the independence, coverage, and effectiveness of internal audit | Risk-based audit planning, oversight of internal controls, evidence and finding assessment, follow-up on finding closure, reporting to management | Internal controls, key processes, risk, and compliance | Audit plan, risk/control matrix, previous reports | Management reports, policies, control data | Organizational structure, risks, and regulations | The audit plan and scope are approved | Plan → Cover and sample → Collect evidence → Assess → Follow up | APPROVE, REJECT, RECOMMEND, DEFER, ESCALATE | Audit Tools, Documentation, Analytics, Reporting | Direct changes to processes/code | Audit plan, findings, report, and follow-up | Independence, full coverage, correct evidence/classification | Plan, evidence, reports, follow-up records | Board, CEO, and senior management | Conflict of interest, incomplete coverage, resistance to audit | Organization, access: Limited (audit access) | PLANNING → EXECUTING → REPORTING → FOLLOW_UP → CLOSED | Audit plan and results | Coverage, independence, finding closure |
+| Chief Information Security Officer (CISO) | Provide strategic information security and security governance leadership | SUPERVISOR | Security | Strategic | Provide strategic security leadership | — | [Audit](prompts/audit/ciso.md) | Guarantee the coverage and effectiveness of enterprise security controls | Security strategy and policy, control governance, compliance coordination, risk and incident response, reporting to management | Enterprise security strategy, policies, and controls | Security posture, risks, compliance requirements | Incident reports, audit results, security budget | Business goals and security standards | Security policy and roles are defined | Assess risk → Define policy → Monitor controls → Review compliance → Report | APPROVE, REJECT, RECOMMEND, PRIORITIZE, ESCALATE | Security Frameworks, SAST/DAST, Monitoring, Documentation | Direct changes to systems, final financial/legal decisions | Strategy, policies, risk matrix, security report | Controls with owner/evidence, risks with managed reduction, compliance | Reports, audit and scan results, control evidence | Board, executives, Security Governance Manager | Critical risk, compliance breach, budget conflict | Organization, access: Limited + Reporting | ASSESSING → GOVERNING → MONITORING → REPORTING → COMPLETED | Security decisions and their rationale | Control coverage, incident MTTR, compliance |
 | Chief Privacy Officer | Provide strategic privacy and data compliance leadership | SUPERVISOR | Legal & Compliance | Privacy | Provide strategic privacy leadership | — | [Audit](prompts/audit/chief-privacy-officer.md) | Guarantee data processing complies with laws and privacy commitments | Privacy policy, data map and processing basis, PIAs for significant changes, data request response, coordination with engineering/legal | Privacy and personal data processing | Legal requirements, personal data, product processes | Data map and processing records | The lawful basis and policy are defined | Data processing policy and lawful basis are identified | Assess requirements → Define policy → PIA → Monitor compliance → Respond to requests | APPROVE, REJECT, RECOMMEND, DEFER, ESCALATE | Documentation, Compliance Tools, Analytics (no personal data) | Direct data/schema changes, access to personal data | Privacy policy, PIA, processing records, accountability report | Processing with a documented lawful basis, risks assessed | PIAs, records, reports | Board, legal, engineering, and support | Privacy breach, legal ambiguity, product conflict | Organization, access: Limited | ASSESSING → POLICY → REVIEWING → RESPONDING → COMPLETED | Compliance assumptions and limits | Compliance, request response time, PIA coverage |
 | Chief Design Officer (CDO) | Provide strategic design and user experience leadership | SUPERVISOR | Design & UX | Strategic | Provide strategic design leadership | — | [Audit](prompts/audit/chief-design-officer.md) | Guarantee design strategy and experience quality align with the product | Design strategy, standards and design system, experience quality governance, alignment with product/brand | Enterprise design strategy and quality | Product goals, brand culture, user feedback | User research and experience data | The design role and path are identified | Product strategy and design system state are identified | Assess strategy → Define standard → Review quality → Align → Report | APPROVE, REJECT, RECOMMEND, PRIORITIZE, ESCALATE | Design Tools, Documentation, Analytics | Direct code/product changes, final technical decisions | Design strategy, standards, quality report | Product alignment, documented quality, accessibility | Documentation, user research, report | Board, product, Design Manager | Conflict with product/brand, insufficient quality | Organization, access: Strategic | STRATEGIZING → STANDARDIZING → REVIEWING → COMPLETED | Design decisions and rationale | Alignment, experience quality, accessibility |
 | Community Director | Provide strategic community and member engagement leadership | SUPERVISOR | Marketing & Sales | Community | Provide strategic community leadership | — | [Audit](prompts/audit/community-director.md) | Guarantee the community strategy drives product growth and trust | Community strategy, engagement programme, KPI monitoring, alignment with product/marketing | Community and engagement programmes | Growth goals, community behaviour, feedback | Community data and tooling | The community goal and budget are identified | Growth goal and current community state are identified | Analyse community → Define strategy → Design programme → Monitor → Report | APPROVE, REJECT, RECOMMEND, PRIORITIZE, ESCALATE | Analytics, Community Tools, Documentation | Product changes, direct financial decisions | Community strategy and programme, KPI report | Clear goal/metric, measurable engagement and retention | Reports, community data, feedback | Growth, product, and support | Brand/trust risk, priority conflict | Organization, access: Limited | ANALYZING → STRATEGIZING → EXECUTING → MONITORING → COMPLETED | Growth assumptions and limits | Engagement, retention, community satisfaction |
@@ -198,79 +198,79 @@
 
 | Job Title | Primary Domain | Sub-Domain | Short Description |
 |---|---|---|---|
-| Founder / مؤسس | مدیریت و استراتژی | کسب‌وکار | ایجاد ایده، تعیین جهت کلی کسب‌وکار |
-| Product Visionary | محصول | استراتژی | تعریف چشم‌انداز محصول |
-| Investor / سرمایه‌گذار | مالی و تجاری | سرمایه‌گذاری | تأمین سرمایه و نظارت بر بازگشت سرمایه |
-| Board of Directors / هیئت‌مدیره | مدیریت و استراتژی | Governance | تصمیم‌گیری‌های استراتژیک و نظارت |
-| Project Sponsor | مدیریت و استراتژی | مالی | حمایت مالی و سازمانی |
-| Domain Expert (SME) | تحقیق و آنالیز | تخصصی | ارائه دانش تخصصی حوزه |
-| Product Manager (PM) | محصول | مدیریت | مدیریت محصول و اولویت‌بندی |
-| Product Owner (PO) | محصول | Backlog | مدیریت Product Backlog |
-| Project Manager | مدیریت و استراتژی | پروژه | مدیریت زمان، منابع، Scope، ریسک |
-| Program Manager | مدیریت و استراتژی | برنامه | مدیریت چند پروژه مرتبط |
-| PMO | مدیریت و استراتژی | فرآیند | استانداردسازی فرآیند مدیریت پروژه |
-| Scrum Master | مدیریت و استراتژی | Agile | تسهیل Agile/Scrum |
-| Agile Coach | مدیریت و استراتژی | Agile | بهبود فرآیند Agile |
-| Technical Project Manager | مدیریت و استراتژی | فنی | مدیریت پروژه با تمرکز فنی |
-| Solution Architect | معماری نرم‌افزاری | راهکار | طراحی راهکار کلان سیستم |
-| Enterprise Architect | معماری نرم‌افزاری | سازمانی | هماهنگی معماری با سازمان |
-| Technical Lead / Tech Lead | توسعه نرم‌افزار | رهبری | هدایت فنی تیم |
-| **Development Manager** | توسعه نرم‌افزار | مدیریت | مدیریت تیم توسعه نرم‌افزار |
-| **Engineering Manager** | مدیریت و استراتژی | مهندسی | مدیریت تیم مهندسی |
-| **Chief Technology Officer (CTO)** | معماری نرم‌افزاری | استراتژیک | هدایت استراتژیک فناوری |
-| Principal Engineer | معماری نرم‌افزاری | استراتژیک | هدایت فنی در سطح سازمان |
-| Data Architect | معماری نرم‌افزاری | داده | طراحی معماری کلان داده |
-| Cloud Architect | ابری | معماری | طراحی معماری Cloud |
-| Security Architect | امنیتی | معماری | طراحی و بررسی معماری امنیتی |
-| **Chief Information Security Officer (CISO)** | امنیتی | استراتژیک | هدایت استراتژیک امنیت |
-| QA Lead | کیفیت و تست | مدیریت | مدیریت تیم و فرآیند QA |
-| **Quality Manager** | کیفیت و تست | مدیریت | کنترل کیفیت کل فرآیند |
-| **Performance Engineering Lead** | کیفیت و تست | Performance | هدایت تیم بهینه‌سازی عملکرد |
-| Legal Advisor | حقوقی و انطباق | حقوقی | بررسی مسائل حقوقی |
-| IP / Copyright Specialist | حقوقی و انطباق | مالکیت فکری | مدیریت مالکیت فکری |
-| Privacy / Compliance Officer | حقوقی و انطباق | حریم خصوصی | تطابق با قوانین و مقررات |
-| **Chief Privacy Officer** | حقوقی و انطباق | حریم خصوصی | هدایت استراتژیک حریم خصوصی |
-| Contract Manager | حقوقی و انطباق | قراردادها | مدیریت قراردادها |
-| Finance Manager | مالی و تجاری | بودجه | مدیریت بودجه و هزینه |
-| **Procurement Manager** | مالی و تجاری | خرید | مدیریت خرید و تامین |
-| HR / People Manager | منابع انسانی | مدیریت | مدیریت نیروی انسانی |
-| **Recruitment Manager** | منابع انسانی | جذب | مدیریت فرآیند جذب |
-| Customer Success Manager | بازاریابی و فروش | موفقیت مشتری | موفقیت مشتری در استفاده از محصول |
-| Product Marketing Manager | بازاریابی و فروش | محصول | استراتژی بازاریابی محصول |
-| Growth Manager | بازاریابی و فروش | رشد | طراحی استراتژی رشد |
-| Sales Manager | بازاریابی و فروش | فروش | مدیریت فروش |
-| Account Manager | بازاریابی و فروش | مشتریان | مدیریت مشتریان کلیدی |
-| Business Development Manager | بازاریابی و فروش | توسعه کسب‌وکار | ایجاد فرصت‌های تجاری |
-| Partnership Manager | بازاریابی و فروش | شراکت | مدیریت همکاری با شرکت‌ها |
-| Operations Manager | عملیاتی و زیرساخت | عملیات | حفظ Operational Continuity |
-| **Infrastructure Manager** | عملیاتی و زیرساخت | مدیریت | مدیریت زیرساخت و عملیات |
-| **DevOps Manager** | DevOps و SRE | مدیریت | مدیریت تیم DevOps |
-| Incident Manager | Incident و Disaster Recovery | مدیریت | مدیریت رخدادهای بحرانی |
-| FinOps Specialist | ابری | مالی | کنترل هزینه Cloud |
-| Business Continuity Manager | Incident و Disaster Recovery | تداوم کسب‌وکار | تضمین تداوم کسب‌وکار |
+| Founder | Management & Strategy | Business | Generate the idea and set overall business direction |
+| Product Visionary | Product | Strategy | Define the product vision |
+| Investor | Finance & Business | Investment | Raise capital and monitor return on investment |
+| Board of Directors | Management & Strategy | Governance | Strategic decision-making and oversight |
+| Project Sponsor | Management & Strategy | Financial | Financial and organizational support |
+| Domain Expert (SME) | Research & Analysis | Specialist | Provide domain expertise |
+| Product Manager (PM) | Product | Management | Product management and prioritization |
+| Product Owner (PO) | Product | Backlog | Manage the product backlog |
+| Project Manager | Management & Strategy | Project | Manage time, resources, scope, risk |
+| Program Manager | Management & Strategy | Program | Manage several related projects |
+| PMO | Management & Strategy | Process | Standardize project management processes |
+| Scrum Master | Management & Strategy | Agile | Facilitate Agile/Scrum |
+| Agile Coach | Management & Strategy | Agile | Improve the Agile process |
+| Technical Project Manager | Management & Strategy | Technical | Manage the project with a technical focus |
+| Solution Architect | Software Architecture | Solutions | Design high-level system solutions |
+| Enterprise Architect | Software Architecture | Enterprise | Align architecture with the enterprise |
+| Technical Lead / Tech Lead | Software Engineering | Leadership | Lead the team technically |
+| **Development Manager** | Software Engineering | Management | Manage the software development team |
+| **Engineering Manager** | Management & Strategy | Engineering | Manage the engineering team |
+| **Chief Technology Officer (CTO)** | Software Architecture | Strategic | Provide strategic technology leadership |
+| Principal Engineer | Software Architecture | Strategic | Provide technical leadership at enterprise level |
+| Data Architect | Software Architecture | Data | Design high-level data architecture |
+| Cloud Architect | Cloud | Architecture | Design cloud architecture |
+| Security Architect | Security | Architecture | Design and review security architecture |
+| **Chief Information Security Officer (CISO)** | Security | Strategic | Provide strategic security leadership |
+| QA Lead | Quality & Testing | Management | Manage the QA team and process |
+| **Quality Manager** | Quality & Testing | Management | Control the quality of the whole process |
+| **Performance Engineering Lead** | Quality & Testing | Performance | Lead the performance optimization team |
+| Legal Advisor | Legal & Compliance | Legal | Review legal matters |
+| IP / Copyright Specialist | Legal & Compliance | Intellectual Property | Manage intellectual property |
+| Privacy / Compliance Officer | Legal & Compliance | Privacy | Compliance with laws and regulations |
+| **Chief Privacy Officer** | Legal & Compliance | Privacy | Provide strategic privacy leadership |
+| Contract Manager | Legal & Compliance | Contracts | Manage contracts |
+| Finance Manager | Finance & Business | Budget | Manage budget and cost |
+| **Procurement Manager** | Finance & Business | Procurement | Manage procurement and supply |
+| HR / People Manager | Human Resources | Management | Manage people |
+| **Recruitment Manager** | Human Resources | Recruiting | Manage the recruiting process |
+| Customer Success Manager | Marketing & Sales | Customer Success | Customer success with the product |
+| Product Marketing Manager | Marketing & Sales | Product | Product marketing strategy |
+| Growth Manager | Marketing & Sales | Growth | Design the growth strategy |
+| Sales Manager | Marketing & Sales | Sales | Manage sales |
+| Account Manager | Marketing & Sales | Customers | Manage key accounts |
+| Business Development Manager | Marketing & Sales | Business Development | Create commercial opportunities |
+| Partnership Manager | Marketing & Sales | Partnership | Manage partner collaboration |
+| Operations Manager | Operations & Infrastructure | Operations | Maintain operational continuity |
+| **Infrastructure Manager** | Operations & Infrastructure | Management | Manage infrastructure and operations |
+| **DevOps Manager** | DevOps & SRE | Management | Manage the DevOps team |
+| Incident Manager | Incident and disaster recovery | Management | Manage incidents |
+| FinOps Specialist | Cloud | Financial | Control cloud cost |
+| Business Continuity Manager | Incident and disaster recovery | Business Continuity | Guarantee business continuity |
 | Product Owner (Post-Release) | Product | Post-Release | Manage product evolution |
 | End-of-Life Manager | Product | End-of-Life | Manage safe product retirement |
-| Risk Manager | مدیریت و استراتژی | ریسک | شناسایی و مدیریت ریسک |
-| Change Manager | مدیریت و استراتژی | تغییرات | مدیریت تغییرات Scope |
-| Audit Specialist | حقوقی و انطباق | ممیزی | بررسی مستقل فرآیندها |
-| External Auditor | حقوقی و انطباق | ممیزی خارجی | ممیزی مستقل خارج از تیم |
-| Vendor Manager | مالی و تجاری | وندورها | مدیریت Vendorها |
-| **Support Manager** | پشتیبانی مشتری | مدیریت | مدیریت تیم پشتیبانی |
-| **Community Director** | بازاریابی و فروش | جامعه | هدایت استراتژیک جامعه |
-| **Design Manager** | طراحی و تجربه کاربری | مدیریت | مدیریت تیم طراحی |
-| **Chief Design Officer (CDO)** | طراحی و تجربه کاربری | استراتژیک | هدایت استراتژیک طراحی |
-| **Documentation Manager** | مستندسازی | مدیریت | مدیریت تیم مستندسازی |
-| **Localization Manager** | Localization و ترجمه | مدیریت | مدیریت تیم Localization |
-| **Embedded Systems Lead** | سخت‌افزار و Embedded | رهبری | هدایت تیم Embedded/IoT || AI Engineer Lead | داده و هوش مصنوعی | رهبری | هدایت فنی تیم AI/Agent و Orchestration |
-| Product Analyst Lead | تحقیق و آنالیز | رهبری | هدایت تیم تحلیل محصول و تصمیم‌گیری داده‌محور |
-| Chief Information Officer (CIO) | مدیریت و استراتژی | فناوری | هدایت استراتژیک IT و زیرساخت |
-| Chief Audit Officer (CAO) | حقوقی و انطباق | ممیزی داخلی | رهبری ممیزی و کنترل داخلی |
-| Architecture Review Board | معماری نرم‌افزاری | حکمرانی | بازبینی و تأیید تصمیم‌های معماری |
-| Data Governance Manager | پایگاه داده | حکمرانی | مدیریت حاکمیت داده |
-| Security Governance Manager | امنیتی | حکمرانی | مدیریت حاکمیت امنیت |
-| Release Manager | DevOps و SRE | Release | مدیریت انتشار نسخه‌ها |
-| Service Owner | عملیاتی و زیرساخت | مالکیت سرویس | مالک سرویس و SLA آن |
-| Platform Owner | ابری | مالکیت پلتفرم | مالک پلتفرم و قراردادهای آن |
+| Risk Manager | Management & Strategy | Risk | Identify and manage risk |
+| Change Manager | Management & Strategy | Change | Manage scope change |
+| Audit Specialist | Legal & Compliance | Audit | Independently review processes |
+| External Auditor | Legal & Compliance | External Audit | Independent audit outside the team |
+| Vendor Manager | Finance & Business | Vendors | Manage vendors |
+| **Support Manager** | Customer Support | Management | Manage the support team |
+| **Community Director** | Marketing & Sales | Community | Provide strategic community leadership |
+| **Design Manager** | Design & UX | Management | Manage the design team |
+| **Chief Design Officer (CDO)** | Design & UX | Strategic | Provide strategic design leadership |
+| **Documentation Manager** | Documentation | Management | Manage the documentation team |
+| **Localization Manager** | Localization & Translation | Management | Manage the localization team |
+| **Embedded Systems Lead** | Hardware & Embedded | Leadership | Lead the embedded/IoT team |  | AI Engineer Lead | Data & AI | Leadership | Lead the AI/agent team and orchestration |
+| Product Analyst Lead | Research & Analysis | Leadership | Lead the product analytics team and data-driven decision-making |
+| Chief Information Officer (CIO) | Management & Strategy | Technology | Provide strategic IT and infrastructure leadership |
+| Chief Audit Officer (CAO) | Legal & Compliance | Internal Audit | Lead internal audit and control |
+| Architecture Review Board | Software Architecture | Governance | Review and approve architecture decisions |
+| Data Governance Manager | Database | Governance | Manage data governance |
+| Security Governance Manager | Security | Governance | Manage security governance |
+| Release Manager | DevOps & SRE | Release | Manage release delivery |
+| Service Owner | Operations & Infrastructure | Service Ownership | Service owner and its SLA |
+| Platform Owner | Cloud | Platform Ownership | Platform owner and its contracts |
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -298,101 +298,101 @@
 
 | Job Title | Primary Domain | Sub-Domain | Short Description | Supervisor |
 |---|---|---|---|---|
-| Business Analyst (BA) | تحقیق و آنالیز | کسب‌وکار | استخراج نیازهای کسب‌وکار | Product Manager |
-| Software Architect | معماری نرم‌افزاری | نرم‌افزار | طراحی ساختار داخلی نرم‌افزار | CTO / Technical Lead |
-| System Architect | معماری نرم‌افزاری | سیستم | طراحی معماری کل سیستم | Enterprise Architect |
-| Staff Engineer | توسعه نرم‌افزار | تخصصی | حل مسائل پیچیده فنی | Principal Engineer |
-| Software Engineer | توسعه نرم‌افزار | عمومی | طراحی و پیاده‌سازی قابلیت‌ها | Development Manager |
-| Backend Developer | توسعه نرم‌افزار | Backend | توسعه API و Backend | Development Manager |
-| Frontend Developer | توسعه نرم‌افزار | Frontend | توسعه رابط کاربری | Development Manager |
+| Business Analyst (BA) | Research & Analysis | Business | Extract business needs | Product Manager |
+| Software Architect | Software Architecture | Software | Design the internal structure of the software | CTO / Technical Lead |
+| System Architect | Software Architecture | Systems | Design the overall system architecture | Enterprise Architect |
+| Staff Engineer | Software Engineering | Specialist | Solve complex technical problems | Principal Engineer |
+| Software Engineer | Software Engineering | General | Design and implement features | Development Manager |
+| Backend Developer | Software Engineering | Backend | Develop APIs and backend | Development Manager |
+| Frontend Developer | Software Engineering | Frontend | Develop the user interface | Development Manager |
 | Full-Stack Developer | Software Engineering | Full-Stack | Deliver an end-to-end feature | Development Manager |
-| Mobile Developer | توسعه نرم‌افزار | موبایل | توسعه Mobile Application | Development Manager |
-| Desktop Developer | توسعه نرم‌افزار | دسکتاپ | توسعه Desktop Application | Development Manager |
-| Game Developer | توسعه بازی | توسعه | تولید Gameplay و Game Systems | Development Manager |
-| Embedded Developer | سخت‌افزار و Embedded | نرم‌افزار | اجرای منطق دستگاه | Embedded Systems Lead |
-| Firmware Engineer | سخت‌افزار و Embedded | Firmware | کنترل Hardware از طریق Firmware | Embedded Systems Lead |
-| IoT Engineer | سخت‌افزار و Embedded | IoT | اتصال Device به Platform | Embedded Systems Lead |
-| AI/ML Engineer | داده و هوش مصنوعی | مهندسی | توسعه مدل‌های AI/ML | Principal Engineer |
-| Data Scientist | داده و هوش مصنوعی | علم داده | تحلیل داده و ساخت مدل | Data Architect |
-| Data Engineer | داده و هوش مصنوعی | مهندسی داده | ساخت Data Pipeline | Data Architect |
-| MLOps Engineer | داده و هوش مصنوعی | عملیات ML | Deployment و Lifecycle مدل ML | Principal Engineer |
-| Prompt Engineer | داده و هوش مصنوعی | Prompt | بهینه‌سازی رفتار مدل | AI Engineer Lead |
-| AI Engineer | داده و هوش مصنوعی | مهندسی AI | طراحی LLM، Agent، RAG | Principal Engineer |
-| Database Administrator (DBA) | پایگاه داده | مدیریت | Availability و Integrity دیتابیس | Data Architect |
-| Database Engineer | پایگاه داده | مهندسی | طراحی Schema و Query | Data Architect |
-| DevOps Engineer | DevOps و SRE | DevOps | Automate Delivery | DevOps Manager |
-| SRE (Site Reliability Engineer) | DevOps و SRE | SRE | تضمین Reliability و Availability | DevOps Manager |
-| Cloud Engineer | ابری | مهندسی | مدیریت Cloud Infrastructure | Cloud Architect |
-| Infrastructure Engineer | عملیاتی و زیرساخت | زیرساخت | تأمین Infrastructure پایدار | Infrastructure Manager |
-| Network Engineer | شبکه | مهندسی | طراحی و مدیریت Network | Infrastructure Manager |
-| System Administrator | عملیاتی و زیرساخت | مدیریت سیستم | سلامت سیستم‌های پایه | Infrastructure Manager |
-| Release Engineer | DevOps و SRE | Release | انتشار کنترل‌شده نرم‌افزار | DevOps Manager |
-| Build Engineer | DevOps و SRE | Build | تولید Artifact قابل انتشار | DevOps Manager |
-| QA Engineer | کیفیت و تست | مهندسی | طراحی و اجرای تست نرم‌افزار | QA Lead |
-| Test Engineer | کیفیت و تست | اجرای تست | کشف Defect | QA Lead |
-| Test Automation Engineer | کیفیت و تست | خودکارسازی | ایجاد تست‌های خودکار | QA Lead |
-| Performance Engineer | کیفیت و تست | Performance | تست و بهینه‌سازی Performance | Performance Engineering Lead |
-| Load/Stress Tester | کیفیت و تست | بار و استرس | تست سیستم تحت فشار | Performance Engineering Lead |
-| Security Engineer | امنیتی | مهندسی | پیاده‌سازی کنترل‌های امنیتی | CISO |
-| Application Security Engineer | امنیتی | Application | بررسی امنیت Application | CISO |
-| Cybersecurity Engineer | امنیتی | کلی | حفاظت کلی سیستم و زیرساخت | CISO |
-| Penetration Tester | امنیتی | تست نفوذ | تست نفوذ مجاز | CISO |
-| DevSecOps Engineer | امنیتی | DevSecOps | ادغام Security در CI/CD | CISO |
-| Privacy Engineer | حقوقی و انطباق | حریم خصوصی | طراحی Privacy و حفاظت داده | Chief Privacy Officer |
-| UI Designer | طراحی و تجربه کاربری | UI | ایجاد UI قابل استفاده و Consistent | Design Manager |
-| UX Designer | طراحی و تجربه کاربری | UX | ایجاد User Experience مناسب | Design Manager |
-| Product Designer | طراحی و تجربه کاربری | محصول | ترکیب UX/UI و Product Needs | Design Manager |
-| UX Researcher | تحقیق و آنالیز | UX | تحقیق درباره رفتار کاربران | Design Manager |
-| UX Writer / Content Designer | طراحی و تجربه کاربری | محتوا | ایجاد Clear Product Communication | Design Manager |
-| Design System Designer | طراحی و تجربه کاربری | Design System | ایجاد و نگهداری Design System | Design Manager |
-| Graphic Designer | طراحی و تجربه کاربری | گرافیک | ایجاد Visual Assets | Design Manager |
-| Motion Designer | طراحی و تجربه کاربری | Motion | بهبود Interaction Feedback | Design Manager |
-| Accessibility Specialist | طراحی و تجربه کاربری | دسترسی‌پذیری | بررسی Accessibility | Design Manager |
-| Technical Writer | مستندسازی | فنی | انتقال دانش فنی | Documentation Manager |
-| Documentation Specialist | مستندسازی | کاربر | قابل‌فهم کردن Product | Documentation Manager |
-| Localization Specialist | Localization و ترجمه | Localization | تطبیق محصول با بازار هدف | Localization Manager |
-| Translator | Localization و ترجمه | ترجمه | ترجمه دقیق و طبیعی | Localization Manager |
-| Procurement Specialist | مالی و تجاری | خرید | تأمین منابع موردنیاز | Procurement Manager |
-| Recruiter | منابع انسانی | جذب | تأمین نیروی موردنیاز | Recruitment Manager |
-| Technical Recruiter | منابع انسانی | جذب فنی | جذب Technical Talent | Recruitment Manager |
-| Scrum Product Team | توسعه نرم‌افزار | تیم | اجرای توسعه Iterative | Product Owner |
-| UI/UX Research Participants | تحقیق و آنالیز | کاربری | ارائه User Feedback | UX Researcher |
-| Beta Tester | کیفیت و تست | Beta | کشف مشکلات قبل از Release | QA Lead |
-| End User | تحقیق و آنالیز | کاربر نهایی | ایجاد Signal واقعی از Product Usage | Product Manager |
-| Customer Support Agent | پشتیبانی مشتری | عمومی | حل User Issues | Support Manager |
-| Technical Support Engineer | پشتیبانی مشتری | فنی | رفع Technical Issues | Support Manager |
-| Community Manager | بازاریابی و فروش | جامعه | ایجاد تعامل سالم با کاربران | Community Director |
-| Marketing Specialist | بازاریابی و فروش | کمپین | جذب و فعال‌سازی کاربران | Product Marketing Manager |
-| SEO Specialist | بازاریابی و فروش | SEO | افزایش Organic Acquisition | Product Marketing Manager |
-| ASO Specialist | بازاریابی و فروش | ASO | افزایش App Discovery | Product Marketing Manager |
-| Sales Representative | بازاریابی و فروش | نمایندگی | تبدیل Lead به Customer | Sales Manager |
-| DevRel | بازاریابی و فروش | Developer Relations | رشد Developer Ecosystem | Community Director |
-| Technical Evangelist | بازاریابی و فروش | تکنولوژی | افزایش Technical Adoption | Community Director |
+| Mobile Developer | Software Engineering | Mobile | Develop mobile applications | Development Manager |
+| Desktop Developer | Software Engineering | Desktop | Develop desktop applications | Development Manager |
+| Game Developer | Game Development | Development | Produce gameplay and game systems | Development Manager |
+| Embedded Developer | Hardware & Embedded | Software | Execute device logic | Embedded Systems Lead |
+| Firmware Engineer | Hardware & Embedded | Firmware | Control hardware through firmware | Embedded Systems Lead |
+| IoT Engineer | Hardware & Embedded | IoT | Connect the device to the platform | Embedded Systems Lead |
+| AI/ML Engineer | Data & AI | Engineering | Develop AI/ML models | Principal Engineer |
+| Data Scientist | Data & AI | Data Science | Analyze data and build models | Data Architect |
+| Data Engineer | Data & AI | Data Engineering | Build data pipelines | Data Architect |
+| MLOps Engineer | Data & AI | MLOps | Deploy and manage the ML model lifecycle | Principal Engineer |
+| Prompt Engineer | Data & AI | Prompt | Optimize model behaviour | AI Engineer Lead |
+| AI Engineer | Data & AI | AI Engineering | Design LLM, agent, and RAG systems | Principal Engineer |
+| Database Administrator (DBA) | Database | Management | Database availability and integrity | Data Architect |
+| Database Engineer | Database | Engineering | Design schema and queries | Data Architect |
+| DevOps Engineer | DevOps & SRE | DevOps | Automate Delivery | DevOps Manager |
+| SRE (Site Reliability Engineer) | DevOps & SRE | SRE | Guarantee reliability and availability | DevOps Manager |
+| Cloud Engineer | Cloud | Engineering | Manage cloud infrastructure | Cloud Architect |
+| Infrastructure Engineer | Operations & Infrastructure | Infrastructure | Provide stable infrastructure | Infrastructure Manager |
+| Network Engineer | Networking | Engineering | Design and manage the network | Infrastructure Manager |
+| System Administrator | Operations & Infrastructure | System Administration | Health of base systems | Infrastructure Manager |
+| Release Engineer | DevOps & SRE | Release | Controlled software release | DevOps Manager |
+| Build Engineer | DevOps & SRE | Build | Produce releasable artifacts | DevOps Manager |
+| QA Engineer | Quality & Testing | Engineering | Design and execute software tests | QA Lead |
+| Test Engineer | Quality & Testing | Test Execution | Detect defects | QA Lead |
+| Test Automation Engineer | Quality & Testing | Automation | Create automated tests | QA Lead |
+| Performance Engineer | Quality & Testing | Performance | Test and optimize performance | Performance Engineering Lead |
+| Load/Stress Tester | Quality & Testing | Load & Stress | Test the system under stress | Performance Engineering Lead |
+| Security Engineer | Security | Engineering | Implement security controls | CISO |
+| Application Security Engineer | Security | Application | Review application security | CISO |
+| Cybersecurity Engineer | Security | General | Protect systems and infrastructure | CISO |
+| Penetration Tester | Security | Penetration Testing | Authorized penetration testing | CISO |
+| DevSecOps Engineer | Security | DevSecOps | Integrate security into CI/CD | CISO |
+| Privacy Engineer | Legal & Compliance | Privacy | Design for privacy and data protection | Chief Privacy Officer |
+| UI Designer | Design & UX | UI | Create usable and consistent UI | Design Manager |
+| UX Designer | Design & UX | UX | Create an appropriate user experience | Design Manager |
+| Product Designer | Design & UX | Product | Combine UX/UI and product needs | Design Manager |
+| UX Researcher | Research & Analysis | UX | Research user behaviour | Design Manager |
+| UX Writer / Content Designer | Design & UX | Content | Create clear product communication | Design Manager |
+| Design System Designer | Design & UX | Design System | Create and maintain the design system | Design Manager |
+| Graphic Designer | Design & UX | Graphics | Create visual assets | Design Manager |
+| Motion Designer | Design & UX | Motion | Improve interaction feedback | Design Manager |
+| Accessibility Specialist | Design & UX | Accessibility | Review accessibility | Design Manager |
+| Technical Writer | Documentation | Technical | Transfer technical knowledge | Documentation Manager |
+| Documentation Specialist | Documentation | User | Make the product understandable | Documentation Manager |
+| Localization Specialist | Localization & Translation | Localization | Adapt the product to the target market | Localization Manager |
+| Translator | Localization & Translation | Translation | Accurate, natural translation | Localization Manager |
+| Procurement Specialist | Finance & Business | Procurement | Provide needed resources | Procurement Manager |
+| Recruiter | Human Resources | Recruiting | Provide needed personnel | Recruitment Manager |
+| Technical Recruiter | Human Resources | Technical Recruiting | Recruit technical talent | Recruitment Manager |
+| Scrum Product Team | Software Engineering | Team | Run iterative development | Product Owner |
+| UI/UX Research Participants | Research & Analysis | UX | Provide user feedback | UX Researcher |
+| Beta Tester | Quality & Testing | Beta | Discover issues before release | QA Lead |
+| End User | Research & Analysis | End User | Generate real signal from product usage | Product Manager |
+| Customer Support Agent | Customer Support | General | Resolve user issues | Support Manager |
+| Technical Support Engineer | Customer Support | Technical | Fix technical issues | Support Manager |
+| Community Manager | Marketing & Sales | Community | Build healthy engagement with users | Community Director |
+| Marketing Specialist | Marketing & Sales | Campaign | Acquire and activate users | Product Marketing Manager |
+| SEO Specialist | Marketing & Sales | SEO | Increase organic acquisition | Product Marketing Manager |
+| ASO Specialist | Marketing & Sales | ASO | Increase app discovery | Product Marketing Manager |
+| Sales Representative | Marketing & Sales | Representation | Convert leads into customers | Sales Manager |
+| DevRel | Marketing & Sales | Developer Relations | Grow the developer ecosystem | Community Director |
+| Technical Evangelist | Marketing & Sales | Technology | Increase technical adoption | Community Director |
 | On-call Engineer | Incident and disaster recovery | On-call | Respond immediately to production issues | Incident Manager |
-| Maintenance Engineer | عملیاتی و زیرساخت | نگهداری | حفظ سلامت سیستم | Infrastructure Manager |
-| Refactoring Engineer | توسعه نرم‌افزار | Refactoring | بهبود ساختار کد | Technical Lead |
-| Legacy Modernization Engineer | Migration و Modernization | Legacy | کاهش Legacy Risk | Principal Engineer |
-| Observability Engineer | DevOps و SRE | Observability | Logging، Metrics، Tracing و Monitoring | DevOps Manager |
-| Data Analyst | تحقیق و آنالیز | داده | تحلیل رفتار کاربران و KPIها | Product Analyst Lead |
-| BI Analyst | تحقیق و آنالیز | BI | ساخت گزارش و Dashboard مدیریتی | Product Analyst Lead |
-| Product Analyst | تحقیق و آنالیز | محصول | کمک به Product Decisions | Product Manager |
+| Maintenance Engineer | Operations & Infrastructure | Maintenance | Maintain system health | Infrastructure Manager |
+| Refactoring Engineer | Software Engineering | Refactoring | Improve code structure | Technical Lead |
+| Legacy Modernization Engineer | Migration & Modernization | Legacy | Reduce legacy risk | Principal Engineer |
+| Observability Engineer | DevOps & SRE | Observability | Logging, metrics, tracing, and monitoring | DevOps Manager |
+| Data Analyst | Research & Analysis | Data | Analyze user behaviour and KPIs | Product Analyst Lead |
+| BI Analyst | Research & Analysis | BI | Build management reports and dashboards | Product Analyst Lead |
+| Product Analyst | Research & Analysis | Product | Support product decisions | Product Manager |
 | Third-party Integration Specialist | Integration & Third-Party | API | Reliable service connectivity | Technical Lead |
-| Migration Specialist | Migration و Modernization | Migration | انتقال داده و سیستم | Technical Lead |
-| Deployment Engineer | DevOps و SRE | Deployment | استقرار نسخه‌ها | DevOps Manager |
-| Disaster Recovery Specialist | Incident و Disaster Recovery | DR | طراحی و تست بازیابی | Business Continuity Manager |
-| Backup Administrator | Incident و Disaster Recovery | Backup | مدیریت Backup و Restore | Infrastructure Manager |
-| Decommission Engineer | Migration و Modernization | Decommission | خاموش‌کردن امن سرویس‌ها | Infrastructure Manager || Agent Architect | داده و هوش مصنوعی | Agent | طراحی معماری Agent | AI Engineer Lead |
-| Agent Integration Engineer | داده و هوش مصنوعی | Agent | پیاده‌سازی Integration Agent | AI Engineer Lead |
-| Tool Developer | داده و هوش مصنوعی | Agent | ابزارها و API Wrapper برای Agent | AI Engineer Lead |
-| Agent Evaluator | داده و هوش مصنوعی | Agent | ارزیابی رفتار Agent و Safety | AI Engineer Lead |
+| Migration Specialist | Migration & Modernization | Migration | Migrate data and systems | Technical Lead |
+| Deployment Engineer | DevOps & SRE | Deployment | Deploy releases | DevOps Manager |
+| Disaster Recovery Specialist | Incident and disaster recovery | DR | Design and test recovery | Business Continuity Manager |
+| Backup Administrator | Incident and disaster recovery | Backup | Manage backup and restore | Infrastructure Manager |
+| Decommission Engineer | Migration & Modernization | Decommission | Safely decommission services | Infrastructure Manager |  | Agent Architect | Data & AI | Agent | Design agent architecture | AI Engineer Lead |
+| Agent Integration Engineer | Data & AI | Agent | Implement agent integration | AI Engineer Lead |
+| Tool Developer | Data & AI | Agent | Agent tools and API wrappers | AI Engineer Lead |
+| Agent Evaluator | Data & AI | Agent | Evaluate agent behaviour and safety | AI Engineer Lead |
 | Agentic Prompt Specialist | Data & AI | Agent | Design prompts and few-shot examples | AI Engineer Lead |
-| Agent Safety Engineer | داده و هوش مصنوعی | Agent | گاردریل، Jailbreak و Budget | AI Engineer Lead |
-| Cloud Security Engineer | امنیتی | Cloud | امنیت سرویس‌های Cloud | Security Architect |
-| Database Security Specialist | امنیتی | پایگاه داده | امنیت پایگاه داده | Security Architect |
-| SOC Analyst | امنیتی | SOC | تحلیل و پاسخ اولیه هشدارها | CISO |
-| Incident Response Engineer | امنیتی | پاسخ رخداد | پاسخ به رخداد امنیتی | Incident Manager |
-| Vulnerability Management Specialist | امنیتی | آسیب‌پذیری | مدیریت آسیب‌پذیری‌ها | Security Governance Manager |
-| Security Auditor | امنیتی | ممیزی | ممیزی مستقل امنیت | Security Governance Manager |
+| Agent Safety Engineer | Data & AI | Agent | Guardrails, jailbreak, and budget | AI Engineer Lead |
+| Cloud Security Engineer | Security | Cloud | Cloud service security | Security Architect |
+| Database Security Specialist | Security | Database | Database security | Security Architect |
+| SOC Analyst | Security | SOC | Analyse and give first response to alerts | CISO |
+| Incident Response Engineer | Security | Incident Response | Respond to security incidents | Incident Manager |
+| Vulnerability Management Specialist | Security | Vulnerability | Manage vulnerabilities | Security Governance Manager |
+| Security Auditor | Security | Audit | Independent security audit | Security Governance Manager |
 
 ### محصول (10 ناظر + 5 مجری = 15)
 
@@ -406,11 +406,11 @@
 | Growth Manager | SUPERVISOR | - |
 | Product Owner (Post-Release) | SUPERVISOR | - |
 | End-of-Life Manager | SUPERVISOR | - |
-| Business Analyst (BA) | مجری | Product Manager |
-| Product Designer | مجری | Design Manager |
-| Product Analyst | مجری | Product Manager |
-| Scrum Product Team | مجری | Product Owner |
-| End User | مجری | Product Manager |
+| Business Analyst (BA) | EXECUTOR | Product Manager |
+| Product Designer | EXECUTOR | Design Manager |
+| Product Analyst | EXECUTOR | Product Manager |
+| Scrum Product Team | EXECUTOR | Product Owner |
+| End User | EXECUTOR | Product Manager |
 
 ---
 
@@ -427,8 +427,8 @@
 | Cloud Architect | SUPERVISOR | - |
 | Security Architect | SUPERVISOR | - |
 | CISO | SUPERVISOR | - |
-| Software Architect | مجری | CTO / Technical Lead |
-| System Architect | مجری | Enterprise Architect |
+| Software Architect | EXECUTOR | CTO / Technical Lead |
+| System Architect | EXECUTOR | Enterprise Architect |
 
 ---
 
@@ -437,18 +437,18 @@
 | Job Title | Role | Supervisor |
 |---|---|---|
 | Development Manager | SUPERVISOR | - |
-| Software Engineer | مجری | Development Manager |
-| Backend Developer | مجری | Development Manager |
-| Frontend Developer | مجری | Development Manager |
+| Software Engineer | EXECUTOR | Development Manager |
+| Backend Developer | EXECUTOR | Development Manager |
+| Frontend Developer | EXECUTOR | Development Manager |
 | Full-Stack Developer | EXECUTOR | Development Manager |
-| Mobile Developer | مجری | Development Manager |
-| Desktop Developer | مجری | Development Manager |
-| Game Developer | مجری | Development Manager |
-| Staff Engineer | مجری | Principal Engineer |
-| Refactoring Engineer | مجری | Technical Lead |
-| Legacy Modernization Engineer | مجری | Principal Engineer |
+| Mobile Developer | EXECUTOR | Development Manager |
+| Desktop Developer | EXECUTOR | Development Manager |
+| Game Developer | EXECUTOR | Development Manager |
+| Staff Engineer | EXECUTOR | Principal Engineer |
+| Refactoring Engineer | EXECUTOR | Technical Lead |
+| Legacy Modernization Engineer | EXECUTOR | Principal Engineer |
 | Third-party Integration Specialist | EXECUTOR | Technical Lead |
-| Migration Specialist | مجری | Technical Lead |
+| Migration Specialist | EXECUTOR | Technical Lead |
 
 ---
 
@@ -458,12 +458,12 @@
 |---|---|---|
 | Data Architect | SUPERVISOR | - |
 | Principal Engineer | SUPERVISOR | - |
-| AI/ML Engineer | مجری | Principal Engineer |
-| Data Scientist | مجری | Data Architect |
-| Data Engineer | مجری | Data Architect |
-| MLOps Engineer | مجری | Principal Engineer |
-| Prompt Engineer | مجری | AI Engineer Lead |
-| AI Engineer | مجری | Principal Engineer |
+| AI/ML Engineer | EXECUTOR | Principal Engineer |
+| Data Scientist | EXECUTOR | Data Architect |
+| Data Engineer | EXECUTOR | Data Architect |
+| MLOps Engineer | EXECUTOR | Principal Engineer |
+| Prompt Engineer | EXECUTOR | AI Engineer Lead |
+| AI Engineer | EXECUTOR | Principal Engineer |
 
 ---
 
@@ -473,12 +473,12 @@
 |---|---|---|
 | CISO | SUPERVISOR | - |
 | Security Architect | SUPERVISOR | - |
-| Security Engineer | مجری | CISO |
-| Application Security Engineer | مجری | CISO |
-| Cybersecurity Engineer | مجری | CISO |
-| Penetration Tester | مجری | CISO |
-| DevSecOps Engineer | مجری | CISO |
-| Privacy Engineer | مجری | Chief Privacy Officer |
+| Security Engineer | EXECUTOR | CISO |
+| Application Security Engineer | EXECUTOR | CISO |
+| Cybersecurity Engineer | EXECUTOR | CISO |
+| Penetration Tester | EXECUTOR | CISO |
+| DevSecOps Engineer | EXECUTOR | CISO |
+| Privacy Engineer | EXECUTOR | Chief Privacy Officer |
 
 ---
 
@@ -489,12 +489,12 @@
 | QA Lead | SUPERVISOR | - |
 | Quality Manager | SUPERVISOR | - |
 | Performance Engineering Lead | SUPERVISOR | - |
-| QA Engineer | مجری | QA Lead |
-| Test Engineer | مجری | QA Lead |
-| Test Automation Engineer | مجری | QA Lead |
-| Performance Engineer | مجری | Performance Engineering Lead |
-| Load/Stress Tester | مجری | Performance Engineering Lead |
-| Beta Tester | مجری | QA Lead |
+| QA Engineer | EXECUTOR | QA Lead |
+| Test Engineer | EXECUTOR | QA Lead |
+| Test Automation Engineer | EXECUTOR | QA Lead |
+| Performance Engineer | EXECUTOR | Performance Engineering Lead |
+| Load/Stress Tester | EXECUTOR | Performance Engineering Lead |
+| Beta Tester | EXECUTOR | QA Lead |
 
 ---
 
@@ -504,16 +504,16 @@
 |---|---|---|
 | Design Manager | SUPERVISOR | - |
 | Chief Design Officer (CDO) | SUPERVISOR | - |
-| UI Designer | مجری | Design Manager |
-| UX Designer | مجری | Design Manager |
-| Product Designer | مجری | Design Manager |
-| UX Researcher | مجری | Design Manager |
-| UX Writer / Content Designer | مجری | Design Manager |
-| Design System Designer | مجری | Design Manager |
-| Graphic Designer | مجری | Design Manager |
-| Motion Designer | مجری | Design Manager |
-| Accessibility Specialist | مجری | Design Manager |
-| UI/UX Research Participants | مجری | UX Researcher |
+| UI Designer | EXECUTOR | Design Manager |
+| UX Designer | EXECUTOR | Design Manager |
+| Product Designer | EXECUTOR | Design Manager |
+| UX Researcher | EXECUTOR | Design Manager |
+| UX Writer / Content Designer | EXECUTOR | Design Manager |
+| Design System Designer | EXECUTOR | Design Manager |
+| Graphic Designer | EXECUTOR | Design Manager |
+| Motion Designer | EXECUTOR | Design Manager |
+| Accessibility Specialist | EXECUTOR | Design Manager |
+| UI/UX Research Participants | EXECUTOR | UX Researcher |
 
 ---
 
@@ -524,18 +524,18 @@
 | Operations Manager | SUPERVISOR | - |
 | Infrastructure Manager | SUPERVISOR | - |
 | DevOps Manager | SUPERVISOR | - |
-| Infrastructure Engineer | مجری | Infrastructure Manager |
-| System Administrator | مجری | Infrastructure Manager |
-| Network Engineer | مجری | Infrastructure Manager |
-| Maintenance Engineer | مجری | Infrastructure Manager |
-| DevOps Engineer | مجری | DevOps Manager |
-| SRE (Site Reliability Engineer) | مجری | DevOps Manager |
-| Cloud Engineer | مجری | Cloud Architect |
-| Backup Administrator | مجری | Infrastructure Manager |
-| Deploy Engineer | مجری | DevOps Manager |
+| Infrastructure Engineer | EXECUTOR | Infrastructure Manager |
+| System Administrator | EXECUTOR | Infrastructure Manager |
+| Network Engineer | EXECUTOR | Infrastructure Manager |
+| Maintenance Engineer | EXECUTOR | Infrastructure Manager |
+| DevOps Engineer | EXECUTOR | DevOps Manager |
+| SRE (Site Reliability Engineer) | EXECUTOR | DevOps Manager |
+| Cloud Engineer | EXECUTOR | Cloud Architect |
+| Backup Administrator | EXECUTOR | Infrastructure Manager |
+| Deploy Engineer | EXECUTOR | DevOps Manager |
 | On-call Engineer | EXECUTOR | Incident Manager |
-| Observability Engineer | مجری | DevOps Manager |
-| Decommission Engineer | مجری | Infrastructure Manager |
+| Observability Engineer | EXECUTOR | DevOps Manager |
+| Decommission Engineer | EXECUTOR | Infrastructure Manager |
 
 ---
 
@@ -546,8 +546,8 @@
 | Cloud Architect | SUPERVISOR | - |
 | FinOps Specialist | SUPERVISOR | - |
 | CTO | SUPERVISOR | - |
-| Cloud Engineer | مجری | Cloud Architect |
-| Observability Engineer | مجری | DevOps Manager |
+| Cloud Engineer | EXECUTOR | Cloud Architect |
+| Observability Engineer | EXECUTOR | DevOps Manager |
 
 ---
 
@@ -555,7 +555,7 @@
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Network Engineer | مجری | Infrastructure Manager |
+| Network Engineer | EXECUTOR | Infrastructure Manager |
 
 ---
 
@@ -564,8 +564,8 @@
 | Job Title | Role | Supervisor |
 |---|---|---|
 | Data Architect | SUPERVISOR | - |
-| Database Administrator (DBA) | مجری | Data Architect |
-| Database Engineer | مجری | Data Architect |
+| Database Administrator (DBA) | EXECUTOR | Data Architect |
+| Database Engineer | EXECUTOR | Data Architect |
 
 ---
 
@@ -576,11 +576,11 @@
 | DevOps Manager | SUPERVISOR | - |
 | Infrastructure Manager | SUPERVISOR | - |
 | Incident Manager | SUPERVISOR | - |
-| DevOps Engineer | مجری | DevOps Manager |
-| SRE (Site Reliability Engineer) | مجری | DevOps Manager |
-| Release Engineer | مجری | DevOps Manager |
-| Build Engineer | مجری | DevOps Manager |
-| Deployment Engineer | مجری | DevOps Manager |
+| DevOps Engineer | EXECUTOR | DevOps Manager |
+| SRE (Site Reliability Engineer) | EXECUTOR | DevOps Manager |
+| Release Engineer | EXECUTOR | DevOps Manager |
+| Build Engineer | EXECUTOR | DevOps Manager |
+| Deployment Engineer | EXECUTOR | DevOps Manager |
 | On-call Engineer | EXECUTOR | Incident Manager |
 
 ---
@@ -600,13 +600,13 @@
 | Vendor Manager | SUPERVISOR | - |
 | Community Director | SUPERVISOR | - |
 | Support Manager | SUPERVISOR | - |
-| Marketing Specialist | مجری | Product Marketing Manager |
-| SEO Specialist | مجری | Product Marketing Manager |
-| ASO Specialist | مجری | Product Marketing Manager |
-| Sales Representative | مجری | Sales Manager |
-| DevRel | مجری | Community Director |
-| Technical Evangelist | مجری | Community Director |
-| Community Manager | مجری | Community Director |
+| Marketing Specialist | EXECUTOR | Product Marketing Manager |
+| SEO Specialist | EXECUTOR | Product Marketing Manager |
+| ASO Specialist | EXECUTOR | Product Marketing Manager |
+| Sales Representative | EXECUTOR | Sales Manager |
+| DevRel | EXECUTOR | Community Director |
+| Technical Evangelist | EXECUTOR | Community Director |
+| Community Manager | EXECUTOR | Community Director |
 
 ---
 
@@ -615,8 +615,8 @@
 | Job Title | Role | Supervisor |
 |---|---|---|
 | Support Manager | SUPERVISOR | - |
-| Customer Support Agent | مجری | Support Manager |
-| Technical Support Engineer | مجری | Support Manager |
+| Customer Support Agent | EXECUTOR | Support Manager |
+| Technical Support Engineer | EXECUTOR | Support Manager |
 
 ---
 
@@ -631,7 +631,7 @@
 | Contract Manager | SUPERVISOR | - |
 | Audit Specialist | SUPERVISOR | - |
 | External Auditor | SUPERVISOR | - |
-| Privacy Engineer | مجری | Chief Privacy Officer |
+| Privacy Engineer | EXECUTOR | Chief Privacy Officer |
 
 ---
 
@@ -643,7 +643,7 @@
 | Finance Manager | SUPERVISOR | - |
 | Procurement Manager | SUPERVISOR | - |
 | Vendor Manager | SUPERVISOR | - |
-| Procurement Specialist | مجری | Procurement Manager |
+| Procurement Specialist | EXECUTOR | Procurement Manager |
 
 ---
 
@@ -653,8 +653,8 @@
 |---|---|---|
 | HR / People Manager | SUPERVISOR | - |
 | Recruitment Manager | SUPERVISOR | - |
-| Recruiter | مجری | Recruitment Manager |
-| Technical Recruiter | مجری | Recruitment Manager |
+| Recruiter | EXECUTOR | Recruitment Manager |
+| Technical Recruiter | EXECUTOR | Recruitment Manager |
 
 ---
 
@@ -663,12 +663,12 @@
 | Job Title | Role | Supervisor |
 |---|---|---|
 | Domain Expert (SME) | SUPERVISOR | - |
-| Business Analyst (BA) | مجری | Product Manager |
-| Data Analyst | مجری | Product Analyst Lead |
-| BI Analyst | مجری | Product Analyst Lead |
-| Product Analyst | مجری | Product Manager |
-| UX Researcher | مجری | Design Manager |
-| UI/UX Research Participants | مجری | UX Researcher |
+| Business Analyst (BA) | EXECUTOR | Product Manager |
+| Data Analyst | EXECUTOR | Product Analyst Lead |
+| BI Analyst | EXECUTOR | Product Analyst Lead |
+| Product Analyst | EXECUTOR | Product Manager |
+| UX Researcher | EXECUTOR | Design Manager |
+| UI/UX Research Participants | EXECUTOR | UX Researcher |
 
 ---
 
@@ -677,8 +677,8 @@
 | Job Title | Role | Supervisor |
 |---|---|---|
 | Documentation Manager | SUPERVISOR | - |
-| Technical Writer | مجری | Documentation Manager |
-| Documentation Specialist | مجری | Documentation Manager |
+| Technical Writer | EXECUTOR | Documentation Manager |
+| Documentation Specialist | EXECUTOR | Documentation Manager |
 
 ---
 
@@ -687,8 +687,8 @@
 | Job Title | Role | Supervisor |
 |---|---|---|
 | Localization Manager | SUPERVISOR | - |
-| Localization Specialist | مجری | Localization Manager |
-| Translator | مجری | Localization Manager |
+| Localization Specialist | EXECUTOR | Localization Manager |
+| Translator | EXECUTOR | Localization Manager |
 
 ---
 
@@ -697,8 +697,8 @@
 | Job Title | Role | Supervisor |
 |---|---|---|
 | Embedded Systems Lead | SUPERVISOR | - |  | Embedded Developer | EXECUTOR | Embedded Systems Lead |
-| Firmware Engineer | مجری | Embedded Systems Lead |
-| IoT Engineer | مجری | Embedded Systems Lead |
+| Firmware Engineer | EXECUTOR | Embedded Systems Lead |
+| IoT Engineer | EXECUTOR | Embedded Systems Lead |
 
 ---
 
@@ -707,7 +707,7 @@
 | Job Title | Role | Supervisor |
 |---|---|---|
 | Third-party Integration Specialist | EXECUTOR | Technical Lead |
-| Migration Specialist | مجری | Technical Lead |
+| Migration Specialist | EXECUTOR | Technical Lead |
 
 ---
 
@@ -715,8 +715,8 @@
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Legacy Modernization Engineer | مجری | Principal Engineer |
-| Decommission Engineer | مجری | Infrastructure Manager |
+| Legacy Modernization Engineer | EXECUTOR | Principal Engineer |
+| Decommission Engineer | EXECUTOR | Infrastructure Manager |
 
 ---
 
@@ -727,9 +727,9 @@
 | Incident Manager | SUPERVISOR | - |
 | Business Continuity Manager | SUPERVISOR | - |
 | On-call Engineer | EXECUTOR | Incident Manager |
-| Disaster Recovery Specialist | مجری | Business Continuity Manager |
-| Backup Administrator | مجری | Infrastructure Manager |
-| Decommission Engineer | مجری | Infrastructure Manager |
+| Disaster Recovery Specialist | EXECUTOR | Business Continuity Manager |
+| Backup Administrator | EXECUTOR | Infrastructure Manager |
+| Decommission Engineer | EXECUTOR | Infrastructure Manager |
 
 ---
 
@@ -822,36 +822,36 @@
 
 ### بر اساس حوزه
 
-| حوزه | ناظر | مجری | مجموع |
+| Domain | SUPERVISOR | EXECUTOR | Total |
 |---|---|---|---|
 | --- | 1 | 1 | 2 |
-| DevOps و SRE | 2 | 6 | 8 |
-| Incident و Disaster Recovery | 2 | 3 | 5 |
+| DevOps & SRE | 2 | 6 | 8 |
+| Incident and disaster recovery | 2 | 3 | 5 |
 | Integration & Third-Party | 0 | 1 | 1 |
-| Localization و ترجمه | 1 | 2 | 3 |
-| Migration و Modernization | 0 | 3 | 3 |
-| ابری | 3 | 1 | 4 |
-| امنیتی | 3 | 11 | 14 |
-| بازاریابی و فروش | 8 | 7 | 15 |
-| تحقیق و آنالیز | 2 | 7 | 9 |
-| توسعه بازی | 0 | 1 | 1 |
-| توسعه نرم‌افزار | 2 | 9 | 11 |
-| حقوقی و انطباق | 8 | 1 | 9 |
-| داده و هوش مصنوعی | 0 | 11 | 11 |
-| سخت‌افزار و Embedded | 1 | 3 | 4 |
-| شبکه | 0 | 1 | 1 |
-| طراحی و تجربه کاربری | 2 | 8 | 10 |
-| عملیاتی و زیرساخت | 3 | 3 | 6 |
-| مالی و تجاری | 4 | 1 | 5 |
-| محصول | 5 | 0 | 5 |
-| مدیریت و استراتژی | 13 | 0 | 13 |
-| مستندسازی | 1 | 2 | 3 |
-| معماری نرم‌افزاری | 6 | 2 | 8 |
-| منابع انسانی | 2 | 2 | 4 |
-| پایگاه داده | 1 | 2 | 3 |
-| پشتیبانی مشتری | 1 | 2 | 3 |
-| کیفیت و تست | 3 | 6 | 9 |
-| **جمع** | **74** | **96** | **170** |
+| Localization & Translation | 1 | 2 | 3 |
+| Migration & Modernization | 0 | 3 | 3 |
+| Cloud | 3 | 1 | 4 |
+| Security | 3 | 11 | 14 |
+| Marketing & Sales | 8 | 7 | 15 |
+| Research & Analysis | 2 | 7 | 9 |
+| Game Development | 0 | 1 | 1 |
+| Software Engineering | 2 | 9 | 11 |
+| Legal & Compliance | 8 | 1 | 9 |
+| Data & AI | 0 | 11 | 11 |
+| Hardware & Embedded | 1 | 3 | 4 |
+| Networking | 0 | 1 | 1 |
+| Design & UX | 2 | 8 | 10 |
+| Operations & Infrastructure | 3 | 3 | 6 |
+| Finance & Business | 4 | 1 | 5 |
+| Product | 5 | 0 | 5 |
+| Management & Strategy | 13 | 0 | 13 |
+| Documentation | 1 | 2 | 3 |
+| Software Architecture | 6 | 2 | 8 |
+| Human Resources | 2 | 2 | 4 |
+| Database | 1 | 2 | 3 |
+| Customer Support | 1 | 2 | 3 |
+| Quality & Testing | 3 | 6 | 9 |
+| **Total** | **74** | **96** | **170** |
 
 
 ---

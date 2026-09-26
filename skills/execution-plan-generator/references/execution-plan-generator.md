@@ -28,8 +28,8 @@ This is not simple task decomposition. You are designing **delivery architecture
 ## 3. Definitions
 
 - **Execution stage** — one uninterrupted working session of the implementation agent (one run/turn), in which it receives one phase and completes all of its steps.
-- **Phase (فاز)** — a complete implementation unit sized for exactly one execution stage, ending in a stable, verifiable project state.
-- **Step (گام)** — one concrete implementation responsibility inside a phase, executed in listed order.
+- **Phase** — a complete implementation unit sized for exactly one execution stage, ending in a stable, verifiable project state.
+- **Step** — one concrete implementation responsibility inside a phase, executed in listed order.
 
 ## 4. Pre-Planning Analysis (mandatory, internal)
 
@@ -126,7 +126,7 @@ Prescribe **WHAT** must be achieved. Leave the implementation agent reasonable f
 
 ## 8. Acceptance Criteria
 
-Every phase MUST end with **معیار پذیرش:** containing objectively verifiable criteria.
+Every phase MUST end with **Acceptance criteria:** containing objectively verifiable criteria.
 
 Bad:
 
@@ -191,15 +191,15 @@ Every phase and every step carries a status inside `[ ]`. Use ONLY these three:
 Exact format:
 
 ```text
-## [🔴] فاز ۱: ...
-### [🔴] گام ۱: ...
+## [🔴] Phase 1: ...
+### [🔴] Step 1: ...
 ```
 
 **In the generated plan, every phase and every step is initialized to `[🔴]`.**
 
 ## 13. Status Update Protocol & Definition of Done
 
-These rules bind the implementation agent and MUST be embedded in «قوانین ثابت انجام پروژه»:
+These rules bind the implementation agent and MUST be embedded in `Fixed Project Execution Rules`:
 
 - Immediately after working on a step, update its status: `[🟢]` fully done, `[🟡]` partial, `[🔴]` untouched.
 - After each execution stage, update the phase status.
@@ -224,51 +224,51 @@ The execution plan is a **living project artifact**. During implementation:
 ## 15. Output Format (exact, mandatory)
 
 - Output ONLY the plan document — no other text.
-- Keep the structural markers exactly as shown below: the two top-level Persian headings, `فاز` / `گام` labels with sequential numbering (فاز ۱، فاز ۲، … and within each phase گام ۱، گام ۲، …), statuses inside `[ ]`, and `**معیار پذیرش:**` at the end of every phase.
+- Keep the structural markers exactly as shown below: the two top-level headings, the `Phase` / `Step` labels with sequential numbering (Phase 1, Phase 2, … and within each phase Step 1, Step 2, …), statuses inside `[ ]`, and `**Acceptance criteria:**` at the end of every phase.
 - Write titles and descriptions in the same language as the task description unless the requester specifies otherwise. Technical terms may remain in English.
 - Separate phases with `---`.
 
 ```markdown
-# قوانین ثابت انجام پروژه
+# Fixed Project Execution Rules
 
 [Permanent execution rules per Section 16.]
 
-# پلن اجرایی
+# Execution Plan
 
-## [🔴] فاز ۱: <phase title>
+## [🔴] Phase 1: <phase title>
 
 <Precise, concise description of this phase's objective, scope, and expected output.>
 
-### [🔴] گام ۱: <step title>
+### [🔴] Step 1: <step title>
 
 <Exact implementation responsibility.>
 
-### [🔴] گام ۲: <step title>
+### [🔴] Step 2: <step title>
 
 <Exact implementation responsibility.>
 
-### [🔴] گام ۳: <step title>
+### [🔴] Step 3: <step title>
 
 <Exact implementation responsibility.>
 
-**معیار پذیرش:**
+**Acceptance criteria:**
 <Objective, measurable criteria that define completeness of this phase.>
 
 ---
 
-## [🔴] فاز ۲: <phase title>
+## [🔴] Phase 2: <phase title>
 
 <Phase description.>
 
-### [🔴] گام ۱: <step title>
+### [🔴] Step 1: <step title>
 
 <Description.>
 
-### [🔴] گام ۲: <step title>
+### [🔴] Step 2: <step title>
 
 <Description.>
 
-**معیار پذیرش:**
+**Acceptance criteria:**
 <Acceptance criteria.>
 
 ---
@@ -276,7 +276,7 @@ The execution plan is a **living project artifact**. During implementation:
 
 Continue until the entire scope of the original task is covered.
 
-## 16. Required Content of «قوانین ثابت انجام پروژه»
+## 16. Required Content of `Fixed Project Execution Rules`
 
 This section is what makes the plan self-executing. It MUST contain at minimum, phrased as binding rules for the implementation agent:
 
@@ -285,7 +285,7 @@ This section is what makes the plan self-executing. It MUST contain at minimum, 
 3. Do not guess missing information — stop and record **Unknown / Requires Verification** instead.
 4. Do not mark incomplete work as complete; never claim completion without verification.
 5. Preserve existing functionality unless the plan intentionally changes it.
-6. Validate every phase against its معیار پذیرش before moving to the next.
+6. Validate every phase against its **Acceptance criteria:** before moving to the next.
 7. The status legend (🔴 / 🟡 / 🟢) and the full status-update protocol and Definition of Done from Section 13.
 8. Keep the plan synchronized with the actual implementation; add newly discovered mandatory work to the appropriate phase with justification; never delete or silently rewrite steps or requirements.
 9. Do not introduce unnecessary scope; do not artificially fragment phases; do not over-merge unrelated work; maintain dependency order.

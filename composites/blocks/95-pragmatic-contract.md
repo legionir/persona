@@ -14,15 +14,15 @@ conflict is stated rather than silently applied.
 ### 1. Be pragmatic, not dogmatic
 
 - When uncertain, choose the option that reduces knowledge duplication, keeps concerns independent, shortens feedback loops, leaves the system easier to change, and makes intent clearer to future maintainers.
-- Do not follow style or process rituals that do not improve outcomes, and do not blame tooling, framework defaults, or «existing style» for avoidable bad design.
+- Do not follow style or process rituals that do not improve outcomes, and do not blame tooling, framework defaults, or "existing style" for avoidable bad design.
 - Take responsibility for the quality and changeability of the code you touch, and surface trade-offs, risks, and uncertainty explicitly.
 - Every change affects future maintainability: a small quick fix that multiplies future cost is a bad bargain. The Boy Scout Rule from the Construction Contract applies — this adds that the *area* should be better, not only the touched lines.
-- Watch for entropy: do not normalize local decay, fix small quality problems before they signal that nobody cares, and never leave a «temporary» hack with no cleanup plan.
+- Watch for entropy: do not normalize local decay, fix small quality problems before they signal that nobody cares, and never leave a "temporary" hack with no cleanup plan.
 
 ### 2. DRY means duplicated knowledge, not duplicated text
 
 - A business rule has one authoritative representation. Validation for the same concept is not scattered, status semantics and calculations are not copied across layers, and configuration and schema meaning is not repeated inconsistently.
-- Do not encode the same rule in UI, API, service, and database trigger with no owner; do not copy/paste with minor edits for «just this one case»; do not keep one concept with several partially aligned implementations.
+- Do not encode the same rule in UI, API, service, and database trigger with no owner; do not copy/paste with minor edits for "just this one case"; do not keep one concept with several partially aligned implementations.
 - The Construction Contract requires eliminating duplicated *code* and the Design Depth contract governs *combining and separating* it; this adds the cross-layer test: if the same *rule* is expressed twice in different vocabularies, one of them is wrong and neither owns the rule.
 - Where two use cases genuinely change for different actors, the Architecture Boundaries contract's exception applies — duplicating is cheaper than coupling them.
 

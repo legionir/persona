@@ -334,7 +334,7 @@ def build_one(source: Path, bundle: bool = True) -> tuple[str, dict, list[str]]:
             "domain": rp.domain,
             "seniority": rp.seniority,
             "source": rel(source),
-            "language": "fa",
+            "language": "en",
         }
     else:
         mp = MasterPersona(source)

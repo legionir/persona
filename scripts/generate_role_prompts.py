@@ -3509,7 +3509,7 @@ def audit_prompt(title: str, persona: dict, slug: str) -> str:
 
 {audit_final_structure()}
 
-{audit_result_block()}\n\n## Audit Acceptance Criteria \"{title}»
+{audit_result_block()}\n\n## Audit Acceptance Criteria \"{title}\"
 {_lines(s['accept'])}\n- Each finding carries a separate SEVERITY / CONFIDENCE / EVIDENCE_STATUS.\n- Coverage, the State Machine, and the Execution Result are complete and free of duplicate findings.\n- The final verdict rests only on documented findings.\n- The execution plan has been produced per the \"Execution Plan Generator\" and saved as a file under `audits/`; its path is recorded in `ExecutionPlan`.\n- The plan is free of scope loss, artificial fragmentation, and over-merging, and every phase has a measurable acceptance criterion.\n\n"""
 
 
@@ -3538,7 +3538,7 @@ def impl_prompt(title: str, persona: dict, slug: str) -> str:
 
 {_execution_plan_impl_block()}
 
-{_execution_result_block()}\n\n## Execution Acceptance Criteria \"{title}»
+{_execution_result_block()}\n\n## Execution Acceptance Criteria \"{title}\"
 {_lines(s['accept'])}\n- The output matches the Quality Gate and every step is documented.\n- The State Machine, Decision Status, and Execution Result are complete.\n- The review/handoff to the identified stakeholder is recorded with evidence.\n- If an execution plan exists under `audits/`, the task has been executed exactly according to it and the step/phase statuses have been updated in that same file (🔴/🟡/🟢).\n\n"""
 
 # --------------------------------------------------------------------------

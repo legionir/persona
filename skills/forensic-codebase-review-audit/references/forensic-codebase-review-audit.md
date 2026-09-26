@@ -6,7 +6,7 @@
 
 ```
 CODEBASE:           <repo URL, path, or "attached files">
-REPORT_LANGUAGE:    <e.g., English / فارسی>
+REPORT_LANGUAGE:    <e.g., English>
 PRIMARY CONCERNS:   <optional — e.g., data integrity, auth, payment flows>
 OUT OF SCOPE:       <optional — explicitly excluded paths or topics>
 PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
@@ -47,7 +47,7 @@ Each role is a review lens. Every lens must be applied across the whole codebase
 
 The most important rule of this audit:
 
-> **«NEVER GUESS. NEVER ASSUME. NEVER INVENT.»**
+> **"NEVER GUESS. NEVER ASSUME. NEVER INVENT."**
 
 ### 2.1 Forbidden bases for conclusions
 

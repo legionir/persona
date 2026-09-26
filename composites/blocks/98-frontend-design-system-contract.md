@@ -17,21 +17,21 @@ deviation is stated explicitly rather than applied silently.
 ### 1. Visual inconsistency is a defect
 
 - Visual and behavioural inconsistency is a defect, not a style preference and not something to fix later. A page that is faster to hack together but breaks system coherence is a net loss.
-- Before writing any UI code, answer in this order: does an existing **token** cover this value; does an existing **component** cover this need semantically; does an existing **layout or page template** cover this structure; and if none exist, is this a genuinely reusable concept that must be promoted into the shared system *immediately* rather than inlined «for now».
-- Tactical one-off styling always outlives its «temporary» label. Never let a single page's local convenience win over system-wide coherence.
+- Before writing any UI code, answer in this order: does an existing **token** cover this value; does an existing **component** cover this need semantically; does an existing **layout or page template** cover this structure; and if none exist, is this a genuinely reusable concept that must be promoted into the shared system *immediately* rather than inlined "for now".
+- Tactical one-off styling always outlives its "temporary" label. Never let a single page's local convenience win over system-wide coherence.
 
 ### 2. Design tokens are the single source of visual truth
 
 - Every visual property derives from a named token. Define and use scales for **colour** (semantic names such as `color-primary`, `color-surface`, `color-danger`, `color-text-muted`, `color-border`), **spacing** (for example 4/8/12/16/24/32/48/64), **typography** (font sizes, weights, and line-heights mapped to semantic roles such as `heading-1`, `body`, `caption`, `label`), **radius** (none/sm/md/lg/full), **shadow and elevation** (flat/sm/md/lg/modal), **motion** (fast/base/slow durations plus one easing family), **breakpoints** (sm/md/lg/xl), and **z-index** (base/dropdown/sticky/overlay/modal/toast).
 - No component, page, or style rule may use a raw hand-typed value when a token exists for that purpose. Do not hardcode a colour, spacing value, radius, shadow, duration, or breakpoint outside the token definition.
-- If a needed value does not exist, add it to the token set after confirming it is genuinely new and reusable — never inline it. A component-local «shadow token» or «spacing constant» that approximates a global token is token bypass.
+- If a needed value does not exist, add it to the token set after confirming it is genuinely new and reusable — never inline it. A component-local "shadow token" or "spacing constant" that approximates a global token is token bypass.
 - Tokens are theme-aware: anything that can differ between light, dark, or brand themes resolves per theme, never hardcoded per component.
 - Use one breakpoint scale app-wide; a one-off `@media (min-width: 913px)` is a defect.
 
 ### 3. One concept, one component
 
 - Every recurring visual or interactive concept — button, input, select, card, modal, drawer, tooltip, popover, table, list item, badge, tag, avatar, tabs, breadcrumb, pagination, toast, empty state, skeleton loader, progress indicator — exists exactly once as a shared component in a single canonical location.
-- Never create a second implementation of an existing concept «just for this page». Extend the existing component with a new variant or prop instead, and search the component directory for something that already serves the same semantic purpose before creating anything new.
+- Never create a second implementation of an existing concept "just for this page". Extend the existing component with a new variant or prop instead, and search the component directory for something that already serves the same semantic purpose before creating anything new.
 - Variations are expressed as variants and props on the single component, not as similarly-named parallel components. `Button`, `PrimaryButton`, `SubmitButton`, and `BigButton` must not coexist as four implementations of one concept.
 - Every shared component exposes a consistent prop API across the whole library: the same name and shape for `size` and `variant`; the same name and behaviour for `disabled`, `loading`, `error`, and `readOnly`; and consistent event naming (`onChange`, `onSubmit`, `onSelect` — not `handleClick` in one component and `onClicked` in another).
 - Two components must not solve the same problem with two different prop vocabularies (one card taking `title`/`subtitle`, another `heading`/`description` for the same slots).
@@ -91,7 +91,7 @@ Every interactive or data-driven element passes through a small set of states, a
 ### 11. Accessibility and theming consistency
 
 - Focus-visible treatment, colour-contrast minimums, and keyboard interaction patterns (tab order, escape-to-close, enter-to-submit) are defined once per component type and inherited everywhere that component is used. ARIA roles and labels for a component type are applied consistently wherever it appears — not added on some pages and forgotten on others.
-- Any theme is implemented purely by swapping token values, never by per-component conditional style overrides. A component must not contain «if dark mode, use this gray» logic; that decision belongs entirely inside the token layer.
+- Any theme is implemented purely by swapping token values, never by per-component conditional style overrides. A component must not contain "if dark mode, use this gray" logic; that decision belongs entirely inside the token layer.
 
 ### 12. Naming and file structure
 
@@ -119,7 +119,7 @@ Before writing any UI code for a new page, section, or component, answer:
 - Have all required states (loading, empty, error, disabled, hover, focus, success) been identified and mapped to their shared pattern?
 - Does anything about this page's typography, colour, spacing, or motion deviate from the rest of the app — and is that deviation justified and documented, or drift that must be corrected?
 
-If any answer reveals a gap, the gap is closed at the system level — token, component, or template — before the page-specific work proceeds, never patched locally «just this once».
+If any answer reveals a gap, the gap is closed at the system level — token, component, or template — before the page-specific work proceeds, never patched locally "just this once".
 
 ### 15. Frontend review gate — for the change itself, not for the audit
 

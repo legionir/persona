@@ -833,8 +833,9 @@ def sec_execution_plan(meta, title) -> str:
         who = ("The Supervisor MUST, where remediation/implementation work is needed, produce an "
                f"Execution Plan and save it under `{path}`. Format: Dependency-aware, "
                "Scope-complete, Phase-coherent, Executable, Verifiable, Stable. File structure: "
-               "`# Fixed project execution rules` + `# Execution plan` with `## [🔴] Phase ...`, "
-               "`### [🔴] Step ...` and `### Acceptance criteria`.")
+               "`# Fixed Project Execution Rules` + `# Execution Plan` with "
+               "`## [🔴] Phase ...`, `### [🔴] Step ...` and "
+               "`**Acceptance criteria:**`.")
     else:
         who = ("""The Executor MUST read the plan, execute it, keep the completed steps, add discovered work with a reason, and update each step/phase status only with `[🔴]` / `[🟡]` / `[🟢]`. Deleting completed steps, hiding failures, and silent rewriting are forbidden.
 """)

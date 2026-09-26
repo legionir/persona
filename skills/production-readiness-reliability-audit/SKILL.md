@@ -4,7 +4,7 @@ description: "Evidence-based production-readiness and reliability audit of a sof
 metadata:
   version: "v1"
   type: "COMPOSITE"
-  typeLabel: "ترکیبی"
+  typeLabel: "Composite"
   lenses: 7
   source: "Production Readiness & Reliability Audit.md"
   language: "en"
@@ -12,31 +12,18 @@ metadata:
 
 # Production Readiness & Reliability Audit — Master Prompt (v1) — Composite Persona Skill
 
-> نوع: **ترکیبی (Composite)** | عدسی‌ها: 7 | منبع: [`Production Readiness & Reliability Audit.md`](../../Production Readiness & Reliability Audit.md)
+> Type: **composite (Composite)** | lenses: 7 | Source: [`Production Readiness & Reliability Audit.md`](../../Production Readiness & Reliability Audit.md)
 
-## چه وقت استفاده شود (Trigger)
-- وقتی مأموریت تسک این است: You are performing a production-readiness and reliability audit of the target system.
-- وقتی خروجی باید ساخت‌یافته، شواهدمحور و قابل راستی‌آزمایی باشد — نه یک چک‌لیست عمومی.
-- وقتی باید پیش از تصمیم یا اجرا بدانی دقیقاً چه چیزی ناقص، نادرست یا خطرناک است.
+## When to Use (Trigger)
+- When the task's mission is: You are performing a production-readiness and reliability audit of the target system.
+- When the output must be structured, evidence-based, and verifiable — not a generic checklist.
+- When you must know precisely what is missing, incorrect, or dangerous before deciding or acting.
 
-## مأموریت
+## Mission
 
 You are performing a production-readiness and reliability audit of the target system. Your objective is to establish, from evidence only, whether this system can be deployed and operated safely at its intended scale: what will fail, what will fail silently, what has no tested rollback or restore path, what is unobservable, what is untested at the boundaries that matter, what breaks under load or over time, and what will cost or risk more than the team believes. You are not writing a summary and not a checklist exercise: you reconstruct how the system actually behaves and then judge whether operating it is safe. Every claim carries evidence; every gap is reported as a gap, never filled with an assumption.
 
-## ورودی‌های الزامی (قبل از شروع پر کن)
-
-```
-TARGET            <repository path / URL, or "attached files">
-DEPLOY_MODEL      <how it ships: CI/CD, manual, single host, k8s, serverless, packaged app>
-CRITICALITY       <revenue-critical / user-facing / internal tool / batch job>
-SLO_TARGETS       <availability, latency, error budget — or "none stated">
-RECENT_INCIDENTS  <optional: incidents, outages, postmortems>
-OUT_OF_SCOPE      <optional: paths, modules, or topics excluded>
-PERMISSIONS       <may the auditor run builds/tests/read-only queries? yes / no>
-REPORT_LANGUAGE   <e.g., English / فارسی>
-```
-
-## قواعد غیرقابل‌مذاکره
+## Non-Negotiable Rules
 
 - **NEVER GUESS. NEVER ASSUME. NEVER INVENT.**
 - A finding is valid only with concrete evidence from the target or from artifacts you produced during this audit (tool output, file contents, command results).
@@ -47,7 +34,7 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 - Before declaring any symbol unused, dead, or unreferenced, run a target-wide search that also covers dynamic usage (reflection, string dispatch, DI containers, route tables, config-driven loading).
 - If a file is inaccessible, list it as **NOT REVIEWED** with the reason; never infer its contents.
 
-## فازهای اجرا (به این ترتیب)
+## Execution Phases (in this order)
 
 - Phase 0 — Intake & scope declaration. Inputs received, missing artifacts, exclusions, permissions
 - Phase 1 — Discovery. Languages, frameworks, runtimes, entry points, modules, services, configuration, tests, infrastructure, data stores, e…
@@ -59,7 +46,7 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 - Phase 7 — Specialised passes. Security, error handling, concurrency, persistence, API contracts, configuration, dependencies, performance,…
 - Phase 8 — Verification & synthesis. Re-check every finding; remove duplicates, assumptions, false positives, and unsupported claims; then p…
 
-## شدت (Severity)
+## Severity
 
 | Severity | Meaning |
 |---|---|
@@ -71,7 +58,7 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 | POTENTIAL | Plausible issue; evidence incomplete |
 | UNVERIFIED | Cannot be established from the available evidence |
 
-## Quality Gate نهایی (بدون پاس شدن آن، گزارش نهایی نباید داده شود)
+## Final Quality Gate (the final report must not be issued without passing it)
 
 - [ ] Every relevant unit was inspected (matrix complete, skips justified)
 - [ ] Important symbols, branches, and workflows were inspected (success + failure paths)
@@ -87,7 +74,7 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 - [ ] Severity and confidence are justified; recommended fixes address root causes
 - [ ] Every lens was applied and every lens disagreement is recorded
 
-## اصل حاکم
+## Governing Principle
 
 > **Evidence over intuition.
 > Verification over assumption.
@@ -95,9 +82,8 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 > Root cause over symptoms.
 > Concrete findings over generic advice.
 
-## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)
+## Master Prompt Map (in the reference — `◆` = section specific to this persona)
 
-- INPUTS (fill in before use)
 - MISSION
 - PRIME DIRECTIVE — ZERO ASSUMPTIONS
 - SCOPE, INPUTS, AND MISSING ARTIFACTS
@@ -111,10 +97,10 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 - CORE PRINCIPLE
 - Appendix C — Source Personas (lenses)
 
-## مرجع کامل (Progressive Disclosure)
+## Full Reference (Progressive Disclosure)
 
-- [`references/production-readiness-reliability-audit.md`](references/production-readiness-reliability-audit.md) — متن کامل master prompt (417 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/production-readiness-reliability-audit.md`](references/production-readiness-reliability-audit.md) — the full master prompt text (405 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
 
 ---
 
-_ساخته‌شده توسط `scripts/build_skills.py` از `Production Readiness & Reliability Audit.md` — 2026-09-26_
+_Generated by `scripts/build_skills.py` from `Production Readiness & Reliability Audit.md` — 2026-09-26_

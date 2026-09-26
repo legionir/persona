@@ -12,7 +12,7 @@ Findings section — this block only adds what a *change proposal* must contain 
 |---|---|
 | `LOCATION` | file, symbol, verified line range — or `approximate (symbol-level)` |
 | `CURRENT SHAPE` | the code quoted verbatim: the exact lines that violate the rule |
-| `RULE` | the contract section violated, by name (e.g. «Design Depth — Module depth», «Architecture Boundaries — The Dependency Rule») |
+| `RULE` | the contract section violated, by name (e.g. "Design Depth — Module depth", "Architecture Boundaries — The Dependency Rule") |
 | `COST` | what this costs the next reader or changer: which change becomes slower, riskier, or unverifiable |
 | `PROPOSED SHAPE` | the smallest behaviour-preserving change, written concretely |
 | `PRESERVATION RISK` | what could change behaviour, and how that is detected |

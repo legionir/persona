@@ -4,7 +4,7 @@ description: "Evidence-based audit of cloud and infrastructure: IaC coverage and
 metadata:
   version: "v1"
   type: "COMPOSITE"
-  typeLabel: "ترکیبی"
+  typeLabel: "Composite"
   lenses: 7
   source: "Cloud & Infrastructure Audit.md"
   language: "en"
@@ -12,32 +12,18 @@ metadata:
 
 # Cloud & Infrastructure Audit — Master Prompt (v1) — Composite Persona Skill
 
-> نوع: **ترکیبی (Composite)** | عدسی‌ها: 7 | منبع: [`Cloud & Infrastructure Audit.md`](../../Cloud & Infrastructure Audit.md)
+> Type: **composite (Composite)** | lenses: 7 | Source: [`Cloud & Infrastructure Audit.md`](../../Cloud & Infrastructure Audit.md)
 
-## چه وقت استفاده شود (Trigger)
-- وقتی مأموریت تسک این است: You are performing a cloud and infrastructure audit.
-- وقتی خروجی باید ساخت‌یافته، شواهدمحور و قابل راستی‌آزمایی باشد — نه یک چک‌لیست عمومی.
-- وقتی باید پیش از تصمیم یا اجرا بدانی دقیقاً چه چیزی ناقص، نادرست یا خطرناک است.
+## When to Use (Trigger)
+- When the task's mission is: You are performing a cloud and infrastructure audit.
+- When the output must be structured, evidence-based, and verifiable — not a generic checklist.
+- When you must know precisely what is missing, incorrect, or dangerous before deciding or acting.
 
-## مأموریت
+## Mission
 
 You are performing a cloud and infrastructure audit. Your objective is to establish, from evidence only, how this system is actually deployed and exposed: what is defined in code versus configured by hand, what is reachable from the internet, which identities hold which permissions, where secrets live, how failure of one component cascades, and what the platform costs and why. You are not listing cloud best practices and not reading a README as if it were the deployment: you compare the declared infrastructure against the deployed and reachable reality and report every gap with evidence. Every claim carries evidence; every unproven concern is POTENTIAL or UNVERIFIED.
 
-## ورودی‌های الزامی (قبل از شروع پر کن)
-
-```
-TARGET           <repository path / URL, IaC directory, or "attached files">
-PLATFORM         <AWS/GCP/Azure/on-prem/k8s/serverless — and how much is IaC>
-ENVIRONMENTS     <which environments exist and how they differ>
-EXPOSURE         <what is public-facing: endpoints, buckets, queues, admin panels>
-CRITICALITY      <production revenue path / internal / batch>
-MANUAL_STEPS     <optional: infra changes made outside IaC/console-only>
-OUT_OF_SCOPE     <optional: paths, modules, or topics excluded>
-PERMISSIONS      <may the auditor run read-only cloud/CLI queries? yes / no>
-REPORT_LANGUAGE  <e.g., English / فارسی>
-```
-
-## قواعد غیرقابل‌مذاکره
+## Non-Negotiable Rules
 
 - **NEVER GUESS. NEVER ASSUME. NEVER INVENT.**
 - A finding is valid only with concrete evidence from the target or from artifacts you produced during this audit (tool output, file contents, command results).
@@ -48,7 +34,7 @@ REPORT_LANGUAGE  <e.g., English / فارسی>
 - Before declaring any symbol unused, dead, or unreferenced, run a target-wide search that also covers dynamic usage (reflection, string dispatch, DI containers, route tables, config-driven loading).
 - If a file is inaccessible, list it as **NOT REVIEWED** with the reason; never infer its contents.
 
-## فازهای اجرا (به این ترتیب)
+## Execution Phases (in this order)
 
 - Phase 0 — Intake & scope declaration. Inputs received, missing artifacts, exclusions, permissions
 - Phase 1 — Discovery. Languages, frameworks, runtimes, entry points, modules, services, configuration, tests, infrastructure, data stores, e…
@@ -60,7 +46,7 @@ REPORT_LANGUAGE  <e.g., English / فارسی>
 - Phase 7 — Specialised passes. Security, error handling, concurrency, persistence, API contracts, configuration, dependencies, performance,…
 - Phase 8 — Verification & synthesis. Re-check every finding; remove duplicates, assumptions, false positives, and unsupported claims; then p…
 
-## شدت (Severity)
+## Severity
 
 | Severity | Meaning |
 |---|---|
@@ -72,7 +58,7 @@ REPORT_LANGUAGE  <e.g., English / فارسی>
 | POTENTIAL | Plausible issue; evidence incomplete |
 | UNVERIFIED | Cannot be established from the available evidence |
 
-## Quality Gate نهایی (بدون پاس شدن آن، گزارش نهایی نباید داده شود)
+## Final Quality Gate (the final report must not be issued without passing it)
 
 - [ ] Every relevant unit was inspected (matrix complete, skips justified)
 - [ ] Important symbols, branches, and workflows were inspected (success + failure paths)
@@ -88,7 +74,7 @@ REPORT_LANGUAGE  <e.g., English / فارسی>
 - [ ] Severity and confidence are justified; recommended fixes address root causes
 - [ ] Every lens was applied and every lens disagreement is recorded
 
-## اصل حاکم
+## Governing Principle
 
 > **Evidence over intuition.
 > Verification over assumption.
@@ -96,9 +82,8 @@ REPORT_LANGUAGE  <e.g., English / فارسی>
 > Root cause over symptoms.
 > Concrete findings over generic advice.
 
-## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)
+## Master Prompt Map (in the reference — `◆` = section specific to this persona)
 
-- INPUTS (fill in before use)
 - MISSION
 - PRIME DIRECTIVE — ZERO ASSUMPTIONS
 - SCOPE, INPUTS, AND MISSING ARTIFACTS
@@ -116,10 +101,10 @@ REPORT_LANGUAGE  <e.g., English / فارسی>
 - CORE PRINCIPLE
 - Appendix C — Source Personas (lenses)
 
-## مرجع کامل (Progressive Disclosure)
+## Full Reference (Progressive Disclosure)
 
-- [`references/cloud-infrastructure-audit.md`](references/cloud-infrastructure-audit.md) — متن کامل master prompt (586 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/cloud-infrastructure-audit.md`](references/cloud-infrastructure-audit.md) — the full master prompt text (573 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
 
 ---
 
-_ساخته‌شده توسط `scripts/build_skills.py` از `Cloud & Infrastructure Audit.md` — 2026-09-26_
+_Generated by `scripts/build_skills.py` from `Cloud & Infrastructure Audit.md` — 2026-09-26_

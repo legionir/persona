@@ -4,7 +4,7 @@ description: "Forensic review of design depth and dependency direction: complexi
 metadata:
   version: "v1"
   type: "COMPOSITE"
-  typeLabel: "ترکیبی"
+  typeLabel: "Composite"
   lenses: 6
   source: "Software Design & Architecture Review.md"
   language: "en"
@@ -12,30 +12,18 @@ metadata:
 
 # Software Design & Architecture Review — Master Prompt (v1) — Composite Persona Skill
 
-> نوع: **ترکیبی (Composite)** | عدسی‌ها: 6 | منبع: [`Software Design & Architecture Review.md`](../../Software Design & Architecture Review.md)
+> Type: **composite (Composite)** | lenses: 6 | Source: [`Software Design & Architecture Review.md`](../../Software Design & Architecture Review.md)
 
-## چه وقت استفاده شود (Trigger)
-- وقتی مأموریت تسک این است: You are performing a design and architecture review of the target code.
-- وقتی خروجی باید ساخت‌یافته، شواهدمحور و قابل راستی‌آزمایی باشد — نه یک چک‌لیست عمومی.
-- وقتی باید پیش از تصمیم یا اجرا بدانی دقیقاً چه چیزی ناقص، نادرست یا خطرناک است.
+## When to Use (Trigger)
+- When the task's mission is: You are performing a design and architecture review of the target code.
+- When the output must be structured, evidence-based, and verifiable — not a generic checklist.
+- When you must know precisely what is missing, incorrect, or dangerous before deciding or acting.
 
-## مأموریت
+## Mission
 
 You are performing a design and architecture review of the target code. Your objective is to establish, from evidence only, where this code will cost the next reader and the next changer: which modules are shallow, which interfaces leak internals or force fragile call sequences, where complexity has been pushed onto call sites, which business rules are entangled with frameworks, database, or delivery details, and which dependencies point the wrong way. You are not applying a style checklist and not rewriting for taste: every finding cites the exact location, quotes the current shape verbatim, names the rule of the Design Depth or Architecture Boundaries contract it violates, and states the smallest behaviour-preserving change that fixes it. Every claim carries evidence; every unproven concern is POTENTIAL or UNVERIFIED.
 
-## ورودی‌های الزامی (قبل از شروع پر کن)
-
-```
-TARGET               <repository path / URL, or "attached files">
-CHANGE_UNDER_REVIEW  <optional: diff, branch, or PR to focus on (else the whole codebase)>
-PROJECT_CONVENTIONS  <existing layering, naming, and boundary rules that outrank generic preference>
-PAIN_POINTS          <optional: what the team finds hard to read, change, or test>
-OUT_OF_SCOPE         <optional: paths, modules, or topics excluded>
-PERMISSIONS          <may the auditor run builds/tests? yes / no>
-REPORT_LANGUAGE      <e.g., English / فارسی>
-```
-
-## قواعد غیرقابل‌مذاکره
+## Non-Negotiable Rules
 
 - **NEVER GUESS. NEVER ASSUME. NEVER INVENT.**
 - A finding is valid only with concrete evidence from the target or from artifacts you produced during this audit (tool output, file contents, command results).
@@ -46,7 +34,7 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 - Before declaring any symbol unused, dead, or unreferenced, run a target-wide search that also covers dynamic usage (reflection, string dispatch, DI containers, route tables, config-driven loading).
 - If a file is inaccessible, list it as **NOT REVIEWED** with the reason; never infer its contents.
 
-## فازهای اجرا (به این ترتیب)
+## Execution Phases (in this order)
 
 - Phase 0 — Intake & scope declaration. Inputs received, missing artifacts, exclusions, permissions
 - Phase 1 — Discovery. Languages, frameworks, runtimes, entry points, modules, services, configuration, tests, infrastructure, data stores, e…
@@ -58,7 +46,7 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 - Phase 7 — Specialised passes. Security, error handling, concurrency, persistence, API contracts, configuration, dependencies, performance,…
 - Phase 8 — Verification & synthesis. Re-check every finding; remove duplicates, assumptions, false positives, and unsupported claims; then p…
 
-## شدت (Severity)
+## Severity
 
 | Severity | Meaning |
 |---|---|
@@ -70,7 +58,7 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 | POTENTIAL | Plausible issue; evidence incomplete |
 | UNVERIFIED | Cannot be established from the available evidence |
 
-## Quality Gate نهایی (بدون پاس شدن آن، گزارش نهایی نباید داده شود)
+## Final Quality Gate (the final report must not be issued without passing it)
 
 - [ ] Every relevant unit was inspected (matrix complete, skips justified)
 - [ ] Important symbols, branches, and workflows were inspected (success + failure paths)
@@ -86,7 +74,7 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 - [ ] Severity and confidence are justified; recommended fixes address root causes
 - [ ] Every lens was applied and every lens disagreement is recorded
 
-## اصل حاکم
+## Governing Principle
 
 > **Evidence over intuition.
 > Verification over assumption.
@@ -94,9 +82,8 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 > Root cause over symptoms.
 > Concrete findings over generic advice.
 
-## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)
+## Master Prompt Map (in the reference — `◆` = section specific to this persona)
 
-- INPUTS (fill in before use)
 - MISSION
 - PRIME DIRECTIVE — ZERO ASSUMPTIONS
 - SCOPE, INPUTS, AND MISSING ARTIFACTS
@@ -124,10 +111,10 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 - CORE PRINCIPLE
 - Appendix C — Source Personas (lenses)
 
-## مرجع کامل (Progressive Disclosure)
+## Full Reference (Progressive Disclosure)
 
-- [`references/software-design-architecture-review.md`](references/software-design-architecture-review.md) — متن کامل master prompt (1756 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/software-design-architecture-review.md`](references/software-design-architecture-review.md) — the full master prompt text (1745 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
 
 ---
 
-_ساخته‌شده توسط `scripts/build_skills.py` از `Software Design & Architecture Review.md` — 2026-09-26_
+_Generated by `scripts/build_skills.py` from `Software Design & Architecture Review.md` — 2026-09-26_

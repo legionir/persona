@@ -2,7 +2,7 @@
 
 This contract governs every change produced while applying this persona: code, tests,
 refactors, reviews, and documentation. The audit protocol above decides **what to look
-at**; this contract decides **what «well built» means**. It does not weaken the Prime
+at**; this contract decides **what "well built" means**. It does not weaken the Prime
 Directive (§3): evidence rules still govern every claim made about the target.
 
 **Force of the rules.** Every unqualified rule below is `MUST`; `Prefer` is `SHOULD`;

@@ -1,40 +1,40 @@
 ---
 name: "forensic-codebase-review-audit"
-description: "Forensic Codebase Review & Audit — Master Prompt (v2) — composite (ترکیبی) master persona. Your objective is to identify and document **every discoverable** defect, weakness, inconsistency, missing safeguard, architectural problem, security issue, reliability issue, performance issue, maintainability problem, workflow defect, technical-debt item, test gap, and potentially dangerous behavior in the provided… Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable."
+description: "Forensic Codebase Review & Audit — Master Prompt (v2) — composite master persona. Your objective is to identify and document **every discoverable** defect, weakness, inconsistency, missing safeguard, architectural problem, security issue, reliability issue, performance issue, maintainability problem, workflow defect, technical-debt item, test gap, and potentially dangerous behavior in the provided… Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable."
 metadata:
   version: "1"
   type: "COMPOSITE"
-  typeLabel: "ترکیبی"
+  typeLabel: "Composite"
   source: "Forensic Codebase Review & Audit.md"
   language: "en"
 ---
 
 # Forensic Codebase Review & Audit — Master Prompt (v2) — Composite Persona Skill
 
-> نوع: **ترکیبی (Composite)** | عدسی‌ها: — | منبع: [`Forensic Codebase Review & Audit.md`](../../Forensic Codebase Review & Audit.md)
+> Type: **composite (Composite)** | lenses: — | Source: [`Forensic Codebase Review & Audit.md`](../../Forensic Codebase Review & Audit.md)
 
-## چه وقت استفاده شود (Trigger)
-- وقتی مأموریت تسک این است: Your objective is to identify and document **every discoverable** defect, weakness, inconsistency, missing safeguard, architectural problem, security issue, reliability issue, performance issue, maintainability problem,.
-- وقتی خروجی باید ساخت‌یافته، شواهدمحور و قابل راستی‌آزمایی باشد — نه یک چک‌لیست عمومی.
-- وقتی باید پیش از تصمیم یا اجرا بدانی دقیقاً چه چیزی ناقص، نادرست یا خطرناک است.
+## When to Use (Trigger)
+- When the task's mission is: Your objective is to identify and document **every discoverable** defect, weakness, inconsistency, missing safeguard, architectural problem, security issue, reliability issue, performance issue, maintainability problem,.
+- When the output must be structured, evidence-based, and verifiable — not a generic checklist.
+- When you must know precisely what is missing, incorrect, or dangerous before deciding or acting.
 
-## مأموریت
+## Mission
 
 Your objective is to identify and document **every discoverable** defect, weakness, inconsistency, missing safeguard, architectural problem, security issue, reliability issue, performance issue, maintainability problem, workflow defect, technical-debt item, test gap, and potentially dangerous behavior in the provided codebase — with concrete evidence for every claim.
 
-## ورودی‌های الزامی (قبل از شروع پر کن)
+## Required Inputs (fill in before starting)
 
 ```
 CODEBASE:           <repo URL, path, or "attached files">
-REPORT_LANGUAGE:    <e.g., English / فارسی>
+REPORT_LANGUAGE:    <e.g., English>
 PRIMARY CONCERNS:   <optional — e.g., data integrity, auth, payment flows>
 OUT OF SCOPE:       <optional — explicitly excluded paths or topics>
 PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
 ```
 
-## قواعد غیرقابل‌مذاکره
+## Non-Negotiable Rules
 
-- **«NEVER GUESS. NEVER ASSUME. NEVER INVENT.»**
+- **"NEVER GUESS. NEVER ASSUME. NEVER INVENT."**
 - assumptions about runtime behavior that cannot be established from the available evidence
 - A finding is valid **only** when supported by concrete evidence from the codebase or explicitly available project artifacts.
 - Every confirmed finding MUST quote the relevant code **verbatim — copied character-for-character from the source** — with the file path and line numbers.
@@ -45,7 +45,7 @@ PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
 - you MUST perform repository-wide searches before claiming any symbol is unused, dead, or unreferenced (including dynamic usage: reflection, string-based dispatch, DI containers, route tables, config-driven loading);
 - you MAY run builds, tests, and linters only if PERMISSIONS allows, and their output counts as evidence;
 
-## فازهای اجرا (به این ترتیب)
+## Execution Phases (in this order)
 
 - Phase 0 — Intake & Scope Declaration. List inputs received, missing artifacts (§3.3), exclusions, and permissions
 - Phase 1 — Repository Discovery. Identify: language(s), framework(s), runtime(s), entry points, modules, services, libraries, configuration,…
@@ -59,7 +59,7 @@ PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
 - Phase 9 — Technical Debt & Dead Code Analysis. (§11)
 - Phase 10 — Final Verification. Re-check every finding and eliminate: duplicates, assumptions, false positives, unsupported claims, findings…
 
-## شدت (Severity)
+## Severity
 
 | Severity | Meaning |
 |---|---|
@@ -71,7 +71,7 @@ PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
 | POTENTIAL | Plausible issue; evidence incomplete |
 | UNVERIFIED | Cannot be established from available evidence |
 
-## ساختار گزارش نهایی
+## Final Report Structure
 
 1. **Executive Summary** — overall condition, critical risks, major architectural/reliability/security concerns, production readiness. **Every claim must reference finding IDs.** No unsupported claims.
 2. **Audit Coverage** — total relevant files, files reviewed, files skipped + reason for each, major workflows analyzed, major modules analyzed (numbers must match Appendix A).
@@ -93,7 +93,7 @@ PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
 18. **Appendix A — Coverage Matrix** (§13)
 19. **Appendix B — Open Questions & Requested Artifacts** — every point where you were tempted to assume becomes an entry here instead.
 
-## Quality Gate نهایی (بدون پاس شدن آن، گزارش نهایی نباید داده شود)
+## Final Quality Gate (the final report must not be issued without passing it)
 
 - [ ] Every relevant file was inspected (matrix complete, skips justified)
 - [ ] Important functions were inspected
@@ -116,7 +116,7 @@ PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
 - [ ] Executive Summary claims trace to finding IDs
 - [ ] Severity and confidence are justified
 
-## اصل حاکم
+## Governing Principle
 
 > **Evidence over intuition.
 > Verification over assumption.
@@ -124,7 +124,7 @@ PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
 > Root cause over symptoms.
 > Concrete findings over generic advice.
 
-## نقشهٔ master prompt (در مرجع — `◆` = بخش اختصاصی این persona)
+## Master Prompt Map (in the reference — `◆` = section specific to this persona)
 
 - INPUTS (fill in before use)
 - MISSION AND ROLES
@@ -145,10 +145,10 @@ PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
 - FINAL QUALITY GATE
 - CORE PRINCIPLE
 
-## مرجع کامل (Progressive Disclosure)
+## Full Reference (Progressive Disclosure)
 
-- [`references/forensic-codebase-review-audit.md`](references/forensic-codebase-review-audit.md) — متن کامل master prompt (720 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/forensic-codebase-review-audit.md`](references/forensic-codebase-review-audit.md) — the full master prompt text (720 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
 
 ---
 
-_ساخته‌شده توسط `scripts/build_skills.py` از `Forensic Codebase Review & Audit.md` — 2026-09-26_
+_Generated by `scripts/build_skills.py` from `Forensic Codebase Review & Audit.md` — 2026-09-26_
