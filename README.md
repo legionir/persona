@@ -11,6 +11,8 @@
 - [دسته‌بندی بر اساس حوزه](#دستهبندی-بر-اساس-حوزه)
 - [مپینگ ناظر-مجری](#مپینگ-ناظر-مجری)
 - [آمار و خلاصه](#آمار-و-خلاصه)
+- [Personaهای ترکیبی (Master Prompt)](#personaهای-ترکیبی-master-prompt)
+- [Skillها (Agent Skills)](#skillها-agent-skills)
 - [ساختار و بازتولید](#ساختار-و-بازتولید)
 
 ## جدول کامل نقش‌ها
@@ -880,12 +882,62 @@
 17. Recruitment Manager
 
 
+## Personaهای ترکیبی (Master Prompt)
+
+علاوه بر ۱۷۰ persona تک‌نقش، مخزن **personaهای ترکیبی** دارد: master promptهایی که چند نقش را
+همزمان (به‌عنوان «عدسی») اجرا می‌کنند و یک پروتکل مشترکِ شواهدمحور روی آن‌ها حاکم است.
+
+| Persona ترکیبی | محور | فایل | Skill |
+|---|---|---|---|
+| Forensic Codebase Review & Audit | ممیزی forensic کدبیس با قاعدهٔ «هیچ حدس، هیچ ساخت» | [`Forensic Codebase Review & Audit.md`](Forensic%20Codebase%20Review%20&%20Audit.md) | [`forensic-codebase-review-audit`](skills/forensic-codebase-review-audit/SKILL.md) |
+| Architecture Review & Architecture Audit | بازبینی و ممیزی معماری، سنجش ۰–۱۰۰ و verdict | [`Architecture Review & Architecture Audit.md`](Architecture%20Review%20&%20Architecture%20Audit.md) | [`architecture-review-architecture-audit`](skills/architecture-review-architecture-audit/SKILL.md) |
+| Codebase Integration & Workflow Integrity Audit Protocol | صحت یکپارچگی و ورکفلو، فازبه‌فاز و قابل ادامه | [`codebase-integrity-audit-protocol.md`](codebase-integrity-audit-protocol.md) | [`codebase-integrity-audit-protocol`](skills/codebase-integrity-audit-protocol/SKILL.md) |
+| Execution Plan Generator | تبدیل تسک بزرگ به پلن اجرایی فازبه‌فاز | [`Execution Plan Generator.md`](Execution%20Plan%20Generator.md) | [`execution-plan-generator`](skills/execution-plan-generator/SKILL.md) |
+| Production Readiness & Reliability Audit | آمادگی production: Rollback/Restore/Migration/Observability/SLO | [`Production Readiness & Reliability Audit.md`](Production%20Readiness%20&%20Reliability%20Audit.md) | [`production-readiness-reliability-audit`](skills/production-readiness-reliability-audit/SKILL.md) |
+
+ساخت composite تازه (از بلوک‌های آماده + spec):
+
+```bash
+python3 scripts/compose_persona.py --list                                  # بلوک‌ها و specها
+python3 scripts/compose_persona.py --spec composites/<slug>.json           # ساخت
+python3 scripts/compose_persona.py --all --check                           # اعتبارسنجی همه
+```
+
+راهنمای کامل: [`docs/composite-personas.md`](docs/composite-personas.md) — بلوک‌ها در
+[`composites/blocks/`](composites/blocks/) و specها در [`composites/`](composites/) هستند.
+
+## Skillها (Agent Skills)
+
+هر persona به شکل **Agent Skill** هم منتشر می‌شود: `SKILL.md` کوچک (trigger + هستهٔ عملیاتی)
+به‌علاوهٔ متن کامل persona در `references/` (progressive disclosure).
+
+```bash
+python3 scripts/build_skills.py                 # ساخت ۱۷۵ skill (۱۷۰ نقش + ۵ ترکیبی)
+python3 scripts/build_skills.py --only backend-developer
+python3 scripts/build_skills.py --source "prompts/audit/*.md"
+python3 scripts/validate_skills.py              # اعتبارسنجی frontmatter/لینک/اندازه
+```
+
+نصب در Claude Code:
+
+```bash
+mkdir -p .claude/skills && cp -r skills/backend-developer .claude/skills/
+```
+
+فهرست و متادیتا: [`skills/README.md`](skills/README.md) و [`skills/index.json`](skills/index.json).
+راهنمای کامل: [`docs/persona-skills.md`](docs/persona-skills.md).
+
 ## ساختار و بازتولید
 
 ### ساختار پوشهٔ prompts
 
 - `prompts/audit/` — پرامپت‌های ممیزی برای نقش‌های **ناظر**. هدف: ارزیابی شواهد‌محور کیفیت، کامل‌بودن و انطباق خروجیِ حوزهٔ همان نقش.
 - `prompts/implementation/` — پرامپت‌های راهنمای پیاده‌سازی برای نقش‌های **مجری**. هدف: تبدیل تسک به یک پلن اجرایی دقیق، فاز‌به‌فاز، وابستگی‌آگاه و دارای معیار پذیرش.
+- `<ریشه>/*.md` — personaهای **ترکیبی** (master prompt): چند نقش با یک پروتکل مشترک.
+- `composites/blocks/` — بلوک‌های قابل استفادهٔ مجدد برای ساخت persona ترکیبی.
+- `composites/*.json` — spec هر persona ترکیبی (مأموریت، ورودی‌ها، عدسی‌ها، پیشتازی، بخش‌های اختصاصی).
+- `skills/<name>/SKILL.md` و `skills/<name>/references/` — خروجی تبدیل persona به Agent Skill.
+- `docs/` — راهنمای ساخت persona ترکیبی و تبدیل به skill.
 
 > همهٔ پرامپت‌های ناظر شامل بخش الزامی «قواعد تحلیل کد و کدبیس» هستند: ممنوعیت حدس و گمان، بررسی فایل‌به‌فایل و خط‌به‌خط، تحلیل دقیق ورکفلوها، مستندسازی کامل یافته‌ها (هر یافته با `FILE / LINE`)، و تقسیم پروژه‌های بزرگ به بخش‌های کوچک‌ترِ قابل بررسی (از طریق Coverage Manifest و Decomposition Table).
 
@@ -916,3 +968,16 @@ python3 scripts/build_metadata.py
 جستجوگر تعاملی: [`index.html`](index.html)
 
 این اسکریپت هم فایل‌های پرامپت را بازنویسی می‌کند و هم ستون `پرامپت` و لینک‌های جدول اصلی README را به‌روز نگه می‌دارد.
+
+ساخت/بازساخت personaهای ترکیبی:
+
+```bash
+python3 scripts/compose_persona.py --all
+```
+
+ساخت skillها از personaها (و اعتبارسنجی آن‌ها):
+
+```bash
+python3 scripts/build_skills.py
+python3 scripts/validate_skills.py
+```

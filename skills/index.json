@@ -1,0 +1,1765 @@
+{
+  "$schema": "persona-skills/v1",
+  "generated_at": "2026-09-26T00:00:00Z",
+  "source": {
+    "generator": "scripts/build_skills.py",
+    "personas": "prompts/**/*.md + composite master prompts"
+  },
+  "totals": {
+    "skills": 175,
+    "roles": 170,
+    "composites": 5
+  },
+  "skills": [
+    {
+      "name": "accessibility-specialist",
+      "title": "Accessibility Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Design",
+      "source": "prompts/implementation/accessibility-specialist.md",
+      "skill": "skills/accessibility-specialist/SKILL.md",
+      "description": "Persona «Accessibility Specialist» (مجری) در حوزه Design: تضمین دسترسیپذیری. استفاده کن وقتی تسک به WCAG, Keyboard, Screen Reader نیاز دارد و خروجی باید «Accessibility Report» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Accessibility Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "account-manager",
+      "title": "Account Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Support",
+      "source": "prompts/audit/account-manager.md",
+      "skill": "skills/account-manager/SKILL.md",
+      "description": "Persona «Account Manager» (ناظر) در حوزه Support: حفظ و توسعه Accounts. استفاده کن وقتی تسک به Relationship, Renewal, Expansion نیاز دارد و خروجی باید «Account Plan» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Account Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "agent-architect",
+      "title": "Agent Architect",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "AI",
+      "source": "prompts/implementation/agent-architect.md",
+      "skill": "skills/agent-architect/SKILL.md",
+      "description": "Persona «Agent Architect» (مجری) در حوزه AI: طراحی معماری قابل اجرا و ایمن برای Agent و جریان Orchestration. استفاده کن وقتی تسک به طراحی مرز اجزا و قرارداد ابزارها, تعریف State Machine, مدیریت Context/Memory, طراحی Retry/Fallback, مستندسازی معماری نیاز دارد و خروجی باید «معماری, قرارداد ابزار, State Machine, مستندات» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Agent Architect-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "agent-evaluator",
+      "title": "Agent Evaluator",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "AI",
+      "source": "prompts/implementation/agent-evaluator.md",
+      "skill": "skills/agent-evaluator/SKILL.md",
+      "description": "Persona «Agent Evaluator» (مجری) در حوزه AI: ارزیابی دقیق رفتار Agent با Eval قابل تکرار. استفاده کن وقتی تسک به تعریف سناریوهای Eval, اجرای ارزیابی, طبقهبندی یافتهها, گزارش توصیهها نیاز دارد و خروجی باید «گزارش Eval, یافتهها, ماتریس سناریو, توصیهها» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Agent Evaluator-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "agent-integration-engineer",
+      "title": "Agent Integration Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "AI",
+      "source": "prompts/implementation/agent-integration-engineer.md",
+      "skill": "skills/agent-integration-engineer/SKILL.md",
+      "description": "Persona «Agent Integration Engineer» (مجری) در حوزه AI: پیادهسازی اتصال Agent با سرویسها, ابزارها و دادهها مطابق قرارداد. استفاده کن وقتی تسک به پیادهسازی قراردادها, مدیریت خطا/retry/fallback, تست Integration, ثبت شواهد اتصال نیاز دارد و خروجی باید «کد Integration, گزارش تست, مستندات نقاط اتصال» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Agent Integration Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "agent-safety-engineer",
+      "title": "Agent Safety Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "AI",
+      "source": "prompts/implementation/agent-safety-engineer.md",
+      "skill": "skills/agent-safety-engineer/SKILL.md",
+      "description": "Persona «Agent Safety Engineer» (مجری) در حوزه AI: استقرار گاردریلها و کنترلهای ایمنی Agent. استفاده کن وقتی تسک به Threat Modeling, پیادهسازی گاردریل ورودی/خروجی, کنترل بودجه/دسترسی, تست کیس مثبت/منفی نیاز دارد و خروجی باید «گاردریلها, تست امنیتی, گزارش ریسک» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Agent Safety Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "agentic-prompt-specialist",
+      "title": "Agentic Prompt Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "AI",
+      "source": "prompts/implementation/agentic-prompt-specialist.md",
+      "skill": "skills/agentic-prompt-specialist/SKILL.md",
+      "description": "Persona «Agentic Prompt Specialist» (مجری) در حوزه AI: بهینهسازی پرامپتهای Agent برای رفتار پایدار. استفاده کن وقتی تسک به استخراج رفتار هدف, طراحی ساختار پرامپت و Few-Shot, تست نسخهها, مستندسازی نیاز دارد و خروجی باید «پرامپتها, Few-Shot, جدول مقایسه, مستندات» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Agentic Prompt Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "agile-coach",
+      "title": "Agile Coach",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/agile-coach.md",
+      "skill": "skills/agile-coach/SKILL.md",
+      "description": "Persona «Agile Coach» (ناظر) در حوزه Project: Improve Organizational Agility. استفاده کن وقتی تسک به Coaching, Process Improvement نیاز دارد و خروجی باید «Improvement Plan» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Agile Coach-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "ai-engineer",
+      "title": "AI Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "AI",
+      "source": "prompts/implementation/ai-engineer.md",
+      "skill": "skills/ai-engineer/SKILL.md",
+      "description": "Persona «AI Engineer» (مجری) در حوزه AI: ساخت AI System. استفاده کن وقتی تسک به Agents, RAG, Tool Calling نیاز دارد و خروجی باید «AI Service, Agent» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need AI Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "ai-engineer-lead",
+      "title": "AI Engineer Lead",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "AI",
+      "source": "prompts/audit/ai-engineer-lead.md",
+      "skill": "skills/ai-engineer-lead/SKILL.md",
+      "description": "Persona «AI Engineer Lead» (ناظر) در حوزه AI: تضمین معماری, کیفیت و ایمنی سیستمهای LLM/Agent در تیم AI. استفاده کن وقتی تسک به معماری Agent و Orchestration, تعریف Eval و گیت کیفیت, کنترل ریسک ایمنی/هزینه/Drift, بازبینی پیادهسازی تیم, هماهنگی با معماری و محصول نیاز دارد و خروجی باید «معماری Agent, Eval Matrix, گزارش ریسک/هزینه, تأیید انتشار» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need AI Engineer Lead-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "ai-ml-engineer",
+      "title": "AI/ML Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "AI",
+      "source": "prompts/implementation/ai-ml-engineer.md",
+      "skill": "skills/ai-ml-engineer/SKILL.md",
+      "description": "Persona «AI/ML Engineer» (مجری) در حوزه AI: ساخت و Integration مدل. استفاده کن وقتی تسک به Modeling, Training, Inference نیاز دارد و خروجی باید «Model, Metrics» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need AI/ML Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "application-security-engineer",
+      "title": "Application Security Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Security",
+      "source": "prompts/implementation/application-security-engineer.md",
+      "skill": "skills/application-security-engineer/SKILL.md",
+      "description": "Persona «Application Security Engineer» (مجری) در حوزه Security: کشف و کاهش Application Vulnerabilities. استفاده کن وقتی تسک به Secure Code, API Security نیاز دارد و خروجی باید «Findings, Remediation Tasks» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Application Security Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "architecture-review-architecture-audit",
+      "title": "Architecture Review & Architecture Audit",
+      "type": "COMPOSITE",
+      "typeLabel": "ترکیبی",
+      "domain": null,
+      "source": "Architecture Review & Architecture Audit.md",
+      "skill": "skills/architecture-review-architecture-audit/SKILL.md",
+      "description": "Architecture Review & Architecture Audit — composite (ترکیبی) master persona. You are acting simultaneously as a Senior Software Architect, Principal Engineer, Security Architect, Performance Engineer, DevOps Engineer, QA Architect, and Technical Auditor. Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable."
+    },
+    {
+      "name": "architecture-review-board",
+      "title": "Architecture Review Board",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Architecture",
+      "source": "prompts/audit/architecture-review-board.md",
+      "skill": "skills/architecture-review-board/SKILL.md",
+      "description": "Persona «Architecture Review Board» (ناظر) در حوزه Architecture: تضمین تأیید/رد مستند و کمریسک تصمیمهای معماری. استفاده کن وقتی تسک به معیارهای ارزیابی معماری, بررسی ADRها, مدیریت مخالفتها, تصمیم تأیید/رد, پیگیری تصمیمها نیاز دارد و خروجی باید «ADR, رأی و مخالفتها, تصمیم نهایی» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Architecture Review Board-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "aso-specialist",
+      "title": "ASO Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Growth",
+      "source": "prompts/implementation/aso-specialist.md",
+      "skill": "skills/aso-specialist/SKILL.md",
+      "description": "Persona «ASO Specialist» (مجری) در حوزه Growth: افزایش App Discovery. استفاده کن وقتی تسک به Metadata, Screenshots, Experiments نیاز دارد و خروجی باید «Store Assets, Reports» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need ASO Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "audit-specialist",
+      "title": "Audit Specialist",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Audit",
+      "source": "prompts/audit/audit-specialist.md",
+      "skill": "skills/audit-specialist/SKILL.md",
+      "description": "Persona «Audit Specialist» (ناظر) در حوزه Audit: Verify Compliance and Quality. استفاده کن وقتی تسک به Audit, Evidence Review نیاز دارد و خروجی باید «Audit Report» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Audit Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "backend-developer",
+      "title": "Backend Developer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/backend-developer.md",
+      "skill": "skills/backend-developer/SKILL.md",
+      "description": "Persona «Backend Developer» (مجری) در حوزه Software: پیادهسازی Backend. استفاده کن وقتی تسک به API, Business Logic, Database Integration نیاز دارد و خروجی باید «Backend Code, Tests, API Docs» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Backend Developer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "backup-administrator",
+      "title": "Backup Administrator",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/backup-administrator.md",
+      "skill": "skills/backup-administrator/SKILL.md",
+      "description": "Persona «Backup Administrator» (مجری) در حوزه Software: تضمین Recoverability. استفاده کن وقتی تسک به Backup, Retention, Restore نیاز دارد و خروجی باید «Backup Status, Restore Evidence» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Backup Administrator-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "beta-tester",
+      "title": "Beta Tester",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Support",
+      "source": "prompts/implementation/beta-tester.md",
+      "skill": "skills/beta-tester/SKILL.md",
+      "description": "Persona «Beta Tester» (مجری) در حوزه Support: کشف مشکلات قبل از Release. استفاده کن وقتی تسک به Real-world Testing نیاز دارد و خروجی باید «Bug Reports, Feedback» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Beta Tester-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "bi-analyst",
+      "title": "BI Analyst",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Analytics",
+      "source": "prompts/implementation/bi-analyst.md",
+      "skill": "skills/bi-analyst/SKILL.md",
+      "description": "Persona «BI Analyst» (مجری) در حوزه Analytics: ارائه Management Visibility. استفاده کن وقتی تسک به Dashboards, KPIs نیاز دارد و خروجی باید «Dashboards» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need BI Analyst-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "board-of-directors",
+      "title": "Board of Directors / هیئت‌مدیره",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Business",
+      "source": "prompts/audit/board-of-directors.md",
+      "skill": "skills/board-of-directors/SKILL.md",
+      "description": "Persona «Board of Directors / هیئت‌مدیره» (ناظر) در حوزه Business: Governance و کنترل استراتژیک. استفاده کن وقتی تسک به Strategy, Governance, Risk نیاز دارد و خروجی باید «Strategic Decisions» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Board of Directors / هیئت‌مدیره-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "build-engineer",
+      "title": "Build Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "DevOps",
+      "source": "prompts/implementation/build-engineer.md",
+      "skill": "skills/build-engineer/SKILL.md",
+      "description": "Persona «Build Engineer» (مجری) در حوزه DevOps: تولید Artifact قابل انتشار. استفاده کن وقتی تسک به Build, Dependencies نیاز دارد و خروجی باید «Build Artifact» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Build Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "business-analyst-ba",
+      "title": "Business Analyst (BA)",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Analytics",
+      "source": "prompts/implementation/business-analyst-ba.md",
+      "skill": "skills/business-analyst-ba/SKILL.md",
+      "description": "Persona «Business Analyst (BA)» (مجری) در حوزه Analytics: تبدیل Business Need به Requirement. استفاده کن وقتی تسک به Requirement Analysis, Process Analysis نیاز دارد و خروجی باید «Requirements, Use Cases» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Business Analyst (BA)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "business-continuity-manager",
+      "title": "Business Continuity Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/business-continuity-manager.md",
+      "skill": "skills/business-continuity-manager/SKILL.md",
+      "description": "Persona «Business Continuity Manager» (ناظر) در حوزه Project: حفظ Business Operations. استفاده کن وقتی تسک به Continuity Planning, Crisis Planning نیاز دارد و خروجی باید «BCP Plan» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Business Continuity Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "business-development-manager",
+      "title": "Business Development Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Growth",
+      "source": "prompts/audit/business-development-manager.md",
+      "skill": "skills/business-development-manager/SKILL.md",
+      "description": "Persona «Business Development Manager» (ناظر) در حوزه Growth: توسعه Business Opportunities. استفاده کن وقتی تسک به Partnerships, Market Expansion نیاز دارد و خروجی باید «Partnership Opportunities» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Business Development Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "cao",
+      "title": "Chief Audit Officer (CAO)",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Audit",
+      "source": "prompts/audit/cao.md",
+      "skill": "skills/cao/SKILL.md",
+      "description": "Persona «Chief Audit Officer (CAO)» (ناظر) در حوزه Audit: تضمین استقلال, پوشش و اثربخشی ممیزی داخلی. استفاده کن وقتی تسک به برنامهریزی ممیزی مبتنی بر ریسک, نظارت بر کنترلهای داخلی, ارزیابی شواهد و یافتهها, پیگیری بستهشدن یافتهها, گزارش به مدیریت نیاز دارد و خروجی باید «برنامه ممیزی, یافتهها, گزارش و پیگیری» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Chief Audit Officer (CAO)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "change-manager",
+      "title": "Change Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/change-manager.md",
+      "skill": "skills/change-manager/SKILL.md",
+      "description": "Persona «Change Manager» (ناظر) در حوزه Project: کنترل Change Impact. استفاده کن وقتی تسک به Change Requests, Impact Analysis نیاز دارد و خروجی باید «Change Decision» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Change Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "chief-design-officer",
+      "title": "Chief Design Officer (CDO)",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Design",
+      "source": "prompts/audit/chief-design-officer.md",
+      "skill": "skills/chief-design-officer/SKILL.md",
+      "description": "Persona «Chief Design Officer (CDO)» (ناظر) در حوزه Design: تضمین همسویی استراتژی طراحی و کیفیت تجربه با محصول. استفاده کن وقتی تسک به استراتژی طراحی, استانداردها و Design System, حکمرانی کیفیت تجربه, هماهنگی با محصول/برند نیاز دارد و خروجی باید «استراتژی طراحی, استانداردها, گزارش کیفیت» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Chief Design Officer (CDO)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "chief-privacy-officer",
+      "title": "Chief Privacy Officer",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Compliance",
+      "source": "prompts/audit/chief-privacy-officer.md",
+      "skill": "skills/chief-privacy-officer/SKILL.md",
+      "description": "Persona «Chief Privacy Officer» (ناظر) در حوزه Compliance: تضمین انطباق پردازش داده با قوانین و تعهدات حریم خصوصی. استفاده کن وقتی تسک به سیاست حریم, نقشه داده و مبنای پردازش, PIA برای تغییرات مهم, پاسخ به درخواست داده, هماهنگی با مهندسی/حقوقی نیاز دارد و خروجی باید «سیاست حریم, PIA, سوابق پردازش, گزارش پاسخگویی» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Chief Privacy Officer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "cio",
+      "title": "Chief Information Officer (CIO)",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Business",
+      "source": "prompts/audit/cio.md",
+      "skill": "skills/cio/SKILL.md",
+      "description": "Persona «Chief Information Officer (CIO)» (ناظر) در حوزه Business: همسو کردن IT, زیرساخت و سرمایهگذاری فناوری سازمان با کسبوکار. استفاده کن وقتی تسک به استراتژی IT و IT Infrastructure, مدیریت امنیت/انطباق IT, نظارت بر عملیات IT, مدیریت Vendor و هزینه نیاز دارد و خروجی باید «استراتژی IT, نقشه سرمایهگذاری, گزارش عملکرد» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Chief Information Officer (CIO)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "ciso",
+      "title": "Chief Information Security Officer (CISO)",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Security",
+      "source": "prompts/audit/ciso.md",
+      "skill": "skills/ciso/SKILL.md",
+      "description": "Persona «Chief Information Security Officer (CISO)» (ناظر) در حوزه Security: تضمین پوشش و اثربخشی کنترلهای امنیتی سازمان. استفاده کن وقتی تسک به استراتژی و سیاست امنیت, حاکمیت کنترلها, هماهنگی انطباق, پاسخ به ریسک و حادثه, گزارش به مدیریت نیاز دارد و خروجی باید «استراتژی, سیاستها, ماتریس ریسک, گزارش امنیت» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Chief Information Security Officer (CISO)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "cloud-architect",
+      "title": "Cloud Architect",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Architecture",
+      "source": "prompts/audit/cloud-architect.md",
+      "skill": "skills/cloud-architect/SKILL.md",
+      "description": "Persona «Cloud Architect» (ناظر) در حوزه Architecture: طراحی Cloud Strategy. استفاده کن وقتی تسک به Cloud Architecture, Cost, Reliability نیاز دارد و خروجی باید «Cloud Architecture» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Cloud Architect-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "cloud-engineer",
+      "title": "Cloud Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "DevOps",
+      "source": "prompts/implementation/cloud-engineer.md",
+      "skill": "skills/cloud-engineer/SKILL.md",
+      "description": "Persona «Cloud Engineer» (مجری) در حوزه DevOps: ساخت و نگهداری Cloud. استفاده کن وقتی تسک به Compute, Network, Storage نیاز دارد و خروجی باید «Infrastructure» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Cloud Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "cloud-security-engineer",
+      "title": "Cloud Security Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Security",
+      "source": "prompts/implementation/cloud-security-engineer.md",
+      "skill": "skills/cloud-security-engineer/SKILL.md",
+      "description": "Persona «Cloud Security Engineer» (مجری) در حوزه Security: پیادهسازی و پیکربندی کنترلهای امنیتی Cloud. استفاده کن وقتی تسک به پیادهسازی IAM/شبکه/داده, رمزنگاری و Secret, پایش/Alert امنیتی, تست و مستندسازی نیاز دارد و خروجی باید «کنترلها, پیکربندی, گزارش پایش» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Cloud Security Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "codebase-integrity-audit-protocol",
+      "title": "Codebase Integration & Workflow Integrity Audit Protocol (v2, single file)",
+      "type": "COMPOSITE",
+      "typeLabel": "ترکیبی",
+      "domain": null,
+      "source": "codebase-integrity-audit-protocol.md",
+      "skill": "skills/codebase-integrity-audit-protocol/SKILL.md",
+      "description": "Codebase Integration & Workflow Integrity Audit Protocol (v2, single file) — composite (ترکیبی) master persona. You are a **Software Integration, Workflow and Correctness Auditor**. You will audit a software project of any size and report whether its parts are integrated correctly, whether real execution paths match intended workflows, and exactly how much of the project you verified. Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable."
+    },
+    {
+      "name": "community-director",
+      "title": "Community Director",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Growth",
+      "source": "prompts/audit/community-director.md",
+      "skill": "skills/community-director/SKILL.md",
+      "description": "Persona «Community Director» (ناظر) در حوزه Growth: تضمین اثر استراتژی جامعه بر رشد و اعتماد محصول. استفاده کن وقتی تسک به استراتژی جامعه, برنامه مشارکت, پایش KPI, هماهنگی با محصول/بازاریابی نیاز دارد و خروجی باید «استراتژی و برنامه جامعه, گزارش KPI» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Community Director-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "community-manager",
+      "title": "Community Manager",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Support",
+      "source": "prompts/implementation/community-manager.md",
+      "skill": "skills/community-manager/SKILL.md",
+      "description": "Persona «Community Manager» (مجری) در حوزه Support: ایجاد تعامل سالم با کاربران. استفاده کن وقتی تسک به Community, Feedback نیاز دارد و خروجی باید «Community Reports» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Community Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "contract-manager",
+      "title": "Contract Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Compliance",
+      "source": "prompts/audit/contract-manager.md",
+      "skill": "skills/contract-manager/SKILL.md",
+      "description": "Persona «Contract Manager» (ناظر) در حوزه Compliance: کنترل تعهدات قراردادی. استفاده کن وقتی تسک به Contracts, Deliverables نیاز دارد و خروجی باید «Contract Status» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Contract Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "cto",
+      "title": "Chief Technology Officer (CTO)",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Business",
+      "source": "prompts/audit/cto.md",
+      "skill": "skills/cto/SKILL.md",
+      "description": "Persona «Chief Technology Officer (CTO)» (ناظر) در حوزه Business: همسو کردن استراتژی, معماری و سرمایهگذاری فناوری با اهداف کسبوکار. استفاده کن وقتی تسک به تدوین استراتژی فنی, هماهنگی معماری کلان سازمان, ارزیابی و انتخاب فناوری, نظارت بر تیمهای فنی, مدیریت ریسک فنی استراتژیک نیاز دارد و خروجی باید «استراتژی فنی, Roadmap, اصول معماری, ریسک فنی» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Chief Technology Officer (CTO)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "customer-success-manager",
+      "title": "Customer Success Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Support",
+      "source": "prompts/audit/customer-success-manager.md",
+      "skill": "skills/customer-success-manager/SKILL.md",
+      "description": "Persona «Customer Success Manager» (ناظر) در حوزه Support: Maximize Customer Value. استفاده کن وقتی تسک به Onboarding, Adoption, Retention نیاز دارد و خروجی باید «Success Plan» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Customer Success Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "customer-support-agent",
+      "title": "Customer Support Agent",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Support",
+      "source": "prompts/implementation/customer-support-agent.md",
+      "skill": "skills/customer-support-agent/SKILL.md",
+      "description": "Persona «Customer Support Agent» (مجری) در حوزه Support: حل User Issues. استفاده کن وقتی تسک به Ticket Handling, Communication نیاز دارد و خروجی باید «Resolution, Ticket» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Customer Support Agent-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "cybersecurity-engineer",
+      "title": "Cybersecurity Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Security",
+      "source": "prompts/implementation/cybersecurity-engineer.md",
+      "skill": "skills/cybersecurity-engineer/SKILL.md",
+      "description": "Persona «Cybersecurity Engineer» (مجری) در حوزه Security: کاهش Cyber Risk. استفاده کن وقتی تسک به Endpoint, Network, Application Security نیاز دارد و خروجی باید «Security Status, Incidents» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Cybersecurity Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "data-analyst",
+      "title": "Data Analyst",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Analytics",
+      "source": "prompts/implementation/data-analyst.md",
+      "skill": "skills/data-analyst/SKILL.md",
+      "description": "Persona «Data Analyst» (مجری) در حوزه Analytics: تبدیل Data به Insight. استفاده کن وقتی تسک به Reporting, Analysis نیاز دارد و خروجی باید «Analysis, Dashboard» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Data Analyst-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "data-architect",
+      "title": "Data Architect",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Architecture",
+      "source": "prompts/audit/data-architect.md",
+      "skill": "skills/data-architect/SKILL.md",
+      "description": "Persona «Data Architect» (ناظر) در حوزه Architecture: ایجاد Data Strategy. استفاده کن وقتی تسک به Data Architecture, Governance نیاز دارد و خروجی باید «Data Architecture» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Data Architect-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "data-engineer",
+      "title": "Data Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Data",
+      "source": "prompts/implementation/data-engineer.md",
+      "skill": "skills/data-engineer/SKILL.md",
+      "description": "Persona «Data Engineer» (مجری) در حوزه Data: تأمین داده قابل اعتماد. استفاده کن وقتی تسک به ETL, Pipelines, Data Quality نیاز دارد و خروجی باید «Pipelines, Schemas» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Data Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "data-governance-manager",
+      "title": "Data Governance Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Data",
+      "source": "prompts/audit/data-governance-manager.md",
+      "skill": "skills/data-governance-manager/SKILL.md",
+      "description": "Persona «Data Governance Manager» (ناظر) در حوزه Data: تضمین مالکیت, کیفیت و امنیت دادههای سازمان. استفاده کن وقتی تسک به سیاست و مالکیت داده, استاندارد کیفیت, ماتریس دسترسی/طبقهبندی, پایش انطباق, هماهنگی با معماری داده نیاز دارد و خروجی باید «سیاست, کاتالوگ داده, گزارش کیفیت» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Data Governance Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "data-scientist",
+      "title": "Data Scientist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "AI",
+      "source": "prompts/implementation/data-scientist.md",
+      "skill": "skills/data-scientist/SKILL.md",
+      "description": "Persona «Data Scientist» (مجری) در حوزه AI: استخراج Insight و Predictive Model. استفاده کن وقتی تسک به Analysis, Modeling نیاز دارد و خروجی باید «Analysis, Model» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Data Scientist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "database-administrator-dba",
+      "title": "Database Administrator (DBA)",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Data",
+      "source": "prompts/implementation/database-administrator-dba.md",
+      "skill": "skills/database-administrator-dba/SKILL.md",
+      "description": "Persona «Database Administrator (DBA)» (مجری) در حوزه Data: Availability و Integrity دیتابیس. استفاده کن وقتی تسک به Backup, Access, Performance نیاز دارد و خروجی باید «DB Config, Backup» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Database Administrator (DBA)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "database-engineer",
+      "title": "Database Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Data",
+      "source": "prompts/implementation/database-engineer.md",
+      "skill": "skills/database-engineer/SKILL.md",
+      "description": "Persona «Database Engineer» (مجری) در حوزه Data: طراحی Data Layer. استفاده کن وقتی تسک به Schema, Query, Index نیاز دارد و خروجی باید «Schema, Queries» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Database Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "database-security-specialist",
+      "title": "Database Security Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Security",
+      "source": "prompts/implementation/database-security-specialist.md",
+      "skill": "skills/database-security-specialist/SKILL.md",
+      "description": "Persona «Database Security Specialist» (مجری) در حوزه Security: پیادهسازی دسترسی, رمزنگاری و ممیزی امنیت دیتابیس. استفاده کن وقتی تسک به مدیریت نقشها/دسترسی, Encryption و Key, Audit Log و Masking, تست امنیتی نیاز دارد و خروجی باید «پیکربندی امنیت, گزارش ممیزی» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Database Security Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "decommission-engineer",
+      "title": "Decommission Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/decommission-engineer.md",
+      "skill": "skills/decommission-engineer/SKILL.md",
+      "description": "Persona «Decommission Engineer» (مجری) در حوزه Software: حذف امن و کنترلشده سیستم. استفاده کن وقتی تسک به Service Shutdown, Data Archival, Cleanup نیاز دارد و خروجی باید «Decommission Report, Archived Data, Cleanup Evidence» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 7 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Decommission Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "deployment-engineer",
+      "title": "Deployment Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/deployment-engineer.md",
+      "skill": "skills/deployment-engineer/SKILL.md",
+      "description": "Persona «Deployment Engineer» (مجری) در حوزه Software: Deploy Safe and Repeatable. استفاده کن وقتی تسک به Deployment, Verification نیاز دارد و خروجی باید «Deployment Record» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Deployment Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "design-manager",
+      "title": "Design Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Design",
+      "source": "prompts/audit/design-manager.md",
+      "skill": "skills/design-manager/SKILL.md",
+      "description": "Persona «Design Manager» (ناظر) در حوزه Design: تضمین کیفیت و بهموقع بودن خروجیهای تیم طراحی. استفاده کن وقتی تسک به مدیریت تیم, تعریف فرایند و استانداردها, تخصیص کار, کنترل کیفیت, هماهنگی با محصول/توسعه نیاز دارد و خروجی باید «گزارش کیفیت, تخصیص, بازخوردها» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Design Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "design-system-designer",
+      "title": "Design System Designer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Design",
+      "source": "prompts/implementation/design-system-designer.md",
+      "skill": "skills/design-system-designer/SKILL.md",
+      "description": "Persona «Design System Designer» (مجری) در حوزه Design: ایجاد Consistent UI System. استفاده کن وقتی تسک به Components, Tokens, Guidelines نیاز دارد و خروجی باید «Components, Guidelines» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Design System Designer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "desktop-developer",
+      "title": "Desktop Developer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/desktop-developer.md",
+      "skill": "skills/desktop-developer/SKILL.md",
+      "description": "Persona «Desktop Developer» (مجری) در حوزه Software: تولید Desktop Application. استفاده کن وقتی تسک به UI, OS Integration نیاز دارد و خروجی باید «Desktop Build» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Desktop Developer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "development-manager",
+      "title": "Development Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/development-manager.md",
+      "skill": "skills/development-manager/SKILL.md",
+      "description": "Persona «Development Manager» (ناظر) در حوزه Project: تضمین تحویل باکیفیت و بهموقع خروجیهای تیم توسعه. استفاده کن وقتی تسک به مدیریت تیم توسعه, تخصیص کار و ظرفیت, کنترل کیفیت فرایند توسعه, رفع بلوکرهای تیم, هماهنگی با معماری و برنامهریزی نیاز دارد و خروجی باید «گزارش وضعیت تیم, برنامه ظرفیت, لیست بلوکرها, معیارهای کیفیت» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Development Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "devops-engineer",
+      "title": "DevOps Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "DevOps",
+      "source": "prompts/implementation/devops-engineer.md",
+      "skill": "skills/devops-engineer/SKILL.md",
+      "description": "Persona «DevOps Engineer» (مجری) در حوزه DevOps: Automate Delivery. استفاده کن وقتی تسک به Pipeline, Deployment, Infrastructure نیاز دارد و خروجی باید «Pipelines, Deployments» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need DevOps Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "devops-manager",
+      "title": "DevOps Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "DevOps",
+      "source": "prompts/audit/devops-manager.md",
+      "skill": "skills/devops-manager/SKILL.md",
+      "description": "Persona «DevOps Manager» (ناظر) در حوزه DevOps: تضمین تحویل پایدار, امن و تکرارپذیر در فرایند DevOps. استفاده کن وقتی تسک به مدیریت تیم, استانداردهای CI/CD, مدیریت محیط/Secret, پایش و پاسخ حادثه, هماهنگی با توسعه/امنیت نیاز دارد و خروجی باید «گزارش پایپلاین, استاندارد محیط, وضعیت حادثه» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need DevOps Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "devrel",
+      "title": "DevRel",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/devrel.md",
+      "skill": "skills/devrel/SKILL.md",
+      "description": "Persona «DevRel» (مجری) در حوزه Software: رشد Developer Ecosystem. استفاده کن وقتی تسک به Documentation, Community, Events نیاز دارد و خروجی باید «Tutorials, Feedback Reports» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need DevRel-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "devsecops-engineer",
+      "title": "DevSecOps Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "DevOps",
+      "source": "prompts/implementation/devsecops-engineer.md",
+      "skill": "skills/devsecops-engineer/SKILL.md",
+      "description": "Persona «DevSecOps Engineer» (مجری) در حوزه DevOps: Automated Security Verification. استفاده کن وقتی تسک به SAST, DAST, SCA, Secrets, Container Security نیاز دارد و خروجی باید «Security Pipeline, Findings» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need DevSecOps Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "disaster-recovery-specialist",
+      "title": "Disaster Recovery Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/disaster-recovery-specialist.md",
+      "skill": "skills/disaster-recovery-specialist/SKILL.md",
+      "description": "Persona «Disaster Recovery Specialist» (مجری) در حوزه Software: Recover System After Disaster. استفاده کن وقتی تسک به DR Plan, Failover, Restore نیاز دارد و خروجی باید «DR Plan, Test Report» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Disaster Recovery Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "documentation-manager",
+      "title": "Documentation Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Documentation",
+      "source": "prompts/audit/documentation-manager.md",
+      "skill": "skills/documentation-manager/SKILL.md",
+      "description": "Persona «Documentation Manager» (ناظر) در حوزه Documentation: تضمین دقت, کامل بودن و بهروز بودن مستندات. استفاده کن وقتی تسک به استاندارد و ساختار مستندات, چرخه تولید/بازبینی, کنترل کیفیت, هماهنگی با محصول/فنی نیاز دارد و خروجی باید «گزارش کیفیت, ساختار مستندات, بهروزرسانیها» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Documentation Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "documentation-specialist",
+      "title": "Documentation Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Documentation",
+      "source": "prompts/implementation/documentation-specialist.md",
+      "skill": "skills/documentation-specialist/SKILL.md",
+      "description": "Persona «Documentation Specialist» (مجری) در حوزه Documentation: قابلفهم کردن Product. استفاده کن وقتی تسک به User Guides, Manuals نیاز دارد و خروجی باید «User Documentation» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Documentation Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "domain-expert-sme",
+      "title": "Domain Expert (SME)",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Analytics",
+      "source": "prompts/audit/domain-expert-sme.md",
+      "skill": "skills/domain-expert-sme/SKILL.md",
+      "description": "Persona «Domain Expert (SME)» (ناظر) در حوزه Analytics: تضمین صحت Domain Logic. استفاده کن وقتی تسک به Domain Rules, Validation نیاز دارد و خروجی باید «Domain Decisions» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Domain Expert (SME)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "embedded-developer",
+      "title": "Embedded Developer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/embedded-developer.md",
+      "skill": "skills/embedded-developer/SKILL.md",
+      "description": "Persona «Embedded Developer» (مجری) در حوزه Software: اجرای منطق دستگاه. استفاده کن وقتی تسک به Device Logic, Hardware Interface نیاز دارد و خروجی باید «Firmware» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Embedded Developer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "embedded-systems-lead",
+      "title": "Embedded Systems Lead",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Software",
+      "source": "prompts/audit/embedded-systems-lead.md",
+      "skill": "skills/embedded-systems-lead/SKILL.md",
+      "description": "Persona «Embedded Systems Lead» (ناظر) در حوزه Software: تضمین معماری, ایمنی و کیفیت سیستمهای Embedded/IoT. استفاده کن وقتی تسک به معماری و مرزهای Firmware/Embedded, استانداردهای کد/تست, مدیریت ریسک سختافزاری, هماهنگی با QA/تولید نیاز دارد و خروجی باید «گزارش معماری, ریسک, کیفیت» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Embedded Systems Lead-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "end-of-life-manager",
+      "title": "End-of-Life Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Product",
+      "source": "prompts/audit/end-of-life-manager.md",
+      "skill": "skills/end-of-life-manager/SKILL.md",
+      "description": "Persona «End-of-Life Manager» (ناظر) در حوزه Product: مدیریت امن Product Retirement. استفاده کن وقتی تسک به Retirement Plan, Communication نیاز دارد و خروجی باید «EOL Plan» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need End-of-Life Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "end-user",
+      "title": "End User",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Support",
+      "source": "prompts/implementation/end-user.md",
+      "skill": "skills/end-user/SKILL.md",
+      "description": "Persona «End User» (مجری) در حوزه Support: ایجاد Signal واقعی از Product Usage. استفاده کن وقتی تسک به Usage, Feedback نیاز دارد و خروجی باید «Feedback, Usage Data» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need End User-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "engineering-manager",
+      "title": "Engineering Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/engineering-manager.md",
+      "skill": "skills/engineering-manager/SKILL.md",
+      "description": "Persona «Engineering Manager» (ناظر) در حوزه Project: ایجاد ظرفیت و عملکرد مهندسی. استفاده کن وقتی تسک به People, Capacity, Delivery نیاز دارد و خروجی باید «Capacity Plans» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Engineering Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "enterprise-architect",
+      "title": "Enterprise Architect",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Architecture",
+      "source": "prompts/audit/enterprise-architect.md",
+      "skill": "skills/enterprise-architect/SKILL.md",
+      "description": "Persona «Enterprise Architect» (ناظر) در حوزه Architecture: Alignment با Enterprise Architecture. استفاده کن وقتی تسک به Standards, Governance نیاز دارد و خروجی باید «Architecture Decisions» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Enterprise Architect-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "execution-plan-generator",
+      "title": "Execution Plan Generator — Master Prompt",
+      "type": "COMPOSITE",
+      "typeLabel": "ترکیبی",
+      "domain": null,
+      "source": "Execution Plan Generator.md",
+      "skill": "skills/execution-plan-generator/SKILL.md",
+      "description": "Execution Plan Generator — Master Prompt — composite (ترکیبی) master persona. You are a **Senior Technical Project Planner** operating with the combined judgment of a Software Architect, Delivery Manager, QA Lead, Security Reviewer, and Implementation Orchestrator. Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable."
+    },
+    {
+      "name": "external-auditor",
+      "title": "External Auditor",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Audit",
+      "source": "prompts/audit/external-auditor.md",
+      "skill": "skills/external-auditor/SKILL.md",
+      "description": "Persona «External Auditor» (ناظر) در حوزه Audit: Independent Assurance. استفاده کن وقتی تسک به External Audit نیاز دارد و خروجی باید «Independent Audit Report» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need External Auditor-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "finance-manager",
+      "title": "Finance Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/finance-manager.md",
+      "skill": "skills/finance-manager/SKILL.md",
+      "description": "Persona «Finance Manager» (ناظر) در حوزه Project: کنترل Financial Health. استفاده کن وقتی تسک به Budget, Forecast, Cost نیاز دارد و خروجی باید «Financial Reports» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Finance Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "finops-specialist",
+      "title": "FinOps Specialist",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "DevOps",
+      "source": "prompts/audit/finops-specialist.md",
+      "skill": "skills/finops-specialist/SKILL.md",
+      "description": "Persona «FinOps Specialist» (ناظر) در حوزه DevOps: بهینهسازی Cloud Cost. استفاده کن وقتی تسک به Cost Analysis, Optimization نیاز دارد و خروجی باید «Cost Report, Recommendations» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need FinOps Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "firmware-engineer",
+      "title": "Firmware Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/firmware-engineer.md",
+      "skill": "skills/firmware-engineer/SKILL.md",
+      "description": "Persona «Firmware Engineer» (مجری) در حوزه Software: کنترل Hardware از طریق Firmware. استفاده کن وقتی تسک به Drivers, Protocols, Firmware نیاز دارد و خروجی باید «Firmware Binary, Source» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 6 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Firmware Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "forensic-codebase-review-audit",
+      "title": "Forensic Codebase Review & Audit — Master Prompt (v2)",
+      "type": "COMPOSITE",
+      "typeLabel": "ترکیبی",
+      "domain": null,
+      "source": "Forensic Codebase Review & Audit.md",
+      "skill": "skills/forensic-codebase-review-audit/SKILL.md",
+      "description": "Forensic Codebase Review & Audit — Master Prompt (v2) — composite (ترکیبی) master persona. Your objective is to identify and document **every discoverable** defect, weakness, inconsistency, missing safeguard, architectural problem, security issue, reliability issue, performance issue, maintainability problem, workflow defect, technical-debt item, test gap, and potentially dangerous behavior in the provided… Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable."
+    },
+    {
+      "name": "founder",
+      "title": "Founder / مؤسس",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Business",
+      "source": "prompts/audit/founder.md",
+      "skill": "skills/founder/SKILL.md",
+      "description": "Persona «Founder / مؤسس» (ناظر) در حوزه Business: تعیین جهت و هدف نهایی پروژه. استفاده کن وقتی تسک به Vision, اهداف کلان, تصمیمهای استراتژیک نیاز دارد و خروجی باید «Vision, Strategic Decisions» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Founder / مؤسس-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "frontend-developer",
+      "title": "Frontend Developer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/frontend-developer.md",
+      "skill": "skills/frontend-developer/SKILL.md",
+      "description": "Persona «Frontend Developer» (مجری) در حوزه Software: پیادهسازی UI/UX. استفاده کن وقتی تسک به Components, State, API Integration نیاز دارد و خروجی باید «UI Code, Tests» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Frontend Developer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "full-stack-developer",
+      "title": "Full-Stack Developer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/full-stack-developer.md",
+      "skill": "skills/full-stack-developer/SKILL.md",
+      "description": "Persona «Full-Stack Developer» (مجری) در حوزه Software: تحویل End-to-End قابلیت. استفاده کن وقتی تسک به Frontend, Backend, Integration نیاز دارد و خروجی باید «Feature Implementation» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Full-Stack Developer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "game-developer",
+      "title": "Game Developer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/game-developer.md",
+      "skill": "skills/game-developer/SKILL.md",
+      "description": "Persona «Game Developer» (مجری) در حوزه Software: تولید Game Systems. استفاده کن وقتی تسک به Gameplay, Physics, Networking نیاز دارد و خروجی باید «Game Build» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Game Developer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "graphic-designer",
+      "title": "Graphic Designer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Design",
+      "source": "prompts/implementation/graphic-designer.md",
+      "skill": "skills/graphic-designer/SKILL.md",
+      "description": "Persona «Graphic Designer» (مجری) در حوزه Design: ایجاد Visual Assets. استفاده کن وقتی تسک به Icons, Illustrations, Banners نیاز دارد و خروجی باید «Graphic Assets» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Graphic Designer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "growth-manager",
+      "title": "Growth Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Growth",
+      "source": "prompts/audit/growth-manager.md",
+      "skill": "skills/growth-manager/SKILL.md",
+      "description": "Persona «Growth Manager» (ناظر) در حوزه Growth: افزایش Sustainable Growth. استفاده کن وقتی تسک به Acquisition, Activation, Retention نیاز دارد و خروجی باید «Growth Experiments» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Growth Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "hr-people-manager",
+      "title": "HR / People Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "HR",
+      "source": "prompts/audit/hr-people-manager.md",
+      "skill": "skills/hr-people-manager/SKILL.md",
+      "description": "Persona «HR / People Manager» (ناظر) در حوزه HR: ایجاد تیم مناسب. استفاده کن وقتی تسک به Hiring, Performance, Development نیاز دارد و خروجی باید «People Plans» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need HR / People Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "incident-manager",
+      "title": "Incident Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/incident-manager.md",
+      "skill": "skills/incident-manager/SKILL.md",
+      "description": "Persona «Incident Manager» (ناظر) در حوزه Project: Restore Service Safely. استفاده کن وقتی تسک به Coordination, Communication, Timeline نیاز دارد و خروجی باید «Incident Report, Timeline» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Incident Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "incident-response-engineer",
+      "title": "Incident Response Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Security",
+      "source": "prompts/implementation/incident-response-engineer.md",
+      "skill": "skills/incident-response-engineer/SKILL.md",
+      "description": "Persona «Incident Response Engineer» (مجری) در حوزه Security: مهار, ریشهیابی و بازیابی رخداد امنیتی. استفاده کن وقتی تسک به مهار و جمعآوری شواهد, تحلیل ریشه, بازیابی, گزارش و درسآموخته نیاز دارد و خروجی باید «گزارش رخداد, شواهد, Timeline, درسآموخته» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 6 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Incident Response Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "infrastructure-engineer",
+      "title": "Infrastructure Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "DevOps",
+      "source": "prompts/implementation/infrastructure-engineer.md",
+      "skill": "skills/infrastructure-engineer/SKILL.md",
+      "description": "Persona «Infrastructure Engineer» (مجری) در حوزه DevOps: تأمین Infrastructure پایدار. استفاده کن وقتی تسک به Servers, Storage, OS نیاز دارد و خروجی باید «Infrastructure Config» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Infrastructure Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "infrastructure-manager",
+      "title": "Infrastructure Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "DevOps",
+      "source": "prompts/audit/infrastructure-manager.md",
+      "skill": "skills/infrastructure-manager/SKILL.md",
+      "description": "Persona «Infrastructure Manager» (ناظر) در حوزه DevOps: تضمین ظرفیت, پایداری و امنیت زیرساخت. استفاده کن وقتی تسک به معماری زیرساخت, استاندارد محیطها, مدیریت ظرفیت/هزینه, پایش و Backup/DR, هماهنگی با DevOps/امنیت نیاز دارد و خروجی باید «گزارش ظرفیت, استاندارد, وضعیت DR» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Infrastructure Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "investor",
+      "title": "Investor / سرمایه‌گذار",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Business",
+      "source": "prompts/audit/investor.md",
+      "skill": "skills/investor/SKILL.md",
+      "description": "Persona «Investor / سرمایه‌گذار» (ناظر) در حوزه Business: تأمین و کنترل سرمایه. استفاده کن وقتی تسک به Funding, Financial Oversight نیاز دارد و خروجی باید «Funding Decision» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Investor / سرمایه‌گذار-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "iot-engineer",
+      "title": "IoT Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/iot-engineer.md",
+      "skill": "skills/iot-engineer/SKILL.md",
+      "description": "Persona «IoT Engineer» (مجری) در حوزه Software: اتصال Device به Platform. استفاده کن وقتی تسک به Device, Protocol, Cloud Integration نیاز دارد و خروجی باید «IoT Integration» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need IoT Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "ip-copyright-specialist",
+      "title": "IP / Copyright Specialist",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Compliance",
+      "source": "prompts/audit/ip-copyright-specialist.md",
+      "skill": "skills/ip-copyright-specialist/SKILL.md",
+      "description": "Persona «IP / Copyright Specialist» (ناظر) در حوزه Compliance: حفاظت IP. استفاده کن وقتی تسک به Licensing, Copyright نیاز دارد و خروجی باید «IP Report» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need IP / Copyright Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "legacy-modernization-engineer",
+      "title": "Legacy Modernization Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/legacy-modernization-engineer.md",
+      "skill": "skills/legacy-modernization-engineer/SKILL.md",
+      "description": "Persona «Legacy Modernization Engineer» (مجری) در حوزه Software: کاهش Legacy Risk. استفاده کن وقتی تسک به Migration, Re-architecture نیاز دارد و خروجی باید «Modernized System» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 6 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Legacy Modernization Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "legal-advisor",
+      "title": "Legal Advisor",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Compliance",
+      "source": "prompts/audit/legal-advisor.md",
+      "skill": "skills/legal-advisor/SKILL.md",
+      "description": "Persona «Legal Advisor» (ناظر) در حوزه Compliance: کاهش Legal Risk. استفاده کن وقتی تسک به Contracts, Terms, IP نیاز دارد و خروجی باید «Legal Assessment» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Legal Advisor-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "load-stress-tester",
+      "title": "Load/Stress Tester",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Testing",
+      "source": "prompts/implementation/load-stress-tester.md",
+      "skill": "skills/load-stress-tester/SKILL.md",
+      "description": "Persona «Load/Stress Tester» (مجری) در حوزه Testing: کشف ظرفیت و Failure Point. استفاده کن وقتی تسک به Load, Stress, Capacity نیاز دارد و خروجی باید «Load Report» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Load/Stress Tester-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "localization-manager",
+      "title": "Localization Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Documentation",
+      "source": "prompts/audit/localization-manager.md",
+      "skill": "skills/localization-manager/SKILL.md",
+      "description": "Persona «Localization Manager» (ناظر) در حوزه Documentation: تضمین کیفیت, یکدستی و سازگاری محلی ترجمهها. استفاده کن وقتی تسک به واژهنامه و سبک, فرایند ترجمه/بازبینی, مدیریت رشتهها/فرمتها, هماهنگی با محصول/طراحی نیاز دارد و خروجی باید «گزارش کیفیت, واژهنامه, بهروزرسانیها» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Localization Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "localization-specialist",
+      "title": "Localization Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Documentation",
+      "source": "prompts/implementation/localization-specialist.md",
+      "skill": "skills/localization-specialist/SKILL.md",
+      "description": "Persona «Localization Specialist» (مجری) در حوزه Documentation: تطبیق محصول با بازار هدف. استفاده کن وقتی تسک به Localization, Formatting نیاز دارد و خروجی باید «Localized Content» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Localization Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "maintenance-engineer",
+      "title": "Maintenance Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/maintenance-engineer.md",
+      "skill": "skills/maintenance-engineer/SKILL.md",
+      "description": "Persona «Maintenance Engineer» (مجری) در حوزه Software: حفظ سلامت سیستم. استفاده کن وقتی تسک به Bug Fix, Maintenance نیاز دارد و خروجی باید «Patch, Tests» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Maintenance Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "marketing-specialist",
+      "title": "Marketing Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Growth",
+      "source": "prompts/implementation/marketing-specialist.md",
+      "skill": "skills/marketing-specialist/SKILL.md",
+      "description": "Persona «Marketing Specialist» (مجری) در حوزه Growth: جذب و فعالسازی کاربران. استفاده کن وقتی تسک به Campaigns, Content نیاز دارد و خروجی باید «Campaigns, Reports» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Marketing Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "migration-specialist",
+      "title": "Migration Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/migration-specialist.md",
+      "skill": "skills/migration-specialist/SKILL.md",
+      "description": "Persona «Migration Specialist» (مجری) در حوزه Software: انتقال بدون Loss/Corruption. استفاده کن وقتی تسک به Data Migration, Validation نیاز دارد و خروجی باید «Migration Results» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 6 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Migration Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "mlops-engineer",
+      "title": "MLOps Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "AI",
+      "source": "prompts/implementation/mlops-engineer.md",
+      "skill": "skills/mlops-engineer/SKILL.md",
+      "description": "Persona «MLOps Engineer» (مجری) در حوزه AI: عملیاتیکردن ML. استفاده کن وقتی تسک به Model Deployment, Monitoring نیاز دارد و خروجی باید «Deployment, Monitoring» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need MLOps Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "mobile-developer",
+      "title": "Mobile Developer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/mobile-developer.md",
+      "skill": "skills/mobile-developer/SKILL.md",
+      "description": "Persona «Mobile Developer» (مجری) در حوزه Software: پیادهسازی Mobile Product. استفاده کن وقتی تسک به UI, Native APIs, Networking نیاز دارد و خروجی باید «Mobile Build» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Mobile Developer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "motion-designer",
+      "title": "Motion Designer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Design",
+      "source": "prompts/implementation/motion-designer.md",
+      "skill": "skills/motion-designer/SKILL.md",
+      "description": "Persona «Motion Designer» (مجری) در حوزه Design: بهبود Interaction Feedback. استفاده کن وقتی تسک به Motion, Animation نیاز دارد و خروجی باید «Animations» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Motion Designer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "network-engineer",
+      "title": "Network Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "DevOps",
+      "source": "prompts/implementation/network-engineer.md",
+      "skill": "skills/network-engineer/SKILL.md",
+      "description": "Persona «Network Engineer» (مجری) در حوزه DevOps: تضمین Connectivity. استفاده کن وقتی تسک به Routing, Firewall, VPN نیاز دارد و خروجی باید «Network Config» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Network Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "observability-engineer",
+      "title": "Observability Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "DevOps",
+      "source": "prompts/implementation/observability-engineer.md",
+      "skill": "skills/observability-engineer/SKILL.md",
+      "description": "Persona «Observability Engineer» (مجری) در حوزه DevOps: قابل مشاهدهکردن System Health. استفاده کن وقتی تسک به Metrics, Logs, Traces نیاز دارد و خروجی باید «Dashboards, Alerts» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Observability Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "on-call-engineer",
+      "title": "On-call Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "DevOps",
+      "source": "prompts/implementation/on-call-engineer.md",
+      "skill": "skills/on-call-engineer/SKILL.md",
+      "description": "Persona «On-call Engineer» (مجری) در حوزه DevOps: Restore Service. استفاده کن وقتی تسک به Diagnosis, Mitigation نیاز دارد و خروجی باید «Incident Resolution» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need On-call Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "operations-manager",
+      "title": "Operations Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/operations-manager.md",
+      "skill": "skills/operations-manager/SKILL.md",
+      "description": "Persona «Operations Manager» (ناظر) در حوزه Project: حفظ Operational Continuity. استفاده کن وقتی تسک به Operations, Processes, Vendors نیاز دارد و خروجی باید «Operational Reports» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Operations Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "partnership-manager",
+      "title": "Partnership Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Growth",
+      "source": "prompts/audit/partnership-manager.md",
+      "skill": "skills/partnership-manager/SKILL.md",
+      "description": "Persona «Partnership Manager» (ناظر) در حوزه Growth: ایجاد Partnership پایدار. استفاده کن وقتی تسک به Partner Management, Integration Coordination نیاز دارد و خروجی باید «Partnership Status» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Partnership Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "penetration-tester",
+      "title": "Penetration Tester",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Security",
+      "source": "prompts/implementation/penetration-tester.md",
+      "skill": "skills/penetration-tester/SKILL.md",
+      "description": "Persona «Penetration Tester» (مجری) در حوزه Security: شناسایی قابلسوءاستفاده بودن آسیبپذیریها. استفاده کن وقتی تسک به Recon, Testing, Validation نیاز دارد و خروجی باید «Pentest Report» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 6 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Penetration Tester-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "performance-engineer",
+      "title": "Performance Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Testing",
+      "source": "prompts/implementation/performance-engineer.md",
+      "skill": "skills/performance-engineer/SKILL.md",
+      "description": "Persona «Performance Engineer» (مجری) در حوزه Testing: تضمین Performance. استفاده کن وقتی تسک به Profiling, Benchmarking نیاز دارد و خروجی باید «Performance Report» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Performance Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "performance-engineering-lead",
+      "title": "Performance Engineering Lead",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Testing",
+      "source": "prompts/audit/performance-engineering-lead.md",
+      "skill": "skills/performance-engineering-lead/SKILL.md",
+      "description": "Persona «Performance Engineering Lead» (ناظر) در حوزه Testing: تضمین عملکرد, ظرفیت و هزینه مطابق SLA. استفاده کن وقتی تسک به اهداف و SLA عملکرد, روش Benchmark, تحلیل گلوگاه, اولویتبندی بهینهسازی, هماهنگی با SRE/معماری نیاز دارد و خروجی باید «گزارش عملکرد, اهداف, اولویتها» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Performance Engineering Lead-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "platform-owner",
+      "title": "Platform Owner",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Operations",
+      "source": "prompts/audit/platform-owner.md",
+      "skill": "skills/platform-owner/SKILL.md",
+      "description": "Persona «Platform Owner» (ناظر) در حوزه Operations: تضمین پایداری, ظرفیت و قراردادهای پلتفرم برای مصرفکنندگان. استفاده کن وقتی تسک به مرز و قرارداد پلتفرم, SLA و مصرف, Roadmap و اولویت, مدیریت هزینه/ظرفیت, هماهنگی با تیمهای مصرفکننده نیاز دارد و خروجی باید «گزارش پلتفرم, قرارداد, اولویت» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Platform Owner-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "pmo",
+      "title": "PMO",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/pmo.md",
+      "skill": "skills/pmo/SKILL.md",
+      "description": "Persona «PMO» (ناظر) در حوزه Project: Governance و Standardization. استفاده کن وقتی تسک به Process, Templates, Auditing نیاز دارد و خروجی باید «Standards, Audit Reports» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need PMO-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "principal-engineer",
+      "title": "Principal Engineer",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Software",
+      "source": "prompts/audit/principal-engineer.md",
+      "skill": "skills/principal-engineer/SKILL.md",
+      "description": "Persona «Principal Engineer» (ناظر) در حوزه Software: Technical Strategy. استفاده کن وقتی تسک به Architecture, Standards, Technical Strategy نیاز دارد و خروجی باید «Technical Strategy» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Principal Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "privacy-compliance-officer",
+      "title": "Privacy / Compliance Officer",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Compliance",
+      "source": "prompts/audit/privacy-compliance-officer.md",
+      "skill": "skills/privacy-compliance-officer/SKILL.md",
+      "description": "Persona «Privacy / Compliance Officer» (ناظر) در حوزه Compliance: Regulatory Compliance. استفاده کن وقتی تسک به Compliance, Auditing نیاز دارد و خروجی باید «Compliance Report» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Privacy / Compliance Officer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "privacy-engineer",
+      "title": "Privacy Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Security",
+      "source": "prompts/implementation/privacy-engineer.md",
+      "skill": "skills/privacy-engineer/SKILL.md",
+      "description": "Persona «Privacy Engineer» (مجری) در حوزه Security: Privacy-by-Design. استفاده کن وقتی تسک به Data Minimization, Retention, Access نیاز دارد و خروجی باید «Privacy Assessment» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Privacy Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "procurement-manager",
+      "title": "Procurement Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Growth",
+      "source": "prompts/audit/procurement-manager.md",
+      "skill": "skills/procurement-manager/SKILL.md",
+      "description": "Persona «Procurement Manager» (ناظر) در حوزه Growth: تضمین خرید با کیفیت, زمان و هزینه مناسب بدون ریسک قراردادی. استفاده کن وقتی تسک به نیازمندی خرید, انتخاب تأمینکننده, قرارداد و SLA, مدیریت ریسک تامین, پیگیری عملکرد نیاز دارد و خروجی باید «گزارش خرید, قرارداد, ارزیابی وندور» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Procurement Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "procurement-specialist",
+      "title": "Procurement Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Growth",
+      "source": "prompts/implementation/procurement-specialist.md",
+      "skill": "skills/procurement-specialist/SKILL.md",
+      "description": "Persona «Procurement Specialist» (مجری) در حوزه Growth: تأمین منابع موردنیاز. استفاده کن وقتی تسک به Vendor, Purchasing نیاز دارد و خروجی باید «Purchase Orders» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Procurement Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "product-analyst",
+      "title": "Product Analyst",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Analytics",
+      "source": "prompts/implementation/product-analyst.md",
+      "skill": "skills/product-analyst/SKILL.md",
+      "description": "Persona «Product Analyst» (مجری) در حوزه Analytics: کمک به Product Decisions. استفاده کن وقتی تسک به Funnel, Cohort, Experiment Analysis نیاز دارد و خروجی باید «Product Insights» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Product Analyst-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "product-analyst-lead",
+      "title": "Product Analyst Lead",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Analytics",
+      "source": "prompts/audit/product-analyst-lead.md",
+      "skill": "skills/product-analyst-lead/SKILL.md",
+      "description": "Persona «Product Analyst Lead» (ناظر) در حوزه Analytics: تضمین دقت, قابلیت اعتماد و اتصال تحلیلهای محصول به تصمیمها. استفاده کن وقتی تسک به تعریف فریمورک و متریک, بازبینی تحلیلها, کنترل کیفیت داده تحلیلی, پیوند یافتهها به تصمیم محصول, هدایت تیم تحلیل نیاز دارد و خروجی باید «تحلیلها, تعریف متریک, گزارش تصمیممحور» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Product Analyst Lead-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "product-designer",
+      "title": "Product Designer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Design",
+      "source": "prompts/implementation/product-designer.md",
+      "skill": "skills/product-designer/SKILL.md",
+      "description": "Persona «Product Designer» (مجری) در حوزه Design: طراحی End-to-End Product Experience. استفاده کن وقتی تسک به UX, UI, Interaction نیاز دارد و خروجی باید «Product Designs» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Product Designer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "product-manager-pm",
+      "title": "Product Manager (PM)",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Product",
+      "source": "prompts/audit/product-manager-pm.md",
+      "skill": "skills/product-manager-pm/SKILL.md",
+      "description": "Persona «Product Manager (PM)» (ناظر) در حوزه Product: Maximize Product Value. استفاده کن وقتی تسک به Product Strategy, Roadmap, Prioritization نیاز دارد و خروجی باید «Roadmap, Priorities» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Product Manager (PM)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "product-marketing-manager",
+      "title": "Product Marketing Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Growth",
+      "source": "prompts/audit/product-marketing-manager.md",
+      "skill": "skills/product-marketing-manager/SKILL.md",
+      "description": "Persona «Product Marketing Manager» (ناظر) در حوزه Growth: Positioning و Go-to-Market. استفاده کن وقتی تسک به Positioning, Messaging نیاز دارد و خروجی باید «GTM Plan» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Product Marketing Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "product-owner-po",
+      "title": "Product Owner (PO)",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Product",
+      "source": "prompts/audit/product-owner-po.md",
+      "skill": "skills/product-owner-po/SKILL.md",
+      "description": "Persona «Product Owner (PO)» (ناظر) در حوزه Product: تبدیل Product Strategy به Work Items. استفاده کن وقتی تسک به Backlog, Acceptance Criteria نیاز دارد و خروجی باید «User Stories, Acceptance Criteria» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Product Owner (PO)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "product-owner-release",
+      "title": "Product Owner پس از Release",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Product",
+      "source": "prompts/audit/product-owner-release.md",
+      "skill": "skills/product-owner-release/SKILL.md",
+      "description": "Persona «Product Owner پس از Release» (ناظر) در حوزه Product: مدیریت ارزش محصول در Production. استفاده کن وقتی تسک به Backlog, Feedback, Prioritization نیاز دارد و خروجی باید «Updated Backlog/Roadmap» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Product Owner پس از Release-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "product-visionary",
+      "title": "Product Visionary",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Business",
+      "source": "prompts/audit/product-visionary.md",
+      "skill": "skills/product-visionary/SKILL.md",
+      "description": "Persona «Product Visionary» (ناظر) در حوزه Business: تعیین اینکه محصول چه ارزشی ایجاد میکند. استفاده کن وقتی تسک به Product Vision, Value Proposition نیاز دارد و خروجی باید «Product Vision» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Product Visionary-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "production-readiness-reliability-audit",
+      "title": "Production Readiness & Reliability Audit — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "ترکیبی",
+      "domain": null,
+      "source": "Production Readiness & Reliability Audit.md",
+      "skill": "skills/production-readiness-reliability-audit/SKILL.md",
+      "description": "Evidence-based production-readiness and reliability audit of a software system: rollback and restore paths, failure modes, observability, alerting, SLOs, release gates, migrations, capacity and operational cost. Use when deciding whether a system can be deployed or operated safely, before a launch, after a major change, or when preparing an on-call/runbook/SLO review. Read-only and non-destructive."
+    },
+    {
+      "name": "program-manager",
+      "title": "Program Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Product",
+      "source": "prompts/audit/program-manager.md",
+      "skill": "skills/program-manager/SKILL.md",
+      "description": "Persona «Program Manager» (ناظر) در حوزه Product: هماهنگی Portfolio/Program. استفاده کن وقتی تسک به Cross-project Coordination نیاز دارد و خروجی باید «Program Plan» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Program Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "project-manager",
+      "title": "Project Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/project-manager.md",
+      "skill": "skills/project-manager/SKILL.md",
+      "description": "Persona «Project Manager» (ناظر) در حوزه Project: تحویل موفق پروژه. استفاده کن وقتی تسک به Planning, Scheduling, Risk, Coordination نیاز دارد و خروجی باید «Plans, Status Reports» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Project Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "project-sponsor",
+      "title": "Project Sponsor",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Business",
+      "source": "prompts/audit/project-sponsor.md",
+      "skill": "skills/project-sponsor/SKILL.md",
+      "description": "Persona «Project Sponsor» (ناظر) در حوزه Business: تضمین حمایت پروژه. استفاده کن وقتی تسک به Funding, Resources, Escalation نیاز دارد و خروجی باید «Approval, Resources» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 3 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Project Sponsor-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "prompt-engineer",
+      "title": "Prompt Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "AI",
+      "source": "prompts/implementation/prompt-engineer.md",
+      "skill": "skills/prompt-engineer/SKILL.md",
+      "description": "Persona «Prompt Engineer» (مجری) در حوزه AI: بهینهسازی رفتار مدل. استفاده کن وقتی تسک به Prompt Design, Evaluation نیاز دارد و خروجی باید «Prompts, Evaluation Results» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Prompt Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "qa-engineer",
+      "title": "QA Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Testing",
+      "source": "prompts/implementation/qa-engineer.md",
+      "skill": "skills/qa-engineer/SKILL.md",
+      "description": "Persona «QA Engineer» (مجری) در حوزه Testing: تضمین کیفیت محصول. استفاده کن وقتی تسک به Functional, Regression, Acceptance نیاز دارد و خروجی باید «Test Reports, Bugs» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need QA Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "qa-lead",
+      "title": "QA Lead",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/qa-lead.md",
+      "skill": "skills/qa-lead/SKILL.md",
+      "description": "Persona «QA Lead» (ناظر) در حوزه Project: تضمین QA Strategy. استفاده کن وقتی تسک به Test Strategy, Quality Gates نیاز دارد و خروجی باید «QA Sign-off» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need QA Lead-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "quality-manager",
+      "title": "Quality Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/quality-manager.md",
+      "skill": "skills/quality-manager/SKILL.md",
+      "description": "Persona «Quality Manager» (ناظر) در حوزه Project: تضمین Quality System. استفاده کن وقتی تسک به Quality Standards, Audits نیاز دارد و خروجی باید «Quality Report» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Quality Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "recruiter",
+      "title": "Recruiter",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "HR",
+      "source": "prompts/implementation/recruiter.md",
+      "skill": "skills/recruiter/SKILL.md",
+      "description": "Persona «Recruiter» (مجری) در حوزه HR: تأمین نیروی موردنیاز. استفاده کن وقتی تسک به Sourcing, Screening نیاز دارد و خروجی باید «Candidate Pipeline» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Recruiter-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "recruitment-manager",
+      "title": "Recruitment Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "HR",
+      "source": "prompts/audit/recruitment-manager.md",
+      "skill": "skills/recruitment-manager/SKILL.md",
+      "description": "Persona «Recruitment Manager» (ناظر) در حوزه HR: تضمین جذب با کیفیت, سرعت و عدالت مناسب. استفاده کن وقتی تسک به پروفایل نقش و معیارها, مراحل ارزیابی, تجربه نامزد, پایش کیفیت/سرعت, هماهنگی با مدیران تیم نیاز دارد و خروجی باید «گزارش جذب, ارزیابیها, تصمیمها» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Recruitment Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "refactoring-engineer",
+      "title": "Refactoring Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/refactoring-engineer.md",
+      "skill": "skills/refactoring-engineer/SKILL.md",
+      "description": "Persona «Refactoring Engineer» (مجری) در حوزه Software: کاهش Technical Debt. استفاده کن وقتی تسک به Refactoring, Cleanup نیاز دارد و خروجی باید «Refactored Code» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Refactoring Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "release-engineer",
+      "title": "Release Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "DevOps",
+      "source": "prompts/implementation/release-engineer.md",
+      "skill": "skills/release-engineer/SKILL.md",
+      "description": "Persona «Release Engineer» (مجری) در حوزه DevOps: انتشار کنترلشده نرمافزار. استفاده کن وقتی تسک به Release, Versioning نیاز دارد و خروجی باید «Release Package» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Release Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "release-manager",
+      "title": "Release Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "DevOps",
+      "source": "prompts/audit/release-manager.md",
+      "skill": "skills/release-manager/SKILL.md",
+      "description": "Persona «Release Manager» (ناظر) در حوزه DevOps: تضمین انتشار امن, کنترلشده و قابل ردیابی نسخهها. استفاده کن وقتی تسک به گیتها و چکلیست Release, تأیید/زمانبندی, Rollback, مستندات, هماهنگی با DevOps/QA نیاز دارد و خروجی باید «گزارش Release, چکلیست, Rollback» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Release Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "risk-manager",
+      "title": "Risk Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/risk-manager.md",
+      "skill": "skills/risk-manager/SKILL.md",
+      "description": "Persona «Risk Manager» (ناظر) در حوزه Project: کاهش Project Risk. استفاده کن وقتی تسک به Risk Register, Mitigation نیاز دارد و خروجی باید «Risk Register» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Risk Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "sales-manager",
+      "title": "Sales Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Growth",
+      "source": "prompts/audit/sales-manager.md",
+      "skill": "skills/sales-manager/SKILL.md",
+      "description": "Persona «Sales Manager» (ناظر) در حوزه Growth: افزایش Revenue. استفاده کن وقتی تسک به Sales Strategy, Pipeline نیاز دارد و خروجی باید «Sales Plan» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Sales Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "sales-representative",
+      "title": "Sales Representative",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Growth",
+      "source": "prompts/implementation/sales-representative.md",
+      "skill": "skills/sales-representative/SKILL.md",
+      "description": "Persona «Sales Representative» (مجری) در حوزه Growth: تبدیل Lead به Customer. استفاده کن وقتی تسک به Prospecting, Demo, Closing نیاز دارد و خروجی باید «Sales Record» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Sales Representative-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "scrum-master",
+      "title": "Scrum Master",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/scrum-master.md",
+      "skill": "skills/scrum-master/SKILL.md",
+      "description": "Persona «Scrum Master» (ناظر) در حوزه Project: Optimize Team Flow. استفاده کن وقتی تسک به Facilitation, Blocker Removal نیاز دارد و خروجی باید «Sprint Reports, Action Items» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Scrum Master-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "scrum-product-team",
+      "title": "Scrum Product Team",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Support",
+      "source": "prompts/implementation/scrum-product-team.md",
+      "skill": "skills/scrum-product-team/SKILL.md",
+      "description": "Persona «Scrum Product Team» (مجری) در حوزه Support: تحویل Increment ارزشمند. استفاده کن وقتی تسک به Development, Testing, Collaboration نیاز دارد و خروجی باید «Increment» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Scrum Product Team-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "security-architect",
+      "title": "Security Architect",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Architecture",
+      "source": "prompts/audit/security-architect.md",
+      "skill": "skills/security-architect/SKILL.md",
+      "description": "Persona «Security Architect» (ناظر) در حوزه Architecture: ایجاد Secure-by-Design Architecture. استفاده کن وقتی تسک به Threat Modeling, Trust Boundaries, Security Architecture نیاز دارد و خروجی باید «Threat Model, Security Architecture» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Security Architect-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "security-auditor",
+      "title": "Security Auditor",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Security",
+      "source": "prompts/implementation/security-auditor.md",
+      "skill": "skills/security-auditor/SKILL.md",
+      "description": "Persona «Security Auditor» (مجری) در حوزه Security: ممیزی مستقل و شواهدمحور کنترلهای امنیتی. استفاده کن وقتی تسک به تعریف Scope و ماتریس کنترل, جمعآوری شواهد, ارزیابی مستقل, ثبت یافته و پیگیری نیاز دارد و خروجی باید «گزارش ممیزی, یافتهها, Coverage» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Security Auditor-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "security-engineer",
+      "title": "Security Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Security",
+      "source": "prompts/implementation/security-engineer.md",
+      "skill": "skills/security-engineer/SKILL.md",
+      "description": "Persona «Security Engineer» (مجری) در حوزه Security: کاهش Security Risk. استفاده کن وقتی تسک به Security Controls, Hardening نیاز دارد و خروجی باید «Security Controls» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Security Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "security-governance-manager",
+      "title": "Security Governance Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Security",
+      "source": "prompts/audit/security-governance-manager.md",
+      "skill": "skills/security-governance-manager/SKILL.md",
+      "description": "Persona «Security Governance Manager» (ناظر) در حوزه Security: تضمین پیادهسازی و پایش حاکمیت امنیت. استفاده کن وقتی تسک به چارچوب حاکمیت و استانداردها, ماتریس ریسک/کنترل, نقشها و مالکیت, پایش انطباق, هماهنگی با CISO/ممیزی نیاز دارد و خروجی باید «ماتریس ریسک/کنترل, گزارش حاکمیت» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Security Governance Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "seo-specialist",
+      "title": "SEO Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Growth",
+      "source": "prompts/implementation/seo-specialist.md",
+      "skill": "skills/seo-specialist/SKILL.md",
+      "description": "Persona «SEO Specialist» (مجری) در حوزه Growth: افزایش Organic Acquisition. استفاده کن وقتی تسک به SEO, Content, Technical SEO نیاز دارد و خروجی باید «SEO Changes, Reports» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need SEO Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "service-owner",
+      "title": "Service Owner",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Operations",
+      "source": "prompts/audit/service-owner.md",
+      "skill": "skills/service-owner/SKILL.md",
+      "description": "Persona «Service Owner» (ناظر) در حوزه Operations: تضمین تحقق SLA و سلامت سرویس. استفاده کن وقتی تسک به مالکیت سرویس, SLA و اولویتها, پایش سلامت/هزینه, مدیریت ریسک وابستگی, هماهنگی با توسعه/مشتری نیاز دارد و خروجی باید «گزارش SLA, اولویتها, ریسک» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Service Owner-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "soc-analyst",
+      "title": "SOC Analyst",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Security",
+      "source": "prompts/implementation/soc-analyst.md",
+      "skill": "skills/soc-analyst/SKILL.md",
+      "description": "Persona «SOC Analyst» (مجری) در حوزه Security: پایش و پاسخ اولیه درست به وقایع امنیتی. استفاده کن وقتی تسک به تحلیل هشدار با شواهد, طبقهبندی/اولویت, پاسخ اولیه و مهار, اسکالیشن و گزارش نیاز دارد و خروجی باید «گزارش حادثه, طبقهبندی, شواهد» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need SOC Analyst-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "software-architect",
+      "title": "Software Architect",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Architecture",
+      "source": "prompts/implementation/software-architect.md",
+      "skill": "skills/software-architect/SKILL.md",
+      "description": "Persona «Software Architect» (مجری) در حوزه Architecture: طراحی ساختار داخلی نرمافزار. استفاده کن وقتی تسک به Components, Interfaces, Patterns نیاز دارد و خروجی باید «Architecture, ADR» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Software Architect-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "software-engineer",
+      "title": "Software Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/software-engineer.md",
+      "skill": "skills/software-engineer/SKILL.md",
+      "description": "Persona «Software Engineer» (مجری) در حوزه Software: تولید Software مطابق Specification. استفاده کن وقتی تسک به Coding, Testing, Debugging نیاز دارد و خروجی باید «Code, Tests, Documentation» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 6 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Software Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "solution-architect",
+      "title": "Solution Architect",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Architecture",
+      "source": "prompts/audit/solution-architect.md",
+      "skill": "skills/solution-architect/SKILL.md",
+      "description": "Persona «Solution Architect» (ناظر) در حوزه Architecture: انتخاب بهترین راهکار فنی. استفاده کن وقتی تسک به Solution Design, Technology Selection نیاز دارد و خروجی باید «Solution Architecture» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Solution Architect-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "sre-site-reliability-engineer",
+      "title": "SRE (Site Reliability Engineer)",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "DevOps",
+      "source": "prompts/implementation/sre-site-reliability-engineer.md",
+      "skill": "skills/sre-site-reliability-engineer/SKILL.md",
+      "description": "Persona «SRE (Site Reliability Engineer)» (مجری) در حوزه DevOps: حفظ سلامت Production. استفاده کن وقتی تسک به Monitoring, Incident, Reliability نیاز دارد و خروجی باید «Incident Report, SLO Report» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need SRE (Site Reliability Engineer)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "staff-engineer",
+      "title": "Staff Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/staff-engineer.md",
+      "skill": "skills/staff-engineer/SKILL.md",
+      "description": "Persona «Staff Engineer» (مجری) در حوزه Software: حل Technical Problems پیچیده. استفاده کن وقتی تسک به Architecture, Technical Investigation نیاز دارد و خروجی باید «Technical Solution» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Staff Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "support-manager",
+      "title": "Support Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Support",
+      "source": "prompts/audit/support-manager.md",
+      "skill": "skills/support-manager/SKILL.md",
+      "description": "Persona «Support Manager» (ناظر) در حوزه Support: تضمین رعایت SLA و کیفیت پاسخ پشتیبانی. استفاده کن وقتی تسک به جریان و سطحبندی پاسخ, مالکیت مشکل, اسکالیشن, معیار کیفیت, مدیریت ظرفیت/دانش نیاز دارد و خروجی باید «گزارش SLA, کیفیت, اسکالیشن» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Support Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "system-administrator",
+      "title": "System Administrator",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "DevOps",
+      "source": "prompts/implementation/system-administrator.md",
+      "skill": "skills/system-administrator/SKILL.md",
+      "description": "Persona «System Administrator» (مجری) در حوزه DevOps: سلامت سیستمهای پایه. استفاده کن وقتی تسک به OS, Services, Users نیاز دارد و خروجی باید «System Config» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need System Administrator-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "system-architect",
+      "title": "System Architect",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Architecture",
+      "source": "prompts/implementation/system-architect.md",
+      "skill": "skills/system-architect/SKILL.md",
+      "description": "Persona «System Architect» (مجری) در حوزه Architecture: طراحی System-level Architecture. استفاده کن وقتی تسک به Hardware/Software/Network Integration نیاز دارد و خروجی باید «System Architecture» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need System Architect-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "technical-evangelist",
+      "title": "Technical Evangelist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/technical-evangelist.md",
+      "skill": "skills/technical-evangelist/SKILL.md",
+      "description": "Persona «Technical Evangelist» (مجری) در حوزه Software: افزایش Technical Adoption. استفاده کن وقتی تسک به Talks, Demos, Content نیاز دارد و خروجی باید «Technical Content» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Technical Evangelist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "technical-lead-tech-lead",
+      "title": "Technical Lead / Tech Lead",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Software",
+      "source": "prompts/audit/technical-lead-tech-lead.md",
+      "skill": "skills/technical-lead-tech-lead/SKILL.md",
+      "description": "Persona «Technical Lead / Tech Lead» (ناظر) در حوزه Software: تضمین کیفیت اجرای فنی. استفاده کن وقتی تسک به Technical Direction, Code Review نیاز دارد و خروجی باید «Technical Decisions, Reviews» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Technical Lead / Tech Lead-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "technical-project-manager",
+      "title": "Technical Project Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/technical-project-manager.md",
+      "skill": "skills/technical-project-manager/SKILL.md",
+      "description": "Persona «Technical Project Manager» (ناظر) در حوزه Project: هماهنگی Technical Delivery. استفاده کن وقتی تسک به Technical Planning, Dependency Management نیاز دارد و خروجی باید «Technical Plan» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Technical Project Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "technical-recruiter",
+      "title": "Technical Recruiter",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "HR",
+      "source": "prompts/implementation/technical-recruiter.md",
+      "skill": "skills/technical-recruiter/SKILL.md",
+      "description": "Persona «Technical Recruiter» (مجری) در حوزه HR: جذب Technical Talent. استفاده کن وقتی تسک به Technical Screening Coordination نیاز دارد و خروجی باید «Candidate Assessment» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Technical Recruiter-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "technical-support-engineer",
+      "title": "Technical Support Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Support",
+      "source": "prompts/implementation/technical-support-engineer.md",
+      "skill": "skills/technical-support-engineer/SKILL.md",
+      "description": "Persona «Technical Support Engineer» (مجری) در حوزه Support: رفع Technical Issues. استفاده کن وقتی تسک به Troubleshooting, Diagnostics نیاز دارد و خروجی باید «Resolution Report» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Technical Support Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "technical-writer",
+      "title": "Technical Writer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Documentation",
+      "source": "prompts/implementation/technical-writer.md",
+      "skill": "skills/technical-writer/SKILL.md",
+      "description": "Persona «Technical Writer» (مجری) در حوزه Documentation: انتقال دانش فنی. استفاده کن وقتی تسک به API Docs, Architecture Docs نیاز دارد و خروجی باید «Technical Docs» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Technical Writer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "test-automation-engineer",
+      "title": "Test Automation Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Testing",
+      "source": "prompts/implementation/test-automation-engineer.md",
+      "skill": "skills/test-automation-engineer/SKILL.md",
+      "description": "Persona «Test Automation Engineer» (مجری) در حوزه Testing: Automate Quality Verification. استفاده کن وقتی تسک به Automated Tests, Frameworks نیاز دارد و خروجی باید «Automated Test Suite» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Test Automation Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "test-engineer",
+      "title": "Test Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Testing",
+      "source": "prompts/implementation/test-engineer.md",
+      "skill": "skills/test-engineer/SKILL.md",
+      "description": "Persona «Test Engineer» (مجری) در حوزه Testing: کشف Defect. استفاده کن وقتی تسک به Test Cases, Regression نیاز دارد و خروجی باید «Test Results» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Test Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "third-party-integration-specialist",
+      "title": "Third-party Integration Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Software",
+      "source": "prompts/implementation/third-party-integration-specialist.md",
+      "skill": "skills/third-party-integration-specialist/SKILL.md",
+      "description": "Persona «Third-party Integration Specialist» (مجری) در حوزه Software: اتصال پایدار سرویسها. استفاده کن وقتی تسک به API Integration, Webhooks نیاز دارد و خروجی باید «Integration Code, Tests» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Third-party Integration Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "tool-developer",
+      "title": "Tool Developer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "AI",
+      "source": "prompts/implementation/tool-developer.md",
+      "skill": "skills/tool-developer/SKILL.md",
+      "description": "Persona «Tool Developer» (مجری) در حوزه AI: توسعه ابزارهای امن, پایدار و قابل تست برای Agent. استفاده کن وقتی تسک به طراحی قرارداد ابزار, پیادهسازی validation/خطا, نوشتن تست, مستندسازی Usage نیاز دارد و خروجی باید «کد ابزار, تستها, مستندات و نمونه» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Tool Developer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "translator",
+      "title": "Translator",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Documentation",
+      "source": "prompts/implementation/translator.md",
+      "skill": "skills/translator/SKILL.md",
+      "description": "Persona «Translator» (مجری) در حوزه Documentation: ترجمه دقیق و طبیعی. استفاده کن وقتی تسک به Translation, Terminology نیاز دارد و خروجی باید «Translated Content» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 3 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Translator-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "ui-designer",
+      "title": "UI Designer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Design",
+      "source": "prompts/implementation/ui-designer.md",
+      "skill": "skills/ui-designer/SKILL.md",
+      "description": "Persona «UI Designer» (مجری) در حوزه Design: ایجاد UI قابل استفاده و Consistent. استفاده کن وقتی تسک به Visual Design, Components نیاز دارد و خروجی باید «UI Designs» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need UI Designer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "ui-ux-research-participants",
+      "title": "UI/UX Research Participants",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Support",
+      "source": "prompts/implementation/ui-ux-research-participants.md",
+      "skill": "skills/ui-ux-research-participants/SKILL.md",
+      "description": "Persona «UI/UX Research Participants» (مجری) در حوزه Support: ارائه User Feedback. استفاده کن وقتی تسک به Usability Testing نیاز دارد و خروجی باید «Feedback» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 3 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need UI/UX Research Participants-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "ux-designer",
+      "title": "UX Designer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Design",
+      "source": "prompts/implementation/ux-designer.md",
+      "skill": "skills/ux-designer/SKILL.md",
+      "description": "Persona «UX Designer» (مجری) در حوزه Design: ایجاد User Experience مناسب. استفاده کن وقتی تسک به User Flows, Interaction نیاز دارد و خروجی باید «UX Designs, Flows» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need UX Designer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "ux-researcher",
+      "title": "UX Researcher",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Analytics",
+      "source": "prompts/implementation/ux-researcher.md",
+      "skill": "skills/ux-researcher/SKILL.md",
+      "description": "Persona «UX Researcher» (مجری) در حوزه Analytics: کشف User Needs. استفاده کن وقتی تسک به Interviews, Testing, Analysis نیاز دارد و خروجی باید «Research Report» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need UX Researcher-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "ux-writer-content-designer",
+      "title": "UX Writer / Content Designer",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Documentation",
+      "source": "prompts/implementation/ux-writer-content-designer.md",
+      "skill": "skills/ux-writer-content-designer/SKILL.md",
+      "description": "Persona «UX Writer / Content Designer» (مجری) در حوزه Documentation: ایجاد Clear Product Communication. استفاده کن وقتی تسک به Microcopy, Error Messages نیاز دارد و خروجی باید «Copy» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need UX Writer / Content Designer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "vendor-manager",
+      "title": "Vendor Manager",
+      "type": "SUPERVISOR",
+      "typeLabel": "ناظر",
+      "domain": "Project",
+      "source": "prompts/audit/vendor-manager.md",
+      "skill": "skills/vendor-manager/SKILL.md",
+      "description": "Persona «Vendor Manager» (ناظر) در حوزه Project: کنترل عملکرد Vendor. استفاده کن وقتی تسک به SLA, Contracts, Performance نیاز دارد و خروجی باید «Vendor Report» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Vendor Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "vulnerability-management-specialist",
+      "title": "Vulnerability Management Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "مجری",
+      "domain": "Security",
+      "source": "prompts/implementation/vulnerability-management-specialist.md",
+      "skill": "skills/vulnerability-management-specialist/SKILL.md",
+      "description": "Persona «Vulnerability Management Specialist» (مجری) در حوزه Security: شناسایی, ارزیابی و پیگیری آسیبپذیریها تا رفع. استفاده کن وقتی تسک به اجرای اسکن, ارزیابی و اولویتبندی, ثبت یافته با مالک, پیگیری رفع و بازتست نیاز دارد و خروجی باید «گزارش آسیبپذیری, یافتهها, پیگیری» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Vulnerability Management Specialist-level judgment with evidence and a fixed scope."
+    }
+  ]
+}

@@ -49,9 +49,11 @@ def read_rows(path: Path) -> list[tuple[str, str, str, str]]:
         if title == "عنوان شغلی" or set(title) <= set("-: "):
             continue
         # the merged main table carries the prompt link in one of its cells;
-        # scan for it instead of assuming a fixed column index
+        # scan for it instead of assuming a fixed column index. The `prompts/`
+        # prefix is required so that links elsewhere in the README (e.g. the
+        # composite-persona / skills sections) are not mistaken for role rows.
         for c in cells:
-            m = re.search(r"(audit|implementation)/([\w\-]+)\.md", c)
+            m = re.search(r"prompts/(audit|implementation)/([\w\-]+)\.md", c)
             if m:
                 rows.append((title, cells[2], m.group(1), m.group(2)))
                 break
