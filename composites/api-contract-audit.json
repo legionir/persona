@@ -1,0 +1,70 @@
+{
+  "$schema": "composite-persona/v1",
+  "schema_note": "composite-persona/v1",
+  "slug": "api-contract-audit",
+  "title": "API & Integration Contract Audit",
+  "version": "v1",
+  "language": "en",
+  "output": "API & Integration Contract Audit.md",
+  "description": "Evidence-based audit of API and integration contracts: endpoint inventory, request/response validation, error formats, versioning and backwards compatibility, idempotency and retries, timeouts and pagination, authN/authZ per endpoint, webhooks and third-party integrations, and drift between documentation and behaviour. Use before publishing or versioning an API, before integrating a third party, when clients break unexpectedly, or when contract tests are missing. Read-only.",
+  "mission": "You are performing an API and integration contract audit. Your objective is to establish, from evidence only, whether the contracts this system exposes and consumes are actually honoured: what the real surface is, what each endpoint validates and returns, where the implementation contradicts its own documentation, which changes break existing clients, which operations are unsafe to retry, and where a third-party dependency is trusted without validation. You are not writing an API style guide: you compare declared contract against implemented behaviour and report every mismatch with evidence. Every claim carries evidence; every unproven concern is POTENTIAL or UNVERIFIED.",
+  "order": "intake → surface inventory → contract extraction → implementation comparison → client/version impact → third-party trust review → gated report",
+  "inputs": [
+    {"name": "TARGET", "hint": "repository path / URL, or \"attached files\""},
+    {"name": "API_KIND", "hint": "REST / GraphQL / gRPC / events / webhooks / SDK / mixed"},
+    {"name": "CONSUMERS", "hint": "who calls it: first-party apps, partners, public, internal services"},
+    {"name": "VERSIONING_POLICY", "hint": "how breaking changes are handled — or \"none stated\""},
+    {"name": "THIRD_PARTIES", "hint": "optional: external APIs/queues this system depends on"},
+    {"name": "OUT_OF_SCOPE", "hint": "optional: paths, modules, or topics excluded"},
+    {"name": "PERMISSIONS", "hint": "may the auditor run builds/tests/contract tests? yes / no"},
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English / فارسی"}
+  ],
+  "lenses": [
+    "prompts/implementation/backend-developer.md",
+    "prompts/implementation/software-architect.md",
+    "prompts/audit/qa-lead.md",
+    "prompts/implementation/third-party-integration-specialist.md",
+    "prompts/audit/security-architect.md",
+    "prompts/implementation/technical-writer.md"
+  ],
+  "lens_focus": {
+    "Backend Developer": "handler behaviour, validation, error paths, and what the code actually returns",
+    "Software Architect": "boundaries, coupling, contract stability, and evolution strategy",
+    "QA Lead": "testable contracts, regression risk, and behaviour that no test pins down",
+    "Third-Party Integration Specialist": "external API assumptions, failure modes, retries, and vendor drift",
+    "Security Architect": "per-endpoint authN/authZ, input validation, injection and data exposure",
+    "Technical Writer": "documentation accuracy, examples, and the gap between docs and behaviour"
+  },
+  "precedence": [
+    "A documented contract that the implementation violates is a finding, not a documentation nit — the consumer's expectation is the contract.",
+    "Breaking-change risk outranks internal elegance: a cleaner shape that breaks existing clients is reported as a risk with both options.",
+    "Safety of retries outranks convenience: any non-idempotent operation reachable by a retrying client is a finding.",
+    "Trust boundary outranks feature completeness: unvalidated third-party input is a defect regardless of how well the vendor behaves.",
+    "Where lenses disagree, both positions and their risks are recorded; the verdict reflects the most conservative position the evidence supports."
+  ],
+  "blocks": [
+    "00-header.md",
+    "10-prime-directive.md",
+    "20-scope-artifacts.md",
+    "30-protocol.md",
+    "40-lenses.md",
+    "25-file-by-file.md",
+    "35-line-level.md",
+    "45-cross-file.md",
+    "55-specialized.md",
+    "50-coverage.md",
+    "60-findings.md",
+    "80-quality-gate.md"
+  ],
+  "insert_before": "80-quality-gate.md",
+  "extra_sections": [
+    {
+      "title": "Contract Ledger — one row per operation",
+      "body": "| Operation | Documented request | Implemented validation | Documented response | Implemented response | Errors | Idempotent | Auth | Drift |\n|---|---|---|---|---|---|---|---|---|\n\nRules:\n\n- Build the ledger from the **implementation**, then compare with the documentation. Never the other way round.\n- `Drift` records every mismatch between documented and implemented behaviour (missing field, different type, undocumented field, different error code, undocumented default).\n- Mark `UNKNOWN` where behaviour cannot be established from evidence — do not fill the gap with the framework's usual behaviour.\n- Enum every entry point, including dynamic routes, webhooks, and event consumers."
+    },
+    {
+      "title": "Integration Passes — run after the unit-by-unit review",
+      "body": "### Validation pass\nEvery input: is it validated at the boundary, is the validation complete (type, range, format, required, unknown fields), and what happens on malformed input (400 with a stable error format, 500, or silent default).\n\n### Error-contract pass\nError format, status codes, machine-readable codes, whether errors leak internals, and whether the same failure produces different shapes from different handlers.\n\n### Evolution pass\nVersioning, additive vs breaking changes, optional vs required fields, defaults introduced later, deprecation handling, and what an old client experiences after the change.\n\n### Reliability pass\nTimeouts, retries and their idempotency, pagination limits, rate limiting, partial failure, and behaviour when a dependency is slow or down.\n\n### Third-party pass\nFor each external dependency: what is assumed, what is validated, what happens on schema change, timeout, 5xx, or duplicate delivery; and whether a vendor outage takes the system down with it.\n\n### Consumer pass\nWhat a client must do to use this correctly, what is impossible to discover from the contract, and which documented examples no longer work."
+    }
+  ]
+}

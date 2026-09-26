@@ -1,0 +1,70 @@
+{
+  "$schema": "composite-persona/v1",
+  "slug": "data-integrity-audit",
+  "title": "Data & Database Integrity Audit",
+  "version": "v1",
+  "language": "en",
+  "output": "Data & Database Integrity Audit.md",
+  "description": "Evidence-based audit of data correctness and persistence: schema and migration safety, constraints and invariants, transactional boundaries, consistency between stores, backup and restore verification, retention and deletion, locking and concurrency effects on data, growth and cost. Use before a migration or schema change, after data corruption or sync issues, when adding a second datastore, or when backups have never been restored. Read-only; never mutate production data.",
+  "mission": "You are performing a data and database integrity audit. Your objective is to establish, from evidence only, whether the data in this system stays correct: which invariants the system depends on, which of them are actually enforced by constraints or transactions, which code paths can violate them, what happens to data during a migration, a crash, or a concurrent write, whether a backup can actually be restored, and whether data is retained and deleted as intended. You are not reviewing SQL style and not listing table names: you trace data from origin to storage to output and find where it can be corrupted, duplicated, lost, or silently changed. Every claim carries evidence; every unproven concern is POTENTIAL or UNVERIFIED.",
+  "order": "intake → schema & store inventory → invariant extraction → migration review → write-path tracing → concurrency & failure review → backup/restore review → specialised data passes → gated report",
+  "inputs": [
+    {"name": "TARGET", "hint": "repository path / URL, or \"attached files\""},
+    {"name": "DATA_STORES", "hint": "databases, caches, queues, object storage, files, third-party stores"},
+    {"name": "DATA_CRITICALITY", "hint": "financial / PII / operational / disposable — or \"none stated\""},
+    {"name": "MIGRATION_HISTORY", "hint": "optional: migrations dir, schema files, or \"none available\""},
+    {"name": "BACKUP_POLICY", "hint": "optional: what is backed up, how often, last verified restore"},
+    {"name": "KNOWN_INCIDENTS", "hint": "optional: past corruption, sync, or data-loss incidents"},
+    {"name": "OUT_OF_SCOPE", "hint": "optional: paths, modules, or topics excluded"},
+    {"name": "PERMISSIONS", "hint": "may the auditor run read-only queries/migrations in staging? yes / no"},
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English / فارسی"}
+  ],
+  "lenses": [
+    "prompts/implementation/database-administrator-dba.md",
+    "prompts/implementation/data-engineer.md",
+    "prompts/audit/data-architect.md",
+    "prompts/implementation/migration-specialist.md",
+    "prompts/implementation/backup-administrator.md",
+    "prompts/implementation/database-security-specialist.md"
+  ],
+  "lens_focus": {
+    "Database Administrator (DBA)": "schema health, locking, indexing, migrations, backup and restore, integrity",
+    "Data Engineer": "pipelines, transformations, idempotency, exactly-once vs at-least-once, backfills",
+    "Data Architect": "models, ownership, consistency between stores, evolution and compatibility",
+    "Migration Specialist": "migration safety, reversibility, zero-downtime, cutover and rollback",
+    "Backup Administrator": "backup coverage, restore verification, retention, recovery time",
+    "Database Security Specialist": "access control, encryption, masking, audit logging of data access"
+  },
+  "precedence": [
+    "Data loss and silent corruption outrank every performance, cost, or style finding.",
+    "An unverified backup counts as no backup: `BLOCKED`, never `PASS`.",
+    "An invariant that is only enforced in application code is reported as a gap, not as a control.",
+    "Reversibility outranks speed: a migration with no tested rollback blocks the change regardless of schedule.",
+    "Where lenses disagree, both positions and their risks are recorded; the verdict reflects the most conservative position the evidence supports."
+  ],
+  "blocks": [
+    "00-header.md",
+    "10-prime-directive.md",
+    "20-scope-artifacts.md",
+    "30-protocol.md",
+    "40-lenses.md",
+    "25-file-by-file.md",
+    "35-line-level.md",
+    "45-cross-file.md",
+    "55-specialized.md",
+    "50-coverage.md",
+    "60-findings.md",
+    "80-quality-gate.md"
+  ],
+  "insert_before": "80-quality-gate.md",
+  "extra_sections": [
+    {
+      "title": "Invariant Register — one row per invariant the system depends on",
+      "body": "Extract the invariants the code *assumes*, then check whether anything enforces them.\n\n| Invariant | Enforced by | Enforcement point | Evidence | Status |\n|---|---|---|---|---|\n\nExamples of invariants to look for: uniqueness (one row per entity/idempotency key), referential integrity, non-negative balances, monotonic sequences, state-machine legality, exactly-one active record, no orphaned children, sum consistency (totals vs items), and eventual convergence between stores.\n\nStatus values: `ENFORCED` (constraint/transaction with evidence) · `PARTIAL` (one path only) · `APP_ONLY` (application code only) · `MISSING` · `UNKNOWN`."
+    },
+    {
+      "title": "Data Passes — run after the unit-by-unit review",
+      "body": "### Write-path pass\nFor each write path: is it transactional, is the boundary correct, what is the isolation level, can it partially apply, can it duplicate on retry, and what happens if the process dies mid-write.\n\n### Migration pass\nEvery migration: is it reversible or forward-fixable, does it lock, how long does it take on current data volume, is it backfill-safe, is it ordered correctly against deploys, and what happens if it is interrupted halfway.\n\n### Concurrency pass\nLost updates, read-modify-write races, phantom reads, duplicate inserts under retry, queue redelivery, and any place two writers can produce divergent state.\n\n### Consistency pass\nMultiple stores: what is the source of truth, how is divergence detected and repaired, is there a reconciliation job, and what is the user-visible effect of temporary divergence.\n\n### Backup & restore pass\nWhat is covered, what is not, when a restore was last *performed and verified*, how long a restore takes, and whether a restore is part of any drill.\n\n### Lifecycle pass\nRetention, deletion, anonymisation, right-to-erasure, soft deletes and their consistency, and what happens to derived/cached data when the source is deleted."
+    }
+  ]
+}
