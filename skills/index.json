@@ -6,9 +6,9 @@
     "personas": "prompts/**/*.md + composite master prompts"
   },
   "totals": {
-    "skills": 187,
+    "skills": 188,
     "roles": 170,
-    "composites": 17
+    "composites": 18
   },
   "skills": [
     {
@@ -700,6 +700,16 @@
       "source": "prompts/audit/domain-expert-sme.md",
       "skill": "skills/domain-expert-sme/SKILL.md",
       "description": "Persona «Domain Expert (SME)» (ناظر) در حوزه Analytics: تضمین صحت Domain Logic. استفاده کن وقتی تسک به Domain Rules, Validation نیاز دارد و خروجی باید «Domain Decisions» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Domain Expert (SME)-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "domain-model-context-review",
+      "title": "Domain Model & Context Review — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "ترکیبی",
+      "domain": null,
+      "source": "Domain Model & Context Review.md",
+      "skill": "skills/domain-model-context-review/SKILL.md",
+      "description": "Forensic review of the domain model and its boundaries: ubiquitous language, bounded contexts and context mapping, subdomain strategy, entities, value objects, aggregates, domain services and specifications, repositories, factories, and domain events — judged against Domain-Driven Design (Evans) and its practical distilled form (Vernon). Use for domain modelling review, before introducing or reshaping aggregates, when a CRUD-shaped codebase needs a model, when integration with a foreign or legacy system leaks vocabulary, or when review comments need evidence instead of taste. Read-only."
     },
     {
       "name": "embedded-developer",

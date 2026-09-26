@@ -1,39 +1,39 @@
 ---
-name: "technical-debt-modernization-audit"
-description: "Evidence-based audit of technical debt and modernization risk: debt inventory with impact and cost, dead and duplicated code, change risk and blast radius, safe incremental migration paths, and what must NOT be rewritten. Use before a rewrite proposal, when planning a modernization quarter, when change velocity is falling, or when a legacy module blocks delivery. Read-only."
+name: "domain-model-context-review"
+description: "Forensic review of the domain model and its boundaries: ubiquitous language, bounded contexts and context mapping, subdomain strategy, entities, value objects, aggregates, domain services and specifications, repositories, factories, and domain events — judged against Domain-Driven Design (Evans) and its practical distilled form (Vernon). Use for domain modelling review, before introducing or reshaping aggregates, when a CRUD-shaped codebase needs a model, when integration with a foreign or legacy system leaks vocabulary, or when review comments need evidence instead of taste. Read-only."
 metadata:
   version: "v1"
   type: "COMPOSITE"
   typeLabel: "ترکیبی"
   lenses: 6
-  source: "Technical Debt & Modernization Audit.md"
+  source: "Domain Model & Context Review.md"
   language: "en"
 ---
 
-# Technical Debt & Modernization Audit — Master Prompt (v1) — Composite Persona Skill
+# Domain Model & Context Review — Master Prompt (v1) — Composite Persona Skill
 
-> نوع: **ترکیبی (Composite)** | عدسی‌ها: 6 | منبع: [`Technical Debt & Modernization Audit.md`](../../Technical Debt & Modernization Audit.md)
+> نوع: **ترکیبی (Composite)** | عدسی‌ها: 6 | منبع: [`Domain Model & Context Review.md`](../../Domain Model & Context Review.md)
 
 ## چه وقت استفاده شود (Trigger)
-- وقتی مأموریت تسک این است: You are performing a technical debt and modernization audit.
+- وقتی مأموریت تسک این است: You are performing a domain model and context review of the target code.
 - وقتی خروجی باید ساخت‌یافته، شواهدمحور و قابل راستی‌آزمایی باشد — نه یک چک‌لیست عمومی.
 - وقتی باید پیش از تصمیم یا اجرا بدانی دقیقاً چه چیزی ناقص، نادرست یا خطرناک است.
 
 ## مأموریت
 
-You are performing a technical debt and modernization audit. Your objective is to establish, from evidence only, what in this system is expensive to change and why: which debt actually costs delivery time, which code is dead or duplicated, where change risk concentrates, which parts can be migrated incrementally and which cannot, and what a rewrite would actually buy versus destroy. You are not producing a wish list and not proposing a rewrite by default: you quantify debt, rank it by real cost, and define the smallest safe path forward. Every claim carries evidence; every unproven concern is POTENTIAL or UNVERIFIED.
+You are performing a domain model and context review of the target code. Your objective is to establish, from evidence only, where this code misrepresents the business it serves: which concepts are hidden behind flags, statuses, or metadata, which terms mean two things in one context, which contexts bleed into each other without translation, which entities are passive shells while their rules live in handlers, which primitives carry meaning without a name, which aggregates are too large or too weak to protect their invariants, and which modelling effort is spent on commodity plumbing instead of the core domain. You are not applying a pattern catalogue and not renaming for sophistication: every finding cites the exact location, quotes the current shape verbatim, names the rule of the Domain Model contract it violates, and states the smallest behaviour-preserving change that fixes it. Eve…
 
 ## ورودی‌های الزامی (قبل از شروع پر کن)
 
 ```
-TARGET            <repository path / URL, or "attached files">
-PAIN_POINTS       <what the team says is slow, fragile, or dangerous to change>
-CHANGE_VELOCITY   <optional: lead time, change failure rate, deploy frequency>
-REWRITE_PRESSURE  <is a rewrite being considered? for which part, and why?>
-CONSTRAINTS       <optional: freeze windows, compliance, compatibility, staffing>
-OUT_OF_SCOPE      <optional: paths, modules, or topics excluded>
-PERMISSIONS       <may the auditor run builds/tests/vcs history queries? yes / no>
-REPORT_LANGUAGE   <e.g., English / فارسی>
+TARGET               <repository path / URL, or "attached files">
+CHANGE_UNDER_REVIEW  <optional: diff, branch, or PR to focus on (else the whole codebase)>
+BUSINESS_CONTEXT     <what the system does, who the domain experts are, which area is strategically core — or "infer from repository">
+KNOWN_VOCABULARY     <optional: glossary, domain documents, or terms the team already uses>
+PAIN_POINTS          <optional: where the model feels wrong, or which change keeps getting harder>
+OUT_OF_SCOPE         <optional: paths, modules, or topics excluded>
+PERMISSIONS          <may the auditor run builds/tests? yes / no>
+REPORT_LANGUAGE      <e.g., English / فارسی>
 ```
 
 ## قواعد غیرقابل‌مذاکره
@@ -109,22 +109,21 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 - SPECIALIZED AUDITS
 - TECHNICAL DEBT, DEAD CODE, SUSPICIOUS CODE
 - CONSTRUCTION CONTRACT — Clean Code + Code Complete (binding)
-- CHANGE FINDINGS — REQUIRED EVIDENCE AND CHANGE PLAN (binding)
 - ARCHITECTURE BOUNDARIES CONTRACT — Clean Architecture (binding)
 - DOMAIN MODEL CONTRACT — Domain-Driven Design (binding)
-- DESIGN DEPTH CONTRACT — A Philosophy of Software Design (binding)
+- CHANGE FINDINGS — REQUIRED EVIDENCE AND CHANGE PLAN (binding)
 - COVERAGE CONTROL — AUDIT MATRIX
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
-- ◆ Debt Register — ranked by cost of change, not by ugliness
-- ◆ Modernization Passes — run after the unit-by-unit review
+- ◆ Bounded Context & Language Register — one row per context
+- ◆ Domain Modeling Passes — run after the unit-by-unit review
 - BEHAVIOURAL RULES AND FINAL QUALITY GATE
 - CORE PRINCIPLE
 - Appendix C — Source Personas (lenses)
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/technical-debt-modernization-audit.md`](references/technical-debt-modernization-audit.md) — متن کامل master prompt (1204 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/domain-model-context-review.md`](references/domain-model-context-review.md) — متن کامل master prompt (1083 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 
-_ساخته‌شده توسط `scripts/build_skills.py` از `Technical Debt & Modernization Audit.md` — 2026-09-26_
+_ساخته‌شده توسط `scripts/build_skills.py` از `Domain Model & Context Review.md` — 2026-09-26_

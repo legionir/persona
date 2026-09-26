@@ -9,6 +9,8 @@
 > [`composites/blocks/92-clean-architecture-contract.md`](../composites/blocks/92-clean-architecture-contract.md) (Clean Architecture)،
 > به انگلیسی و هم‌سبک با بقیهٔ بلوک‌ها. این سند فقط نقشهٔ استخراج و نحوهٔ اتصال است.
 > قرارداد قبلی (Clean Code + Code Complete) در [`docs/construction-contract.md`](construction-contract.md) مستند شده است.
+> یک کتاب دیگر («Domain-Driven Design») جداگانه مستند شده است:
+> [`docs/domain-driven-design-contract.md`](domain-driven-design-contract.md).
 
 ---
 

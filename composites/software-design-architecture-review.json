@@ -54,6 +54,7 @@
     "90-construction-contract.md",
     "91-design-depth-contract.md",
     "92-clean-architecture-contract.md",
+    "93-domain-model-contract.md",
     "95-change-findings.md",
     "50-coverage.md",
     "60-findings.md",

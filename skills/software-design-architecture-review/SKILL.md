@@ -110,6 +110,7 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 - CONSTRUCTION CONTRACT — Clean Code + Code Complete (binding)
 - DESIGN DEPTH CONTRACT — A Philosophy of Software Design (binding)
 - ARCHITECTURE BOUNDARIES CONTRACT — Clean Architecture (binding)
+- DOMAIN MODEL CONTRACT — Domain-Driven Design (binding)
 - CHANGE FINDINGS — REQUIRED EVIDENCE AND CHANGE PLAN (binding)
 - COVERAGE CONTROL — AUDIT MATRIX
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
@@ -121,7 +122,7 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/software-design-architecture-review.md`](references/software-design-architecture-review.md) — متن کامل master prompt (1062 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/software-design-architecture-review.md`](references/software-design-architecture-review.md) — متن کامل master prompt (1206 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 

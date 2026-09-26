@@ -110,6 +110,7 @@ REPORT_LANGUAGE    <e.g., English / فارسی>
 - COVERAGE CONTROL — AUDIT MATRIX
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
 - ARCHITECTURE BOUNDARIES CONTRACT — Clean Architecture (binding)
+- DOMAIN MODEL CONTRACT — Domain-Driven Design (binding)
 - ◆ Contract Ledger — one row per operation
 - ◆ Integration Passes — run after the unit-by-unit review
 - BEHAVIOURAL RULES AND FINAL QUALITY GATE
@@ -118,7 +119,7 @@ REPORT_LANGUAGE    <e.g., English / فارسی>
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/api-integration-contract-audit.md`](references/api-integration-contract-audit.md) — متن کامل master prompt (713 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/api-integration-contract-audit.md`](references/api-integration-contract-audit.md) — متن کامل master prompt (857 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 
