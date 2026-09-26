@@ -13,6 +13,7 @@
 > خودِ قواعد اینجا تکرار **نشده‌اند**. منبع یگانه:
 > [`composites/blocks/97-refactoring-contract.md`](../composites/blocks/97-refactoring-contract.md)
 > (به انگلیسی، هم‌سبک با بقیهٔ بلوک‌ها). این سند فقط نقشهٔ استخراج و نحوهٔ اتصال است.
+> قرارداد سیستم طراحی فرانت‌اند: [`docs/frontend-design-system-contract.md`](frontend-design-system-contract.md).
 
 ---
 

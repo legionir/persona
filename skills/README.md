@@ -30,11 +30,12 @@ for d in skills/*/; do cp -r "$d" .claude/skills/; done
 | [`execution-plan-generator`](execution-plan-generator/SKILL.md) | ترکیبی | ترکیبی | `Execution Plan Generator.md` | 72 |
 | [`forensic-codebase-review-audit`](forensic-codebase-review-audit/SKILL.md) | ترکیبی | ترکیبی | `Forensic Codebase Review & Audit.md` | 154 |
 | [`forensic-security-threat-audit`](forensic-security-threat-audit/SKILL.md) | ترکیبی | ترکیبی | `Forensic Security & Threat Audit.md` | 124 |
+| [`frontend-design-system-review`](frontend-design-system-review/SKILL.md) | ترکیبی | ترکیبی | `Frontend & Design System Review.md` | 129 |
 | [`incident-forensic-review-postmortem`](incident-forensic-review-postmortem/SKILL.md) | ترکیبی | ترکیبی | `Incident Forensic Review & Postmortem.md` | 124 |
 | [`performance-scalability-audit`](performance-scalability-audit/SKILL.md) | ترکیبی | ترکیبی | `Performance & Scalability Audit.md` | 125 |
 | [`privacy-compliance-audit`](privacy-compliance-audit/SKILL.md) | ترکیبی | ترکیبی | `Privacy & Compliance Audit.md` | 124 |
 | [`production-readiness-reliability-audit`](production-readiness-reliability-audit/SKILL.md) | ترکیبی | ترکیبی | `Production Readiness & Reliability Audit.md` | 120 |
-| [`software-design-architecture-review`](software-design-architecture-review/SKILL.md) | ترکیبی | ترکیبی | `Software Design & Architecture Review.md` | 132 |
+| [`software-design-architecture-review`](software-design-architecture-review/SKILL.md) | ترکیبی | ترکیبی | `Software Design & Architecture Review.md` | 133 |
 | [`technical-debt-modernization-audit`](technical-debt-modernization-audit/SKILL.md) | ترکیبی | ترکیبی | `Technical Debt & Modernization Audit.md` | 133 |
 | [`testing-quality-assurance-audit`](testing-quality-assurance-audit/SKILL.md) | ترکیبی | ترکیبی | `Testing & Quality Assurance Audit.md` | 129 |
 | [`accessibility-specialist`](accessibility-specialist/SKILL.md) | مجری | Design | `prompts/implementation/accessibility-specialist.md` | 236 |
@@ -208,4 +209,4 @@ for d in skills/*/; do cp -r "$d" .claude/skills/; done
 | [`vendor-manager`](vendor-manager/SKILL.md) | ناظر | Project | `prompts/audit/vendor-manager.md` | 244 |
 | [`vulnerability-management-specialist`](vulnerability-management-specialist/SKILL.md) | مجری | Security | `prompts/implementation/vulnerability-management-specialist.md` | 252 |
 
-_تعداد: 188 skill — ساخته‌شده در 2026-09-26 توسط `scripts/build_skills.py`_
+_تعداد: 189 skill — ساخته‌شده در 2026-09-26 توسط `scripts/build_skills.py`_

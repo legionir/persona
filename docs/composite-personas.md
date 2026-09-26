@@ -85,6 +85,7 @@
 | `95-pragmatic-contract.md` | قرارداد پراگماتیک: ادغام یگانهٔ The Pragmatic Programmer (DRY یعنی دانش نه متن، orthogonality، tracer bullet، خودکارسازی، حلقهٔ بازخورد، قرارداد و منابع، ارتباطات) |
 | `96-change-findings.md` | شواهد الزامی برای هر یافتهٔ «تغییر» + قواعد پلن تغییر (severity را به روبیک پایهٔ Findings map می‌کند، دوباره نمی‌نویسد) |
 | `97-refactoring-contract.md` | قرارداد رفکتورینگ: ادغام یگانهٔ Refactoring.Guru (جداسازی از کار feature/bug، گام‌های کوچک، راستی‌آزمایی و شرط توقف، قاعدهٔ سه، شش دستهٔ بو با محرک→درمان→جایگزین، قواعد استثنای بو، انتخاب و ایمنی تکنیک، آنتی‌الگوهای تصمیم، ورکفلو agent) |
+| `98-frontend-design-system-contract.md` | قرارداد سیستم طراحی فرانت‌اند: ادغام یگانهٔ Doctrine of Visual & Interaction Consistency (توکن‌ها، یک مفهوم=یک کامپوننت، prop API یکسان، shell و template، پوشش stateها، فرم، جدول، تایپوگرافی، رنگ، آیکون، موشن، ریسپانسیو، دسترس‌پذیری، تم، نام‌گذاری، اجبار مکانیکی) |
 
 ترتیب پیشنهادی یک ممیزی forensic کامل:
 
@@ -176,6 +177,8 @@ python3 scripts/compose_persona.py --all --check
       (به‌جای نوشتن دوبارهٔ شواهد یافته در `extra_sections`).
 - [ ] اگر composite تغییر ساختاری/رفکتورینگ پیشنهاد می‌دهد، بلوک `97-refactoring-contract.md` include شده
       (و فرایند تغییر و قواعد پلن از `90-`/`96-` تکرار نشده‌اند).
+- [ ] اگر composite فرانت‌اند/UI ممیزی می‌کند، بلوک `98-frontend-design-system-contract.md` include شده
+      (و جداسازی presentation از domain از `94-` و کاتالوگ بو از `97-` تکرار نشده‌اند).
 
 ---
 
@@ -201,6 +204,7 @@ DevOps Engineer، Observability Engineer، DBA)، ۱۲ «گیت آمادگی» (
 | `clean-code-construction-review` | ۶ | کیفیت ساخت کد بر اساس قرارداد Clean Code + Code Complete |
 | `software-design-architecture-review` | ۶ | عمق طراحی و جهت وابستگی‌ها بر اساس Philosophy of Software Design + Clean Architecture |
 | `domain-model-context-review` | ۶ | زبان مشترک، bounded context و مدل دامنه بر اساس DDD (Evans / Vernon) |
+| `frontend-design-system-review` | ۶ | توکن‌ها، کتابخانهٔ کامپوننت، shell/template و پوشش stateها در فرانت‌اند |
 | `architecture-review-architecture-audit` | — | بازبینی معماری با Tier/Size و سنجش ۰–۱۰۰ |
 | `codebase-integrity-audit-protocol` | — | یکپارچگی و ورکفلو، فازبه‌فاز و قابل ادامه (P0–P10) |
 | `execution-plan-generator` | — | تبدیل تسک بزرگ به پلن اجرایی فازبه‌فاز |

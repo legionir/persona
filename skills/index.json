@@ -6,9 +6,9 @@
     "personas": "prompts/**/*.md + composite master prompts"
   },
   "totals": {
-    "skills": 188,
+    "skills": 189,
     "roles": 170,
-    "composites": 18
+    "composites": 19
   },
   "skills": [
     {
@@ -850,6 +850,16 @@
       "source": "prompts/audit/founder.md",
       "skill": "skills/founder/SKILL.md",
       "description": "Persona «Founder / مؤسس» (ناظر) در حوزه Business: تعیین جهت و هدف نهایی پروژه. استفاده کن وقتی تسک به Vision, اهداف کلان, تصمیمهای استراتژیک نیاز دارد و خروجی باید «Vision, Strategic Decisions» باشد؛ این skill دامنه، اختیار (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE)، 4 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Founder / مؤسس-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "frontend-design-system-review",
+      "title": "Frontend & Design System Review — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "ترکیبی",
+      "domain": null,
+      "source": "Frontend & Design System Review.md",
+      "skill": "skills/frontend-design-system-review/SKILL.md",
+      "description": "Forensic review of visual and interaction consistency: design tokens, the shared component library and its prop APIs, page shells and templates, state coverage, forms, tables, typography, colour, iconography, motion, responsiveness, accessibility, theming, and the mechanical enforcement that keeps the system coherent — judged against the Unified Design System Doctrine. Use for frontend code review, before adding a new page or component, when a design system exists on paper but not in code, when screens drift apart, or when review comments need evidence instead of taste. Read-only."
     },
     {
       "name": "frontend-developer",

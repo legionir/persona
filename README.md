@@ -884,9 +884,9 @@
 
 ## Personaهای ترکیبی (Master Prompt)
 
-علاوه بر ۱۷۰ persona تک‌نقش، مخزن **۱۸ persona ترکیبی** دارد: master promptهایی که چند نقش را
+علاوه بر ۱۷۰ persona تک‌نقش، مخزن **۱۹ persona ترکیبی** دارد: master promptهایی که چند نقش را
 همزمان (به‌عنوان «عدسی») اجرا می‌کنند و یک پروتکل مشترکِ شواهدمحور روی آن‌ها حاکم است.
-۱۴ تا از این ۱۸ تا با `scripts/compose_persona.py` از بلوک‌های آماده ساخته می‌شوند.
+۱۵ تا از این ۱۹ تا با `scripts/compose_persona.py` از بلوک‌های آماده ساخته می‌شوند.
 
 | Persona ترکیبی | عدسی | محور | فایل | Skill |
 |---|---|---|---|---|
@@ -897,12 +897,13 @@
 | Clean Code & Construction Review | 6 | کیفیت ساخت کد بر اساس قرارداد Clean Code + Code Complete | [`Clean Code & Construction Review.md`](Clean%20Code%20%26%20Construction%20Review.md) | [`clean-code-construction-review`](skills/clean-code-construction-review/SKILL.md) |
 | Software Design & Architecture Review | 6 | عمق طراحی و جهت وابستگی‌ها بر اساس Philosophy of Software Design + Clean Architecture | [`Software Design & Architecture Review.md`](Software%20Design%20%26%20Architecture%20Review.md) | [`software-design-architecture-review`](skills/software-design-architecture-review/SKILL.md) |
 | Domain Model & Context Review | 6 | زبان مشترک، bounded context و مدل دامنه بر اساس DDD (Evans / Vernon) | [`Domain Model & Context Review.md`](Domain%20Model%20%26%20Context%20Review.md) | [`domain-model-context-review`](skills/domain-model-context-review/SKILL.md) |
+| Frontend & Design System Review | 6 | توکن‌ها، کتابخانهٔ کامپوننت، shell/template و پوشش stateها در فرانت‌اند | [`Frontend & Design System Review.md`](Frontend%20%26%20Design%20System%20Review.md) | [`frontend-design-system-review`](skills/frontend-design-system-review/SKILL.md) |
 | Production Readiness & Reliability Audit | 7 | آمادگی production: Rollback/Restore/Migration/Observability/SLO | [`Production Readiness & Reliability Audit.md`](Production%20Readiness%20%26%20Reliability%20Audit.md) | [`production-readiness-reliability-audit`](skills/production-readiness-reliability-audit/SKILL.md) |
 | Forensic Security & Threat Audit | 8 | سطح حمله و مرزهای اعتماد؛ تفک exploitable از theoretical | [`Forensic Security & Threat Audit.md`](Forensic%20Security%20%26%20Threat%20Audit.md) | [`forensic-security-threat-audit`](skills/forensic-security-threat-audit/SKILL.md) |
 | Data & Database Integrity Audit | 6 | ثبات داده، invariant، migration، تراکنش، backup/restore | [`Data & Database Integrity Audit.md`](Data%20%26%20Database%20Integrity%20Audit.md) | [`data-database-integrity-audit`](skills/data-database-integrity-audit/SKILL.md) |
 | API & Integration Contract Audit | 6 | قرارداد API و یکپارچه‌سازی؛ drift مستندات ↔ پیاده‌سازی | [`API & Integration Contract Audit.md`](API%20%26%20Integration%20Contract%20Audit.md) | [`api-integration-contract-audit`](skills/api-integration-contract-audit/SKILL.md) |
 | AI Agent System Audit & Hardening | 6 | سیستم LLM/Agent: ابزارها و مجوزها، eval، مسیرهای ناامن | [`AI Agent System Audit & Hardening.md`](AI%20Agent%20System%20Audit%20%26%20Hardening.md) | [`ai-agent-system-audit-hardening`](skills/ai-agent-system-audit-hardening/SKILL.md) |
-| Performance & Scalability Audit | 6 | گلوگاه‌ها، سقف منابع، رفتار در ۱۰x و ۱۰۰x | [`Performance & Scalability Audit.md`](Performance%20%26%20Scalability%20Audit.md) | [`performance-scalability-audit`](skills/performance-scalability-audit/SKILL.md) |
+| Performance & Scalability Audit | 6 | گلوچه‌ها، سقف منابع، رفتار در ۱۰x و ۱۰۰x | [`Performance & Scalability Audit.md`](Performance%20%26%20Scalability%20Audit.md) | [`performance-scalability-audit`](skills/performance-scalability-audit/SKILL.md) |
 | Technical Debt & Modernization Audit | 6 | بدهی فنی بر اساس هزینهٔ تغییر؛ مسیر مهاجرت تدریجی و ایمن | [`Technical Debt & Modernization Audit.md`](Technical%20Debt%20%26%20Modernization%20Audit.md) | [`technical-debt-modernization-audit`](skills/technical-debt-modernization-audit/SKILL.md) |
 | Testing & Quality Assurance Audit | 6 | آنچه سوئیت واقعاً اثبات می‌کند؛ تست‌های بی‌ادعا و شکاف پوشش | [`Testing & Quality Assurance Audit.md`](Testing%20%26%20Quality%20Assurance%20Audit.md) | [`testing-quality-assurance-audit`](skills/testing-quality-assurance-audit/SKILL.md) |
 | Incident Forensic Review & Postmortem | 6 | بازسازی تایم‌لاین، زنجیرهٔ علّی، شکاف detection و recovery | [`Incident Forensic Review & Postmortem.md`](Incident%20Forensic%20Review%20%26%20Postmortem.md) | [`incident-forensic-review-postmortem`](skills/incident-forensic-review-postmortem/SKILL.md) |
@@ -926,7 +927,7 @@ python3 scripts/compose_persona.py --all --check                           # ا�
 به‌علاوهٔ متن کامل persona در `references/` (progressive disclosure).
 
 ```bash
-python3 scripts/build_skills.py                 # ساخت ۱۸۸ skill (۱۷۰ نقش + ۱۸ ترکیبی)
+python3 scripts/build_skills.py                 # ساخت ۱۸۹ skill (۱۷۰ نقش + ۱۹ ترکیبی)
 python3 scripts/build_skills.py --only backend-developer
 python3 scripts/build_skills.py --source "prompts/audit/*.md"
 python3 scripts/validate_skills.py              # اعتبارسنجی frontmatter/لینک/اندازه
@@ -956,6 +957,7 @@ mkdir -p .claude/skills && cp -r skills/backend-developer .claude/skills/
 - `composites/blocks/94-enterprise-patterns-contract.md` — قرارداد الگوهای سازمانی (ادغام یگانهٔ PoEAA: الگوی منطق کسب‌وکار، persistence، تراکنش، ORM، presentation).
 - `composites/blocks/95-pragmatic-contract.md` — قرارداد پراگماتیک (ادغام یگانهٔ The Pragmatic Programmer: DRY، orthogonality، خودکارسازی، بازخورد).
 - `composites/blocks/97-refactoring-contract.md` — قرارداد رفکتورینگ (ادغام یگانهٔ Refactoring.Guru: کاتالوگ بو با محرک→درمان، قواعد استثنا، شرط توقف).
+- `composites/blocks/98-frontend-design-system-contract.md` — قرارداد سیستم طراحی فرانت‌اند (ادغام یگانهٔ Doctrine of Visual & Interaction Consistency: توکن‌ها، یک مفهوم=یک کامپوننت، پوشش stateها، shell/template).
 - `composites/*.json` — spec هر persona ترکیبی (مأموریت، ورودی‌ها، عدسی‌ها، پیشتازی، بخش‌های اختصاصی).
 - `skills/<name>/SKILL.md` و `skills/<name>/references/` — خروجی تبدیل persona به Agent Skill.
 - `docs/` — راهنماهای فارسی: ساخت persona ترکیبی، تبدیل به skill، و قراردادهای فنی
@@ -967,6 +969,7 @@ mkdir -p .claude/skills && cp -r skills/backend-developer .claude/skills/
   - [`docs/enterprise-patterns-contract.md`](docs/enterprise-patterns-contract.md) — قرارداد الگوهای سازمانی (PoEAA)
   - [`docs/pragmatic-programmer-contract.md`](docs/pragmatic-programmer-contract.md) — قرارداد پراگماتیک (The Pragmatic Programmer)
   - [`docs/refactoring-contract.md`](docs/refactoring-contract.md) — قرارداد رفکتورینگ (Refactoring.Guru)
+  - [`docs/frontend-design-system-contract.md`](docs/frontend-design-system-contract.md) — قرارداد سیستم طراحی فرانت‌اند (Visual & Interaction Consistency)
 
 > همهٔ پرامپت‌های ناظر شامل بخش الزامی «قواعد تحلیل کد و کدبیس» هستند: ممنوعیت حدس و گمان، بررسی فایل‌به‌فایل و خط‌به‌خط، تحلیل دقیق ورکفلوها، مستندسازی کامل یافته‌ها (هر یافته با `FILE / LINE`)، و تقسیم پروژه‌های بزرگ به بخش‌های کوچک‌ترِ قابل بررسی (از طریق Coverage Manifest و Decomposition Table).
 
