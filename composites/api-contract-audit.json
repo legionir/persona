@@ -54,6 +54,7 @@
     "55-specialized.md",
     "50-coverage.md",
     "60-findings.md",
+    "92-clean-architecture-contract.md",
     "80-quality-gate.md"
   ],
   "insert_before": "80-quality-gate.md",

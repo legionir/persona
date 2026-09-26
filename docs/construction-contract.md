@@ -7,6 +7,9 @@
 > خودِ قواعد اینجا تکرار **نشده‌اند**. تنها منبع قواعد:
 > [`composites/blocks/90-construction-contract.md`](../composites/blocks/90-construction-contract.md)
 > (به انگلیسی، هم‌سبک با بقیهٔ بلوک‌های master prompt). این سند فقط نقشهٔ ادغام و نحوهٔ اتصال است.
+> دو کتاب دیگر («A Philosophy of Software Design» و «Clean Architecture») جداگانه مستند شده‌اند:
+> [`docs/design-architecture-contract.md`](design-architecture-contract.md). شواهد الزامی برای یافته‌های
+> «تغییر» هم در بلوک مشترک `95-change-findings.md` زندگی می‌کند.
 
 ---
 

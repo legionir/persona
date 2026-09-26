@@ -53,6 +53,9 @@
     "55-specialized.md",
     "65-debt.md",
     "90-construction-contract.md",
+    "95-change-findings.md",
+    "92-clean-architecture-contract.md",
+    "91-design-depth-contract.md",
     "50-coverage.md",
     "60-findings.md",
     "80-quality-gate.md"

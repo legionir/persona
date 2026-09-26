@@ -6,9 +6,9 @@
     "personas": "prompts/**/*.md + composite master prompts"
   },
   "totals": {
-    "skills": 186,
+    "skills": 187,
     "roles": 170,
-    "composites": 16
+    "composites": 17
   },
   "skills": [
     {
@@ -1600,6 +1600,16 @@
       "source": "prompts/implementation/software-architect.md",
       "skill": "skills/software-architect/SKILL.md",
       "description": "Persona «Software Architect» (مجری) در حوزه Architecture: طراحی ساختار داخلی نرمافزار. استفاده کن وقتی تسک به Components, Interfaces, Patterns نیاز دارد و خروجی باید «Architecture, ADR» باشد؛ این skill دامنه، اختیار (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE)، 5 گام اجرایی و Quality Gate نهایی را اجبار می‌کند. Use when you need Software Architect-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "software-design-architecture-review",
+      "title": "Software Design & Architecture Review — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "ترکیبی",
+      "domain": null,
+      "source": "Software Design & Architecture Review.md",
+      "skill": "skills/software-design-architecture-review/SKILL.md",
+      "description": "Forensic review of design depth and dependency direction: complexity symptoms, module depth, information hiding, interface width, strategic vs tactical patching, layer ownership, ports and adapters, and boundary cost — judged against A Philosophy of Software Design and Clean Architecture. Use for design review, before a large refactor, when a change feels awkward, when architecture decisions are argued about, or when review comments need evidence instead of taste. Read-only."
     },
     {
       "name": "software-engineer",

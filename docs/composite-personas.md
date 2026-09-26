@@ -78,6 +78,9 @@
 | `55-specialized.md` | ۱۲ دامنهٔ ممیزی تخصصی (security، error، concurrency، DB، API، testing، architecture، config، deps، perf، observability، build/deploy) |
 | `65-debt.md` | بدهی فنی (۱۳ کلاس) + کد مرده و مشکوک + قاعدهٔ بررسی repository-wide قبل از اعلام dead |
 | `90-construction-contract.md` | قرارداد ساخت کد: ادغام یگانهٔ Clean Code + Code Complete (نام‌گذاری، روال، کامنت، داده، جریان کنترل، خطا، بوها، تست، رفکتور، همزمانی، گیت بازبینی) |
+| `91-design-depth-contract.md` | قرارداد عمق طراحی: ادغام یگانهٔ A Philosophy of Software Design (پیچیدگی، عمق ماژول، پنهان‌سازی اطلاعات، رابط، استراتژیک در مقابل تاکتیکی، حذف استثناها، کشیدن پیچیدگی به پایین، تجزیهٔ زمانی، ترکیب/جدایی، طراحی comments-first) |
+| `92-clean-architecture-contract.md` | قرارداد مرزهای معماری: ادغام یگانهٔ Clean Architecture (قانون وابستگی، مسئولیت لایه‌ها، use case و entity، port و adapter، ساختار بر پایهٔ use case، قواعد کامپوننت، هزینهٔ مرز، تست از مسیر مرز، الگوهای ممنوع) |
+| `95-change-findings.md` | شواهد الزامی برای هر یافتهٔ «تغییر» + قواعد پلن تغییر (severity را به روبیک پایهٔ Findings map می‌کند، دوباره نمی‌نویسد) |
 
 ترتیب پیشنهادی یک ممیزی forensic کامل:
 
@@ -160,6 +163,11 @@ python3 scripts/compose_persona.py --all --check
 - [ ] Appendix منبعِ lensها ثبت شده (ردیابی به personaهای مبدأ).
 - [ ] اگر موضوع ممیزی به کیفیت ساخت کد مربوط است، بلوک `90-construction-contract.md` include شده
       (و بلوک دیگری قواعد مشابه را کپی نمی‌کند).
+- [ ] اگر موضوع ممیزی به کیفیت ساخت کد مربوط است، بلوک `90-construction-contract.md` include شده
+      (و بلوک دیگری قواعد مشابه را کپی نمی‌کند).
+- [ ] اگر موضوع ممیزی به طراحی/معماری مربوط است، بلوک‌های `91-` و/یا `92-` include شده‌اند.
+- [ ] اگر خروجی composite «تغییر» پیشنهاد می‌دهد، بلوک `95-change-findings.md` include شده است
+      (به‌جای نوشتن دوبارهٔ شواهد یافته در `extra_sections`).
 
 ---
 
@@ -183,6 +191,7 @@ DevOps Engineer، Observability Engineer، DBA)، ۱۲ «گیت آمادگی» (
 |---|---|---|
 | `forensic-codebase-review-audit` | — | ممیزی forensic کدبیس (فایل‌به‌فایل، خط‌به‌خط، بدون حدس) |
 | `clean-code-construction-review` | ۶ | کیفیت ساخت کد بر اساس قرارداد Clean Code + Code Complete |
+| `software-design-architecture-review` | ۶ | عمق طراحی و جهت وابستگی‌ها بر اساس Philosophy of Software Design + Clean Architecture |
 | `architecture-review-architecture-audit` | — | بازبینی معماری با Tier/Size و سنجش ۰–۱۰۰ |
 | `codebase-integrity-audit-protocol` | — | یکپارچگی و ورکفلو، فازبه‌فاز و قابل ادامه (P0–P10) |
 | `execution-plan-generator` | — | تبدیل تسک بزرگ به پلن اجرایی فازبه‌فاز |

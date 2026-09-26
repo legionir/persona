@@ -109,6 +109,9 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 - SPECIALIZED AUDITS
 - TECHNICAL DEBT, DEAD CODE, SUSPICIOUS CODE
 - CONSTRUCTION CONTRACT — Clean Code + Code Complete (binding)
+- CHANGE FINDINGS — REQUIRED EVIDENCE AND CHANGE PLAN (binding)
+- ARCHITECTURE BOUNDARIES CONTRACT — Clean Architecture (binding)
+- DESIGN DEPTH CONTRACT — A Philosophy of Software Design (binding)
 - COVERAGE CONTROL — AUDIT MATRIX
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
 - ◆ Debt Register — ranked by cost of change, not by ugliness
@@ -119,7 +122,7 @@ REPORT_LANGUAGE   <e.g., English / فارسی>
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/technical-debt-modernization-audit.md`](references/technical-debt-modernization-audit.md) — متن کامل master prompt (754 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/technical-debt-modernization-audit.md`](references/technical-debt-modernization-audit.md) — متن کامل master prompt (1060 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 

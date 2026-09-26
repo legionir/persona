@@ -108,17 +108,17 @@ REPORT_LANGUAGE      <e.g., English / فارسی>
 - SPECIALIZED AUDITS
 - TECHNICAL DEBT, DEAD CODE, SUSPICIOUS CODE
 - CONSTRUCTION CONTRACT — Clean Code + Code Complete (binding)
+- DESIGN DEPTH CONTRACT — A Philosophy of Software Design (binding)
+- CHANGE FINDINGS — REQUIRED EVIDENCE AND CHANGE PLAN (binding)
 - COVERAGE CONTROL — AUDIT MATRIX
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
-- ◆ Construction Findings — required evidence
-- ◆ Change Plan Rules — when the review output includes fixes
 - BEHAVIOURAL RULES AND FINAL QUALITY GATE
 - CORE PRINCIPLE
 - Appendix C — Source Personas (lenses)
 
 ## مرجع کامل (Progressive Disclosure)
 
-- [`references/clean-code-construction-review.md`](references/clean-code-construction-review.md) — متن کامل master prompt (755 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
+- [`references/clean-code-construction-review.md`](references/clean-code-construction-review.md) — متن کامل master prompt (894 خط). فقط وقتی به جزئیات پروتکل، دامنهٔ سنجش، یا قالب‌های خروجی نیاز داری باز کن.
 
 ---
 
