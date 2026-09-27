@@ -7,6 +7,7 @@ Checks:
   2. SUPERVISOR files additionally contain the 10 headings of section 62.
   3. EXECUTOR files additionally contain the 12 headings of section 63.
   4. Every file matches a README row and no README row is orphaned.
+  5. Every supervisor named in a README row is a registered SUPERVISOR row.
   5. Every executor has at least one registered supervisor.
   6. No legacy headers / legacy state machines remain.
 
@@ -23,6 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PROMPTS = ROOT / "prompts"
 README = ROOT / "README.md"
+MAIN_COLS = 28    # width of the merged main role table
 
 SUP_HEADINGS = [
     "## Audit Scope", "## Audit Criteria", "## Audit Procedure", "## Coverage Manifest",
@@ -69,6 +71,29 @@ def main() -> int:
     rows = read_rows(README)
     readme_slugs = {(d, s) for _, _, d, s in rows}
     file_slugs = {(p.parent.name, p.stem) for p in files}
+
+    # Every supervisor named in the README "Supervisor" column must itself be a
+    # row registered as a SUPERVISOR. Generation resolves supervisors from the
+    # Master map + EXTRA_SUPERVISORS, so a bad name here does not break the
+    # build -- it only makes the table lie to the reader, which is worse.
+    registered = {r[0] for r in rows if r[1] == r"SUPERVISOR"}
+    for ln in README.read_text(encoding="utf-8").splitlines():
+        s = ln.strip()
+        if not s.startswith("|"):
+            continue
+        cells = [c.strip() for c in s.strip("|").split("|")]
+        if len(cells) != MAIN_COLS:
+            continue
+        title, _duty, role_type = cells[0], cells[1], cells[2]
+        if title == r"Job Title" or set(title) <= set("-: "):
+            continue
+        if role_type != r"EXECUTOR":
+            continue
+        for sup in cells[6].split(","):
+            sup = sup.strip()
+            if sup and sup not in registered:
+                problems.append(
+                    f"README row '{title}' names unregistered supervisor '{sup}'")
 
     for p in files:
         text = p.read_text(encoding="utf-8")
