@@ -14,7 +14,8 @@ Two persona shapes are recognised:
 
   kind = "role"    ->  prompts/<audit|implementation>/<slug>.md
                        numbered sections 1..29, `# Persona — <Role>`.
-  kind = "master"  ->  <Root>/*.md  (e.g. "Forensic Codebase Review & Audit.md")
+  kind = "master"  ->  prompts/composite/<slug>.md
+                       (e.g. "Forensic Codebase Review & Audit.md")
                        English composite master prompt: free-form headings."""
 
 from __future__ import annotations
@@ -26,6 +27,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PROMPTS = ROOT / "prompts"
+MASTERS = PROMPTS / "composite"
 SKILLS = ROOT / "skills"
 COMPOSITES = ROOT / "composites"
 BLOCKS = COMPOSITES / "blocks"
@@ -397,7 +399,7 @@ class RolePersona:
 
 
 class MasterPersona:
-    r"Structured view over a composite master prompt at repo root."
+    r"Structured view over a composite master prompt in prompts/composite/."
 
     def __init__(self, path: Path):
         self.path = path
@@ -456,11 +458,17 @@ class MasterPersona:
 # discovery
 # ---------------------------------------------------------------------------
 def master_personas() -> list[Path]:
-    return sorted(p for p in ROOT.glob("*.md") if p.name not in NON_PERSONA_MD)
+    """Composite master prompts: prompts/composite/*.md."""
+    MASTERS.mkdir(parents=True, exist_ok=True)
+    return sorted(MASTERS.glob("*.md"))
 
 
 def role_personas() -> list[Path]:
-    return sorted(p for p in PROMPTS.rglob("*.md") if p.name != "README.md")
+    """Role persona prompts: prompts/<audit|implementation>/*.md."""
+    return sorted(
+        p for p in PROMPTS.rglob("*.md")
+        if p.name != "README.md" and MASTERS not in p.parents
+    )
 
 
 # ---------------------------------------------------------------------------

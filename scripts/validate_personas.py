@@ -62,7 +62,10 @@ def read_rows(path: Path) -> list[tuple[str, str, str, str]]:
 
 def main() -> int:
     problems: list[str] = []
-    files = sorted(p for p in PROMPTS.rglob("*.md") if p.name != "README.md")
+    files = sorted(
+        p for p in PROMPTS.rglob("*.md")
+        if p.name != "README.md" and (PROMPTS / "composite") not in p.parents
+    )
     rows = read_rows(README)
     readme_slugs = {(d, s) for _, _, d, s in rows}
     file_slugs = {(p.parent.name, p.stem) for p in files}

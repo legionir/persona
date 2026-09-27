@@ -1,10 +1,10 @@
 # How to Build a Composite Persona
 
-> Composite personas are the master prompts at the repository root:
+> Composite personas are the master prompts in `prompts/composite/`:
 > `Forensic Codebase Review & Audit.md`, `Architecture Review & Architecture Audit.md`,
 > `codebase-integrity-audit-protocol.md`, `Execution Plan Generator.md`, and
 > `Production Readiness & Reliability Audit.md`.
-> They differ from the `prompts/` personas in one respect: **they are not a single role — they run several roles at the same time.**
+> They differ from the role personas in `prompts/audit/` and `prompts/implementation/` in one respect: **they are not a single role — they run several roles at the same time.**
 
 ---
 
@@ -66,7 +66,7 @@ Each block is one tested slice of protocol and is reused across several composit
 
 ### Depth blocks (optional — for forensic audits)
 
-These blocks were extracted from the strength of `Forensic Codebase Review & Audit.md`; add them wherever the audit must be genuinely file-by-file and line-by-line rather than a shallow summary:
+These blocks were extracted from the strength of `prompts/composite/Forensic Codebase Review & Audit.md`; add them wherever the audit must be genuinely file-by-file and line-by-line rather than a shallow summary:
 
 | Block | Contents |
 |---|---|
@@ -143,7 +143,7 @@ python3 scripts/compose_persona.py --all
 python3 scripts/compose_persona.py --all --check
 ```
 
-The default output is written at the repository root (`output` in the spec), like the other master prompts.
+The default output is written to `prompts/composite/` (`output` in the spec names the file; `--out-dir` overrides the directory), alongside the other master prompts.
 
 ---
 

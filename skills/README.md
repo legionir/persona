@@ -19,25 +19,25 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 
 | Skill | Type | Domain | Source | SKILL.md lines |
 |---|---|---|---|---|
-| [`ai-agent-system-audit-hardening`](ai-agent-system-audit-hardening/SKILL.md) | Composite | Composite | `AI Agent System Audit & Hardening.md` | 110 |
-| [`api-integration-contract-audit`](api-integration-contract-audit/SKILL.md) | Composite | Composite | `API & Integration Contract Audit.md` | 113 |
-| [`architecture-review-architecture-audit`](architecture-review-architecture-audit/SKILL.md) | Composite | Composite | `Architecture Review & Architecture Audit.md` | 148 |
-| [`clean-code-construction-review`](clean-code-construction-review/SKILL.md) | Composite | Composite | `Clean Code & Construction Review.md` | 114 |
-| [`cloud-infrastructure-audit`](cloud-infrastructure-audit/SKILL.md) | Composite | Composite | `Cloud & Infrastructure Audit.md` | 110 |
-| [`codebase-integrity-audit-protocol`](codebase-integrity-audit-protocol/SKILL.md) | Composite | Composite | `codebase-integrity-audit-protocol.md` | 118 |
-| [`data-database-integrity-audit`](data-database-integrity-audit/SKILL.md) | Composite | Composite | `Data & Database Integrity Audit.md` | 113 |
-| [`domain-model-context-review`](domain-model-context-review/SKILL.md) | Composite | Composite | `Domain Model & Context Review.md` | 118 |
-| [`execution-plan-generator`](execution-plan-generator/SKILL.md) | Composite | Composite | `Execution Plan Generator.md` | 72 |
-| [`forensic-codebase-review-audit`](forensic-codebase-review-audit/SKILL.md) | Composite | Composite | `Forensic Codebase Review & Audit.md` | 154 |
-| [`forensic-security-threat-audit`](forensic-security-threat-audit/SKILL.md) | Composite | Composite | `Forensic Security & Threat Audit.md` | 110 |
-| [`frontend-design-system-review`](frontend-design-system-review/SKILL.md) | Composite | Composite | `Frontend & Design System Review.md` | 115 |
-| [`incident-forensic-review-postmortem`](incident-forensic-review-postmortem/SKILL.md) | Composite | Composite | `Incident Forensic Review & Postmortem.md` | 110 |
-| [`performance-scalability-audit`](performance-scalability-audit/SKILL.md) | Composite | Composite | `Performance & Scalability Audit.md` | 110 |
-| [`privacy-compliance-audit`](privacy-compliance-audit/SKILL.md) | Composite | Composite | `Privacy & Compliance Audit.md` | 110 |
-| [`production-readiness-reliability-audit`](production-readiness-reliability-audit/SKILL.md) | Composite | Composite | `Production Readiness & Reliability Audit.md` | 106 |
-| [`software-design-architecture-review`](software-design-architecture-review/SKILL.md) | Composite | Composite | `Software Design & Architecture Review.md` | 120 |
-| [`technical-debt-modernization-audit`](technical-debt-modernization-audit/SKILL.md) | Composite | Composite | `Technical Debt & Modernization Audit.md` | 119 |
-| [`testing-quality-assurance-audit`](testing-quality-assurance-audit/SKILL.md) | Composite | Composite | `Testing & Quality Assurance Audit.md` | 115 |
+| [`ai-agent-system-audit-hardening`](ai-agent-system-audit-hardening/SKILL.md) | Composite | Composite | `prompts/composite/AI Agent System Audit & Hardening.md` | 110 |
+| [`api-integration-contract-audit`](api-integration-contract-audit/SKILL.md) | Composite | Composite | `prompts/composite/API & Integration Contract Audit.md` | 113 |
+| [`architecture-review-architecture-audit`](architecture-review-architecture-audit/SKILL.md) | Composite | Composite | `prompts/composite/Architecture Review & Architecture Audit.md` | 135 |
+| [`clean-code-construction-review`](clean-code-construction-review/SKILL.md) | Composite | Composite | `prompts/composite/Clean Code & Construction Review.md` | 114 |
+| [`cloud-infrastructure-audit`](cloud-infrastructure-audit/SKILL.md) | Composite | Composite | `prompts/composite/Cloud & Infrastructure Audit.md` | 110 |
+| [`codebase-integrity-audit-protocol`](codebase-integrity-audit-protocol/SKILL.md) | Composite | Composite | `prompts/composite/codebase-integrity-audit-protocol.md` | 118 |
+| [`data-database-integrity-audit`](data-database-integrity-audit/SKILL.md) | Composite | Composite | `prompts/composite/Data & Database Integrity Audit.md` | 113 |
+| [`domain-model-context-review`](domain-model-context-review/SKILL.md) | Composite | Composite | `prompts/composite/Domain Model & Context Review.md` | 118 |
+| [`execution-plan-generator`](execution-plan-generator/SKILL.md) | Composite | Composite | `prompts/composite/Execution Plan Generator.md` | 72 |
+| [`forensic-codebase-review-audit`](forensic-codebase-review-audit/SKILL.md) | Composite | Composite | `prompts/composite/Forensic Codebase Review & Audit.md` | 143 |
+| [`forensic-security-threat-audit`](forensic-security-threat-audit/SKILL.md) | Composite | Composite | `prompts/composite/Forensic Security & Threat Audit.md` | 110 |
+| [`frontend-design-system-review`](frontend-design-system-review/SKILL.md) | Composite | Composite | `prompts/composite/Frontend & Design System Review.md` | 115 |
+| [`incident-forensic-review-postmortem`](incident-forensic-review-postmortem/SKILL.md) | Composite | Composite | `prompts/composite/Incident Forensic Review & Postmortem.md` | 110 |
+| [`performance-scalability-audit`](performance-scalability-audit/SKILL.md) | Composite | Composite | `prompts/composite/Performance & Scalability Audit.md` | 110 |
+| [`privacy-compliance-audit`](privacy-compliance-audit/SKILL.md) | Composite | Composite | `prompts/composite/Privacy & Compliance Audit.md` | 110 |
+| [`production-readiness-reliability-audit`](production-readiness-reliability-audit/SKILL.md) | Composite | Composite | `prompts/composite/Production Readiness & Reliability Audit.md` | 106 |
+| [`software-design-architecture-review`](software-design-architecture-review/SKILL.md) | Composite | Composite | `prompts/composite/Software Design & Architecture Review.md` | 120 |
+| [`technical-debt-modernization-audit`](technical-debt-modernization-audit/SKILL.md) | Composite | Composite | `prompts/composite/Technical Debt & Modernization Audit.md` | 119 |
+| [`testing-quality-assurance-audit`](testing-quality-assurance-audit/SKILL.md) | Composite | Composite | `prompts/composite/Testing & Quality Assurance Audit.md` | 115 |
 | [`accessibility-specialist`](accessibility-specialist/SKILL.md) | EXECUTOR | Design | `prompts/implementation/accessibility-specialist.md` | 237 |
 | [`account-manager`](account-manager/SKILL.md) | SUPERVISOR | Support | `prompts/audit/account-manager.md` | 244 |
 | [`agent-architect`](agent-architect/SKILL.md) | EXECUTOR | AI | `prompts/implementation/agent-architect.md` | 254 |
@@ -209,4 +209,4 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`vendor-manager`](vendor-manager/SKILL.md) | SUPERVISOR | Project | `prompts/audit/vendor-manager.md` | 244 |
 | [`vulnerability-management-specialist`](vulnerability-management-specialist/SKILL.md) | EXECUTOR | Security | `prompts/implementation/vulnerability-management-specialist.md` | 253 |
 
-_Count: 189 skills — generated on 2026-09-26 by `scripts/build_skills.py`_
+_Count: 189 skills — generated on 2026-09-27 by `scripts/build_skills.py`_

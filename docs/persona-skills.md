@@ -154,7 +154,7 @@ Limits: `name` <= 64 characters, `description` <= 1024 characters.
 | The model does not know the contract details | Point explicitly at `references/…md` in `SKILL.md` (it is always at the end of the file) |
 | `SKILL.md` grew past 300 lines | Move the detail into `references/` (the script warns you) |
 | `validate_skills.py` reports a broken link | Run the script again; the links are derived from the reference file names |
-| I built a new composite but it has no skill | `python3 scripts/build_skills.py` (it walks the repository root) |
+| I built a new composite but it has no skill | `python3 scripts/build_skills.py` (it walks `prompts/` and `prompts/composite/`) |
 
 ---
 

@@ -326,4 +326,4 @@ Think in terms of **delivery architecture**, not task decomposition. A phase mus
 
 # TASK
 
-{PASTE THE FULL TASK DESCRIPTION, REQUIREMENTS, CONSTRAINTS, AND ANY CODEBASE CONTEXT HERE}
+The full task description, requirements, constraints, and any codebase context are supplied together with this prompt. Plan against that task exactly as given: invent no requirement, API, file, architecture, technology, schema, dependency, or existing behaviour — where something is not stated, write "Unknown / Requires Verification: ..." or "Assumption: ..." explicitly.

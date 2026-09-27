@@ -1,16 +1,6 @@
 # Forensic Codebase Review & Audit — Master Prompt (v2)
 
-**How to use:** Give this prompt to the auditing AI together with full access to the codebase (repository access, file tree + contents, or attached sources). Fill in the INPUTS block. The audit is not complete until the Final Quality Gate (§16) passes.
-
-## INPUTS (fill in before use)
-
-```
-CODEBASE:           <repo URL, path, or "attached files">
-REPORT_LANGUAGE:    <e.g., English>
-PRIMARY CONCERNS:   <optional — e.g., data integrity, auth, payment flows>
-OUT OF SCOPE:       <optional — explicitly excluded paths or topics>
-PERMISSIONS:        <may the auditor run builds/tests/linters? yes / no>
-```
+**How to use:** Give this prompt to the auditing AI together with full access to the codebase (repository access, file tree + contents, or attached sources). The runtime and the prompt system supply the target, the permissions, and any focus areas or exclusions — no fill-in block is required. The audit is not complete until the Final Quality Gate (§16) passes.
 
 ---
 

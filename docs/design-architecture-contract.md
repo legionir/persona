@@ -95,10 +95,10 @@ that would fuse two use cases with different actors". That contradiction is stat
 
 ---
 
-## 4. The shared `95-change-findings.md` block
+## 4. The shared `96-change-findings.md` block
 
 When a composite persona proposes a change, the finding must carry the evidence and the change plan. These rules
-are written once in [`composites/blocks/95-change-findings.md`](../composites/blocks/95-change-findings.md)
+are written once in [`composites/blocks/96-change-findings.md`](../composites/blocks/96-change-findings.md)
 and included by both change-oriented personas:
 
 - `Clean Code & Construction Review` — previously carried these two sections as `extra_sections` in its own spec.

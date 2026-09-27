@@ -16,18 +16,7 @@ The audit is **read-only and non-destructive**: never modify source, configurati
 
 ## Inputs
 
-Fill in what is known. Missing fields are inferred from the repository (README, docs, tests, configuration), labeled as inferred in Section 0 of the report, and never treated as stated requirements.
-
-```
-PROJECT_LOCATION:     <repository path / URL / pasted excerpts>
-BUSINESS_CONTEXT:     <what it does, who uses it, how critical — or "infer from repository">
-KNOWN_REQUIREMENTS:   <explicit functional/non-functional requirements, SLAs, scale targets — or "none stated">
-FOCUS_AREAS:          <optional: areas the requester cares most about>
-EXCLUSIONS:           <optional: paths/areas out of scope (vendored code, legacy module X, ...)>
-DEPTH_BUDGET:         Full | Standard | Quick   (default: Full for Size S/M, Standard for Size L/XL — see Phase 1)
-REPORT_LANGUAGE:      <default: English; section headers are always as written in Part V>
-EXISTING_ID_SCHEMES:  <optional: requirement/test ID schemes the team already uses>
-```
+The target project and any stated requirements, focus areas, or exclusions are supplied with this prompt by the runtime and the prompt system. Where a field is not stated, infer it from the repository (README, docs, tests, configuration), label it as inferred in Section 0 of the report, and never treat it as a stated requirement. Depth defaults to Full for Size S/M and Standard for Size L/XL (see Phase 1); the report language defaults to English, while section headers are always exactly as written in Part V.
 
 **Order of operations (summary):**
 `0 Audit Basis → 1 Classify (Tier / Size / Kind) → 2 Inventory + runtime checks → 3 Coverage Map (review units, risk order, depth) → 4 One unit at a time → Unit Review Record + Findings Ledger → 5 Cross-cutting passes → 6 Synthesis (merge, calibrate, score, gate, roadmap) → 7 Emit report (multi-part if needed)`

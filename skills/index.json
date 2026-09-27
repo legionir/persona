@@ -1,6 +1,6 @@
 {
   "$schema": "persona-skills/v1",
-  "generated_at": "2026-09-26T00:00:00Z",
+  "generated_at": "2026-09-27T00:00:00Z",
   "source": {
     "generator": "scripts/build_skills.py",
     "personas": "prompts/**/*.md + composite master prompts"
@@ -97,7 +97,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "AI Agent System Audit & Hardening.md",
+      "source": "prompts/composite/AI Agent System Audit & Hardening.md",
       "skill": "skills/ai-agent-system-audit-hardening/SKILL.md",
       "description": "Forensic audit of LLM/agent systems: prompt and tool contracts, tool-call safety and permissions, output validation, eval coverage and regression, hallucination and unsafe-action paths, cost and latency behaviour, fallback and failure handling. Use before shipping an agent or AI feature, when adding tools or autonomy, when eval results look too good, or when an agent has taken an unintended action. Read-only."
     },
@@ -137,7 +137,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "API & Integration Contract Audit.md",
+      "source": "prompts/composite/API & Integration Contract Audit.md",
       "skill": "skills/api-integration-contract-audit/SKILL.md",
       "description": "Evidence-based audit of API and integration contracts: endpoint inventory, request/response validation, error formats, versioning and backwards compatibility, idempotency and retries, timeouts and pagination, authN/authZ per endpoint, webhooks and third-party integrations, and drift between documentation and behaviour. Use before publishing or versioning an API, before integrating a third party, when clients break unexpectedly, or when contract tests are missing. Read-only."
     },
@@ -157,7 +157,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Architecture Review & Architecture Audit.md",
+      "source": "prompts/composite/Architecture Review & Architecture Audit.md",
       "skill": "skills/architecture-review-architecture-audit/SKILL.md",
       "description": "Architecture Review & Architecture Audit — composite master persona. You are acting simultaneously as a Senior Software Architect, Principal Engineer, Security Architect, Performance Engineer, DevOps Engineer, QA Architect, and Technical Auditor. Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable."
     },
@@ -347,7 +347,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Clean Code & Construction Review.md",
+      "source": "prompts/composite/Clean Code & Construction Review.md",
       "skill": "skills/clean-code-construction-review/SKILL.md",
       "description": "Forensic review of construction quality: naming, routine boundaries, data and control flow, error handling, boundaries and coupling, test quality, and complexity — judged against the Clean Code + Code Complete construction contract. Use for code review, before merging a large change, when a refactor feels unsafe, when naming/structure is argued about, or when review comments need evidence instead of taste. Read-only."
     },
@@ -377,7 +377,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Cloud & Infrastructure Audit.md",
+      "source": "prompts/composite/Cloud & Infrastructure Audit.md",
       "skill": "skills/cloud-infrastructure-audit/SKILL.md",
       "description": "Evidence-based audit of cloud and infrastructure: IaC coverage and drift, network exposure and segmentation, IAM and least privilege, secrets and encryption, compute/container hardening, observability of infrastructure, cost drivers, and failure behaviour of the platform itself. Use before a production migration, after a security review, when infra is partly manual, or when cost or blast radius is unclear. Read-only; never change live infrastructure."
     },
@@ -397,7 +397,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "codebase-integrity-audit-protocol.md",
+      "source": "prompts/composite/codebase-integrity-audit-protocol.md",
       "skill": "skills/codebase-integrity-audit-protocol/SKILL.md",
       "description": "Codebase Integration & Workflow Integrity Audit Protocol (v2, single file) — composite master persona. You are a **Software Integration, Workflow and Correctness Auditor**. You will audit a software project of any size and report whether its parts are integrated correctly, whether real execution paths match intended workflows, and exactly how much of the project you verified. Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable."
     },
@@ -497,7 +497,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Data & Database Integrity Audit.md",
+      "source": "prompts/composite/Data & Database Integrity Audit.md",
       "skill": "skills/data-database-integrity-audit/SKILL.md",
       "description": "Evidence-based audit of data correctness and persistence: schema and migration safety, constraints and invariants, transactional boundaries, consistency between stores, backup and restore verification, retention and deletion, locking and concurrency effects on data, growth and cost. Use before a migration or schema change, after data corruption or sync issues, when adding a second datastore, or when backups have never been restored. Read-only; never mutate production data."
     },
@@ -707,7 +707,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Domain Model & Context Review.md",
+      "source": "prompts/composite/Domain Model & Context Review.md",
       "skill": "skills/domain-model-context-review/SKILL.md",
       "description": "Forensic review of the domain model and its boundaries: ubiquitous language, bounded contexts and context mapping, subdomain strategy, entities, value objects, aggregates, domain services and specifications, repositories, factories, and domain events — judged against Domain-Driven Design (Evans) and its practical distilled form (Vernon). Use for domain modelling review, before introducing or reshaping aggregates, when a CRUD-shaped codebase needs a model, when integration with a foreign or legacy system leaks vocabulary, or when review comments need evidence instead of taste. Read-only."
     },
@@ -777,7 +777,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Execution Plan Generator.md",
+      "source": "prompts/composite/Execution Plan Generator.md",
       "skill": "skills/execution-plan-generator/SKILL.md",
       "description": "Execution Plan Generator — Master Prompt — composite master persona. You are a **Senior Technical Project Planner** operating with the combined judgment of a Software Architect, Delivery Manager, QA Lead, Security Reviewer, and Implementation Orchestrator. Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable."
     },
@@ -827,7 +827,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Forensic Codebase Review & Audit.md",
+      "source": "prompts/composite/Forensic Codebase Review & Audit.md",
       "skill": "skills/forensic-codebase-review-audit/SKILL.md",
       "description": "Forensic Codebase Review & Audit — Master Prompt (v2) — composite master persona. Your objective is to identify and document **every discoverable** defect, weakness, inconsistency, missing safeguard, architectural problem, security issue, reliability issue, performance issue, maintainability problem, workflow defect, technical-debt item, test gap, and potentially dangerous behavior in the provided… Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable."
     },
@@ -837,7 +837,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Forensic Security & Threat Audit.md",
+      "source": "prompts/composite/Forensic Security & Threat Audit.md",
       "skill": "skills/forensic-security-threat-audit/SKILL.md",
       "description": "Forensic, evidence-only security audit of a software system: attack surface and trust boundaries, authentication/authorization, secrets and crypto, injection and SSRF/XSS/CSRF paths, dependency and supply-chain risk, data exposure, and exploitable vs theoretical findings. Use before a security review, a launch, a pen-test, after a suspected compromise, or when a dependency/security advisory must be triaged. Read-only; never exploit beyond the available evidence."
     },
@@ -857,7 +857,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Frontend & Design System Review.md",
+      "source": "prompts/composite/Frontend & Design System Review.md",
       "skill": "skills/frontend-design-system-review/SKILL.md",
       "description": "Forensic review of visual and interaction consistency: design tokens, the shared component library and its prop APIs, page shells and templates, state coverage, forms, tables, typography, colour, iconography, motion, responsiveness, accessibility, theming, and the mechanical enforcement that keeps the system coherent — judged against the Unified Design System Doctrine. Use for frontend code review, before adding a new page or component, when a design system exists on paper but not in code, when screens drift apart, or when review comments need evidence instead of taste. Read-only."
     },
@@ -927,7 +927,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Incident Forensic Review & Postmortem.md",
+      "source": "prompts/composite/Incident Forensic Review & Postmortem.md",
       "skill": "skills/incident-forensic-review-postmortem/SKILL.md",
       "description": "Forensic review of an incident or outage from available evidence: timeline reconstruction, root cause versus contributing factors, detection and response gaps, blast radius, recovery path, and the actions that prevent recurrence. Use after an incident or near-miss, when a postmortem must be evidence-based, when the same failure has happened before, or when detection was slower than the user impact. Read-only; never guess a timeline entry."
     },
@@ -1197,7 +1197,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Performance & Scalability Audit.md",
+      "source": "prompts/composite/Performance & Scalability Audit.md",
       "skill": "skills/performance-scalability-audit/SKILL.md",
       "description": "Evidence-based performance and scalability audit: hot paths, complexity and N+1 patterns, I/O and caching correctness, concurrency limits, database and query behaviour, resource ceilings, and what breaks first at 10x and 100x. Use before a traffic milestone, when latency or cost is growing, after a scaling incident, or when load tests are missing or unconvincing. Read-only; measurements must come from evidence, not intuition."
     },
@@ -1237,7 +1237,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Privacy & Compliance Audit.md",
+      "source": "prompts/composite/Privacy & Compliance Audit.md",
       "skill": "skills/privacy-compliance-audit/SKILL.md",
       "description": "Evidence-based audit of privacy and compliance posture: personal-data inventory and flows, lawful basis and consent, retention and deletion, access control and audit logging, DSAR/erasure capability, third-party and cross-border transfers, and control-to-evidence traceability. Use before a compliance audit or launch in a regulated market, when handling new categories of personal data, or when erasure/retention is assumed but unverified. Read-only; this is not legal advice."
     },
@@ -1367,7 +1367,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Production Readiness & Reliability Audit.md",
+      "source": "prompts/composite/Production Readiness & Reliability Audit.md",
       "skill": "skills/production-readiness-reliability-audit/SKILL.md",
       "description": "Evidence-based production-readiness and reliability audit of a software system: rollback and restore paths, failure modes, observability, alerting, SLOs, release gates, migrations, capacity and operational cost. Use when deciding whether a system can be deployed or operated safely, before a launch, after a major change, or when preparing an on-call/runbook/SLO review. Read-only and non-destructive."
     },
@@ -1627,7 +1627,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Software Design & Architecture Review.md",
+      "source": "prompts/composite/Software Design & Architecture Review.md",
       "skill": "skills/software-design-architecture-review/SKILL.md",
       "description": "Forensic review of design depth and dependency direction: complexity symptoms, module depth, information hiding, interface width, strategic vs tactical patching, layer ownership, ports and adapters, and boundary cost — judged against A Philosophy of Software Design and Clean Architecture. Use for design review, before a large refactor, when a change feels awkward, when architecture decisions are argued about, or when review comments need evidence instead of taste. Read-only."
     },
@@ -1707,7 +1707,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Technical Debt & Modernization Audit.md",
+      "source": "prompts/composite/Technical Debt & Modernization Audit.md",
       "skill": "skills/technical-debt-modernization-audit/SKILL.md",
       "description": "Evidence-based audit of technical debt and modernization risk: debt inventory with impact and cost, dead and duplicated code, change risk and blast radius, safe incremental migration paths, and what must NOT be rewritten. Use before a rewrite proposal, when planning a modernization quarter, when change velocity is falling, or when a legacy module blocks delivery. Read-only."
     },
@@ -1797,7 +1797,7 @@
       "type": "COMPOSITE",
       "typeLabel": "Composite",
       "domain": null,
-      "source": "Testing & Quality Assurance Audit.md",
+      "source": "prompts/composite/Testing & Quality Assurance Audit.md",
       "skill": "skills/testing-quality-assurance-audit/SKILL.md",
       "description": "Evidence-based audit of test and verification quality: what is actually tested, which critical behaviours have no test, assertion-free and mocked-away tests, flakiness and ordering dependence, coverage that measures the wrong thing, and regression risk. Use before trusting a green suite, when defects escape to production, when a refactor feels unsafe, or when a release gate depends on tests. Read-only; never weaken a test to make it pass."
     },
