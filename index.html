@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>یافتن Persona — Persona Finder</title>
+<title>Persona Finder</title>
 <style>
   :root {
     --bg: #0f1220;
@@ -18,6 +18,8 @@
     --sup-bg: rgba(47,111,237,.15);
     --exe: #18a06c;
     --exe-bg: rgba(24,160,108,.15);
+    --comp: #e09a2e;
+    --comp-bg: rgba(224,154,46,.15);
     --radius: 14px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -131,6 +133,13 @@
     max-width: 100%; overflow-wrap: anywhere;
   }
   .chip.k { color: #c9b8ff; border-color: rgba(139,91,255,.35); }
+  /* `display:grid` below would otherwise beat the [hidden] attribute */
+  .filters[hidden], .tabs[hidden], .grid[hidden], .meta-line[hidden] { display: none; }
+  .badge.comp { color: #ffc46b; background: var(--comp-bg); border-color: rgba(255,196,107,.4); }
+
+  /* a facet that does not apply to the current type is dimmed, not removed */
+  .filters .off { opacity: .4; }
+  .filters select:disabled { cursor: not-allowed; }
 
   /* related roles — clickable chips that scroll to the target role */
   .rel { font-size: 12.5px; color: var(--muted); line-height: 1.9; display: flex; flex-direction: column; gap: 6px; max-width: 100%; }
@@ -189,50 +198,50 @@
 </style>
 </head>
 <body>
-<a class="gh-link" href="https://github.com/legionir/persona" target="_blank" rel="noopener" title="مخزن GitHub (legionir/persona)">
+<a class="gh-link" href="https://github.com/legionir/persona" target="_blank" rel="noopener" title="GitHub repository (legionir/persona)">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
   <span>GitHub</span>
 </a>
 
 <div class="wrap">
   <header>
-    <h1>⚡ یافتن <span>Persona</span></h1>
-    <p>بین ۱۷۰ پرامپت نقش‌محور، سریع Persona خودت را پیدا کن — جستجو بر اساس عنوان، وظایف، حوزه، کلمات کلیدی و ناظر/مجری</p>
+    <h1>⚡ Find a <span>Persona</span></h1>
+    <p>Search 189 personas — 170 role prompts and 19 composite master prompts — by title, mission, duties, domain, keywords, and type</p>
     <div class="stats" id="stats"></div>
   </header>
 
   <div class="searchbar">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9aa3c0" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-    <input id="q" type="search" placeholder="مثلاً: backend، امنیت، Agent، UX، قالب: backend-developer ..." autocomplete="off">
-    <button class="clear-btn" id="clearQ" title="پاک کردن">✕</button>
+    <input id="q" type="search" placeholder="e.g. backend, security, forensic, readiness, or slug: backend-developer ..." autocomplete="off">
+    <button class="clear-btn" id="clearQ" title="Clear">✕</button>
   </div>
 
-  <div class="filters">
-    <div><label for="fType">نوع نقش</label><select id="fType"><option value="">همه</option></select></div>
-    <div><label for="fGroup">گروه کاری</label><select id="fGroup"><option value="">همه</option></select></div>
-    <div><label for="fDomain">حوزه</label><select id="fDomain"><option value="">همه</option></select></div>
-    <div><label for="fCategory">دسته</label><select id="fCategory"><option value="">همه</option></select></div>
-    <div><label for="fSeniority">سطح</label><select id="fSeniority"><option value="">همه</option></select></div>
-    <div><label for="fSort">مرتب‌سازی</label>
+  <div class="filters" id="filters">
+    <div><label for="fType">Role type</label><select id="fType"><option value="">All</option></select></div>
+    <div><label for="fGroup">Group</label><select id="fGroup"><option value="">All</option></select></div>
+    <div><label for="fDomain">Domain</label><select id="fDomain"><option value="">All</option></select></div>
+    <div><label for="fCategory">Category</label><select id="fCategory"><option value="">All</option></select></div>
+    <div><label for="fSeniority">Seniority</label><select id="fSeniority"><option value="">All</option></select></div>
+    <div><label for="fSort">Sort</label>
       <select id="fSort">
-        <option value="default">ترتیب استاندارد</option>
-        <option value="alpha">الفبا (A→Z)</option>
-        <option value="type">نوع (ناظر/مجری)</option>
+        <option value="default">Default order</option>
+        <option value="alpha">Alphabetical (A→Z)</option>
+        <option value="type">Type (supervisor/executor)</option>
       </select>
     </div>
   </div>
 
   <div class="meta-line">
     <span id="count"></span>
-    <button id="reset">⟲ بازنشانی فیلترها</button>
+    <button id="reset">⟲ Reset filters</button>
   </div>
 
   <div class="grid" id="grid"></div>
-  <div class="empty" id="empty" hidden><b>نتیجه‌ای پیدا نشد.</b><br>عبارت دیگری را امتحان کن یا فیلترها را بازنشانی کن.</div>
+  <div class="empty" id="empty" hidden><b>No results found.</b><br>Try another phrase or reset the filters.</div>
 
   <footer>
-    داده: <code>personas.json</code> (متادیتای API-ready) — بازتولید با <code>python3 scripts/build_metadata.py</code>
-    <br>فایل‌های پرامپت طبق جدول‌های نقش‌ها در <code>README.md</code> تولید شده‌اند.
+    Data: <code>personas.json</code> (API-ready metadata for all 189 personas) — regenerate with <code>python3 scripts/build_metadata.py</code>
+    <br>The prompt files are generated from the role tables in <code>README.md</code>.
   </footer>
 </div>
 
@@ -240,19 +249,44 @@
 "use strict";
 
 const GITHUB_BASE = "https://github.com/legionir/persona/blob/main/";
-let DATA = null;
-let TITLE_ID = null; // Map: عنوان نقش -> id (برای اسکرول به کارت نقش)
+let DATA = null;      // personas.json — 170 role personas + 19 composite master prompts
+let ALL = [];         // one unified list: DATA.roles + DATA.composites
+let TITLE_ID = null;  // Map: role title -> id (to scroll to that role's card)
+
+/* Facets that only role personas carry. They are dimmed when the selected
+   type is Composite, because a composite has no group / domain / seniority. */
+const ROLE_ONLY_FACETS = ["fGroup", "fDomain", "fCategory", "fSeniority"];
+
+/* A composite master prompt, reshaped to look like a role persona so one
+   renderer, one filter and one sort handle both. The group / domain /
+   category / seniority facets are null: a composite runs several roles at
+   once and has none of them. */
+function compositeToPersona(s){
+  return {
+    id: s.id,
+    title: s.title,
+    type: "COMPOSITE",
+    typeLabel: s.typeLabel || "Composite",
+    roleId: null,
+    mission: s.description || s.mission || "",
+    duties: "",
+    group: null, domain: null, category: null, seniority: null,
+    supervisors: [], consumers: [], capabilities: [],
+    path: s.path,
+    file: s.file,
+    skill: s.skill,
+    lenses: s.lenses || null,
+    isComposite: true,
+    keywords: s.keywords || []
+  };
+}
 
 const $ = (id) => document.getElementById(id);
 
-function faDigits(n){ return String(n).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]); }
+function faDigits(n){ return String(n); }
 
 function norm(s){
   return (s || "")
-    .replace(/\u200c/g, " ")
-    .replace(/[يی]/g, "ی")
-    .replace(/[كک]/g, "ک")
-    .replace(/[آأإا]/g, "ا")
     .toLowerCase()
     .replace(/\s+/g, " ")
     .trim();
@@ -274,20 +308,23 @@ function initFacets(data){
 
 function renderStats(t){
   $("stats").innerHTML = `
-    <span class="stat">کل پرامپت‌ها: <b>${faDigits(t.roles)}</b></span>
-    <span class="stat">ناظر: <b>${faDigits(t.supervisors)}</b></span>
-    <span class="stat">مجری: <b>${faDigits(t.executors)}</b></span>`;
+    <span class="stat">Total personas: <b>${faDigits(t.personas)}</b></span>
+    <span class="stat">Role prompts: <b>${faDigits(t.roles)}</b></span>
+    <span class="stat">Composite prompts: <b>${faDigits(t.composites)}</b></span>
+    <span class="stat">Supervisors: <b>${faDigits(t.supervisors)}</b></span>
+    <span class="stat">Executors: <b>${faDigits(t.executors)}</b></span>`;
 }
 
-function matches(role, q){
+function matches(p, q){
   if (!q) return true;
   const hay = norm([
-    role.title, role.id, role.mission, role.duties,
-    role.typeLabel, role.domainLabel, role.categoryLabel,
-    role.groupLabel, role.seniorityLabel,
-    (role.supervisors || []).join(" "),
-    (role.consumers || []).join(" "),
-    (role.keywords || []).join(" ")
+    p.title, p.id, p.mission, p.duties,
+    p.typeLabel, p.domainLabel, p.categoryLabel,
+    p.groupLabel, p.seniorityLabel,
+    p.skill || "", p.lenses ? p.lenses + " lenses" : "",
+    (p.supervisors || []).join(" "),
+    (p.consumers || []).join(" "),
+    (p.keywords || []).join(" ")
   ].join(" "));
   return q.split(/\s+/).every(token => hay.includes(token));
 }
@@ -295,13 +332,14 @@ function matches(role, q){
 function getFiltered(){
   const q = norm($("q").value);
   const fType = $("fType").value;
-  const fGroup = $("fGroup").value;
-  const fDomain = $("fDomain").value;
-  const fCategory = $("fCategory").value;
-  const fSeniority = $("fSeniority").value;
+  const composite = fType === "COMPOSITE";
+  const fGroup = composite ? "" : $("fGroup").value;
+  const fDomain = composite ? "" : $("fDomain").value;
+  const fCategory = composite ? "" : $("fCategory").value;
+  const fSeniority = composite ? "" : $("fSeniority").value;
   const sort = $("fSort").value;
 
-  let list = DATA.roles.filter(r =>
+  let list = ALL.filter(r =>
     matches(r, q) &&
     (!fType || r.type === fType) &&
     (!fGroup || r.group === fGroup) &&
@@ -319,7 +357,47 @@ function getFiltered(){
 
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 
-/* لینک‌های نقش‌های مرتبط (ناظر/مجری) — کلیک → اسکرول به کارت همان نقش */
+/* A composite has no group / domain / category / seniority — grey those four
+   selects out instead of letting the user build a filter that matches nothing. */
+function syncRoleOnlyFacets(){
+  const composite = $("fType").value === "COMPOSITE";
+  ROLE_ONLY_FACETS.forEach(id => {
+    const el = $(id);
+    el.disabled = composite;
+    if (composite) el.value = "";
+    const wrap = el.closest("div");
+    if (wrap) wrap.classList.toggle("off", composite);
+  });
+}
+
+/* Composite master prompts render with the same card, but no group / domain /
+   seniority and an extra lens count — see compositeToPersona() above. */
+function compositeCardHTML(r){
+  const ghUrl = GITHUB_BASE + r.path;
+  const lensChip = r.lenses
+    ? `<span class="chip k">${faDigits(r.lenses)} lenses</span>` : "";
+  return `
+  <article class="card" id="role-${esc(r.id)}">
+    <div class="top">
+      <h2><a href="${esc(r.path)}" target="_blank" title="Open the master prompt">${esc(r.title)}</a></h2>
+      <span class="badge comp">Composite</span>
+    </div>
+    <div class="mission">${esc(r.mission)}</div>
+    <div class="chips">
+      <span class="chip">Master prompt</span>
+      ${lensChip}
+      <span class="chip k">${esc(r.id)}</span>
+    </div>
+    <div class="foot">
+      <span class="path" title="${esc(r.path)}">${esc(r.path)}</span>
+      <button class="icon-btn" data-copy="${esc(r.path)}" title="Copy path">⧉</button>
+      <a class="icon-btn" href="${esc(r.skill)}" target="_blank" title="Open the Agent Skill">Skill</a>
+      <a class="icon-btn primary" href="${ghUrl}" target="_blank" title="View on GitHub">GitHub</a>
+    </div>
+  </article>`;
+}
+
+/* Links for related roles (supervisor/executor) — click to scroll to that role's card */
 function relLinks(names){
   return names.map(n => {
     const id = TITLE_ID.get(n);
@@ -329,21 +407,22 @@ function relLinks(names){
 }
 
 function cardHTML(r){
+  if (r.isComposite) return compositeCardHTML(r);
   const badge = r.type === "SUPERVISOR"
-    ? `<span class="badge sup">ناظر ${esc(r.roleId)}</span>`
-    : `<span class="badge exe">مجری ${esc(r.roleId)}</span>`;
+    ? `<span class="badge sup">Supervisor ${esc(r.roleId)}</span>`
+    : `<span class="badge exe">Executor ${esc(r.roleId)}</span>`;
   const fileUrl = r.path;
   const ghUrl = GITHUB_BASE + r.path;
   const sups = r.type === "EXECUTOR" && r.supervisors.length
-    ? `<div class="rel"><b>ناظر/مالک:</b><div class="rel-links">${relLinks(r.supervisors)}</div></div>` : "";
+    ? `<div class="rel"><b>Supervisor/owner:</b><div class="rel-links">${relLinks(r.supervisors)}</div></div>` : "";
   const cons = r.type === "SUPERVISOR" && r.consumers.length
-    ? `<div class="rel"><b>مجری‌های تحت نظارت:</b><div class="rel-links">${relLinks(r.consumers)}</div></div>` : "";
+    ? `<div class="rel"><b>Supervised executors:</b><div class="rel-links">${relLinks(r.consumers)}</div></div>` : "";
   const caps = r.capabilities.slice(0,8).map(c => `<span class="cap">${esc(c)}</span>`).join("") +
     (r.capabilities.length > 8 ? `<span class="cap">+${faDigits(r.capabilities.length-8)}</span>` : "");
   return `
   <article class="card" id="role-${esc(r.id)}">
     <div class="top">
-      <h2><a href="${fileUrl}" target="_blank" title="باز کردن فایل پرامپت">${esc(r.title)}</a></h2>
+      <h2><a href="${fileUrl}" target="_blank" title="Open the prompt file">${esc(r.title)}</a></h2>
       ${badge}
     </div>
     <div class="mission">${esc(r.mission)}</div>
@@ -357,18 +436,19 @@ function cardHTML(r){
     <div class="caps">${caps}</div>
     <div class="foot">
       <span class="path" title="${esc(fileUrl)}">prompts/…/${esc(r.file)}</span>
-      <button class="icon-btn" data-copy="${esc(fileUrl)}" title="کپی مسیر">⧉</button>
-      <a class="icon-btn" href="${fileUrl}" target="_blank" title="باز کردن فایل">باز</a>
-      <a class="icon-btn primary" href="${ghUrl}" target="_blank" title="مشاهده در GitHub">GitHub</a>
+      <button class="icon-btn" data-copy="${esc(fileUrl)}" title="Copy path">⧉</button>
+      <a class="icon-btn" href="${fileUrl}" target="_blank" title="Open the file">Open</a>
+      <a class="icon-btn primary" href="${ghUrl}" target="_blank" title="View on GitHub">GitHub</a>
     </div>
   </article>`;
 }
 
 function render(){
+  syncRoleOnlyFacets();
   const list = getFiltered();
   $("grid").innerHTML = list.map(cardHTML).join("");
   $("empty").hidden = list.length > 0;
-  $("count").textContent = `${faDigits(list.length)} نتیجه از ${faDigits(DATA.totals.roles)}`;
+  $("count").textContent = `${faDigits(list.length)} of ${faDigits(ALL.length)} results`;
 }
 
 function scrollToRole(id){
@@ -410,19 +490,21 @@ function bindEvents(){
 }
 
 fetch("personas.json", { cache: "no-store" })
-  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then(data => {
-    DATA = data;
+  .then(r => { if (!r.ok) throw new Error("personas.json -> " + r.status); return r.json(); })
+  .then((personas) => {
+    DATA = personas;
     TITLE_ID = new Map(DATA.roles.map(r => [r.title, r.id]));
-    renderStats(data.totals);
-    initFacets(data);
-    render();
+    // personas.json carries both kinds, so the page needs one file and one request
+    ALL = [...DATA.roles, ...DATA.composites.map(compositeToPersona)];
+    renderStats(DATA.totals);
+    initFacets(DATA);
     bindEvents();
+    render();
   })
   .catch(err => {
     $("empty").hidden = false;
-    $("empty").innerHTML = `<b>خطا در بارگذاری personas.json</b><br>
-      فایل را با یک سرور HTTP باز کن (مثلاً: <code dir="ltr">python3 -m http.server 8000</code>)<br>
+    $("empty").innerHTML = `<b>Could not load the data files</b><br>
+      Open the page through an HTTP server (for example: <code dir="ltr">python3 -m http.server 8000</code>)<br>
       <span style="font-size:12px">${esc(err.message)}</span>`;
     $("empty").style.direction = "ltr";
   });

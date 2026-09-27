@@ -1,0 +1,5 @@
+# The Persona Finder is a public, read-only static site.
+User-agent: *
+Allow: /
+
+Sitemap: https://legionir.github.io/persona/sitemap.xml

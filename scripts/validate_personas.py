@@ -7,6 +7,7 @@ Checks:
   2. SUPERVISOR files additionally contain the 10 headings of section 62.
   3. EXECUTOR files additionally contain the 12 headings of section 63.
   4. Every file matches a README row and no README row is orphaned.
+  5. Every supervisor named in a README row is a registered SUPERVISOR row.
   5. Every executor has at least one registered supervisor.
   6. No legacy headers / legacy state machines remain.
 
@@ -23,6 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 PROMPTS = ROOT / "prompts"
 README = ROOT / "README.md"
+MAIN_COLS = 28    # width of the merged main role table
 
 SUP_HEADINGS = [
     "## Audit Scope", "## Audit Criteria", "## Audit Procedure", "## Coverage Manifest",
@@ -46,12 +48,14 @@ def read_rows(path: Path) -> list[tuple[str, str, str, str]]:
         if len(cells) < 3:
             continue
         title = cells[0]
-        if title == "عنوان شغلی" or set(title) <= set("-: "):
+        if title == r"Job Title" or set(title) <= set("-: "):
             continue
         # the merged main table carries the prompt link in one of its cells;
-        # scan for it instead of assuming a fixed column index
+        # scan for it instead of assuming a fixed column index. The `prompts/`
+        # prefix is required so that links elsewhere in the README (e.g. the
+        # composite-persona / skills sections) are not mistaken for role rows.
         for c in cells:
-            m = re.search(r"(audit|implementation)/([\w\-]+)\.md", c)
+            m = re.search(r"prompts/(audit|implementation)/([\w\-]+)\.md", c)
             if m:
                 rows.append((title, cells[2], m.group(1), m.group(2)))
                 break
@@ -60,17 +64,43 @@ def read_rows(path: Path) -> list[tuple[str, str, str, str]]:
 
 def main() -> int:
     problems: list[str] = []
-    files = sorted(p for p in PROMPTS.rglob("*.md") if p.name != "README.md")
+    files = sorted(
+        p for p in PROMPTS.rglob("*.md")
+        if p.name != "README.md" and (PROMPTS / "composite") not in p.parents
+    )
     rows = read_rows(README)
     readme_slugs = {(d, s) for _, _, d, s in rows}
     file_slugs = {(p.parent.name, p.stem) for p in files}
+
+    # Every supervisor named in the README "Supervisor" column must itself be a
+    # row registered as a SUPERVISOR. Generation resolves supervisors from the
+    # Master map + EXTRA_SUPERVISORS, so a bad name here does not break the
+    # build -- it only makes the table lie to the reader, which is worse.
+    registered = {r[0] for r in rows if r[1] == r"SUPERVISOR"}
+    for ln in README.read_text(encoding="utf-8").splitlines():
+        s = ln.strip()
+        if not s.startswith("|"):
+            continue
+        cells = [c.strip() for c in s.strip("|").split("|")]
+        if len(cells) != MAIN_COLS:
+            continue
+        title, _duty, role_type = cells[0], cells[1], cells[2]
+        if title == r"Job Title" or set(title) <= set("-: "):
+            continue
+        if role_type != r"EXECUTOR":
+            continue
+        for sup in cells[6].split(","):
+            sup = sup.strip()
+            if sup and sup not in registered:
+                problems.append(
+                    f"README row '{title}' names unregistered supervisor '{sup}'")
 
     for p in files:
         text = p.read_text(encoding="utf-8")
         rel = str(p.relative_to(ROOT))
         if "# Persona — " not in text:
             problems.append(f"{rel}: missing '# Persona — <Role>' title")
-        if "سیستم پرامپت" in text:
+        if r"Prompt System" in text:
             problems.append(f"{rel}: legacy header found")
         nums = re.findall(r"^## (\d+)\. ", text, re.M)
         expected = [str(i) for i in range(1, 30)]

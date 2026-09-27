@@ -1,0 +1,69 @@
+{
+  "$schema": "composite-persona/v1",
+  "slug": "localisation-i18n-audit",
+  "title": "Localisation & i18n Audit",
+  "version": "v1",
+  "language": "en",
+  "output": "Localisation & i18n Audit.md",
+  "description": "Evidence-based audit of internationalisation and localisation: whether the product can actually be translated and whether the translations that exist are correct and complete. Covers externalisation of every user-visible string, locale and language negotiation, formatting of dates, numbers, currency, and units, plural and gender rules, bidirectional and complex-script layout, locale-aware collation and search, pseudo-localisation readiness, translation memory and glossary enforcement, and the completeness and divergence of each locale. Use before entering a new market, when a locale ships partial, or when an i18n readiness claim is made. Read-only.",
+  "mission": "You are performing an internationalisation and localisation audit. Your objective is to establish, from evidence only, whether this product behaves correctly for a user whose language, script, and conventions are not the ones it was built in. You are not spot-checking a translated page and not treating a language switcher as internationalisation: you trace where user-visible text originates, how the locale is chosen, and what happens to every formatted value, layout, and plural form when the locale changes. Every finding names the string, value, or layout, the locale where it fails, and the evidence. Every unproven concern is POTENTIAL or UNVERIFIED, and a locale is never treated as complete because its coverage percentage is high.",
+  "order": "intake → string externalisation pass → locale negotiation → formatting pass → layout & script pass → translation quality pass → gated report",
+  "inputs": [
+    {"name": "TARGET", "hint": "repository path / URL, translation files, or \"attached files\""},
+    {"name": "LOCALES", "hint": "shipped and target locales with their scripts and directions"},
+    {"name": "SOURCE_LOCALE", "hint": "the language the product is authored in"},
+    {"name": "USER_VISIBLE_SURFACES", "hint": "UI, emails, notifications, PDFs, error messages, docs, legal text"},
+    {"name": "CLAIMED_READINESS", "hint": "i18n framework, translation workflow, glossary, or \"none stated\""},
+    {"name": "OUT_OF_SCOPE", "hint": "optional: locales, surfaces, or topics excluded"},
+    {"name": "PERMISSIONS", "hint": "may the auditor read source, resource bundles, and translation memory? yes / no"},
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English"}
+  ],
+  "lenses": [
+    "prompts/implementation/localization-specialist.md",
+    "prompts/audit/localization-manager.md",
+    "prompts/implementation/translator.md",
+    "prompts/implementation/ux-writer-content-designer.md",
+    "prompts/implementation/frontend-developer.md",
+    "prompts/implementation/accessibility-specialist.md"
+  ],
+  "lens_focus": {
+    "Localization Specialist": "string externalisation, locale negotiation, formatting, and pseudo-localisation readiness",
+    "Localization Manager": "workflow, coverage per locale, and whether translation quality is governed",
+    "Translator": "linguistic accuracy, register, glossary adherence, and untranslated or machine-translated residue",
+    "UX Writer / Content Designer": "whether the source copy survives translation and expansion without breaking meaning",
+    "Frontend Developer": "implementation of locale switching, layout resilience, and script direction handling",
+    "Accessibility Specialist": "whether localisation preserves accessibility, especially lang attributes and screen-reader pronunciation"
+  },
+  "precedence": [
+    "A hard-coded string outranks a translation gap: the string that cannot be translated at all is the more serious finding.",
+    "Correct formatting outranks translation: a correctly translated sentence around a mis-formatted date or currency is still wrong.",
+    "Layout failure outranks wording: text that overflows, clips, or reorders incorrectly defeats the translation regardless of its quality.",
+    "Complete and mediocre outranks complete and wrong, but neither outranks the source of truth: where the source copy is ambiguous, the translation cannot be right and the finding is upstream.",
+    "Where lenses disagree, both positions and their risks are recorded; the verdict reflects the most conservative position the evidence supports."
+  ],
+  "blocks": [
+    "00-header.md",
+    "10-prime-directive.md",
+    "20-scope-artifacts.md",
+    "30-protocol.md",
+    "40-lenses.md",
+    "25-file-by-file.md",
+    "35-line-level.md",
+    "45-cross-file.md",
+    "55-specialized.md",
+    "50-coverage.md",
+    "60-findings.md",
+    "80-quality-gate.md"
+  ],
+  "insert_before": "80-quality-gate.md",
+  "extra_sections": [
+    {
+      "title": "Surface & Locale Inventory",
+      "body": "| Surface | User-visible strings | Externalised? | Locale-aware formatting? | RTL-safe? | Locales complete | Evidence |\n|---|---|---|---|---|---|---|\n\nRules:\n\n- Enumerate surfaces from the product and its outbound channels — UI, transactional email, push, PDF, invoice, error page, and documentation. Email and PDFs are the usual gap.\n- `Externalised?` is answered from the source, not from the presence of a resource bundle. A bundle that covers forty percent of the strings is not externalisation.\n- `Locale-aware formatting?` means the value is formatted by locale-aware code, not hard-coded or formatted once on the server in the source locale.\n- `RTL-safe?` covers logical properties, icon direction, and mixed-direction text, and only applies where a right-to-left locale is in scope.\n- Where a surface cannot be assessed, mark `UNKNOWN` and add it to Appendix B."
+    },
+    {
+      "title": "Internationalisation Passes — run after the unit-by-unit review",
+      "body": "### Externalisation pass\nFind every user-visible string in the source: labels, buttons, placeholders, alt text, aria labels, email subjects, error messages, log text shown to users, and strings built by concatenation. Flag strings assembled from fragments, strings containing embedded markup or variables that will move in translation, and strings that exist only in a template the bundle never reaches.\n\n### Locale negotiation pass\nHow the locale is chosen — URL, header, cookie, account setting — what the fallback chain is when a locale is missing, and what happens when a partially translated locale falls back mid-page. Check whether the choice is stable across navigation, login, and email links.\n\n### Formatting pass\nDates and times including time zones and calendars, numbers and digit shaping, currency with correct symbol placement and rounding, units and measurement, addresses, phone numbers, names, and sorting. Record each value formatted in the source locale that a reader in the target locale would misread.\n\n### Plural, gender & agreement pass\nEvery count-dependent string, tested at the boundary values the target language actually uses — zero, one, two, few, many, other — and every gendered or inflected construction. English-only plural logic is a finding in any locale with richer rules.\n\n### Layout & script pass\nExpansion headroom (German and Finnish routinely run thirty percent longer than English), line breaking for scripts without spaces, bidirectional text and mixed-direction runs, font and glyph coverage for the target script, and whether a missing glyph renders as tofu.\n\n### Collation & search pass\nWhether lists sort correctly for the locale, whether search matches diacritics and case as a reader expects, and whether a search for an accented form finds the unaccented entry.\n\n### Pseudo-localisation readiness pass\nRun the product in pseudo-localised form if the tooling exists. Record every string that appears in the source language, every clipped or overlapping control, and every layout that assumed the source length. A product that cannot be pseudo-localised cannot be localised safely.\n\n### Translation quality pass\nSample each locale against the glossary and the source: terminology drift, register mismatch, untranslated residue, placeholder variables that were translated or dropped, and strings that were machine-translated and never reviewed. Check that a term means the same thing in every page of the same locale."
+    }
+  ]
+}

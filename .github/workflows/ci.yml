@@ -1,0 +1,69 @@
+name: CI
+
+# Every artifact in this repository is generated. The pipeline is
+# generate_personas.py -> compose_persona.py -> build_metadata.py -> build_skills.py,
+# so CI does two things: regenerate from the committed sources, and fail if the
+# result differs from what is committed (a hand-edited generated file is a bug).
+#
+# The drift gate only works because the generators are deterministic: no
+# generated file carries a wall-clock stamp. If you add one, `make all` will
+# produce a diff on every run and this gate becomes permanently red.
+
+on:
+  push:
+    branches: [main, "arena/**"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # No `cache: pip`: the pipeline is stdlib-only and there is no
+      # requirements.txt or pyproject.toml, so setup-python fails outright with
+      # "No file matched to [**/requirements.txt or **/pyproject.toml]".
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install the web-test dependencies
+        run: npm ci
+
+      - name: Regenerate every artifact from source
+        run: make prompts composites metadata skills
+
+      - name: Fail if any generated file drifted
+        run: |
+          if ! git diff --exit-code --quiet; then
+            echo "::error::Generated artifacts are out of date. Run 'make prompts composites metadata skills' and commit the result."
+            git --no-pager diff --stat
+            exit 1
+          fi
+
+      - name: Validate (structure, composites, skills, English-only)
+        run: make validate
+
+      - name: Web test (index.html)
+        run: make test
+
+      - name: Upload the regenerated artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regenerated-artifacts
+          path: |
+            prompts/**
+            personas.json
+            skills/**
+          retention-days: 7

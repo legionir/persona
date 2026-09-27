@@ -91,7 +91,7 @@ def load_master_registry() -> tuple[dict[str, str], dict[str, str]]:
         "cto": "Chief Technology Officer (CTO)",
         "ciso": "Chief Information Security Officer (CISO)",
         "privacy-compliance-officer": "Privacy / Compliance Officer",
-        "product-owner-release": "Product Owner پس از Release",
+        "product-owner-release": r"Product Owner (Post-Release)",
     }
     for s, t in list(sup_slug.items()):
         if s in canon:
@@ -107,7 +107,7 @@ def load_master_map() -> dict[str, list[str]]:
     """
     if MASTER.exists():
         text = MASTER.read_text(encoding="utf-8")
-        body = _between(text, r"SUPERVISOR_MAP:\s*\n", r"\n«توجه:")
+        body = _between(text, r"SUPERVISOR_MAP:\s*\n", r"\nNote:")
         result: dict[str, list[str]] = {}
         cur = None
         for ln in body.splitlines():
@@ -177,8 +177,7 @@ SUPERVISOR_ALIAS = {
     "Finance Manager": "Finance Manager",
     "End-of-Life Manager": "End-of-Life Manager",
     "Business Continuity Manager": "Business Continuity Manager",
-    "Product Owner پس از Release": "Product Owner پس از Release",
-    "Product Owner پس از Release": "Product Owner پس از Release",
+    "Product Owner (Post-Release)": "Product Owner (Post-Release)",
 }
 
 
@@ -301,11 +300,11 @@ STEP_CAP = {
     "HANDOFF": ["Report", "Communicate"],
 }
 PROD_AUTH_MAP = [
-    (["بدون دسترسی", "no direct access", "no production access", "read only", "فقط مشاهده", "فقط مطالعه"], "NONE"),
-    (["read", "مطالعه", "view", "monitor", "مشاهده"], "READ_ONLY"),
-    (["limited", "محدود", "direct system access", "دسترسی مستقیم"], "LIMITED"),
-    (["authorized write", "limited write", "نوشتن محدود"], "AUTHORIZED_WRITE"),
-    (["full", "کامل", "admin", "مدیریت کامل"], "FULL"),
+    ([r"no direct access", "no direct access", "no production access", "read only", r"read only", r"read only"], "NONE"),
+    (["read", r"Study", "view", "monitor", r"Observation"], "READ_ONLY"),
+    (["limited", r"limited", "direct system access", r"direct system access"], "LIMITED"),
+    (["authorized write", "limited write", r"limited write"], "AUTHORIZED_WRITE"),
+    (["full", r"full", "admin", r"full"], "FULL"),
 ]
 
 
@@ -314,7 +313,7 @@ def production_authority(permissions: str, restricted: str) -> str:
     for keys, val in PROD_AUTH_MAP:
         if any(k in text for k in keys):
             return val
-    return "Unknown / Requires Verification: سطح دسترسی Production در دادهٔ نقش صریح نیست"
+    return r"Unknown / Requires Verification: the Production access level is not explicit in the role data"
 
 
 # ---------------------------------------------------------------------------
@@ -325,7 +324,7 @@ def _unordered(items) -> str:
 
 
 def _uk(field: str) -> str:
-    return f"Unknown / Requires Verification: «{field}» در دادهٔ این نقش ثبت نشده؛ فقط Context معتبر باید ارسال شود"
+    return f"Unknown / Requires Verification: \"{field}\" is not recorded in this role's data; only valid Context may be sent"
 
 
 # ---------------------------------------------------------------------------
@@ -347,28 +346,25 @@ def sec_mission(p, spec, meta) -> str:
     return f"""## 2. Mission
 - **PrimaryGoal:** {p['mission']}
 - **ExpectedOutcome:** {p['outputs']}
-- **SuccessDefinition:** {p['quality']}
-- **FailureDefinition:** خروجی بدون Evidence یا ناقص؛ عبور از Scope/Authority؛ {p['escalation']}"""
+- **SuccessDefinition:** {p['quality']}\n- **FailureDefinition:** output without evidence or incomplete; exceeding Scope/Authority; {p['escalation']}"""
 
 
 def sec_responsibilities(p, spec, meta) -> str:
     pri = _bullets(p['responsibilities'])
     sec = _unordered(spec['audit'] if meta['type'] == 'SUPERVISOR' else spec['impl'])
     if meta['type'] == 'SUPERVISOR':
-        sup = _unordered([f"هماهنگی با مصرف‌کننده‌ها: {c}" for c in meta['consumers']] or [
-            "دریافت خروجی از مجری‌ها و بررسی آن در Scope"] )
-        out = ["پیاده‌سازی مستقیم (Implementation) خارج از Authority",
-               "تصمیم‌های مالی/حقوقی/امنیتی خارج از Scope — ESCALATE"]
+        sup = _unordered([f"Coordination with consumers: {c}" for c in meta['consumers']] or [
+            r"Receiving output from the executors and reviewing it within Scope"] )
+        out = [r"Direct implementation (Implementation) outside Authority",
+               r"Financial/legal/security decisions outside Scope — ESCALATE"]
     else:
-        sup = _unordered([f"هماهنگی با ناظر: {s}" for s in meta['supervisors']] or [
-            "هماهنگی با ناظر/مالک تعریف‌شده"])
-        out = ["تغییر فایل/سرویس خارج از Scope",
-               "تغییر معماری، امنیت، قرارداد یا داده بدون تأیید ناظر"]
+        sup = _unordered([f"Coordination with the supervisor: {s}" for s in meta['supervisors']] or [
+            r"Coordination with the defined supervisor"])
+        out = [r"File/service change outside Scope",
+               r"Architecture, security, contract, or data change without supervisor approval"]
     return f"""## 3. Responsibilities
 - **Primary:**
-{pri}
-- **Secondary (مختص این نقش):**
-{sec}
+{pri}\n- **Secondary (specific to this role):**\n{sec}
 - **Supporting:**
 {sup}
 - **OutOfScope:**
@@ -390,49 +386,46 @@ def sec_type_capability(p, meta, group) -> str:
     other = TYPE_CAPS['EXECUTOR' if meta['type'] == 'SUPERVISOR' else 'SUPERVISOR']
     return f"""## 4. Type & Capability
 - **Type:** {meta['type']}
-- **Supervisor Capabilities:** {_unordered(caps) if meta['type'] == 'SUPERVISOR' else "NOT_APPLICABLE — این Persona نوع EXECUTOR است"}
-- **Executor Capabilities:** {_unordered(caps) if meta['type'] == 'EXECUTOR' else "NOT_APPLICABLE — این Persona نوع SUPERVISOR است"}
-- **Capabilities NOT owned (فقط در صورت Authority صریح):** {_unordered(other)}"""
+- **Supervisor Capabilities:** {_unordered(caps) if meta['type'] == 'SUPERVISOR' else "NOT_APPLICABLE — this Persona is of type EXECUTOR"}
+- **Executor Capabilities:** {_unordered(caps) if meta['type'] == 'EXECUTOR' else "NOT_APPLICABLE — this Persona is of type SUPERVISOR"}\n- **Capabilities NOT owned (only with explicit Authority):** {_unordered(other)}"""
 
 
 def sec_authority(p, meta) -> str:
     if meta['type'] == 'SUPERVISOR':
         decisions = "APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE"
-        actions = "بررسی، ممیزی، ارزیابی، تأیید/رد، اولویت‌بندی، توصیه، نظارت، کنترل، اسکالیشن"
-        forbid_d = "تصمیم اجرایی/پیاده‌سازی و تغییر مستقیم کد، پیکربندی یا دیتابیس"
-        forbid_a = "اعمال تغییر در Production بدون مجوز؛ تغییر معماری/امنیت/قرارداد خارج از Authority"
-        approve = "تغییر Scope، تغییر معماری، تغییر Production، تصمیم‌های امنیتی/حقوقی/مالی کلان"
+        actions = r"Review, audit, assessment, approve/reject, prioritisation, recommendation, oversight, control, escalation"
+        forbid_d = r"Execution/implementation decision and direct change of code, configuration, or database"
+        forbid_a = r"Applying changes to Production without authorisation; architecture/security/contract changes outside Authority"
+        approve = r"Scope change, architecture change, Production change, major security/legal/financial decisions"
     else:
         decisions = "PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE"
-        actions = "پیاده‌سازی، پیکربندی، یکپارچه‌سازی، تست، استقرار، نگهداری، مستندسازی"
-        forbid_d = "تصمیم ناظرانه: تأیید/رد نهایی Scope، معماری، امنیت، بودجه"
-        forbid_a = "تغییر فایل خارج از Scope؛ ساخت API/وابستگی/کانفیگ بدون شواهد"
-        approve = "تغییر فایل خارج از Scope، تغییر در Production، تغییر قرارداد/معماری/دیتابیس"
+        actions = r"Implementation, configuration, integration, testing, deployment, maintenance, documentation"
+        forbid_d = r"Supervisory decisions: final approval/rejection of Scope, architecture, security, budget"
+        forbid_a = r"File change outside Scope; building an API/dependency/config without evidence"
+        approve = r"File change outside Scope, change in Production, contract/architecture/database change"
     auth = production_authority(p['permissions'], p['restricted'])
     return f"""## 5. Authority & Boundaries
 - **AllowedDecisions:** {decisions}
 - **AllowedActions:** {actions}
 - **ApprovalRequiredFor:** {approve}
 - **ForbiddenDecisions:** {forbid_d}
-- **ForbiddenActions:** {forbid_a}
-- **CrossDomainRules:** اگر تصمیم روی مالکیت Persona دیگر اثر دارد (معماری، امنیت، داده، مالی، حقوقی): شناسایی اثر → حفظ رفتار فعلی در صورت امکان → مستندسازی → **ESCALATE** به Persona مسئول.
-- **ProductionAuthority:** {auth}"""
+- **ForbiddenActions:** {forbid_a}\n- **CrossDomainRules:** if a decision affects another Persona's ownership (architecture, security, data, finance, legal): identify the effect → preserve current behaviour where possible → document → **ESCALATE** to the responsible Persona.\n- **ProductionAuthority:** {auth}"""
 
 
 def sec_stakeholders(p, meta) -> str:
     if meta['type'] == 'SUPERVISOR':
         decision = meta['title']
-        impl = "NOT_APPLICABLE — این Persona خود Implementation مستقیم انجام نمی‌دهد"
-        reviewer = "، ".join(meta['supervisors']) or "NOT_APPLICABLE"
-        approver = "، ".join(meta['supervisors']) or "NOT_APPLICABLE"
-        supporting = "، ".join(meta['supervisors']) or "مصرف‌کننده‌ها (مجری‌های تحت نظارت)"
-        consumers = "، ".join(meta['consumers']) or "NOT_APPLICABLE"
+        impl = r"NOT_APPLICABLE — this Persona does not itself perform direct Implementation"
+        reviewer = r", ".join(meta['supervisors']) or "NOT_APPLICABLE"
+        approver = r", ".join(meta['supervisors']) or "NOT_APPLICABLE"
+        supporting = r", ".join(meta['supervisors']) or r"Consumers (supervised executors)"
+        consumers = r", ".join(meta['consumers']) or "NOT_APPLICABLE"
     else:
-        decision = meta['supervisors'][0] if meta['supervisors'] else "Unknown / Requires Verification: ناظر باید در Registry باشد"
+        decision = meta['supervisors'][0] if meta['supervisors'] else r"Unknown / Requires Verification: the supervisor must exist in the Registry"
         impl = meta['title']
-        reviewer = "، ".join(meta['supervisors']) or "Unknown / Requires Verification"
-        approver = "، ".join(meta['supervisors']) or "Unknown / Requires Verification"
-        supporting = "، ".join(meta['supervisors']) or "Unknown / Requires Verification"
+        reviewer = r", ".join(meta['supervisors']) or "Unknown / Requires Verification"
+        approver = r", ".join(meta['supervisors']) or "Unknown / Requires Verification"
+        supporting = r", ".join(meta['supervisors']) or "Unknown / Requires Verification"
         consumers = p['handoff']
     return f"""## 6. Stakeholders & Ownership
 - **PrimaryOwner:** {meta['title']}
@@ -448,17 +441,12 @@ def sec_inputs(p) -> str:
     return f"""## 7. Inputs
 - **Required:** {_bullets(p['required'])}
 - **Optional:** {_bullets(p['optional'])}
-- **Generated:** {_bullets(p['outputs'])}
-- **Prohibited:** ورودی بدون منبع یا سند معتبر؛ داده/آرتیفکت نامعتبر؛ Context خارج از Scope این نقش
-- **Validation:** هر ورودی باید با `Name / Type / Source / Required / Validation / Freshness` ثبت شود؛ در نبود منبع صریح: **Unknown / Requires Verification: ...**"""
+- **Generated:** {_bullets(p['outputs'])}\n- **Prohibited:** input without a source or a valid document; invalid data/artifact; context outside this role's scope\n- **Validation:** every input is recorded with `Name / Type / Source / Required / Validation / Freshness`; without an explicit source: **Unknown / Requires Verification: ...**"""
 
 
 def sec_preconditions(p) -> str:
     return f"""## 8. Preconditions
-- **Required:** {_bullets(p['preconditions'])}
-- **Optional:** NOT_APPLICABLE — در دادهٔ نقش تفکیک نشده (در صورت نیاز، از Context معتبر استفاده کن)
-- **Blocking:** اگر ورودی الزامی در دسترس نباشد → `BLOCKED` (How Verified: منبع/آرتیفکت ورودی باید ثبت شود)
-- **Authorization:** {p['permissions']}
+- **Required:** {_bullets(p['preconditions'])}\n- **Optional:** NOT_APPLICABLE — not broken out in the role data (if needed, use valid Context)\n- **Blocking:** if a required input is unavailable → `BLOCKED` (How Verified: the input source/artifact must be recorded)\n- **Authorization:** {p['permissions']}
 - **Environment:** {_uk('Environment')}
 - **Access:** {_uk('Access')}"""
 
@@ -477,8 +465,7 @@ def sec_context(p, meta) -> str:
 - **Data:** {_uk('Data')}
 - **PreviousDecisions:** {_uk('PreviousDecisions')}
 - **OpenIssues:** {_uk('OpenIssues')}
-- **RelevantHistory:** {_uk('RelevantHistory')}
-- **Rule:** فقط Context مرتبط را دریافت کن؛ کل Project Context بدون نیاز ممنوع."""
+- **RelevantHistory:** {_uk('RelevantHistory')}\n- **Rule:** receive only relevant Context; the whole Project Context without need is forbidden."""
 
 
 def sec_memory(p) -> str:
@@ -487,94 +474,91 @@ def sec_memory(p) -> str:
 - **Persistent:** {_uk('Persistent Memory')}
 - **Project:** {_uk('Project Memory')}
 - **Role:** {_uk('Role Memory')}
-- **Historical:** {_uk('Historical Memory')}
-- **Rules:** Memory ≠ Evidence؛ Memory ≠ Requirement؛ Memory ≠ Authorization. اطلاعات Memory در تصمیم‌های مهم باید دوباره Verify شود."""
+- **Historical:** {_uk('Historical Memory')}\n- **Rules:** Memory ≠ Evidence; Memory ≠ Requirement; Memory ≠ Authorization. Memory information must be verified again in important decisions."""
 
 
 def sec_scope(p, meta) -> str:
-    out_scope = ("پیاده‌سازی مستقیم خارج از Authority" if meta['type'] == 'SUPERVISOR'
-                 else "تغییر فایل/سرویس/داده خارج از Scope تعیین‌شده")
+    out_scope = (r"Direct implementation outside Authority" if meta['type'] == 'SUPERVISOR'
+                 else r"File/service/data change outside the defined Scope")
     return f"""## 11. Scope
 - **InScope:** {p['scope']}
-- **OutOfScope:** {out_scope}؛ تصمیم‌های خارج از Authority ثبت و ESCALATE می‌شوند (نه سکوت)
-- **AffectedAreas:** {meta['domain']} / {meta['category']}
+- **OutOfScope:** {out_scope}; decisions outside Authority are recorded and ESCALATED (not silenced)\n- **AffectedAreas:** {meta['domain']} / {meta['category']}
 - **FileScope:** {_uk('FileScope')}
 - **ModuleScope:** {_uk('ModuleScope')}
 - **ServiceScope:** {_uk('ServiceScope')}
-- **EnvironmentScope:** {_uk('EnvironmentScope')}
-- **ScopeExpansionPolicy:** REQUIRES_APPROVAL — هر توسعهٔ Scope باید مستند و تأیید شود"""
+- **EnvironmentScope:** {_uk('EnvironmentScope')}\n- **ScopeExpansionPolicy:** REQUIRES_APPROVAL — every scope expansion must be documented and approved"""
 
 
 NFR_BY_GROUP = {
-    "strategy": {"NonFunctional": "سازگاری با چشم‌انداز و اهداف، امکان‌سنجی منابع، ریسک عدم قطعیت مدیریت‌شده",
-                 "Architecture": "همسویی تصمیم‌ها با معماری کلان", "Governance": "مدل تصمیم و مالکیت مستند",
-                 "Compliance": "انطباق تصمیم‌های کلان با مقررات", "Operational": "قابلیت ترجمه به برنامهٔ اجرایی"},
-    "product": {"NonFunctional": "قابلیت سنجش ارزش، شفافیت اولویت‌ها، مدیریت تغییر Scope",
-                "Architecture": "سازگاری Roadmap با معماری محصول", "Governance": "مدل اولویت‌بندی و مالکیت Backlog",
-                "Compliance": "انطباق با ملاحظات قانونی/حریم", "Operational": "پایش KPI و بازخورد کاربر"},
-    "management": {"NonFunctional": "قابلیت ردیابی وضعیت، شفافیت زمان/منابع/ریسک",
-                   "Architecture": "سازگاری برنامه با محدودیت‌های فنی", "Governance": "نقش و مالکیت تصمیم مستند",
-                   "Compliance": "انطباق با فرایند و مقررات", "Operational": "گزارش وضعیت شامل بلوکر/ریسک"},
-    "analysis": {"NonFunctional": "بدون ابهام، قابل آزمون، قابل ردیابی",
-                 "Architecture": "سازگاری نیازها با معماری و داده", "Governance": "مسیر تأیید نیازمندی‌ها",
-                 "Compliance": "پوشش الزامات قانونی/حریم در نیازها", "Operational": "نگاشت نیاز به خروجی/تست"},
-    "architecture": {"NonFunctional": "مقیاس‌پذیری، نگهداشت، تغییرپذیری، Backward Compatibility",
-                     "Architecture": "مرز اجزا، قراردادها و Decision Records", "Security": "پوشش کنترل‌های امنیتی در معماری",
-                     "Performance": "ارزیابی ظرفیت/کارایی اجزا", "Scalability": "سناریوی مقیاس مستند",
-                     "Reliability": "Fault Tolerance و مسیرهای شکست", "Compatibility": "سازگاری با سامانه‌های موجود",
-                     "Governance": "مسیر تأیید معماری", "Operational": "قابلیت استقرار و پایش معماری"},
-    "engineering": {"NonFunctional": "صحت رفتار، DRY، کیفیت کد، کارایی، امنیت پایه",
-                    "Architecture": "رعایت قرارداد و مرز معماری", "Security": "اعتبارسنجی ورودی/خروجی، عدم افشای Secret",
-                    "Performance": "پایش p95/Throughput", "Compatibility": "Backward Compatibility",
-                    "Testing": "پوشش Edge/Failure", "Operational": "Logging/Tracing و قابلیت رگرسیون"},
-    "ai": {"NonFunctional": "بازتولیدپذیری، پایش Drift، کنترل هزینه",
-           "Architecture": "مرز Agent/مدل و قرارداد ابزار", "Security": "Guardrail، Jailbreak، دادهٔ حساس",
-           "Performance": "کیفیت مدل (Eval Score)، Latency", "Reliability": "Fallback و رفتار خطا",
-           "Compliance": "حریم خصوصی و انطباق استفاده از مدل", "Operational": "پایش و Evaluation پیوسته"},
-    "data": {"NonFunctional": "دقت، یکپارچگی، کارایی و امنیت داده",
-             "Architecture": "سازگاری Schema/Migration با معماری", "Security": "دسترسی، رمزنگاری و ردیابی داده",
-             "Performance": "کارایی Query/Index", "Reliability": "Backup/Restore و DR",
-             "Compliance": "طبقه‌بندی داده و حریم خصوصی", "Operational": "کیفیت و پایش داده"},
-    "devops": {"NonFunctional": "تکرارپذیری، مشاهده‌پذیری، بازیابی‌پذیری",
-               "Architecture": "سازگاری CI/CD و محیط‌ها", "Security": "مدیریت Secret و Least Privilege",
-               "Performance": "زمان Build/Deploy و ظرفیت", "Reliability": "Rollback/Canary و آمادگی حادثه",
-               "Compatibility": "سازگاری پلتفرم/نسخه‌ها", "Operational": "Alert/Runbook و پایش"},
-    "qa": {"NonFunctional": "تکرارپذیری تست، پوشش Edge، پیگیری Defect",
-           "Architecture": "پوشش لایه‌ها و قراردادها در تست", "Security": "کیس‌های امنیتی در استراتژی تست",
-           "Performance": "تست بار/کارایی", "Reliability": "پایداری و Flaky Rate",
-           "Compatibility": "پوشش نسخه‌ها/مرورگرها/پلتفرم‌ها", "Operational": "گزارش و پیگیری Defect"},
-    "security": {"NonFunctional": "پوشش کنترل‌ها، مدیریت آسیب‌پذیری، کشف به‌موقع",
-                 "Architecture": "انطباق کنترل‌ها با معماری", "Security": "Threat Modeling، اعتبارسنجی، Secret",
-                 "Performance": "اثر کنترل‌ها بر کارایی", "Reliability": "پاسخ و بازیابی حادثه",
-                 "Compliance": "انطباق با مقررات و سیاست‌ها", "Operational": "پایش، گزارش و پیگیری"},
-    "compliance": {"NonFunctional": "انطباق، شواهد کامل، ردیابی تصمیم",
-                   "Architecture": "تأثیر الزامات بر معماری", "Security": "حفاظت داده در فرایند انطباق",
-                   "Reliability": "ثبات فرایند کنترل", "Compliance": "پوشش قوانین/قرارداد/حریم",
-                   "Operational": "گیت‌های کنترل و گزارش‌دهی"},
-    "design": {"NonFunctional": "یکدستی، دسترس‌پذیری، پوشش Stateها",
-               "Architecture": "سازگاری با Design System", "Security": "حریم دادهٔ کاربری در طراحی",
-               "Performance": "کارایی UI/تعامل", "Reliability": "پوشش حالت‌های خطا/خالی",
-               "Compatibility": "ریسپانسیو و دسترس‌پذیری", "Operational": "قابلیت تست و پیاده‌سازی"},
-    "content": {"NonFunctional": "دقت، کامل بودن، یکدستی اصطلاحات",
-                "Architecture": "سازگاری اسناد با نسخه/رفتار", "Security": "عدم افشای اطلاعات در مستندات",
-                "Compatibility": "سازگاری با پلتفرم/نسخه‌ها", "Operational": "به‌روزرسانی و دسترسی اسناد"},
-    "people": {"NonFunctional": "عدالت، عدم تبعیض، حفاظت دادهٔ شخصی",
-               "Architecture": "سازگاری ساختار نقش/تیم با سازمان", "Security": "حریم دادهٔ افراد",
-               "Compliance": "انطباق استخدام/داده با مقررات", "Operational": "فرایند شفاف و قابل ارزیابی"},
-    "support": {"NonFunctional": "سرعت پاسخ، پیوستگی مالکیت، رضایت",
-                "Architecture": "سازگاری فرایند پشتیبانی با محصول", "Security": "حفاظت دادهٔ مشتری",
-                "Reliability": "ثبات SLA", "Compliance": "مطابقت با تعهدات/قوانین", "Operational": "اسکالیشن و دانش‌نامه"},
-    "growth": {"NonFunctional": "قابل اندازه‌گیری، هم‌راستا با برند، ROI شفاف",
-               "Architecture": "سازگاری پیام با محصول", "Security": "حریم دادهٔ مخاطب",
-               "Compliance": "انطباق بازاریابی/فروش با مقررات", "Operational": "پایش KPI و آزمایش"},
-    "assurance": {"NonFunctional": "استقلال، عینیت، پوشش کامل، شواهد ردیابی‌شده",
-                  "Architecture": "پوشش معماری در محدودهٔ ممیزی", "Security": "مسئولیت‌پذیری و امنیت اطلاعات ممیزی",
-                  "Reliability": "تکرارپذیری ممیزی", "Compliance": "انطباق با استانداردهای ممیزی",
-                  "Operational": "گزارش، پیگیری و بسته‌شدن یافته‌ها"},
-    "ops": {"NonFunctional": "آمادگی، بازیابی سریع، بهبود مستمر",
-            "Architecture": "سازگاری Runbook با معماری", "Security": "امنیت فرایند عملیات",
-            "Performance": "SLA و MTTR", "Reliability": "Availability/Recovery",
-            "Compliance": "انطباق عملیات با سیاست‌ها", "Operational": "Alert، Postmortem و Runbook"},
+    "strategy": {"NonFunctional": r"Alignment with the vision and goals, feasibility of resources, managed uncertainty risk",
+                 "Architecture": r"Alignment of decisions with the high-level architecture", "Governance": r"Documented decision model and ownership",
+                 "Compliance": r"Compliance of major decisions with regulations", "Operational": r"Translatability into an executable programme"},
+    "product": {"NonFunctional": r"Measurability of value, transparency of priorities, scope-change management",
+                "Architecture": r"Roadmap consistency with the product architecture", "Governance": r"Prioritisation model and backlog ownership",
+                "Compliance": r"Compliance with legal/privacy considerations", "Operational": r"KPI monitoring and user feedback"},
+    "management": {"NonFunctional": r"Status traceability, transparency of time/resources/risk",
+                   "Architecture": r"Programme consistency with technical constraints", "Governance": r"Documented role and decision ownership",
+                   "Compliance": r"Compliance with the process and regulations", "Operational": r"Status reporting including blockers/risk"},
+    "analysis": {"NonFunctional": r"Unambiguous, testable, traceable",
+                 "Architecture": r"Requirements consistency with the architecture and data", "Governance": r"Approval path for requirements",
+                 "Compliance": r"Coverage of legal/privacy requirements in the requirements", "Operational": r"Mapping requirements to output/tests"},
+    "architecture": {"NonFunctional": r"Scalability, maintainability, changeability, backward compatibility",
+                     "Architecture": r"Component boundaries, contracts, and Decision Records", "Security": r"Coverage of security controls in the architecture",
+                     "Performance": r"Assessment of component capacity/performance", "Scalability": r"Documented scale scenario",
+                     "Reliability": r"Fault tolerance and failure paths", "Compatibility": r"Consistency with existing systems",
+                     "Governance": r"Architecture approval path", "Operational": r"Deployability and monitoring of the architecture"},
+    "engineering": {"NonFunctional": r"Behavioural correctness, DRY, code quality, performance, baseline security",
+                    "Architecture": r"Adherence to the contract and architecture boundary", "Security": r"Input/output validation, no secret disclosure",
+                    "Performance": r"p95/throughput monitoring", "Compatibility": "Backward Compatibility",
+                    "Testing": r"Coverage of edge and failure cases", "Operational": r"Logging/tracing and regression capability"},
+    "ai": {"NonFunctional": r"Reproducibility, drift monitoring, cost control",
+           "Architecture": r"Agent/model boundary and tool contract", "Security": r"Guardrails, jailbreak, sensitive data",
+           "Performance": r"Model quality (eval score), latency", "Reliability": r"Fallback and error behaviour",
+           "Compliance": r"Privacy and compliance of model usage", "Operational": r"Continuous monitoring and evaluation"},
+    "data": {"NonFunctional": r"Data accuracy, consistency, performance, and security",
+             "Architecture": r"Schema/migration consistency with the architecture", "Security": r"Data access, encryption, and traceability",
+             "Performance": r"Query/index performance", "Reliability": r"Backup/restore and DR",
+             "Compliance": r"Data classification and privacy", "Operational": r"Data quality and monitoring"},
+    "devops": {"NonFunctional": r"Repeatability, observability, recoverability",
+               "Architecture": r"CI/CD and environment consistency", "Security": r"Secret management and least privilege",
+               "Performance": r"Build/deploy time and capacity", "Reliability": r"Rollback/canary and incident readiness",
+               "Compatibility": r"Platform/release consistency", "Operational": r"Alerts/runbook and monitoring"},
+    "qa": {"NonFunctional": r"Test repeatability, edge coverage, defect follow-up",
+           "Architecture": r"Coverage of layers and contracts in tests", "Security": r"Security cases in the test strategy",
+           "Performance": r"Load/performance testing", "Reliability": r"Stability and flaky rate",
+           "Compatibility": r"Coverage of releases/browsers/platforms", "Operational": r"Defect reporting and follow-up"},
+    "security": {"NonFunctional": r"Control coverage, vulnerability management, timely detection",
+                 "Architecture": r"Control consistency with the architecture", "Security": r"Threat modelling, validation, secrets",
+                 "Performance": r"Effect of controls on performance", "Reliability": r"Incident response and recovery",
+                 "Compliance": r"Compliance with regulations and policies", "Operational": r"Monitoring, reporting, and follow-up"},
+    "compliance": {"NonFunctional": r"Compliance, complete evidence, traceable decisions",
+                   "Architecture": r"Effect of requirements on the architecture", "Security": r"Data protection in the compliance process",
+                   "Reliability": r"Control-process stability", "Compliance": r"Coverage of rules/contracts/privacy",
+                   "Operational": r"Control gates and reporting"},
+    "design": {"NonFunctional": r"Consistency, accessibility, state coverage",
+               "Architecture": r"Consistency with the design system", "Security": r"User-data privacy in the design",
+               "Performance": r"UI/interaction performance", "Reliability": r"Coverage of error/empty states",
+               "Compatibility": r"Responsiveness and accessibility", "Operational": r"Testability and implementability"},
+    "content": {"NonFunctional": r"Accuracy, completeness, terminology consistency",
+                "Architecture": r"Document consistency with the release/behaviour", "Security": r"No information disclosure in documentation",
+                "Compatibility": r"Consistency with platforms/releases", "Operational": r"Document updating and availability"},
+    "people": {"NonFunctional": r"Fairness, non-discrimination, personal-data protection",
+               "Architecture": r"Consistency of the role/team structure with the organisation", "Security": r"Employee-data privacy",
+               "Compliance": r"Compliance of hiring/data with regulations", "Operational": r"Transparent and assessable process"},
+    "support": {"NonFunctional": r"Response speed, ownership continuity, satisfaction",
+                "Architecture": r"Consistency of the support process with the product", "Security": r"Customer-data protection",
+                "Reliability": r"SLA stability", "Compliance": r"Compliance with commitments/laws", "Operational": r"Escalation and knowledge base"},
+    "growth": {"NonFunctional": r"Measurable, brand-aligned, with clear ROI",
+               "Architecture": r"Message consistency with the product", "Security": r"Audience-data privacy",
+               "Compliance": r"Compliance of marketing/sales with regulations", "Operational": r"KPI monitoring and experimentation"},
+    "assurance": {"NonFunctional": r"Independence, objectivity, complete coverage, traceable evidence",
+                  "Architecture": r"Coverage of the architecture within the audit scope", "Security": r"Accountability and information security of the audit",
+                  "Reliability": r"Audit repeatability", "Compliance": r"Compliance with audit standards",
+                  "Operational": r"Reporting, follow-up, and closure of findings"},
+    "ops": {"NonFunctional": r"Readiness, fast recovery, continuous improvement",
+            "Architecture": r"Runbook consistency with the architecture", "Security": r"Security of the operations process",
+            "Performance": r"SLA and MTTR", "Reliability": "Availability/Recovery",
+            "Compliance": r"Operations compliance with policies", "Operational": r"Alerts, postmortem, and runbook"},
 }
 
 
@@ -583,7 +567,7 @@ def sec_criteria(p, spec, meta, group) -> str:
     if meta['type'] == 'SUPERVISOR':
         lines = [
             "- **Functional:**", _bullets(p['quality']), "",
-            "- **NonFunctional:**", f"- {nfr.get('NonFunctional', 'پوشش NFR')}", "",
+            "- **NonFunctional:**", f"- {nfr.get('NonFunctional', 'NFR coverage')}", "",
         ]
         for key in ["Architecture", "Security", "Performance", "Scalability",
                     "Reliability", "Compatibility", "Governance", "Compliance", "Operational"]:
@@ -591,13 +575,13 @@ def sec_criteria(p, spec, meta, group) -> str:
         return "## 12. Criteria / Requirements\n" + "\n".join(lines)
     lines = [
         "- **Functional:**", _bullets(p['quality']), "",
-        "- **Technical (مختص این نقش):**", _unordered(spec['impl']), "",
+        r"- **Technical (specific to this role):**", _unordered(spec['impl']), "",
         "- **API:**", f"- {nfr.get('Architecture', _uk('API'))}",
         "- **Data:**", f"- {nfr.get('Security', _uk('Data'))}",
-        "- **Security:**", f"- {nfr.get('Security', 'اعتبارسنجی و عدم افشای Secret')}",
+        "- **Security:**", f"- {nfr.get('Security', 'Validation and no secret disclosure')}",
         "- **Performance:**", f"- {nfr.get('Performance', _uk('Performance'))}",
         "- **Compatibility:**", f"- {nfr.get('Compatibility', _uk('Compatibility'))}",
-        "- **Testing:**", f"- {nfr.get('Testing', 'تست قبل و بعد از تغییر با شواهد')}",
+        "- **Testing:**", f"- {nfr.get('Testing', 'Testing before and after the change, with evidence')}",
         "- **Configuration:**", f"- {_uk('Configuration')}",
         "- **Migration:**", f"- {_uk('Migration')}",
     ]
@@ -606,72 +590,72 @@ def sec_criteria(p, spec, meta, group) -> str:
 
 def _step_kind(name: str) -> str:
     n = name.lower()
-    if any(k in n for k in ["audit", "ممیزی", "govern", "حاکم", "control", "کنترل"]):
+    if any(k in n for k in ["audit", r"Audit", "govern", r"Governing", "control", r"Control"]):
         return "AUDIT"
-    if any(k in n for k in ["inspect", "بازبینی", "check", "بررسی"]):
+    if any(k in n for k in ["inspect", r"Review", "check", r"Review"]):
         return "INSPECT"
-    if any(k in n for k in ["assess", "ارزیابی"]):
+    if any(k in n for k in ["assess", r"Assessment"]):
         return "ASSESS"
-    if any(k in n for k in ["analy", "understand", "discover", "تحلیل", "فهم", "درک"]):
+    if any(k in n for k in ["analy", "understand", "discover", r"Analysis", r"Understanding", r"Comprehension"]):
         return "ANALYZE"
-    if any(k in n for k in ["design", "architect", "model", "define", "research", "طراحی", "تعریف"]):
+    if any(k in n for k in ["design", "architect", "model", "define", "research", r"Design", r"Definition"]):
         return "DESIGN"
-    if any(k in n for k in ["plan", "برنامه", "roadmap", "نقشه"]):
+    if any(k in n for k in ["plan", r"Program", "roadmap", r"Map"]):
         return "PLAN"
-    if any(k in n for k in ["implement", "build", "develop", "create", "code", "write", "transform", "پیاده", "ساخت", "توسعه"]):
+    if any(k in n for k in ["implement", "build", "develop", "create", "code", "write", "transform", r"Implementation", r"Build", r"Development"]):
         return "IMPLEMENT"
-    if any(k in n for k in ["integrat", "connect", "link", "wire", "اتصال", "یکپارچه", "integrate"]):
+    if any(k in n for k in ["integrat", "connect", "link", "wire", r"Connection", r"Integration", "integrate"]):
         return "INTEGRATE"
-    if any(k in n for k in ["test", "validat", "verify", "check", "optim", "تست", "اعتبار", "بهینه"]):
+    if any(k in n for k in ["test", "validat", "verify", "check", "optim", r"Testing", r"Validation", r"Optimisation"]):
         return "TEST"
-    if any(k in n for k in ["monitor", "پایش", "نظارت", "measure", "سنجش"]):
+    if any(k in n for k in ["monitor", r"Monitoring", r"Oversight", "measure", r"Measurement"]):
         return "MONITOR"
-    if any(k in n for k in ["document", "مستند"]):
+    if any(k in n for k in ["document", r"Documentation"]):
         return "DOCUMENT"
-    if any(k in n for k in ["deploy", "استقرار", "release", "انتشار"]):
+    if any(k in n for k in ["deploy", r"Deployment", "release", r"Publication"]):
         return "INTEGRATE"
-    if any(k in n for k in ["review", "report", "deliver", "retrospect", "گزارش", "مرور"]):
+    if any(k in n for k in ["review", "report", "deliver", "retrospect", r"Reporting", r"Review"]):
         return "REVIEW"
-    if any(k in n for k in ["handoff", "تحویل"]):
+    if any(k in n for k in ["handoff", r"Delivery"]):
         return "HANDOFF"
     return "VALIDATE"
 
 
 _STEP_ACTIONS_MASTER = {
-    "ANALYZE": ["ورودی‌ها و Scope را با شواهد بررسی کن.", "کد/سند/داده/سرویس متأثر را شناسایی کن.",
-                "رابط‌ها، وابستگی‌ها و ریسک‌های پنهان را مشخص کن.", "شمول/عدم شمول را با دلیل ثبت کن."],
-    "ASSESS": ["معیارهای ارزیابی را از Scope استخراج کن.", "شواهد موجود را جمع و مرتب کن.",
-               "وضعیت را در برابر معیارها بسنج.", "نتیجه را با سطح اطمینان ثبت کن."],
-    "INSPECT": ["هدف و محدودهٔ بررسی را تعیین کن.", "منابع/فایل‌ها/بخش‌ها را enumerate کن.",
-                "هر مورد را با شواهد بررسی کن.", "یافته/غیاب شواهد را ثبت کن."],
-    "DESIGN": ["گزینه‌های معتبر را با معیار مشخص مقایسه و مستند کن.", "Design/Plan را با Scope و Authority محدود کن.",
-               "قراردادها/رابط‌ها/Stateها را مشخص کن.", "اثر تغییر روی رفتار موجود را ارزیابی کن؛ خارج از Scope → ESCALATE."],
-    "PLAN": ["موارد درست و ترتیب وابستگی‌ها را تعیین کن.", "گام‌های قابل اجرا و قابل راستی‌آزمایی تعریف کن.",
-             "Hidden Work (خطا، اعتبارسنجی، تست، مهاجرت، مستندسازی، امنیت) را شناسایی کن.", "معیار پذیرش هر فاز/گام را بنویس."],
-    "IMPLEMENT": ["فقط Scope همین Persona را پیاده‌سازی کن.", "ورودی‌ها را Validate و خروجی را مطابق قرارداد تولید کن.",
-                  "Edge/Error/Stateها را پوشش بده.", "رفتار موجود را حفظ کن مگر تغییر عمدی مستند."],
-    "INTEGRATE": ["قرارداد/رابط بین اجزا را راستی‌آزمایی کن.", "Backward و سازگاری رفتاری را حفظ کن.",
-                  "خطاهای Integration را جدا/مستند کن؛ در مرز مسئولیت دیگر → ESCALATE."],
-    "TEST": ["تست/validation متناسب با Scope بنویس و اجرا کن.", "حالت‌های Applicable (موفق/خطا/خالی/edge/authz/perf) را پوشش بده.",
-             "نتیجه را با شواهد ثبت کن؛ شاهد ناکافی → BLOCKED/NEEDS_CLARIFICATION."],
-    "VALIDATE": ["خروجی را با معیار پذیرش مقایسه کن.", "شواهد و ردیابی را کنترل کن.",
-                 "نتیجه را با Status و State ثبت کن؛ بدون شواهد ادعای موفقیت نکن."],
-    "REVIEW": ["خروجی را با Quality Gate و DoD مقایسه کن.", "شواهد و ردیابی را کنترل کن.",
-               "یافته‌ها را یکپارچه و Deduplicate کن.", "نتیجهٔ نهایی را با Status و State گزارش کن."],
-    "AUDIT": ["Scope و Coverage Manifest تعریف کن.", "منابع/فایل‌ها/بخش‌ها را enumerate و segment کن.",
-              "هر Segment را با شواهد بررسی کن.", "یافته‌ها را با Root Finding ثبت و Risk را ارزیابی کن."],
-    "GOVERN": ["تصمیم را در Scope و Authority ارزیابی کن.", "با مالک/ناظر سنجیده و مستند کن.",
-               "Result را با معیار ثبت کن و از تصمیم خارج از Authority خودداری کن."],
-    "VERIFY": ["ادعا را فقط با شاهد بپذیر.", "شاهد/Evidence را با Location ثبت کن.",
-               "وضعیت VERIFIED/POTENTIAL/UNVERIFIED را ثبت کن.", "ادعای بدون شاهد را «ادعای پشتیبانی‌نشده» گزارش کن."],
-    "MONITOR": ["شاخص‌ها و منبع داده را مشخص کن.", "مقادیر را با شواهد ثبت کن.",
-                "انحراف/report را شناسایی و به Persona مسئول ESCALATE کن."],
-    "OPTIMIZE": ["گلوگاه/فرصت را با معیار مشخص کن.", "تغییر حداقلی با اثر قابل اندازه‌گیری اعمال کن.",
-                 "Regression را قبل/بعد بسنج و مستند کن."],
-    "DOCUMENT": ["هدف/مخاطب/ساختار سند را تعیین کن.", "محتوای دقیق مبتنی بر شواهد بنویس.",
-                 "با رفتار/نسخه تطبیق بده و بازبینی کن."],
-    "HANDOFF": ["آرتیفکت‌های لازم و Recipient را مشخص کن.", "Acceptance Criteria و ExecutionPlan را ضمیمه کن.",
-                "مسئولیت/تصمیم باقی‌مانده را صریح تحویل بده."],
+    "ANALYZE": [r"Review the inputs and Scope with evidence.", r"Identify the affected code, document, data, or service.",
+                r"Identify the interfaces, dependencies, and hidden risks.", r"Record applicability/non-applicability with a reason."],
+    "ASSESS": [r"Extract the assessment criteria from the Scope.", r"Collect and organise the available evidence.",
+               r"Measure the status against the criteria.", r"Record the result with a confidence level."],
+    "INSPECT": [r"Determine the goal and scope of the review.", r"Enumerate the sources/files/sections.",
+                r"Examine each item with evidence.", r"Record the finding or the absence of evidence."],
+    "DESIGN": [r"Compare the valid options against stated criteria and document them.", r"Constrain the Design/Plan to Scope and Authority.",
+               r"Specify the contracts/interfaces/states.", r"Assess the change's effect on existing behaviour; outside Scope → ESCALATE."],
+    "PLAN": [r"Determine the correct items and the order of dependencies.", r"Define executable and verifiable steps.",
+             r"Identify Hidden Work (errors, validation, tests, migration, documentation, security).", r"Write the acceptance criterion for each phase/step."],
+    "IMPLEMENT": [r"Implement only this Persona's Scope.", r"Validate the inputs and produce the output per contract.",
+                  r"Cover edge/error/states.", r"Preserve existing behaviour unless the change is deliberate and documented."],
+    "INTEGRATE": [r"Verify the contract/interface between components.", r"Preserve backward and behavioural compatibility.",
+                  r"Isolate and document integration errors; at another's responsibility boundary → ESCALATE."],
+    "TEST": [r"Write and run tests/validation appropriate to the scope.", r"Cover the applicable states (success/error/empty/edge/authz/perf).",
+             r"Record the result with evidence; insufficient evidence → BLOCKED/NEEDS_CLARIFICATION."],
+    "VALIDATE": [r"Compare the output against the acceptance criterion.", r"Check the evidence and traceability.",
+                 r"Report the final result with a status and state; do not claim success without evidence."],
+    "REVIEW": [r"Compare the output against the Quality Gate and DoD.", r"Check the evidence and traceability.",
+               r"Consolidate and deduplicate the findings.", r"Report the final result with a status and state."],
+    "AUDIT": [r"Define the Scope and Coverage Manifest.", r"Enumerate and segment the sources/files/sections.",
+              r"Examine each segment with evidence.", r"Record the findings against the Root Finding and assess the Risk."],
+    "GOVERN": [r"Assess the decision within Scope and Authority.", r"Assess and document against the owner/supervisor.",
+               r"Record the result against the criterion and refrain from decisions outside Authority."],
+    "VERIFY": [r"Accept a claim only with evidence.", r"Record the evidence with its Location.",
+               r"Record the VERIFIED/POTENTIAL/UNVERIFIED status.", r"Report a claim made without evidence as an unsupported claim."],
+    "MONITOR": [r"Specify the indicators and the data source.", r"Record the values with evidence.",
+                r"Identify the deviation and ESCALATE it to the responsible Persona."],
+    "OPTIMIZE": [r"Specify the bottleneck/opportunity with a criterion.", r"Apply the minimal change with a measurable effect.",
+                 r"Measure and document regression before and after."],
+    "DOCUMENT": [r"Determine the document's goal/audience/structure.", r"Write precise, evidence-based content.",
+                 r"Align with the behaviour/release and review."],
+    "HANDOFF": [r"Specify the required artifacts and the Recipient.", r"Attach the Acceptance Criteria and the ExecutionPlan.",
+                r"Hand over any remaining responsibility/decision explicitly."],
 }
 
 
@@ -684,20 +668,14 @@ def _structured_steps_master(p) -> str:
         chunks.append(f"""### STEP {i} — {name}  [{kind}]
 - **ID:** STEP-{i}
 - **Name:** {name}
-- **Type:** {kind}
-- **Objective:** اجرای گام «{name}» با حفظ Scope و بدون تغییر خارج از Authority.
-- **Inputs:** {p['required']}  |  Optional: {p['optional']}
+- **Type:** {kind}\n- **Objective:** execute the step \"{name}\" while preserving scope and without changes outside Authority.\n- **Inputs:** {p['required']}  |  Optional: {p['optional']}
 - **Preconditions:** {p['preconditions']}
 - **Actions:"""
                      + "\n".join(f"{j}. {a}" for j, a in enumerate(actions, 1))
                      + f"""
 - **Validation:** {p['quality']}
 - **Outputs:** {p['outputs']}
-- **Evidence:** {p['evidence']}
-- **DecisionPoints:** در این گام از Status مجاز استفاده کن (PASS / FAIL / BLOCKED / NEEDS_CLARIFICATION / ESCALATE / NOT_APPLICABLE) و نتیجه را مستند کن.
-- **ExitCriteria:** خروجی گام با معیار پذیرش مطابقت دارد و شواهد ثبت شده‌اند.
-- **FailureConditions:** ورودی ناقص/متناقض، خارج از Scope، یا شواهد ناکافی.
-- **EscalationConditions:** {p['escalation']}""")
+- **Evidence:** {p['evidence']}\n- **DecisionPoints:** at this step you may use the statuses (PASS / FAIL / BLOCKED / NEEDS_CLARIFICATION / ESCALATE / NOT_APPLICABLE) and must document the result.\n- **ExitCriteria:** the step's output matches the acceptance criterion and the evidence is recorded.\n- **FailureConditions:** incomplete or contradictory input, out of scope, or insufficient evidence.\n- **EscalationConditions:** {p['escalation']}""")
     return "\n\n".join(chunks)
 
 
@@ -709,17 +687,15 @@ def sec_decision_rules(p, meta) -> str:
     common = "PASS / FAIL / BLOCKED / NEEDS_CLARIFICATION / ESCALATE / NOT_APPLICABLE"
     if meta['type'] == 'SUPERVISOR':
         values = "APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE"
-        note = "ناظر فقط بر اساس Scope و شواهد تصمیم می‌گیرد؛ بدون Evidence تأیید نمی‌کند."
+        note = r"The supervisor decides only on the basis of Scope and evidence; it does not approve without Evidence."
     else:
         values = "PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE"
-        note = "مجری بدون شواهد (تست/Build/مانیفست) Completion اعلام نمی‌کند."
-    return f"""## 14. Decision Rules
-- **Status Values (همهٔ Persona):** {common}
+        note = r"The executor does not declare Completion without evidence (test/build/manifest)."
+    return f"""## 14. Decision Rules\n- **Status Values (all Personas):** {common}
 - **Decision Values ({meta['type']}):** {values}
 - **Role-specific rules:**
 {_bullets(p['decision'])}
-- **Rules:** {note}
-- هر `NOT_APPLICABLE` باید دلیل داشته باشد؛ هر Escalation باید Target مشخص داشته باشد."""
+- **Rules:** {note}\n- Every `NOT_APPLICABLE` must have a reason; every Escalation must have a specific Target."""
 
 
 def sec_tools(p, meta, group) -> str:
@@ -746,77 +722,53 @@ def sec_tools(p, meta, group) -> str:
     }
     return f"""## 15. Tools & Environment
 - **Allowed:** {_bullets(p['allowed'])}
-- **Restricted:** {_bullets(p['restricted'])}
-- **Forbidden:** ابزار/دسترسی‌ای که در «Restricted» ذکر شده؛ هر ابزار بدون مدرک اجازهٔ استفاده.
-- **ApprovalRequired:** Production/تغییر دسترسی، ابزار خارج از لیست Allowed، تغییر دیتابیس/زیرساخت.
-- **ReadOnly:** {production_authority(p['permissions'], p['restricted'])}
-- **Categories (مطابق Master):** {cats.get(group, 'Documentation, Filesystem')}"""
+- **Restricted:** {_bullets(p['restricted'])}\n- **Forbidden:** tools/access mentioned under \"Restricted\"; using any tool without a permit is not allowed.\n- **ApprovalRequired:** Production/access change, tools outside the Allowed list, database/infrastructure change.\n- **ReadOnly:** {production_authority(p['permissions'], p['restricted'])}\n- **Categories (per the Master):** {cats.get(group, 'Documentation, Filesystem')}"""
 
 
 def sec_evidence(p) -> str:
-    return f"""## 16. Evidence & Verification
-- **Evidence لازم:** {_bullets(p['evidence'])}
-- **Evidence Status:** VERIFIED / POTENTIAL / UNVERIFIED / MISSING
-- **Evidence Types:** FILE / LINE / CODE / DIFF / TEST_RESULT / BUILD_OUTPUT / LOG / TRACE / SCREENSHOT / API_RESPONSE / DATABASE_RESULT / BENCHMARK / METRIC / CONFIGURATION / DOCUMENT / ARCHITECTURE_DIAGRAM / DATASET / AUDIT_RECORD / USER_FEEDBACK
-- **Evidence Location:** FILE / LINE ، DOCUMENT / SECTION ، API / ENDPOINT ، DATABASE / TABLE / COLUMN ، ARCHITECTURE / NODE ، CONFIGURATION / KEY ، LOG / TIMESTAMP ، DATASET / FIELD ، TEST / CASE
-- **Rule:** هر ادعای مهم به Evidence قابل ردیابی متصل است؛ بدون Evidence: **MISSING** → ادعا ثبت نمی‌شود."""
+    return f"""## 16. Evidence & Verification\n- **Required evidence:** {_bullets(p['evidence'])}\n- **Evidence Status:** VERIFIED / POTENTIAL / UNVERIFIED / MISSING\n- **Evidence Types:** FILE / LINE / CODE / DIFF / TEST_RESULT / BUILD_OUTPUT / LOG / TRACE / SCREENSHOT / API_RESPONSE / DATABASE_RESULT / BENCHMARK / METRIC / CONFIGURATION / DOCUMENT / ARCHITECTURE_DIAGRAM / DATASET / AUDIT_RECORD / USER_FEEDBACK\n- **Evidence Location:** FILE / LINE , DOCUMENT / SECTION , API / ENDPOINT , DATABASE / TABLE / COLUMN , ARCHITECTURE / NODE , CONFIGURATION / KEY , LOG / TIMESTAMP , DATASET / FIELD , TEST / CASE\n- **Rule:** every material claim links to traceable evidence; without evidence: **MISSING** → the claim is not recorded."""
 
 
 def sec_coverage(meta) -> str:
     if meta['type'] == 'SUPERVISOR':
-        body = """- **Total Scope / Reviewed Scope / Unreviewed Scope / Blocked Scope / Coverage %:** در هر ممیزی محاسبه و ثبت کن.
+        body = """- **Total Scope / Reviewed Scope / Unreviewed Scope / Blocked Scope / Coverage %:** compute and record in every audit.
 - **Formula:** Coverage % = Reviewed Scope Items / Total Scope Items × 100
 - **Completion Rule:** 100% Coverage + All Mandatory Checks Passed + No Blocking Issue + All Required Evidence = Review Complete
-- **Manifest:** هر فایل/بخش Scope باید `Discovered → Classified → Reviewed → Status-marked` شود (REVIEWED / IN_PROGRESS / NOT_REVIEWED + دلیل معتبر)."""
+- **Manifest:** every file/section of Scope must go `Discovered → Classified → Reviewed → Status-marked` (REVIEWED / IN_PROGRESS / NOT_REVIEWED + a valid reason)."""
     else:
-        body = """- **Total Scope:** همهٔ فایل‌ها/بخش‌های متأثر از تسک.
-- **Reviewed/Unreviewed/Blocked/Change Coverage %:** نسبت فایل‌های تغییر/تست‌شده به کل Scope تغییر.
+        body = """- **Total Scope:** all files/sections affected by the task.
+- **Reviewed/Unreviewed/Blocked/Change Coverage %:** the ratio of changed/tested files to the whole change scope.
 - **Formula:** Change Coverage % = Changed & Tested Items / Total Changed Items × 100
-- **Completion Rule:** تمام Incrementها کامل + Change Manifest کامل + Tests اجراشده + No Blocking Issue = Detailed completion.
-- **Manifest:** هر فایل تغییر: Action/Scope/Status/Reason/RequirementIDs/TestStatus/Evidence."""
+- **Completion Rule:** all Increments complete + Change Manifest complete + Tests executed + No Blocking Issue = detailed completion.
+- **Manifest:** every changed file: Action/Scope/Status/Reason/RequirementIDs/TestStatus/Evidence."""
     return "## 17. Coverage / Completeness\n" + body
 
 
 def sec_findings(meta) -> str:
     if meta['type'] == 'SUPERVISOR':
         return """## 18. Findings / Changes
-**هر Finding (قالب):** ID / ROOT_FINDING_ID / SEGMENT / SOURCE / LOCATION / SEVERITY / CONFIDENCE / EVIDENCE_STATUS / CATEGORY / TITLE / EVIDENCE / PROBLEM / TRIGGER / EXPECTED / ACTUAL / IMPACT / AFFECTED / RISK / RECOMMENDED_FIX / OWNER / REGRESSION_RISK / MISSING_EVIDENCE / WHAT_WOULD_CONFIRM
+**Every finding (format):** ID / ROOT_FINDING_ID / SEGMENT / SOURCE / LOCATION / SEVERITY / CONFIDENCE / EVIDENCE_STATUS / CATEGORY / TITLE / EVIDENCE / PROBLEM / TRIGGER / EXPECTED / ACTUAL / IMPACT / AFFECTED / RISK / RECOMMENDED_FIX / OWNER / REGRESSION_RISK / MISSING_EVIDENCE / WHAT_WOULD_CONFIRM
 - **Severity:** CRITICAL / HIGH / MEDIUM / LOW / INFO — **Confidence:** CONFIRMED / HIGH / MEDIUM / LOW
 - **Lifecycle:** DETECTED → VALIDATING → CONFIRMED → REPORTED → ACCEPTED → PLANNED → FIXED → REVALIDATED → CLOSED (side: REJECTED / FALSE_POSITIVE / DEFERRED)
-- **Deduplication:** یافته‌های هم‌ریشه با ROOT_FINDING_ID + AFFECTED یک‌بار ثبت می‌شوند؛ حذف Impact واقعی ممنوع است."""
+- **Deduplication:** findings that share a root cause are recorded once with ROOT_FINDING_ID + AFFECTED; hiding real impact is forbidden."""
     return """## 18. Findings / Changes
 **ChangeManifest:** Path → Action / Scope / Status / Reason / RequirementIDs / TestStatus / Evidence
 - **Allowed Actions:** CREATED / MODIFIED / DELETED / RENAMED / UNCHANGED
 - **Status:** COMPLETED / IN_PROGRESS / INCOMPLETE / BLOCKED
 - **Increment:** ID / Objective / Files / Requirements / Dependencies / ExpectedResult / Tests / Evidence / Status
-- **Rules:** هیچ تغییر Silent مجاز نیست؛ Fragmentation مصنوعی، Over-Merging و Scope Expansion پنهان ممنوع."""
+- **Rules:** no silent change is permitted; artificial fragmentation, over-merging, and hidden scope expansion are forbidden."""
 
 
 def sec_risk(p, spec, meta) -> str:
     focus = spec['audit'] if meta['type'] == 'SUPERVISOR' else spec['impl']
-    return f"""## 19. Risk
-- **Model:** Risk → ID / SourceFindings / Likelihood / Impact / Score / AffectedAreas / Mitigation / Owner / ResidualRisk
-- **Likelihood:** RARE / UNLIKELY / POSSIBLE / LIKELY / ALMOST_CERTAIN
-- **Impact:** NEGLIGIBLE / LOW / MEDIUM / HIGH / CRITICAL
-- **Rule:** Finding ≠ Risk. یافته را به Risk تبدیل نکن؛ ریسک را از یافته‌ها با ارزیابی احتمال/اثر استخراج کن.
-- **Role Risk Focus (مختص این نقش):**
-{_unordered(focus)}
+    return f"""## 19. Risk\n- **Model:** Risk → ID / SourceFindings / Likelihood / Impact / Score / AffectedAreas / Mitigation / Owner / ResidualRisk\n- **Likelihood:** RARE / UNLIKELY / POSSIBLE / LIKELY / ALMOST_CERTAIN\n- **Impact:** NEGLIGIBLE / LOW / MEDIUM / HIGH / CRITICAL\n- **Rule:** Finding ≠ Risk. Do not turn a finding into a risk; extract the risk from the findings by assessing likelihood/impact.\n- **Role Risk Focus (specific to this role):**\n\n{_unordered(focus)}
 - **Escalation Signals:** {p['escalation']}"""
 
 
 def sec_recommendations(p, spec, meta) -> str:
     if meta['type'] == 'SUPERVISOR':
-        return f"""## 20. Recommendations / Implementation
-- **Recommendation:** ID / RelatedFindings / Objective / ProposedChange / Priority / Dependencies / Owner / ExpectedOutcome / ValidationMethod
-- **Priority:** P0 / P1 / P2 / P3 / P4
-- **Role-specific focus برای Recommendation:**
-{_unordered(spec['audit'])}
-- **Implementation:** فقط در Scope و به‌صورت Execution Plan؛ هیچ پیاده‌سازی مستقیم خارج از Authority."""
-    return f"""## 20. Recommendations / Implementation
-- **Implementation Outputs:** Source Code / Configuration / Schema / Migration / Tests / Build Artifacts / Documentation / Infrastructure Changes / Deployment Artifacts / Reports
-- **فقط در Scope خود:** هر خروجی باید با Requirement و Evidence ردیابی شود.
-- **Role-specific (مختص این نقش):**
-{_unordered(spec['impl'])}"""
+        return f"""## 20. Recommendations / Implementation\n- **Recommendation:** ID / RelatedFindings / Objective / ProposedChange / Priority / Dependencies / Owner / ExpectedOutcome / ValidationMethod\n- **Priority:** P0 / P1 / P2 / P3 / P4\n- **Role-specific focus for recommendations:**\n\n{_unordered(spec['audit'])}\n- **Implementation:** only within Scope and in the form of an Execution Plan; no direct implementation outside Authority."""
+    return f"""## 20. Recommendations / Implementation\n- **Implementation Outputs:** Source Code / Configuration / Schema / Migration / Tests / Build Artifacts / Documentation / Infrastructure Changes / Deployment Artifacts / Reports\n- **Within your own scope only:** every output must be traceable to a Requirement and Evidence.\n- **Role-specific (specific to this role):**\n\n{_unordered(spec['impl'])}"""
 
 
 GATES_SUPERVISOR = ["Functional Correctness", "Behavioral Correctness", "Architecture Consistency",
@@ -831,16 +783,14 @@ GATES_EXECUTOR = ["Functional Correctness", "Implementation Completeness", "API 
 def sec_quality_gates(p, spec, meta) -> str:
     gates = GATES_SUPERVISOR if meta['type'] == 'SUPERVISOR' else GATES_EXECUTOR
     return f"""## 21. Quality Gates
-{_unordered(gates)}
-### Role-Specific Acceptance Criteria (مختص این نقش)
-{_unordered(spec['accept'])}"""
+{_unordered(gates)}\n### Role-Specific Acceptance Criteria\n{_unordered(spec['accept'])}"""
 
 
 def sec_traceability() -> str:
     return """## 22. Traceability
 - **Universal chain:** Requirement → Criterion → Design → Implementation → Test → Evidence → Acceptance
 - **IDs:** REQ-### / CRIT-### / DESIGN-### / IMP-### / TEST-### / EVIDENCE-### / RISK-### / FIND-### / REC-### / ACCEPT-### / CHANGE-###
-- **Rule:** هر خروجی مهم باید به این زنجیره متصل باشد؛ شناسهٔ رسمی نبود → شناسهٔ توصیفی قابل ردیابی."""
+- **Rule:** every material output must link to this chain; where there is no official ID, use a traceable descriptive ID."""
 
 
 def sec_state_machine(p, meta) -> str:
@@ -848,55 +798,47 @@ def sec_state_machine(p, meta) -> str:
         sm = ("RECEIVED → SCOPING → CONTEXT_ASSEMBLY → ASSESSING → INSPECTING → ANALYZING → "
               "VALIDATING → FINDINGS_REVIEW → RECOMMENDATION_READY → HANDOFF_PENDING → COMPLETED")
         side = "BLOCKED / ESCALATED / NEEDS_CLARIFICATION / FAILED"
-        desc = "ناظر هرگز وارد狀態‌های Implementation مستقیم نمی‌شود؛ خروجی نهایی فقط با Evidence و Coverage کامل."
+        desc = r"The supervisor never enters direct implementation states; the final output comes only with Evidence and complete Coverage."
     else:
         sm = ("RECEIVED → UNDERSTANDING → INSPECTING → PLANNING → IMPLEMENTING → INTEGRATING → "
               "TESTING → VERIFYING → REVIEW_PENDING → CHANGES_REQUIRED → COMPLETED")
         side = "BLOCKED / ESCALATED / NEEDS_CLARIFICATION / FAILED / ROLLBACK_REQUIRED"
-        desc = "برگشت از REVIEW_PENDING به CHANGES_REQUIRED و از TESTING به ROLLBACK_REQUIRED مجاز است."
+        desc = r"Returning from REVIEW_PENDING to CHANGES_REQUIRED and from TESTING to ROLLBACK_REQUIRED is permitted."
     return f"""## 23. State Machine
 - **States ({meta['type']}):** `{sm}`
 - **Side states:** {side}
-- **Rules:** {desc}
-- **Project lifecycle (از دادهٔ نقش):** {p['lifecycle']}"""
+- **Rules:** {desc}\n- **Project lifecycle (from the role data):** {p['lifecycle']}"""
 
 
 def sec_handoff(p, meta) -> str:
-    recv = "، ".join(meta['consumers']) if meta['consumers'] else p['handoff']
+    recv = r", ".join(meta['consumers']) if meta['consumers'] else p['handoff']
     return f"""## 24. Handoff
 - **PrimaryRecipient:** {recv}
 - **SupportingRecipients:** {', '.join(meta['supervisors']) if meta['supervisors'] else '—'}
 - **DecisionOwner:** {meta['supervisors'][0] if meta['supervisors'] and meta['type'] == 'EXECUTOR' else meta['title']}
-- **ImplementationOwner:** {meta['title'] if meta['type'] == 'EXECUTOR' else '— (ناظر خودش پیاده‌سازی نمی‌کند)'}
-- **RequiredArtifacts:** {p['outputs']}
-- **RequiredActions:** بازبینی/تأیید بر اساس Acceptance، تداوم اجرای پلن، ثبت وضعیت در `state`
-- **AcceptanceCriteria:** {p['quality']}
+- **ImplementationOwner:** {meta['title'] if meta['type'] == 'EXECUTOR' else '— (the supervisor does not implement itself)'}
+- **RequiredArtifacts:** {p['outputs']}\n- **RequiredActions:** review/approve against Acceptance, continue executing the plan, record the status in `state`\n- **AcceptanceCriteria:** {p['quality']}
 - **ExecutionPlan:** audits/{SLUG_OVERRIDES.get(meta['title'], _slug(meta['title']))}-execution-plan.md"""
 
 
 def sec_escalation(p, meta) -> str:
     return f"""## 25. Escalation
-- **Trigger:** {p['escalation']}
-- **Evidence:** شواهد یا «Unknown / Requires Verification» مرتبط با Trigger
-- **Impact:** ریسک/محدودیت ناشی از وضعیت (باید صریح ثبت شود)
-- **BlockedWork:** گام/فایل/تصمیم متوقف‌شده
-- **DecisionRequired:** تصمیمی که خارج از Scope/Authority این Persona است
-- **TargetPersona:** {', '.join(meta['supervisors']) if meta['supervisors'] else 'Persona مالک (طبق Registry)'}
-- **Urgency:** P0 (Immediate) / P1 / P2
-- **Triggers (رسمی):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE"""
+- **Trigger:** {p['escalation']}\n- **Evidence:** evidence, or \"Unknown / Requires Verification\", related to the Trigger\n- **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)\n- **BlockedWork:** the step/file/decision that is stopped\n- **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority\n- **TargetPersona:** {', '.join(meta['supervisors']) if meta['supervisors'] else 'Owning Persona (per the Registry)'}\n- **Urgency:** P0 (Immediate) / P1 / P2\n- **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE"""
 
 
 def sec_execution_plan(meta, title) -> str:
     slug = SLUG_OVERRIDES.get(title, _slug(title))
     path = f"audits/{slug}-execution-plan.md"
     if meta['type'] == 'SUPERVISOR':
-        who = ("Supervisor MUST در صورت نیاز به کار remediation/implementation یک Execution Plan تولید کند و آن را "
-               f"در `{path}` ذخیره کند. قالب: Dependency-aware، Scope-complete، Phase-coherent، Executable، Verifiable، Stable. "
-               "ساختار فایل: `# قوانین ثابت انجام پروژه` + `# پلن اجرایی` با `## [🔴] فاز ...`، `### [🔴] گام ...` و `### معیار پذیرش`.")
+        who = ("The Supervisor MUST, where remediation/implementation work is needed, produce an "
+               f"Execution Plan and save it under `{path}`. Format: Dependency-aware, "
+               "Scope-complete, Phase-coherent, Executable, Verifiable, Stable. File structure: "
+               "`# Fixed Project Execution Rules` + `# Execution Plan` with "
+               "`## [🔴] Phase ...`, `### [🔴] Step ...` and "
+               "`**Acceptance criteria:**`.")
     else:
-        who = ("Executor MUST پلن را بخواند، اجرا کند، گام‌های انجام‌شده را حفظ کند، کار کشف‌شده را با دلیل اضافه کند و "
-               "وضعیت هر گام/فاز را فقط با `[🔴]` / `[🟡]` / `[🟢]` به‌روزرسانی کند. حذف گام‌های انجام‌شده، پنهان‌کردن شکست و "
-               "بازنویسی بی‌صدا ممنوع.")
+        who = ("""The Executor MUST read the plan, execute it, keep the completed steps, add discovered work with a reason, and update each step/phase status only with `[🔴]` / `[🟡]` / `[🟢]`. Deleting completed steps, hiding failures, and silent rewriting are forbidden.
+""")
     return f"""## 26. Execution Plan
 - **Path:** {path}
 - **Rule:** {who}"""
@@ -907,7 +849,7 @@ def sec_execution_result() -> str:
 ```
 Status: <PASS | FAIL | BLOCKED | ESCALATE | NEEDS_CLARIFICATION | NOT_APPLICABLE>
 Verdict: <...>
-State: <یکی از State Machine این Persona>
+State: <one of this Persona's State Machine states>
 Coverage: <...>
 Coverage Manifest: <...>
 Decomposition: <...>
@@ -932,9 +874,7 @@ Next Action: <...>
 def sec_kpi(p, spec, meta) -> str:
     kpi = p['kpi'] if p['kpi'] and p['kpi'] not in ("—", "-") else spec['accept']
     return f"""## 28. KPI / Metrics
-{_bullets(kpi)}
-- KPI فقط برای Evaluation است؛ رفتار مصنوعی برای رسیدن به عدد ممنوع.
-- بدون Evidence → `Unknown` ثبت کن."""
+{_bullets(kpi)}\n- KPIs are for Evaluation only; artificial behaviour to reach a number is forbidden.\n- Without evidence → record `Unknown`."""
 
 
 def sec_mandatory(p, meta) -> str:
@@ -983,116 +923,13 @@ def sec_mandatory(p, meta) -> str:
 def supervisor_specific(p, spec, meta, title) -> str:
     slug = SLUG_OVERRIDES.get(title, _slug(title))
     return f"""## Audit Scope
-- **Scope:** {p['scope']}
-- **محدودهٔ ممیزی:** فقط Scope/Authority همین Persona؛ هر بخش خارج از Scope با دلیل EXCLUDE ثبت می‌شود.
-- **Rule:** Scope قبل از شروع صریحاً enumerate شود.
-
-## Audit Criteria
-- **مختص این نقش:** {_unordered(spec['audit'])}
-- **معیارها:** {_bullets(p['quality'])}
-- هر معیار باید قابل سنجش و مبتنی بر شواهد باشد.
-
-## Audit Procedure
-`RECEIVED` → `SCOPING` → `CONTEXT_ASSEMBLY` → `ASSESSING` → `INSPECTING` → `ANALYZING` → `VALIDATING` → `FINDINGS_REVIEW` → `RECOMMENDATION_READY` → `HANDOFF_PENDING` → `COMPLETED`
-- در هر گام: Input → Action → Validation → Output → Evidence.
-- یافته‌های هم‌ریشه Deduplicate و هر Segment با شواهد بررسی می‌شود.
-
-## Coverage Manifest
-```
-CoverageManifest:
-  - Segment:
-      Files: [...]
-      Components: [...]
-      Status: REVIEWED | IN_PROGRESS | NOT_REVIEWED
-      Reason: OUT_OF_SCOPE | MISSING_ACCESS | MISSING_ARTIFACT | DELETED | UNAVAILABLE | BLOCKED
-      Findings: [...]
-```
-
-## Decomposition Table
-| Segment | Files/Components | Review Status | Findings | Notes |
-|---|---|---|---|---|
-| ... | ... | REVIEWED / IN_PROGRESS / NOT_REVIEWED | FIND-### | ... |
-
-## Findings
-- هر یافته طبق قالب بخش ۱۸؛ هر یافته دارای `FILE / LINE`، Severity، Confidence و EvidenceStatus.
-- یافتهٔ `POTENTIAL` باید `MISSING EVIDENCE` و `WHAT WOULD CONFIRM IT` داشته باشد.
-- یافتهٔ تکراری ساخته نمی‌شود؛ `ROOT_FINDING_ID` حفظ می‌شود.
-
-## Risk Assessment
-- از مدل Risk بخش ۱۹ استفاده کن؛ احتمال/اثر/ریسک باقی‌مانده/مالک/کاهش را ثبت کن.
-- ریسک‌ها را از یافته‌ها استخراج کن، نه برعکس.
-
-## Recommendations
-- طبق بخش ۲۰ با Priority (P0–P4) و مالک؛ هر Recommendation به Find/Risk متصل است.
-- محورهای خاص این نقش: {_unordered(spec['audit'])}
-
-## Execution Plan
-- اگر remediation لازم است: پلن با قالب Master تولید و در `audits/{slug}-execution-plan.md` ذخیره شود.
-- مسیر پلن در Execution Result و Handoff درج شود.
-
-## Final Verdict
-- Verdict فقط بر اساس Coverage کامل، شواهد ثبت‌شده و معیارها: `CONSISTENT & READY` / `INCONSISTENT` / `NEEDS REDESIGN` / `BLOCKED` / `NOT_APPLICABLE`.
-- ادعای «بررسی کامل» فقط با Coverage Manifest + Decomposition کامل."""
+- **Scope:** {p['scope']}\n- **Audit scope:** only this Persona's Scope/Authority; anything outside Scope is recorded with an EXCLUDE reason.\n- **Rule:** Scope is explicitly enumerated before starting.\n\n## Audit Criteria\n- **Specific to this role:** {_unordered(spec['audit'])}\n- **Criteria:** {_bullets(p['quality'])}\n- Every criterion must be measurable and evidence-based.\n\n## Audit Procedure\n`RECEIVED` → `SCOPING` → `CONTEXT_ASSEMBLY` → `ASSESSING` → `INSPECTING` → `ANALYZING` → `VALIDATING` → `FINDINGS_REVIEW` → `RECOMMENDATION_READY` → `HANDOFF_PENDING` → `COMPLETED`\n- At each step: Input → Action → Validation → Output → Evidence.\n- Deduplicate findings that share a root cause; each segment is examined with evidence.\n\n## Coverage Manifest\n```\nCoverageManifest:\n  - Segment:\n      Files: [...]\n      Components: [...]\n      Status: REVIEWED | IN_PROGRESS | NOT_REVIEWED\n      Reason: OUT_OF_SCOPE | MISSING_ACCESS | MISSING_ARTIFACT | DELETED | UNAVAILABLE | BLOCKED\n      Findings: [...]\n```\n\n## Decomposition Table\n| Segment | Files/Components | Review Status | Findings | Notes |\n|---|---|---|---|---|\n| ... | ... | REVIEWED / IN_PROGRESS / NOT_REVIEWED | FIND-### | ... |\n\n## Findings\n- Each finding follows the format of section 18; each finding carries `FILE / LINE`, Severity, Confidence, and EvidenceStatus.\n- A `POTENTIAL` finding must carry `MISSING EVIDENCE` and `WHAT WOULD CONFIRM IT`.\n- No duplicate finding is created; `ROOT_FINDING_ID` is preserved.\n\n## Risk Assessment\n- Use the risk model of section 19; record likelihood, impact, residual risk, owner, and mitigation.\n- Extract risks from the findings, not the other way round.\n\n## Recommendations\n- Per section 20 with Priority (P0–P4) and an owner; every recommendation links to a finding or risk.\n- Areas specific to this role: {_unordered(spec['audit'])}\n\n## Execution Plan\n- If remediation is needed: produce the plan in the Master format and save it under `audits/{slug}-execution-plan.md`.\n- The plan path is stated in the Execution Result and the Handoff.\n\n## Final Verdict\n- The verdict rests only on complete Coverage, recorded evidence, and the criteria: `CONSISTENT & READY` / `INCONSISTENT` / `NEEDS REDESIGN` / `BLOCKED` / `NOT_APPLICABLE`.\n- Claim \"fully reviewed\" only with a complete Coverage Manifest + Decomposition."""
 
 
 def executor_specific(p, spec, meta, title) -> str:
     slug = SLUG_OVERRIDES.get(title, _slug(title))
     return f"""## Implementation Scope
-- **Scope:** {p['scope']}
-- **Boundaries:** فقط فایل‌ها/سرویس‌های در Scope؛ هر تغییر خارج از Scope → ESCALATE.
-- **ScopeExpansionPolicy:** REQUIRES_APPROVAL + ثبت دلیل.
-
-## Implementation Requirements
-- **Functional:** {_bullets(p['quality'])}
-- **Technical (مختص این نقش):** {_unordered(spec['impl'])}
-- هر requirement به Accept و Test متصل است.
-
-## Implementation Procedure
-`RECEIVED` → `UNDERSTANDING` → `INSPECTING` → `PLANNING` → `IMPLEMENTING` → `INTEGRATING` → `TESTING` → `VERIFYING` → `REVIEW_PENDING` → `CHANGES_REQUIRED` → `COMPLETED`
-- در هر گام: Input → Action → Validation → Output → Evidence.
-
-## Change Manifest
-```
-ChangeManifest:
-  - Path: <...>
-      Action: CREATED | MODIFIED | DELETED | RENAMED | UNCHANGED
-      Scope: <...>
-      Status: COMPLETED | IN_PROGRESS | INCOMPLETE | BLOCKED
-      Reason: <...>
-      RequirementIDs: [REQ-###]
-      TestStatus: PASS | FAIL | NOT_RUN
-      Evidence: [EVIDENCE-###]
-```
-
-## Modified Files
-- فهرست کامل مسیرهای تغییر‌یافته با دلیل و Effect — هیچ تغییر خاموشی.
-
-## Created Files
-- فهرست کامل فایل‌های جدید با هدف و Evidence.
-
-## Deleted Files
-- فهرست کامل فایل‌های حذف‌شده + دلیل + جایگزین/مهاجرت.
-
-## Tests
-- قبل از تغییر: تست Baseline. بعد از تغییر: تست مرتبط + Regression.
-- هر تست با `TEST-###`، نتیجه و شواهد ثبت شود؛ بدون اجرا، نتیجه‌ای ادعا نشود.
-
-## Verification
-- Syntax → Behavior → Regression → Evidence → Manifest → DoD.
-- ادعای موفقیت فقط با شواهد (Build/Test/Manifest).
-
-## Evidence
-- {_bullets(p['evidence'])}
-- هر شاهد با `EVIDENCE-###` و Location ثبت شود (FILE/LINE، API/ENDPOINT، ...).
-
-## Execution Plan Status
-- **Plan Path:** `audits/{slug}-execution-plan.md` (اگر وجود دارد)
-- وضعیت هر گام/فاز: `[🔴]` Not Implemented / `[🟡]` Partially Implemented / `[🟢]` Fully Implemented.
-- فاز فقط با ALL Steps = 🟢 و ALL Acceptance = PASS 🟢 می‌شود.
-
-## Final Completion Status
-- **DoD:** All Increments Complete + Manifest Complete + Modified Files Recorded + Tests Executed + Regression Checked + Evidence Recorded + No Blocking Issue + Handoff Complete + Execution Result Complete.
-- بدون تحقق DoD، Completion اعلام نشود."""
+- **Scope:** {p['scope']}\n- **Boundaries:** only files/services within Scope; any change outside Scope → ESCALATE.\n- **ScopeExpansionPolicy:** REQUIRES_APPROVAL + record the reason.\n\n## Implementation Requirements\n- **Functional:** {_bullets(p['quality'])}\n- **Technical (specific to this role):** {_unordered(spec['impl'])}\n- Every requirement links to an acceptance criterion and a test.\n\n## Implementation Procedure\n`RECEIVED` → `UNDERSTANDING` → `INSPECTING` → `PLANNING` → `IMPLEMENTING` → `INTEGRATING` → `TESTING` → `VERIFYING` → `REVIEW_PENDING` → `CHANGES_REQUIRED` → `COMPLETED`\n- At each step: Input → Action → Validation → Output → Evidence.\n\n## Change Manifest\n```\nChangeManifest:\n  - Path: <...>\n      Action: CREATED | MODIFIED | DELETED | RENAMED | UNCHANGED\n      Scope: <...>\n      Status: COMPLETED | IN_PROGRESS | INCOMPLETE | BLOCKED\n      Reason: <...>\n      RequirementIDs: [REQ-###]\n      TestStatus: PASS | FAIL | NOT_RUN\n      Evidence: [EVIDENCE-###]\n```\n\n## Modified Files\n- The full list of changed paths with reason and effect — no silent change.\n\n## Created Files\n- The full list of new files with their purpose and evidence.\n\n## Deleted Files\n- The full list of deleted files + reason + replacement/migration.\n\n## Tests\n- Before the change: a baseline test. After the change: the related test + regression.\n- Every test is recorded with `TEST-###`, a result, and evidence; without execution, no result is claimed.\n\n## Verification\n- Syntax → Behavior → Regression → Evidence → Manifest → DoD.\n- Claim success only with evidence (build/test/manifest).\n\n## Evidence\n- {_bullets(p['evidence'])}\n- Every piece of evidence is recorded with `EVIDENCE-###` and a Location (FILE/LINE, API/ENDPOINT, ...).\n\n## Execution Plan Status\n- **Plan Path:** `audits/{slug}-execution-plan.md` (if it exists)\n- The status of each step/phase: `[🔴]` Not Implemented / `[🟡]` Partially Implemented / `[🟢]` Fully Implemented.\n- A phase is only 🟢 when ALL Steps = 🟢 and ALL Acceptance = PASS 🟢.\n\n## Final Completion Status\n- **DoD:** All Increments Complete + Manifest Complete + Modified Files Recorded + Tests Executed + Regression Checked + Evidence Recorded + No Blocking Issue + Handoff Complete + Execution Result Complete.\n- Without DoD being met, Completion must not be declared."""
 
 
 # ---------------------------------------------------------------------------
@@ -1100,7 +937,7 @@ ChangeManifest:
 # ---------------------------------------------------------------------------
 def build_persona(title: str, role_type: str, p: dict, spec: dict, meta: dict) -> str:
     group = spec["domain"]
-    head = f"# Persona — {title}\n\n> **نوع:** {meta['type']}  |  **Role_ID:** {meta['role_id']}\n\n---\n"
+    head = f"# Persona — {title}\n\n> **Type:** {meta['type']}  |  **Role_ID:** {meta['role_id']}\n\n---\n"
     parts = [
         sec_identity(meta),
         sec_mission(p, spec, meta),
@@ -1151,7 +988,7 @@ def build_registry(sup_titles: set[str]) -> dict[str, dict]:
     sup_titles_registered = {_slug(t) for t in sup_titles}
     for title, _duties, role_type in [(r[0], r[1], r[2]) for r in data_rows]:
         slug = SLUG_OVERRIDES.get(title, _slug(title))
-        ptype = "SUPERVISOR" if role_type == "ناظر" else "EXECUTOR"
+        ptype = "SUPERVISOR" if role_type == r"SUPERVISOR" else "EXECUTOR"
         group = spec_for(slug)["domain"]
         spec = spec_for(slug)
         details = load_details()
@@ -1185,10 +1022,10 @@ def main() -> None:
     (ROOT / "audits").mkdir(parents=True, exist_ok=True)
 
     master_sup, _master_exe = load_master_registry()
-    # Registered supervisor titles (canonical) = rows of README with role ناظر
+    # Registered supervisor titles (canonical) = rows of README with role supervisor
     rows = read_rows()
     data_rows = [r for r in rows[1:]]
-    sup_titles = {r[0] for r in data_rows if r[2] == "ناظر"}
+    sup_titles = {r[0] for r in data_rows if r[2] == r"SUPERVISOR"}
     sup_map = build_supervisor_map(sup_titles)
 
     meta_all = build_registry(sup_titles)
@@ -1206,14 +1043,14 @@ def main() -> None:
         title, _duty, role_type = r[0], r[1], r[2]
         slug = SLUG_OVERRIDES.get(title, _slug(title))
         meta = meta_all[slug]
-        if role_type == "ناظر":
+        if role_type == r"SUPERVISOR":
             meta["supervisors"] = []
             meta["consumers"] = sorted(by_supervisor.get(title, []))
         else:
             sups = sup_map.get(title)
             if not sups:
                 warn_supervisor_missing.append(title)
-                sups = ["Unknown / Requires Verification: supervisor باید در Registry تعریف شود"]
+                sups = [r"Unknown / Requires Verification: the supervisor must be defined in the Registry"]
             meta["supervisors"] = sups
             meta["consumers"] = []
 
@@ -1224,14 +1061,14 @@ def main() -> None:
         spec = spec_for(slug)
 
         content = build_persona(title, role_type, persona, spec, meta)
-        out_dir = AUDIT_DIR if role_type == "ناظر" else IMPL_DIR
+        out_dir = AUDIT_DIR if role_type == r"SUPERVISOR" else IMPL_DIR
         (out_dir / f"{slug}.md").write_text(content, encoding="utf-8")
         written.append((slug, role_type))
 
     # ---- legacy README link labels are already in README ----
     print(f"Personas written: {len(written)}")
-    sup_n = sum(1 for _, t in written if t == "ناظر")
-    exe_n = sum(1 for _, t in written if t == "مجری")
+    sup_n = sum(1 for _, t in written if t == r"SUPERVISOR")
+    exe_n = sum(1 for _, t in written if t == r"EXECUTOR")
     print(f"Supervisors: {sup_n}   Executors: {exe_n}")
     if warn_supervisor_missing:
         print("WARNING executors without supervisor:", warn_supervisor_missing)

@@ -5,13 +5,29 @@ Each role has its own hand-authored spec (mission + role-specific targets +
 role-specific acceptance criteria). The prompts are NOT generic templates with
 only the title swapped — the content is bespoke per role.
 
-Usage:
-    python3 scripts/generate_role_prompts.py
+!! DO NOT RUN THIS FILE DIRECTLY !!
+===================================
+
+This module is a *library*: `scripts/generate_personas.py` imports `SPECS`,
+`DETAILS`, `_slug`, `read_rows`, `load_details`, ... from it.
+
+Its own `main()` writes prompts with the legacy `_slug()` naming
+(`chief-technology-officer-cto.md`), while the canonical pipeline uses
+`SLUG_OVERRIDES` from `role_extras.py` (`cto.md`). Running it directly creates
+duplicate files beside the canonical ones and rewrites the README link cells,
+which breaks `validate_personas.py`.
+
+The canonical entry point is:
+
+    python3 scripts/generate_personas.py          # or: make prompts
+
+`main()` below refuses to run unless `--i-know` is passed.
 """
 
 from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -54,2818 +70,2818 @@ SPECS = {
     # ----------------------------- founder -----------------------------
     "founder": sp(
         "strategy",
-        "آیا جهت‌گیری کلی کسب‌وکار و اهداف تصمیم‌گیری‌های کلان، شفاف و با امکان اجرا تعریف شده‌اند؟",
+        r"Are overall business direction and the goals of major decision-making defined clearly and actionably?",
         [
-            "وضوح و عدم تناقض بین Vision، Mission و اهداف کوتاه‌مدت",
-            "قابلیت ترجمه‌ی جهت‌گیری کلان به اولویت‌های قابل اجرا",
-            "مشخص بودن محدوده‌ی تصمیم‌دهی و مسئولیت‌پذیری",
-            "سازگاری تصمیم‌های کلان با منابع و ظرفیت تیم",
+            r"Clarity and consistency between vision, mission, and short-term goals",
+            r"Ability to translate top-level direction into executable priorities",
+            r"Clarity of the decision boundary and accountability",
+            r"Alignment of major decisions with resources and team capacity",
         ],
         [
-            "تعریف Vision/Mission و Objective قابل سنجش",
-            "تعیین Non-Goals و مرزهایی که عمداً اجرا نمی‌شوند",
-            "تعریف مدل تصمیم‌گیری برای مسائل کلان (چه کسی، چه زمانی)",
-            "نگاشت اهداف کلان به KPIهای قابل ردیابی",
+            r"Defining vision/mission and measurable objectives",
+            r"Setting non-goals and boundaries deliberately not pursued",
+            r"Defining the decision model for major issues (who, when)",
+            r"Mapping top-level goals to traceable KPIs",
         ],
         [
-            "هر تصمیم کلان به یک Objective و یک KPI متصل باشد",
-            "Vision/Mission بدون تناقض با Non-Goals باشد",
-            "تابع تصمیم‌گیری مستند باشد (مالک، معیار، زمان)",
+            r"Every major decision ties to one objective and one KPI",
+            r"Vision/mission are free of contradiction with the non-goals",
+            r"The decision function is documented (owner, criteria, timing)",
         ],
     ),
     "product-visionary": sp(
         "strategy",
-        "آیا چشم‌انداز محصول واقعاً گره‌ی کاربر/بازار را حل می‌کند و قابل اجرا است؟",
+        r"Does the product vision genuinely solve the user/market problem and is it actionable?",
         [
-            "دقت مسئله‌ی در حال حل (Problem Statement)",
-            "تمایز چشم‌انداز با رقبا و جایگزین‌ها",
-            "وضوح Value Proposition برای کاربر هدف",
-            "سازگاری چشم‌انداز با امکان‌سنجی فنی/بازاری",
+            r"Accuracy of the problem being solved (problem statement)",
+            r"Differentiation of the vision from competitors and alternatives",
+            r"Clarity of the value proposition for the target user",
+            r"Alignment of the vision with technical/market feasibility",
         ],
         [
-            "مستندسازی Problem Statement و Target User",
-            "تعریف Value Proposition و Key Differentiators",
-            "تعریف Boundary شرایطی که محصول در آن ارزش دارد",
-            "نگاشت چشم‌انداز به قابلیت‌های خاص (Feature Assumptions)",
+            r"Documenting the problem statement and target user",
+            r"Defining the value proposition and key differentiators",
+            r"Defining the boundary of the conditions in which the product has value",
+            r"Mapping the vision to specific features (feature assumptions)",
         ],
         [
-            "Problem Statement بدون ابهام و دارای شواهد باشد",
-            "Value Proposition در یک جمله‌ی قابل اندازه‌گیری باشد",
-            "هر قابلیت پیشنهادی به یک فرضیه/معیار موفقیت متصل باشد",
+            r"The problem statement is unambiguous and evidence-backed",
+            r"The value proposition is stated in one measurable sentence",
+            r"Every proposed feature ties to a hypothesis or success criterion",
         ],
     ),
     "investor": sp(
         "strategy",
-        "آیا سرمایه‌گذاری با ریسک قابل قبول و مسیر بازگشت سرمایه‌ی قابل اندازه‌گیری همراه است؟",
+        r"Is the investment accompanied by acceptable risk and a measurable return path?",
         [
-            "صحت مدل مالی و فرضیات درآمدی",
-            "پوشش ریسک‌های سرمایه‌گذاری (بازار، تکنولوژی، اجرا)",
-            "وضوح Milestoneهای تأمین مالی و مصرف سرمایه",
-            "قابلیت بازگشت سرمایه (ROI) و خروج (Exit) در افق تعریف‌شده",
+            r"Validity of the financial model and revenue assumptions",
+            r"Coverage of investment risks (market, technology, execution)",
+            r"Clarity of funding milestones and capital consumption",
+            r"Ability to return capital (ROI) and exit within the stated horizon",
         ],
         [
-            "تعریف ساختار مالی، Burn Rate و Runway",
-            "تعریف Milestoneهای سرمایه‌گذاری و گیت‌های تأمین مالی",
-            "مدل‌سازی سناریوهای درآمد/هزینه و Break-even",
-            "تعریف معیارهای خروج و شرایط افزایش سرمایه",
+            r"Defining the financial structure, burn rate, and runway",
+            r"Defining investment milestones and funding gates",
+            r"Modelling revenue/cost scenarios and break-even",
+            r"Defining exit criteria and conditions for raising more capital",
         ],
         [
-            "مدل مالی دارای مفروضات صریح و سناریو پایه/بهترین/بدترین باشد",
-            "هر Milestone دارای شاخص پیشرفت و شرط تأمین مالی باشد",
-            "ریسک‌ها با احتمال/اثر و برنامه‌ی کاهش مستند شده باشند",
+            r"The financial model has explicit assumptions and base/best/worst scenarios",
+            r"Every milestone has a progress indicator and a funding condition",
+            r"Risks are documented with probability/impact and a reduction plan",
         ],
     ),
     "board-of-directors": sp(
         "strategy",
-        "آیا هیئت‌مدیره به‌درستی بر استراتژی، حکمرانی و عملکرد شرکتی نظارت می‌کند؟",
+        r"Does the board properly oversee strategy, governance, and corporate performance?",
         [
-            "کفایت گزارش‌های مدیریتی برای تصمیم‌گیری هیئت",
-            "انطباق تصمیم‌های هیئت با مقررات و منافع ذی‌نفعان",
-            "شفافیت تعارض منافع و استقلال اعضا",
-            "پایش عملکرد در برابر برنامه‌ی استراتژیک",
+            r"Sufficiency of management reporting for board decision-making",
+            r"Alignment of board decisions with regulations and stakeholder interests",
+            r"Transparency of conflicts of interest and member independence",
+            r"Monitoring performance against the strategic plan",
         ],
         [
-            "تعریف چارچوب حکمرانی و اختیارات هیئت/مدیرعامل",
-            "تعریف گزارش‌های مدیریتی دوره‌ای (مالی، ریسک، استراتژی)",
-            "پیاده‌سازی مکانیسم رفع تعارض منافع و رأی‌گیری",
-            "پیاده‌سازی ارزیابی عملکرد هیئت/مدیریت",
+            r"Defining the governance framework and board/CEO authorities",
+            r"Defining periodic management reporting (financial, risk, strategy)",
+            r"Implementing the conflict-of-interest resolution and voting mechanism",
+            r"Implementing board/management performance evaluation",
         ],
         [
-            "اختیارات و حدود تصمیم‌گیری به‌صورت مکتوب باشد",
-            "گزارش مدیریتی حداقل شامل استراتژی، مالی، ریسک و اجرا باشد",
-            "مکانیسم تعارض منافع و رأی‌گیری تعریف و ثبت شده باشد",
+            r"Authorities and decision boundaries are written down",
+            r"Management reporting covers at least strategy, finance, risk, and execution",
+            r"The conflict-of-interest and voting mechanism is defined and recorded",
         ],
     ),
     "project-sponsor": sp(
         "strategy",
-        "آیا حامی پروژه از نظر مالی/سازمانی مانع‌زدایی می‌کند و حمایتش ماندگار و قابل ردیابی است؟",
+        r"Does the project sponsor remove obstacles financially and organisationally, and is their support durable and traceable?",
         [
-            "وضوح نقش حمایتی (مالی، سیاسی، سازمانی)",
-            "اثربخشی در رفع موانع کلان در زمان مناسب",
-            "انطباق حمایت با Scope و منافع پروژه",
-            "نحوه‌ی رسیدگی به تغییرات بزرگ/کنترل بودجه",
+            r"Clarity of the sponsor's supportive role (financial, political, organisational)",
+            r"Effectiveness in removing major obstacles at the right time",
+            r"Alignment of support with project scope and interests",
+            r"How major changes and budget control are handled",
         ],
         [
-            "تعریف منشور پروژه و محدوده‌ی حمایت اسپانسر",
-            "تعریف فرآیند تصمیم‌های بزرگ و تغییر Scope",
-            "تعریف کانال ارتباطی اسپانسر با تیم/ذی‌نفعان",
-            "تعریف شاخص‌های پایش حمایت و رفع مانع",
+            r"Defining the project charter and the sponsor's scope of support",
+            r"Defining the process for major decisions and scope change",
+            r"Defining the sponsor's communication channel with the team/stakeholders",
+            r"Defining indicators for monitoring support and obstacle removal",
         ],
         [
-            "منشور پروژه دارای اسپانسر و حدود اختیارات مشخص باشد",
-            "فرآیند تأیید/رد تغییرات بزرگ مستند باشد",
-            "هر مانع کلان رفع‌شده به یک ذی‌نفع/تاریخ/نتیجه متصل باشد",
+            r"The project charter has a sponsor and clearly stated authority limits",
+            r"The approve/reject process for major changes is documented",
+            r"Every major obstacle removed ties to a stakeholder, date, and outcome",
         ],
     ),
 
     # --------------------------- analysis / BA -------------------------
     "business-analyst-ba": sp(
         "analysis",
-        "آیا نیازهای کسب‌وکار به نیازمندی‌های دقیق، قابل آزمون و بدون ابهام تبدیل شده‌اند؟",
+        r"Have business needs been converted into precise, testable, unambiguous requirements?",
         [
-            "پوشش کامل Requirements و عدم ابهام در Acceptance Criteria",
-            "مثبت بودن و قابل سنجش بودن جریان‌های کسب‌وکار",
-            "نقش‌آفرینی و ارتباط با ذی‌نفعان (Stakeholder Mapping)",
-            "سازگاری با فرآیندها/سیستم‌های موجود (As-Is/To-Be)",
+            r"Complete requirement coverage and unambiguous acceptance criteria",
+            r"Business flows are validated and measurable",
+            r"Stakeholder mapping and engagement",
+            r"Alignment with existing processes/systems (as-is/to-be)",
         ],
         [
-            "استخراج Functional/Non-functional/Data Requirements",
-            "نوشتن User Story با Acceptance Criteria و Edge Cases",
-            "ترسیم As-Is و To-Be و Gap Analysis",
-            "تعریف ماتریس ردیابی نیازمندی ↔ خروجی/تست",
+            r"Extracting functional, non-functional, and data requirements",
+            r"Writing user stories with acceptance criteria and edge cases",
+            r"Drawing as-is and to-be and gap analysis",
+            r"Defining the requirement-to-output/test traceability matrix",
         ],
         [
-            "هر نیاز دارای Acceptance Criteria بدون ابهام باشد",
-            "Gap Analysis شامل تأثیر روی فرآیند و داده باشد",
-            "ماتریس ردیابی نیازمندی به Acceptance/Test کامل باشد",
+            r"Every requirement has unambiguous acceptance criteria",
+            r"The gap analysis includes the effect on process and data",
+            r"The requirement-to-acceptance/test traceability matrix is complete",
         ],
     ),
     "domain-expert-sme": sp(
         "analysis",
-        "آیا دانش تخصصی حوزه به‌درستی در محصول/الزامات منعکس شده است و درست تفسیر می‌شود؟",
+        r"Is domain expertise correctly reflected in the product/requirements and correctly interpreted?",
         [
-            "صحت مفاهیم دامنه (ارزش‌ها، اصطلاحات، قواعد)",
-            "دقت قواعد تجاری و لبه‌های دامنه",
-            "اثر تفسیر غلط دامنه روی پیاده‌سازی",
-            "کفایت مستندات دامنه برای تیم پیاده‌سازی",
+            r"Correctness of domain concepts (values, terms, rules)",
+            r"Accuracy of business rules and domain edges",
+            r"The effect of misinterpreting the domain on implementation",
+            r"Sufficiency of domain documentation for the implementation team",
         ],
         [
-            "تعریف واژه‌نامه/اصطلاحات دامنه و قواعد بیزنس",
-            "شناسایی عمق دامنه (Core/Support/Generic)",
-            "تعریف سناریوهای دامنه و لبه‌ها با خبرگان",
-            "نگاشت مفاهیم دامنه به مدل داده/منطق",
+            r"Defining the domain glossary/terms and business rules",
+            r"Identifying domain depth (core/support/generic)",
+            r"Defining domain scenarios and edges with experts",
+            r"Mapping domain concepts to the data model/logic",
         ],
         [
-            "هر مفهوم دامنه یک تعریف واحد/واژه‌نامه داشته باشد",
-            "هر قاعده بیزنس دارای سناریوی مثبت/منفی باشد",
-            "تفسیرهای دامنه بدون خطای معنا به کد/داده منتقل شده باشند",
+            r"Every domain concept has one definition/glossary entry",
+            r"Every business rule has a positive and negative scenario",
+            r"Domain interpretations have been carried into code/data without semantic error",
         ],
     ),
 
     # ----------------------------- product -----------------------------
     "product-manager-pm": sp(
         "product",
-        "آیا محصول با استراتژی هم‌راستاست و اولویت‌بندی قابلیت‌ها بر اساس ارزش واقعی انجام شده است؟",
+        r"Is the product aligned with strategy and is feature prioritisation based on real value?",
         [
-            "انطباق Roadmap با اهداف محصول و بازار",
-            "منطق اولویت‌بندی (ارزش/ریسک/تلاش)",
-            "تعریف و پایش KPIها و یادگیری از Feedback",
-            "وضوح Scope و مدیریت تغییرات محصول",
+            r"Alignment of the roadmap with product and market goals",
+            r"Prioritisation logic (value/risk/effort)",
+            r"Defining and monitoring KPIs and learning from feedback",
+            r"Clarity of scope and management of product change",
         ],
         [
-            "تعریف Product Roadmap با فازها و شرط‌های Go/No-Go",
-            "اولویت‌بندی قابلیت‌ها با Weighted Shortest Job First یا RICE",
-            "تعریف KPI محصول و منابع داده‌ی اندازه‌گیری",
-            "مدیریت تغییر Scope با مدل تصمیم‌گیری محصول",
+            r"Defining the product roadmap with phases and go/no-go conditions",
+            r"Prioritising features with weighted shortest job first or RICE",
+            r"Defining product KPIs and the data sources for measuring them",
+            r"Managing scope change with the product decision model",
         ],
         [
-            "هر قابلیت در Roadmap دارای معیار ارزش/ریسک/تلاش باشد",
-            "KPIها دارای معادله، منبع داده و هدف باشند",
-            "تغییرات Scope با اثر روی Roadmap ثبت شوند",
+            r"Every roadmap feature has a value/risk/effort criterion",
+            r"KPIs have an equation, a data source, and a target",
+            r"Scope changes are recorded with their effect on the roadmap",
         ],
     ),
     "product-owner-po": sp(
         "product",
-        "آیا Backlog محصول دارای Itemهای آماده، اولویت‌بندی‌شده و آزمون‌پذیر است؟",
+        r"Does the product backlog contain ready, prioritised, testable items?",
         [
-            "کیفیت Backlog (کامل، تفکیک‌شده، اولویت‌بندی‌شده)",
-            "وضوح Definition of Ready و Definition of Done",
-            "سازگاری Acceptance Criteria با انتظار کاربر",
-            "پوشش داستان‌های غیرفنی/فنی و وابستگی‌ها",
+            r"Backlog quality (complete, decomposed, prioritised)",
+            r"Clarity of the definition of ready and definition of done",
+            r"Alignment of acceptance criteria with user expectation",
+            r"Coverage of non-technical/technical stories and dependencies",
         ],
         [
-            "تعریف/نگهداری Product Backlog و Refinement",
-            "نوشتن Acceptance Criteria و Definition of Ready",
-            "اولویت‌بندی و نشان‌گذاری Value/Effort/Dependency",
-            "نگاشت Backlog به Sprint Goals و خروجی‌ها",
+            r"Defining and maintaining the product backlog and refinement",
+            r"Writing acceptance criteria and the definition of ready",
+            r"Prioritising and labelling value/effort/dependency",
+            r"Mapping the backlog to sprint goals and outputs",
         ],
         [
-            "هر Item دارای Acceptance Criteria و DOR قابل سنجش باشد",
-            "Backlog از نظر اولویت و وابستگی سازگار باشد",
-            "Sprint Goal با Itemهای انتخاب‌شده دارای ارتباط ردیابی‌شده باشد",
+            r"Every item has measurable acceptance criteria and a definition of ready",
+            r"The backlog is consistent in priority and dependency",
+            r"The sprint goal has a traceable link to the selected items",
         ],
     ),
     "program-manager": sp(
         "product",
-        "آیا چند پروژه‌ی مرتبط با یکدیگر هم‌سو، بدون تداخل و با مدیریت مشترک پیش می‌روند؟",
+        r"Are several related projects progressing in alignment, without interference, under shared management?",
         [
-            "هم‌ترازی اهداف پروژه‌ها با اهداف برنامه",
-            "مدیریت وابستگی‌ها و تداخل بین پروژه‌ها",
-            "تخصیص منابع مشترک و مدیریت ظرفیت",
-            "گزارش‌دهی یکپارچه‌ی برنامه در برابر ریسک/بازه",
+            r"Alignment of project goals with programme goals",
+            r"Managing dependencies and interference between projects",
+            r"Allocating shared resources and managing capacity",
+            r"Integrated programme reporting against risk/interval",
         ],
         [
-            "تعریف ساختار برنامه و mapping پروژه‌ها به اهداف",
-            "نگاشت و مدیریت وابستگی‌های بین پروژه‌ای",
-            "تعریف مکانیزم ریسک/منابع مشترک و تغییرات",
-            "تعریف گزارش برنامه (Status/Blocker/Dependency)",
+            r"Defining the programme structure and mapping projects to goals",
+            r"Mapping and managing cross-project dependencies",
+            r"Defining the shared-risk/resource and change mechanism",
+            r"Defining programme reporting (status/blocker/dependency)",
         ],
         [
-            "هر پروژه به یک هدف برنامه متصل باشد",
-            "وابستگی‌های متقاطع با مالک/تاریخ/وضعیت ثبت باشند",
-            "گزارش برنامه شامل وابستگی‌ها، ریسک‌ها و انحراف‌ها باشد",
+            r"Every project ties to one programme goal",
+            r"Cross dependencies are recorded with owner/date/status",
+            r"Programme reporting includes dependencies, risks, and deviations",
         ],
     ),
     "product-owner-release": sp(
         "product",
-        "آیا محصول پس از انتشار به‌درستی evolution می‌شود و Backlog آینده با واقعیت کاربر هم‌راستاست؟",
+        r"Is the product properly evolved after release and is the future backlog aligned with user reality?",
         [
-            "کیفیت و اولویت Backlog پس از Release",
-            "سازگاری Evolution با Feedback دریافتی از کاربر",
-            "آماده‌سازی نیازهای نسخه‌ی بعدی و انطباق داده‌ها",
-            "تعریف دورة بازبینی ارزش قابلیت‌های منتشرشده",
+            r"Quality and priority of the backlog after release",
+            r"Alignment of evolution with received user feedback",
+            r"Preparing next-release requirements and data alignment",
+            r"Defining the review cycle for the value of released features",
         ],
         [
-            "تعریف مکانیزم جمع‌آوری Feedback پس از Release",
-            "اولویت‌بندی مجدد Backlog با داده‌ی واقعی استفاده",
-            "تعریف چرخه‌ی بازبینی قابلیت منتشرشده (KPI/Retention)",
-            "تعریف ارتباط نسخه‌ها با Backlog آینده",
+            r"Defining the post-release feedback collection mechanism",
+            r"Re-prioritising the backlog with real usage data",
+            r"Defining the released-feature review cycle (KPI/retention)",
+            r"Defining the link between releases and the future backlog",
         ],
         [
-            "هر قابلیت منتشرشده دارای منبع Feedback و Décision باشد",
-            "Backlog آینده بر اساس داده و اولویت به‌روز شده باشد",
-            "چرخه‌ی ارزیابی قابلیت با تاریخ/خروجی مشخص باشد",
+            r"Every released feature has a feedback source and a decision",
+            r"The future backlog is updated on the basis of data and priority",
+            r"The feature evaluation cycle has a stated date and output",
         ],
     ),
     "end-of-life-manager": sp(
         "product",
-        "آیا پایان عمر محصول/فاز با کمترین آسیب برای مشتری و تیم مدیریت می‌شود؟",
+        r"Is the product/phase end-of-life managed with minimal harm to customer and team?",
         [
-            "مستندسازی دلایل پایان پشتیبانی و محدوده‌ی آن",
-            "پیام و مسیر مهاجرت برای مشتری",
-            "پوشش داده/قرارداد/پشتیبانی در دوره‌ی گذار",
-            "برنامه‌ریزی و ارتباطات برای ذی‌نفعان",
+            r"Documenting the reasons for ending support and its scope",
+            r"Migration message and path for the customer",
+            r"Coverage of data, contract, and support in the transition period",
+            r"Planning and communications for stakeholders",
         ],
         [
-            "تعریف ماتریس EOL (تاریخ، فازها، پشتیبانی باقی‌مانده)",
-            "تعریف مسیر مهاجرت/جایگزین برای کاربران",
-            "تعریف ارتباطات و اسناد End-of-Life",
-            "پیاده‌سازی نگه‌داری داده/قرارداد طی دوره‌ی گذار",
+            r"Defining the EOL matrix (date, phases, remaining support)",
+            r"Defining the migration/replacement path for users",
+            r"Defining end-of-life communications and documents",
+            r"Implementing data/contract maintenance through the transition period",
         ],
         [
-            "ماتریس EOL حاوی تاریخ‌ها و خدمات باقی‌مانده باشد",
-            "مسیر مهاجرت برای کاربران قابل اجرا و مستند باشد",
-            "ارتباطات EOL شامل زمان/مخاطب/پیام/کانال باشد",
+            r"The EOL matrix contains the dates and remaining services",
+            r"The migration path for users is executable and documented",
+            r"EOL communications include timing, audience, message, and channel",
         ],
     ),
 
     # ----------------------------- management --------------------------
     "project-manager": sp(
         "management",
-        "آیا پروژه در محدوده‌ی زمان، منابع، ریسک و هزینه با هماهنگی تیم پیش می‌رود؟",
+        r"Is the project progressing within time, resources, risk, and cost limits with team coordination?",
         [
-            "انطباق زمان‌بندی با وابستگی‌ها و ظرفیت واقعی",
-            "پوشش و کنترل Scope و اجتناب از Scope Creep",
-            "کیفیت برنامه‌ی ریسک و مدیریت موانع",
-            "شفافیت وضعیت و گزارش‌دهی به ذی‌نفعان",
+            r"Alignment of the schedule with dependencies and real capacity",
+            r"Scope coverage and control, avoiding scope creep",
+            r"Quality of the risk plan and obstacle management",
+            r"Transparency of status and reporting to stakeholders",
         ],
         [
-            "تعریف WBS، زمان‌بندی و Critical Path",
-            "تعریف بودجه/منابع و مکانیزم کنترل انحراف",
-            "تعریف ریسک/issue و مکانیزم رفع موانع",
-            "تعریف گیت‌های فازی و گزارش وضعیت دوره‌ای",
+            r"Defining the WBS, schedule, and critical path",
+            r"Defining budget/resources and the variance control mechanism",
+            r"Defining risks/issues and the blocker-removal mechanism",
+            r"Defining phase gates and periodic status reporting",
         ],
         [
-            "هر گام دارای مسئول/زمان/وابستگی مشخص باشد",
-            "کنترل Scope با Change Control مستند باشد",
-            "گزارش وضعیت شامل پیشرفت/انحراف/ریسک/بلوکر باشد",
+            r"Every step has a stated owner, time, and dependency",
+            r"Scope control is documented with change control",
+            r"Status reporting includes progress, variance, risk, and blockers",
         ],
     ),
     "technical-project-manager": sp(
         "management",
-        "آیا پروژه‌ی فنی با تعادل بین الزامات فنی و زمان/منابع مدیریت می‌شود؟",
+        r"Is the technical project managed with a balance between technical requirements and time/resources?",
         [
-            "وضوح تصمیم‌های فنی و تأثیر آنها روی زمان/منابع",
-            "استدلال صحیح در تخمین/ریسک فنی",
-            "هماهنگی بین تیم فنی و ذی‌نفعان غیرفنی",
-            "پوشش Dependencies فنی و آماده‌سازی Infrastructure",
+            r"Clarity of technical decisions and their effect on time/resources",
+            r"Sound reasoning in technical estimate/risk",
+            r"Coordination between the technical team and non-technical stakeholders",
+            r"Coverage of technical dependencies and infrastructure readiness",
         ],
         [
-            "تعریف توالی کارهای فنی بر اساس Dependencies",
-            "برآورد تلاش/ریسک فنی و برنامه‌ی کاهش ریسک",
-            "تعریف معیار آمادگی فنی (Definition of Ready فنی)",
-            "هماهنگی بین تیم‌های مهندسی/DevOps/QA با Checkpoint",
+            r"Defining the sequence of technical work on the basis of dependencies",
+            r"Estimating technical effort/risk and the risk-reduction plan",
+            r"Defining the technical readiness criterion (technical definition of ready)",
+            r"Coordination between engineering/DevOps/QA teams with checkpoints",
         ],
         [
-            "هر کار فنی دارای وابستگی و تخمین/ریسک مستند باشد",
-            "برنامه‌ی ریسک فنی دارای مالک/زمان/اثر باشد",
-            "گیت‌های فنی با خروجی verifiable تعریف شده باشند",
+            r"Every technical task has a documented dependency and estimate/risk",
+            r"The technical risk plan has an owner, time, and effect",
+            r"Technical gates are defined with a verifiable output",
         ],
     ),
     "pmo": sp(
         "management",
-        "آیا فرآیندهای مدیریت پروژه استاندارد، قابل اندازه‌گیری و قابل تکرار هستند؟",
+        r"Are project management processes standardised, measurable, and repeatable?",
         [
-            "کفایت و به‌روزبودن استانداردهای PM",
-            "هم‌راستایی گزارش‌ها و الگوها در سازمان",
-            "پیاده‌سازیِ چارچوب کنترل و گیت‌ها",
-            "کیفیت داده‌ی برنامه‌ریزی و گزارش‌دهی PPM",
+            r"Sufficiency and currency of PM standards",
+            r"Alignment of reports and templates across the organisation",
+            r"Implementation of the control framework and gates",
+            r"Quality of planning data and PPM reporting",
         ],
         [
-            "تعریف استاندارد/قالب مستندات و گزارش‌های PM",
-            "تعریف گیت‌های فاز و روندهای Stage-Gate",
-            "پیاده‌سازی شاخص‌های PMO (انحراف، تحویل، ریسک)",
-            "تعریف آموزش/راهنما و ممیزی Compliance",
+            r"Defining the PM documentation/reporting standard and templates",
+            r"Defining phase gates and stage-gate processes",
+            r"Implementing PMO indicators (variance, delivery, risk)",
+            r"Defining training/guidance and compliance audit",
         ],
         [
-            "قالب‌های PM و گزارش‌ها در مخزن استاندارد موجود باشند",
-            "گیت‌های هر فاز دارای ورودی/خروجی مشخص باشند",
-            "شاخص‌های PMO تعریف و قابل استخراج باشند",
+            r"PM templates and reports exist as standard in the repository",
+            r"Each phase's gates have defined inputs and outputs",
+            r"PMO indicators are defined and extractable",
         ],
     ),
     "scrum-master": sp(
         "management",
-        "آیا تسهیل Scrum درست است و موانع تیم به‌موقع رفع/شفاف می‌شوند؟",
+        r"Is Scrum facilitated correctly and are team obstacles removed or clarified in time?",
         [
-            "اجرای درست رویدادهای Scrum (Planning/Review/Retro/Standup)",
-            "اثربخشی Rفع Impediment و ثبت/پیگیری موانع",
-            "کیفیت Facilitation و همکاری تیم",
-            "انطباق با اصول Agile (خودسازماندهی، بازخورد، بهبود)",
+            r"Correct execution of Scrum events (planning/review/retro/standup)",
+            r"Effectiveness of impediment removal and obstacle recording/tracking",
+            r"Quality of facilitation and team collaboration",
+            r"Alignment with Agile principles (self-organisation, feedback, improvement)",
         ],
         [
-            "تعریف کادنس رویدادها و قالب‌های هر جلسه",
-            "تعریف فرآیند ثبت/پیگیری/حل Impediment",
-            "تعریف شاخص‌های سلامت تیم (velocity، commit، retros)",
-            "تعریف رفتار بهبود و یکپارچه با توسعه‌ی Scrum",
+            r"Defining the event cadence and each meeting's template",
+            r"Defining the impediment record/track/resolve process",
+            r"Defining team health indicators (velocity, commit, retros)",
+            r"Defining improvement behaviour integrated with Scrum development",
         ],
         [
-            "هر رویداد دارای هدف/خروجی/زمان مشخص باشد",
-            "موانع تیم دارای وضعیت/مالک/تاریخ باشند",
-            "Retro دارای آیتم اقدام و مالیتا Retro بعدی باشد",
+            r"Every event has a stated goal, output, and time",
+            r"Team obstacles have a status, owner, and date",
+            r"The retro has an action item and feeds the next retro",
         ],
     ),
     "agile-coach": sp(
         "management",
-        "آیا فرآیند Agile در سطح تیم/سازمان واقعاً بلوغ می‌یابد؟",
+        r"Is the Agile process genuinely maturing at team or organisation level?",
         [
-            "میزان رعایت ارزش‌ها/اصول Agile در عمل",
-            "اثرگذاری coaching بر رفتار تیم‌ها",
-            "کیفیت آموزش/مستندات و Adoption",
-            "پایش improvement (cycle time، handoff، blockages)",
+            r"How well Agile values/principles are honoured in practice",
+            r"The impact of coaching on team behaviour",
+            r"Quality of training/documentation and adoption",
+            r"Monitoring improvement (cycle time, handoff, blockages)",
         ],
         [
-            "تعریف مدل بلوغ Agile (نقاط اندازه‌گیری)",
-            "تعریف چرخه‌ی coaching: ارزیابی→مشاهده→بازخورد→اقدام",
-            "تعریف الگوهای جلسات/Retro/Lean و تکنیک‌ها",
-            "تعریف شاخص بهبود (Cycle Time/Throughput/Blockage)",
+            r"Defining the Agile maturity model (measurement points)",
+            r"Defining the coaching cycle: assess → observe → give feedback → act",
+            r"Defining meeting, retro, and Lean patterns and techniques",
+            r"Defining improvement indicators (cycle time/throughput/blockage)",
         ],
         [
-            "ارزیابی بلوغ با شواهد و مقیاس مشخص ثبت شود",
-            "برنامه‌ی coaching دارای هدف/اقدام/بازبینی باشد",
-            "شاخص‌های بهبود از داده واقعی (Ciclo/Tiempo) سنجیده شوند",
+            r"Maturity assessment is recorded with evidence and a stated scale",
+            r"The coaching plan has a goal, action, and review",
+            r"Improvement indicators are measured from real data (cycle time)",
         ],
     ),
     "engineering-manager": sp(
         "management",
-        "آیا تیم مهندسی از نظر افراد، ظرفیت و فرآیند توسعه به‌درستی مدیریت می‌شود؟",
+        r"Is the engineering team properly managed in terms of people, capacity, and development process?",
         [
-            "انطباق ظرفیت با بار کاری و اولویت‌ها",
-            "کیفیت رشد/بازخورد افراد و مسیرهای Career",
-            "سلامت فرآیند توسعه (review، merge، on-call)",
-            "درگیری در تصمیم‌های فنی به‌صورت هم‌راستا با معماری",
+            r"Alignment of capacity with workload and priorities",
+            r"Quality of people growth/feedback and career paths",
+            r"Health of the development process (review, merge, on-call)",
+            r"Engagement in technical decisions aligned with architecture",
         ],
         [
-            "تعریف مدل ظرفیت‌سنجی و تخصیص کار",
-            "تعریف چرخه‌ی feedback/coaching و رشد",
-            "تعریف شاخص‌های سلامت engineering (DORA، PR، on-call)",
-            "تعریف هماهنگی فنی با Tech Leads و Decision Records",
+            r"Defining the capacity model and work assignment",
+            r"Defining the feedback/coaching and growth cycle",
+            r"Defining engineering health indicators (DORA, PR, on-call)",
+            r"Defining technical coordination with tech leads and decision records",
         ],
         [
-            "ظرفیت هر فرد/تیم در برابر بار کار شفاف باشد",
-            "چرخه‌ی feedback/coaching دارای زمان‌بندی و خروجی باشد",
-            "شاخص‌های سلامت توسعه تعریف و گزارش شوند",
+            r"Each person's/team's capacity against workload is transparent",
+            r"The feedback/coaching cycle has a schedule and an output",
+            r"Development health indicators are defined and reported",
         ],
     ),
     "operations-manager": sp(
         "management",
-        "آیا عملیات جاری محصول پس از راه‌اندازی پایدار، کارآمد و قابل پایش است؟",
+        r"Are ongoing product operations after launch stable, efficient, and monitorable?",
         [
-            "پوشش فرآیندهای عملیاتی (تیم، SLA، دستورالعمل)",
-            "اثربخشی اسکالیشن و مدیریت اتفاقات",
-            "بهینه‌بودن هزینه و منابع عملیاتی",
-            "کیفیت گزارش‌های عملیاتی و بهبود مستمر",
+            r"Coverage of operational processes (team, SLA, runbooks)",
+            r"Effectiveness of escalation and incident management",
+            r"Operational cost and resources are optimised",
+            r"Quality of operational reporting and continuous improvement",
         ],
         [
-            "تعریف Runbooks و فرآیندهای عملیاتی روزمره",
-            "تعریف SLA و ماتریس اسکالیشن",
-            "تعریف شاخص‌های عملیاتی (Uptime/MTTR/هزینه)",
-            "تعریف چرخه‌ی بهبود و بازبینی فرآیندها",
+            r"Defining runbooks and day-to-day operational processes",
+            r"Defining the SLA and escalation matrix",
+            r"Defining operational indicators (uptime/MTTR/cost)",
+            r"Defining the improvement cycle and process review",
         ],
         [
-            "Runbooks دارای مراحل/مسئول/زمان باشند",
-            "SLA و اسکالیشن با مخاطب/زمان/خط در دسترس باشند",
-            "شاخص‌های عملیاتی قابل گزارش و مقایسه باشند",
+            r"Runbooks have steps, owners, and timings",
+            r"SLA and escalation are available with audience, timing, and threshold",
+            r"Operational indicators are reportable and comparable",
         ],
     ),
     "risk-manager": sp(
         "management",
-        "آیا ریسک‌های پروژه شناسایی، ارزیابی و با برنامه‌ی کاهش مؤثر مدیریت می‌شوند؟",
+        r"Are project risks identified, assessed, and managed with an effective reduction plan?",
         [
-            "کامل بودن شناسایی ریسک‌ها (فنی، مالی، زمانی، سازمانی)",
-            "دقت امتیازدهی احتمال/اثر",
-            "اثربخشی برنامه‌های کاهش و پاسخ",
-            "به‌روز بودن و گزارش‌دهی ریسک در طول پروژه",
+            r"Completeness of risk identification (technical, financial, schedule, organisational)",
+            r"Accuracy of probability/impact scoring",
+            r"Effectiveness of reduction and response plans",
+            r"Currency of and reporting on risk throughout the project",
         ],
         [
-            "تعریف چارچوب شناسایی/ارزیابی/امتیازدهی ریسک",
-            "تعریف پاسخ/کاهش و مالک ریسک",
-            "تعریف پایش/بازبینی ریسک در گیت‌های پروژه",
-            "تعریف ثبت ریسک و گزارش‌دهی",
+            r"Defining the risk identify/assess/score framework",
+            r"Defining the response, reduction, and risk owner",
+            r"Defining risk monitoring/review at project gates",
+            r"Defining risk recording and reporting",
         ],
         [
-            "ثبت ریسک شامل احتمال/اثر/پاسخ/مالک باشد",
-            "برنامه‌ی کاهش دارای اقدام/زمان/معیار اثربخشی باشد",
-            "ریسک‌ها در بازبینی دوره‌ای به‌روز شده باشند",
+            r"Risk records include probability, impact, response, and owner",
+            r"The reduction plan has an action, time, and effectiveness criterion",
+            r"Risks are updated at periodic reviews",
         ],
     ),
     "change-manager": sp(
         "management",
-        "آیا تغییرات Scope/فرآیند/سازمان با کنترل و کاهش ریسک اعمال می‌شوند؟",
+        r"Are scope, process, and organisational changes applied with control and risk reduction?",
         [
-            "وضوح و کامل بودن درخواست تغییر",
-            "ارزیابی اثر تغییر روی Scope، بودجه، زمان، تیم",
-            "رعایت فرآیند تأیید و کمیته‌ی تغییر",
-            "کفایت ارتباطات/آموزش و پذیرش تغییر",
+            r"Clarity and completeness of the change request",
+            r"Assessing the change's effect on scope, budget, schedule, and team",
+            r"Adherence to the approval process and change board",
+            r"Sufficiency of communications/training and change adoption",
         ],
         [
-            "تعریف فرم و گردش Change Request",
-            "تعریف ارزیابی اثر/ریسک و پیشنهاد تصمیم",
-            "تعریف گیت تأیید/اجرا/بازبینی تغییر",
-            "تعریف برنامه‌ی ارتباطات/آموزش و پایش پذیرش",
+            r"Defining the change request form and flow",
+            r"Defining impact/risk assessment and the decision proposal",
+            r"Defining the change approve/execute/review gate",
+            r"Defining the communications/training plan and adoption monitoring",
         ],
         [
-            "هر تغییر دارای درخواست/اثر/تصمیم/تاریخ/مالک باشد",
-            "فرآیند تأیید شامل کمیته یا نقش تصمیم‌گیرنده باشد",
-            "تغییرات تأییدشده با گزارش پذیرش/اثر دوره‌ای پایش شوند",
+            r"Every change has a request, impact, decision, date, and owner",
+            r"The approval process includes a board or decision-maker role",
+            r"Approved changes are monitored with periodic adoption/impact reporting",
         ],
     ),
     "incident-manager": sp(
         "management",
-        "آیا بحران‌های Production به‌سرعت و با کمترین آسیب مدیریت و بهبود می‌شوند؟",
+        r"Are production crises managed and improved quickly and with minimal damage?",
         [
-            "وضوح تعریف Severity و مسیر اسکالیشن",
-            "اثربخشی تیم IC و اقدامات فوری",
-            "کیفیت Communication در حین Incident",
-            "کیفیت Post-Mortem و پیگیری اقدامات",
+            r"Clarity of the severity definition and escalation path",
+            r"Effectiveness of the IC team and immediate actions",
+            r"Quality of communication during an incident",
+            r"Quality of the post-mortem and action follow-up",
         ],
         [
-            "تعریف طبقه‌بندی و ماتریس اسکالیشن Incident",
-            "تعریف ساختار Incident Commander/Communication",
-            "تعریف Flow تشخیص/Mitigation/Recovery",
-            "تعریف فرآیند Blameless Post-Mortem و اقدامات",
+            r"Defining incident classification and the escalation matrix",
+            r"Defining the incident commander/communication structure",
+            r"Defining the detect/mitigate/recover flow",
+            r"Defining the blameless post-mortem process and actions",
         ],
         [
-            "هر Severity دارای پاسخ/زمان/مسئول باشد",
-            "Incident Log دارای زمان‌ها/قرارگرفته/اقدامات باشد",
-            "Post-Mortem دارای Root Cause/Action/Owner/Deadline باشد",
+            r"Every severity has a response, time, and owner",
+            r"The incident log has times, location, and actions",
+            r"The post-mortem has a root cause, action, owner, and deadline",
         ],
     ),
     "vendor-manager": sp(
         "management",
-        "آیا رابطه با تأمین‌کنندگان/سرویس‌دهندگان به‌صورت اثربخش و قابل ارزیابی مدیریت می‌شود؟",
+        r"Is the relationship with suppliers/service providers managed effectively and assessably?",
         [
-            "کیفیت قرارداد/SLA و انطباق با الزامات",
-            "ارزیابی عملکرد و ریسک تأمین‌کننده",
-            "مدیریت هزینه و رابطه/استراتژی Vendor",
-            "ترک Vendor و شیوه‌ی خروج (Exit)",
+            r"Quality of contract/SLA and alignment with requirements",
+            r"Assessment of supplier performance and risk",
+            r"Management of vendor cost and relationship/strategy",
+            r"Vendor offboarding and exit approach",
         ],
         [
-            "تعریف معیار انتخاب/ارزیابی Vendor",
-            "تعریف SLA/گزارش عملکرد/بازبینی دوره‌ای",
-            "تعریف ساختار رابطه، ریسک و قرارداد",
-            "تعریف Exit/Transition و کاهش وابستگی",
+            r"Defining vendor selection/assessment criteria",
+            r"Defining the SLA, performance reporting, and periodic review",
+            r"Defining the relationship structure, risk, and contract",
+            r"Defining exit/transition and dependency reduction",
         ],
         [
-            "هر Vendor دارای SLA، معیار ارزیابی و مالک داشته باشد",
-            "بازبینی دوره‌ای با شواهد عملکرد ثبت شود",
-            "برنامه‌ی خروج/جایگزین برای Vendor بحرانی موجود باشد",
+            r"Every vendor has an SLA, assessment criterion, and owner",
+            r"Periodic reviews are recorded with performance evidence",
+            r"An exit/replacement plan exists for critical vendors",
         ],
     ),
     "business-continuity-manager": sp(
         "management",
-        "آیا تداوم کسب‌وکار در بحران تضمین می‌شود و EQPهای آن آزموده شده‌اند؟",
+        r"Is business continuity guaranteed in a crisis and have its EQP been tested?",
         [
-            "پوشش سناریوهای بحران در BCP",
-            "تداوم سرویس/فرآیندهای حیاتی در سناریو",
-            "کیفیت مستندات/ارتباطات و نقش‌ها",
-            "واقعی بودن تست‌های BCP و RTO/RPO",
+            r"Coverage of crisis scenarios in the BCP",
+            r"Continuity of critical services/processes in the scenario",
+            r"Quality of documentation/communications and roles",
+            r"Realism of BCP tests and of RTO/RPO",
         ],
         [
-            "تعریف تحلیل BIA و سرویس/فرآیند حیاتی",
-            "تعریف RTO/RPO و سناریوهای تداوم",
-            "تعریف برنامه‌ی تست/تمرین و ارزیابی",
-            "تعریف نقش/مسئولیت و کانال‌های ارتباط بحران",
+            r"Defining the BIA and critical service/process",
+            r"Defining RTO/RPO and continuity scenarios",
+            r"Defining the test/exercise plan and assessment",
+            r"Defining crisis roles, responsibilities, and communication channels",
         ],
         [
-            "BIA دارای سرویس حیاتی/RTO/RPO باشد",
-            "گسل/فری برای هر سناریوی بحران دارای تمرین و نتیجه باشد",
-            "نقش‌ها و کانال‌های بحران مکتوب و در دسترس باشند",
+            r"The BIA has a critical service and RTO/RPO",
+            r"Every crisis scenario has a gap/free exercise and a result",
+            r"Crisis roles and channels are written down and accessible",
         ],
     ),
     "qa-lead": sp(
         "management",
-        "آیا فرآیند و تیم QA به‌درستی مدیریت و با کیفیت خروجی هم‌راستا است؟",
+        r"Are the QA process and team properly managed and aligned with output quality?",
         [
-            "پوشش استراتژی تست و آمادگی تیم",
-            "کیفیت متدولوژی/ابزار/ماتریس Coverage",
-            "انطباق انتظارات QA با اهداف محصول",
-            "First pass on Defect/Report و trend",
+            r"Coverage of the test strategy and team readiness",
+            r"Quality of methodology, tooling, and the coverage matrix",
+            r"Alignment of QA expectations with product goals",
+            r"First pass on defects/reports and trend",
         ],
         [
-            "تعریف استراتژی/سطح/مقیاس تست",
-            "تعریف ماتریس Coverage و Risk-based testing",
-            "تعریف چرخه‌ی defect/بازبینی/متریک کیفیت",
-            "تعریف ارزیابی رشد و ظرفیت تیم QA",
+            r"Defining the test strategy, level, and scale",
+            r"Defining the coverage matrix and risk-based testing",
+            r"Defining the defect/review/quality-metric cycle",
+            r"Defining QA team growth and capacity assessment",
         ],
         [
-            "استراتژی تست شامل scope/risk/استاندارد باشد",
-            "Coverage/defect trend قابل گزارش باشد",
-            "triage و اولویت‌بندی defect دارای روند مشخص باشد",
+            r"The test strategy includes scope, risk, and standard",
+            r"Coverage/defect trend is reportable",
+            r"Defect triage and prioritisation follow a stated process",
         ],
     ),
 
     # ------------------------------ devops -----------------------------
     "devops-engineer": sp(
         "devops",
-        "آیا چرخه‌ی build/test/deploy و زیرساخت پایدار، خودکار و ایمن است؟",
+        r"Is the build/test/deploy cycle and infrastructure stable, automated, and safe?",
         [
-            "قابلیت تکرار و پایدار بودن Pipeline",
-            "پوشش failure/rollback در Deployment",
-            "امنیت و مدیریت Secret در Pipeline",
-            "هم‌سویی با محیط‌ها و Configuration",
+            r"Repeatability and stability of the pipeline",
+            r"Coverage of failure/rollback in deployment",
+            r"Security and secret management in the pipeline",
+            r"Alignment with environments and configuration",
         ],
         [
-            "تعریف CI/CD (jobs، env، gates، caching)",
-            "تعریف IaC و مدیریت Secret/Configuration",
-            "تعریف Rollback/Canary/Blue-Green",
-            "تعریف Monitoring/Alerting برای Pipeline",
+            r"Defining CI/CD (jobs, env, gates, caching)",
+            r"Defining IaC and secret/configuration management",
+            r"Defining rollback, canary, and blue-green",
+            r"Defining monitoring/alerting for the pipeline",
         ],
         [
-            "Pipeline در CI سبز و بدون نادیده‌گرفتن خطا باشد",
-            "Deployment دارای rollback و تحت کنترل خارجی باشد",
-            "Secret در کد هاردکد نشده و در مسیرهای امن باشد",
+            r"The pipeline is green in CI and ignores no error",
+            r"Deployment has a rollback and is under external control",
+            r"Secrets are not hardcoded in code and are on secure paths",
         ],
     ),
     "sre-site-reliability-engineer": sp(
         "devops",
-        "آیا قابلیت اطمینان، در دسترس بودن و عملکرد سرویس در حد SLA حفظ می‌شود؟",
+        r"Are service reliability, availability, and performance maintained at the SLA level?",
         [
-            "واضح بودن SLO/SLI و پوشش Reliability",
-            "کیفیت Error Budget و تصمیم‌های release",
-            "پوشش monitoring/alerting و تشریح Runbook",
-            "اثربخشی بهبود Reliability (blameless/mtTR)",
+            r"Clarity of SLO/SLI and reliability coverage",
+            r"Quality of the error budget and release decisions",
+            r"Coverage of monitoring/alerting and runbook detail",
+            r"Effectiveness of reliability improvement (blameless/MTTR)",
         ],
         [
-            "تعریف SLOs/SLIs و Error Budget",
-            "تعریف Monitoring/Alerting/Incident Flow",
-            "تعریف Capacity/Baseline/Performance را",
-            "تعریف چرخه‌ی بهبود و Postmortem",
+            r"Defining SLOs/SLIs and the error budget",
+            r"Defining monitoring, alerting, and incident flow",
+            r"Defining capacity, baseline, and performance",
+            r"Defining the improvement cycle and postmortem",
         ],
         [
-            "هر SLO دارای SLI و Error Budget باشد",
-            "Alert/Runbook دارای پاسخ/مرحله/مسئول باشد",
-            "MTTR/availability و اقدامات بهبود قابل گزارش باشند",
+            r"Every SLO has an SLI and an error budget",
+            r"Every alert/runbook has a response, step, and owner",
+            r"MTTR/availability and improvement actions are reportable",
         ],
     ),
     "cloud-engineer": sp(
         "devops",
-        "آیا زیرساخت ابری امن، مقیاس‌پذیر، قابل مشاهده و مقرون‌به‌صرفه است؟",
+        r"Is the cloud infrastructure secure, scalable, observable, and cost-effective?",
         [
-            "الگوی معماری/امنیت/مقیاس کلود",
-            "مدیریت هزینه و Resource optimization",
-            "Cleanup/Drift و جداسازی محیط‌ها",
-            "پوشش Backup/HA/Disaster in cloud",
+            r"Cloud architecture, security, and scale pattern",
+            r"Cost management and resource optimisation",
+            r"Cleanup/drift and environment isolation",
+            r"Backup/HA/disaster coverage in the cloud",
         ],
         [
-            "تعریف محیط‌ها/Accounts/IAM/Landing Zone",
-            "پیاده‌سازی IaC و مدیریت Drift",
-            "بهینه‌سازی هزینه/مقیاس و Right-sizing",
-            "پیاده‌سازی Backup/DR/HA برای سرویس‌های بحرانی",
+            r"Defining environments, accounts, IAM, and landing zone",
+            r"Implementing IaC and drift management",
+            r"Optimising cost/scale and right-sizing",
+            r"Implementing backup/DR/HA for critical services",
         ],
         [
-            "محیط‌های cloud جدا و دارای least-privilege باشند",
-            "منابع بحرانی دارای backup/DR/HA باشند",
-            "هزینه با گزارش dest/vendor قابل پیگیری باشد",
+            r"Cloud environments are isolated and use least privilege",
+            r"Critical resources have backup/DR/HA",
+            r"Cost is traceable by destination/vendor report",
         ],
     ),
     "cloud-architect": sp(
         "architecture",
-        "آیا معماری ابری با نیازها، امنیت و بهترین شیوه‌ها سازگار و قابل توسعه است؟",
+        r"Is the cloud architecture consistent with needs, security, and best practices, and extensible?",
         [
-            "انتخاب خدمات و معماری متناسب با workload",
-            "مدیریت امنیت/هویت/شبکه در کلود",
-            "مقیاس پذیری/قابلیت بازیابی/هزینه",
-            "سازگاری با استراتژی Multi-Cloud/On-prem",
+            r"Selecting services and architecture suited to the workload",
+            r"Managing security, identity, and network in the cloud",
+            r"Scalability, recoverability, and cost",
+            r"Consistency with the multi-cloud/on-prem strategy",
         ],
         [
-            "انتخاب معماری (serverless/containers/VMs) و Deci",
-            "تعریف شبکه/IAM/security/observability در cloud",
-            "تعریف scale/availability/cost را",
-            "تعریف تصمیم‌های معماری و Trade-off",
+            r"Selecting architecture (serverless/containers/VMs) and decisions",
+            r"Defining network, IAM, security, and observability in the cloud",
+            r"Defining scale, availability, and cost",
+            r"Defining architecture decisions and trade-offs",
         ],
         [
-            "معماری cloud دارای Review/decision record باشد",
-            "شبکه/هویت/امنیت با minimum permission برقرار باشد",
-            "اسکال/بازیابی/هزینه به‌صورت قابل ارزیابی تعریف شده باشد",
+            r"The cloud architecture has a review/decision record",
+            r"Network, identity, and security are established with minimum permission",
+            r"Scale, recovery, and cost are defined assessably",
         ],
     ),
     "infrastructure-engineer": sp(
         "devops",
-        "آیا زیرساخت (Server/Network/Storage) پایدار، امن و قابل مقیاس است؟",
+        r"Is the infrastructure (server/network/storage) stable, secure, and scalable?",
         [
-            "انطباق زیرساخت با نیازمندی‌ها و SLA",
-            "مدیریت امنیت/پچ/پایش زیرساخت",
-            "مدیریت ظرفیت و مقیاس",
-            "پوشش Backup/HA/Disaster زیرساخت",
+            r"Alignment of infrastructure with requirements and SLA",
+            r"Managing infrastructure security, patching, and monitoring",
+            r"Managing capacity and scale",
+            r"Infrastructure backup/HA/disaster coverage",
         ],
         [
-            "تعریف استاندارد Provisioning/Configuration",
-            "پیاده‌سازی پایش/پچ/امنیت و hardening",
-            "برنامه‌ریزی ظرفیت و auto-scaling",
-            "تعریف backup/HA/DR infra و test",
+            r"Defining the provisioning/configuration standard",
+            r"Implementing monitoring, patching, security, and hardening",
+            r"Capacity planning and auto-scaling",
+            r"Defining infrastructure backup/HA/DR and testing",
         ],
         [
-            "زیرساخت critical دارای HA/backup/DR باشد",
-            "پچ/پایش/امنیت با برنامه و روند اجرا شوند",
-            "ظرفیت با شواهد بار/معیار پایش شود",
+            r"Critical infrastructure has HA, backup, and DR",
+            r"Patching, monitoring, and security are run to plan and trend",
+            r"Capacity is monitored with load evidence and criteria",
         ],
     ),
     "network-engineer": sp(
         "devops",
-        "آیا شبکه امن، پایدار و با کمترین اختلال طراحی/مدیریت می‌شود؟",
+        r"Is the network designed/managed securely, stably, and with minimal disruption?",
         [
-            "انطباق طراحی شبکه با نیازها و مقیاس",
-            "مدیریت امنیت/segment/فایروال/IPS/IDS",
-            "کفایت مانیتورینگ و troubleshooting شبکه",
-            "پوشش DR/HA و management of connectivity",
+            r"Alignment of network design with needs and scale",
+            r"Managing security, segmentation, firewall, IPS/IDS",
+            r"Sufficiency of network monitoring and troubleshooting",
+            r"DR/HA coverage and connectivity management",
         ],
         [
-            "تعریف Topology/VLAN/subnet/routing",
-            "تعریف امنیت perimeter/firewall/ACL",
-            "تعریف monitoring/alerting و runbook شبکه",
-            "تعریف redundancy/HA و capacity planning",
+            r"Defining topology, VLAN, subnet, and routing",
+            r"Defining perimeter security, firewall, and ACL",
+            r"Defining network monitoring/alerting and runbook",
+            r"Defining redundancy/HA and capacity planning",
         ],
         [
-            "معماری شبکه دارای redundancy و document باشد",
-            "قواعد امنیتی (ACL/firewall) تعریف و قابل ردیابی باشند",
-            "گزارش‌های آلرت/تغییر شبکه به‌روز باشند",
+            r"The network architecture has redundancy and documentation",
+            r"Security rules (ACL/firewall) are defined and traceable",
+            r"Network alert/change reports are current",
         ],
     ),
     "system-administrator": sp(
         "devops",
-        "آیا سیستم‌عامل‌ها/سرورها/سرویس‌های پایه پایدار، امن و به‌روز نگهداری می‌شوند؟",
+        r"Are operating systems, servers, and base services kept stable, secure, and current?",
         [
-            "پایداری سرویس‌های پایه و زمان در دسترس",
-            "امنیت کاربر/مجوز/پچ/فایل",
-            "کیفیت اتوماسیون و مدیریت Config",
-            "پوشش Backup/Restore و DR",
+            r"Stability of base services and time available",
+            r"Security of user, permissions, patching, and files",
+            r"Quality of automation and config management",
+            r"Backup/restore and DR coverage",
         ],
         [
-            "تعریف استاندارد Server hardening و کاربر",
-            "تعریف اتوماسیون (scripts/ansible) و Config",
-            "تعریف پایش پایه، لاگ و alert",
-            "تعریف backup/restore و test",
+            r"Defining the server hardening and user standard",
+            r"Defining automation (scripts/ansible) and config",
+            r"Defining base monitoring, logging, and alerting",
+            r"Defining backup/restore and testing",
         ],
         [
-            "سرورهای critical با hardening و پچ پوشش باشند",
-            "روند backup/restore و test اجرا و نتیجه گرفته شده باشد",
-            "پایش/لاگ پایه فعال و alert تنظیم باشد",
+            r"Critical servers are covered by hardening and patching",
+            r"The backup/restore and test procedure has been run and results captured",
+            r"Base monitoring/logging is active and alerts are configured",
         ],
     ),
 
     # -------------------------------- qa --------------------------------
     "qa-engineer": sp(
         "qa",
-        "آیا تست‌ها با کیفیت، پوشش و بر اساس Risk طراحی/اجرا می‌شوند؟",
+        r"Are tests designed/executed with quality, coverage, and on a risk basis?",
         [
-            "پوشش Functional/Regression/Edge",
-            "کیفیت Test Case و Acceptance Mapping",
-            "پایداری/قابلیت اجرای تست‌ها",
-            "مستندسازی defects با evidence",
+            r"Coverage of functional, regression, and edge",
+            r"Quality of test cases and acceptance mapping",
+            r"Stability and executability of tests",
+            r"Documenting defects with evidence",
         ],
         [
-            "طراحی Test Plan/MasterTest/خودکار",
-            "نوشتن Test Cases با steps/expected/evidence",
-            "تعریف Regression suite نسخه‌ها",
-            "تعریف defect lifecycle و report",
+            r"Designing the test plan, master test, and automation",
+            r"Writing test cases with steps, expected results, and evidence",
+            r"Defining the regression suite for releases",
+            r"Defining the defect lifecycle and report",
         ],
         [
-            "هر requirement به Test Case/evidence متصل باشد",
-            "Regression suite پایدار و در CI اجرایی باشد",
-            "defects دارای severity/evidence/flow باشند",
+            r"Every requirement links to a test case and evidence",
+            r"The regression suite is stable and executable in CI",
+            r"Defects have severity, evidence, and flow",
         ],
     ),
     "test-engineer": sp(
         "qa",
-        "آیا تست‌های عملکردی/فنی دقیق و بر اساس سناریوهای واقعی اجرا می‌شوند؟",
+        r"Are functional/technical tests executed precisely and on the basis of real scenarios?",
         [
-            "کیفیت اجرای تست functional/technical",
-            "پوشش سناریوهای داده و edge",
-            "دقت گزارش و شواهد",
-            "سازگاری با SLA/رگرسیون",
+            r"Quality of functional/technical test execution",
+            r"Coverage of data scenarios and edge cases",
+            r"Accuracy of reporting and evidence",
+            r"Consistency with SLA/regression",
         ],
         [
-            "تهیهی Test Data و Environment setup",
-            "اجرای تست‌های functional/technical و رگرسیون",
-            "مستندسازی results و evidence",
-            "ارتباط با dev/PM برای triage",
+            r"Preparing test data and environment setup",
+            r"Executing functional/technical and regression tests",
+            r"Documenting results and evidence",
+            r"Coordinating with dev/PM for triage",
         ],
         [
-            "هر test record شامل result/evidence/date باشد",
-            "خطاها با repro و evidence گزارش شوند",
-            "قابلیت تکرار testes با محیط مستند باشد",
+            r"Every test record includes result, evidence, and date",
+            r"Errors are reported with reproduction and evidence",
+            r"Tests are repeatable with a documented environment",
         ],
     ),
     "test-automation-engineer": sp(
         "qa",
-        "آیا آزمون‌های خودکار پایدار، سریع و قابل نگهداری هستن؟",
+        r"Are automated tests stable, fast, and maintainable?",
         [
-            "کیفیت framework و flakiness",
-            "پوشش automated suites در CI",
-            "قابلیت نگهداری (selectors، data، isolation)",
-            "سرعت/پایداری اجرا",
+            r"Framework quality and flakiness",
+            r"Coverage of automated suites in CI",
+            r"Maintainability (selectors, data, isolation)",
+            r"Execution speed and stability",
         ],
         [
-            "انتخاب framework و ساختار (page objects)",
-            "نوشتن تست‌های maintained و data-isolated",
-            "اتصال به CI و reporting",
-            "مدیریت flaky tests و رگرسیون خودکار",
+            r"Selecting the framework and structure (page objects)",
+            r"Writing maintained, data-isolated tests",
+            r"Connecting to CI and reporting",
+            r"Managing flaky tests and automatic regression",
         ],
         [
-            "سوئیت‌ها در CI با گزارش اجرا شوند",
-            "flaky tests دارای owner/issue ثبت باشند",
-            "تست‌های خودکار قابلیت اجرا در هر محیط را داشته باشند",
+            r"Suites run in CI with reporting",
+            r"Flaky tests have an owner and recorded issue",
+            r"Automated tests can run in any environment",
         ],
     ),
     "performance-engineer": sp(
         "qa",
-        "آیا Performance تست، تحلیل و بهینه‌سازی با شواهد قابل اعتماد انجام می‌شود؟",
+        r"Is performance testing, analysis, and optimisation carried out with reliable evidence?",
         [
-            "وضوح اهداف Performance و بار",
-            "کیفیت تست/معیار و عدم سوگیری",
-            "اثربخشی توصیه‌های بهینه‌سازی",
-            "پوشش bottle-neck و capacity",
+            r"Clarity of performance and load goals",
+            r"Quality of test criteria and absence of bias",
+            r"Effectiveness of optimisation recommendations",
+            r"Coverage of bottlenecks and capacity",
         ],
         [
-            "تعریف workload/durations/sizes و baseline",
-            "اجرای load/stress/spike test",
-            "تحلیل bottleneck و recommending optimizations",
-            "گزارش Performance و compare",
+            r"Defining workload, durations, sizes, and baseline",
+            r"Running load, stress, and spike tests",
+            r"Analysing bottlenecks and recommending optimisations",
+            r"Performance reporting and comparison",
         ],
         [
-            "اهداف Performance با baseline قابل سنجش باشند",
-            "تست‌ها reproducible با config/مقادیر ثبت باشند",
-            "توصیه‌ها با شواهد/اثر گزارش شوند",
+            r"Performance goals are measurable against a baseline",
+            r"Tests are reproducible with recorded config/values",
+            r"Recommendations are reported with evidence and effect",
         ],
     ),
     "load-stress-tester": sp(
         "qa",
-        "آیا رفتار سیستم تحت بار/فشار بالا، پایدار و مطابق انتظار است؟",
+        r"Is system behaviour under load/high pressure stable and as expected?",
         [
-            "واقعی بودن سناریوی بار/فشار",
-            "پایش منابع/فروپاشی/برگشت",
-            "پوشش لبه‌های ظرفیت و endpoint",
-            "دقت گزارش و نتیجه‌گیری",
+            r"Realism of the load/stress scenario",
+            r"Monitoring resources, collapse, and recovery",
+            r"Coverage of capacity limits and endpoints",
+            r"Accuracy of reporting and conclusions",
         ],
         [
-            "تعریف Load model (RPS/utentes/مصرف)",
-            "اجرای load/soak/spike test",
-            "پایش metrics و شناسایی failures",
-            "گزارش capacity و recommendations",
+            r"Defining the load model (RPS/users/consumption)",
+            r"Running load, soak, and spike tests",
+            r"Monitoring metrics and identifying failures",
+            r"Capacity reporting and recommendations",
         ],
         [
-            "سناریوهای بار دارای اهداف/مقدار/مدت باشند",
-            "گزارش شامل metrics, errors و threshold باشد",
-            "توصیه‌ها با شواهد capacity باشد",
+            r"Load scenarios have goals, magnitude, and duration",
+            r"The report includes metrics, errors, and thresholds",
+            r"Recommendations are backed by capacity evidence",
         ],
     ),
 
     # ------------------------------ security ----------------------------
     "security-engineer": sp(
         "security",
-        "آیا کنترل‌های امنیتی به‌درستی پیاده، پیکربندی و پایش می‌شوند؟",
+        r"Are security controls properly implemented, configured, and monitored?",
         [
-            "پوشش کنترل‌های امنیتی در scope",
-            "مدیریت vulnerability/پچ/perm",
-            "امنیت data/secret/config",
-            "هم‌سویی با compliance",
+            r"Coverage of in-scope security controls",
+            r"Managing vulnerabilities, patching, and permissions",
+            r"Security of data, secrets, and config",
+            r"Alignment with compliance",
         ],
         [
-            "تعریف control matrix/threat model",
-            "پیاده‌سازی/cis hardening و پچ",
-            "مدیریت secrets/perms/audit",
-            "تعریف security test/scanner و triage",
+            r"Defining the control matrix and threat model",
+            r"Implementing CIS hardening and patching",
+            r"Managing secrets, permissions, and audit",
+            r"Defining security tests, scanners, and triage",
         ],
         [
-            "کنترل‌های critical دارای پیاده‌سازی/تست/گزارش باشند",
-            "آسیب‌پذیری‌ها دارای severity/owner/deadline باشند",
-            "secret/permها مطابق policy باشند",
+            r"Critical controls have implementation, testing, and reporting",
+            r"Vulnerabilities have severity, owner, and deadline",
+            r"Secrets and permissions comply with policy",
         ],
     ),
     "application-security-engineer": sp(
         "security",
-        "آیا امنیت خود Application (کد، ورودی، محتوای پاسخ) تضمین می‌شود؟",
+        r"Is the application's own security (code, input, response content) guaranteed?",
         [
-            "پوشش OWASP-like در کد/API",
-            "امنیت ورودی/پارامتر/authentication",
-            "مدیریت اعتماد و data exposure",
-            "امنیت race/error/debug",
+            r"OWASP-like coverage in code/API",
+            r"Security of input, parameters, and authentication",
+            r"Managing trust and data exposure",
+            r"Security of race conditions, errors, and debug",
         ],
         [
-            "پیاده‌سازی input validation/output encoding",
-            "امنیت session/authz/CSRF/XSS/SQLi",
-            "secure error/exception و لاگ عدم افشا",
-            "تعریف security code review و tests",
+            r"Implementing input validation and output encoding",
+            r"Security of session, authz, CSRF, XSS, and SQLi",
+            r"Secure error/exception handling and non-disclosing logs",
+            r"Defining security code review and tests",
         ],
         [
-            "ورودی‌ها/خروجی‌ها valid و encode شده باشند",
-            "Authentication/authorization با least privilege برقرار باشد",
-            "خطاها، لاگ و exception عدم افشای داخلی داشته باشند",
+            r"Inputs and outputs are validated and encoded",
+            r"Authentication and authorisation are established with least privilege",
+            r"Errors, logs, and exceptions do not disclose internals",
         ],
     ),
     "cybersecurity-engineer": sp(
         "security",
-        "آیا سیستم‌ها و زیرساخت در برابر حملات کلی محافظت می‌شوند؟",
+        r"Are systems and infrastructure protected against general attacks?",
         [
-            "پوشش لایه‌های دفاعی (endpoint/network/identity)",
-            "پایش/تشخیص و پاسخ (SIEM/EDR)",
-            "مدیریت threat/vulnerability و re-mediation",
-            "آمادگی IncAnd موانع",
+            r"Coverage of defence layers (endpoint/network/identity)",
+            r"Monitoring, detection, and response (SIEM/EDR)",
+            r"Managing threats, vulnerabilities, and remediation",
+            r"Incident readiness and blockers",
         ],
         [
-            "تعریف defense-in-depth و control layers",
-            "پیاده‌سازی monitoring/threat detection",
-            "مدیریت Incident response و playbook",
-            "تعریف baseline/hardening و پچ",
+            r"Defining defence in depth and control layers",
+            r"Implementing monitoring and threat detection",
+            r"Managing incident response and playbooks",
+            r"Defining baseline, hardening, and patching",
         ],
         [
-            "دفاع لایه‌ای و کنترل‌های اصلی تعریف شده باشند",
-            "تشخیص/پاسخ/بازیابی دارای runbook باشد",
-            "پچ/هاردن و رمدییشن با SLA ثبت شوند",
+            r"Layered defence and core controls are defined",
+            r"Detection, response, and recovery have a runbook",
+            r"Patching, hardening, and remediation are recorded against SLA",
         ],
     ),
     "penetration-tester": sp(
         "security",
-        "آیا آسیب‌پذیری‌های قابل بهره‌برداری با امنیت و شواهد شناسایی/گزارش می‌شوند؟",
+        r"Are exploitable vulnerabilities identified/reported safely and with evidence?",
         [
-            "قانونی بودن scope/اختیار تست",
-            "کیفیت شناسایی/بهره‌برداری/شواهد",
-            "دقت severity و قابل بازتولید بودن",
-            "ایمنی تست (عدم خسارت)",
+            r"Legality of the test scope and authority",
+            r"Quality of identification, exploitation, and evidence",
+            r"Accuracy of severity and reproducibility",
+            r"Safety of the test (no damage)",
         ],
         [
-            "تعریف scope/rules/authorization",
-            "اجرای reconnaissance/testing/exploitation",
-            "مستندسازی evidence/severity/repro",
-            "تعریف report و همکاری با remediation",
+            r"Defining scope, rules, and authorisation",
+            r"Running reconnaissance, testing, and exploitation",
+            r"Documenting evidence, severity, and reproduction",
+            r"Defining the report and cooperation with remediation",
         ],
         [
-            "تست فقط در scope مجاز انجام شود",
-            "هر finding دارای evidence/repro/severity باشد",
-            "گزارش شامل توضیح و مسیر جبران باشد",
+            r"Testing is carried out only within the authorised scope",
+            r"Every finding has evidence, reproduction, and severity",
+            r"The report includes explanation and a remediation path",
         ],
     ),
     "security-architect": sp(
         "architecture",
-        "آیا معماری امنیتی با نیازمندی‌ها، تهدیدها و بهترین شیوه‌ها هم‌راستاست؟",
+        r"Is the security architecture aligned with requirements, threats, and best practices?",
         [
-            "پوشش control/model در architecture",
+            r"Coverage of controls and the model in the architecture",
             "safety/privacy/zero-trust",
-            "مدیریت trust boundary و data flows",
-            "سازگاری با compliance",
+            r"Managing trust boundaries and data flows",
+            r"Consistency with compliance",
         ],
         [
-            "طراحی threat model/trust boundaries",
-            "تعریف security architecture/zero-trust",
-            "انتخاب controls/encryption/identity",
-            "تعریف security acceptance و review",
+            r"Designing the threat model and trust boundaries",
+            r"Defining the security architecture and zero trust",
+            r"Selecting controls, encryption, and identity",
+            r"Defining security acceptance and review",
         ],
         [
-            "معماری دارای trust boundaries و threat model باشد",
-            "داده‌ها/هویت/رمزنگاری مطابق policy باشند",
-            "کنترل‌ها با معیار acceptance تعریف شده باشند",
+            r"The architecture has trust boundaries and a threat model",
+            r"Data, identity, and encryption comply with policy",
+            r"Controls are defined with an acceptance criterion",
         ],
     ),
     "devsecops-engineer": sp(
         "devops",
-        "آیا امنیت در چرخه‌ی CI/CD به‌صورت خودکار و قابل ردیابی ادغام شده است؟",
+        r"Is security integrated into the CI/CD cycle automatically and traceably?",
         [
-            "وجود gates امنیتی در CI",
-            "پوشش scan/خطر/Dependency",
-            "مدیریت secrets/در خط لوله",
-            "قابلیت ردیابی و ثبات امنیت نسخه‌ها",
+            r"Security gates exist in CI",
+            r"Coverage of scanning, risk, and dependencies",
+            r"Managing secrets in the pipeline",
+            r"Traceability and consistency of release security",
         ],
         [
-            "تعریف security checks در pipeline",
-            "پیاده‌سازی SAST/DAST/dependency scan",
-            "مدیریت secrets و گیت‌های امنیتی",
-            "تعریف reporting/compliance",
+            r"Defining security checks in the pipeline",
+            r"Implementing SAST, DAST, and dependency scanning",
+            r"Managing secrets and security gates",
+            r"Defining reporting and compliance",
         ],
         [
-            "Pipeline دارای security gates باشد",
-            "یافته‌های scan دارای triage/owner/در دسترس باشند",
-            "secret در CI به‌صورت safe مدیریت شوند",
+            r"The pipeline has security gates",
+            r"Scan findings have triage, owner, and disposition",
+            r"Secrets are managed safely in CI",
         ],
     ),
     "privacy-engineer": sp(
         "security",
-        "آیا محصول به‌گونه‌ای طراحی شده که داده‌های شخصی و private محافظت شوند؟",
+        r"Is the product designed so that personal and private data are protected?",
         [
-            "نگاشت داده‌های شخصی و مقصد",
-            "رعایت principles (data minimization/consent)",
-            "امنیت پردازش/ذخیره/بازیابی",
-            "پوشش حقوق کاربر (delete/rectify)",
+            r"Mapping personal data and destinations",
+            r"Adherence to principles (data minimisation, consent)",
+            r"Security of processing, storage, and recovery",
+            r"Coverage of user rights (delete, rectify)",
         ],
         [
-            "تعریف data inventory و retention",
-            "پیاده‌سازی consent/minimization/access control",
-            "پیاده‌سازی anonymization/encryption",
-            "پیاده‌سازی process delete/export",
+            r"Defining the data inventory and retention",
+            r"Implementing consent, minimisation, and access control",
+            r"Implementing anonymisation and encryption",
+            r"Implementing the delete/export process",
         ],
         [
-            "داده‌های شخصی با حداکثر حفاظت و SIEM باشند",
-            "مکانیزم رضایت/حقوق کاربر قابل اجرا باشد",
-            "بازیابی/پاک‌سازی داده مطابق policy باشد",
+            r"Personal data have maximum protection and SIEM coverage",
+            r"The consent/user-rights mechanism is executable",
+            r"Data recovery/deletion follows policy",
         ],
     ),
     "privacy-compliance-officer": sp(
         "compliance",
-        "آیا رعایت قوانین حریم خصوصی و مقررات با مستندات و شواهد تضمین می‌شود؟",
+        r"Is compliance with privacy laws and regulations guaranteed with documentation and evidence?",
         [
-            "نقشه‌ی applicable regulations",
-            "پوشش consent/Rights/Records",
-            "کیفیت ممیزی و کنترل‌ها",
-            "پاسخ‌گویی و فرآیند داده‌برنامه",
+            r"Map of applicable regulations",
+            r"Coverage of consent, rights, and records",
+            r"Quality of audit and controls",
+            r"Accountability and the data programme process",
         ],
         [
-            "تعریف compliance framework و gap",
-            "پیاده‌سازی کنترل/مستندات و شواهد",
-            "تعریف فرآیند پاسخ به درخواست داده",
-            "تعریف ممیزی/گزارش/اصلاح",
+            r"Defining the compliance framework and gaps",
+            r"Implementing controls, documentation, and evidence",
+            r"Defining the data request response process",
+            r"Defining audit, reporting, and remediation",
         ],
         [
-            "الزامات regulations با gap/کنترل نگاشت شوند",
-            "فرآیند درخواست data subject با SLA باشد",
-            "شواهد/گزارش ممیزی موجود باشند",
+            r"Regulatory requirements are mapped to gaps and controls",
+            r"The data-subject request process has an SLA",
+            r"Audit evidence and reports exist",
         ],
     ),
 
     # ------------------------------- design -----------------------------
     "ui-designer": sp(
         "design",
-        "آیا رابط کاربری از نظر ظاهر، hierarchy و سازگاری با Design System کیفیت دارد؟",
+        r"Does the user interface have quality in appearance, hierarchy, and consistency with the design system?",
         [
-            "انطباق بصری با Design System موجود",
-            "سلسله مراتب/تراز/فضا",
-            "پوشش states (hover/focus/disabled/loading)",
-            "یکدستی اصول ریسپانسیو و A11y",
+            r"Visual consistency with the existing design system",
+            r"Hierarchy, balance, and space",
+            r"Coverage of states (hover/focus/disabled/loading)",
+            r"Consistency of responsive and a11y principles",
         ],
         [
-            "استخراج Design Tokens و الگوهای UI",
-            "طراحی وضعیت‌ها/ریسپانسیو و grid",
-            "رعایت contrast/focus/semantics",
-            "استفاده از Reusable Components/توکن",
+            r"Extracting design tokens and UI patterns",
+            r"Designing states, responsiveness, and grid",
+            r"Respecting contrast, focus, and semantics",
+            r"Using reusable components and tokens",
         ],
         [
-            "هر صفحه با توکن‌های پروژه طراحی شود (نه hardcode)",
-            "حالت‌های کلیدی در طرح پوشش داده شوند",
-            "کنتراست و دسترس‌پذیری در طرح رعایت شده باشد",
+            r"Every page is designed with the project's tokens, not hardcoded values",
+            r"Key states are covered in the design",
+            r"Contrast and accessibility are respected in the design",
         ],
     ),
     "ux-designer": sp(
         "design",
-        "آیا تجربه‌ی کاربری از نظر مسیر، اصطکاک و کشف‌پذیری به‌درستی طراحی شده است؟",
+        r"Is the user experience properly designed in terms of path, friction, and discoverability?",
         [
-            "وضوح و کارایی مسیرهای کاربری",
-            "Feedback/Error/Dead-end و بازیابی",
-            "پیش‌بینی‌پذیری/ثبات اصطلاحات",
-            "پوشش Accessible/keyboard و پایداری",
+            r"Clarity and efficiency of user paths",
+            r"Feedback, error, dead-end, and recovery",
+            r"Predictability and terminology consistency",
+            r"Coverage of accessibility, keyboard, and stability",
         ],
         [
-            "تعریف user flows و journey",
-            "طراحی Feedback/error/undo policies",
-            "طراحی IA/navigation و terminology",
-            "ارزیابی با a11y و task completion",
+            r"Defining user flows and journeys",
+            r"Designing feedback, error, and undo policies",
+            r"Designing IA, navigation, and terminology",
+            r"Evaluating with a11y and task completion",
         ],
         [
-            "هر مسیر دارای نقاط ورودی/خروجی/خطا باشد",
-            "فعالیت مخرب دارای تأیید/بازیابی باشد",
-            "واژه‌نامه/اصطلاحات ثابت در کل محصول باشند",
+            r"Every path has entry points, exits, and error points",
+            r"Destructive actions have confirmation and recovery",
+            r"The glossary and terminology are consistent across the whole product",
         ],
     ),
     "product-designer": sp(
         "design",
-        "آیا طراحی محصول بین UX/UI و نیازهای محصول تعادل برقرار می‌کند؟",
+        r"Does the product design strike a balance between UX/UI and product needs?",
         [
-            "سازگاری طرح با اهداف/محدودیت محصول",
-            "وضوح و اولویت‌بندی عناصر",
-            "یکپارچگی با پروسه‌ی محصول و فیدبک",
-            "قابلیت پیاده‌سازی و scalability",
+            r"Alignment of the design with product goals and constraints",
+            r"Clarity and prioritisation of elements",
+            r"Consistency with the product process and feedback",
+            r"Implementability and scalability",
         ],
         [
-            "تعریف problem/constraints/scope طراحی",
-            "ترکیب UX flow با UI design و tokens",
-            "هماهنگی با PM/tech و اطمینان از feasibility",
-            "تعریف feedback loop و iteration",
+            r"Defining the design problem, constraints, and scope",
+            r"Combining UX flow with UI design and tokens",
+            r"Coordinating with PM/tech and ensuring feasibility",
+            r"Defining the feedback loop and iteration",
         ],
         [
-            "طرح دارای مسیر کاربری/ولید و constraint باشد",
-            "طرح با سیستم طراحی/prototype consistent باشد",
-            "طرح با team بازبینی و مستند شده باشد",
+            r"The design has a valid user path and constraints",
+            r"The design is consistent with the design system/prototype",
+            r"The design has been reviewed with the team and documented",
         ],
     ),
     "ux-researcher": sp(
         "analysis",
-        "آیا تحقیق و تحلیل رفتار/نیاز کاربر با روش‌های معتبر انجام می‌شود؟",
+        r"Is user behaviour/need research and analysis carried out with valid methods?",
         [
-            "اعتبار روش و نمونه‌گیری",
-            "پوشش bias و Neutrality",
-            "حضور شواهد و تفسیر قابل ردیابی",
-            "ارتباط یافته‌ها با تصمیم محصول",
+            r"Validity of method and sampling",
+            r"Coverage of bias and neutrality",
+            r"Presence of evidence and traceable interpretation",
+            r"Linkage of findings to the product decision",
         ],
         [
-            "تعریف research plan/objectives/method",
-            "اجرای interviews/surveys/usability",
-            "تحلیل qualitative/quantitative شواهد",
-            "گزارش insight با توصیه و ذینفعان",
+            r"Defining the research plan, objectives, and method",
+            r"Running interviews, surveys, and usability studies",
+            r"Analysing qualitative and quantitative evidence",
+            r"Reporting insight with recommendations and stakeholders",
         ],
         [
-            "طرح تحقیق شامل هدف/روش/نمونه‌گیری باشد",
-            "تحلیل مبتنی بر شواهد و بدون bias باشد",
-            "توصیه‌ها به تصمیم محصول متصل شوند",
+            r"The research plan includes goal, method, and sampling",
+            r"The analysis is evidence-based and free of bias",
+            r"Recommendations link to the product decision",
         ],
     ),
     "ux-writer-content-designer": sp(
         "content",
-        "آیا متن‌های UI و Microcopy شفاف، منسجم و هم‌راستا با کاربر هستند؟",
+        r"Are UI copy and microcopy clear, consistent, and aligned with the user?",
         [
-            "وضوح و سازگاری زبان/اصطلاحات",
-            "بازخورد/خطا/دکمه‌ها واضح",
-            "سازگاری با tone/voice و a11y",
-            "پوشش حالت‌ها و Context",
+            r"Clarity and consistency of language and terminology",
+            r"Clear feedback, errors, and buttons",
+            r"Consistency with tone of voice and a11y",
+            r"Coverage of states and context",
         ],
         [
-            "تعریف voice/tone/word guide",
-            "نوشتن copy برای Error/Empty/Success/CTA",
-            "بازبینی یکدستی UI copy در همه‌جا",
-            "ارزیابی clarity/action/ایمپکت",
+            r"Defining the voice, tone, and word guide",
+            r"Writing copy for error, empty, success, and CTA",
+            r"Reviewing UI copy consistency everywhere",
+            r"Evaluating clarity, action, and impact",
         ],
         [
-            "هر متن دارای goal/audience/action باشد",
-            "خطاها/بازخورد شفاف و قابل اقدام باشند",
-            "اصطلاحات کل محصول ثابت باشند",
+            r"Every text has a goal, audience, and action",
+            r"Errors and feedback are clear and actionable",
+            r"Product-wide terminology is consistent",
         ],
     ),
     "design-system-designer": sp(
         "design",
-        "آیا سیستم طراحی منسجم، مقیاس‌پذیر و نگهداشت‌پذیر است؟",
+        r"Is the design system coherent, scalable, and maintainable?",
         [
-            "کامل بودن tokens/components/states",
-            "یکپارچگی docs و adoption",
-            "قابلیت نگهداشت و نسخه‌بندی",
-            "یکدستی a11y و responsive",
+            r"Completeness of tokens, components, and states",
+            r"Consistency of docs and adoption",
+            r"Maintainability and versioning",
+            r"Consistency of a11y and responsive behaviour",
         ],
         [
-            "تعریف tokens (color/typography/spacing/radius)",
-            "تعریف component library و states/variants",
-            "تعریف docs/usage و versioning",
-            "تعریف governance/contribution برای design system",
+            r"Defining tokens (colour, typography, spacing, radius)",
+            r"Defining the component library and its states and variants",
+            r"Defining docs, usage, and versioning",
+            r"Defining governance and contribution for the design system",
         ],
         [
-            "هر component دارای states/variants/docs باشد",
-            "tokens مرکزی و بدون hardcode گسترده باشند",
-            "نسخه/تغییرات design system مستند باشند",
+            r"Every component has states, variants, and docs",
+            r"Tokens are central and free of hardcoding",
+            r"Design-system version and changes are documented",
         ],
     ),
     "graphic-designer": sp(
         "design",
-        "آیا assets گرافیکی (آیکون/بنر/تصویر) با هویت برند یکدست هستند؟",
+        r"Are graphic assets (icon/banner/image) consistent with brand identity?",
         [
-            "یکدستی سبک، رنگ و مقیاس",
-            "کیفیت asset و خروجی فرمت",
-            "انطباق با برند/قواعد و دسترس‌پذیری",
-            "سازگاری با سیستم طراحی",
+            r"Consistency of style, colour, and scale",
+            r"Quality of assets and format output",
+            r"Compliance with brand rules and accessibility",
+            r"Consistency with the design system",
         ],
         [
-            "تعریف style/asset/برند",
-            "طراحی icon/illustration/banner در مقیاس و فرمت",
-            "تولید assets با naming/export standards",
-            "ارزیابی سازگاری و performance",
+            r"Defining style, assets, and brand",
+            r"Designing icons, illustrations, and banners at scale and format",
+            r"Producing assets to naming and export standards",
+            r"Assessing consistency and performance",
         ],
         [
-            "assets با سبک و مقیاس یکدست باشند",
-            "فرمت/export مطابق استاندارد باشد",
-            "assets به سناریو/برند متصل و بدون تضاد باشند",
+            r"Assets are consistent in style and scale",
+            r"Format and export match the standard",
+            r"Assets are tied to scenario and brand and free of conflict",
         ],
     ),
     "motion-designer": sp(
         "design",
-        "آیا انیمیشن/Motion کیفیت، وضوح و یکدستی دارد و در خدمت UX است؟",
+        r"Does animation/motion have quality, clarity, and consistency, and does it serve the UX?",
         [
-            "منطقی بودن animation در جهت UX",
-            "یکدستی duration/easing",
-            "کاهش clutter/performance/a11y",
-            "سازگاری با design system",
+            r"Whether animation serves the UX",
+            r"Consistency of duration and easing",
+            r"Reducing clutter, performance cost, and a11y cost",
+            r"Consistency with the design system",
         ],
         [
-            "تعریف motion principle/duration/easing",
-            "طراحی transitions/feedback/hover",
-            "رعایت reduced-motion و performance",
-            "تعریف checklist برای motion",
+            r"Defining motion principles, duration, and easing",
+            r"Designing transitions, feedback, and hover",
+            r"Respecting reduced-motion and performance",
+            r"Defining a checklist for motion",
         ],
         [
-            "هر animation دارای هدف/duration/easing باشد",
-            "motion با reduced-motion سازگار باشد",
-            "motion ها با design system هم‌راستا باشند",
+            r"Every animation has a goal, duration, and easing",
+            r"Motion respects reduced-motion",
+            r"Motion is aligned with the design system",
         ],
     ),
     "accessibility-specialist": sp(
         "design",
-        "آیا محصول از نظر دسترس‌پذیری و استانداردها برای همه‌ی کاربران قابل استفاده است؟",
+        r"Is the product usable for all users in terms of accessibility and standards?",
         [
-            "پوشش WCAG (contrast/keyboard/semantics)",
-            "شستن/محتوای جایگزین/فوکوس",
-            "پوشش screen readers و forms",
-            "آمادگی برای کاربردهای معلولیت",
+            r"WCAG coverage (contrast, keyboard, semantics)",
+            r"Contrast, alternative content, and focus",
+            r"Coverage of screen readers and forms",
+            r"Readiness for disability use cases",
         ],
         [
-            "تعریف a11y acceptance و checklist",
-            "رعایت semantic HTML, aria, alt, labels",
+            r"Defining a11y acceptance and checklist",
+            r"Respecting semantic HTML, ARIA, alt, and labels",
             "manage focus/modal/keyboard",
-            "تدوین a11y تست و بازبینی",
+            r"Compiling a11y tests and reviews",
         ],
         [
-            "هر صفحه/component دارای label/alt/semantics باشد",
-            "کیبورد/فوکوس/مودال صحیح باشد",
-            "کنتراست و a11y با checklists پوشیده شود",
+            r"Every page/component has labels, alt text, and semantics",
+            r"Keyboard, focus, and modal behaviour are correct",
+            r"Contrast and a11y are covered by checklists",
         ],
     ),
 
     # ------------------------------- content ----------------------------
     "technical-writer": sp(
         "content",
-        "آیا مستندات فنی، دقیق، قابل اجرا و متناسب با مخاطب است؟",
+        r"Is the technical documentation precise, actionable, and appropriate to its audience?",
         [
-            "دقت فنی و پوشش سناریوها",
-            "وضوح ساختار و قابلیت اجرا (آموزش)",
-            "سازگاری با نسخه و رفتار سیستم",
-            "پوشش Troubleshooting/FAQ",
+            r"Technical accuracy and scenario coverage",
+            r"Clarity of structure and executability (tutorials)",
+            r"Consistency with release and system behaviour",
+            r"Coverage of troubleshooting and FAQ",
         ],
         [
-            "تعریف ساختار docs (API/install/guide)",
-            "مستندسازی endpoints/params/examples",
-            "بازبینی اعتبار فنی و version",
-            "تعریف errors/troubleshooting",
+            r"Defining the docs structure (API, install, guide)",
+            r"Documenting endpoints, params, and examples",
+            r"Reviewing technical validity and version",
+            r"Defining errors and troubleshooting",
         ],
         [
-            "هر doc دارای هدف/مخاطب/مراحل دقیق باشد",
-            "آموزش‌ها قابل اجرا (start to end) باشند",
-            "مستندات با نسخه/رفتار به‌روز باشند",
+            r"Every doc has a goal, audience, and precise steps",
+            r"Tutorials are executable from start to end",
+            r"Docs are current with the release and behaviour",
         ],
     ),
     "documentation-specialist": sp(
         "content",
-        "آیا مستندات محصول برای کاربر نهایی واضح، کامل و منسجم است؟",
+        r"Is the product documentation clear, complete, and coherent for the end user?",
         [
-            "کامل و قابل استفاده بودن اطلاعات",
-            "یکدستی ساختار، اصطلاح، زبان",
-            "پوشش سناریوها/گام‌ها/چالش‌ها",
-            "نگه‌داری و بازبینی دوره‌ای",
+            r"Information is complete and usable",
+            r"Consistency of structure, terminology, and language",
+            r"Coverage of scenarios, steps, and challenges",
+            r"Maintenance and periodic review",
         ],
         [
-            "تعریف ساختار docs و style guide",
-            "تألیف user guides/FAQ/quickstart",
-            "بازبینی accuracy و UX doc",
-            "مدیریت نگهداری و دسترس‌پذیری",
+            r"Defining the docs structure and style guide",
+            r"Authoring user guides, FAQs, and quickstarts",
+            r"Reviewing accuracy and documentation UX",
+            r"Managing maintenance and availability",
         ],
         [
-            "هر doc دارای مسیر/گام/نتیجه مشخص باشد",
-            "اصطلاحات و ساختار در کل docs ثابت باشد",
-            "مستندات با محصول در نسخه‌ی درست موجود باشند",
+            r"Every doc has a stated path, step, and outcome",
+            r"Terminology and structure are consistent across all docs",
+            r"Docs exist in the right release alongside the product",
         ],
     ),
     "localization-specialist": sp(
         "content",
-        "آیا بومی‌سازی، فرهنگ/زبان و تجربه‌ی محلی به‌درستی انجام می‌شود؟",
+        r"Is localisation, culture/language, and the local experience handled correctly?",
         [
-            "کیفیت ترجمه و تناسب فرهنگی",
-            "سازگاری strings/date/numbers/format",
-            "پوشش RTL/LTR و UI انتقادی",
-            "مدیریت locale و glossary",
+            r"Translation quality and cultural fit",
+            r"Consistency of strings, dates, numbers, and formats",
+            r"Coverage of RTL/LTR and critical UI",
+            r"Managing locale and glossary",
         ],
         [
-            "تعریف locale/glossary/style",
-            "ترجمه/بومی‌سازی strings and format",
-            "آماده‌سازی RTL/LTR و adjustment",
-            "تست localized version و QA",
+            r"Defining locale, glossary, and style",
+            r"Translating and localising strings and formats",
+            r"Preparing RTL/LTR and adjustments",
+            r"Testing the localised version and QA",
         ],
         [
-            "محتواهای با locale و glossary consistent باشند",
-            "formatهای local به‌درستی render شوند",
-            "رخدادهای locale با test پوشش داده شوند",
+            r"Content is consistent with locale and glossary",
+            r"Local formats render correctly",
+            r"Locale cases are covered by tests",
         ],
     ),
     "translator": sp(
         "content",
-        "آیا ترجمه‌ی محتوا/مستندات دقیق، روان و از نظر فنی درست است؟",
+        r"Is content/documentation translation accurate, fluent, and technically correct?",
         [
-            "دقت معنایی/اصطلاحی",
-            "سازگاری واژه‌نامه و tone",
-            "دقت فنی/کد/نام‌ها",
-            "پیش‌بینی و پوشش منبع نسخه",
+            r"Semantic and terminological accuracy",
+            r"Consistency of glossary and tone",
+            r"Accuracy of technical terms, code, and names",
+            r"Anticipating and covering source releases",
         ],
         [
-            "تعریف glossary و tone per language",
-            "ترجمه منبع/Terminology/به شکل یکدست",
-            "بازبینی contextual و QA",
-            "نگهداری version/update translation",
+            r"Defining glossary and tone per language",
+            r"Translating source and terminology consistently",
+            r"Contextual review and QA",
+            r"Maintaining version and translation updates",
         ],
         [
-            "ترجمه با glossary و tone پایدار باشد",
-            "نام‌ها/کد/فنی در ترجمه preserve شوند",
-            "به‌روزرسانی ترجمه با نسخه‌ی منبع sync شود",
+            r"Translation is consistent with glossary and tone",
+            r"Names, code, and technical terms are preserved in translation",
+            r"Translation updates sync with the source release",
         ],
     ),
 
     # --------------------------- audit / compliance ---------------------
     "audit-specialist": sp(
         "assurance",
-        "آیا فرآیندها و خروجی‌ها به‌صورت مستقل، دقیق و مبتنی بر شواهد ممیزی می‌شوند؟",
+        r"Are processes and outputs audited independently, precisely, and on an evidence basis?",
         [
-            "استقلال و کامل بودن پوشش ممیزی",
-            "قابلیت ردیابی شواهد",
-            "انطباق با استانداردها/معیارها",
-            "کیفیت گزارش و پیگیری",
+            r"Independence and completeness of audit coverage",
+            r"Traceability of evidence",
+            r"Compliance with standards and criteria",
+            r"Quality of reporting and follow-up",
         ],
         [
-            "تعریف scope/criteria/گزارش ممیزی",
-            "جمع‌آوری evidence و control test",
-            "ثبت findings با severity/evidence",
-            "توالی پیگیری و رفع",
+            r"Defining audit scope, criteria, and reporting",
+            r"Collecting evidence and testing controls",
+            r"Recording findings with severity and evidence",
+            r"Follow-up and remediation sequence",
         ],
         [
-            "هر finding دارای evidence/severity/recommendation باشد",
-            "گزارش ممیزی با scope و criteria مستند باشد",
-            "اقدامات اصلاحی دارای owner/deadline باشند",
+            r"Every finding has evidence, severity, and a recommendation",
+            r"The audit report is documented with scope and criteria",
+            r"Corrective actions have an owner and deadline",
         ],
     ),
     "external-auditor": sp(
         "assurance",
-        "آیا ممیزی مستقل، بی‌طرف و با شواهد شفاف از بیرون انجام می‌شود؟",
+        r"Is the independent audit conducted impartially and with clear evidence from outside?",
         [
-            "بی‌طرفی و استقلال ممیزی",
-            "پوشش کامل scope و evidence",
-            "انطباق با مقررات/استانداردها",
-            "کیفیت گزارش و اعتماد به آن",
+            r"Impartiality and audit independence",
+            r"Complete coverage of scope and evidence",
+            r"Compliance with regulations and standards",
+            r"Quality of the report and trust in it",
         ],
         [
-            "تعریف scope/criteria در قرارداد ممیزی",
-            "جمع‌آوری evidence و independent test",
-            "گزارش findings با نتیجه‌گیری",
-            "تعریف پیگیری/پاسخ‌گویی/تأیید",
+            r"Defining scope and criteria in the audit engagement",
+            r"Collecting evidence and testing independently",
+            r"Reporting findings with conclusions",
+            r"Defining follow-up, accountability, and confirmation",
         ],
         [
-            "ممیزی بدون conflict و بر اساس scope باشد",
-            "یافته‌ها با evidence و استانداردها مرتبط باشند",
-            "گزارش شامل نتیجه و حالت انطباق باشد",
+            r"The audit is free of conflict and based on scope",
+            r"Findings relate to evidence and standards",
+            r"The report includes the conclusion and compliance state",
         ],
     ),
     "quality-manager": sp(
         "management",
-        "آیا کیفیت کل فرآیند تولید محصول با معیارها و کنترل‌ها تضمین می‌شود؟",
+        r"Is the quality of the whole product delivery process guaranteed by criteria and controls?",
         [
-            "پوشش Quality gates in فرآیند",
-            "کیفیت metrics (defect/coverage/بازگشت)",
-            "مدیریت quality plan و بهبود",
-            "سازگاری با استانداردها",
+            r"Coverage of quality gates in the process",
+            r"Quality of metrics (defect, coverage, rework)",
+            r"Managing the quality plan and improvement",
+            r"Consistency with standards",
         ],
         [
-            "تعریف quality policy/gates/metrics",
-            "تعریف inspects/reviews و gates",
-            "تعریف root-cause/continuous improvement",
-            "گزارش کیفیت و پیگیری",
+            r"Defining the quality policy, gates, and metrics",
+            r"Defining inspections, reviews, and gates",
+            r"Defining root-cause analysis and continuous improvement",
+            r"Quality reporting and follow-up",
         ],
         [
-            "هر gate دارای معیار pass/fail باشد",
-            "متریک کیفیت با داده و روند گزارش شود",
-            "اقدامات بهبود دارای مالک/اثر باشند",
+            r"Every gate has a pass/fail criterion",
+            r"Quality metrics are reported with data and trend",
+            r"Improvement actions have an owner and effect",
         ],
     ),
 
     # ------------------------------- legal ------------------------------
     "legal-advisor": sp(
         "compliance",
-        "آیا مسائل حقوقی/قراردادها و ریسک‌ها با مشاوره‌ی دقیق مدیریت می‌شوند؟",
+        r"Are legal/contract matters and risks managed with precise advice?",
         [
-            "پوشش ریسک‌های قرارداد/قانونی",
-            "وضوح مسئولیت/تعهد/مالکیت",
-            "انطباق با قوانین و محدودیت‌ها",
-            "کیفیت شواهد و مستندات",
+            r"Coverage of contractual and legal risks",
+            r"Clarity of responsibility, obligation, and ownership",
+            r"Compliance with laws and constraints",
+            r"Quality of evidence and documentation",
         ],
         [
-            "تعریف مرور قراردادها/شرایط",
-            "شناسایی ریسک‌های law/liability/IP",
-            "تعریف نکات قانونی در process (consent/DPA)",
-            "تعریف پیگیری/آرشیو",
+            r"Defining contract and terms review",
+            r"Identifying legal, liability, and IP risks",
+            r"Defining legal points in the process (consent, DPA)",
+            r"Defining follow-up and archiving",
         ],
         [
-            "هر قرارداد دارای ریسک/شرایط/مسولیت مستند باشد",
-            "مسائل قانونی با مستندات و پیگیری ثبت شوند",
-            "مستندات/امضاء/بایگانی مطابق policy باشند",
+            r"Every contract has documented risk, terms, and responsibility",
+            r"Legal matters are recorded with documentation and follow-up",
+            r"Documentation, signatures, and archiving comply with policy",
         ],
     ),
     "ip-copyright-specialist": sp(
         "compliance",
-        "آیا مالکیت معنوی، لایسنس و کپی‌رایت به‌درستی مدیریت می‌شوند؟",
+        r"Are intellectual property, licences, and copyright managed correctly?",
         [
-            "پوشش IP/license/copyright",
-            "تشخیص نقض/Risk",
-            "مدیریت third-party/open source",
-            "مستندات و ردیابی حقوق",
+            r"Coverage of IP, licence, and copyright",
+            r"Detecting infringement and risk",
+            r"Managing third-party and open source",
+            r"Documentation and rights tracking",
         ],
         [
-            "تعریف IP inventory/license policy",
-            "بررسی open source و license compliance",
-            "تعریف ثبت/نگه‌داری/تمدید",
-            "تعریف فرآیند پاسخ به claims",
+            r"Defining the IP inventory and licence policy",
+            r"Reviewing open source and licence compliance",
+            r"Defining registration, maintenance, and renewal",
+            r"Defining the claims response process",
         ],
         [
-            "هر asset با IP status و license ثبت باشد",
-            "دیتابیس open-source/license به‌روز باشد",
-            "اقدامات حقوقی/claims با مستندات باشند",
+            r"Every asset is recorded with IP status and licence",
+            r"The open-source/licence database is current",
+            r"Legal actions and claims are documented",
         ],
     ),
     "contract-manager": sp(
         "compliance",
-        "آیا قراردادها و تعهدات با چرخه‌ی مدیریت دقیق و بدون غفلت کنترل می‌شوند؟",
+        r"Are contracts and obligations controlled by a precise management cycle and without negligence?",
         [
-            "پوشش محتوای/شرایط قرارداد",
-            "مدیریت زمان‌بندی و renewals",
-            "سازگاری با SLA/تعهدات",
-            "قابلیت پیگیری و گزارش",
+            r"Coverage of contract content and terms",
+            r"Managing schedules and renewals",
+            r"Consistency with SLA and obligations",
+            r"Traceability and reporting",
         ],
         [
-            "تعریف قرارداد workflow and approval",
-            "تعریف calendaring/reminders/renewal",
-            "تعریف tracking obligations/احرفه",
-            "تعریف archiving/reporting",
+            r"Defining the contract workflow and approval",
+            r"Defining calendaring, reminders, and renewal",
+            r"Defining obligation tracking",
+            r"Defining archiving and reporting",
         ],
         [
-            "هر قرارداد دارای تاریخ/وضعیت/مسئول باشد",
-            "یادآوری‌های renewal با زمان تنظیم باشند",
-            "تعهدات با SLA قابل ردیابی باشند",
+            r"Every contract has a date, status, and owner",
+            r"Renewal reminders are configured with timing",
+            r"Obligations are traceable against SLA",
         ],
     ),
 
     # --------------------------- finance etc ----------------------------
     "finance-manager": sp(
         "management",
-        "آیا بودجه/هزینه و سلامت مالی پروژه با شفافیت مدیریت می‌شود؟",
+        r"Are budget/cost and project financial health managed transparently?",
         [
-            "پوشش بودجه/جریان نقدی",
-            "انطباق هزینه با Scope/value",
-            "گزارش مالی دقیق و پیش‌بینی",
+            r"Coverage of budget and cash flow",
+            r"Alignment of cost with scope and value",
+            r"Accurate financial reporting and forecasting",
             "management of spending and risks",
         ],
         [
-            "تعریف بودجه/چشم‌انداز/cost model",
-            "گزارش هزینه/واریانس/پیش‌بینی",
-            "کنترل گیت بودجه و approvals",
-            "تعریف معیار مالی و ROI",
+            r"Defining budget, forecast, and cost model",
+            r"Reporting cost, variance, and forecast",
+            r"Budget gate control and approvals",
+            r"Defining financial criteria and ROI",
         ],
         [
-            "گزارش مالی شامل budget/actual/forecast باشد",
-            "تصمیم‌های هزینه با approval ثبت شوند",
-            "انحراف/ریسک مالی قابل ردیابی باشد",
+            r"Financial reporting includes budget, actual, and forecast",
+            r"Cost decisions are recorded with approval",
+            r"Financial variance and risk are traceable",
         ],
     ),
     "finops-specialist": sp(
         "devops",
-        "آیا هزینه‌ی زیرساخت Cloud کنترل، بهینه و قابل توضیح است؟",
+        r"Is cloud infrastructure cost controlled, optimised, and explainable?",
         [
-            "visibility/wheere هزینه",
-            "درستی allocation و showback",
-            "بهینه‌سازی و راست‌سازی",
-            "التزام به هزینه‌ی ارزش",
+            r"Cost visibility and allocation",
+            r"Correct allocation and showback",
+            r"Optimisation and right-sizing",
+            r"Commitment to cost of value",
         ],
         [
-            "تعریف cost tags/allocation",
-            "فرآیند monitoring/alert روی هزینه",
-            "مدیریت optimization (right-size/schedule)",
-            "تعریف گزارش مالی cloud و decision",
+            r"Defining cost tags and allocation",
+            r"Cost monitoring and alerting process",
+            r"Managing optimisation (right-sizing, scheduling)",
+            r"Defining cloud financial reporting and decisions",
         ],
         [
-            "هزینه‌ها با tag/owner قابل تفکیک باشند",
-            "آلرت‌های بودجه/هزینه تنظیم شده باشند",
-            "اقدام optimization با کاهش هزینه/اثر ثبت شده باشند",
+            r"Costs are separable by tag and owner",
+            r"Budget and cost alerts are configured",
+            r"Optimisation actions are recorded with cost reduction and effect",
         ],
     ),
     "procurement-specialist": sp(
         "growth",
-        "آیا خرید تجهیزات/سرویس/نرم‌افزار به‌درستی، منصفانه و مقرون‌به‌صرفه انجام می‌شود؟",
+        r"Is equipment/service/software procurement carried out correctly, fairly, and cost-effectively?",
         [
-            "یکدستی منبع/کیفیت/قیمت",
-            "انطباق خرید با نیاز/بودجه",
-            "مدیریت قرارداد/تأمین‌کننده",
-            "کمک به رشد و پایداری",
+            r"Consistency of source, quality, and price",
+            r"Alignment of procurement with need and budget",
+            r"Managing contract and supplier",
+            r"Supporting growth and stability",
         ],
         [
-            "تعریف needs/requirements/مشخصات خرید",
-            "استعلام/مقایسه/مذاکره vendor",
-            "مدیریت order/قرارداد/تسویه",
-            "تعریف ارزیابی Vendor/quality",
+            r"Defining purchase needs, requirements, and specifications",
+            r"Requesting, comparing, and negotiating with vendors",
+            r"Managing order, contract, and settlement",
+            r"Defining vendor and quality assessment",
         ],
         [
-            "هر خرید دارای requires/قیمت/مالک/تاریخ باشد",
-            "مقایسه vendor با معیار مشخص باشد",
-            "قرارداد/تحویل/دسترس‌پذیری مستند باشد",
+            r"Every purchase has a requirement, price, owner, and date",
+            r"Vendor comparison uses stated criteria",
+            r"Contract, delivery, and availability are documented",
         ],
     ),
 
     # ------------------------------- people ------------------------------
     "hr-people-manager": sp(
         "people",
-        "آیا جذب، توسعه و نگه‌داشت نیروی انسانی با کیفیت و سازگار انجام می‌شود؟",
+        r"Are people recruited, developed, and retained with quality and consistency?",
         [
-            "انطباق استراتژی People با اهداف تیم",
-            "در فرآیند جذب/ارزیابی/توسعه",
-            "پوشش عدالت/بی‌طرفی/حریم",
-            "اثربخشی programs و retention",
+            r"Alignment of the people strategy with team goals",
+            r"In the recruit, assess, and develop process",
+            r"Coverage of fairness, impartiality, and privacy",
+            r"Effectiveness of programmes and retention",
         ],
         [
-            "تعریف نقش/مهارت/دسته‌بندی و مسیر",
-            "طراحی فرآیند استخدام/ورود/ارزیابی",
-            "تعریف رشد/مدیریت عملکرد/retenção",
-            "مدیریت قوانین/حریم و دادهپرداز",
+            r"Defining role, skill, classification, and path",
+            r"Designing the hire, onboarding, and assessment process",
+            r"Defining growth, performance management, and retention",
+            r"Managing policy, privacy, and data processing",
         ],
         [
-            "فرآیند People با معیار/گام/مسئول باشد",
-            "ارزیابی/بازخورد با شواهد و بدون bias باشد",
-            "داده‌های کارکنان مطابق حریم مدیریت شوند",
+            r"The people process has criteria, steps, and owners",
+            r"Assessment and feedback are evidence-based and free of bias",
+            r"Employee data is managed according to privacy policy",
         ],
     ),
     "recruiter": sp(
         "people",
-        "آیا جذب اعضای تیم با کیفیت، سریع و منصفانه انجام می‌شود؟",
+        r"Are team members recruited with quality, speed, and fairness?",
         [
-            "کیفیت pipeline و تجربه کاندیدا",
-            "پوشش نیازمندی تیم/Skill",
-            "عدالت و بدون bias",
-            "سازگاری با زمان/هزینه",
+            r"Quality of the pipeline and candidate experience",
+            r"Coverage of team and skill requirements",
+            r"Fairness and absence of bias",
+            r"Consistency with time and cost",
         ],
         [
-            "تعریف job description/sourcing/список",
-            "مصاحبه/ارزیابی/اسکور با معیار",
-            "بهبود pipeline و candidate experience",
-            "مدیریت داده‌ها/حریم و حقوقی",
+            r"Defining job description, sourcing, and shortlist",
+            r"Interviewing, assessing, and scoring against criteria",
+            r"Improving the pipeline and candidate experience",
+            r"Managing data, privacy, and legal matters",
         ],
         [
-            "هر کاندیدا با معیارهای مشخص ارزیابی شود",
-            "pipeline دارای فاز/مسئول/تاريخ باشد",
-            "تجربه کاندیدا با feedback ثبت شود",
+            r"Every candidate is assessed against stated criteria",
+            r"The pipeline has phases, owners, and dates",
+            r"The candidate experience is recorded with feedback",
         ],
     ),
     "technical-recruiter": sp(
         "people",
-        "آیا جذب نیروهای فنی با ارزیابی مهارت/تطبیق فنی انجام می‌شود؟",
+        r"Is technical hiring done with skill assessment and technical fit?",
         [
-            "کیفیت نیازمندی فنی و ارزیابی",
-            "تطبیق با stack/معماری",
-            "پوشش technical screening و fairness",
-            "سازگاری با سطح/تجربه و رشد",
+            r"Quality of technical requirements and assessment",
+            r"Fit with the stack and architecture",
+            r"Coverage of technical screening and fairness",
+            r"Consistency with level, experience, and growth",
         ],
         [
-            "تعریف مهارت‌ها/تست فنی/rubric",
-            "شرکت در technical screening و ارزیابی",
-            "هماهنگی با team/lead",
-            "مدیریت candidate data و feedback",
+            r"Defining skills, technical tests, and rubric",
+            r"Participating in technical screening and assessment",
+            r"Coordinating with the team and lead",
+            r"Managing candidate data and feedback",
         ],
         [
-            "هر انتساب با rubrics/skill/stack سنجیده شود",
-            "تست فنی با معیار/زمان/عدم bias باشد",
-            "بازخورد فنی به کاندیدا مستند باشد",
+            r"Every assignment is measured against rubrics, skills, and stack",
+            r"The technical test has criteria, timing, and no bias",
+            r"Technical feedback to the candidate is documented",
         ],
     ),
 
     # ---------------------------- support/community ---------------------
     "customer-support-agent": sp(
         "support",
-        "آیا مشکلات و درخواست‌های کاربران با کیفیت و در زمان معقول پاسخ داده می‌شود؟",
+        r"Are user issues and requests answered with quality and within a reasonable time?",
         [
-            "دقت/کامل‌بودن پاسخ",
-            "سرعت و انطباق SLA",
-            "پوشش escalation و ownership",
-            "تجربه‌ی کاربر و بازخورد",
+            r"Accuracy and completeness of the response",
+            r"Speed and SLA compliance",
+            r"Coverage of escalation and ownership",
+            r"User experience and feedback",
         ],
         [
-            "تعریف flow/اسکریپت/FAQ پایه",
-            "پاسخ/تشخیص/اسکالیشن/رفع مشکلات",
-            "ثبت ticket و مستندات/نتیجه",
-            "گزارش کیفیت/نظرسنجی",
+            r"Defining flow, scripts, and base FAQ",
+            r"Responding, diagnosing, escalating, and resolving issues",
+            r"Recording the ticket and documentation/outcome",
+            r"Reporting quality and survey results",
         ],
         [
-            "هر ticket دارای status/owner/مستند باشد",
-            "SLA پاسخ/حل رعایت شوند",
-            "بازخورد کاربر با اقدام ثبت شود",
+            r"Every ticket has a status, owner, and documentation",
+            r"Response and resolution SLAs are met",
+            r"User feedback is recorded with action",
         ],
     ),
     "technical-support-engineer": sp(
         "support",
-        "آیا مشکلات فنی کاربران با تشخیص/رفع درست حل می‌شود؟",
+        r"Are users' technical problems resolved through correct diagnosis and fix?",
         [
-            "دقت عیب‌یابی و رفع",
-            "پوشش logs/evidence/tests",
-            "سازگاری با نسخه/محیط",
-            "مستندات و improvement",
+            r"Accuracy of diagnosis and fix",
+            r"Coverage of logs, evidence, and tests",
+            r"Consistency with release and environment",
+            r"Documentation and improvement",
         ],
         [
-            "تعریف تشخیص اولیه/جمع‌آوری log",
-            "رفع/توصیه/Workaround",
-            "ثبت/بازبینی حل و escalate",
-            "تغذیه docs/knowledge base",
+            r"Defining initial diagnosis and log collection",
+            r"Fix, recommendation, and workaround",
+            r"Recording and reviewing the fix and escalating",
+            r"Feeding docs and the knowledge base",
         ],
         [
-            "هر ticket فنی دارای تشخیص/اقدام/نتیجه باشد",
-            "شواهد/log با تحلیل ثبت شده باشند",
-            "اقدامات/تعمیر با مستندات و بهبود باشد",
+            r"Every technical ticket has a diagnosis, action, and outcome",
+            r"Evidence and logs are recorded with analysis",
+            r"Actions and fixes are documented and improved",
         ],
     ),
     "customer-success-manager": sp(
         "support",
-        "آیا موفقیت مشتری از طریق on-boarding، استفاده و retention تسهیل می‌شود؟",
+        r"Is customer success facilitated through onboarding, usage, and retention?",
         [
-            "سلامت حساب/استفاده/retention",
-            "کفایت onboarding و ارزش‌آفرینی",
-            "مدیریت churn/risk/expand",
-            "سازگاری با محصول/تیم",
+            r"Account health, usage, and retention",
+            r"Sufficiency of onboarding and value creation",
+            r"Managing churn, risk, and expansion",
+            r"Alignment with product and team",
         ],
         [
-            "تعریف health score و onboarding",
-            "پایش adoption/usage و churn signals",
-            "تعریف QBR/نشانه‌های رشد و retention",
-            "هماهنگی با product/tech برای feedback",
+            r"Defining the health score and onboarding",
+            r"Monitoring adoption, usage, and churn signals",
+            r"Defining QBR, growth signals, and retention",
+            r"Coordinating with product and tech for feedback",
         ],
         [
-            "هر حساب دارای health/owner/اقدام باشد",
-            "علائم churn با alert و اقدام مرتبط باشند",
-            "نتیجه‌ی onboarding/renewal با شواهد ثبت شود",
+            r"Every account has a health score, owner, and action",
+            r"Churn signals have an alert and a related action",
+            r"Onboarding and renewal outcomes are recorded with evidence",
         ],
     ),
     "community-manager": sp(
         "support",
-        "آیا جامعه‌ی کاربران با محتوا، تعامل و سلامت مدیریت می‌شود؟",
+        r"Is the user community managed with content, engagement, and health?",
         [
-            "پوشش community growth/engagement",
-            "مدیریت content/rules/safety",
-            "سازگاری با برند/سواد",
-            "feedbacو به محصول",
+            r"Coverage of community growth and engagement",
+            r"Managing content, rules, and safety",
+            r"Consistency with brand and literacy",
+            r"Feedback to the product",
         ],
         [
-            "تعریف community strategy/rules/role",
-            "تولید/انتشار محتوا و activation",
-            "مدیریت moderation/feedback",
-            "گزارش engagement و improvement",
+            r"Defining community strategy, rules, and roles",
+            r"Producing and publishing content and activation",
+            r"Managing moderation and feedback",
+            r"Reporting engagement and improvement",
         ],
         [
-            "هر community کانال با rules/moderators مشخص باشد",
-            "گزارش engagement با داده real ثبت شود",
-            "feedback با اثر به محصول/تیم منتقل شود",
+            r"Every community channel is specified with rules and moderators",
+            r"Engagement reporting is recorded with real data",
+            r"Feedback reaches the product and team with effect",
         ],
     ),
 
     # ------------------------------ marketing ---------------------------
     "product-marketing-manager": sp(
         "growth",
-        "آیا استراتژی بازاریابی محصول با محصول/بازار هم‌راستاست و قابلیت اندازه‌گیری دارد؟",
+        r"Is the product marketing strategy aligned with product/market and measurable?",
         [
-            "وضوح positioning/message/audience",
-            "انسجام با مرحله‌ی محصول",
-            "قابلیت اندازه‌گیری و هم‌راستایی KPI",
-            "مدیریت launch/campaign/بازار",
+            r"Clarity of positioning, message, and audience",
+            r"Coherence with the product stage",
+            r"Measurability and KPI alignment",
+            r"Managing launch, campaign, and market",
         ],
         [
-            "تعریف category/positioning/persona",
-            "تعریف message/copy/offer و channel",
-            "تعریف launch plan/KPI/gating",
-            "هماهنگی با content/growth/sales",
+            r"Defining category, positioning, and persona",
+            r"Defining message, copy, offer, and channel",
+            r"Defining the launch plan, KPI, and gating",
+            r"Coordinating with content, growth, and sales",
         ],
         [
-            "positioning و message مستند و بدون ابهام باشند",
-            "برنامه‌ی launch دارای گام/مالک/KPI باشد",
-            "KPIها با داده و decision پیگیری شوند",
+            r"Positioning and message are documented and unambiguous",
+            r"The launch plan has steps, owners, and KPIs",
+            r"KPIs are tracked with data and decisions",
         ],
     ),
     "marketing-specialist": sp(
         "growth",
-        "آیا کمپین‌ها و فعالیت‌های بازاریابی مؤثر و قابل سنجش اجرا می‌شوند؟",
+        r"Are campaigns and marketing activities executed effectively and measurably?",
         [
-            "کیفیت/اثر کمپین",
-            "پوشش channel/audience/copy",
-            "بهینه‌سازی و ROI",
-            "سازگاری پیام با برند/مناسب",
+            r"Campaign quality and effect",
+            r"Coverage of channel, audience, and copy",
+            r"Optimisation and ROI",
+            r"Message consistency with brand and audience",
         ],
         [
-            "تعریف campaign objective/audience/copy",
-            "اجرای channel execution",
-            "پایش performance و A/B",
-            "گزارش الهام/آموزش و iteration",
+            r"Defining campaign objective, audience, and copy",
+            r"Executing channel execution",
+            r"Monitoring performance and A/B tests",
+            r"Reporting inspiration, learning, and iteration",
         ],
         [
-            "هر کمپین دارای objective/معیار/بودجه باشد",
-            "پیام/کانال با brand/audience سازگار باشد",
-            "نتایج با داده و توصیه پیگیری شوند",
+            r"Every campaign has an objective, criteria, and budget",
+            r"Message and channel are consistent with brand and audience",
+            r"Results are tracked with data and recommendations",
         ],
     ),
     "seo-specialist": sp(
         "growth",
-        "آیا بهینه‌سازی محتوا/معماری برای موتور جستجو به‌درستی انجام می‌شود؟",
+        r"Is content/architecture optimisation for search engines done correctly?",
         [
-            "پوشش technical SEO و content",
-            "کیفیت keyword/topic/intent",
-            "سازگاری با سایت/برند و تجربه",
-            "پایش/گزارش rank/traffic",
+            r"Coverage of technical SEO and content",
+            r"Quality of keyword, topic, and intent",
+            r"Consistency with site, brand, and experience",
+            r"Monitoring and reporting rank and traffic",
         ],
         [
-            "تعریف keyword/topic model و site structure",
-            "بهینه‌سازی on-page/technical/structured data",
-            "مدل linking/internal/silha",
-            "گزارش rank/organic/conversion",
+            r"Defining keyword/topic model and site structure",
+            r"Optimising on-page, technical, and structured data",
+            r"Link model and internal linking",
+            r"Reporting rank, organic traffic, and conversion",
         ],
         [
-            "هر صفحه با intent/keyword/on-page بهینه باشد",
-            "تصحیح technical SEO (crawl/index/speed)",
-            "گزارش organic با داده و تصمیم موجود باشد",
+            r"Every page is optimised for intent, keyword, and on-page factors",
+            r"Correcting technical SEO (crawl, index, speed)",
+            r"Organic reporting includes data and decisions",
         ],
     ),
     "aso-specialist": sp(
         "growth",
-        "آیا بهینه‌سازی App Store / Google Play مؤثر و قابل سنجش است؟",
+        r"Is App Store / Google Play optimisation effective and measurable?",
         [
-            "پوشش metadata/keywords/تصویر",
-            "سازگاری با platform/روند",
-            "بهبود conversion/category",
-            "پایش install/rank/review",
+            r"Coverage of metadata, keywords, and imagery",
+            r"Consistency with platform and trend",
+            r"Improving conversion and category",
+            r"Monitoring installs, rank, and reviews",
         ],
         [
-            "تعریف keywords/title/subtitle/screenshots",
-            "بهینه‌سازی metadata و creative",
-            "مدیریت reviews/replies و conversion",
-            "گزارش A/B و install",
+            r"Defining keywords, title, subtitle, and screenshots",
+            r"Optimising metadata and creative",
+            r"Managing reviews, replies, and conversion",
+            r"Reporting A/B tests and installs",
         ],
         [
-            "متادیتا با keyword intent و platform به‌روز باشد",
-            "creative/asset با تصاویر و A/B شده باشند",
-            "گزارش install/rank/review با داده باشد",
+            r"Metadata is current with keyword intent and platform",
+            r"Creatives and assets have imagery and A/B testing",
+            r"Install, rank, and review reporting is data-backed",
         ],
     ),
     "growth-manager": sp(
         "growth",
-        "آیا استراتژی رشد محصول با آزمایش/فانل و حفظ اثربخش است؟",
+        r"Is the product growth strategy effective through experimentation, funnel, and retention?",
         [
-            "وضوح north-star/فانل/حفظ",
-            "پوشش experiments/prioritization",
-            "سازگاری با product/مخاطب",
-            "قابلیت measurement و یادگیری",
+            r"Clarity of north-star metric, funnel, and retention",
+            r"Coverage of experiments and prioritisation",
+            r"Consistency with product and audience",
+            r"Measurement and learning capability",
         ],
         [
-            "تعریف north-star/funnel/KPI",
-            "تعریف experiment backlog/prioritization",
-            "پیاده‌سازی activation/retention/acquire",
-            "تعریف feedback loop و درجه‌بندی",
+            r"Defining north-star, funnel, and KPI",
+            r"Defining the experiment backlog and prioritisation",
+            r"Implementing activation, retention, and acquisition",
+            r"Defining the feedback loop and grading",
         ],
         [
-            "هر experiment دارای فرض/معیار/گیت باشد",
-            "KPI growth با داده پایش شوند",
-            "آزمایش‌ها با نتیجه/توصیه مستند باشند",
+            r"Every experiment has a hypothesis, criterion, and gate",
+            r"Growth KPIs are monitored with data",
+            r"Experiments are documented with results and recommendations",
         ],
     ),
 
     # -------------------------------- sales -----------------------------
     "sales-manager": sp(
         "growth",
-        "آیا فرآیند فروش با پوشش pipeline، مذاکره و رسیدن به نتیجه مدیریت می‌شود؟",
+        r"Is the sales process managed with pipeline coverage, negotiation, and closing?",
         [
-            "کیفیت pipeline/prospecting/forecast",
-            "انطباق فرآیند با محصول/مخاطب",
-            "شفافیت deals/stage/risk",
-            "سازگاری با تیم/برند",
+            r"Quality of pipeline, prospecting, and forecast",
+            r"Alignment of the process with product and audience",
+            r"Transparency of deals, stage, and risk",
+            r"Consistency with team and brand",
         ],
         [
-            "تعریف sales pipeline/stage/proc",
-            "تعریف prospecting/qualify/تصمیم",
-            "تعریف forecast/commit/review",
-            "تعریف هماهنگی با marketing/product",
+            r"Defining the sales pipeline, stages, and process",
+            r"Defining prospecting, qualification, and decision",
+            r"Defining forecast, commit, and review",
+            r"Defining coordination with marketing and product",
         ],
         [
-            "هر deal دارای stage/value/owner/risk باشد",
-            "forecast با داده/شانس/time ثبت شود",
-            "فرآیند/قرارداد با تیم سازگار و مستند باشد",
+            r"Every deal has a stage, value, owner, and risk",
+            r"Forecast is recorded with data, probability, and time",
+            r"Process and contract are consistent with the team and documented",
         ],
     ),
     "sales-representative": sp(
         "growth",
-        "آیا تعامل با مشتری و فروش با کیفیت، شفاف و هم‌راستا با نیاز انجام می‌شود؟",
+        r"Is customer engagement and selling done with quality, transparency, and need alignment?",
         [
-            "کیفیت ارتباط/تشخیص نیاز",
-            "پوشش objection/نقد",
-            "شفافیت offer/قیمت/مرحله",
-            "نگه‌داشتن و تبدیل (CRM)",
+            r"Quality of communication and need discovery",
+            r"Coverage of objections and pushback",
+            r"Transparency of offer, price, and stage",
+            r"Retention and conversion (CRM)",
         ],
         [
-            "تعریف target/qualification/discovery",
-            "ارائه/demo/پاسخ objections",
-            "تعریف offer/اقامه/توافق",
-            "به‌روزرسانی CRM و follow-up",
+            r"Defining target, qualification, and discovery",
+            r"Presenting, demoing, and answering objections",
+            r"Defining offer, proposal, and agreement",
+            r"Updating CRM and following up",
         ],
         [
-            "هر lead/account دارای مرحله/وضعیت/مالک باشد",
-            "ارائه/دیدار با نیاز مستند شود",
-            "توافق/قرارداد با مستندات و پیگیری ثبت شود",
+            r"Every lead/account has a stage, status, and owner",
+            r"Presentations and meetings are documented with the need",
+            r"Agreements and contracts are recorded with documentation and follow-up",
         ],
     ),
 
     # --------------------- biz dev / partnerships --------------------
     "account-manager": sp(
         "support",
-        "آیا ارتباط با مشتریان کلیدی با شناخت نیاز، هماهنگی و حفظ رابطه مدیریت می‌شود؟",
+        r"Is key-customer relationship management done with need understanding, coordination, and relationship retention?",
         [
-            "کیفیت رابطه/نظرسنجی",
-            "استفاده/رضایت/فرصت",
-            "پوشش escalation/renewal",
-            "سازگاری با محصول/تیم",
+            r"Quality of relationship and survey",
+            r"Usage, satisfaction, and opportunity",
+            r"Coverage of escalation and renewal",
+            r"Alignment with product and team",
         ],
         [
-            "تعریف account plan/value/تماس",
-            "پایش usage/satisfaction/قوام",
-            "مدیریت renewal/upsell/escalate",
-            "هماهنگی با product/support/CS",
+            r"Defining the account plan, value, and contact",
+            r"Monitoring usage, satisfaction, and consistency",
+            r"Managing renewal, upsell, and escalation",
+            r"Coordinating with product, support, and customer success",
         ],
         [
-            "هر account دارای plan/owner/تماس/وضعیت باشد",
-            "خصمانگی/رضایت با شواهد پایش شود",
-            "renewal/risk دارای اقدام و مالک باشد",
+            r"Every account has a plan, owner, contact, and status",
+            r"Hostility and satisfaction are monitored with evidence",
+            r"Renewal and risk have an action and an owner",
         ],
     ),
     "business-development-manager": sp(
         "growth",
-        "آیا فرصت‌های تجاری از طریق partnership و market به‌درستی شناسایی و دنبال می‌شوند؟",
+        r"Are commercial opportunities correctly identified and pursued through partnership and market?",
         [
-            "کیفیت شناسایی فرصت/بستر",
-            "پیگیری/ارزش proposition",
-            "سازگاری با استراتژی و بازار",
-            "اثر و ROI partnership",
+            r"Quality of opportunity and platform identification",
+            r"Follow-up and value proposition",
+            r"Consistency with strategy and market",
+            r"Partnership effect and ROI",
         ],
         [
-            "تعریف market/همکار/فرصت‌یابی",
-            "تعریف تاچی/پیگیری/قرارداد",
-            "سازگاری با product/strategy",
-            "گزارش pipeline/momentum/value",
+            r"Defining market, partner, and opportunity discovery",
+            r"Defining touchpoints, follow-up, and contract",
+            r"Consistency with product and strategy",
+            r"Reporting pipeline, momentum, and value",
         ],
         [
-            "هر فرصت دارای ارزش/مرحله/مالک باشد",
-            "پیگیری‌ها دارای وضعیت/تاریخ باشند",
-            "گزارش partnership با ROI/تعریف شده باشد",
+            r"Every opportunity has a value, stage, and owner",
+            r"Follow-ups have a status and date",
+            r"Partnership reporting includes ROI and definitions",
         ],
     ),
     "partnership-manager": sp(
         "growth",
-        "آیا همکاری با شرکت‌ها/سرویس‌ها به‌درستی توسعه/مدیریت می‌شود؟",
+        r"Is collaboration with companies/services developed and managed correctly?",
         [
-            "انطباق با استراتژی/ارزش دوطرفه",
-            "پوشش کانال/سرویس/قرارداد",
-            "مدیریت ROI/انگیزه/محتوای",
-            "کیفیت رابطه/پیگیری",
+            r"Alignment with strategy and mutual value",
+            r"Coverage of channel, service, and contract",
+            r"Managing ROI, incentives, and content",
+            r"Quality of relationship and follow-up",
         ],
         [
-            "تعریف partner profile/value",
-            "تعریف برنامه/انگیزه/کاتالوگ/روند",
-            "مدیریت co-marketing/integration/قرارداد",
-            "گزارش performance/ROI",
+            r"Defining partner profile and value",
+            r"Defining programme, incentive, catalogue, and process",
+            r"Managing co-marketing, integration, and contract",
+            r"Reporting performance and ROI",
         ],
         [
-            "همکار با ارزش/کانال/قرارداد مستند باشد",
-            "اقدامات همکاری دارای تاریخ/وضعیت باشند",
-            "گزارش performance با data و تصمیم باشد",
+            r"Partners are documented with value, channel, and contract",
+            r"Partnership actions have a date and status",
+            r"Performance reporting includes data and decisions",
         ],
     ),
 
     # --------------------------- devrel / evangelist --------------------
     "devrel": sp(
         "engineering",
-        "آیا ارتباط با توسعه‌دهندگان و جامعه فنی با محتوا/آموزش/feedback مؤثر است؟",
+        r"Is developer and technical-community engagement effective through content, education, and feedback?",
         [
-            "کیفیت محتوا/آموزش/event",
-            "پوشش developer persona/journey",
-            "جذب feedback و adoption",
-            "سازگاری با برند/اختصاص در دسترس",
+            r"Quality of content, education, and events",
+            r"Coverage of developer persona and journey",
+            r"Attracting feedback and adoption",
+            r"Consistency with brand and available resources",
         ],
         [
-            "تعریف developer persona/content plan",
-            "نوشتن docs/tutorials/امتحان",
-            "شرکت در community/events/امتحان",
-            "جمع‌بندی feedback و community growth",
+            r"Defining developer persona and content plan",
+            r"Writing docs, tutorials, and workshops",
+            r"Participating in community and events",
+            r"Collecting feedback and community growth",
         ],
         [
-            "محتوای توسعه‌دهنده با نسخه/behavior سازگار باشد",
-            "کمیونیتی/event دارای engagement/feedback باشد",
-            "feedback با product/engineering به اشتراک گذاشته شود",
+            r"Developer content is consistent with release and behaviour",
+            r"Community and events have engagement and feedback",
+            r"Feedback is shared with product and engineering",
         ],
     ),
     "technical-evangelist": sp(
         "engineering",
-        "آیا معرفی تکنولوژی/محصول به جامعه فنی با دقت/مثبت و تأثیر آموزشی انجام می‌شود؟",
+        r"Is technology/product introduction to the technical community done accurately, positively, and with educational impact?",
         [
-            "دقت فنی و عدم گمراهی",
-            "کیفیت دمو/محتوا/پاسخ",
-            "تأثیر بر adoption",
-            "سازگاری با برند/استراتژی",
+            r"Technical accuracy and absence of misdirection",
+            r"Quality of demo, content, and response",
+            r"Effect on adoption",
+            r"Consistency with brand and strategy",
         ],
         [
-            "تعریف audience/case/demo",
-            "تولید محتوا/ارائه/workshop",
-            "پاسخ به سوالات/objection",
-            "گیر feedback و گزارش adoption",
+            r"Defining audience, case, and demo",
+            r"Producing content, presentations, and workshops",
+            r"Answering questions and objections",
+            r"Capturing feedback and reporting adoption",
         ],
         [
-            "ادعاهای فنی با نسخه/شواهد سازگار باشند",
-            "ارائه/دمو با مخاطب/زمان مشخص باشد",
-            "feedback/معیار adoption گزارش شود",
+            r"Technical claims are consistent with release and evidence",
+            r"Presentations and demos have a stated audience and time",
+            r"Feedback and adoption criteria are reported",
         ],
     ),
 
     # ------------------------------ engineering -------------------------
     "software-architect": sp(
         "architecture",
-        "آیا معماری نرم‌افزار از نظر ماژولار بودن، مرزها و قابلیت نگهداشت سالم است؟",
+        r"Is the software architecture sound in modularity, boundaries, and maintainability?",
         [
-            "تفکیک ماژول‌ها و مرزها",
-            "سازگاری با نیازمندی‌ها و مقیاس",
-            "کیفیت قراردادهای بین ماژول",
-            "قابلیت نگهداشت و تست‌پذیری",
+            r"Separation of modules and boundaries",
+            r"Alignment with requirements and scale",
+            r"Quality of inter-module contracts",
+            r"Maintainability and testability",
         ],
         [
-            "تعریف لایه‌ها/مرزها/بسته‌بندی",
-            "تعریف قراردادها/interfaces/event",
-            "تعریف نگرش به داده/تکنیک/برفر",
-            "تعریف ارزیابی و decision record",
+            r"Defining layers, boundaries, and packaging",
+            r"Defining contracts, interfaces, and events",
+            r"Defining the approach to data, technique, and refactoring",
+            r"Defining assessment and decision records",
         ],
         [
-            "معماری دارای لایه‌ها و مرزهای بدون وابستگی معکوس باشد",
-            "قراردادها با input/output و error تعریف شده باشند",
-            "تصمیم‌ها با Trade-off مستند باشند",
+            r"The architecture has layers and boundaries without reverse dependency",
+            r"Contracts are defined with input, output, and error",
+            r"Decisions are documented with trade-offs",
         ],
     ),
     "software-engineer": sp(
         "engineering",
-        "آیا طراحی و پیاده‌سازی قابلیت‌ها با کیفیت، تست و قراردادها ارائه شده است؟",
+        r"Are features designed and implemented with quality, tests, and contracts?",
         [
-            "کد صحیح/خوانا/قابل نگهداشت",
-            "انطباق با معماری/قرارداد",
-            "پوشش edge/failure/validation",
-            "تست/گزارش/یکپارچگی",
+            r"Correct, readable, maintainable code",
+            r"Alignment with architecture and contract",
+            r"Coverage of edge, failure, and validation",
+            r"Testing, reporting, and consistency",
         ],
         [
-            "تعریف رفتار/ورودی/خروجی و قرارداد",
-            "پیاده‌سازی domain/interface/core",
-            "مدیریت validation,error, edge cases",
-            "نوشتن تست + بازبینی + نسخه",
+            r"Defining behaviour, input, output, and contract",
+            r"Implementing domain, interface, and core",
+            r"Managing validation, errors, and edge cases",
+            r"Writing tests, review, and release",
         ],
         [
-            "کد با expected behavior و قرارداد مطابقت دارد",
-            "Cases لبه و failure با رفتار مستند تست شوند",
-            "تست‌ها سبز و کیفیت merge داشته باشد",
+            r"Code matches the expected behaviour and contract",
+            r"Edge and failure cases are tested with documented behaviour",
+            r"Tests are green and merge quality is maintained",
         ],
     ),
     "backend-developer": sp(
         "engineering",
-        "آیا Backend (API، منطق، سرویس) با صحت، امنیت و کارایی توسعه یافته است؟",
+        r"Is the backend (API, logic, service) developed with correctness, security, and efficiency?",
         [
-            "کیفیت API/business logic/persistence",
-            "امنیت/authent/authorization/validation",
-            "کارایی/transaction/concurrency",
-            "پوشش error/retry/observability",
+            r"Quality of API, business logic, and persistence",
+            r"Security of authentication, authorisation, and validation",
+            r"Performance, transaction, and concurrency",
+            r"Coverage of error, retry, and observability",
         ],
         [
-            "تعریف API contracts/validation/status",
-            "پیاده‌سازی business/service/data access",
-            "مدیریت transactions/optimistic locking",
-            "تست + logging/tracing + upgrade session",
+            r"Defining API contracts, validation, and status",
+            r"Implementing business, service, and data access",
+            r"Managing transactions and optimistic locking",
+            r"Testing, logging, tracing, and session upgrade",
         ],
         [
-            "API با قرارداد/خطا/کد پاسخ سازگار است",
-            "validation و authorization پیاده‌سازی شده باشد",
-            "Logic با transaction و تست‌ها پوشش داده شود",
+            r"The API is consistent with its contract, errors, and response codes",
+            r"Validation and authorisation are implemented",
+            r"Logic is covered with transactions and tests",
         ],
     ),
     "frontend-developer": sp(
         "engineering",
-        "آیا UI و منطق client با کیفیت، ریسپانسیو و دسترس‌پذیر توسعه داده شده است؟",
+        r"Are the UI and client logic developed with quality, responsiveness, and accessibility?",
         [
-            "کیفیت UI 상태/render/بازده",
-            "پوشش state management/data fetch",
+            r"Quality of the UI state, render, and responsiveness",
+            r"Coverage of state management and data fetching",
             "a11y/responsive/animation",
-            "DRY و استفاده از components",
+            r"DRY and use of components",
         ],
         [
-            "تعریف component/state/data flow",
-            "پیاده‌سازی UI با semantic/accessibility",
-            "مدیریت loading/empty/error/optimistic",
-            "تست component/regression + performance",
+            r"Defining component, state, and data flow",
+            r"Implementing UI with semantics and accessibility",
+            r"Managing loading, empty, error, and optimistic states",
+            r"Component, regression, and performance testing",
         ],
         [
-            "UI با states (load/empty/error/disabled) پوشش داشته باشد",
-            "Semantic/focus/keyboard و responsive رعایت شده باشد",
-            "کامپوننت‌ها reusable و بدون نسخه‌های تکراری باشند",
+            r"The UI covers its states (load, empty, error, disabled)",
+            r"Semantics, focus, keyboard, and responsive behaviour are respected",
+            r"Components are reusable and free of duplicate versions",
         ],
     ),
     "full-stack-developer": sp(
         "engineering",
-        "آیا توسعه هم‌زمان Frontend/Backend با یکپارچگی و کیفیت انجام می‌شود؟",
+        r"Is simultaneous frontend/backend development done with consistency and quality?",
         [
-            "انطباق قرارداد API با UI",
-            "کیفیت end-to-end flow",
-            "پوشش auth/state/data/session",
-            "کیفیت معماری و DRY",
+            r"Alignment of the API contract with the UI",
+            r"Quality of the end-to-end flow",
+            r"Coverage of auth, state, data, and session",
+            r"Quality of architecture and DRY",
         ],
         [
-            "تعریف contract/data flow/end-to-end",
-            "پیاده‌سازی backend + frontend با توافقات",
-            "مدیریت auth/session/optimization",
-            "تست integration/E2E + documentation",
+            r"Defining contract, data flow, and end-to-end",
+            r"Implementing backend and frontend to agreement",
+            r"Managing auth, session, and optimisation",
+            r"Integration/E2E testing and documentation",
         ],
         [
-            "قراردادها بین FE/BE بدون mismatch باشد",
-            "جریان end-to-end با state/session پوشش یافته باشد",
-            "تست integration/E2E سبز و reproducible باشد",
+            r"Contracts between frontend and backend are free of mismatch",
+            r"The end-to-end flow is covered with state and session",
+            r"Integration and E2E tests are green and reproducible",
         ],
     ),
     "mobile-developer": sp(
         "engineering",
-        "آیا اپلیکیشن موبایل با کیفیت، پایدار و سازگار با پلتفرم توسعه می‌یابد؟",
+        r"Is the mobile application developed with quality, stability, and platform compliance?",
         [
-            "درستی native/cross-platform سازگاری",
-            "کیفیت state/دیپ لینک/تصویر/آفلاین",
-            "پوشش app lifecycle/permission/notification",
-            "کارایی/باطری/جریان",
+            r"Correctness of native/cross-platform consistency",
+            r"Quality of state, deep links, media, and offline",
+            r"Coverage of app lifecycle, permissions, and notifications",
+            r"Performance, battery, and flow",
         ],
         [
-            "تعریف navigate/state/persistence",
-            "پیاده‌سازی UI/platform compliance",
-            "مدیریت offline/network/permission/notification",
-            "تست device/server + code signature/release",
+            r"Defining navigation, state, and persistence",
+            r"Implementing UI and platform compliance",
+            r"Managing offline, network, permissions, and notifications",
+            r"Device testing, signing, and release",
         ],
         [
-            "جریان navigation/deep-link/state stable باشد",
-            "فرایندهای offline/error/retry پوشش داشته باشند",
-            "تست‌ها در multiple devices/versions اجرا شوند",
+            r"The navigation, deep-link, and state flow is stable",
+            r"Offline, error, and retry flows are covered",
+            r"Tests run across multiple devices and versions",
         ],
     ),
     "desktop-developer": sp(
         "engineering",
-        "آیا نرم‌افزار Desktop با کیفیت، سازگار با OS و تجربه‌ی desktop توسعه می‌یابد؟",
+        r"Is the desktop software developed with quality, OS compliance, and a desktop experience?",
         [
-            "سازگاری با multiple OS/نسخه",
-            "کیفیت UI/پردازش/فایل/مدیریت window",
-            "پوشش async/updates/security",
-            "استحکام و کارایی",
+            r"Consistency with multiple OS versions",
+            r"Quality of UI, processing, files, and window management",
+            r"Coverage of async, updates, and security",
+            r"Robustness and performance",
         ],
         [
-            "تعریف architecture/state/data",
-            "پیاده‌سازی UI + system integration",
-            "مدیریت file/update/تماس/context",
-            "تست multi-platform + performance + signatures",
+            r"Defining architecture, state, and data",
+            r"Implementing UI and system integration",
+            r"Managing file, update, contact, and context",
+            r"Multi-platform, performance, and signature testing",
         ],
         [
-            "نرم‌افزار با OS دیفالتها سازگار باشد",
-            "انتشار/Update/Signing پوشش داشته باشند",
-            "موانع و خطاهای پلتفرم با تست مدیریت شوند",
+            r"The software is consistent with OS defaults",
+            r"Release, update, and signing are covered",
+            r"Platform obstacles and errors are managed with tests",
         ],
     ),
     "game-developer": sp(
         "engineering",
-        "آیا بازی با منطق/گیم‌پلی/سیستم‌های پایدار و تجربه‌ی خوشایند توسعه می‌یابد؟",
+        r"Is the game developed with logic, gameplay, stable systems, and an enjoyable experience?",
         [
-            "پایداری loop/gameplay/state",
-            "کارایی/frame/پلتفرم",
-            "بازبینی سیستم/شروع/کشتن",
-            "کیفیت UX/صدا/visual",
+            r"Stability of loop, gameplay, and state",
+            r"Performance, frame rate, and platform",
+            r"System, startup, and shutdown review",
+            r"Quality of UX, audio, and visuals",
         ],
         [
-            "تعریف gameplay loop/state machine",
-            "پیاده‌سازی mechanics/event/entity",
-            "مدیریت perf/memory/input/device",
-            "تست gameplay/perf/بازخورد",
+            r"Defining the gameplay loop and state machine",
+            r"Implementing mechanics, events, and entities",
+            r"Managing performance, memory, input, and device",
+            r"Gameplay, performance, and feedback testing",
         ],
         [
-            "گیم‌پلی با اهداف/تست loop پایدار باشد",
-            "loading/کیفیت/bug fixing پوشش داشته باشد",
-            "معیار perf (fps/memory) برقرار باشد",
+            r"Gameplay with goals and a tested loop is stable",
+            r"Loading, quality, and bug fixing are covered",
+            r"A performance criterion (fps, memory) is established",
         ],
     ),
     "embedded-developer": sp(
         "engineering",
-        "آیا نرم‌افزار برای دستگاه‌های Embedded با محدودیت منابع و پایداری توسعه می‌یابد؟",
+        r"Is embedded-device software developed with resource constraints and stability?",
         [
-            "سازگاری با محدودیت‌های سخت‌افزاری",
-            "پایداری/زمان واقعی/قطع/شروع",
-            "اتصال/ارتباط/پروتکل",
-            "امنیت/تست در بورد",
+            r"Consistency with hardware constraints",
+            r"Stability, real-time, interruption, and startup",
+            r"Connectivity, communication, and protocol",
+            r"Security and on-board testing",
         ],
         [
-            "تعریف target/memory/power/پروتکل",
-            "پیاده‌سازی low-level/OS/دیوایس",
-            "مدیریت interrupts/timing/wdt",
-            "تست device/hardware-in-loop/safety",
+            r"Defining target, memory, power, and protocol",
+            r"Implementing low-level, OS, and device code",
+            r"Managing interrupts, timing, and watchdog",
+            r"Device, hardware-in-the-loop, and safety testing",
         ],
         [
-            "در زمان‌های بالا/low resources stable باشد",
-            "قابلیت ارتباط و خطا با پروتکل حفظ شود",
-            "تست‌ها روی hardware/best patterns اجرا شوند",
+            r"The system is stable at high times and low resources",
+            r"Connectivity and error handling are preserved by protocol",
+            r"Tests run on hardware and best patterns",
         ],
     ),
     "firmware-engineer": sp(
         "engineering",
-        "آیا Firmware با سطح پایین و ارتباط سخت‌افزار، پایدار و قابل ارتقا توسعه می‌یابد؟",
+        r"Is firmware developed at low level with hardware communication, stable and upgradeable?",
         [
-            "سازگاری با device/HAL",
-            "امنیت/قابلیت ارتقا/دائم",
-            "پایداری/زمان/درجات",
-            "مستندات و تست hardware",
+            r"Consistency with device and HAL",
+            r"Security, upgradeability, and durability",
+            r"Stability, timing, and degrees",
+            r"Hardware documentation and testing",
         ],
         [
-            "تعریف device/register/memory map",
-            "پیاده‌سازی driver/protocol/startup",
-            "مدیریت boot/update/watchdog",
-            "تست hardware + OTA + safety",
+            r"Defining device, register, and memory map",
+            r"Implementing driver, protocol, and startup",
+            r"Managing boot, update, and watchdog",
+            r"Hardware, OTA, and safety testing",
         ],
         [
-            "Firmware روی device/simulator موفق شود",
-            "Update/OTA/rollback مشخص باشد",
-            "تست/لاگ hardware با شواهد باشد",
+            r"Firmware runs successfully on device/simulator",
+            r"Update, OTA, and rollback are defined",
+            r"Hardware tests and logs are evidence-backed",
         ],
     ),
     "iot-engineer": sp(
         "engineering",
-        "آیا سیستم‌های IoT (دستگاه/داده/ارتباط) امن، قابل مقیاس و قابل پایش توسعه می‌یابند؟",
+        r"Are IoT systems (device/data/connectivity) developed securely, scalably, and monitorably?",
         [
-            "امنیت device/network/data",
-            "ارتباط/MQTT/etc و مقیاس",
-            "پایش/فوتپرینت/قابلیت اطمینان",
-            "انطباق با data/pipeline cloud",
+            r"Security of device, network, and data",
+            r"Connectivity, MQTT, and scale",
+            r"Monitoring, footprint, and reliability",
+            r"Consistency with cloud data and pipelines",
         ],
         [
-            "تعریف device/edge/connectivity/protocol",
-            "پیاده‌سازی ingestion/telemetry/control",
-            "مدیریت auth/replay/OTA/device identity",
-            "تألیف monitoring/alert + test devices",
+            r"Defining device, edge, connectivity, and protocol",
+            r"Implementing ingestion, telemetry, and control",
+            r"Managing auth, replay, OTA, and device identity",
+            r"Authoring monitoring, alerts, and device tests",
         ],
         [
-            "دستگاه با هویت/امنیت/OTA connect شوند",
-            "telemetry/status دیده و با alert پایش شود",
-            "مقیاس/latency/در زمان مدیریت شود",
+            r"Devices connect with identity, security, and OTA",
+            r"Telemetry and status are visible and monitored with alerts",
+            r"Scale and latency are managed in real time",
         ],
     ),
     "maintenance-engineer": sp(
         "engineering",
-        "آیا نگهداری، رفع باگ و بهبود سیستم بدون تخریب پایداری انجام می‌شود؟",
+        r"Is maintenance, bug fixing, and system improvement carried out without destroying stability?",
         [
-            "پوشش رگرسیون/پایداری بعد از تغییر",
-            "کیفیت fix/تست/توصیه",
-            "مستندسازی/انتشار",
-            "مدیریت priority/مناسب",
+            r"Coverage of regression and stability after change",
+            r"Quality of fix, tests, and recommendation",
+            r"Documentation and release",
+            r"Managing priority appropriately",
         ],
         [
-            "تعریف triage/repro/root cause",
-            "اعمال fix + tests + regression",
-            "مدیریت release/hotfix/backport",
-            "جامعه‌ی مشاهدات/known issues",
+            r"Defining triage, reproduction, and root cause",
+            r"Applying the fix with tests and regression",
+            r"Managing release, hotfix, and backport",
+            r"The observability of known issues",
         ],
         [
-            "باگ با root cause و test اصلاح شود",
-            "رگرسیون بعد از fix سبز بماند",
-            "تغییرات/ریزنس با گزارش انتشار مستند شوند",
+            r"Bugs are fixed with root cause and a test",
+            r"Regression stays green after the fix",
+            r"Changes and releases are documented with release reporting",
         ],
     ),
     "refactoring-engineer": sp(
         "engineering",
-        "آیا بهبود ساختار/کیفیت کد بدون تغییر رفتار و کاهش ریسک انجام می‌شود؟",
+        r"Is code structure/quality improvement carried out without behaviour change and with reduced risk?",
         [
-            "حفظ رفتار در بازآرایی",
-            "کیفیت تغییرات/فازها",
-            "پوشش رگرسیون",
-            "مرتب‌سازی وabolishing debt",
+            r"Preserving behaviour while refactoring",
+            r"Quality of changes and phases",
+            r"Coverage of regression",
+            r"Ordering and retiring debt",
         ],
         [
-            "تعریف refactor bound/master/test",
-            "پرسش‌های incremental + refactor",
-            "افزایش readability/maintainability",
-            "تست safety و گردش‌های CI",
+            r"Defining refactor bounds, master, and tests",
+            r"Incremental questions and refactoring",
+            r"Increasing readability and maintainability",
+            r"Test safety and CI cycles",
         ],
         [
-            "مجموعه‌ی تست قبل از refactor موجود باشد",
-            "refactor تغییرات را در بخش‌های کوچک اعمال کند",
-            "رفتار (خروجی) بعد از refactor بدون تغییر باشد",
+            r"A test suite exists before refactoring",
+            r"Refactoring applies changes in small sections",
+            r"Behaviour (output) is unchanged after refactoring",
         ],
     ),
     "legacy-modernization-engineer": sp(
         "engineering",
-        "آیا مهاجرت/نوسازی سیستم قدیمی با کنترل ریسک و حفظ تداوم انجام می‌شود؟",
+        r"Is legacy system migration/modernisation carried out with risk control and continuity preserved?",
         [
-            "شناخت کامل legacy/system",
-            "پوشش migration/backward compatibility",
-            "کاهش ریسک cutover",
-            "قابلیت rollback",
+            r"Full understanding of the legacy system",
+            r"Coverage of migration and backward compatibility",
+            r"Reducing cutover risk",
+            r"Rollback capability",
         ],
         [
-            "تعریف modern target/strangler/مراحل",
-            "نقشه‌ی mapping legacy to new",
-            "پیاده‌سازی migration steps and tests",
-            "مدیریت cutover/rollback/parallel",
+            r"Defining the modern target, strangler, and steps",
+            r"The legacy-to-new mapping plan",
+            r"Implementing migration steps and tests",
+            r"Managing cutover, rollback, and parallel run",
         ],
         [
-            "هر گام migration با mapping/test/rollback باشد",
-            "سرویس legacy به تدریج با جدید جایگزین شود",
-            "cutover با rollback و monitoring باشد",
+            r"Every migration step has mapping, tests, and rollback",
+            r"Legacy services are gradually replaced by the new ones",
+            r"Cutover has rollback and monitoring",
         ],
     ),
     "third-party-integration-specialist": sp(
         "engineering",
-        "آیا اتصال به سرویس‌ها/APIهای خارجی با امنیت، مقاوم‌سازی و تست انجام می‌شود؟",
+        r"Is connection to external services/APIs done securely, with hardening and tests?",
         [
-            "شناخت API/resource/limit",
-            "مدیریت auth/rate/error",
-            "مقاوم‌سازی/retry/fallback",
-            "تست integration/mock/ایدمن",
+            r"Understanding API, resources, and limits",
+            r"Managing auth, rate, and error",
+            r"Hardening, retry, and fallback",
+            r"Integration and mock testing",
         ],
         [
-            "تعریف contract/auth/timeout",
-            "پیاده‌سازی integration with validation",
-            "مدیریت rate/retry/circuit/fallback",
-            "تست integration/mock + secrets",
+            r"Defining contract, auth, and timeout",
+            r"Implementing integration with validation",
+            r"Managing rate, retry, circuit breaker, and fallback",
+            r"Integration, mock, and secrets testing",
         ],
         [
-            "هارفعالیت‌های third-party با auth/limit سازگار باشند",
-            "خطا/retry/fallback تست شود",
-            "secret/key در محل امن بدون هاردکد باشد",
+            r"Third-party integrations are consistent with auth and limits",
+            r"Error, retry, and fallback are tested",
+            r"Secrets and keys are in a secure location and not hardcoded",
         ],
     ),
     "migration-specialist": sp(
         "engineering",
-        "آیا انتقال داده/سیستم از محیط قبلی با صحت، امنیت و زمان‌بندی انجام می‌شود؟",
+        r"Is data/system migration from the previous environment done accurately, securely, and on schedule?",
         [
-            "پوشش کامل داده/نگاشت",
-            "دقت/تکرار/بازیابی",
-            "امنیت/compliance/حفظ داده",
-            "قابلیت rollback/اقدام",
+            r"Complete coverage of data and mapping",
+            r"Accuracy, repeatability, and recovery",
+            r"Security, compliance, and data retention",
+            r"Rollback capability and action",
         ],
         [
-            "تعریف source/target/mapping/validation",
-            "پیاده‌سازی migration + dry run",
-            "مدیریت cutover/backup/rollback",
-            "تست validation data + resume",
+            r"Defining source, target, mapping, and validation",
+            r"Implementing migration with a dry run",
+            r"Managing cutover, backup, and rollback",
+            r"Data validation and resume testing",
         ],
         [
-            "نگاشت داده به target کامل و بدون خطا باشد",
-            "داده‌ها در مقصد validation شوند",
-            "قطع برق/خطا با resume/rollback مدیریت شود",
+            r"Data mapping to the target is complete and error-free",
+            r"Data is validated at the destination",
+            r"Interruptions and errors are managed with resume and rollback",
         ],
     ),
     "deployment-engineer": sp(
         "engineering",
-        "آیا استقرار نسخه‌ها در محیط‌ها با پایداری، امنیت و قابلیت بازگشت انجام می‌شود؟",
+        r"Is release deployment across environments done with stability, security, and reversibility?",
         [
-            "کیفیت pipeline/deploy",
-            "پوشش environment/secret/version",
-            "قابلیت rollback/مونیترینگ",
-            "سازگاری با محیط و تناسب",
+            r"Quality of pipeline and deployment",
+            r"Coverage of environment, secret, and version",
+            r"Rollback and monitoring capability",
+            r"Consistency with environment and fit",
         ],
         [
-            "تعریف deploy strategy (env/artifact)",
-            "اجرای deploy + rollback",
-            "مدیریت config/secret/انواع محیط",
-            "تعریف post-deploy checks و alert",
+            r"Defining the deploy strategy (env, artifact)",
+            r"Executing deploy and rollback",
+            r"Managing config, secrets, and environment types",
+            r"Defining post-deploy checks and alerts",
         ],
         [
-            "استقرار با تصویر version و integrity باشد",
-            "شکست/rollback بر اساس alert/canary باشد",
-            "Config/secret هر محیط در دسترس و ایمن باشد",
+            r"Deployment carries a version image and integrity",
+            r"Failure and rollback are driven by alerts and canary",
+            r"Config and secrets for each environment are accessible and secure",
         ],
     ),
     "disaster-recovery-specialist": sp(
         "engineering",
-        "آیا بازیابی پس از بحران با اهداف RTO/RPO و تست معتبر انجام می‌شود؟",
+        r"Is disaster recovery carried out with RTO/RPO targets and valid testing?",
         [
-            "پوشش سناریو/بازیابی",
-            "دقت backup/بازیابی/زمان",
-            "test/rehearsal راستی‌آزمایی",
-            "مستندات و runbook",
+            r"Coverage of scenario and recovery",
+            r"Accuracy of backup, recovery, and timing",
+            r"Verifying tests and rehearsals",
+            r"Documentation and runbook",
         ],
         [
-            "تعریف RTO/RPO/source/backup",
-            "طراحی DR/pipeline/replication",
-            "تست خرابی/best معیار",
-            "تعریف runbook/ارتباط/بازیابی",
+            r"Defining RTO, RPO, source, and backup",
+            r"Designing DR, pipeline, and replication",
+            r"Testing failure and criteria",
+            r"Defining runbook, communication, and recovery",
         ],
         [
-            "هر سناریو DR دارای RTO/RPO/منبع و بازیابی باشد",
-            "Backup/بازیابی تست شده باشد",
-            "Runbook با نقش/زمان/روش مستند باشد",
+            r"Every DR scenario has an RTO, RPO, source, and recovery",
+            r"Backup and recovery have been tested",
+            r"The runbook documents role, timing, and method",
         ],
     ),
     "backup-administrator": sp(
         "engineering",
-        "آیا Backup و Restore با صحت، زمان و آزمایش منظم مدیریت می‌شوند؟",
+        r"Are backup and restore managed with accuracy, timing, and regular testing?",
         [
-            "پوشش داده/backup retention",
-            "دقت/کامل/restore",
-            "test/rehearsal و alert",
-            "ایمنی/پایبندی",
+            r"Coverage of data and backup retention",
+            r"Accuracy, completeness, and restore",
+            r"Tests, rehearsals, and alerts",
+            r"Safety and continuity",
         ],
         [
-            "تعریف scope/schedule/retention",
-            "مدیریت backup/jobs/monitoring",
-            "تست restore و رفع خطا",
-            "تعریف alert/alarm و report",
+            r"Defining scope, schedule, and retention",
+            r"Managing backup jobs and monitoring",
+            r"Testing restore and fixing errors",
+            r"Defining alerts, alarms, and reporting",
         ],
         [
-            "فایل‌های backup طبق schedule و retention باشند",
-            "تست restore موفق باشد",
-            "عدم موفقیت backup با alert و investigation همراه باشد",
+            r"Backup files follow the schedule and retention",
+            r"Restore tests succeed",
+            r"Backup failure comes with an alert and investigation",
         ],
     ),
     "on-call-engineer": sp(
         "devops",
-        "آیا رسیدگی فوری به مشکلات Production با سرعت، مستند و با بهبود انجام می‌شود؟",
+        r"Is immediate response to production issues carried out with speed, documentation, and improvement?",
         [
-            "وضوح رویه‌ی روی‌کال",
-            "سرعت/دقیق بودن پاسخ",
-            "الگوریتم/escalation و handoff",
-            "پایداری/پوشش shifts",
+            r"Clarity of the on-call procedure",
+            r"Speed and accuracy of response",
+            r"Algorithm, escalation, and handoff",
+            r"Stability and shift coverage",
         ],
         [
-            "تعریف on-call rotation/runbook",
-            "پاسخ به alerts و incidents",
-            "ثبت action/communication/handoff",
-            "ارزیابی/کمک به بهبود",
+            r"Defining the on-call rotation and runbook",
+            r"Responding to alerts and incidents",
+            r"Recording action, communication, and handoff",
+            r"Assessing and supporting improvement",
         ],
         [
-            "هر alert/incident دارای پاسخ و نتیجه ثبت باشد",
-            "runbook/اسکالیشن در دسترس باشد",
-            "شبکه‌ها بدون overlap و با برآورد پوشش باشد",
+            r"Every alert and incident has a recorded response and outcome",
+            r"The runbook and escalation path are available",
+            r"Networks are free of overlap and sized to estimated coverage",
         ],
     ),
     "decommission-engineer": sp(
         "engineering",
-        "آیا خاموش‌کردن امن سرویس‌ها و انتقال/حذف داده‌ها بدون آسیب به کاربر و با رعایت امنیت انجام می‌شود؟",
+        r"Is safe decommissioning of services and migration/deletion of data done without harming users and with security respected?",
         [
-            "کامل و امن بودن فرآیند حذف/انتقال داده",
-            "پوشش دوره‌ی خروج (drain، alert، backup)",
-            "رعایت compliance/retention در حذف داده",
-            "قابلیت بازیابی در صورت نیاز (rollback/backup)",
+            r"Completeness and safety of the data deletion/migration process",
+            r"Coverage of the exit period (drain, alert, backup)",
+            r"Compliance and retention respected in data deletion",
+            r"Recoverability when needed (rollback, backup)",
         ],
         [
-            "تعریف فهرست سرویس‌ها/داده‌ها و وابستگی‌های آنها",
-            "برنامه‌ریزی drain/محدودشدن/غیرفعال‌سازی",
-            "پیاده‌سازی انتقال/آرشیو و حذف امن داده",
-            "تست خاموش‌کردن + rollback و گزارش",
+            r"Defining the inventory of services and data and their dependencies",
+            r"Planning drain, throttling, and deactivation",
+            r"Implementing migration, archiving, and safe data deletion",
+            r"Testing shutdown, rollback, and reporting",
         ],
         [
-            "هیچ سرویس/داده‌ی حیاتی بدون پشتیبان/انتقال خاموش نشود",
-            "دوره‌ی خروج با alert/دسته‌بندی و backup مستند باشد",
-            "حذف داده مطابق retention/compliance انجام و گزارش شود",
+            r"No critical service or data is decommissioned without backup or migration",
+            r"The exit period is documented with alerts, classification, and backup",
+            r"Data deletion is carried out and reported per retention and compliance",
         ],
     ),
     "staff-engineer": sp(
         "engineering",
-        "آیا حل مسائل پیچیده و هدایت معماری در مقیاس بزرگ انجام می‌شود؟",
+        r"Are complex problems solved and architecture led at large scale?",
         [
-            "کیفیت/دقت تصمیم‌ها و Trade-off",
-            "پوشش اهداف و مسیر فنی",
-            "تأثیر و رهبری فنی",
-            "هم‌سویی با فرهنگ/محدودیت",
+            r"Quality and accuracy of decisions and trade-offs",
+            r"Coverage of goals and the technical path",
+            r"Impact and technical leadership",
+            r"Alignment with culture and constraints",
         ],
         [
-            "تعریف tech strategy/roadmap",
-            "تحلیل پیچیده و معماری/مقیاس",
-            "مربی‌گری و کد/ریسک",
-            "تعریف سیستم/ادغام/تصمیم records",
+            r"Defining the technical strategy and roadmap",
+            r"Complex analysis and architecture at scale",
+            r"Mentoring and code/risk",
+            r"Defining system, integration, and decision records",
         ],
         [
-            "تصمیم‌ها با evidence/trade-off ثبت باشند",
-            "راه‌حل با معیارهای معماری (scale/performance) توجیه شود",
-            "تأخیر/debt با مخاطره/نگرش مستند باشد",
+            r"Decisions are recorded with evidence and trade-offs",
+            r"Solutions are justified against architecture criteria (scale, performance)",
+            r"Delay and debt are documented with risk and posture",
         ],
     ),
     "principal-engineer": sp(
         "engineering",
-        "آیا تصمیم‌های فنی سازمان و معماری‌های پیچیده با پذیرش/تأثیر اثربخش هدایت می‌شوند؟",
+        r"Are enterprise technical decisions and complex architectures led effectively with adoption and impact?",
         [
-            "کیفیت دیدگاه فنی سازمانی",
-            "سازگاری با اجرا/تجربه",
-            "مدیریت پیچیدگی/Trade-off",
-            "تأثیر بر راه‌حل‌ها/تیم",
+            r"Quality of the enterprise technical viewpoint",
+            r"Consistency with execution and experience",
+            r"Managing complexity and trade-offs",
+            r"Effect on solutions and the team",
         ],
         [
-            "تعریف معماری/استاندارد سازمانی",
-            "حل چند پیچیده و شکست / فرافنی",
-            "توانایی تعریف RFC/decisions",
-            "راهنمایی/توانمندسازی تیم",
+            r"Defining enterprise architecture and standards",
+            r"Solving several complex problems and cross-technical gaps",
+            r"Ability to define RFCs and decisions",
+            r"Guiding and enabling the team",
         ],
         [
-            "تصمیم‌های سازمانی با RFC/evidence ثبت شوند",
-            "معماری پیچیده با مقیاس/سناریو توجیه شود",
-            "تصمیم‌ها در سازمان قابل پیاده و ارزیابی باشند",
+            r"Enterprise decisions are recorded with RFCs and evidence",
+            r"Complex architecture is justified with scale and scenario",
+            r"Decisions in the organisation are implementable and assessable",
         ],
     ),
     "technical-lead-tech-lead": sp(
         "engineering",
-        "آیا هدایت فنی تیم و تصمیم‌های پیاده‌سازی با کیفیت و هماهنگی انجام می‌شود؟",
+        r"Is team technical leadership and implementation decision-making done with quality and coordination?",
         [
-            "وضوح نقش/تصمیم فنی",
-            "کیفیت سیاست‌های کد/مربی",
-            "پوشش کیفیت (test/review)",
-            "هماهنگی با stakeholders",
+            r"Clarity of role and technical decision",
+            r"Quality of code policy and mentoring",
+            r"Quality coverage (tests, review)",
+            r"Coordination with stakeholders",
         ],
         [
-            "تعریف decision/review/coding standards",
-            "هدایت تیم در احراز فن/معماری",
-            "مدیریت risk/tech debt/quality",
-            "مربی‌گری و گزارش",
+            r"Defining decision, review, and coding standards",
+            r"Leading the team in technical and architectural verification",
+            r"Managing risk, technical debt, and quality",
+            r"Mentoring and reporting",
         ],
         [
-            "تصمیم‌های فنی با مستند و به‌صورت قابل ارزیابی باشند",
-            "review/code quality/تست برقرار باشند",
-            "ریسک/بدهی/انحراف فنی با وضعیت گزارش شوند",
+            r"Technical decisions are documented and assessable",
+            r"Review, code quality, and tests are in place",
+            r"Technical risk, debt, and variance are reported with status",
         ],
     ),
 
     # ------------------------------ ai / data ---------------------------
     "ai-ml-engineer": sp(
         "ai",
-        "آیا توسعه و Integration مدل‌های AI/ML با صحت، بازتولید و پایش انجام می‌شود؟",
+        r"Are AI/ML models developed and integrated with correctness, reproducibility, and monitoring?",
         [
-            "کیفیت مدل/data/pipeline",
-            "پوشش train/eval/deploy/monitor",
-            "بازتولیدپذیری/versioning",
+            r"Quality of model, data, and pipeline",
+            r"Coverage of train, eval, deploy, and monitor",
+            r"Reproducibility and versioning",
             "Safety/Privacy/Cost",
         ],
         [
-            "تعریف features/dataset/metric",
-            "پیاده‌سازی training/eval/inference",
-            "مدیریت model/data versioning",
-            "پیاده‌سازی monitor/drift/guardrail",
+            r"Defining features, dataset, and metric",
+            r"Implementing training, eval, and inference",
+            r"Managing model and data versioning",
+            r"Implementing monitor, drift, and guardrail",
         ],
         [
-            "Pipeline با dataset/version/eval reproducible باشد",
-            "مدل deploy با monitor/drift/fallback باشد",
-            "داده/بایاس/حریم با تست/گزارش مدیریت شود",
+            r"The pipeline is reproducible with dataset, version, and eval",
+            r"The deployed model has monitor, drift detection, and fallback",
+            r"Data, bias, and privacy are managed with tests and reporting",
         ],
     ),
     "data-scientist": sp(
         "ai",
-        "آیا تحلیل داده و ساخت مدل آماری/پیش‌بینی با معیار و فرضیه‌ی دقیق انجام می‌شود؟",
+        r"Is data analysis and statistical/predictive model building done with precise criteria and hypothesis?",
         [
-            "کیفیت داده/EEA/داده‌ها",
-            "پوشش مدل/validation/metric",
-            "بازتولید و تفسیر",
-            "پیش‌بینی/پایداری/بایاس",
+            r"Quality of data, EDA, and datasets",
+            r"Coverage of model, validation, and metric",
+            r"Reproducibility and interpretation",
+            r"Prediction, stability, and bias",
         ],
         [
-            "تعریف problem/data/evaluation",
-            "انجام EDA/feature/model/validation",
-            "سنجش metrics/cross-validation",
-            "گزارش insight/ریسک و deploy readiness",
+            r"Defining problem, data, and evaluation",
+            r"Performing EDA, feature engineering, model, and validation",
+            r"Measuring metrics with cross-validation",
+            r"Reporting insight, risk, and deploy readiness",
         ],
         [
-            "نتایج با metric/cross-validation reproducible باشد",
-            "فرضیه/داده/محدودیت مستند باشد",
-            "یافته‌ها با شواهد و میزان اطمینان گزارش شوند",
+            r"Results are reproducible with metric and cross-validation",
+            r"Hypothesis, data, and limitations are documented",
+            r"Findings are reported with evidence and confidence level",
         ],
     ),
     "data-engineer": sp(
         "data",
-        "آیا Pipeline و زیرساخت پردازش داده با صحت، مقیاس و پایش ساخته می‌شود؟",
+        r"Are data processing pipelines and infrastructure built with correctness, scale, and monitoring?",
         [
-            "کیفیت/قابلیت اطمینان pipeline",
-            "پوشش data/quality/قابلیت",
-            "مقیاس/هزینه/latency",
-            "سازگاری با source و contracts",
+            r"Quality and reliability of the pipeline",
+            r"Coverage of data quality and capability",
+            r"Scale, cost, and latency",
+            r"Consistency with source and contracts",
         ],
         [
-            "تعریف sources/schema/transform",
-            "پیاده‌سازی pipeline with retries/backfill",
-            "مدیریت data quality/خطا/برق",
-            "تعریف monitor/alert/cost",
+            r"Defining sources, schema, and transforms",
+            r"Implementing pipeline with retries and backfill",
+            r"Managing data quality, errors, and power",
+            r"Defining monitor, alert, and cost",
         ],
         [
-            "Pipeline با schema/tests/خطا پایدار باشد",
-            "Backfill/retry/duplicate پوشش داده شود",
-            "data quality/managed با alert گزارش شود",
+            r"The pipeline is stable with schema, tests, and error handling",
+            r"Backfill, retry, and duplicates are covered",
+            r"Data quality and management are reported with alerts",
         ],
     ),
     "mlops-engineer": sp(
         "ai",
-        "آیا Deployment، Monitoring و Lifecycle مدل‌های ML با پایداری و کنترل انجام می‌شود؟",
+        r"Are ML model deployment, monitoring, and lifecycle carried out with stability and control?",
         [
-            "پوشش ML lifeCycle/versioning",
-            "کیفیت deployment/monitoring",
-            "بازتولید/ریسک/fallback",
-            "نظارت/قیمت/سرعت",
+            r"Coverage of the ML lifecycle and versioning",
+            r"Quality of deployment and monitoring",
+            r"Reproducibility, risk, and fallback",
+            r"Monitoring, price, and speed",
         ],
         [
-            "تعریف pipeline (train/eval/deploy)",
-            "مدیریت model registry/versioning",
-            "پایش drift/performance/alert",
-            "تعریف rollback/canary/cost",
+            r"Defining the pipeline (train, eval, deploy)",
+            r"Managing the model registry and versioning",
+            r"Monitoring drift, performance, and alerts",
+            r"Defining rollback, canary, and cost",
         ],
         [
-            "هر مدل با registry/version/evidence باشد",
-            "پایش drift/perf و alert تنظیم باشد",
-            "استقرار/بازیابی دارای rollback/fallback باشد",
+            r"Every model has registry, version, and evidence",
+            r"Drift and performance monitoring and alerts are configured",
+            r"Deployment and recovery have rollback and fallback",
         ],
     ),
     "prompt-engineer": sp(
         "ai",
-        "آیا طراحی Prompt و تعامل ساختاریافته برای مدل‌ها با دقت/ارزیابی انجام می‌شود؟",
+        r"Is prompt design and structured interaction with models done with precision and evaluation?",
         [
-            "کیفیت prompt/محتوای/معنا",
-            "پوشش evaluation/qualities",
-            "ایمنی/کاهش hallucination",
-            "سازگاری با task/context",
+            r"Quality of prompt, content, and meaning",
+            r"Coverage of evaluation and qualities",
+            r"Safety and reduction of hallucination",
+            r"Consistency with task and context",
         ],
         [
-            "تعریف task/context/few-shot/reference",
-            "طراحی prompt و variables",
-            "سنجش quality/safety/evaluation",
-            "تکرار prompt experiments و نگهداری نسخه",
+            r"Defining task, context, few-shot, and reference",
+            r"Designing prompts and variables",
+            r"Measuring quality, safety, and evaluation",
+            r"Repeating prompt experiments and keeping versions",
         ],
         [
-            "پاسخ‌ها با معیار (helper) ارزیابی شوند",
-            "نشانه‌های harm/hallucination مدیریت شوند",
-            "نسخه‌های prompt با result/version ردیابی شوند",
+            r"Responses are evaluated against criteria",
+            r"Signs of harm and hallucination are managed",
+            r"Prompt versions are tracked with results and versions",
         ],
     ),
     "ai-engineer": sp(
         "ai",
-        "آیا سیستم‌های LLM/Agent/RAG/AI Services به‌درستی و ایمن طراحی/توسعه می‌یابند؟",
+        r"Are LLM/agent/RAG/AI-service systems designed and developed correctly and safely?",
         [
-            "کیفیت معماری LLM/agent",
-            "پوشش RAG/retrieval/eval",
+            r"Quality of the LLM/agent architecture",
+            r"Coverage of RAG, retrieval, and eval",
             "Safety/hallucination/guardrail",
-            "اقدام/ابزار/delay/cost",
+            r"Action, tools, latency, and cost",
         ],
         [
-            "تعریف architecture (agent/flow/retrieval)",
-            "پیاده‌سازی RAG/agents/tools/eval",
-            "تعریف guardrail/fallback/observability",
-            "سنجش cost/latency/quality",
+            r"Defining the architecture (agent, flow, retrieval)",
+            r"Implementing RAG, agents, tools, and eval",
+            r"Defining guardrail, fallback, and observability",
+            r"Measuring cost, latency, and quality",
         ],
         [
-            "سیستم با retrieval/eval/fallback reproducible باشد",
-            "guardrail برای harm/hallucination پیاده‌سازی شود",
-            "performance/cost قابل مشاهده و بهینه شود",
+            r"The system is reproducible with retrieval, eval, and fallback",
+            r"Guardrails against harm and hallucination are implemented",
+            r"Performance and cost are observable and optimised",
         ],
     ),
     "observability-engineer": sp(
         "devops",
-        "آیا Logging/Metrics/Tracing/Monitoring با قابلیت تشخیص و بهبود کامل است؟",
+        r"Are logging/metrics/tracing/monitoring complete with detection and improvement capability?",
         [
-            "پوشش observability (logs/metrics/traces)",
-            "کیفیت alert/داشبورد",
+            r"Coverage of observability (logs, metrics, traces)",
+            r"Quality of alerts and dashboards",
             "Correlation/troubleshooting",
-            "پایش SLO/Performance",
+            r"Monitoring SLO and performance",
         ],
         [
-            "تعریف instrumented code/log/metric/trace",
-            "پیاده‌سازی metrics/dashboards/alerts",
-            "مدیریت correlation/context",
-            "تعریف SLO/Error budget و انباشته",
+            r"Defining instrumented code, log, metric, and trace",
+            r"Implementing metrics, dashboards, and alerts",
+            r"Managing correlation and context",
+            r"Defining SLO, error budget, and accumulation",
         ],
         [
-            "سرویس‌های crucial با logs/metrics/traces شوند",
-            "alert/dashboard با SLO مرتبط باشند",
-            "یافته‌های monitoring با action بهبود مستند باشند",
+            r"Critical services have logs, metrics, and traces",
+            r"Alerts and dashboards relate to the SLO",
+            r"Monitoring findings are documented with improvement actions",
         ],
     ),
     "data-analyst": sp(
         "analysis",
-        "آیا تحلیل رفتار کاربران و KPIها با داده دقیق و بینش قابل اقدام انجام می‌شود؟",
+        r"Is user-behaviour and KPI analysis carried out with accurate data and actionable insight?",
         [
-            "کیفیت داده/metric و accuracy",
-            "پوشش funnels/segments/بینی",
-            "سازگاری با محصول/A-B tests",
-            "قابل اقدام بودن insight",
+            r"Quality of data, metrics, and accuracy",
+            r"Coverage of funnels, segments, and insights",
+            r"Consistency with product and A/B tests",
+            r"Actionability of insight",
         ],
         [
-            "تعریف مرجع metric/data/schema",
-            "تحلیل behavior/funnel/segment",
-            "گزارش analysis and recommendations",
-            "ارتباط با product/engineering",
+            r"Defining the metric, data, and schema source",
+            r"Analysing behaviour, funnel, and segment",
+            r"Reporting analysis and recommendations",
+            r"Linking with product and engineering",
         ],
         [
-            "هر KPI تعریف/منبع/Numerator denominator داشته باشد",
-            "تجزیه‌وتحلیل با نمونه/داده و limitation باز باشد",
-            "توصیه‌ها با action/owner/impact باشد",
+            r"Every KPI has a definition, source, numerator, and denominator",
+            r"Analysis is open about sample, data, and limitations",
+            r"Recommendations have action, owner, and impact",
         ],
     ),
     "bi-analyst": sp(
         "analysis",
-        "آیا گزارش‌ها و داشبوردهای مدیریتی دقیق، قابل فهم و کاربردی هستند؟",
+        r"Are management reports and dashboards accurate, understandable, and useful?",
         [
-            "کیفیت مدل data/ریچ",
-            "دقت/پوشش/فیلتر dashboards",
-            "درک/عمل/پاسخ برای مدیریت",
-            "تازه/دسترس/امنیت داده",
+            r"Quality of the data model and richness",
+            r"Accuracy, coverage, and filtering of dashboards",
+            r"Comprehension, action, and response for management",
+            r"Data freshness, access, and security",
         ],
         [
-            "تعریف data model/reporting requirements",
-            "ساخت dashboards با KPI/فیلتر/دروازه",
-            "مدیریت data freshness/access",
-            "ارزیابی استفاده و بهبود",
+            r"Defining the data model and reporting requirements",
+            r"Building dashboards with KPIs, filters, and gates",
+            r"Managing data freshness and access",
+            r"Assessing usage and improvement",
         ],
         [
-            "هر داشبورد با منبع داده/KPI/فیلتر مستند باشد",
-            "داده‌ها با تعریف و timezone consistent باشند",
-            "دسترسی/امنیت data رعایت شود",
+            r"Every dashboard is documented with data source, KPI, and filter",
+            r"Data is consistent in definition and timezone",
+            r"Data access and security are respected",
         ],
     ),
     "product-analyst": sp(
         "analysis",
-        "آیا تحلیل استفاده‌ی کاربران برای تصمیم‌های Product با داده و experimentsی انجام می‌شود؟",
+        r"Is usage analysis for product decisions carried out with data and experimentation?",
         [
-            "وضوح metric/product objective",
-            "انجام funnels/experiments/segments",
-            "اضافه‌کردن insight به تصمیم محصول",
-            "دقت/قابلیت اعتماد",
+            r"Clarity of metric and product objective",
+            r"Running funnels, experiments, and segments",
+            r"Adding insight to the product decision",
+            r"Accuracy and reliability",
         ],
         [
-            "تعریف product metric/funnel",
-            "انجام analysis/experiment evaluation",
-            "گزارش recommendation and trade-off",
-            "هماهنگی با PM/design/eng",
+            r"Defining product metrics and funnels",
+            r"Running analysis and experiment evaluation",
+            r"Reporting recommendations and trade-offs",
+            r"Coordinating with PM, design, and engineering",
         ],
         [
-            "تحلیل با metric/محاسبه و limitation مستند باشد",
-            "experiment با معیار/معناداری ارزیابی شود",
-            "توصیه‌ها به تصمیم محصول/feature متصل شوند",
+            r"Analysis is documented with metric, calculation, and limitations",
+            r"Experiments are evaluated against criteria and significance",
+            r"Recommendations link to product and feature decisions",
         ],
     ),
 
     # ----------------------------- database -----------------------------
     "database-administrator-dba": sp(
         "data",
-        "آیا Database از نظر پایداری، امنیت، پشتیبان و کارایی مدیریت می‌شود؟",
+        r"Is the database managed for stability, security, backup, and performance?",
         [
-            "پایداری/performance/overload",
-            "امنیت/access/permission",
-            "پشتیبان/recovery/DR",
-            "متناسب با schema/index/query",
+            r"Stability, performance, and overload",
+            r"Security, access, and permissions",
+            r"Backup, recovery, and DR",
+            r"Fit with schema, index, and query",
         ],
         [
-            "تعریف access/ssl/audit",
-            "مدیریت backup/restore/و DR",
-            "پایش performance/wait/locks",
-            "بازبینی query/index/storage",
+            r"Defining access, SSL, and audit",
+            r"Managing backup, restore, and DR",
+            r"Monitoring performance, waits, and locks",
+            r"Reviewing query, index, and storage",
         ],
         [
-            "دسترسی کاربر با least privilege باشد",
-            "فایل backup با schedule/recovery تست شده باشد",
-            "پایش/alert (CPU/locks/storage) فعال باشد",
+            r"User access follows least privilege",
+            r"Backup files are tested against schedule and recovery",
+            r"Monitoring and alerts (CPU, locks, storage) are active",
         ],
     ),
     "database-engineer": sp(
         "data",
-        "آیا Schema/Query/Index و معماری داده با صحت، کارایی و مقیاس طراحی می‌شوند؟",
+        r"Are schema, queries, indexes, and data architecture designed with correctness, performance, and scale?",
         [
-            "کیفیت schema/تقاطع/استاندارد",
-            "کارایی query/index/load",
-            "یکپارچگی داده/تراکنش",
-            "سازگاری با قرارداد/مقیاس",
+            r"Quality of schema, intersection, and standard",
+            r"Query, index, and load performance",
+            r"Data integrity and transactions",
+            r"Consistency with contract and scale",
         ],
         [
-            "تعریف schema/migration/null constraints",
-            "طراحی query/index/انواع",
-            "مدیریت transaction/consistency",
-            "تست performance/data quality",
+            r"Defining schema, migration, and null constraints",
+            r"Designing query, index, and types",
+            r"Managing transactions and consistency",
+            r"Testing performance and data quality",
         ],
         [
-            "Schema با constraints/index/migration مستند باشد",
-            "Query/Index حاصل از execution plan مناسب باشد",
-            "یکپارچگی/consistency با شواهد تست شود",
+            r"The schema is documented with constraints, indexes, and migrations",
+            r"Query and index derive from an appropriate execution plan",
+            r"Integrity and consistency are tested with evidence",
         ],
     ),
     "data-architect": sp(
         "architecture",
-        "آیا معماری کلان داده (مقیاس، استاندارد، حاکمیت) سالم و قابل توسعه است؟",
+        r"Is the high-level data architecture (scale, standard, governance) sound and extensible?",
         [
-            "سازگاری با نیازها/مقیاس",
-            "مدیریت مدل/متن/lifecycle",
-            "دسترسی/حاکمیت/کیفیت",
-            "قابلیت توسعه/نگهداری",
+            r"Consistency with requirements and scale",
+            r"Managing model, text, and lifecycle",
+            r"Access, governance, and quality",
+            r"Extensibility and maintainability",
         ],
         [
-            "تعریف data model/layers/standards",
-            "تعریف data governance/catalog/lineage",
-            "انتخاب storage/processing",
-            "مدیریت quality/security/compliance",
+            r"Defining the data model, layers, and standards",
+            r"Defining data governance, catalog, and lineage",
+            r"Selecting storage and processing",
+            r"Managing quality, security, and compliance",
         ],
         [
-            "معماری دارای لایه‌ها/استاندارد و نگاشت باشد",
-            "کاتالوگ/Lienage/governance موجود باشد",
-            "قابلیت مقیاس/کیفیت/امنیت سنجیده شود",
+            r"The architecture has layers, standards, and mapping",
+            r"Catalog, lineage, and governance exist",
+            r"Scalability, quality, and security are assessed",
         ],
     ),
 
     # ----------------------------- ops/infra ---------------------------
     "system-architect": sp(
         "architecture",
-        "آیا معماری کل سیستم (نرم‌افزار، سخت‌افزار، زیرساخت) منسجم و قابل اجراست؟",
+        r"Is the overall system architecture (software, hardware, infrastructure) coherent and executable?",
         [
-            "پوشش complete system/components",
-            "سازگاری نرم‌افزار/سخت‌افزار/زیرساخت",
-            "مقیاس/تحمل/امنیت",
-            "قابلیت اجرا و changes",
+            r"Coverage of the complete system and components",
+            r"Consistency of software, hardware, and infrastructure",
+            r"Scale, resilience, and security",
+            r"Executability and changeability",
         ],
         [
-            "تعریف system view/component/interface",
-            "طراحی deployment/infra/hardware",
-            "مدیریت optimization/کاهش شکست",
-            "تعریف decision/artifacts",
+            r"Defining the system view, components, and interface",
+            r"Designing deployment, infrastructure, and hardware",
+            r"Managing optimisation and failure reduction",
+            r"Defining decisions and artifacts",
         ],
         [
-            "معماری سیستم دارای نقشه/مرز/تن‌ها باشد",
-            "اجزای critical با redundancy و مقیاس باشند",
-            "تصمیم‌ها با trade-off و review مستند باشند",
+            r"The system architecture has a map, boundaries, and tones",
+            r"Critical components have redundancy and scale",
+            r"Decisions are documented with trade-offs and review",
         ],
     ),
     "solution-architect": sp(
         "architecture",
-        "آیا راهکار کلان سیستم با انتخاب تکنولوژی و تناسب نیاز طراحی شده است؟",
+        r"Is the high-level system solution designed with technology selection and need fit?",
         [
-            "پوشش functional/nfr/constraints",
-            "منطق انتخاب تکنولوژی",
-            "مدیریت cost/complexity/risk",
-            "قابلیت اجرا و تغییر",
+            r"Coverage of functional, non-functional, and constraints",
+            r"Technology selection logic",
+            r"Managing cost, complexity, and risk",
+            r"Executability and changeability",
         ],
         [
-            "تعریف solution options/معیار",
-            "انتخاب تکنولوژی/قرارداد/integration",
-            "مدیریت cost/complexity/Trade-off",
-            "تعریف architecture decision and rollout",
+            r"Defining solution options and criteria",
+            r"Selecting technology, contract, and integration",
+            r"Managing cost, complexity, and trade-offs",
+            r"Defining the architecture decision and rollout",
         ],
         [
-            "راهکار شامل options/انتخاب/توجیه باشد",
-            "تکنولوژی با معیار (fit/cost/lock) انتخاب شده باشد",
-            "راهکار به plan implementable تبدیل شود",
+            r"The solution includes options, selection, and justification",
+            r"Technology is selected by criteria (fit, cost, lock-in)",
+            r"The solution is converted into an implementable plan",
         ],
     ),
     "enterprise-architect": sp(
         "architecture",
-        "آیا معماری نرم‌افزار با معماری کل سازمان هم‌راستاست؟",
+        r"Is the software architecture aligned with the overall enterprise architecture?",
         [
-            "سازگاری با معماری سازمان/استاندارد",
-            "هم‌راستایی با استراتژی و governance",
-            "مدیریت integration/داده",
-            "مناسب/مرور و مسئولیت",
+            r"Consistency with enterprise architecture and standards",
+            r"Alignment with strategy and governance",
+            r"Managing integration and data",
+            r"Appropriateness, review, and responsibility",
         ],
         [
-            "تعریف enterprise architecture/policy",
-            "نگاشت solution with domains",
-            "مدیریت interoperability/compliance",
-            "تعریف review/governance و تغییر",
+            r"Defining enterprise architecture and policy",
+            r"Mapping solutions to domains",
+            r"Managing interoperability and compliance",
+            r"Defining review, governance, and change",
         ],
         [
-            "نگاشت راهکار با استاندارد/استراتژی سازمانی باشد",
-            "داده/سرویس/ادغام با معماری سازمان هماهنگ باشند",
-            "تصمیم‌ها با governance و compliance مستند باشند",
+            r"Solutions map to enterprise standards and strategy",
+            r"Data, service, and integration align with enterprise architecture",
+            r"Decisions are documented with governance and compliance",
         ],
     ),
     "release-engineer": sp(
         "devops",
-        "آیا فرآیند Build و Release با پایداری، امنیت و قابلیت بازگشت مدیریت می‌شود؟",
+        r"Is the build and release process managed with stability, security, and reversibility?",
         [
-            "کیفیت pipeline/version/artefact",
-            "پوشش rollback/canary",
-            "امنیت/audit/reproducibility",
-            "سازگاری با env",
+            r"Quality of pipeline, version, and artifact",
+            r"Coverage of rollback and canary",
+            r"Security, audit, and reproducibility",
+            r"Consistency with the environment",
         ],
         [
-            "تعریف versioning/artefact/sign",
-            "پیاده‌سازی release pipeline + gates",
-            "مدیریت rollout/rollback/canary",
-            "تعریف changelog/release notes",
+            r"Defining versioning, artifacts, and signing",
+            r"Implementing the release pipeline and gates",
+            r"Managing rollout, rollback, and canary",
+            r"Defining changelog and release notes",
         ],
         [
-            "هر release دارای version/artefact/checksum باشد",
-            "Rollback/canary تعریف و تست شده باشد",
-            "Release notes/audit ردیابی داشته باشد",
+            r"Every release has a version, artifact, and checksum",
+            r"Rollback and canary are defined and tested",
+            r"Release notes and audit are traceable",
         ],
     ),
     "build-engineer": sp(
         "devops",
-        "آیا Build/Package/Dependency با پایداری و reproducible مدیریت می‌شوند؟",
+        r"Are build, packaging, and dependencies managed with stability and reproducibility?",
         [
-            "کیفیت build/config/caching",
-            "پوشش dependency/vulnerability",
-            "قابلیت reproducible و artifact",
-            "سازگاری با سرعت/حجم",
+            r"Quality of build, config, and caching",
+            r"Coverage of dependencies and vulnerabilities",
+            r"Reproducibility and artifacts",
+            r"Consistency with speed and size",
         ],
         [
-            "تعریف build scripts/Docker/CI",
-            "مدیریت dependency/lock/سکوریتی",
-            "پیاده‌سازی caching/parallel",
-            "تولید artifact/قابل تست",
+            r"Defining build scripts, Docker, and CI",
+            r"Managing dependencies, locks, and security",
+            r"Implementing caching and parallel execution",
+            r"Producing artifacts that can be tested",
         ],
         [
-            "Build بدون hardcode و reproducible باشد",
-            "Dependency با lock و scan امن باشد",
-            "Artifacts/خطاها در CI واضح باشند",
+            r"The build is free of hardcoding and reproducible",
+            r"Dependencies are secured by lock files and scanning",
+            r"Artifacts and errors are visible in CI",
         ],
     ),
 
     # --------------------------- misc roles ----------------------------
     "scrum-product-team": sp(
         "support",
-        "آیا اجرای فرآیندهای توسعه Iterative با نقش‌ها و کارهای Scrum منسجم انجام می‌شود؟",
+        r"Are iterative development processes run coherently with roles and Scrum work?",
         [
-            "کد/خروجی Iteration با تمرکز",
-            "پوشش sprint items/تعریف",
-            "همکاری تیم / کیفیت delivery",
-            "سازگاری با sprint goal",
+            r"Code and iteration output with focus",
+            r"Coverage of sprint items and definition",
+            r"Team collaboration and delivery quality",
+            r"Consistency with the sprint goal",
         ],
         [
-            "تعریف sprint goal/backlog selection",
-            "اجرای daily/refinement/review/retro",
-            "مدیریت blocked/issue و ownership",
-            "تعریف Definition of Done و قبول sprint",
+            r"Defining the sprint goal and backlog selection",
+            r"Running daily, refinement, review, and retro",
+            r"Managing blocked items, issues, and ownership",
+            r"Defining the definition of done and sprint acceptance",
         ],
         [
-            "هر sprint دارای goal و items مرتبط باشد",
-            "خروجی‌ها با DoD و acceptance بررسی شوند",
-            "retro/issueها برای بهبود ثبت شوند",
+            r"Every sprint has a goal and related items",
+            r"Outputs are checked against DoD and acceptance",
+            r"Retros and issues are recorded for improvement",
         ],
     ),
     "ui-ux-research-participants": sp(
         "support",
-        "آیا مشارکت در تست/تحقیق کاربری با بازخورد صادقانه و قابل استفاده انجام می‌شود؟",
+        r"Is participation in testing/user research done with honest, usable feedback?",
         [
-            "کیفیت/صداقت بازخورد",
-            "پوشش سناریو/علت",
-            "سازگاری با هدف تست",
-            "مطلوب/قابل تعریف داده",
+            r"Quality and honesty of feedback",
+            r"Coverage of scenario and cause",
+            r"Consistency with the test goal",
+            r"Desired and definable data",
         ],
         [
-            "آشنایی با سناریو/هدف مطالعه",
-            "اجرای tasks و بیان رفتار/مشکل",
-            "ثبت feedback/مشاهدات",
-            "بازخورد با پیشنهاد/ابتکار",
+            r"Familiarity with the study scenario and goal",
+            r"Executing tasks and stating behaviour/problem",
+            r"Recording feedback and observations",
+            r"Feedback with suggestion and initiative",
         ],
         [
-            "بازخورد به هر task/screen متصل باشد",
-            "مشاهده با یافته/quote و اسناد ثبت شود",
-            "سازگاری با privacy/بحثی باشد",
+            r"Feedback links to each task and screen",
+            r"Observations are recorded with findings, quotes, and documents",
+            r"Consistency with privacy and discussion",
         ],
     ),
     "beta-tester": sp(
         "support",
-        "آیا استفاده‌ی آزمایشی از محصول قبل از Release با گزارش دقیق و امن انجام می‌شود؟",
+        r"Is experimental use of the product before release done with precise, safe reporting?",
         [
-            "پوشش use cases/سناریو",
-            "گزارش bug/feedback/اطلاعات",
-            "امنیت/تنظیم",
-            "سازگاری با هدف Beta",
+            r"Coverage of use cases and scenarios",
+            r"Reporting bugs, feedback, and information",
+            r"Security and configuration",
+            r"Consistency with the beta goal",
         ],
         [
-            "دریافت access/جست‌وجو/استفاده",
-            "اجرای flows و ثبت issues",
-            "یافته با info (build/step/evidence)",
-            "بازخورد به تیم/حفظ کیفیت",
+            r"Receiving access, exploration, and use",
+            r"Executing flows and recording issues",
+            r"Findings with information (build, step, evidence)",
+            r"Feedback to the team and quality preservation",
         ],
         [
-            "مسائل با severity/steps/evidence گزارش شوند",
-            "راهنمای feedback/document مشخص باشد",
-            "اطلاعات غیرقابل افشا نشت نکند",
+            r"Issues are reported with severity, steps, and evidence",
+            r"The feedback and documentation guide is specified",
+            r"Non-disclosable information does not leak",
         ],
     ),
     "end-user": sp(
         "support",
-        "آیا استفاده واقعی از محصول با بازخورد کاربردی و تأثیر مؤثر انجام می‌شود؟",
+        r"Is real use of the product carried out with practical feedback and effective impact?",
         [
-            "استفاده در سناریوی واقعی",
-            "گزارش problem/expectation",
-            "واکنش بر UX/Performance",
-            "بازخورد مفید/امن",
+            r"Use in a real scenario",
+            r"Reporting problem and expectation",
+            r"Reaction to UX and performance",
+            r"Useful and safe feedback",
         ],
         [
-            "تعیین اهداف/day-to-day استفاده",
-            "ثبت مشکلات/فریکشن/کارایی",
-            "گزارش به تیم/مسیر",
-            "امنیت/اطلاعات/رعایت انطباق",
+            r"Setting goals and day-to-day use",
+            r"Recording problems, friction, and efficiency",
+            r"Reporting to the team and the path",
+            r"Security, information, and compliance",
         ],
         [
-            "بازخورد با رفتار/سند/فایل باشد",
-            "مشکلات با severity/repro گزارش شوند",
-            "اطلاعات شخصی/حساس افشا نشود",
+            r"Feedback covers behaviour, document, and file",
+            r"Problems are reported with severity and reproduction",
+            r"Personal and sensitive information is not disclosed",
         ],
     ),
 }
@@ -2877,139 +2893,139 @@ SPECS = {
 # --------------------------------------------------------------------------
 
 GROUP_SPEC = {
-    "strategy": ("استراتژی و جهت‌دهی کلان",
-        ["هم‌راستایی با چشم‌انداز/اهداف کلان", "شفافیت و امکان‌سنجی تصمیم‌ها",
-         "تخصیص/اثر منابع", "مدیریت ریسک و عدم قطعیت"],
-        ["تعریف Objective/Non-Goal/KPI", "تعریف مدل تصمیم‌گیری",
-         "تجزیه‌ی هدف به خروجی‌ها", "تعریف معیار موفقیت"],
-        ["اهداف قابل سنجش با KPI متصل باشند", "Non-Goals مستند باشند",
-         "تصمیم‌ها با مالک/منطق ثبت شوند"]),
-    "product": ("فرآیند محصول/Backlog",
-        ["کامل بودن Backlog و Scope", "اولویت‌بندی بر اساس ارزش/ریسک",
-         "وضوح Acceptance/DoD", "سازگاری مسیر کاربری"],
-        ["استخراج نیازمندی/User Story", "اولویت‌بندی با معیار",
-         "تعریف DoD و Acceptance", "تشخیص Hidden Work و نگاشت Scope"],
-        ["هر Item دارای Acceptance/DoD باشد", "اولویت بر اساس معیار باشد",
-         "نیازمندی‌ها بدون Scope Loss در فازها باشند"]),
-    "management": ("مدیریت فرآیند/تیم",
-        ["انطباق برنامه با زمان/منابع/ریسک", "پوشش Scope",
-         "شفافیت نقش/تصمیم", "قابلیت ردیابی وضعیت"],
-        ["تعریف WBS/فازها/مسئول", "تعریف معیار زمان/هزینه/کیفیت",
-         "ساختار گزارش‌دهی", "مدیریت تغییرات"],
-        ["هر گام دارای مسئول/زمان/وابستگی باشد", "تغییرات کنترل شوند",
-         "گزارش وضعیت شامل ریسک/بلوکر باشد"]),
-    "analysis": ("تحلیل/نیازمندی‌ها",
-        ["کامل و بدون ابهام بودن نیازها", "قابل آزمون بودن Acceptance",
-         "سازگاری با واقعیت فنی/داده", "ردیابی هر نیاز به خروجی"],
-        ["استخراج Functional/Non/Data/UI", "تبدیل به Acceptance",
-         "شناسایی ابهام/مفروضات", "تعریف In/Out scope"],
-        ["نیازمندی‌ها بدون ابهام و با شاهد باشند", "AC قابل آزمون باشند",
-         "هیچ نیاز بدون ردیابی نماند"]),
-    "architecture": ("معماری",
-        ["انطباق با نیازها/مقیاس", "آمادگی تغییر/قابلیت نگهداشت",
-         "سازگاری اجزا/قراردادها", "پوشش Security/Perf/Reliability"],
-        ["تعریف مرز اجزا/قرارداد", "انتخاب/توجیه تکنولوژی",
-         "تعریف Decision Records", "مدیریت Backward compatibility"],
-        ["معماری با مرز/قرارداد مستند باشد", "تصمیم‌ها با Trade-off ثبت شوند",
-         "اجزای critical با مقیاس/امنیت ارزیابی شوند"]),
-    "engineering": ("مهندسی/پیاده‌سازی",
-        ["عملکرد صحیح/نگهداشت", "انطباق با معماری/قرارداد",
-         "پوشش تست/خطا/edge", "کیفیت کد/DRY/امنیت/کارایی"],
-        ["تعریف قرارداد/ورودی/خروجی", "پیاده‌سازی core با validation",
-         "پوشش Edge/Failure", "نوشتن تست و حفظ compatibility"],
-        ["کد با قرارداد و behavior مطابقت داشته باشد", "تست‌ها پوشش edge باشند",
-         "کد با استاندارد و بدون regrace تغییر کند"]),
-    "ai": ("AI/Data علم",
-        ["کیفیت مدل/داده/pipeline", "بازتولید و versioning",
-         "پایش/drift/سازگاری", "Safety/Privacy/Cost"],
-        ["تعریف ویژگی/داده/metric", "طراحی pipeline",
-         "مدیریت versioning/repro", "پایش/monitoring و safety"],
-        ["نتایج با metric reproducible باشند", "مدل با monitoring/guardrail باشد",
-         "ریسک bias/privacy ایمن شود"]),
-    "data": ("داده/پایگاه داده",
-        ["درستی Schema/Query/Index", "یکپارچگی/کیفیت داده",
-         "کارایی/مقیاس", "امنیت/backup/دسترسی"],
-        ["تعریف Schema/Migration", "بهینه‌سازی Query/Index",
-         "پیاده‌سازی Validation/Cleanup", "تعریف Backup/Restore/DR"],
-        ["Schema با constraints/Index داشته باشد", "دارایی داده با tests باشد",
-         "Backup/بازیابی تست شود"]),
-    "devops": ("DevOps/زیرساخت",
-        ["قابلیت تکرار CI/CD", "پوشش failure/rollback",
-         "امنیت Secret/LeastPriv", "پایش/Incident"],
-        ["تعریف Pipeline", "مدیریت Config/Secret",
-         "طراحی Rollback/Canary", "تعریف Monitoring/Runbook"],
-        ["Pipeline سبز و reproducible باشد", "Deploy با rollback و secret secure باشد",
-         "Alert/Runbook در دسترس باشد"]),
-    "qa": ("تست/کیفیت",
-        ["پوشش Test Cases با نیازمندی", "پوشش edge/خطا",
-         "پایداری/reproducible", "پیگیری defect"],
-        ["استراتژی تست", "Test Data/Fixture",
-         "پوشش Functional/Edge/Regression", "اتوماسیون و گزارش"],
-        ["نیازمندی‌ها به تست متصل باشند", "تست‌ها reproducible باشند",
-         "defect با severity/evidence مدیریت شود"]),
-    "security": ("امنیت",
-        ["پوشش کنترل‌ها", "مدیریت آسیب‌پذیری/فقدان",
-         "دسترسی/رمز/داده", "سازگاری compliance"],
+    "strategy": (r"Strategy and top-level direction",
+        [r"Alignment with vision and top-level goals", r"Transparency and feasibility of decisions",
+         r"Allocation and effect of resources", r"Managing risk and uncertainty"],
+        [r"Defining objective, non-goal, and KPI", r"Defining the decision model",
+         r"Decomposing the goal into outputs", r"Defining the success criteria"],
+        [r"Goals are measurable and tied to KPIs", r"Non-goals are documented",
+         r"Decisions are recorded with owner and rationale"]),
+    "product": (r"Product process / backlog",
+        [r"Completeness of the backlog and scope", r"Prioritisation by value and risk",
+         r"Clarity of acceptance and definition of done", r"Consistency of the user path"],
+        [r"Extracting requirements and user stories", r"Prioritisation by criteria",
+         r"Defining the definition of done and acceptance", r"Detecting hidden work and mapping scope"],
+        [r"Every item has acceptance criteria and a definition of done", r"Priority is set by criteria",
+         r"Requirements appear in the phases without scope loss"]),
+    "management": (r"Process / team management",
+        [r"Alignment of the plan with time, resources, and risk", r"Scope coverage",
+         r"Transparency of role and decision", r"Status traceability"],
+        [r"Defining WBS, phases, and owners", r"Defining time, cost, and quality criteria",
+         r"Reporting structure", r"Change management"],
+        [r"Every step has an owner, time, and dependency", r"Changes are controlled",
+         r"Status reporting includes risk and blockers"]),
+    "analysis": (r"Analysis / requirements",
+        [r"Requirements are complete and unambiguous", r"Acceptance criteria are testable",
+         r"Consistency with technical and data reality", r"Traceability of every requirement to its output"],
+        [r"Extracting functional, non-functional, data, and UI requirements", r"Converting to acceptance criteria",
+         r"Identifying ambiguity and assumptions", r"Defining in and out of scope"],
+        [r"Requirements are unambiguous and evidence-backed", r"Acceptance criteria are testable",
+         r"No requirement is left without traceability"]),
+    "architecture": (r"Architecture",
+        [r"Consistency with requirements and scale", r"Change readiness and maintainability",
+         r"Consistency of components and contracts", r"Coverage of security, performance, and reliability"],
+        [r"Defining component boundaries and contracts", r"Selecting and justifying technology",
+         r"Defining decision records", r"Managing backward compatibility"],
+        [r"The architecture is documented with boundaries and contracts", r"Decisions are recorded with trade-offs",
+         r"Critical components are assessed for scale and security"]),
+    "engineering": (r"Engineering / implementation",
+        [r"Correct behaviour and maintainability", r"Alignment with architecture and contract",
+         r"Coverage of tests, errors, and edge cases", r"Quality of code, DRY, security, and performance"],
+        [r"Defining contract, input, and output", r"Implementing the core with validation",
+         r"Coverage of edge and failure cases", r"Writing tests and preserving compatibility"],
+        [r"Code matches the contract and behaviour", r"Tests cover edge cases",
+         r"Code changes meet the standard and introduce no regression"]),
+    "ai": (r"AI / data science",
+        [r"Quality of model, data, and pipeline", r"Reproducibility and versioning",
+         r"Monitoring, drift, and consistency", "Safety/Privacy/Cost"],
+        [r"Defining features, data, and metrics", r"Designing the pipeline",
+         r"Managing versioning and reproducibility", r"Monitoring and safety"],
+        [r"Results are reproducible against metrics", r"The model has monitoring and guardrails",
+         r"Bias and privacy risk is made safe"]),
+    "data": (r"Data / database",
+        [r"Correctness of schema, query, and index", r"Data integrity and quality",
+         r"Performance and scale", r"Security, backup, and access"],
+        [r"Defining schema and migration", r"Optimising query and index",
+         r"Implementing validation and cleanup", r"Defining backup, restore, and DR"],
+        [r"The schema has constraints and indexes", r"Data assets have tests",
+         r"Backup and restore are tested"]),
+    "devops": (r"DevOps / infrastructure",
+        [r"Repeatability of CI/CD", r"Coverage of failure and rollback",
+         r"Security of secrets and least privilege", r"Monitoring and incidents"],
+        [r"Defining the pipeline", r"Managing config and secrets",
+         r"Designing rollback and canary", r"Defining monitoring and runbook"],
+        [r"The pipeline is green and reproducible", r"Deployment has rollback and secure secrets",
+         r"Alerts and runbooks are available"]),
+    "qa": (r"Testing / quality",
+        [r"Coverage of test cases against requirements", r"Coverage of edge and error cases",
+         r"Stability and reproducibility", r"Defect follow-up"],
+        [r"Test strategy", "Test Data/Fixture",
+         r"Coverage of functional, edge, and regression", r"Automation and reporting"],
+        [r"Requirements link to tests", r"Tests are reproducible",
+         r"Defects are managed with severity and evidence"]),
+    "security": (r"Security",
+        [r"Coverage of controls", r"Managing vulnerabilities and gaps",
+         r"Access, secrets, and data", r"Compliance consistency"],
         ["Threat modeling", "Input validation/authz",
-         "مدیریت Secret/Permission", "Security tests/scan"],
-        ["کنترل‌ها با تست/گزارش باشند", "secret و permis مطابق policy باشند",
-         "آسیب‌پذیری‌ها با owner/deadline باشند"]),
-    "compliance": ("انطباق/حقوقی",
-        ["انطباق با قوانین/سیاست", "پوشش قرارداد/IP/حریم",
-         "مدیریت ریسک حقوقی", "مستندسازی/ردیابی"],
-        ["شناسایی الزامات", "تعریف قرارداد/IP/license",
-         "قابلیت ردیابی/شواهد", "گیت کنترل"],
-        ["الزامات با gap/کنترل نگاشت شوند", "شواهد/گزارش موجود باشد",
-         "تصمیم‌ها با مسیر تأیید مستند باشند"]),
-    "design": ("طراحی/UX/UI",
-        ["یکپارچگی با Design System", "پوشش states",
-         "دسترس‌پذیری/ریسپانسیو", "کیفیت تعامل"],
-        ["استخراج Design System/Tokens", "طراحی states/responsive",
-         "رعایت A11y", "DRY/Reusable components"],
-        ["طرح با tokens و states باشد", "a11y/responsive رعایت شود",
-         "اجزا reusable یکدست باشند"]),
-    "content": ("محتوا/مستندات",
-        ["دقت/کامل بودن/استفاده", "یکدستی اصطلاحات/ساختار",
-         "سازگاری با نسخه/رفتار", "پوشش سناریو/خطا"],
-        ["تعریف Style Guide/ساختار", "تولید/بازبینی محتوا",
-         "بررسی accuracy", "پوشش API/Install/Error"],
-        ["docs با هدف/مخاطب/گام باشد", "اصطلاحات ثابت باشند",
-         "مستندات با نسخه سازگار باشند"]),
+         r"Managing secrets and permissions", "Security tests/scan"],
+        [r"Controls have tests and reporting", r"Secrets and permissions comply with policy",
+         r"Vulnerabilities have owners and deadlines"]),
+    "compliance": (r"Compliance / legal",
+        [r"Compliance with laws and policy", r"Coverage of contract, IP, and privacy",
+         r"Managing legal risk", r"Documentation and traceability"],
+        [r"Identifying requirements", r"Defining contract, IP, and licence",
+         r"Traceability and evidence", r"Control gate"],
+        [r"Requirements are mapped to gaps and controls", r"Evidence and reports exist",
+         r"Decisions are documented with an approval path"]),
+    "design": (r"Design / UX / UI",
+        [r"Consistency with the design system", r"Coverage of states",
+         r"Accessibility and responsiveness", r"Quality of interaction"],
+        [r"Extracting the design system and tokens", r"Designing states and responsive behaviour",
+         r"Respecting accessibility", "DRY/Reusable components"],
+        [r"The design uses tokens and states", r"Accessibility and responsiveness are respected",
+         r"Reusable components are consistent"]),
+    "content": (r"Content / documentation",
+        [r"Accuracy, completeness, and usability", r"Consistency of terminology and structure",
+         r"Consistency with release and behaviour", r"Coverage of scenarios and errors"],
+        [r"Defining the style guide and structure", r"Producing and reviewing content",
+         r"Checking accuracy", r"Coverage of API, install, and error"],
+        [r"Docs have a goal, audience, and steps", r"Terminology is consistent",
+         r"Docs are consistent with the release"]),
     "people": ("People/HR",
-        ["انطباق با اهداف تیم", "کیفیت جذب/ارزیابی",
-         "عدالت/عدم bias/حریم", "اثربخشی/retention"],
-        ["تعریف نقش/مهارت/معیار", "طراحی فرآیند", "مدیریت رشد/ارزیابی",
-         "حفاظت داده شخصی"],
-        ["فرآیند با معیار/گام باشد", "ارزیابی بدون bias باشد",
-         "داده‌ها با حریم مدیریت شوند"]),
-    "support": ("پشتیبانی/مشتری",
-        ["دقت/سرعت پاسخ", "پوشش مشکلات/خطا",
-         "اسکالیشن/ownership", "بازخورد/رضایت"],
-        ["تعریف جریان پاسخ/اسکالیشن", "ثبت/رفع مشکل",
-         "تعریف معیار کیفیت", "جمع‌بندی feedback"],
-        ["هر درخواست با status/owner باشد", "SLA رعایت شود",
-         "بازخورد با action ثبت شود"]),
-    "growth": ("رشد/بازاریابی/فروش",
-        ["هم‌راستایی با هدف", "قابل اندازه‌گیری KPI",
-         "یکدستی پیام/برند", "اثر/ROI"],
-        ["تعریف Persona/message/offer", "کانال/کمپین",
-         "KPI و tool", "فرآیند فروش/مذاکره"],
-        ["گام‌ها با هدف/KPI باشند", "پیام با مخاطب سازگار باشد",
-         "نتایج با داده پیگیری شوند"]),
-    "assurance": ("ممیزی/تضمین",
-        ["استقلال/عینیت", "پوشش کامل",
-         "شواهد/ردیابی", "کیفیت گزارش/پیگیری"],
-        ["ماتریس Risk/Control", "روش نمونه‌گیری/شواهد",
-         "تعیین severity/evidence", "گزارش + پیگیری"],
-        ["هر یافته با severity/evidence/action باشد", "Scope/criteria مستند باشد",
-         "اقدامات با owner/deadline باشند"]),
-    "ops": ("عملیات/آمادگی",
-        ["سازگاری با runbook", "پوشش reliability/incident",
-         "سرعت/بازیابی", "بهبود مستمر"],
-        ["تعریف runbook/alert", "پاسخ به incident",
-         "مدیریت recovery", "Postmortem/improvement"],
-        ["Alert/runbook با نقش باشند", "بازیابی با time مستند باشد",
-         "پس‌مرگ با اقدام/مالک باشد"]),
+        [r"Alignment with team goals", r"Quality of hiring and assessment",
+         r"Fairness, absence of bias, and privacy", r"Effectiveness and retention"],
+        [r"Defining role, skill, and criteria", r"Designing the process", r"Managing growth and assessment",
+         r"Protecting personal data"],
+        [r"The process has criteria and steps", r"Assessment is free of bias",
+         r"Data is managed according to privacy policy"]),
+    "support": (r"Support / customer",
+        [r"Accuracy and speed of response", r"Coverage of problems and errors",
+         r"Escalation and ownership", r"Feedback and satisfaction"],
+        [r"Defining the response and escalation flow", r"Recording and resolving the issue",
+         r"Defining quality criteria", r"Collecting feedback"],
+        [r"Every request has a status and owner", r"The SLA is met",
+         r"Feedback is recorded with action"]),
+    "growth": (r"Growth / marketing / sales",
+        [r"Alignment with the goal", r"Measurable KPIs",
+         r"Consistency of message and brand", r"Effect and ROI"],
+        [r"Defining persona, message, and offer", r"Channel and campaign",
+         r"KPI and tooling", r"Sales and negotiation process"],
+        [r"Steps have goals and KPIs", r"The message is consistent with the audience",
+         r"Results are tracked with data"]),
+    "assurance": (r"Audit / assurance",
+        [r"Independence and objectivity", r"Complete coverage",
+         r"Evidence and traceability", r"Quality of reporting and follow-up"],
+        [r"Risk and control matrix", r"Sampling method and evidence",
+         r"Determining severity and evidence", r"Reporting and follow-up"],
+        [r"Every finding has severity, evidence, and action", r"Scope and criteria are documented",
+         r"Actions have owners and deadlines"]),
+    "ops": (r"Operations / readiness",
+        [r"Consistency with the runbook", r"Coverage of reliability and incidents",
+         r"Speed and recovery", r"Continuous improvement"],
+        [r"Defining the runbook and alerts", r"Responding to incidents",
+         r"Managing recovery", "Postmortem/improvement"],
+        [r"Alerts and runbooks have roles", r"Recovery is documented with timings",
+         r"The postmortem has actions and owners"]),
 }
 
 
@@ -3153,25 +3169,25 @@ KPI_METRICS = {
 }
 
 ROLE_SPECIAL_BLOCKS = {
-    "frontend-developer": """## State Model (UI) — شناسایی حالت‌های قابل اجرا
-قبل از پیاده‌سازی، حالت‌های زیر را صرفاً بر اساس منطق Feature ارزیابی کن؛ **همه لزوماً نیاز نیستند**:
+    "frontend-developer": """## State Model (UI) — identifying applicable states
+Assess the following states purely on the basis of the feature's logic; **not all of them are required**:
 - Initial, Loading, Success/Ready, Empty, Error, Retrying, Disabled, Submitting,
   Success-after-submit, Submission-error, Unauthorized (401), Forbidden (403),
   Offline, Partial, Stale
-- برای هر حالت گزارش بده: `APPLICABLE / NOT_APPLICABLE` و اگر Applicable است، شرایط ورود/خروج و رفتار آن را تعریف کن.
-- اگر Feature فاقد Empty/Error/Loading طبیعی است، به‌عنوان `NOT_APPLICABLE` ثبت کن؛ Feature را «مصنوعی» برای پوشش حالت توسعه نده.""",
+- For each state report `APPLICABLE / NOT_APPLICABLE`; if applicable, define its entry/exit conditions and behaviour.
+- If a feature is genuinely without an empty/error/loading path, record it as `NOT_APPLICABLE`; do not inflate the feature artificially just to cover a state.""",
     "backend-developer": """## Transaction & Concurrency Policy
-- **ارزیابی کن، بعد تصمیم بگیر**: فقط در مواردی که یکپارچگی داده یا قوانین بیزنس ایجاب می‌کند، Transaction یا Concurrency Control (مثل Optimistic Locking) معرفی کن.
-- **مرز تراکنش غیرضروری نساز**: تراکنش را فقط حول یک واحد منطقی تغییر با یکپارچگی مشخص تعریف کن؛ از تراکنش‌های طولانی/بی‌دلیل پرهیز کن.
-- در صورت نیاز، `Concurrency` کنترل‌ها (مثل Version / CAS) و رفتار `Retry` را مستند کن.
-- هر Decision مربوط به تراکنش را با دلیل + اثر روی داده/کارایی ثبت کن.
+- **Assess first, then decide**: introduce a transaction or concurrency control (such as optimistic locking) only where data integrity or business rules require it.
+- **Do not create an unnecessary transaction boundary**: define the transaction around a single logical unit of change with a stated consistency; avoid long or unjustified transactions.
+- Where needed, document the `Concurrency` controls (such as version / CAS) and the `Retry` behaviour.
+- Record every transaction decision with its reason and its effect on data and performance.
 
-## Security Baseline (Backend) — حداقل کنترل‌ها
-این موارد در Scope توست و باید رعایت شود:
-- Authentication، Authorization، Input Validation، Output Validation
-- Injection Protection، Sensitive Data Handling، Secret Handling، Rate Limiting
-- Error Disclosure (عدم افشای جزئیات داخلی)، Logging، Auditability، Dependency Security
-- اگر تصمیم معماری امنیتی، طراحی کنترل پیچیده، یا آسیب‌پذیری بحرانی وجود داشت، **نگه ندار**؛ به Security Engineer / Application Security Engineer به‌صورت صریح ESCALATE کن.""",
+## Security Baseline (Backend) — minimum controls
+These items are within your scope and must be respected:
+- Authentication, Authorization, Input Validation, Output Validation
+- Injection Protection, Sensitive Data Handling, Secret Handling, Rate Limiting
+- Error Disclosure (no disclosure of internal details), Logging, Auditability, Dependency Security
+- If there is a security architecture decision, a complex control design, or a critical vulnerability, **do not keep it**; explicitly ESCALATE it to the Security Engineer / Application Security Engineer.""",
 }
 
 
@@ -3185,7 +3201,7 @@ def _kpi_list(group: str) -> str:
 
 
 def _norm_text(value: str) -> str:
-    value = value.replace("\u060c", ", ").replace("\u3001", ", ").replace("\u200c", "")
+    value = value.replace(r",", ", ").replace("\u3001", ", ").replace("\u200c", "")
     value = re.sub(r"\s+", " ", value)
     return value.strip()
 
@@ -3234,41 +3250,41 @@ def _step_kind(name: str) -> str:
 
 _STEP_ACTIONS = {
     "ANALYZE": [
-        "محدوده‌ی کار و ورودی‌های موردنیاز را بررسی کن.",
-        "کد/سند/داده/سرویس متأثر را شناسایی کن.",
-        "رابط‌ها، وابستگی‌ها و ریسک‌های پنهان را مشخص کن.",
-        "شمول یا عدم شمول (Not Applicable) هر مورد را تعیین کن.",
+        r"Review the scope of work and the required inputs.",
+        r"Identify the affected code, document, data, or service.",
+        r"Identify the interfaces, dependencies, and hidden risks.",
+        r"Determine the applicability or non-applicability of each item.",
     ],
     "DESIGN": [
-        "گزینه‌های معتبر را با معیارهای مشخص مقایسه و مستند کن.",
-        "Design/Plan را با Scope و مرز اختیار این Persona محدود کن.",
-        "قراردادها/توکن‌ها/پروتکل/روابط را مشخص کن.",
-        "تأثیر تغییر روی رفتار موجود را ارزیابی کن؛ تغییر خارج از Scope را ESCALATE کن.",
+        r"Compare the valid options against stated criteria and document them.",
+        r"Constrain the design/plan to this persona's scope and authority boundary.",
+        r"Identify the contracts, tokens, protocols, and relationships.",
+        r"Assess the change's effect on existing behaviour; escalate changes outside scope.",
     ],
     "IMPLEMENT": [
-        "فقط Scope همین Persona را پیاده‌سازی کن؛ از تغییر مالکیت دیگر Persona پرهیز کن.",
-        "ورودی‌ها را Validate کن و خروجی را مطابق قرارداد تولید کن.",
-        "Edge Cases، Error Paths و حالت‌های مرتبط را پوشش بده.",
-        "رفتار موجود را حفظ کن مگر تغییر عمدی مستند باشد.",
+        r"Implement only this persona's scope; avoid touching another persona's ownership.",
+        r"Validate the inputs and produce the output according to contract.",
+        r"Cover edge cases, error paths, and related states.",
+        r"Preserve existing behaviour unless the change is deliberate and documented.",
     ],
     "INTEGRATE": [
-        "قرارداد/رابط بین اجزا را راستی‌آزمایی کن (بدون تداخل با مالکیت دیگران).",
-        "سازگاری Backward و رفتاری را حفظ کن.",
-        "خطاهای Integration را جدا/مستند کن و در صورت مرز مسئولیت دیگر، ESCALATE کن.",
+        r"Verify the contract/interface between components (without interfering with others' ownership).",
+        r"Preserve backward and behavioural compatibility.",
+        r"Isolate and document integration errors, and escalate where the responsibility boundary belongs to another persona.",
     ],
     "TEST": [
-        "تست/validation متناسب با Scope بنویس و اجرا کن.",
-        "حالت‌های Applicable (success/failure/empty/edge/authz/perf) را پوشش بده.",
-        "نتیجه‌ی تست را با شواهد ثبت کن؛ شاهد ناکافی را `BLOCKED`/`NEEDS_CLARIFICATION` گزارش کن.",
+        r"Write and run tests/validation appropriate to the scope.",
+        r"Cover the applicable states (success/failure/empty/edge/authz/perf).",
+        r"Record the test result with evidence; report insufficient evidence as `BLOCKED`/`NEEDS_CLARIFICATION`.",
     ],
     "REVIEW": [
-        "خروجی را با Quality Gate و Definition of Done مقایسه کن.",
-        "شواهد و ردیابی را کنترل کن.",
-        "نتیجه‌ی نهایی را با Status و وضعیت State Machine گزارش کن.",
+        r"Compare the output against the Quality Gate and Definition of Done.",
+        r"Check the evidence and traceability.",
+        r"Report the final result with a status and a State Machine state.",
     ],
     "GENERIC": [
-        "ورودی را بررسی و آماده‌سازی کن، سپس مطابق گام، خروجی را تولید و مستند کن.",
-        "در صورت ناقص بودن ورودی یا فراتر بودن از Scope، طبق قوانین تصمیم رفتار کن.",
+        r"Review and prepare the input, then produce and document the output according to the step.",
+        r"If the input is incomplete or beyond scope, behave according to the decision rules.",
     ],
 }
 
@@ -3281,7 +3297,7 @@ def _structured_steps(p: dict, group: str, slug: str) -> str:
         actions = _STEP_ACTIONS[kind]
         lines.append(f"### STEP {i} — {name}  [{kind}]")
         lines.append("")
-        lines.append(f"**Objective:** اجرای گام «{name}» با حفظ Scope و بدون تغییر خارج از اختیار.")
+        lines.append(f"**Objective:** execute the step \"{name}\" while preserving scope and without changes outside your authority.")
         lines.append("")
         lines.append(f"**Inputs:** {p['required']}  |  Optional: {p['optional']}  |  Context: {p['context']}  |  Preconditions: {p['preconditions']}")
         lines.append("")
@@ -3291,15 +3307,15 @@ def _structured_steps(p: dict, group: str, slug: str) -> str:
         lines.append("")
         lines.append("**Validation:**")
         lines.append(f"- {p['quality']}")
-        lines.append("- ورودی‌ها موجود و معتبر باشند؛ هیچ تعارض/ناسازگاری نامحلولی باقی نمانده باشد.")
+        lines.append(r"- Inputs are present and valid; no unresolved conflict or incompatibility remains.")
         lines.append("")
         lines.append(f"**Outputs:** {p['outputs']}")
         lines.append("")
         lines.append(f"**Evidence:** {p['evidence']}")
         lines.append("")
-        lines.append("**Exit Criteria:** خروجی گام با معیار پذیرش مطابقت دارد و شواهد ثبت شده‌اند.")
+        lines.append(r"**Exit Criteria:** the step's output matches the acceptance criterion and the evidence is recorded.")
         lines.append("")
-        lines.append("**Failure Conditions:** ورودی ناقص/متناقض، خارج از Scope، یا شواهد ناکافی.")
+        lines.append(r"**Failure Conditions:** incomplete or contradictory input, out of scope, or insufficient evidence.")
         lines.append("")
         lines.append(f"**Escalation Conditions:** {p['escalation']}")
         lines.append("")
@@ -3307,58 +3323,57 @@ def _structured_steps(p: dict, group: str, slug: str) -> str:
 
 
 def _authority_rules(role_type: str) -> str:
-    return """## مرز اختیار و مسئولیت (Authority & Boundaries)
-- اجازه‌ی تصمیم فقط در **همین Scope و سطح اختیار** را داری. خارج از آن تصمیم نگیر.
-- اگر تصمیمی روی مالکیت Persona دیگری اثر دارد (مثلاً معماری، دیتابیس، امنیت، طراحی، CI/CD):
-  1) تعارض/اثر را شناسایی کن؛
-  2) در صورت امکان رفتار فعلی را حفظ کن؛
-  3) اثر را مستند کن؛
-  4) به Persona مسئول **ESCALATE** کن — سکوت نکن و خودسرانه تصمیم نگیر."""
+    return """## Authority & Boundaries
+- You may decide only within **this scope and authority level**. Do not decide outside it.
+- If a decision affects another persona's ownership (for example architecture, database, security, design, CI/CD):
+  1) identify the conflict/impact;
+  2) preserve current behaviour where possible;
+  3) document the impact;
+  4) **ESCALATE** to the responsible persona — do not stay silent and do not decide unilaterally."""
 
 
 def _traceability() -> str:
-    return """## زنجیره‌ی ردیابی (Traceability)
-هر خروجی را به این زنجیره متصل کن:
+    return """## Traceability
+Connect every output to this chain:
 `Requirement → Design → Implementation → Test → Evidence → Acceptance`
-الگوی مشخص‌سازی:
-- `REQ-###` (نیازمندی)
-- `DESIGN-###` (طراحی/طرح مربوطه)
-- `IMP-###` (پیاده‌سازی/کامپوننت/فایل)
-- `TEST-###` (تست / validation)
-- `EVIDENCE-###` (لاگ، اسکرین‌شات، گزارش، شواهد)
-- `ACCEPT-###` (پذیرش/Quality Gate)
-اگر شناسه‌ی رسمی وجود ندارد، شناسه‌ی توصیفی و قابل ردیابی بساز و در `Execution Result` ثبت کن."""
+Identification pattern:
+- `REQ-###` (requirement)
+- `DESIGN-###` (related design)
+- `IMP-###` (implementation / component / file)
+- `TEST-###` (test / validation)
+- `EVIDENCE-###` (log, screenshot, report, evidence)
+- `ACCEPT-###` (acceptance / quality gate)
+If no formal identifier exists, create a descriptive, traceable one and record it in `Execution Result`."""
 
 
 def _state_machine_block() -> str:
     return (
-        "## State Machine\n"
-        "گام‌ها در این حالت‌ها حرکت می‌کنند (Orchestrator به‌واسطه‌ی `status` می‌داند Persona کجاست):\n"
-        "`RECEIVED` → `ANALYZING` → `READY` → `IMPLEMENTING` → `INTEGRATING` → `TESTING` → `REVIEW_PENDING` → `CHANGES_REQUIRED` → `VERIFIED` → `COMPLETED`\n"
-        "به‌علاوه‌ی حالت‌های کناری: `BLOCKED`, `ESCALATED`, `FAILED`\n"
-        "- در شروع: `RECEIVED`؛ پس از تحلیل موفق: `READY`؛ پس از تأیید نهایی: `COMPLETED`.\n"
-        "- اگر تغییری خواسته شد: به `CHANGES_REQUIRED` برگرد؛ اگر Block داشت: `BLOCKED`/`ESCALATED`.\n"
-        "- هیچ وضعیتی را خودسرانه اختراع نکن؛ از همین مجموعه استفاده کن."
+        """## State Machine
+Steps move through these states (the orchestrator uses `status` to know where the persona is):
+`RECEIVED` → `ANALYZING` → `READY` → `IMPLEMENTING` → `INTEGRATING` → `TESTING` → `REVIEW_PENDING` → `CHANGES_REQUIRED` → `VERIFIED` → `COMPLETED`
+Plus the side states: `BLOCKED`, `ESCALATED`, `FAILED`
+- At start: `RECEIVED`; after successful analysis: `READY`; after final approval: `COMPLETED`.
+- If changes are requested: return to `CHANGES_REQUIRED`; if blocked: `BLOCKED`/`ESCALATED`.
+- Never invent a state on your own; use exactly this set."""
     )
 
 
 def _decision_block_body(p: dict) -> str:
     parts = _decisions(p["decision"])
-    return "## Decision Rules (قواعد تصمیم)\n\nقواعد تصمیم این Persona:\n" + "\n".join(f"- {x}" for x in parts) + f"""
-- در هر گام، وضعیت را فقط از مجموعه‌ی زیر انتخاب کن: `{", ".join(DECISION_STATES)}`
-- `PASS` = خروجی کامل و معتبر با شواهد؛ `FAIL` = خروجی با خطا/ناقص.
-- `BLOCKED` = مانع خارجی/در دسترس نبودن ورودی؛ `NEEDS_CLARIFICATION` = ابهام نیازمند تأیید (نه لزوماً خطا).
-- `ESCALATE` = تصمیم فراتر از Scope یا خطر مهم؛ `NOT_APPLICABLE` = گام برای این مورد معنا ندارد (با دلیل)."""
+    return """## Decision Rules
+
+This Persona's decision rules:
+""" + "\n".join(f"- {x}" for x in parts) + f"""\n- At each step, choose the status only from the set below: `{", ".join(DECISION_STATES)}`\n- `PASS` = complete, valid output with evidence; `FAIL` = erroneous or incomplete output.\n- `BLOCKED` = external obstacle or missing input; `NEEDS_CLARIFICATION` = ambiguity needing confirmation (not necessarily an error).\n- `ESCALATE` = a decision beyond scope or a significant danger; `NOT_APPLICABLE` = the step is meaningless for this item (with a reason)."""
 
 
 def _execution_result_block() -> str:
-    return """## Execution Result (قابل پردازش توسط Orchestrator)
-خروجی نهایی را در این قالب بده (همان ساختار را می‌توانی بعداً به JSON تبدیل کنی):
+    return """## Execution Result (machine-processable by the orchestrator)
+Give the final output in this format (the same structure can later be converted to JSON):
 ```
 Status: PASS | FAIL | BLOCKED | ESCALATE | NEEDS_CLARIFICATION | NOT_APPLICABLE
-State:  <یکی از State Machine>
-ExecutionPlan: <مسیر فایل پلن در audits/ و فاز/گام‌های به‌روزشده در این اجرا | N/A اگر پلنی وجود ندارد>
-PlanStatus: <🔴 / 🟡 / 🟢 برای هر گام/فاز تغییر‌یافته>
+State:  <one of the State Machine states>
+ExecutionPlan: <path to the plan file in audits/ and the phases/steps updated in this run | N/A if no plan exists>
+PlanStatus: <🔴 / 🟡 / 🟢 for each changed step/phase>
 Completed Steps: [...]
 Modified Files: [...]
 Created Files: [...]
@@ -3376,44 +3391,28 @@ Next Action: [...]
 
 
 def _ready_done_block(quality: str) -> str:
-    return f"""### Definition of Ready / Done / Quality Gates
-**Definition of Ready (قبل از شروع):**
-- ورودی‌های الزامی موجود و معتبر باشند (`{quality}`).
-- Scope تکلیف روشن باشد و هیچ تعارض/ابهام بلوک‌کننده‌ای نمانده باشد.
-- پیش‌شرط‌های این Persona برآورده شده باشند.
-
-**Definition of Done (بعد از اتمام):**
-- همه‌ی گام‌های Procedure کامل اجرا شده باشند.
-- خروجی‌ها و شواهد ثبت شده باشند؛ معیار پذیرش `{quality}` برآورده شده باشد.
-- تست/validation مرتبط سبز باشد؛ بدون Issue بلوک‌کننده.
-- `Handoff` و `Execution Result` تکمیل شده باشد.
-
-**Quality Gates:**
-- Functional / Behavioral correctness
-- Integration & Backward compatibility
-- Quality/Perf/Security criteria مرتبط با این Persona
-- Evidence & Traceability
-- Regression safety"""
+    return f"""### Definition of Ready / Done / Quality Gates\n**Definition of Ready (before starting):**\n- Required inputs are present and valid (`{quality}`).\n- The assigned scope is clear and no blocking conflict or ambiguity remains.\n- This persona's preconditions are satisfied.\n\n**Definition of Done (after completion):**\n- Every step of the Procedure has been executed in full.\n- Outputs and evidence are recorded; the acceptance criterion `{quality}` is met.\n- Related tests/validation are green; no blocking issues.\n- `Handoff` and `Execution Result` are complete.\n\n**Quality Gates:**\n- Functional / behavioural correctness\n- Integration & backward compatibility\n- Quality/Perf/Security criteria relevant to this persona\n- Evidence & traceability\n- Regression safety"""
 
 
 def _kpi_block(group: str) -> str:
-    return "## KPI / معیار عملکرد (اندازه‌پذیر)\n" + _kpi_list(group) + """
-- این KPI‌ها برای **ارزیابی عملکرد** هستند؛ نباید برای رسیدن به عدد، رفتار مصنوعی انجام دهی.
-- در گزارش نهایی، هر KPI را فقط با شواهد واقعی ثبت کن و اگر داده‌ای نیست، `Unknown` بنویس."""
+    return """## KPI / Performance Metrics (measurable)
+""" + _kpi_list(group) + """
+- These KPIs are for **performance evaluation**; you must not behave artificially to reach a number.
+- In the final report, record each KPI only with real evidence, and if there is no data, write `Unknown`."""
 
 
 def audit_result_block() -> str:
-    return """## Execution Result (قابل پردازش توسط Orchestrator)
-نتایج ممیزی را در قالب زیر بده:
+    return """## Execution Result (machine-readable by the Orchestrator)
+Give the audit results in the following format:
 ```
 Status: PASS | FAIL | BLOCKED | ESCALATE | NEEDS_CLARIFICATION | NOT_APPLICABLE
 Verdict: <Consistent & ready / Inconsistent / Needs redesign ...>
-State: <یکی از State Machine>
-Coverage: [مورد | منبع شواهد | وضعیت]
+State: <one of the State Machine states>
+Coverage: [item | evidence source | status]
 Coverage Manifest: [Segment | Files/Components | Review Status (DONE/IN_PROGRESS/NOT_REVIEWED+Reason)]
 Decomposition: [Segment | Files/Components | Findings]
 Findings: [ID | File/Line | Severity | Confidence | EvidenceStatus | Summary]
-ExecutionPlan: <مسیر فایل پلن اجرایی ذخیره‌شده در audits/، مثلاً audits/<slug>-execution-plan.md>
+ExecutionPlan: <path of the saved execution-plan file under audits/, e.g. audits/<slug>-execution-plan.md>
 Affected Locations: [...]
 Critical/High Findings: [...]
 Required Decisions: [...]
@@ -3425,111 +3424,80 @@ Also record: Assumptions / Unknowns / Risks if any.
 
 """
 def audit_final_structure() -> str:
-    return """## خروجی نهایی ممیزی
-1. **خلاصه اجرایی**: وضعیت کلی، مهم‌ترین ریسک‌ها، آمادگی.
-2. **Coverage Manifest**: فهرست کامل بخش‌ها/فایل‌های Scope و وضعیت بررسی هر یک (بررسی‌شده / در حال بررسی / بررسی‌نشده + دلیل). هیچ بخشی نباید بی‌دلیل «بررسی‌نشده» بماند.
-3. **جدول تقسیم‌بندی (Decomposition Table)**: `Segment | فایل‌ها/اجزا | وضعیت بررسی | یافته‌ها | یادداشت`.
-4. **جدول پوشش** (مورد | منبع شواهد | وضعیت PASS/FAIL/NOT_APPLICABLE).
-5. **یافته‌ها** با قالب زیر و پس از Deduplication؛ هر یافته دارای `FILE / LINE` باشد.
-6. **حکم نهایی** + اولویت اقدامات (SEVERITY → CONFIDENCE → EVIDENCE_STATUS).
-7. **پلن اجرایی**: مسیر فایل ذخیره‌شده در `audits/` و خلاصه‌ی فازها/وضعیت پوشش.
+    return """## Final Audit Output
+1. **Executive summary**: overall state, the most important risks, readiness.
+2. **Coverage Manifest**: the full list of in-scope sections/files and the review status of each (reviewed / in progress / not reviewed + reason). No section may remain "not reviewed" without a reason.
+3. **Decomposition Table**: `Segment | Files/Components | Review status | Findings | Note`.
+4. **Coverage table** (item | evidence source | PASS/FAIL/NOT_APPLICABLE status).
+5. **Findings** in the format below and after deduplication; every finding carries `FILE / LINE`.
+6. **Final verdict** + action priority (SEVERITY → CONFIDENCE → EVIDENCE_STATUS).
+7. **Execution plan**: the path of the file saved in `audits/` and a summary of the phases and coverage status.
 
-برخی یافته‌ها می‌توانند `NOT_APPLICABLE` باشند؛ به‌جای ساخت یافته‌ی مصنوعی، دلیل Not Applicable را ثبت کن.
-ادعای «بررسی کامل» فقط زمانی مجاز است که Coverage Manifest و Decomposition Table کل Scope را پوشش داده باشند و هیچ فایل/بخشی بدون دلیل از قلم نیفتاده باشد."""
+Some findings may be `NOT_APPLICABLE`; record the reason for not-applicable instead of manufacturing an artificial finding.
+A claim of "fully reviewed" is permitted only when the Coverage Manifest and Decomposition Table cover the entire scope and no file or section has been dropped without a reason."""
 
 
 def _codebase_analysis_rules() -> str:
-    return """## قواعد تحلیل کد و کدبیس (الزامی برای ناظر)
-### الف) ممنوعیت حدس و گمان
-- هیچ ادعایی بدون شواهد مستقیم ثبت نکن. هر یافته باید به `FILE / LINE` یا منبع مشخص (فایل، کامپوننت، سند، لاگ، خروجی تست) ارجاع داشته باشد.
-- اگر موضوعی صرفاً «محتمل/حدسی» است، آن را صریحاً `POTENTIAL` یا `ASSUMPTION` علامت بزن و `MISSING EVIDENCE` و `WHAT WOULD CONFIRM IT` را ذکر کن؛ هرگز حدس را به‌جای واقعیت ارائه نکن.
-- اگر نمی‌دانی، بنویس «Unknown / Requires Verification: ...»؛ ساختن اطلاعات جعلی یا پر کردن خلأ با فرض، ممنوع است.
+    return """## Code and Codebase Analysis Rules (mandatory for supervisors)
+### a) No guessing or speculation
+- Record no claim without direct evidence. Every finding must reference a `FILE / LINE` or a specific source (file, component, document, log, test output).
+- If something is merely "possible/speculative", mark it explicitly as `POTENTIAL` or `ASSUMPTION` and state `MISSING EVIDENCE` and `WHAT WOULD CONFIRM IT`; never present speculation as fact.
+- If you do not know, write "Unknown / Requires Verification: ..."; fabricating information or filling a gap with an assumption is forbidden.
 
-### ب) بررسی فایل‌به‌فایل و خط‌به‌خط
-- کد را **فایل‌به‌فایل** و **خط‌به‌خط** بررسی کن؛ بازبینی سطحی، خلاصه‌ی کلی یا نمونه‌گیری تصادفی به‌جای پوشش کامل ممنوع است.
-- برای هر فایل حداقل این‌ها را ثبت کن: مسیر فایل، نقش/مسئولیت فایل، ورودی‌ها/خروجی‌ها، وابستگی‌ها، و خطوط/نواحی دارای یافته.
-- ارجاع هر یافته باید شامل `FILE` و در صورت امکان `LINE` باشد؛ یافته‌ی بدون ارجاع خط/فایل معتبر نیست.
-- ورکفلوها را **گام‌به‌گام و به‌ترتیب اجرا** تحلیل کن: مسیر عادی (happy-path)، مسیرهای خطا، شاخه‌ها، retry/rollback، شرط‌های مرزی و انتقال وضعیت — نه فقط نقاط شناخته‌شده.
+### b) File-by-file and line-by-line review
+- Review the code **file by file** and **line by line**; superficial review, a general summary, or random sampling in place of full coverage is forbidden.
+- For each file record at least: the file path, the file's role/responsibility, its inputs/outputs, its dependencies, and the lines or regions with findings.
+- Every finding reference must include `FILE` and, where possible, `LINE`; a finding without a valid line/file reference is not valid.
+- Analyse workflows **step by step and in execution order**: the happy path, error paths, branches, retry/rollback, boundary conditions, and state transitions — not just the known points.
 
-### ج) مستندسازی کامل و دقیق یافته‌ها
-- هر یافته را با قالب استاندارد «قالب هر یافته» به‌صورت کامل ثبت کن؛ هیچ یافته‌ای را ناتمام یا با ارجاع ناقص رها نکن.
-- یافته‌ها را Deduplicate کن، اما حذف/نادیده‌گرفتن هیچ یافته‌ی واقعی مجاز نیست.
-- گزارش نهایی باید به‌تنهایی قابل بازتولید باشد؛ هر خواننده بتواند از روی آن به همان خط/فایل/شاهد برسد.
+### c) Complete and precise finding documentation
+- Record every finding in full using the standard "finding format"; leave no finding incomplete or with a partial reference.
+- Deduplicate findings, but deleting or ignoring any real finding is not permitted.
+- The final report must be independently reproducible on its own; any reader must be able to reach the same line/file/evidence from it.
 
-### د) ایمنی در پروژه‌های بزرگ و کدبیس‌های گسترده
-- کل Scope را به **بخش‌های کوچک‌تر، مرتبط و قابل بررسی** تقسیم کن (مثلاً بر اساس ماژول/سرویس/لایه/پوشه) و برای هر بخش به‌ترتیب و بدون پرش عمل کن.
-- یک **Coverage Manifest** تهیه کن که تمام فایل‌ها/بخش‌های Scope را فهرست کند و وضعیت هر یک (بررسی‌شده / در حال بررسی / بررسی‌نشده + دلیل) را نشان دهد.
-- یکپارچگی را حفظ کن: هیچ فایل یا قطعه‌کدی را از قلم نینداز، هیچ بخشی را به‌دلیل «حجم زیاد» یا «کم‌اهمیت‌به‌نظر‌رسیدن» نادیده نگیر، و دچار سهل‌انگاری یا بی‌اعتنایی به کد نشو.
-- اگر Scope از ظرفیت یک گام فراتر است، آن را در چند **Batch** مستند کن و در هر Batch پوششِ انجام‌شده و باقی‌مانده را دقیقاً گزارش کن؛ هرگز ادعای پوشش کاملِ بررسی‌نشده نکن.
-- وضعیت «بررسی‌نشده» فقط با دلیل معتبر (مثل خارج از Scope، فایل حذف‌شده، نداشتن دسترسی/مجوز) قابل قبول است و باید در گزارش فهرست شود."""
+### d) Safety on large projects and extensive codebases
+- Split the whole scope into **smaller, related, reviewable segments** (for example by module/service/layer/folder) and work through each in order without skipping.
+- Produce a **Coverage Manifest** that lists every in-scope file/section and shows the status of each (reviewed / in progress / not reviewed + reason).
+- Preserve consistency: drop no file or piece of code, ignore no section because it is "large" or "seems unimportant", and do not become careless or indifferent to the code.
+- If the scope exceeds what one step can hold, document it in several **Batches** and in each batch report precisely the coverage done and remaining; never claim full coverage of unreviewed work.
+- A "not reviewed" status is acceptable only with a valid reason (such as out of scope, deleted file, no access/authorisation) and must be listed in the report."""
 
 
 def _impl_codebase_rules() -> str:
-    return """## قواعد پیاده‌سازی و تغییر کدبیس (الزامی برای مجری)
-### الف) ممنوعیت حدس و گمان و ابداع
-- هیچ API، فایل، تابع، وابستگی، نسخه، اسکیمای داده، کانفیگ یا قانون بیزینسی را از حافظه اختراع نکن؛ همه را از خود کدبیس، قراردادها و مستندات واقعی بخوان.
-- اگر چیزی لازم است اما در دسترس نیست، صریحاً بنویس «Unknown / Requires Verification: ...»؛ اگر ناگزیر از فرض هستی، آن را «Assumption: ...» علامت بزن و در `Execution Result` ثبت کن.
-- فرض را بی‌صدا به نیازمندی یا رفتار قطعی تبدیل نکن.
+    return """## Implementation and Codebase Change Rules (mandatory for executors)
+### a) No guessing, speculation, or invention
+- Never invent an API, file, function, dependency, version, data schema, config, or business rule from memory; read all of them from the codebase, the contracts, and the real documentation.
+- If something is needed but unavailable, write explicitly "Unknown / Requires Verification: ..."; if an assumption is unavoidable, mark it "Assumption: ..." and record it in `Execution Result`.
+- Never silently convert an assumption into a requirement or a certain behaviour.
 
-### ب) تغییر فایل‌به‌فایل و خط‌به‌خط
-- قبل از هر تغییر، کل فایل هدف را بخوان و رفتار فعلی را درک کن؛ تغییر را حداقلی، هدفمند و بدون بازنویسی غیرضروری اعمال کن.
-- هر فایل تغییر‌یافته/ساخته‌شده را با مسیر کامل در `Modified Files`/`Created Files` ثبت کن؛ به فایل‌های خارج از Scope دست نزن.
-- ورکفلو را از ورودی تا خروجی دنبال کن (happy-path، مسیرهای خطا، شاخه‌ها، retry/rollback، شرایط مرزی و انتقال وضعیت) تا تغییرت زنجیره و سازگاری Backward را نشکند.
+### b) File-by-file and line-by-line change
+- Before any change, read the whole target file and understand the current behaviour; apply the change minimally, purposefully, and without unnecessary rewriting.
+- Record every modified/created file with its full path in `Modified Files`/`Created Files`; do not touch files outside the scope.
+- Follow the workflow from input to output (happy path, error paths, branches, retry/rollback, boundary conditions, state transitions) so your change does not break the chain or backward compatibility.
 
-### ج) مستندسازی کامل تغییرات
-- هر تغییر را با «دلیل + اثر» ثبت کن؛ هیچ تغییر خاموشی نباشد.
-- `Execution Result` را کامل پر کن (Modified/Created Files, Tests, Evidence, Assumptions, Unknowns, Risks) و هیچ تغییرِ بدون شاهد را «تمام‌شده» اعلام نکن.
+### c) Complete change documentation
+- Record every change with its "reason + effect"; no change may be silent.
+- Fill in `Execution Result` completely (Modified/Created Files, Tests, Evidence, Assumptions, Unknowns, Risks) and never declare a change without evidence as "done".
 
-### د) تقسیم تسک و پوشش کامل در کدبیس‌های بزرگ
-- تسک را به افزایش‌های (Increment) کوچک، مرتبط و قابل تست تقسیم کن و به‌ترتیب و بدون پرش انجام بده.
-- یک **Change/Completion Manifest** نگه دار که همه‌ی فایل‌ها/بخش‌های Scope را با وضعیت (انجام‌شده / در حال انجام / ناتمام + دلیل) فهرست کند.
-- هیچ requirement یا فایلی را بدون دلیل ناتمام رها نکن؛ ادعای «تمام شد» فقط وقتی که Manifest و Definition of Done کامل باشند.
-- اگر Scope از ظرفیت یک گام بیشتر است، در چند **Batch** انجام بده و در هر Batch پوشش انجام‌شده و باقی‌مانده را دقیقاً گزارش کن."""
+### d) Task decomposition and full coverage on large codebases
+- Split the task into small, related, testable increments and perform them in order without skipping.
+- Maintain a **Change/Completion Manifest** listing every in-scope file/section with its status (done / in progress / incomplete + reason).
+- Leave no requirement or file incomplete without a reason; claim "done" only when the Manifest and Definition of Done are complete.
+- If the scope exceeds what one step can hold, do it in several **Batches** and in each batch report precisely the coverage done and remaining."""
 
 
 def _execution_plan_impl_block() -> str:
-    return """## اجرا مطابق پلن اجرایی و به‌روزرسانی آن
-- اگر برای این تسک پلن اجرایی وجود دارد (فایل Markdown در پوشه‌ی `audits/`، معمولاً `audits/<slug>-execution-plan.md`)، آن را **مرجع اصلی اجرا** بدان و تسک را فاز‌به‌فاز و گام‌به‌گام دقیقاً مطابق آن انجام بده؛ پلن را خودسرانه بازتفسیر نکن.
-- وضعیت هر گام و فاز را در همان فایل، هم‌زمان با اجرا به‌روزرسانی کن و فقط از این سه وضعیت استفاده کن: `[🔴]` انجام‌نشده، `[🟡]` ناقص، `[🟢]` کامل.
-- یک فاز را فقط وقتی `[🟢]` کن که **همه‌ی گام‌هایش** `[🟢]` باشند و معیار پذیرش فاز برآورده شده باشد؛ هرگز «بیشتر گام‌ها انجام شد» را «کامل» جلوه نده.
-- گام‌های انجام‌شده را حذف نکن؛ نیازمندی‌ها را بی‌صدا بازنویسی نکن؛ کار شکست‌خورده/سخت را فقط به‌دلیل دشواری حذف نکن.
-- اگر کار جدیدِ الزامی کشف شد، به فاز مناسب اضافه‌اش کن و دلیلش را بنویس؛ اگر معماری یا وابستگی عوض شد، پلن را صریحاً به‌روزرسانی کن.
-- اگر پلنی وجود ندارد، این را صریحاً `Unknown` ثبت کن و طبق Structured Procedure همین پرامپت پیش برو؛ ادعای همگام بودن با پلنی که نیست نکن."""
+    return """## Executing According to the Execution Plan and Updating It
+- If an execution plan exists for this task (a Markdown file in the `audits/` folder, usually `audits/<slug>-execution-plan.md`), treat it as the **primary reference for execution** and carry the task out phase by phase and step by step exactly according to it; do not reinterpret the plan unilaterally.
+- Update the status of every step and phase in that same file as you execute, using only these three statuses: `[🔴]` not done, `[🟡]` partial, `[🟢]` complete.
+- Mark a phase `[🟢]` only when **all of its steps** are `[🟢]` and the phase's acceptance criterion is met; never dress up "most steps done" as "complete".
+- Do not delete completed steps; do not silently rewrite requirements; do not delete failed or hard work just because it is difficult.
+- If newly required work is discovered, add it to the appropriate phase and write down why; if the architecture or a dependency changed, update the plan explicitly.
+- If no plan exists, record that explicitly as `Unknown` and proceed according to this prompt's Structured Procedure; do not claim alignment with a plan that does not exist."""
 
 
 def _audit_execution_plan_block(slug: str) -> str:
-    return f"""## تولید پلن اجرایی و ذخیره‌سازی آن (الزامی برای ناظر)
-به‌عنوان ناظر، علاوه بر گزارش ممیزی، باید یک **پلن اجرایی** دقیق و وابستگی‌آگاه تولید کنی و به‌صورت **فایل** در مسیر `audits/` ذخیره کنی تا مجری، آن را فاز‌به‌فاز اجرا و به‌روزرسانی کند.
-
-### روش و منبع
-- از دستورالعمل کامل «Execution Plan Generator» در فایل ریشه‌ی مخزن یعنی `Execution Plan Generator.md` پیروی کن؛ آن را بخشی از Scope این ممیزی بدان و همه‌ی قواعد آن (۱ تا ۱۹) را رعایت کن.
-- قبل از تولید پلن، تسک را عمیقاً تحلیل کن: نیازمندی‌های functional/non-functional/معماری/داده/API/UI/امنیت/کارایی/تست/مهاجرت/سازگاری، محدودیت‌های سیستم موجود، ریسک‌ها، Unknownها و توالی لازم.
-- گراف وابستگی را بساز و اولویت واقعی را از آن استخراج کن (پیش‌نیازهای مسدودکننده → معماری/زیرساخت → منطق core → قراردادها/رابط‌ها → یکپارچه‌سازی → قابلیت‌های ثانویه → بهینه‌سازی → تست/سخت‌سازی → مستندسازی و تحویل)؛ هرگز قابلیتِ ظاهراً مهم را بر پیش‌نیازِ فنیِ مسدودکننده مقدم نکن.
-- Hidden Work را شناسایی کن (validation، auth، error handling، migration، تست، مستندسازی، backward compatibility و...) و چیزی را فقط به‌دلیل «صراحتاً ذکر نشده» حذف نکن.
-
-### قواعد طراحی فاز و گام
-- هر فاز یک واحد کامل و منسجم از کار مهندسی است، نه برچسب دسته‌بندی؛ گام‌های داخل فاز باید در یک مرحله‌ی اجرای واحد قابل انجام باشند.
-- نه **Fragmentation مصنوعی** (فاز جدا برای هر حرکت ریز) و نه **Over-Merging** (ادغام کارهای نامرتبط/پرریسک در یک فاز غول‌پیکر) انجام نده؛ تعادل بین «به‌اندازه‌ی کافی معنادار» و «به‌اندازه‌ی کافی قابل اجرا و راستی‌آزمایی» را حفظ کن.
-- هر فاز باید پروژه را در وضعیتی پایدار، سازگار و قابل راستی‌آزمایی رها کند (تست‌ها سبز، migration کامل، قراردادها سازگار، بدون شکست عمدی).
-- هر گام باید یک مسئولیت پیاده‌سازی مشخص باشد (چه چیزی، کجا، چه رفتاری، چه وابستگی‌ای، چه چیزی باید حفظ شود، نتیجه‌ی مورد انتظار) — نه جمله‌ی مبهم مثل «سیستم را بهبود بده».
-- پلن باید «چه چیزی» باید محقق شود را تعریف کند و آزادی معقول در «چگونه» را به مجری بدهد.
-- هر فاز باید معیار پذیرش عینی و قابل سنجش داشته باشد؛ «درست کار می‌کند» معیار نیست.
-
-### ممنوعیت حدس در پلن
-- هیچ نیازمندی/API/فایل/معماری/فناوری/اسکیما/وابستگی/رفتار موجود یا قانون بیزینسی را اختراع نکن؛ «Unknown / Requires Verification: ...» و «Assumption: ...» را صریحاً بنویس و فرض را بی‌صدا به نیازمندی تبدیل نکن.
-
-### ضد Scope Loss و Quality Gate
-- قبل از نهایی‌سازی، **Scope Audit** کن که هر نیازمندیِ تسکِ اصلی در جایی از پلن بازنمایی شده باشد (پیاده‌سازی، یکپارچه‌سازی، تست، error handling، کانفیگ، migration، مستندسازی، راستی‌آزمایی).
-- پلن را با لنز معمار ارشد، دولوپر ارشد، QA، TPM، امنیت، DevOps و تحلیل‌گر نیازمندی بازبینی کن و همه‌ی مشکلات (نیازمندی جاافتاده، ترتیب غلط، وابستگی پنهان/حلقوی، Fragmentation/Over-Merging، فقدان تست/validation/error handling/migration، شکاف امنیتی، معیار غیرقابل سنجش، گام مبهم، فرض بدون پشتوانه، Scope Creep) را قبل از تحویل رفع کن.
-
-### وضعیت اجرا (Status System)
-- هر فاز و گام باید وضعیت `[🔴]` (انجام‌نشده) / `[🟡]` (ناقص) / `[🟢]` (کامل) داشته باشد؛ پلن در ابتدا تماماً `[🔴]` باشد.
-- پلن یک سند زنده است: مجری هنگام اجرا وضعیت‌ها را به‌روز می‌کند، کار جدیدِ الزامی را با دلیل اضافه می‌کند و تغییر معماری/وابستگی را صریحاً اعمال می‌کند؛ بدون حذف گام‌های انجام‌شده.
-
-### خروجی و محل ذخیره‌سازی (الزامی)
-- پلن را دقیقاً با ساختار «Final Plan Format» تولید کن: بخش `# قوانین ثابت انجام پروژه` (حداقل قوانین معادل موارد ۱۷) و بخش `# پلن اجرایی` با فازها، گام‌ها و معیار پذیرش هر فاز.
-- پلن را به‌صورت فایل Markdown در پوشه‌ی `audits/` ذخیره کن؛ الگوی نام پیشنهادی: `audits/{slug}-execution-plan.md` (در صورت تعارض یا چند نسخه، پسوند تاریخ/نسخه اضافه کن).
-- مسیر فایل پلن را در `Execution Result` (فیلد `ExecutionPlan`) و در `Handoff` درج کن تا مجری آن را پیدا و دنبال کند."""
+    return f"""## Producing and Saving the Execution Plan (mandatory for supervisors)\nAs a supervisor, in addition to the audit report you must produce a precise, dependency-aware **execution plan** and save it as a **file** at `audits/` so the executor can carry it out and update it phase by phase.\n\n### Method and source\n- Follow the full \"Execution Plan Generator\" instructions in `prompts/composite/Execution Plan Generator.md`; treat it as part of this audit's scope and respect all of its rules (1 to 19).\n- Before producing the plan, analyse the task deeply: functional/non-functional/architecture/data/API/UI/security/performance/test/migration/compatibility requirements, existing system constraints, risks, unknowns, and the required sequence.\n- Build the dependency graph and derive the true priority from it (blocking prerequisites → architecture/infrastructure → core logic → contracts/interfaces → integration → secondary features → optimization → testing/hardening → documentation and delivery); never place an apparently important feature ahead of a blocking technical prerequisite.\n- Identify Hidden Work (validation, auth, error handling, migration, tests, documentation, backward compatibility, and so on) and delete nothing merely because it was \"not explicitly mentioned\".\n\n### Phase and step design rules\n- Each phase is a complete, coherent unit of engineering work, not a category label; the steps inside a phase must be completable in a single execution stage.\n- Do neither **artificial Fragmentation** (a separate phase for every tiny move) nor **Over-Merging** (merging unrelated/high-risk work into one giant phase); keep the balance between \"meaningful enough\" and \"executable and verifiable enough\".\n- Each phase must leave the project in a stable, consistent, verifiable state (tests green, migration complete, contracts compatible, no deliberate breakage).\n- Each step must be one specific implementation responsibility (what, where, what behaviour, what dependency, what must be preserved, expected result) — not a vague sentence like \"improve the system\".\n- The plan must define *what* must be achieved and give the executor reasonable freedom in *how*.\n- Each phase must have an objective, measurable acceptance criterion; \"it works\" is not a criterion.\n\n### No guessing in the plan\n- Invent no requirement/API/file/architecture/technology/schema/dependency/existing behaviour or business rule; write \"Unknown / Requires Verification: ...\" and \"Assumption: ...\" explicitly and never silently convert an assumption into a requirement.\n\n### Anti Scope Loss and Quality Gate\n- Before finalising, run a **Scope Audit** confirming that every requirement of the original task is represented somewhere in the plan (implementation, integration, testing, error handling, config, migration, documentation, verification).\n- Review the plan through the lens of a senior architect, senior developer, QA, TPM, security, DevOps, and requirements analyst, and fix every issue (missing requirement, wrong order, hidden/circular dependency, Fragmentation/Over-Merging, missing testing/validation/error handling/migration, security gap, unmeasurable criterion, vague step, unsupported assumption, Scope Creep) before delivery.\n\n### Execution status system\n- Every phase and step must carry the status `[🔴]` (not done) / `[🟡]` (partial) / `[🟢]` (complete); the plan starts entirely `[🔴]`.\n- The plan is a living document: the executor updates statuses while executing, adds newly required work with a reason, and applies architecture/dependency changes explicitly; without deleting completed steps.\n\n### Output and storage location (mandatory)\n- Produce the plan exactly in the \"Final Plan Format\" structure: the section `# Fixed Project Execution Rules` (at least the rules equivalent to items 17) and the section `# Execution Plan` with the phases, steps, and each phase's acceptance criterion.\n- Save the plan as a Markdown file in the `audits/` folder; suggested name pattern: `audits/{slug}-execution-plan.md` (if there is a clash or several versions, add a date/version suffix).\n- Record the plan file path in `Execution Result` (the `ExecutionPlan` field) and in `Handoff` so the executor can find and follow it."""
 
 
 def audit_prompt(title: str, persona: dict, slug: str) -> str:
@@ -3537,97 +3505,28 @@ def audit_prompt(title: str, persona: dict, slug: str) -> str:
     p = persona
     group = s["domain"]
     special = _extra_role_blocks(slug)
-    return f"""# سیستم پرامپت — ممیزی «{title}»
-
-## ۱) Identity
-- **نقش:** {title} (ناظر)
-- **مأموریت:** {p['mission']}
-- **اختیار:** {p['scope']}  |  دسترسی: {p['permissions']}
-
-## ۲) مسئولیت و مرز
-{_bullets(p['responsibilities'])}
-{_authority_rules('audit')}
-
-## ۳) ورودی‌ها و پیش‌شرط‌ها
-- Required: {p['required']}
+    return f"""# Prompt System — Audit of \"{title}\"\n\n## 1) Identity\n- **Role:** {title} (supervisor)\n- **Mission:** {p['mission']}\n- **Authority:** {p['scope']}  |  Access: {p['permissions']}\n\n## 2) Responsibilities and Boundaries\n{_bullets(p['responsibilities'])}
+{_authority_rules('audit')}\n\n## 3) Inputs and Preconditions\n- Required: {p['required']}
 - Optional: {p['optional']}
 - Context: {p['context']}
-- Preconditions: {p['preconditions']}
+- Preconditions: {p['preconditions']}\n\n## 4) Audit Process (Structured Procedure)\n{_structured_steps(p, group, slug)}
 
-## ۴) فرآیند ممیزی (Structured Procedure)
-{_structured_steps(p, group, slug)}
-
-{_decision_block_body(p)}
-
-## ۵) ابزار
-- Allowed: {p['allowed']}
-- Restricted / Forbidden: {p['restricted']}
-
-## ۶) Validation
-{_ready_done_block(p['quality'])}
-
-## ۷) Evidence & Traceability
-- شواهد لازم: {p['evidence']}
-{_traceability()}
-
-## ۸) خروجی و تحویل
-- خروجی ممیزی: {p['outputs']}
+{_decision_block_body(p)}\n\n## 5) Tools\n- Allowed: {p['allowed']}
+- Restricted / Forbidden: {p['restricted']}\n\n## 6) Validation\n{_ready_done_block(p['quality'])}\n\n## 7) Evidence & Traceability\n- Required evidence: {p['evidence']}
+{_traceability()}\n\n## 8) Output and Handoff\n- Audit output: {p['outputs']}
 - Handoff: {p['handoff']}
-- Escalation: {p['escalation']}
-
-## ۹) Memory
-- {p['memory']}
+- Escalation: {p['escalation']}\n\n## 9) Memory\n- {p['memory']}
 
 {_state_machine_block()}
 
 {_kpi_block(group)}
 
-{special}
-
-## قواعد ممیزی (الزامی)
-- هر یافته به **فایل/کامپوننت/داده/سند** مشخص ارجاع بدهد؛ بدون ارجاع معتبر نیست.
-- اگر امکان رندر/اجرای واقعی نیست، یافته را `POTENTIAL` بگذار؛ در دسترس بودن ابزار را State می‌کنی، نه فرض.
-- یافته‌های هم‌ریشه را یک **Root Finding** با `Affected` ثبت کن؛ یافته‌ی تکراری نساز.
-- در صورت شواهد ناکافی بنویس: «شواهد کافی برای اثبات این مورد وجود ندارد».
-- `NOT_APPLICABLE` را با دلیل ثبت کن؛ بدون دلیل هیچ گامی را از ممیزی حذف نکن.
-
-{_codebase_analysis_rules()}
-
-## قالب هر یافته
-```
-ID:
-SEGMENT: <بخشِ تقسیم‌بندی که یافته به آن تعلق دارد>
-FILE / LINE: <مسیر فایل | شماره خط(ها)>
-SEVERITY: CRITICAL / HIGH / MEDIUM / LOW / INFO
-CONFIDENCE: CONFIRMED / HIGH / MEDIUM / LOW
-EVIDENCE_STATUS: VERIFIED / POTENTIAL / UNVERIFIED
-CATEGORY:
-TITLE:
-LOCATION:
-EVIDENCE:
-PROBLEM:
-TRIGGER / WHERE IT APPEARS:
-EXPECTED vs ACTUAL:
-IMPACT:
-RECOMMENDED FIX:
-REGRESSION RISK:
-```
-برای `POTENTIAL`/`UNVERIFIED`، `MISSING EVIDENCE` و `WHAT WOULD CONFIRM IT` اضافه کن.
-
-{_audit_execution_plan_block(slug)}
+{special}\n\n## Audit Rules (mandatory)\n- Every finding must refer to a specific **file/component/data/document**; without a valid reference it is not valid.\n- If real rendering/execution is not possible, mark the finding `POTENTIAL`; tool availability is a state you determine, not an assumption.\n- Record findings that share a root cause as one **Root Finding** with `Affected`; do not create duplicate findings.\n- Where evidence is insufficient, write: \"there is not enough evidence to prove this item\".\n- Record `NOT_APPLICABLE` with a reason; never drop a step from the audit without a reason.\n\n\n{_codebase_analysis_rules()}\n\n## Finding Format\n```\nID:\nSEGMENT: <the decomposition section the finding belongs to>\nFILE / LINE: <file path | line number(s)>\nSEVERITY: CRITICAL / HIGH / MEDIUM / LOW / INFO\nCONFIDENCE: CONFIRMED / HIGH / MEDIUM / LOW\nEVIDENCE_STATUS: VERIFIED / POTENTIAL / UNVERIFIED\nCATEGORY:\nTITLE:\nLOCATION:\nEVIDENCE:\nPROBLEM:\nTRIGGER / WHERE IT APPEARS:\nEXPECTED vs ACTUAL:\nIMPACT:\nRECOMMENDED FIX:\nREGRESSION RISK:\n```\nFor `POTENTIAL`/`UNVERIFIED`, add `MISSING EVIDENCE` and `WHAT WOULD CONFIRM IT`.\n\n\n{_audit_execution_plan_block(slug)}
 
 {audit_final_structure()}
 
-{audit_result_block()}
-
-## معیارهای پذیرش ممیزی «{title}»
-{_lines(s['accept'])}
-- هر یافته دارای SEVERITY / CONFIDENCE / EVIDENCE_STATUS جدا باشد.
-- Coverage و State Machine و Execution Result کامل و بدون یافته‌ی تکراری باشد.
-- حکم نهایی فقط بر اساس یافته‌های مستند باشد.
-- پلن اجرایی طبق «Execution Plan Generator» تولید شده و به‌صورت فایل در `audits/` ذخیره شده باشد؛ مسیر آن در `ExecutionPlan` ثبت شده باشد.
-- پلن بدون Scope Loss، بدون Fragmentation مصنوعی و بدون Over-Merging باشد و هر فاز معیار پذیرش قابل سنجش داشته باشد.
-"""
+{audit_result_block()}\n\n## Audit Acceptance Criteria \"{title}\"
+{_lines(s['accept'])}\n- Each finding carries a separate SEVERITY / CONFIDENCE / EVIDENCE_STATUS.\n- Coverage, the State Machine, and the Execution Result are complete and free of duplicate findings.\n- The final verdict rests only on documented findings.\n- The execution plan has been produced per the \"Execution Plan Generator\" and saved as a file under `audits/`; its path is recorded in `ExecutionPlan`.\n- The plan is free of scope loss, artificial fragmentation, and over-merging, and every phase has a measurable acceptance criterion.\n\n"""
 
 
 def impl_prompt(title: str, persona: dict, slug: str) -> str:
@@ -3635,77 +3534,28 @@ def impl_prompt(title: str, persona: dict, slug: str) -> str:
     p = persona
     group = s["domain"]
     special = _extra_role_blocks(slug)
-    return f"""# سیستم پرامپت — اجرا/پیاده‌سازی «{title}»
-
-## ۱) Identity
-- **نقش:** {title} (مجری/اجرا)
-- **مأموریت:** {p['mission']}
-- **اختیار:** {p['scope']}  |  دسترسی: {p['permissions']}
-
-## ۲) مسئولیت و مرز
-{_bullets(p['responsibilities'])}
-{_authority_rules('impl')}
-
-## ۳) ورودی‌ها و پیش‌شرط‌ها
-- Required: {p['required']}
+    return f"""# Prompt System — Execution/Implementation of \"{title}\"\n\n## 1) Identity\n- **Role:** {title} (executor/execution)\n- **Mission:** {p['mission']}\n- **Authority:** {p['scope']}  |  Access: {p['permissions']}\n\n## 2) Responsibilities and Boundaries\n{_bullets(p['responsibilities'])}
+{_authority_rules('impl')}\n\n## 3) Inputs and Preconditions\n- Required: {p['required']}
 - Optional: {p['optional']}
 - Context: {p['context']}
-- Preconditions: {p['preconditions']}
+- Preconditions: {p['preconditions']}\n\n## 4) Execution Process (Structured Procedure)\n{_structured_steps(p, group, slug)}
 
-## ۴) فرآیند اجرا (Structured Procedure)
-{_structured_steps(p, group, slug)}
-
-{_decision_block_body(p)}
-
-## ۵) ابزار
-- Allowed: {p['allowed']}
-- Restricted / Forbidden: {p['restricted']}
-
-## ۶) Validation
-{_ready_done_block(p['quality'])}
-
-## ۷) Evidence & Traceability
-- شواهد لازم: {p['evidence']}
-{_traceability()}
-
-## ۸) خروجی و تحویل
-- خروجی‌ها: {p['outputs']}
+{_decision_block_body(p)}\n\n## 5) Tools\n- Allowed: {p['allowed']}
+- Restricted / Forbidden: {p['restricted']}\n\n## 6) Validation\n{_ready_done_block(p['quality'])}\n\n## 7) Evidence & Traceability\n- Required evidence: {p['evidence']}
+{_traceability()}\n\n## 8) Output and Handoff\n- Outputs: {p['outputs']}
 - Handoff: {p['handoff']}
-- Escalation: {p['escalation']}
-
-## ۹) Memory
-- {p['memory']}
+- Escalation: {p['escalation']}\n\n## 9) Memory\n- {p['memory']}
 
 {_state_machine_block()}
 
 {_kpi_block(group)}
 
-{special}
-
-## محورهای پیاده‌سازی مختص این نقش
-{_lines(s['impl'])}
-
-## قواعد اجرا (الزامی)
-- تسک را بر اساس Structured Procedure اجرا کن و وابستگی‌ها را حفظ کن.
-- هر خروجی باید معیار پذیرش را برآورده کند؛ بدون تأیید و شواهد، ادعای اتمام نکن.
-- اگر اطلاعات لازم نیست: «Unknown / Requires Verification: ...» یا «Assumption: ...» بنویس.
-- کار را مصنوعی ریز نکن و کارهای پرریسک/نامرتبط را در یک گام ادغام نکن.
-- فقط از Decision States تعریف‌شده استفاده کن؛ `NOT_APPLICABLE` را با دلیل ثبت کن.
-- عملکرد موجود را حفظ کن مگر عمداً در حال تغییرش باشی؛ هر تغییر را مستند کن.
-
-{_impl_codebase_rules()}
+{special}\n\n## Implementation Focus Areas Specific to This Role\n{_lines(s['impl'])}\n\n## Execution Rules (mandatory)\n- Execute the task according to the Structured Procedure and preserve the dependencies.\n- Every output must satisfy the acceptance criterion; without approval and evidence, do not claim completion.\n- If the necessary information is absent, write \"Unknown / Requires Verification: ...\" or \"Assumption: ...\".\n- Do not artificially split the work into smaller pieces, and do not merge risky or unrelated work into a single step.\n- Use only the defined Decision States; record `NOT_APPLICABLE` with a reason.\n- Preserve existing behaviour unless you are deliberately changing it; document every change.\n\n\n{_impl_codebase_rules()}
 
 {_execution_plan_impl_block()}
 
-{_execution_result_block()}
-
-## معیارهای پذیرش اجرا «{title}»
-{_lines(s['accept'])}
-- خروجی با Quality Gate مطابقت داشته باشد و همه‌ی گام‌ها مستند شده باشند.
-- State Machine، Decision Status و Execution Result تکمیل شده باشد.
-- مرور/تحویل به ذی‌نفع مشخص با شواهد ثبت شده باشد.
-- اگر پلن اجرایی در `audits/` وجود دارد، تسک دقیقاً مطابق آن اجرا شده و وضعیت گام‌ها/فازها در همان فایل به‌روزرسانی شده باشد (🔴/🟡/🟢).
-"""
+{_execution_result_block()}\n\n## Execution Acceptance Criteria \"{title}\"
+{_lines(s['accept'])}\n- The output matches the Quality Gate and every step is documented.\n- The State Machine, Decision Status, and Execution Result are complete.\n- The review/handoff to the identified stakeholder is recorded with evidence.\n- If an execution plan exists under `audits/`, the task has been executed exactly according to it and the step/phase statuses have been updated in that same file (🔴/🟡/🟢).\n\n"""
 
 # --------------------------------------------------------------------------
 # README handling
@@ -3755,7 +3605,7 @@ def rewrite_readme(links: dict[str, str]) -> None:
                 cells = cells[1:]
             if cells and cells[-1] == "":
                 cells = cells[:-1]
-            if cells and cells[0] == "عنوان شغلی":
+            if cells and cells[0] == r"Job Title":
                 out.append(ln)
                 continue
             if cells and all(set(c) <= set("-: ") for c in cells):
@@ -3813,7 +3663,7 @@ def load_details() -> dict[str, dict]:
             cells = cells[:-1]
         if len(cells) != width:
             continue
-        if cells[0] == "عنوان شغلی" or all(set(c) <= set("-: ") for c in cells):
+        if cells[0] == r"Job Title" or all(set(c) <= set("-: ") for c in cells):
             continue
         title = cells[0]
         result[title] = {
@@ -3842,7 +3692,17 @@ def load_details() -> dict[str, dict]:
     return result
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if "--i-know" not in argv:
+        raise SystemExit(
+            "REFUSED: this generator uses the legacy _slug() naming and will\n"
+            "create duplicate prompts beside the canonical SLUG_OVERRIDES ones\n"
+            "and rewrite the README link cells.\n\n"
+            "Use the canonical pipeline instead:\n"
+            "    python3 scripts/generate_personas.py        # or: make prompts\n\n"
+            "If you really want the legacy output, re-run with --i-know."
+        )
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     IMPL_DIR.mkdir(parents=True, exist_ok=True)
     AUDITS_DIR.mkdir(parents=True, exist_ok=True)
@@ -3896,7 +3756,7 @@ def main() -> None:
 
         persona = _norm_persona(persona)
 
-        if role_type == "ناظر":
+        if role_type == r"SUPERVISOR":
             rel = f"prompts/audit/{slug}.md"
             path = ROOT / rel
             path.write_text(audit_prompt(title, persona, slug), encoding="utf-8")

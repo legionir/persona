@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+node_modules/
+# Runtime output — the personas write their execution plans and audit reports here
+audits/
