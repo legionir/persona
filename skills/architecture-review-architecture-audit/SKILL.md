@@ -7,6 +7,7 @@ metadata:
   typeLabel: "Composite"
   source: "prompts/composite/Architecture Review & Architecture Audit.md"
   language: "en"
+  generated: false
 ---
 
 # Architecture Review & Architecture Audit — Composite Persona Skill

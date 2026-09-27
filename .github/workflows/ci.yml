@@ -1,0 +1,63 @@
+name: CI
+
+# Every artifact in this repository is generated. The pipeline is
+# generate_personas.py -> build_metadata.py -> compose_persona.py -> build_skills.py,
+# so CI does two things: regenerate from the committed sources, and fail if the
+# result differs from what is committed (a hand-edited generated file is a bug).
+
+on:
+  push:
+    branches: [main, "arena/**"]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install the web-test dependencies
+        run: npm ci
+
+      - name: Regenerate every artifact from source
+        run: make all
+
+      - name: Fail if any generated file drifted
+        run: |
+          if ! git diff --exit-code --quiet; then
+            echo "::error::Generated artifacts are out of date. Run 'make all' and commit the result."
+            git --no-pager diff --stat
+            exit 1
+          fi
+
+      - name: Validate (structure, composites, skills, English-only)
+        run: make validate
+
+      - name: Web test (index.html)
+        run: make test
+
+      - name: Upload the regenerated artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regenerated-artifacts
+          path: |
+            prompts/**
+            personas.json
+            skills/**
+          retention-days: 7

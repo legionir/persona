@@ -7,6 +7,7 @@ metadata:
   typeLabel: "Composite"
   source: "prompts/composite/Forensic Codebase Review & Audit.md"
   language: "en"
+  generated: false
 ---
 
 # Forensic Codebase Review & Audit — Master Prompt (v2) — Composite Persona Skill

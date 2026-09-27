@@ -4,7 +4,18 @@
 >
 > 🌐 **Online version (GitHub Pages):** once Pages is enabled (Settings → Pages → Deploy from a branch → `main` → `/ (root)`), the site is available at `https://legionir.github.io/persona/`. A `.nojekyll` file is committed at the repository root so Markdown/JSON files are served exactly as they are, without Jekyll processing.
 >
-> 📦 **API-ready metadata:** [`personas.json`](personas.json) — 170 roles with the fields `id`, `roleId`, `type`, `domain`, `category`, `seniority`, `mission`, `duties`, `supervisors`, `consumers`, `capabilities`, `path`, and `facets` for search and grouping. Regenerate with `python3 scripts/build_metadata.py`
+> 📦 **API-ready metadata:** [`personas.json`](personas.json) — all **189 personas** (170 roles + 19 composite master prompts) with the fields `id`, `roleId`, `type`, `domain`, `category`, `seniority`, `mission`, `duties`, `supervisors`, `consumers`, `capabilities`, `path`, and `facets` for search and grouping. Regenerate with `python3 scripts/build_metadata.py`
+>
+> 🔄 **Everything here is generated.** One command rebuilds every artifact from its source and validates the result:
+>
+> ```bash
+> make all      # regenerate everything, then validate
+> make check    # validate only, write nothing
+> ```
+>
+> See [Structure and Regeneration](#structure-and-regeneration) for what comes from what, and [CONTRIBUTING.md](CONTRIBUTING.md) for which files are safe to edit.
+>
+> 📄 Licensed under [Apache-2.0](LICENSE).
 
 ## Table of Contents
 - [Complete role table](#complete-role-table)
@@ -959,6 +970,9 @@ Full guide: [`docs/persona-skills.md`](docs/persona-skills.md).
 - `composites/blocks/98-frontend-design-system-contract.md` — the frontend design-system contract (single merge of the Doctrine of Visual & Interaction Consistency: tokens, one concept = one component, state coverage, shell/template).
 - `composites/*.json` — the spec of each composite persona (mission, inputs, lenses, precedence, extra sections).
 - `skills/<name>/SKILL.md` and `skills/<name>/references/` — the output of turning a persona into an Agent Skill.
+- `Makefile` — one entry point for the whole pipeline (`make all`, `make check`, `make test`, `make serve`).
+- `.github/workflows/ci.yml` — CI: regenerate everything, fail on drift, then run every validation gate.
+- [`LICENSE`](LICENSE) (Apache-2.0), [`CONTRIBUTING.md`](CONTRIBUTING.md), [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md), [`SECURITY.md`](SECURITY.md).
 - `docs/` — English guides: building a composite persona, converting to a skill, and the technical contracts
   - [`docs/composite-personas.md`](docs/composite-personas.md) — the composite-persona builder (block + spec)
   - [`docs/persona-skills.md`](docs/persona-skills.md) — converting a persona into an Agent Skill
@@ -978,37 +992,46 @@ Each file is named with the English slug of its job title; for example `prompts/
 
 ### Regeneration
 
-All role data (identity, role, domains, the relevant supervisor, and the 20 details of each role) is kept in the main table of this `README.md`, and the prompts are generated exactly from it:
+Everything in this repository except `composites/blocks/`, `composites/*.json`, and the four
+hand-maintained master prompts is **generated**. The pipeline order matters: personas come
+from the README table, metadata and composites are derived from the personas, and skills are
+derived from both.
 
 ```bash
-python3 scripts/generate_personas.py
+make all        # the whole pipeline, then every gate
+make check      # validate only, write nothing
+make test       # the index.html functional test (needs: npm install)
+make serve      # local preview at http://localhost:8000
 ```
 
-Validating the structure of every file:
+The same thing step by step:
 
 ```bash
-python3 scripts/validate_personas.py
+python3 scripts/generate_personas.py     # 170 role prompts + the README Prompt column and links
+python3 scripts/build_metadata.py        # personas.json (170 roles + 19 composites)
+python3 scripts/compose_persona.py --all # the 15 spec-driven composite master prompts
+python3 scripts/build_skills.py          # 189 Agent Skills + skills/index.json + skills/README.md
 ```
 
-Building the search/API metadata (`personas.json`):
+`generate_personas.py` rewrites the prompt files and keeps the `Prompt` column and the links
+of the README main table up to date.
 
-```bash
-python3 scripts/build_metadata.py
-```
+> `scripts/generate_role_prompts.py` is a **library**, not an entry point — `generate_personas.py`
+> imports the per-role specs from it. Its own `main()` writes the legacy `_slug()` filenames and
+> will create duplicates beside the canonical ones, so it refuses to run unless you pass
+> `--i-know`. Use `generate_personas.py`.
 
-Interactive finder: [`index.html`](index.html)
+### Validation gates
 
-This script rewrites the prompt files and keeps the `Prompt` column and the links of the README main table up to date.
+| Command | What it guarantees |
+|---|---|
+| `python3 scripts/validate_personas.py` | 170 prompts match the README table; slugs and links agree |
+| `python3 scripts/validate_composites.py` | all 19 master prompts are English-only, copy-paste ready, and substantive |
+| `python3 scripts/validate_skills.py` | 189 skills have valid frontmatter, resolvable links, and a `references/` copy byte-identical to its source |
+| `python3 scripts/compose_persona.py --all --check` | the 15 spec-driven composites re-render byte-for-byte |
+| `python3 scripts/build_skills.py --check` | the skills on disk match what the builder would produce |
+| `node scripts/test_web.js` | `index.html` renders all 189 personas and its filters, sort, and search work |
 
-Building / rebuilding composite personas:
-
-```bash
-python3 scripts/compose_persona.py --all
-```
-
-Building skills from the personas (and validating them):
-
-```bash
-python3 scripts/build_skills.py
-python3 scripts/validate_skills.py
-```
+CI runs all of them on every push and pull request (see
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml)), and additionally fails if a
+regenerated file differs from what is committed — a hand-edited generated file is a bug.

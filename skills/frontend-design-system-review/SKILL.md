@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/Frontend & Design System Review.md"
   language: "en"
+  spec: "composites/frontend-design-system-review.json"
+  generated: true
 ---
 
 # Frontend & Design System Review — Master Prompt (v1) — Composite Persona Skill

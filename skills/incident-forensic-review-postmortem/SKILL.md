@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/Incident Forensic Review & Postmortem.md"
   language: "en"
+  spec: "composites/incident-forensic-review.json"
+  generated: true
 ---
 
 # Incident Forensic Review & Postmortem — Master Prompt (v1) — Composite Persona Skill

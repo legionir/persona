@@ -7,6 +7,7 @@ metadata:
   typeLabel: "Composite"
   source: "prompts/composite/Execution Plan Generator.md"
   language: "en"
+  generated: false
 ---
 
 # Execution Plan Generator — Master Prompt — Composite Persona Skill

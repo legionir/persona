@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/Testing & Quality Assurance Audit.md"
   language: "en"
+  spec: "composites/testing-quality-audit.json"
+  generated: true
 ---
 
 # Testing & Quality Assurance Audit — Master Prompt (v1) — Composite Persona Skill

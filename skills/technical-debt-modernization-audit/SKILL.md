@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/Technical Debt & Modernization Audit.md"
   language: "en"
+  spec: "composites/technical-debt-modernization-audit.json"
+  generated: true
 ---
 
 # Technical Debt & Modernization Audit — Master Prompt (v1) — Composite Persona Skill

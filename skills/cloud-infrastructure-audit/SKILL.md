@@ -8,6 +8,8 @@ metadata:
   lenses: 7
   source: "prompts/composite/Cloud & Infrastructure Audit.md"
   language: "en"
+  spec: "composites/cloud-infrastructure-audit.json"
+  generated: true
 ---
 
 # Cloud & Infrastructure Audit — Master Prompt (v1) — Composite Persona Skill

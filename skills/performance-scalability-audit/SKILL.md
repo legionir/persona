@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/Performance & Scalability Audit.md"
   language: "en"
+  spec: "composites/performance-scalability-audit.json"
+  generated: true
 ---
 
 # Performance & Scalability Audit — Master Prompt (v1) — Composite Persona Skill

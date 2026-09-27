@@ -455,6 +455,26 @@ class MasterPersona:
 
 
 # ---------------------------------------------------------------------------
+# composite descriptions (shared by build_metadata.py and build_skills.py)
+# ---------------------------------------------------------------------------
+def master_description(mp: MasterPersona, spec: dict | None) -> str:
+    """The one-line description of a composite master prompt.
+
+    Used both for the Agent Skill trigger and for personas.json, so the two
+    files can never disagree about what a composite is for.
+    """
+    if spec and spec.get("description"):
+        return clip(spec["description"], DESC_MAX)
+    mission = clip(re.sub(r"\s+", " ", mp.first_paragraph()), 320)
+    return clip(
+        f"{mp.title} — composite master persona. {mission} "
+        f"Use when you need a deep, structured, evidence-only run of this persona and a "
+        f"generic checklist answer is not acceptable.",
+        DESC_MAX,
+    )
+
+
+# ---------------------------------------------------------------------------
 # discovery
 # ---------------------------------------------------------------------------
 def master_personas() -> list[Path]:

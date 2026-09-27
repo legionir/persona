@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/Software Design & Architecture Review.md"
   language: "en"
+  spec: "composites/software-design-architecture-review.json"
+  generated: true
 ---
 
 # Software Design & Architecture Review — Master Prompt (v1) — Composite Persona Skill

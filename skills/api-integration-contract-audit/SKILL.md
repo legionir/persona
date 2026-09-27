@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/API & Integration Contract Audit.md"
   language: "en"
+  spec: "composites/api-contract-audit.json"
+  generated: true
 ---
 
 # API & Integration Contract Audit — Master Prompt (v1) — Composite Persona Skill

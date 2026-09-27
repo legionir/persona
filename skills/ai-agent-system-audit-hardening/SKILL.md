@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/AI Agent System Audit & Hardening.md"
   language: "en"
+  spec: "composites/ai-agent-system-audit.json"
+  generated: true
 ---
 
 # AI Agent System Audit & Hardening — Master Prompt (v1) — Composite Persona Skill

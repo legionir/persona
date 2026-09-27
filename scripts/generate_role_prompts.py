@@ -5,13 +5,29 @@ Each role has its own hand-authored spec (mission + role-specific targets +
 role-specific acceptance criteria). The prompts are NOT generic templates with
 only the title swapped — the content is bespoke per role.
 
-Usage:
-    python3 scripts/generate_role_prompts.py
+!! DO NOT RUN THIS FILE DIRECTLY !!
+===================================
+
+This module is a *library*: `scripts/generate_personas.py` imports `SPECS`,
+`DETAILS`, `_slug`, `read_rows`, `load_details`, ... from it.
+
+Its own `main()` writes prompts with the legacy `_slug()` naming
+(`chief-technology-officer-cto.md`), while the canonical pipeline uses
+`SLUG_OVERRIDES` from `role_extras.py` (`cto.md`). Running it directly creates
+duplicate files beside the canonical ones and rewrites the README link cells,
+which breaks `validate_personas.py`.
+
+The canonical entry point is:
+
+    python3 scripts/generate_personas.py          # or: make prompts
+
+`main()` below refuses to run unless `--i-know` is passed.
 """
 
 from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -3676,7 +3692,17 @@ def load_details() -> dict[str, dict]:
     return result
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if "--i-know" not in argv:
+        raise SystemExit(
+            "REFUSED: this generator uses the legacy _slug() naming and will\n"
+            "create duplicate prompts beside the canonical SLUG_OVERRIDES ones\n"
+            "and rewrite the README link cells.\n\n"
+            "Use the canonical pipeline instead:\n"
+            "    python3 scripts/generate_personas.py        # or: make prompts\n\n"
+            "If you really want the legacy output, re-run with --i-know."
+        )
     AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     IMPL_DIR.mkdir(parents=True, exist_ok=True)
     AUDITS_DIR.mkdir(parents=True, exist_ok=True)

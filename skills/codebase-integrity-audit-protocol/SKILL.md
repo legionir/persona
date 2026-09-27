@@ -7,6 +7,7 @@ metadata:
   typeLabel: "Composite"
   source: "prompts/composite/codebase-integrity-audit-protocol.md"
   language: "en"
+  generated: false
 ---
 
 # Codebase Integration & Workflow Integrity Audit Protocol (v2, single file) — Composite Persona Skill

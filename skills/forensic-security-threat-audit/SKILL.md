@@ -8,6 +8,8 @@ metadata:
   lenses: 8
   source: "prompts/composite/Forensic Security & Threat Audit.md"
   language: "en"
+  spec: "composites/forensic-security-threat-audit.json"
+  generated: true
 ---
 
 # Forensic Security & Threat Audit — Master Prompt (v1) — Composite Persona Skill

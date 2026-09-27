@@ -9,6 +9,8 @@ Checks, per skill directory:
   4. Every local markdown link inside SKILL.md resolves to a real file.
   5. SKILL.md stays under the soft line budget (progressive disclosure).
   6. skills/index.json lists exactly the directories that exist.
+  7. references/*.md is byte-identical to the persona prompt it was copied
+     from — a stale reference copy would silently ship the old contract.
 
 Usage:
     python3 scripts/validate_skills.py
@@ -18,6 +20,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -50,6 +53,36 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
                 if isinstance(data[current], dict):
                     data[current][k2.strip()] = v2.strip().strip('"')
     return data, text[m.end():]
+
+
+def check_reference_copies(root: Path, index: dict) -> list[str]:
+    """references/*.md must be a byte-identical copy of its source prompt.
+
+    The reference file is the progressive-disclosure copy of the full persona
+    contract. If it drifts, a consumer that opens only the reference gets a
+    contract that no longer matches prompts/**.
+    """
+    problems: list[str] = []
+    for s in index.get("skills", []):
+        src = ROOT / s.get("source", "")
+        refs = sorted((root / s["name"] / "references").glob("*.md"))
+        if not src.exists():
+            problems.append(f"{s['name']}: source prompt missing -> {s.get('source')}")
+            continue
+        if not refs:
+            problems.append(f"{s['name']}: no reference copy of {s.get('source')}")
+            continue
+        if len(refs) > 1:
+            problems.append(f"{s['name']}: {len(refs)} reference files, expected 1 "
+                            f"({', '.join(r.name for r in refs)})")
+        want = hashlib.md5(src.read_bytes()).hexdigest()
+        for r in refs:
+            got = hashlib.md5(r.read_bytes()).hexdigest()
+            if got != want:
+                problems.append(
+                    f"{s['name']}: references/{r.name} is stale — "
+                    f"it differs from {s.get('source')} (run scripts/build_skills.py)")
+    return problems
 
 
 def check_skill(skill_dir: Path) -> list[str]:
@@ -108,6 +141,7 @@ def main(argv: list[str] | None = None) -> int:
         problems.extend(check_skill(d))
 
     index = root / "index.json"
+    doc: dict = {}
     if index.exists():
         doc = json.loads(index.read_text(encoding="utf-8"))
         listed = {s["name"] for s in doc.get("skills", [])}
@@ -118,6 +152,9 @@ def main(argv: list[str] | None = None) -> int:
             problems.append(f"index.json: stale entry for {extra}")
     else:
         problems.append("index.json missing")
+
+    if doc:
+        problems.extend(check_reference_copies(root, doc))
 
     print(f"Skills: {len(dirs)}")
     if problems:

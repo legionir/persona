@@ -37,6 +37,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from persona_lib import (  # noqa: E402
     COMPOSITES, DESC_MAX, NAME_MAX, NON_PERSONA_MD, PROMPTS, ROOT, SKILLS,
+    master_description,
     SKILL_LINES_SOFT_MAX,
     section_block,
     MasterPersona, RolePersona, bullets_of, checkbox_of, clip, code_blocks,
@@ -66,18 +67,6 @@ def role_description(rp: RolePersona) -> str:
         f"Use when you need {rp.title}-level judgment with evidence and a fixed scope."
     )
     return clip(desc, DESC_MAX)
-
-
-def master_description(mp: MasterPersona, spec: dict | None) -> str:
-    if spec and spec.get("description"):
-        return clip(spec["description"], DESC_MAX)
-    mission = clip(re.sub(r"\s+", " ", mp.first_paragraph()), 320)
-    return clip(
-        f"{mp.title} — composite master persona. {mission} "
-        f"Use when you need a deep, structured, evidence-only run of this persona and a "
-        f"generic checklist answer is not acceptable.",
-        DESC_MAX,
-    )
 
 
 # ---------------------------------------------------------------------------
@@ -303,7 +292,13 @@ def master_skill_body(mp: MasterPersona, spec: dict | None, bundle: bool = True)
 # ---------------------------------------------------------------------------
 # build
 # ---------------------------------------------------------------------------
-def composite_specs() -> dict[str, dict]:
+def composite_specs() -> dict[str, tuple[dict, Path]]:
+    """Every composite spec, keyed by the master-prompt file name it produces.
+
+    The path is carried alongside so the catalog can record which spec produced
+    a given skill — a consumer can then tell a generated composite from a
+    hand-maintained one.
+    """
     out = {}
     for p in sorted(COMPOSITES.glob("*.json")):
         try:
@@ -311,7 +306,7 @@ def composite_specs() -> dict[str, dict]:
         except (json.JSONDecodeError, OSError):
             continue
         if spec.get("output"):
-            out[spec["output"]] = spec
+            out[spec["output"]] = (spec, p)
     return out
 
 
@@ -319,7 +314,7 @@ def build_one(source: Path, bundle: bool = True) -> tuple[str, dict, list[str]]:
     problems: list[str] = []
     text = source.read_text(encoding="utf-8")
     specs = composite_specs()
-    spec = specs.get(source.name)
+    spec, spec_path = specs.get(source.name, (None, None))
 
     if "# Persona — " in text:
         rp = RolePersona(source)
@@ -349,6 +344,8 @@ def build_one(source: Path, bundle: bool = True) -> tuple[str, dict, list[str]]:
             "lenses": len((spec or {}).get("lenses", [])) or None,
             "source": rel(source),
             "language": (spec or {}).get("language", "en"),
+            "spec": f"composites/{spec_path.name}" if spec_path else None,
+            "generated": bool(spec),
         }
 
     problems.extend(frontmatter_problems(name, description))
@@ -390,7 +387,9 @@ def write_catalog(entries: dict[str, dict]) -> None:
                         "description": s.get("description", ""),
                         "meta": {"type": s.get("type"), "typeLabel": s.get("typeLabel"),
                                  "domain": s.get("domain"),
-                                 "lenses": s.get("lenses")},
+                                 "lenses": s.get("lenses"),
+                                 "spec": s.get("spec"),
+                                 "generated": s.get("generated")},
                         "source": s.get("source", ""),
                         "path": s.get("skill", f"skills/{s['name']}/SKILL.md"),
                         "lines": len((SKILLS / s["name"] / "SKILL.md").read_text(encoding="utf-8").splitlines()),
@@ -414,7 +413,9 @@ def write_catalog(entries: dict[str, dict]) -> None:
              "source": e["source"], "skill": e.get("path", f"skills/{n}/SKILL.md"),
              "description": e["description"],
              **({"lenses": e["meta"]["lenses"]}
-                if e["meta"].get("lenses") else {})}
+                if e["meta"].get("lenses") else {}),
+             **({"spec": e["meta"]["spec"], "generated": e["meta"]["generated"]}
+                if e["meta"].get("type") == "COMPOSITE" else {})}
             for n, e in sorted(merged.items())
         ],
     }

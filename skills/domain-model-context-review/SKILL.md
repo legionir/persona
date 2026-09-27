@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/Domain Model & Context Review.md"
   language: "en"
+  spec: "composites/domain-model-context-review.json"
+  generated: true
 ---
 
 # Domain Model & Context Review — Master Prompt (v1) — Composite Persona Skill

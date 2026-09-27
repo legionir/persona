@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/Data & Database Integrity Audit.md"
   language: "en"
+  spec: "composites/data-integrity-audit.json"
+  generated: true
 ---
 
 # Data & Database Integrity Audit — Master Prompt (v1) — Composite Persona Skill

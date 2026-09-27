@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/Privacy & Compliance Audit.md"
   language: "en"
+  spec: "composites/privacy-compliance-audit.json"
+  generated: true
 ---
 
 # Privacy & Compliance Audit — Master Prompt (v1) — Composite Persona Skill

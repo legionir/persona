@@ -8,6 +8,8 @@ metadata:
   lenses: 7
   source: "prompts/composite/Production Readiness & Reliability Audit.md"
   language: "en"
+  spec: "composites/production-readiness-reliability-audit.json"
+  generated: true
 ---
 
 # Production Readiness & Reliability Audit — Master Prompt (v1) — Composite Persona Skill

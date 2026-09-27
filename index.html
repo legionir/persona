@@ -240,8 +240,7 @@
   <div class="empty" id="empty" hidden><b>No results found.</b><br>Try another phrase or reset the filters.</div>
 
   <footer>
-    Role data: <code>personas.json</code> (API-ready metadata) — regenerate with <code>python3 scripts/build_metadata.py</code>
-    <br>Composite data: <code>skills/index.json</code> (189 skills) — regenerate with <code>python3 scripts/build_skills.py</code>
+    Data: <code>personas.json</code> (API-ready metadata for all 189 personas) — regenerate with <code>python3 scripts/build_metadata.py</code>
     <br>The prompt files are generated from the role tables in <code>README.md</code>.
   </footer>
 </div>
@@ -250,34 +249,35 @@
 "use strict";
 
 const GITHUB_BASE = "https://github.com/legionir/persona/blob/main/";
-let DATA = null;      // personas.json    — 170 role personas
-let SKILLS = null;    // skills/index.json — 189 skills (170 roles + 19 composites)
-let ALL = [];         // one unified list: 170 roles + 19 composites
+let DATA = null;      // personas.json — 170 role personas + 19 composite master prompts
+let ALL = [];         // one unified list: DATA.roles + DATA.composites
 let TITLE_ID = null;  // Map: role title -> id (to scroll to that role's card)
 
 /* Facets that only role personas carry. They are dimmed when the selected
    type is Composite, because a composite has no group / domain / seniority. */
 const ROLE_ONLY_FACETS = ["fGroup", "fDomain", "fCategory", "fSeniority"];
 
-/* A composite skill, reshaped to look like a role persona so one renderer,
-   one filter and one sort handle both. */
+/* A composite master prompt, reshaped to look like a role persona so one
+   renderer, one filter and one sort handle both. The group / domain /
+   category / seniority facets are null: a composite runs several roles at
+   once and has none of them. */
 function compositeToPersona(s){
   return {
-    id: s.name,
-    title: String(s.title || "").replace(/\s*—\s*Master Prompt\s*(\(v\d+\))?\s*$/i, "").trim() || s.name,
+    id: s.id,
+    title: s.title,
     type: "COMPOSITE",
-    typeLabel: "Composite",
+    typeLabel: s.typeLabel || "Composite",
     roleId: null,
-    mission: s.description || "",
+    mission: s.description || s.mission || "",
     duties: "",
     group: null, domain: null, category: null, seniority: null,
     supervisors: [], consumers: [], capabilities: [],
-    path: s.source,
-    file: String(s.source || "").split("/").pop(),
+    path: s.path,
+    file: s.file,
     skill: s.skill,
     lenses: s.lenses || null,
     isComposite: true,
-    keywords: []
+    keywords: s.keywords || []
   };
 }
 
@@ -300,8 +300,6 @@ function initFacets(data){
         `<option value="${val}">${label}</option>`);
   };
   fill("fType", data.facets.types.map(t => [t.id, t.label]));
-  // personas.json only knows SUPERVISOR / EXECUTOR; composites come from skills/index.json
-  fill("fType", [["COMPOSITE", "Composite"]]);
   fill("fGroup", data.facets.groups.map(g => [g[0], g[1]]));
   fill("fDomain", data.facets.domains.map(d => [d[0], d[1]]));
   fill("fCategory", data.facets.categories.map(c => [c[0], c[1]]));
@@ -309,11 +307,10 @@ function initFacets(data){
 }
 
 function renderStats(t){
-  const comp = (SKILLS && SKILLS.totals.composites) || 0;
   $("stats").innerHTML = `
-    <span class="stat">Total personas: <b>${faDigits(t.roles + comp)}</b></span>
+    <span class="stat">Total personas: <b>${faDigits(t.personas)}</b></span>
     <span class="stat">Role prompts: <b>${faDigits(t.roles)}</b></span>
-    <span class="stat">Composite prompts: <b>${faDigits(comp)}</b></span>
+    <span class="stat">Composite prompts: <b>${faDigits(t.composites)}</b></span>
     <span class="stat">Supervisors: <b>${faDigits(t.supervisors)}</b></span>
     <span class="stat">Executors: <b>${faDigits(t.executors)}</b></span>`;
 }
@@ -492,19 +489,13 @@ function bindEvents(){
   });
 }
 
-Promise.all([
-  fetch("personas.json", { cache: "no-store" })
-    .then(r => { if (!r.ok) throw new Error("personas.json -> " + r.status); return r.json(); }),
-  fetch("skills/index.json", { cache: "no-store" })
-    .then(r => { if (!r.ok) throw new Error("skills/index.json -> " + r.status); return r.json(); })
-])
-  .then(([personas, skills]) => {
+fetch("personas.json", { cache: "no-store" })
+  .then(r => { if (!r.ok) throw new Error("personas.json -> " + r.status); return r.json(); })
+  .then((personas) => {
     DATA = personas;
-    SKILLS = skills;
     TITLE_ID = new Map(DATA.roles.map(r => [r.title, r.id]));
-    ALL = [...DATA.roles, ...SKILLS.skills
-             .filter(s => s.type === "COMPOSITE")
-             .map(compositeToPersona)];
+    // personas.json carries both kinds, so the page needs one file and one request
+    ALL = [...DATA.roles, ...DATA.composites.map(compositeToPersona)];
     renderStats(DATA.totals);
     initFacets(DATA);
     bindEvents();

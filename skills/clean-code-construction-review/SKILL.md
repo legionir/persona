@@ -8,6 +8,8 @@ metadata:
   lenses: 6
   source: "prompts/composite/Clean Code & Construction Review.md"
   language: "en"
+  spec: "composites/clean-code-construction-review.json"
+  generated: true
 ---
 
 # Clean Code & Construction Review — Master Prompt (v1) — Composite Persona Skill
