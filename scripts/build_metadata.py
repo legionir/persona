@@ -250,9 +250,11 @@ def main() -> None:
     }
 
     composites = build_composites()
+    # No wall-clock stamp on purpose: these files are committed artifacts, and a
+    # build timestamp makes every regeneration produce a diff, which breaks the
+    # CI drift gate and hides real drift in noise. Provenance comes from git.
     doc = {
         "$schema": "personas-metadata/v1",
-        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "source": {
             "schema": r"README.md (full role table) + prompts/composite/*.md",
             "readme": "README.md",

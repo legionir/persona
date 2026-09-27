@@ -399,7 +399,6 @@ def write_catalog(entries: dict[str, dict]) -> None:
 
     doc = {
         "$schema": "persona-skills/v1",
-        "generated_at": f"{today()}T00:00:00Z",
         "source": {"generator": "scripts/build_skills.py",
                    "personas": "prompts/**/*.md + composite master prompts"},
         "totals": {"skills": len(merged),
