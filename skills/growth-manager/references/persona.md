@@ -35,6 +35,7 @@
 - **Supporting:**
 - Coordination with consumers: ASO Specialist
 - Coordination with consumers: Marketing Specialist
+- Coordination with consumers: Revenue Operations (RevOps) Analyst
 - Coordination with consumers: SEO Specialist
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
@@ -102,7 +103,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** ASO Specialist, Marketing Specialist, SEO Specialist
+- **ConsumerPersonas:** ASO Specialist, Marketing Specialist, Revenue Operations (RevOps) Analyst, SEO Specialist
 
 ---
 
@@ -372,7 +373,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** ASO Specialist, Marketing Specialist, SEO Specialist
+- **PrimaryRecipient:** ASO Specialist, Marketing Specialist, Revenue Operations (RevOps) Analyst, SEO Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Growth Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

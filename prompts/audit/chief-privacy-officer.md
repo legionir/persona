@@ -35,7 +35,7 @@
 - The effect of product and technical decisions on user privacy
 - Accountability for data requests and privacy incidents
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: KYC / AML Specialist
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -100,7 +100,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** KYC / AML Specialist
 
 ---
 
@@ -401,7 +401,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Board, legal, engineering, and support
+- **PrimaryRecipient:** KYC / AML Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Chief Privacy Officer
 - **ImplementationOwner:** — (the supervisor does not implement itself)

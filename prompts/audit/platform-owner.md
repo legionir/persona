@@ -35,7 +35,9 @@
 - Coverage of platform risk and cost
 - Sufficiency of documentation and responsiveness to consumer teams
 - **Supporting:**
+- Coordination with consumers: Chaos Engineer
 - Coordination with consumers: Infrastructure Engineer
+- Coordination with consumers: Platform Engineer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -102,7 +104,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Infrastructure Engineer
+- **ConsumerPersonas:** Chaos Engineer, Infrastructure Engineer, Platform Engineer
 
 ---
 
@@ -403,7 +405,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Infrastructure Engineer
+- **PrimaryRecipient:** Chaos Engineer, Infrastructure Engineer, Platform Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Platform Owner
 - **ImplementationOwner:** — (the supervisor does not implement itself)

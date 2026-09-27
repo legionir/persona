@@ -35,14 +35,17 @@
 - Coverage of safety risks, model error, cost, and drift
 - Alignment of implementation with contracts and guardrails
 - **Supporting:**
+- Coordination with consumers: AI Safety / Alignment Engineer
 - Coordination with consumers: AI/ML Engineer
 - Coordination with consumers: Agent Architect
 - Coordination with consumers: Agent Evaluator
 - Coordination with consumers: Agent Integration Engineer
 - Coordination with consumers: Agent Safety Engineer
 - Coordination with consumers: Agentic Prompt Specialist
+- Coordination with consumers: Fine-tuning Engineer
 - Coordination with consumers: MLOps Engineer
 - Coordination with consumers: Prompt Engineer
+- Coordination with consumers: RAG / Retrieval Engineer
 - Coordination with consumers: Tool Developer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
@@ -111,7 +114,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** AI/ML Engineer, Agent Architect, Agent Evaluator, Agent Integration Engineer, Agent Safety Engineer, Agentic Prompt Specialist, MLOps Engineer, Prompt Engineer, Tool Developer
+- **ConsumerPersonas:** AI Safety / Alignment Engineer, AI/ML Engineer, Agent Architect, Agent Evaluator, Agent Integration Engineer, Agent Safety Engineer, Agentic Prompt Specialist, Fine-tuning Engineer, MLOps Engineer, Prompt Engineer, RAG / Retrieval Engineer, Tool Developer
 
 ---
 
@@ -422,7 +425,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** AI/ML Engineer, Agent Architect, Agent Evaluator, Agent Integration Engineer, Agent Safety Engineer, Agentic Prompt Specialist, MLOps Engineer, Prompt Engineer, Tool Developer
+- **PrimaryRecipient:** AI Safety / Alignment Engineer, AI/ML Engineer, Agent Architect, Agent Evaluator, Agent Integration Engineer, Agent Safety Engineer, Agentic Prompt Specialist, Fine-tuning Engineer, MLOps Engineer, Prompt Engineer, RAG / Retrieval Engineer, Tool Developer
 - **SupportingRecipients:** —
 - **DecisionOwner:** AI Engineer Lead
 - **ImplementationOwner:** — (the supervisor does not implement itself)

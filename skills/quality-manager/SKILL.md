@@ -208,7 +208,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Management, QA Lead
+- **PrimaryRecipient:** Beta Tester, Load / Stress Tester, Performance Engineer, QA Engineer, Test Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Quality Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

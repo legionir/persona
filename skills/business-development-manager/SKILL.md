@@ -208,7 +208,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Founder, Legal
+- **PrimaryRecipient:** Sales Manager
 - **SupportingRecipients:** —
 - **DecisionOwner:** Business Development Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

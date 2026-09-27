@@ -39,6 +39,8 @@
 - Coordination with consumers: Full-Stack Developer
 - Coordination with consumers: IoT Engineer
 - Coordination with consumers: Legacy Modernization Engineer
+- Coordination with consumers: Payments / Billing Engineer
+- Coordination with consumers: Search / Relevance Engineer
 - Coordination with consumers: Software Architect
 - Coordination with consumers: System Architect
 - Coordination with consumers: Third-party Integration Specialist
@@ -109,7 +111,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** AI Engineer, Backend Developer, Embedded Developer, Firmware Engineer, Full-Stack Developer, IoT Engineer, Legacy Modernization Engineer, Software Architect, System Architect, Third-party Integration Specialist
+- **ConsumerPersonas:** AI Engineer, Backend Developer, Embedded Developer, Firmware Engineer, Full-Stack Developer, IoT Engineer, Legacy Modernization Engineer, Payments / Billing Engineer, Search / Relevance Engineer, Software Architect, System Architect, Third-party Integration Specialist
 
 ---
 
@@ -397,7 +399,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** AI Engineer, Backend Developer, Embedded Developer, Firmware Engineer, Full-Stack Developer, IoT Engineer, Legacy Modernization Engineer, Software Architect, System Architect, Third-party Integration Specialist
+- **PrimaryRecipient:** AI Engineer, Backend Developer, Embedded Developer, Firmware Engineer, Full-Stack Developer, IoT Engineer, Legacy Modernization Engineer, Payments / Billing Engineer, Search / Relevance Engineer, Software Architect, System Architect, Third-party Integration Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Solution Architect
 - **ImplementationOwner:** — (the supervisor does not implement itself)

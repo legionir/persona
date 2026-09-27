@@ -36,6 +36,7 @@
 - **Supporting:**
 - Coordination with the supervisor: Incident Manager
 - Coordination with the supervisor: Chief Information Security Officer (CISO)
+- Coordination with the supervisor: Incident Commander
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -97,9 +98,9 @@
 - **PrimaryOwner:** Incident Response Engineer
 - **DecisionOwner:** Incident Manager
 - **ImplementationOwner:** Incident Response Engineer
-- **Reviewer:** Incident Manager, Chief Information Security Officer (CISO)
-- **Approver:** Incident Manager, Chief Information Security Officer (CISO)
-- **SupportingPersonas:** Incident Manager, Chief Information Security Officer (CISO)
+- **Reviewer:** Incident Manager, Chief Information Security Officer (CISO), Incident Commander
+- **Approver:** Incident Manager, Chief Information Security Officer (CISO), Incident Commander
+- **SupportingPersonas:** Incident Manager, Chief Information Security Officer (CISO), Incident Commander
 - **ConsumerPersonas:** Incident Manager and CISO
 
 ---
@@ -433,7 +434,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Incident Manager and CISO
-- **SupportingRecipients:** Incident Manager, Chief Information Security Officer (CISO)
+- **SupportingRecipients:** Incident Manager, Chief Information Security Officer (CISO), Incident Commander
 - **DecisionOwner:** Incident Manager
 - **ImplementationOwner:** Incident Response Engineer
 - **RequiredArtifacts:** Incident report, evidence, timeline, lessons learned
@@ -449,7 +450,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Incident Manager, Chief Information Security Officer (CISO)
+- **TargetPersona:** Incident Manager, Chief Information Security Officer (CISO), Incident Commander
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

@@ -33,6 +33,7 @@
 - Managing maintenance and availability
 - **Supporting:**
 - Coordination with the supervisor: Product Manager (PM)
+- Coordination with the supervisor: Documentation Manager
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -93,9 +94,9 @@
 - **PrimaryOwner:** Documentation Specialist
 - **DecisionOwner:** Product Manager (PM)
 - **ImplementationOwner:** Documentation Specialist
-- **Reviewer:** Product Manager (PM)
-- **Approver:** Product Manager (PM)
-- **SupportingPersonas:** Product Manager (PM)
+- **Reviewer:** Product Manager (PM), Documentation Manager
+- **Approver:** Product Manager (PM), Documentation Manager
+- **SupportingPersonas:** Product Manager (PM), Documentation Manager
 - **ConsumerPersonas:** Support, Customer Success
 
 ---
@@ -376,7 +377,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Support, Customer Success
-- **SupportingRecipients:** Product Manager (PM)
+- **SupportingRecipients:** Product Manager (PM), Documentation Manager
 - **DecisionOwner:** Product Manager (PM)
 - **ImplementationOwner:** Documentation Specialist
 - **RequiredArtifacts:** User Documentation
@@ -392,7 +393,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Product Manager (PM)
+- **TargetPersona:** Product Manager (PM), Documentation Manager
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

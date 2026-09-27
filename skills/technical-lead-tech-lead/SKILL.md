@@ -219,7 +219,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Agent Architect, Backend Developer, Build Engineer, Design System Designer, Desktop Developer, DevOps Engineer, Embedded Developer, Firmware Engineer, Frontend Developer, Full-Stack Developer, Game Developer, Maintenance Engineer, Mobile Developer, Refactoring Engineer, Software Architect, Software Engineer, Staff Engineer, Technical Writer, Third-party Integration Specialist
+- **PrimaryRecipient:** Agent Architect, Backend Developer, Build Engineer, Design System Designer, Desktop Developer, DevOps Engineer, Embedded Developer, Fine-tuning Engineer, Firmware Engineer, Frontend Developer, Full-Stack Developer, Game Designer, Game Developer, Maintenance Engineer, Mobile Developer, Payments / Billing Engineer, Refactoring Engineer, Search / Relevance Engineer, Software Architect, Software Engineer, Staff Engineer, Technical Writer, Third-party Integration Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Technical Lead / Tech Lead
 - **ImplementationOwner:** — (the supervisor does not implement itself)

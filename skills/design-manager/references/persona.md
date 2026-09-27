@@ -36,7 +36,9 @@
 - Balance of capacity, blockers, and review quality
 - **Supporting:**
 - Coordination with consumers: Accessibility Specialist
+- Coordination with consumers: Brand Designer
 - Coordination with consumers: Design System Designer
+- Coordination with consumers: DesignOps Engineer
 - Coordination with consumers: Graphic Designer
 - Coordination with consumers: Motion Designer
 - Coordination with consumers: UI Designer
@@ -108,7 +110,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Accessibility Specialist, Design System Designer, Graphic Designer, Motion Designer, UI Designer, UI/UX Research Participants, UX Designer, UX Researcher, UX Writer / Content Designer
+- **ConsumerPersonas:** Accessibility Specialist, Brand Designer, Design System Designer, DesignOps Engineer, Graphic Designer, Motion Designer, UI Designer, UI/UX Research Participants, UX Designer, UX Researcher, UX Writer / Content Designer
 
 ---
 
@@ -410,7 +412,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Accessibility Specialist, Design System Designer, Graphic Designer, Motion Designer, UI Designer, UI/UX Research Participants, UX Designer, UX Researcher, UX Writer / Content Designer
+- **PrimaryRecipient:** Accessibility Specialist, Brand Designer, Design System Designer, DesignOps Engineer, Graphic Designer, Motion Designer, UI Designer, UI/UX Research Participants, UX Designer, UX Researcher, UX Writer / Content Designer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Design Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

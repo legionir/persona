@@ -3,7 +3,7 @@
  * Functional test for index.html (the Persona Finder).
  *
  * index.html is a single static file that fetches personas.json and
- * skills/index.json and renders 189 personas (170 roles + 19 composites).
+ * skills/index.json and renders 209 personas (190 roles + 19 composites).
  * Nothing in the Python pipeline touches it, so without this harness a
  * regression in the page ships silently.
  *
@@ -83,7 +83,7 @@ const ROLE_ONLY = ["fGroup", "fDomain", "fCategory", "fSeniority"];
 setTimeout(() => {
   // ---------- boot ----------
   ok("both data files load",
-     $("stats").textContent.includes("170") && $("stats").textContent.includes("19"),
+     $("stats").textContent.includes("190") && $("stats").textContent.includes("19"),
      $("stats").textContent.replace(/\s+/g, " ").trim());
   ok("no error banner", $("empty").hidden === true);
 
@@ -154,11 +154,11 @@ setTimeout(() => {
       // ---------- each type count ----------
       $("fType").value = "SUPERVISOR";
       fire($("fType"));
-      ok("SUPERVISOR -> 74", cards().length === personas.totals.supervisors,
+      ok("SUPERVISOR -> 75", cards().length === personas.totals.supervisors,
          `${cards().length} cards`);
       $("fType").value = "EXECUTOR";
       fire($("fType"));
-      ok("EXECUTOR -> 96", cards().length === personas.totals.executors,
+      ok("EXECUTOR -> 115", cards().length === personas.totals.executors,
          `${cards().length} cards`);
 
       // ---------- a role-only facet excludes composites ----------

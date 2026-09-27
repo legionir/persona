@@ -199,7 +199,7 @@ metadata:
 
 ### 24. Handoff
 - **PrimaryRecipient:** PM, Growth
-- **SupportingRecipients:** Product Manager (PM)
+- **SupportingRecipients:** Product Manager (PM), Risk Manager, Project Manager
 - **DecisionOwner:** Product Manager (PM)
 - **ImplementationOwner:** Product Analyst
 - **RequiredArtifacts:** Product Insights
@@ -215,7 +215,7 @@ metadata:
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Product Manager (PM)
+- **TargetPersona:** Product Manager (PM), Risk Manager, Project Manager
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

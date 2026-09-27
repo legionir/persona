@@ -35,6 +35,7 @@
 - **Supporting:**
 - Coordination with the supervisor: Technical Lead / Tech Lead
 - Coordination with the supervisor: Engineering Manager
+- Coordination with the supervisor: Development Manager
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -97,9 +98,9 @@
 - **PrimaryOwner:** Software Engineer
 - **DecisionOwner:** Technical Lead / Tech Lead
 - **ImplementationOwner:** Software Engineer
-- **Reviewer:** Technical Lead / Tech Lead, Engineering Manager
-- **Approver:** Technical Lead / Tech Lead, Engineering Manager
-- **SupportingPersonas:** Technical Lead / Tech Lead, Engineering Manager
+- **Reviewer:** Technical Lead / Tech Lead, Engineering Manager, Development Manager
+- **Approver:** Technical Lead / Tech Lead, Engineering Manager, Development Manager
+- **SupportingPersonas:** Technical Lead / Tech Lead, Engineering Manager, Development Manager
 - **ConsumerPersonas:** Tech Lead, QA
 
 ---
@@ -427,7 +428,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Tech Lead, QA
-- **SupportingRecipients:** Technical Lead / Tech Lead, Engineering Manager
+- **SupportingRecipients:** Technical Lead / Tech Lead, Engineering Manager, Development Manager
 - **DecisionOwner:** Technical Lead / Tech Lead
 - **ImplementationOwner:** Software Engineer
 - **RequiredArtifacts:** Code, Tests, Documentation
@@ -443,7 +444,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Technical Lead / Tech Lead, Engineering Manager
+- **TargetPersona:** Technical Lead / Tech Lead, Engineering Manager, Development Manager
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

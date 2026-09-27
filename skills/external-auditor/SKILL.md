@@ -207,7 +207,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Board, Management
+- **PrimaryRecipient:** Security Auditor
 - **SupportingRecipients:** —
 - **DecisionOwner:** External Auditor
 - **ImplementationOwner:** — (the supervisor does not implement itself)

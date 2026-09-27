@@ -35,6 +35,7 @@
 - **Supporting:**
 - Coordination with the supervisor: Cloud Architect
 - Coordination with the supervisor: Platform Owner
+- Coordination with the supervisor: FinOps Specialist
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -94,9 +95,9 @@
 - **PrimaryOwner:** Infrastructure Engineer
 - **DecisionOwner:** Cloud Architect
 - **ImplementationOwner:** Infrastructure Engineer
-- **Reviewer:** Cloud Architect, Platform Owner
-- **Approver:** Cloud Architect, Platform Owner
-- **SupportingPersonas:** Cloud Architect, Platform Owner
+- **Reviewer:** Cloud Architect, Platform Owner, FinOps Specialist
+- **Approver:** Cloud Architect, Platform Owner, FinOps Specialist
+- **SupportingPersonas:** Cloud Architect, Platform Owner, FinOps Specialist
 - **ConsumerPersonas:** DevOps, SRE
 
 ---
@@ -378,7 +379,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** DevOps, SRE
-- **SupportingRecipients:** Cloud Architect, Platform Owner
+- **SupportingRecipients:** Cloud Architect, Platform Owner, FinOps Specialist
 - **DecisionOwner:** Cloud Architect
 - **ImplementationOwner:** Infrastructure Engineer
 - **RequiredArtifacts:** Infrastructure Config
@@ -394,7 +395,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Cloud Architect, Platform Owner
+- **TargetPersona:** Cloud Architect, Platform Owner, FinOps Specialist
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

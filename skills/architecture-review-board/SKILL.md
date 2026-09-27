@@ -224,7 +224,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Senior architects, CTO, and technical teams
+- **PrimaryRecipient:** Enterprise Architect, Software Architect, Solution Architect, System Architect
 - **SupportingRecipients:** —
 - **DecisionOwner:** Architecture Review Board
 - **ImplementationOwner:** — (the supervisor does not implement itself)

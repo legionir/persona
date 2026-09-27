@@ -34,7 +34,8 @@
 - Sufficiency of design standards, the design system, and accessibility
 - The effect of design decisions on conversion, retention, and cost
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Brand Designer
+- Coordination with consumers: DesignOps Engineer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -99,7 +100,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Brand Designer, DesignOps Engineer
 
 ---
 
@@ -402,7 +403,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Board, product, Design Manager
+- **PrimaryRecipient:** Brand Designer, DesignOps Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Chief Design Officer (CDO)
 - **ImplementationOwner:** — (the supervisor does not implement itself)

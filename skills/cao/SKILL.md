@@ -226,7 +226,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Board, CEO, and senior management
+- **PrimaryRecipient:** Compliance Evidence Analyst, SOC 2 & ISO 27001 Readiness Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Chief Audit Officer (CAO)
 - **ImplementationOwner:** — (the supervisor does not implement itself)

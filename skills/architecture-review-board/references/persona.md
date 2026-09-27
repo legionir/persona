@@ -35,7 +35,10 @@
 - Transparency of the approval process, decision records, and dissent
 - Coverage of scale, security, cost, and maintainability risk
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Enterprise Architect
+- Coordination with consumers: Software Architect
+- Coordination with consumers: Solution Architect
+- Coordination with consumers: System Architect
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -100,7 +103,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Enterprise Architect, Software Architect, Solution Architect, System Architect
 
 ---
 
@@ -402,7 +405,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Senior architects, CTO, and technical teams
+- **PrimaryRecipient:** Enterprise Architect, Software Architect, Solution Architect, System Architect
 - **SupportingRecipients:** —
 - **DecisionOwner:** Architecture Review Board
 - **ImplementationOwner:** — (the supervisor does not implement itself)

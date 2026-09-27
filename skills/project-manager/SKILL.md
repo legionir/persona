@@ -218,7 +218,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** All Teams
+- **PrimaryRecipient:** Business Analyst (BA), Product Analyst
 - **SupportingRecipients:** —
 - **DecisionOwner:** Project Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

@@ -34,7 +34,8 @@
 - Quality of the risk plan and obstacle management
 - Transparency of status and reporting to stakeholders
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Business Analyst (BA)
+- Coordination with consumers: Product Analyst
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -98,7 +99,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Business Analyst (BA), Product Analyst
 
 ---
 
@@ -387,7 +388,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** All Teams
+- **PrimaryRecipient:** Business Analyst (BA), Product Analyst
 - **SupportingRecipients:** —
 - **DecisionOwner:** Project Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

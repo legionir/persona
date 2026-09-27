@@ -34,7 +34,9 @@
 - Consistency of terminology and style across the whole collection
 - Coverage of scenarios, errors, and install/migration cases
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Content Strategist
+- Coordination with consumers: Documentation Specialist
+- Coordination with consumers: Technical Writer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -100,7 +102,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Content Strategist, Documentation Specialist, Technical Writer
 
 ---
 
@@ -404,7 +406,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Product, technical, and support
+- **PrimaryRecipient:** Content Strategist, Documentation Specialist, Technical Writer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Documentation Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

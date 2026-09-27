@@ -33,6 +33,7 @@
 - **Supporting:**
 - Coordination with the supervisor: Solution Architect
 - Coordination with the supervisor: Enterprise Architect
+- Coordination with the supervisor: Architecture Review Board
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -94,9 +95,9 @@
 - **PrimaryOwner:** System Architect
 - **DecisionOwner:** Solution Architect
 - **ImplementationOwner:** System Architect
-- **Reviewer:** Solution Architect, Enterprise Architect
-- **Approver:** Solution Architect, Enterprise Architect
-- **SupportingPersonas:** Solution Architect, Enterprise Architect
+- **Reviewer:** Solution Architect, Enterprise Architect, Architecture Review Board
+- **Approver:** Solution Architect, Enterprise Architect, Architecture Review Board
+- **SupportingPersonas:** Solution Architect, Enterprise Architect, Architecture Review Board
 - **ConsumerPersonas:** Solution Architect, Engineering
 
 ---
@@ -377,7 +378,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Solution Architect, Engineering
-- **SupportingRecipients:** Solution Architect, Enterprise Architect
+- **SupportingRecipients:** Solution Architect, Enterprise Architect, Architecture Review Board
 - **DecisionOwner:** Solution Architect
 - **ImplementationOwner:** System Architect
 - **RequiredArtifacts:** System Architecture
@@ -393,7 +394,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Solution Architect, Enterprise Architect
+- **TargetPersona:** Solution Architect, Enterprise Architect, Architecture Review Board
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

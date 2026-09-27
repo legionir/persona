@@ -34,6 +34,7 @@
 - **Supporting:**
 - Coordination with the supervisor: Release Manager
 - Coordination with the supervisor: DevOps Manager
+- Coordination with the supervisor: Change Manager
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -94,9 +95,9 @@
 - **PrimaryOwner:** Deployment Engineer
 - **DecisionOwner:** Release Manager
 - **ImplementationOwner:** Deployment Engineer
-- **Reviewer:** Release Manager, DevOps Manager
-- **Approver:** Release Manager, DevOps Manager
-- **SupportingPersonas:** Release Manager, DevOps Manager
+- **Reviewer:** Release Manager, DevOps Manager, Change Manager
+- **Approver:** Release Manager, DevOps Manager, Change Manager
+- **SupportingPersonas:** Release Manager, DevOps Manager, Change Manager
 - **ConsumerPersonas:** SRE, Release Engineer
 
 ---
@@ -397,7 +398,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** SRE, Release Engineer
-- **SupportingRecipients:** Release Manager, DevOps Manager
+- **SupportingRecipients:** Release Manager, DevOps Manager, Change Manager
 - **DecisionOwner:** Release Manager
 - **ImplementationOwner:** Deployment Engineer
 - **RequiredArtifacts:** Deployment Record
@@ -413,7 +414,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Release Manager, DevOps Manager
+- **TargetPersona:** Release Manager, DevOps Manager, Change Manager
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

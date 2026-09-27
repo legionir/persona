@@ -32,7 +32,8 @@
 - Adherence to the approval process and change board
 - Sufficiency of communications/training and change adoption
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Deployment Engineer
+- Coordination with consumers: Release Engineer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -98,7 +99,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Deployment Engineer, Release Engineer
 
 ---
 
@@ -385,7 +386,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** PM, PO, Team
+- **PrimaryRecipient:** Deployment Engineer, Release Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Change Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

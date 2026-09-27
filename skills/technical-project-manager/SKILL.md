@@ -218,7 +218,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Tech Lead, PM
+- **PrimaryRecipient:** Project Manager
 - **SupportingRecipients:** —
 - **DecisionOwner:** Technical Project Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

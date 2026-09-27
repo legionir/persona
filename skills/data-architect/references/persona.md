@@ -32,9 +32,11 @@
 - Access, governance, and quality
 - Extensibility and maintainability
 - **Supporting:**
+- Coordination with consumers: Analytics Engineer
 - Coordination with consumers: BI Analyst
 - Coordination with consumers: Data Engineer
 - Coordination with consumers: Data Scientist
+- Coordination with consumers: Data Steward
 - Coordination with consumers: Database Administrator (DBA)
 - Coordination with consumers: Database Engineer
 - Coordination with consumers: Database Security Specialist
@@ -103,7 +105,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** BI Analyst, Data Engineer, Data Scientist, Database Administrator (DBA), Database Engineer, Database Security Specialist, Migration Specialist
+- **ConsumerPersonas:** Analytics Engineer, BI Analyst, Data Engineer, Data Scientist, Data Steward, Database Administrator (DBA), Database Engineer, Database Security Specialist, Migration Specialist
 
 ---
 
@@ -373,7 +375,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** BI Analyst, Data Engineer, Data Scientist, Database Administrator (DBA), Database Engineer, Database Security Specialist, Migration Specialist
+- **PrimaryRecipient:** Analytics Engineer, BI Analyst, Data Engineer, Data Scientist, Data Steward, Database Administrator (DBA), Database Engineer, Database Security Specialist, Migration Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Data Architect
 - **ImplementationOwner:** — (the supervisor does not implement itself)

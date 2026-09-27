@@ -224,7 +224,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Board, legal, engineering, and support
+- **PrimaryRecipient:** KYC / AML Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Chief Privacy Officer
 - **ImplementationOwner:** — (the supervisor does not implement itself)

@@ -224,7 +224,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Infrastructure Engineer
+- **PrimaryRecipient:** Chaos Engineer, Infrastructure Engineer, Platform Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Platform Owner
 - **ImplementationOwner:** — (the supervisor does not implement itself)

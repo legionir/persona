@@ -37,7 +37,9 @@
 - **Supporting:**
 - Coordination with consumers: Application Security Engineer
 - Coordination with consumers: Cloud Security Engineer
+- Coordination with consumers: Cryptography Engineer
 - Coordination with consumers: Cybersecurity Engineer
+- Coordination with consumers: IAM / Identity Engineer
 - Coordination with consumers: Incident Response Engineer
 - Coordination with consumers: Penetration Tester
 - Coordination with consumers: SOC Analyst
@@ -110,7 +112,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Application Security Engineer, Cloud Security Engineer, Cybersecurity Engineer, Incident Response Engineer, Penetration Tester, SOC Analyst, Security Auditor, Security Engineer, Vulnerability Management Specialist
+- **ConsumerPersonas:** Application Security Engineer, Cloud Security Engineer, Cryptography Engineer, Cybersecurity Engineer, IAM / Identity Engineer, Incident Response Engineer, Penetration Tester, SOC Analyst, Security Auditor, Security Engineer, Vulnerability Management Specialist
 
 ---
 
@@ -418,7 +420,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Application Security Engineer, Cloud Security Engineer, Cybersecurity Engineer, Incident Response Engineer, Penetration Tester, SOC Analyst, Security Auditor, Security Engineer, Vulnerability Management Specialist
+- **PrimaryRecipient:** Application Security Engineer, Cloud Security Engineer, Cryptography Engineer, Cybersecurity Engineer, IAM / Identity Engineer, Incident Response Engineer, Penetration Tester, SOC Analyst, Security Auditor, Security Engineer, Vulnerability Management Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Chief Information Security Officer (CISO)
 - **ImplementationOwner:** — (the supervisor does not implement itself)

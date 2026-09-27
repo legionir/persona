@@ -33,6 +33,8 @@
 - Defining vendor and quality assessment
 - **Supporting:**
 - Coordination with the supervisor: Procurement Manager
+- Coordination with the supervisor: Contract Manager
+- Coordination with the supervisor: Vendor Manager
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -95,9 +97,9 @@
 - **PrimaryOwner:** Procurement Specialist
 - **DecisionOwner:** Procurement Manager
 - **ImplementationOwner:** Procurement Specialist
-- **Reviewer:** Procurement Manager
-- **Approver:** Procurement Manager
-- **SupportingPersonas:** Procurement Manager
+- **Reviewer:** Procurement Manager, Contract Manager, Vendor Manager
+- **Approver:** Procurement Manager, Contract Manager, Vendor Manager
+- **SupportingPersonas:** Procurement Manager, Contract Manager, Vendor Manager
 - **ConsumerPersonas:** Finance, PM
 
 ---
@@ -378,7 +380,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Finance, PM
-- **SupportingRecipients:** Procurement Manager
+- **SupportingRecipients:** Procurement Manager, Contract Manager, Vendor Manager
 - **DecisionOwner:** Procurement Manager
 - **ImplementationOwner:** Procurement Specialist
 - **RequiredArtifacts:** Purchase Orders
@@ -394,7 +396,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Procurement Manager
+- **TargetPersona:** Procurement Manager, Contract Manager, Vendor Manager
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

@@ -35,7 +35,8 @@
 - Coverage of customer feedback and the root cause of recurring problems
 - Readiness and capacity of the support team
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Customer Support Agent
+- Coordination with consumers: Technical Support Engineer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -101,7 +102,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Customer Support Agent, Technical Support Engineer
 
 ---
 
@@ -386,7 +387,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Product, technical support, and customers
+- **PrimaryRecipient:** Customer Support Agent, Technical Support Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Support Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

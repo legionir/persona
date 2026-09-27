@@ -34,7 +34,9 @@
 - Device safety, security, and reliability
 - Quality of testing, tooling, and debug/flash processes
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Embedded Developer
+- Coordination with consumers: Firmware Engineer
+- Coordination with consumers: IoT Engineer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -103,7 +105,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Embedded Developer, Firmware Engineer, IoT Engineer
 
 ---
 
@@ -409,7 +411,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** CTO, QA, manufacturing, and embedded team
+- **PrimaryRecipient:** Embedded Developer, Firmware Engineer, IoT Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Embedded Systems Lead
 - **ImplementationOwner:** — (the supervisor does not implement itself)

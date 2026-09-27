@@ -208,7 +208,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** PM, Management
+- **PrimaryRecipient:** Scrum Master
 - **SupportingRecipients:** —
 - **DecisionOwner:** PMO
 - **ImplementationOwner:** — (the supervisor does not implement itself)

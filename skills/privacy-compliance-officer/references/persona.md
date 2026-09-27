@@ -32,6 +32,8 @@
 - Quality of audit and controls
 - Accountability and the data programme process
 - **Supporting:**
+- Coordination with consumers: Compliance Evidence Analyst
+- Coordination with consumers: KYC / AML Specialist
 - Coordination with consumers: Privacy Engineer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
@@ -98,7 +100,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Privacy Engineer
+- **ConsumerPersonas:** Compliance Evidence Analyst, KYC / AML Specialist, Privacy Engineer
 
 ---
 
@@ -369,7 +371,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Privacy Engineer
+- **PrimaryRecipient:** Compliance Evidence Analyst, KYC / AML Specialist, Privacy Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Privacy / Compliance Officer
 - **ImplementationOwner:** — (the supervisor does not implement itself)

@@ -206,7 +206,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** PM, Management
+- **PrimaryRecipient:** Business Analyst (BA), Domain Expert (SME), Product Analyst
 - **SupportingRecipients:** —
 - **DecisionOwner:** Risk Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

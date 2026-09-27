@@ -32,7 +32,7 @@
 - Consistency with SLA and obligations
 - Traceability and reporting
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Procurement Specialist
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -97,7 +97,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Procurement Specialist
 
 ---
 
@@ -364,7 +364,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Legal, PM
+- **PrimaryRecipient:** Procurement Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Contract Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

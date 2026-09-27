@@ -208,7 +208,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Cloud Engineer, Cloud Security Engineer, DevOps Engineer, Infrastructure Engineer, IoT Engineer, MLOps Engineer
+- **PrimaryRecipient:** Cloud Engineer, Cloud Security Engineer, DevOps Engineer, Infrastructure Engineer, IoT Engineer, MLOps Engineer, Platform Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Cloud Architect
 - **ImplementationOwner:** — (the supervisor does not implement itself)

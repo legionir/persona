@@ -35,6 +35,7 @@
 - **Supporting:**
 - Coordination with the supervisor: Technical Lead / Tech Lead
 - Coordination with the supervisor: Solution Architect
+- Coordination with the supervisor: Development Manager
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -95,9 +96,9 @@
 - **PrimaryOwner:** Full-Stack Developer
 - **DecisionOwner:** Technical Lead / Tech Lead
 - **ImplementationOwner:** Full-Stack Developer
-- **Reviewer:** Technical Lead / Tech Lead, Solution Architect
-- **Approver:** Technical Lead / Tech Lead, Solution Architect
-- **SupportingPersonas:** Technical Lead / Tech Lead, Solution Architect
+- **Reviewer:** Technical Lead / Tech Lead, Solution Architect, Development Manager
+- **Approver:** Technical Lead / Tech Lead, Solution Architect, Development Manager
+- **SupportingPersonas:** Technical Lead / Tech Lead, Solution Architect, Development Manager
 - **ConsumerPersonas:** QA, Tech Lead
 
 ---
@@ -402,7 +403,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** QA, Tech Lead
-- **SupportingRecipients:** Technical Lead / Tech Lead, Solution Architect
+- **SupportingRecipients:** Technical Lead / Tech Lead, Solution Architect, Development Manager
 - **DecisionOwner:** Technical Lead / Tech Lead
 - **ImplementationOwner:** Full-Stack Developer
 - **RequiredArtifacts:** Feature Implementation
@@ -418,7 +419,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Technical Lead / Tech Lead, Solution Architect
+- **TargetPersona:** Technical Lead / Tech Lead, Solution Architect, Development Manager
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

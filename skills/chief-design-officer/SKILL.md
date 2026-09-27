@@ -226,7 +226,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Board, product, Design Manager
+- **PrimaryRecipient:** Brand Designer, DesignOps Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Chief Design Officer (CDO)
 - **ImplementationOwner:** — (the supervisor does not implement itself)

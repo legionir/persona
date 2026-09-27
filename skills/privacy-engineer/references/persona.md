@@ -34,6 +34,7 @@
 - Implementing the delete/export process
 - **Supporting:**
 - Coordination with the supervisor: Privacy / Compliance Officer
+- Coordination with the supervisor: Legal Advisor
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -95,9 +96,9 @@
 - **PrimaryOwner:** Privacy Engineer
 - **DecisionOwner:** Privacy / Compliance Officer
 - **ImplementationOwner:** Privacy Engineer
-- **Reviewer:** Privacy / Compliance Officer
-- **Approver:** Privacy / Compliance Officer
-- **SupportingPersonas:** Privacy / Compliance Officer
+- **Reviewer:** Privacy / Compliance Officer, Legal Advisor
+- **Approver:** Privacy / Compliance Officer, Legal Advisor
+- **SupportingPersonas:** Privacy / Compliance Officer, Legal Advisor
 - **ConsumerPersonas:** Legal, Compliance
 
 ---
@@ -399,7 +400,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Legal, Compliance
-- **SupportingRecipients:** Privacy / Compliance Officer
+- **SupportingRecipients:** Privacy / Compliance Officer, Legal Advisor
 - **DecisionOwner:** Privacy / Compliance Officer
 - **ImplementationOwner:** Privacy Engineer
 - **RequiredArtifacts:** Privacy Assessment
@@ -415,7 +416,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Privacy / Compliance Officer
+- **TargetPersona:** Privacy / Compliance Officer, Legal Advisor
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

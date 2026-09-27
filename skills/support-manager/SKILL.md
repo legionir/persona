@@ -212,7 +212,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Product, technical support, and customers
+- **PrimaryRecipient:** Customer Support Agent, Technical Support Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Support Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

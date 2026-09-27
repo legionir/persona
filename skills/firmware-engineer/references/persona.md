@@ -35,6 +35,7 @@
 - **Supporting:**
 - Coordination with the supervisor: Solution Architect
 - Coordination with the supervisor: Technical Lead / Tech Lead
+- Coordination with the supervisor: Embedded Systems Lead
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -94,9 +95,9 @@
 - **PrimaryOwner:** Firmware Engineer
 - **DecisionOwner:** Solution Architect
 - **ImplementationOwner:** Firmware Engineer
-- **Reviewer:** Solution Architect, Technical Lead / Tech Lead
-- **Approver:** Solution Architect, Technical Lead / Tech Lead
-- **SupportingPersonas:** Solution Architect, Technical Lead / Tech Lead
+- **Reviewer:** Solution Architect, Technical Lead / Tech Lead, Embedded Systems Lead
+- **Approver:** Solution Architect, Technical Lead / Tech Lead, Embedded Systems Lead
+- **SupportingPersonas:** Solution Architect, Technical Lead / Tech Lead, Embedded Systems Lead
 - **ConsumerPersonas:** Embedded Lead
 
 ---
@@ -416,7 +417,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Embedded Lead
-- **SupportingRecipients:** Solution Architect, Technical Lead / Tech Lead
+- **SupportingRecipients:** Solution Architect, Technical Lead / Tech Lead, Embedded Systems Lead
 - **DecisionOwner:** Solution Architect
 - **ImplementationOwner:** Firmware Engineer
 - **RequiredArtifacts:** Firmware Binary, Source
@@ -432,7 +433,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Solution Architect, Technical Lead / Tech Lead
+- **TargetPersona:** Solution Architect, Technical Lead / Tech Lead, Embedded Systems Lead
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

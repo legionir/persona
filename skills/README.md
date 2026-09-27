@@ -49,6 +49,8 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`ai-engineer`](ai-engineer/SKILL.md) | EXECUTOR | AI | `prompts/implementation/ai-engineer.md` | 250 |
 | [`ai-engineer-lead`](ai-engineer-lead/SKILL.md) | SUPERVISOR | AI | `prompts/audit/ai-engineer-lead.md` | 267 |
 | [`ai-ml-engineer`](ai-ml-engineer/SKILL.md) | EXECUTOR | AI | `prompts/implementation/ai-ml-engineer.md` | 249 |
+| [`ai-safety-alignment-engineer`](ai-safety-alignment-engineer/SKILL.md) | EXECUTOR | AI | `prompts/implementation/ai-safety-alignment-engineer.md` | 238 |
+| [`analytics-engineer`](analytics-engineer/SKILL.md) | EXECUTOR | Data | `prompts/implementation/analytics-engineer.md` | 238 |
 | [`application-security-engineer`](application-security-engineer/SKILL.md) | EXECUTOR | Security | `prompts/implementation/application-security-engineer.md` | 249 |
 | [`architecture-review-board`](architecture-review-board/SKILL.md) | SUPERVISOR | Architecture | `prompts/audit/architecture-review-board.md` | 262 |
 | [`aso-specialist`](aso-specialist/SKILL.md) | EXECUTOR | Growth | `prompts/implementation/aso-specialist.md` | 236 |
@@ -58,12 +60,14 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`beta-tester`](beta-tester/SKILL.md) | EXECUTOR | Support | `prompts/implementation/beta-tester.md` | 237 |
 | [`bi-analyst`](bi-analyst/SKILL.md) | EXECUTOR | Analytics | `prompts/implementation/bi-analyst.md` | 238 |
 | [`board-of-directors`](board-of-directors/SKILL.md) | SUPERVISOR | Business | `prompts/audit/board-of-directors.md` | 244 |
+| [`brand-designer`](brand-designer/SKILL.md) | EXECUTOR | Design | `prompts/implementation/brand-designer.md` | 238 |
 | [`build-engineer`](build-engineer/SKILL.md) | EXECUTOR | DevOps | `prompts/implementation/build-engineer.md` | 237 |
 | [`business-analyst-ba`](business-analyst-ba/SKILL.md) | EXECUTOR | Analytics | `prompts/implementation/business-analyst-ba.md` | 248 |
 | [`business-continuity-manager`](business-continuity-manager/SKILL.md) | SUPERVISOR | Project | `prompts/audit/business-continuity-manager.md` | 245 |
 | [`business-development-manager`](business-development-manager/SKILL.md) | SUPERVISOR | Growth | `prompts/audit/business-development-manager.md` | 246 |
 | [`cao`](cao/SKILL.md) | SUPERVISOR | Audit | `prompts/audit/cao.md` | 264 |
 | [`change-manager`](change-manager/SKILL.md) | SUPERVISOR | Project | `prompts/audit/change-manager.md` | 257 |
+| [`chaos-engineer`](chaos-engineer/SKILL.md) | EXECUTOR | DevOps | `prompts/implementation/chaos-engineer.md` | 238 |
 | [`chief-design-officer`](chief-design-officer/SKILL.md) | SUPERVISOR | Design | `prompts/audit/chief-design-officer.md` | 264 |
 | [`chief-privacy-officer`](chief-privacy-officer/SKILL.md) | SUPERVISOR | Compliance | `prompts/audit/chief-privacy-officer.md` | 262 |
 | [`cio`](cio/SKILL.md) | SUPERVISOR | Business | `prompts/audit/cio.md` | 261 |
@@ -73,7 +77,10 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`cloud-security-engineer`](cloud-security-engineer/SKILL.md) | EXECUTOR | Security | `prompts/implementation/cloud-security-engineer.md` | 252 |
 | [`community-director`](community-director/SKILL.md) | SUPERVISOR | Growth | `prompts/audit/community-director.md` | 263 |
 | [`community-manager`](community-manager/SKILL.md) | EXECUTOR | Support | `prompts/implementation/community-manager.md` | 236 |
+| [`compliance-evidence-analyst`](compliance-evidence-analyst/SKILL.md) | EXECUTOR | Compliance | `prompts/implementation/compliance-evidence-analyst.md` | 238 |
+| [`content-strategist`](content-strategist/SKILL.md) | EXECUTOR | Documentation | `prompts/implementation/content-strategist.md` | 238 |
 | [`contract-manager`](contract-manager/SKILL.md) | SUPERVISOR | Compliance | `prompts/audit/contract-manager.md` | 245 |
+| [`cryptography-engineer`](cryptography-engineer/SKILL.md) | EXECUTOR | Security | `prompts/implementation/cryptography-engineer.md` | 238 |
 | [`cto`](cto/SKILL.md) | SUPERVISOR | Business | `prompts/audit/cto.md` | 264 |
 | [`customer-success-manager`](customer-success-manager/SKILL.md) | SUPERVISOR | Support | `prompts/audit/customer-success-manager.md` | 244 |
 | [`customer-support-agent`](customer-support-agent/SKILL.md) | EXECUTOR | Support | `prompts/implementation/customer-support-agent.md` | 249 |
@@ -83,6 +90,7 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`data-engineer`](data-engineer/SKILL.md) | EXECUTOR | Data | `prompts/implementation/data-engineer.md` | 248 |
 | [`data-governance-manager`](data-governance-manager/SKILL.md) | SUPERVISOR | Data | `prompts/audit/data-governance-manager.md` | 262 |
 | [`data-scientist`](data-scientist/SKILL.md) | EXECUTOR | AI | `prompts/implementation/data-scientist.md` | 250 |
+| [`data-steward`](data-steward/SKILL.md) | EXECUTOR | Data | `prompts/implementation/data-steward.md` | 238 |
 | [`database-administrator-dba`](database-administrator-dba/SKILL.md) | EXECUTOR | Data | `prompts/implementation/database-administrator-dba.md` | 248 |
 | [`database-engineer`](database-engineer/SKILL.md) | EXECUTOR | Data | `prompts/implementation/database-engineer.md` | 239 |
 | [`database-security-specialist`](database-security-specialist/SKILL.md) | EXECUTOR | Security | `prompts/implementation/database-security-specialist.md` | 252 |
@@ -90,6 +98,7 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`deployment-engineer`](deployment-engineer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/deployment-engineer.md` | 248 |
 | [`design-manager`](design-manager/SKILL.md) | SUPERVISOR | Design | `prompts/audit/design-manager.md` | 263 |
 | [`design-system-designer`](design-system-designer/SKILL.md) | EXECUTOR | Design | `prompts/implementation/design-system-designer.md` | 249 |
+| [`designops-engineer`](designops-engineer/SKILL.md) | EXECUTOR | Design | `prompts/implementation/designops-engineer.md` | 238 |
 | [`desktop-developer`](desktop-developer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/desktop-developer.md` | 238 |
 | [`development-manager`](development-manager/SKILL.md) | SUPERVISOR | Project | `prompts/audit/development-manager.md` | 263 |
 | [`devops-engineer`](devops-engineer/SKILL.md) | EXECUTOR | DevOps | `prompts/implementation/devops-engineer.md` | 249 |
@@ -108,15 +117,19 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`enterprise-architect`](enterprise-architect/SKILL.md) | SUPERVISOR | Architecture | `prompts/audit/enterprise-architect.md` | 245 |
 | [`external-auditor`](external-auditor/SKILL.md) | SUPERVISOR | Audit | `prompts/audit/external-auditor.md` | 245 |
 | [`finance-manager`](finance-manager/SKILL.md) | SUPERVISOR | Project | `prompts/audit/finance-manager.md` | 245 |
+| [`fine-tuning-engineer`](fine-tuning-engineer/SKILL.md) | EXECUTOR | AI | `prompts/implementation/fine-tuning-engineer.md` | 238 |
 | [`finops-specialist`](finops-specialist/SKILL.md) | SUPERVISOR | DevOps | `prompts/audit/finops-specialist.md` | 244 |
 | [`firmware-engineer`](firmware-engineer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/firmware-engineer.md` | 261 |
 | [`founder`](founder/SKILL.md) | SUPERVISOR | Business | `prompts/audit/founder.md` | 248 |
 | [`frontend-developer`](frontend-developer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/frontend-developer.md` | 249 |
 | [`full-stack-developer`](full-stack-developer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/full-stack-developer.md` | 249 |
+| [`game-designer`](game-designer/SKILL.md) | EXECUTOR | Design | `prompts/implementation/game-designer.md` | 238 |
 | [`game-developer`](game-developer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/game-developer.md` | 237 |
 | [`graphic-designer`](graphic-designer/SKILL.md) | EXECUTOR | Design | `prompts/implementation/graphic-designer.md` | 238 |
 | [`growth-manager`](growth-manager/SKILL.md) | SUPERVISOR | Growth | `prompts/audit/growth-manager.md` | 244 |
 | [`hr-people-manager`](hr-people-manager/SKILL.md) | SUPERVISOR | HR | `prompts/audit/hr-people-manager.md` | 245 |
+| [`iam-identity-engineer`](iam-identity-engineer/SKILL.md) | EXECUTOR | Security | `prompts/implementation/iam-identity-engineer.md` | 238 |
+| [`incident-commander`](incident-commander/SKILL.md) | SUPERVISOR | Operations | `prompts/audit/incident-commander.md` | 248 |
 | [`incident-manager`](incident-manager/SKILL.md) | SUPERVISOR | Project | `prompts/audit/incident-manager.md` | 257 |
 | [`incident-response-engineer`](incident-response-engineer/SKILL.md) | EXECUTOR | Security | `prompts/implementation/incident-response-engineer.md` | 265 |
 | [`infrastructure-engineer`](infrastructure-engineer/SKILL.md) | EXECUTOR | DevOps | `prompts/implementation/infrastructure-engineer.md` | 236 |
@@ -124,6 +137,7 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`investor`](investor/SKILL.md) | SUPERVISOR | Business | `prompts/audit/investor.md` | 245 |
 | [`iot-engineer`](iot-engineer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/iot-engineer.md` | 249 |
 | [`ip-copyright-specialist`](ip-copyright-specialist/SKILL.md) | SUPERVISOR | Compliance | `prompts/audit/ip-copyright-specialist.md` | 244 |
+| [`kyc-aml-specialist`](kyc-aml-specialist/SKILL.md) | EXECUTOR | Compliance | `prompts/implementation/kyc-aml-specialist.md` | 238 |
 | [`legacy-modernization-engineer`](legacy-modernization-engineer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/legacy-modernization-engineer.md` | 261 |
 | [`legal-advisor`](legal-advisor/SKILL.md) | SUPERVISOR | Compliance | `prompts/audit/legal-advisor.md` | 245 |
 | [`load-stress-tester`](load-stress-tester/SKILL.md) | EXECUTOR | Testing | `prompts/implementation/load-stress-tester.md` | 248 |
@@ -140,9 +154,11 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`on-call-engineer`](on-call-engineer/SKILL.md) | EXECUTOR | DevOps | `prompts/implementation/on-call-engineer.md` | 248 |
 | [`operations-manager`](operations-manager/SKILL.md) | SUPERVISOR | Project | `prompts/audit/operations-manager.md` | 244 |
 | [`partnership-manager`](partnership-manager/SKILL.md) | SUPERVISOR | Growth | `prompts/audit/partnership-manager.md` | 245 |
+| [`payments-billing-engineer`](payments-billing-engineer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/payments-billing-engineer.md` | 238 |
 | [`penetration-tester`](penetration-tester/SKILL.md) | EXECUTOR | Security | `prompts/implementation/penetration-tester.md` | 261 |
 | [`performance-engineer`](performance-engineer/SKILL.md) | EXECUTOR | Testing | `prompts/implementation/performance-engineer.md` | 249 |
 | [`performance-engineering-lead`](performance-engineering-lead/SKILL.md) | SUPERVISOR | Testing | `prompts/audit/performance-engineering-lead.md` | 263 |
+| [`platform-engineer`](platform-engineer/SKILL.md) | EXECUTOR | DevOps | `prompts/implementation/platform-engineer.md` | 238 |
 | [`platform-owner`](platform-owner/SKILL.md) | SUPERVISOR | Operations | `prompts/audit/platform-owner.md` | 262 |
 | [`pmo`](pmo/SKILL.md) | SUPERVISOR | Project | `prompts/audit/pmo.md` | 246 |
 | [`principal-engineer`](principal-engineer/SKILL.md) | SUPERVISOR | Software | `prompts/audit/principal-engineer.md` | 246 |
@@ -165,16 +181,19 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`qa-engineer`](qa-engineer/SKILL.md) | EXECUTOR | Testing | `prompts/implementation/qa-engineer.md` | 250 |
 | [`qa-lead`](qa-lead/SKILL.md) | SUPERVISOR | Project | `prompts/audit/qa-lead.md` | 256 |
 | [`quality-manager`](quality-manager/SKILL.md) | SUPERVISOR | Project | `prompts/audit/quality-manager.md` | 246 |
+| [`rag-retrieval-engineer`](rag-retrieval-engineer/SKILL.md) | EXECUTOR | AI | `prompts/implementation/rag-retrieval-engineer.md` | 238 |
 | [`recruiter`](recruiter/SKILL.md) | EXECUTOR | HR | `prompts/implementation/recruiter.md` | 237 |
 | [`recruitment-manager`](recruitment-manager/SKILL.md) | SUPERVISOR | HR | `prompts/audit/recruitment-manager.md` | 264 |
 | [`refactoring-engineer`](refactoring-engineer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/refactoring-engineer.md` | 249 |
 | [`release-engineer`](release-engineer/SKILL.md) | EXECUTOR | DevOps | `prompts/implementation/release-engineer.md` | 237 |
 | [`release-manager`](release-manager/SKILL.md) | SUPERVISOR | DevOps | `prompts/audit/release-manager.md` | 262 |
+| [`revenue-operations-analyst`](revenue-operations-analyst/SKILL.md) | EXECUTOR | Growth | `prompts/implementation/revenue-operations-analyst.md` | 238 |
 | [`risk-manager`](risk-manager/SKILL.md) | SUPERVISOR | Project | `prompts/audit/risk-manager.md` | 244 |
 | [`sales-manager`](sales-manager/SKILL.md) | SUPERVISOR | Growth | `prompts/audit/sales-manager.md` | 244 |
 | [`sales-representative`](sales-representative/SKILL.md) | EXECUTOR | Growth | `prompts/implementation/sales-representative.md` | 237 |
 | [`scrum-master`](scrum-master/SKILL.md) | SUPERVISOR | Project | `prompts/audit/scrum-master.md` | 257 |
 | [`scrum-product-team`](scrum-product-team/SKILL.md) | EXECUTOR | Support | `prompts/implementation/scrum-product-team.md` | 249 |
+| [`search-relevance-engineer`](search-relevance-engineer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/search-relevance-engineer.md` | 238 |
 | [`security-architect`](security-architect/SKILL.md) | SUPERVISOR | Architecture | `prompts/audit/security-architect.md` | 258 |
 | [`security-auditor`](security-auditor/SKILL.md) | EXECUTOR | Security | `prompts/implementation/security-auditor.md` | 254 |
 | [`security-engineer`](security-engineer/SKILL.md) | EXECUTOR | Security | `prompts/implementation/security-engineer.md` | 237 |
@@ -182,6 +201,7 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`seo-specialist`](seo-specialist/SKILL.md) | EXECUTOR | Growth | `prompts/implementation/seo-specialist.md` | 236 |
 | [`service-owner`](service-owner/SKILL.md) | SUPERVISOR | Operations | `prompts/audit/service-owner.md` | 262 |
 | [`soc-analyst`](soc-analyst/SKILL.md) | EXECUTOR | Security | `prompts/implementation/soc-analyst.md` | 253 |
+| [`soc2-iso27001-readiness-specialist`](soc2-iso27001-readiness-specialist/SKILL.md) | EXECUTOR | Compliance | `prompts/implementation/soc2-iso27001-readiness-specialist.md` | 238 |
 | [`software-architect`](software-architect/SKILL.md) | EXECUTOR | Architecture | `prompts/implementation/software-architect.md` | 249 |
 | [`software-engineer`](software-engineer/SKILL.md) | EXECUTOR | Software | `prompts/implementation/software-engineer.md` | 262 |
 | [`solution-architect`](solution-architect/SKILL.md) | SUPERVISOR | Architecture | `prompts/audit/solution-architect.md` | 257 |
@@ -209,4 +229,4 @@ Full index and machine-readable metadata: [`index.json`](index.json)
 | [`vendor-manager`](vendor-manager/SKILL.md) | SUPERVISOR | Project | `prompts/audit/vendor-manager.md` | 244 |
 | [`vulnerability-management-specialist`](vulnerability-management-specialist/SKILL.md) | EXECUTOR | Security | `prompts/implementation/vulnerability-management-specialist.md` | 253 |
 
-_Count: 189 skills — generated on 2026-09-27 by `scripts/build_skills.py`_
+_Count: 209 skills — generated on 2026-09-27 by `scripts/build_skills.py`_

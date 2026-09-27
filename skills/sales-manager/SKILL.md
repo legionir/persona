@@ -206,7 +206,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Sales Representative
+- **PrimaryRecipient:** Revenue Operations (RevOps) Analyst, Sales Representative
 - **SupportingRecipients:** —
 - **DecisionOwner:** Sales Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

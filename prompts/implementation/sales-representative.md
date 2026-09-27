@@ -34,6 +34,7 @@
 - Updating CRM and following up
 - **Supporting:**
 - Coordination with the supervisor: Sales Manager
+- Coordination with the supervisor: Account Manager
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -94,9 +95,9 @@
 - **PrimaryOwner:** Sales Representative
 - **DecisionOwner:** Sales Manager
 - **ImplementationOwner:** Sales Representative
-- **Reviewer:** Sales Manager
-- **Approver:** Sales Manager
-- **SupportingPersonas:** Sales Manager
+- **Reviewer:** Sales Manager, Account Manager
+- **Approver:** Sales Manager, Account Manager
+- **SupportingPersonas:** Sales Manager, Account Manager
 - **ConsumerPersonas:** Sales Manager
 
 ---
@@ -378,7 +379,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Sales Manager
-- **SupportingRecipients:** Sales Manager
+- **SupportingRecipients:** Sales Manager, Account Manager
 - **DecisionOwner:** Sales Manager
 - **ImplementationOwner:** Sales Representative
 - **RequiredArtifacts:** Sales Record
@@ -394,7 +395,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Sales Manager
+- **TargetPersona:** Sales Manager, Account Manager
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

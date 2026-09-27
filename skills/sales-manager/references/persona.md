@@ -32,6 +32,7 @@
 - Transparency of deals, stage, and risk
 - Consistency with team and brand
 - **Supporting:**
+- Coordination with consumers: Revenue Operations (RevOps) Analyst
 - Coordination with consumers: Sales Representative
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
@@ -98,7 +99,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Sales Representative
+- **ConsumerPersonas:** Revenue Operations (RevOps) Analyst, Sales Representative
 
 ---
 
@@ -366,7 +367,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Sales Representative
+- **PrimaryRecipient:** Revenue Operations (RevOps) Analyst, Sales Representative
 - **SupportingRecipients:** —
 - **DecisionOwner:** Sales Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

@@ -207,7 +207,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Founder, Compliance
+- **PrimaryRecipient:** Privacy Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Legal Advisor
 - **ImplementationOwner:** — (the supervisor does not implement itself)

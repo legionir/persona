@@ -206,7 +206,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Customer Success, Sales
+- **PrimaryRecipient:** Sales Representative
 - **SupportingRecipients:** —
 - **DecisionOwner:** Account Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

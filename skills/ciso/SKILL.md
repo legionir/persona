@@ -226,7 +226,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Application Security Engineer, Cloud Security Engineer, Cybersecurity Engineer, Incident Response Engineer, Penetration Tester, SOC Analyst, Security Auditor, Security Engineer, Vulnerability Management Specialist
+- **PrimaryRecipient:** Application Security Engineer, Cloud Security Engineer, Cryptography Engineer, Cybersecurity Engineer, IAM / Identity Engineer, Incident Response Engineer, Penetration Tester, SOC Analyst, Security Auditor, Security Engineer, Vulnerability Management Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Chief Information Security Officer (CISO)
 - **ImplementationOwner:** — (the supervisor does not implement itself)

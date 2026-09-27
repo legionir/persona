@@ -35,6 +35,7 @@
 - **Supporting:**
 - Coordination with the supervisor: Solution Architect
 - Coordination with the supervisor: Cloud Architect
+- Coordination with the supervisor: Embedded Systems Lead
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -96,9 +97,9 @@
 - **PrimaryOwner:** IoT Engineer
 - **DecisionOwner:** Solution Architect
 - **ImplementationOwner:** IoT Engineer
-- **Reviewer:** Solution Architect, Cloud Architect
-- **Approver:** Solution Architect, Cloud Architect
-- **SupportingPersonas:** Solution Architect, Cloud Architect
+- **Reviewer:** Solution Architect, Cloud Architect, Embedded Systems Lead
+- **Approver:** Solution Architect, Cloud Architect, Embedded Systems Lead
+- **SupportingPersonas:** Solution Architect, Cloud Architect, Embedded Systems Lead
 - **ConsumerPersonas:** Backend, Cloud, QA
 
 ---
@@ -400,7 +401,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Backend, Cloud, QA
-- **SupportingRecipients:** Solution Architect, Cloud Architect
+- **SupportingRecipients:** Solution Architect, Cloud Architect, Embedded Systems Lead
 - **DecisionOwner:** Solution Architect
 - **ImplementationOwner:** IoT Engineer
 - **RequiredArtifacts:** IoT Integration
@@ -416,7 +417,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Solution Architect, Cloud Architect
+- **TargetPersona:** Solution Architect, Cloud Architect, Embedded Systems Lead
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

@@ -207,7 +207,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Privacy Engineer
+- **PrimaryRecipient:** Compliance Evidence Analyst, KYC / AML Specialist, Privacy Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Privacy / Compliance Officer
 - **ImplementationOwner:** — (the supervisor does not implement itself)

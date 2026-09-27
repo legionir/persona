@@ -207,7 +207,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** PMs, Executives
+- **PrimaryRecipient:** Product Owner (PO), Project Manager
 - **SupportingRecipients:** —
 - **DecisionOwner:** Program Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

@@ -225,7 +225,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Accessibility Specialist, Design System Designer, Graphic Designer, Motion Designer, UI Designer, UI/UX Research Participants, UX Designer, UX Researcher, UX Writer / Content Designer
+- **PrimaryRecipient:** Accessibility Specialist, Brand Designer, Design System Designer, DesignOps Engineer, Graphic Designer, Motion Designer, UI Designer, UI/UX Research Participants, UX Designer, UX Researcher, UX Writer / Content Designer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Design Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

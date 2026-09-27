@@ -208,7 +208,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** BI Analyst, Data Engineer, Data Scientist, Database Administrator (DBA), Database Engineer, Database Security Specialist, Migration Specialist
+- **PrimaryRecipient:** Analytics Engineer, BI Analyst, Data Engineer, Data Scientist, Data Steward, Database Administrator (DBA), Database Engineer, Database Security Specialist, Migration Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Data Architect
 - **ImplementationOwner:** — (the supervisor does not implement itself)

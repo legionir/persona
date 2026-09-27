@@ -6,8 +6,8 @@
     "personas": "prompts/**/*.md + composite master prompts"
   },
   "totals": {
-    "skills": 189,
-    "roles": 170,
+    "skills": 209,
+    "roles": 190,
     "composites": 19
   },
   "skills": [
@@ -135,6 +135,26 @@
       "description": "Persona \"AI/ML Engineer\" (EXECUTOR) in the AI: Build and integrate models. Use when the task needs Modeling, Training, Inference and the output must be \"Model, Metrics\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need AI/ML Engineer-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "ai-safety-alignment-engineer",
+      "title": "AI Safety / Alignment Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "AI",
+      "source": "prompts/implementation/ai-safety-alignment-engineer.md",
+      "skill": "skills/ai-safety-alignment-engineer/SKILL.md",
+      "description": "Persona \"AI Safety / Alignment Engineer\" (EXECUTOR) in the AI: Make the system's failure modes known, bounded, and tested before they are discovered by a user. Use when the task needs Whether the stated safety property has an evaluation that can fail, Prompt-injection and tool-misuse resistance with evidence, not assertion, Refusal and fallback behaviour at the boundary of competence and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need AI Safety / Alignment Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "analytics-engineer",
+      "title": "Analytics Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Data",
+      "source": "prompts/implementation/analytics-engineer.md",
+      "skill": "skills/analytics-engineer/SKILL.md",
+      "description": "Persona \"Analytics Engineer\" (EXECUTOR) in the Data: Make the numbers trustworthy and the same everywhere they appear. Use when the task needs Whether a metric has one definition or several that disagree, Lineage from source to the number a decision-maker reads, Freshness, completeness, and the handling of late or corrected data and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Analytics Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
       "name": "api-integration-contract-audit",
       "title": "API & Integration Contract Audit — Master Prompt (v1)",
       "type": "COMPOSITE",
@@ -250,6 +270,16 @@
       "description": "Persona \"Board of Directors\" (SUPERVISOR) in the Business: Governance and strategic control. Use when the task needs Strategy, Governance, Risk and the output must be \"Strategic Decisions\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Board of Directors-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "brand-designer",
+      "title": "Brand Designer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Design",
+      "source": "prompts/implementation/brand-designer.md",
+      "skill": "skills/brand-designer/SKILL.md",
+      "description": "Persona \"Brand Designer\" (EXECUTOR) in the Design: Make the brand recognisable and applicable without a designer in the room. Use when the task needs Whether brand rules are documented well enough to be applied without the author, Consistency of logo, colour, type, and voice across every surface, Accessibility of the brand palette and of the approved combinations and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Brand Designer-level judgment with evidence and a fixed scope."
+    },
+    {
       "name": "build-engineer",
       "title": "Build Engineer",
       "type": "EXECUTOR",
@@ -308,6 +338,16 @@
       "source": "prompts/audit/change-manager.md",
       "skill": "skills/change-manager/SKILL.md",
       "description": "Persona \"Change Manager\" (SUPERVISOR) in the Project: Control change impact. Use when the task needs Change Requests, Impact Analysis and the output must be \"Change Decision\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need Change Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "chaos-engineer",
+      "title": "Chaos Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "DevOps",
+      "source": "prompts/implementation/chaos-engineer.md",
+      "skill": "skills/chaos-engineer/SKILL.md",
+      "description": "Persona \"Chaos Engineer\" (EXECUTOR) in the DevOps: Find the failure the system has not been designed for, before production finds it. Use when the task needs Whether the stated resilience claim has ever been tested, Blast-radius containment: can the experiment be stopped, and how fast, Detection and recovery paths exercised by the experiment and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Chaos Engineer-level judgment with evidence and a fixed scope."
     },
     {
       "name": "chief-design-officer",
@@ -438,6 +478,26 @@
       "description": "Persona \"Community Manager\" (EXECUTOR) in the Support: Build healthy engagement with users. Use when the task needs Community, Feedback and the output must be \"Community Reports\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Community Manager-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "compliance-evidence-analyst",
+      "title": "Compliance Evidence Analyst",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Compliance",
+      "source": "prompts/implementation/compliance-evidence-analyst.md",
+      "skill": "skills/compliance-evidence-analyst/SKILL.md",
+      "description": "Persona \"Compliance Evidence Analyst\" (EXECUTOR) in the Compliance: Make every claimed control demonstrable from retained evidence. Use when the task needs Existence, completeness, and retention period of the evidence for each control, Whether the evidence actually demonstrates the control, or only asserts it, Chain from requirement to control to evidence to reviewer sign-… and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Compliance Evidence Analyst-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "content-strategist",
+      "title": "Content Strategist",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Documentation",
+      "source": "prompts/implementation/content-strategist.md",
+      "skill": "skills/content-strategist/SKILL.md",
+      "description": "Persona \"Content Strategist\" (EXECUTOR) in the Documentation: Make every piece of content earn its place and stay true after publication. Use when the task needs Whether each content type has a purpose, an audience, and an owner, Voice and terminology consistency across surfaces and authors, Duplication and contradiction between overlapping content and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Content Strategist-level judgment with evidence and a fixed scope."
+    },
+    {
       "name": "contract-manager",
       "title": "Contract Manager",
       "type": "SUPERVISOR",
@@ -446,6 +506,16 @@
       "source": "prompts/audit/contract-manager.md",
       "skill": "skills/contract-manager/SKILL.md",
       "description": "Persona \"Contract Manager\" (SUPERVISOR) in the Compliance: Control contractual obligations. Use when the task needs Contracts, Deliverables and the output must be \"Contract Status\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Contract Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "cryptography-engineer",
+      "title": "Cryptography Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Security",
+      "source": "prompts/implementation/cryptography-engineer.md",
+      "skill": "skills/cryptography-engineer/SKILL.md",
+      "description": "Persona \"Cryptography Engineer\" (EXECUTOR) in the Security: Use cryptography correctly, for the right purpose, with keys managed as a lifecycle. Use when the task needs Algorithm, mode, and key-size choices against current guidance, with no deprecated primitives, Key generation, storage, rotation, and destruction paths, Certificate lifecycle: issuance, renewal, pinning, and revocation… and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Cryptography Engineer-level judgment with evidence and a fixed scope."
     },
     {
       "name": "cto",
@@ -551,6 +621,16 @@
       "description": "Persona \"Data Scientist\" (EXECUTOR) in the AI: Extract insights and predictive models. Use when the task needs Analysis, Modeling and the output must be \"Analysis, Model\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need Data Scientist-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "data-steward",
+      "title": "Data Steward",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Data",
+      "source": "prompts/implementation/data-steward.md",
+      "skill": "skills/data-steward/SKILL.md",
+      "description": "Persona \"Data Steward\" (EXECUTOR) in the Data: Make each data domain correct, defined, and safely reachable. Use when the task needs Business definitions versus what the systems actually store, Quality rules: completeness, accuracy, timeliness, uniqueness per domain, Access requests and whether grants match the stated purpose and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Data Steward-level judgment with evidence and a fixed scope."
+    },
+    {
       "name": "database-administrator-dba",
       "title": "Database Administrator (DBA)",
       "type": "EXECUTOR",
@@ -619,6 +699,16 @@
       "source": "prompts/implementation/design-system-designer.md",
       "skill": "skills/design-system-designer/SKILL.md",
       "description": "Persona \"Design System Designer\" (EXECUTOR) in the Design: Create a consistent UI system. Use when the task needs Components, Tokens, Guidelines and the output must be \"Components, Guidelines\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need Design System Designer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "designops-engineer",
+      "title": "DesignOps Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Design",
+      "source": "prompts/implementation/designops-engineer.md",
+      "skill": "skills/designops-engineer/SKILL.md",
+      "description": "Persona \"DesignOps Engineer\" (EXECUTOR) in the Design: Make the design system the path of least resistance for design and engineering. Use when the task needs Adoption: which components are used, which are bypassed, and why, Parity between the design-tool library and the code component library, Contribution path: can a designer or engineer ship a change safely and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need DesignOps Engineer-level judgment with evidence and a fixed scope."
     },
     {
       "name": "desktop-developer",
@@ -826,6 +916,16 @@
       "description": "Persona \"Finance Manager\" (SUPERVISOR) in the Project: Control financial health. Use when the task needs Budget, Forecast, Cost and the output must be \"Financial Reports\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Finance Manager-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "fine-tuning-engineer",
+      "title": "Fine-tuning Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "AI",
+      "source": "prompts/implementation/fine-tuning-engineer.md",
+      "skill": "skills/fine-tuning-engineer/SKILL.md",
+      "description": "Persona \"Fine-tuning Engineer\" (EXECUTOR) in the AI: Improve the model where training data, not prompting, is the binding constraint. Use when the task needs Whether the problem is actually solvable by fine-tuning, with the evidence, Dataset provenance, licence, and consent for every training example, Train / validation / test separation with no leakage between them and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Fine-tuning Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
       "name": "finops-specialist",
       "title": "FinOps Specialist",
       "type": "SUPERVISOR",
@@ -914,6 +1014,16 @@
       "description": "Persona \"Full-Stack Developer\" (EXECUTOR) in the Software: Deliver an end-to-end feature. Use when the task needs Frontend, Backend, Integration and the output must be \"Feature Implementation\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need Full-Stack Developer-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "game-designer",
+      "title": "Game Designer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Design",
+      "source": "prompts/implementation/game-designer.md",
+      "skill": "skills/game-designer/SKILL.md",
+      "description": "Persona \"Game Designer\" (EXECUTOR) in the Design: Make the intended experience emerge from rules the player can learn. Use when the task needs Whether the core loop is stated, testable, and actually the loop being played, Onboarding: what the player must learn, in what order, and how it is taught, Balance and progression curves with the intended and observed d… and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Game Designer-level judgment with evidence and a fixed scope."
+    },
+    {
       "name": "game-developer",
       "title": "Game Developer",
       "type": "EXECUTOR",
@@ -952,6 +1062,26 @@
       "source": "prompts/audit/hr-people-manager.md",
       "skill": "skills/hr-people-manager/SKILL.md",
       "description": "Persona \"HR / People Manager\" (SUPERVISOR) in the HR: Build the right team. Use when the task needs Hiring, Performance, Development and the output must be \"People Plans\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need HR / People Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "iam-identity-engineer",
+      "title": "IAM / Identity Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Security",
+      "source": "prompts/implementation/iam-identity-engineer.md",
+      "skill": "skills/iam-identity-engineer/SKILL.md",
+      "description": "Persona \"IAM / Identity Engineer\" (EXECUTOR) in the Security: Make every access decision explicit, least-privilege, and provable. Use when the task needs Coverage of authentication, authorisation, and session management across every entry point, Least-privilege and separation of duties in every role, group, and policy definition, Lifecycle of accounts, keys, tokens, and… and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need IAM / Identity Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "incident-commander",
+      "title": "Incident Commander",
+      "type": "SUPERVISOR",
+      "typeLabel": "SUPERVISOR",
+      "domain": "Operations",
+      "source": "prompts/audit/incident-commander.md",
+      "skill": "skills/incident-commander/SKILL.md",
+      "description": "Persona \"Incident Commander\" (SUPERVISOR) in the Operations: Run a live incident to resolution with clear command, not a crowd of opinions. Use when the task needs Whether command was established early and handed over cleanly, Role separation: command, communications, operations, and planning, Decision quality under uncertainty, and what was assumed versus known and the output must be \"Domain Output\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Incident Commander-level judgment with evidence and a fixed scope."
     },
     {
       "name": "incident-forensic-review-postmortem",
@@ -1035,6 +1165,16 @@
       "source": "prompts/audit/ip-copyright-specialist.md",
       "skill": "skills/ip-copyright-specialist/SKILL.md",
       "description": "Persona \"IP / Copyright Specialist\" (SUPERVISOR) in the Compliance: Protect IP. Use when the task needs Licensing, Copyright and the output must be \"IP Report\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need IP / Copyright Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "kyc-aml-specialist",
+      "title": "KYC / AML Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Compliance",
+      "source": "prompts/implementation/kyc-aml-specialist.md",
+      "skill": "skills/kyc-aml-specialist/SKILL.md",
+      "description": "Persona \"KYC / AML Specialist\" (EXECUTOR) in the Compliance: Detect and prevent financial crime without blocking legitimate customers. Use when the task needs Customer due-diligence depth versus the assessed risk tier, Screening coverage: sanctions, PEP, and adverse media, with the refresh cadence, Transaction-monitoring rules, thresholds, and the alert-to-case path and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need KYC / AML Specialist-level judgment with evidence and a fixed scope."
     },
     {
       "name": "legacy-modernization-engineer",
@@ -1197,6 +1337,16 @@
       "description": "Persona \"Partnership Manager\" (SUPERVISOR) in the Growth: Build durable partnerships. Use when the task needs Partner Management, Integration Coordination and the output must be \"Partnership Status\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Partnership Manager-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "payments-billing-engineer",
+      "title": "Payments / Billing Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Software",
+      "source": "prompts/implementation/payments-billing-engineer.md",
+      "skill": "skills/payments-billing-engineer/SKILL.md",
+      "description": "Persona \"Payments / Billing Engineer\" (EXECUTOR) in the Software: Move money correctly, exactly once, and reconcilably. Use when the task needs Idempotency and exactly-once semantics on every money-moving path, Rounding, currency, tax, and proration handling at every boundary, Reconciliation between the internal ledger and every external provider and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Payments / Billing Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
       "name": "penetration-tester",
       "title": "Penetration Tester",
       "type": "EXECUTOR",
@@ -1238,6 +1388,16 @@
       "lenses": 6,
       "spec": "composites/performance-scalability-audit.json",
       "generated": true
+    },
+    {
+      "name": "platform-engineer",
+      "title": "Platform Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "DevOps",
+      "source": "prompts/implementation/platform-engineer.md",
+      "skill": "skills/platform-engineer/SKILL.md",
+      "description": "Persona \"Platform Engineer\" (EXECUTOR) in the DevOps: Make the correct way to ship the easiest way to ship. Use when the task needs Whether the paved road actually removes work or only relocates it, Self-service coverage versus the paths that still need a human ticket, Golden-path drift: how many teams bypass it, and why and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Platform Engineer-level judgment with evidence and a fixed scope."
     },
     {
       "name": "platform-owner",
@@ -1486,6 +1646,16 @@
       "description": "Persona \"Quality Manager\" (SUPERVISOR) in the Project: Guarantee the quality system. Use when the task needs Quality Standards, Audits and the output must be \"Quality Report\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Quality Manager-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "rag-retrieval-engineer",
+      "title": "RAG / Retrieval Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "AI",
+      "source": "prompts/implementation/rag-retrieval-engineer.md",
+      "skill": "skills/rag-retrieval-engineer/SKILL.md",
+      "description": "Persona \"RAG / Retrieval Engineer\" (EXECUTOR) in the AI: Retrieve the right passage, from the right source, with the right permissions. Use when the task needs Chunking strategy versus the structure of the source documents, Embedding and index choice measured on the real query distribution, Permission filtering before retrieval, not after generation and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need RAG / Retrieval Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
       "name": "recruiter",
       "title": "Recruiter",
       "type": "EXECUTOR",
@@ -1536,6 +1706,16 @@
       "description": "Persona \"Release Manager\" (SUPERVISOR) in the DevOps: Guarantee safe, controlled, traceable releases. Use when the task needs Release gates and checklist, approval/scheduling, rollback, documentation, alignment with DevOps/QA and the output must be \"Release report, checklist, rollback\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need Release Manager-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "revenue-operations-analyst",
+      "title": "Revenue Operations (RevOps) Analyst",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Growth",
+      "source": "prompts/implementation/revenue-operations-analyst.md",
+      "skill": "skills/revenue-operations-analyst/SKILL.md",
+      "description": "Persona \"Revenue Operations (RevOps) Analyst\" (EXECUTOR) in the Growth: Make one revenue number that sales, finance, and product all recognise. Use when the task needs Whether pipeline, booking, and revenue definitions agree across systems, Forecast model: inputs, assumptions, and its measured accuracy, CRM hygiene: required fields, duplicates, and stale records and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Revenue Operations (RevOps) Analyst-level judgment with evidence and a fixed scope."
+    },
+    {
       "name": "risk-manager",
       "title": "Risk Manager",
       "type": "SUPERVISOR",
@@ -1584,6 +1764,16 @@
       "source": "prompts/implementation/scrum-product-team.md",
       "skill": "skills/scrum-product-team/SKILL.md",
       "description": "Persona \"Scrum Product Team\" (EXECUTOR) in the Support: Deliver a valuable increment. Use when the task needs Development, Testing, Collaboration and the output must be \"Increment\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need Scrum Product Team-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "search-relevance-engineer",
+      "title": "Search / Relevance Engineer",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Software",
+      "source": "prompts/implementation/search-relevance-engineer.md",
+      "skill": "skills/search-relevance-engineer/SKILL.md",
+      "description": "Persona \"Search / Relevance Engineer\" (EXECUTOR) in the Software: Return the right result first, measurably, at the required latency. Use when the task needs Indexing pipeline completeness, freshness, and failure handling, Query parsing, analysis, and the handling of typos, synonyms, and empty results, Ranking signals, their weights, and whether they are measured or assumed and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Search / Relevance Engineer-level judgment with evidence and a fixed scope."
     },
     {
       "name": "security-architect",
@@ -1654,6 +1844,16 @@
       "source": "prompts/implementation/soc-analyst.md",
       "skill": "skills/soc-analyst/SKILL.md",
       "description": "Persona \"SOC Analyst\" (EXECUTOR) in the Security: Monitor and give correct first response to security incidents. Use when the task needs Evidence-based alert analysis, classification/prioritisation, first response and containment, escalation and reporting and the output must be \"Incident report, classification, evidence\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need SOC Analyst-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "soc2-iso27001-readiness-specialist",
+      "title": "SOC 2 & ISO 27001 Readiness Specialist",
+      "type": "EXECUTOR",
+      "typeLabel": "EXECUTOR",
+      "domain": "Compliance",
+      "source": "prompts/implementation/soc2-iso27001-readiness-specialist.md",
+      "skill": "skills/soc2-iso27001-readiness-specialist/SKILL.md",
+      "description": "Persona \"SOC 2 & ISO 27001 Readiness Specialist\" (EXECUTOR) in the Compliance: Turn the control framework into evidence that already exists, not a project invented for the audit. Use when the task needs Mapping of every trust-service and Annex A control to a real owner and a real artefact, Gap between the written policy and the observed practice, with evidence either way, Scope boundary definition: systems, people, and… and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need SOC 2 & ISO 27001 Readiness Specialist-level judgment with evidence and a fixed scope."
     },
     {
       "name": "software-architect",

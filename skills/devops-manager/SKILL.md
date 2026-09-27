@@ -224,7 +224,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Deployment Engineer, DevSecOps Engineer, Disaster Recovery Specialist, MLOps Engineer, Observability Engineer, On-call Engineer, Performance Engineer, Test Automation Engineer
+- **PrimaryRecipient:** Chaos Engineer, Deployment Engineer, DevSecOps Engineer, Disaster Recovery Specialist, MLOps Engineer, Observability Engineer, On-call Engineer, Performance Engineer, Test Automation Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** DevOps Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

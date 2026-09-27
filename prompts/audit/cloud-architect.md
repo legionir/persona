@@ -39,6 +39,7 @@
 - Coordination with consumers: Infrastructure Engineer
 - Coordination with consumers: IoT Engineer
 - Coordination with consumers: MLOps Engineer
+- Coordination with consumers: Platform Engineer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -105,7 +106,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Cloud Engineer, Cloud Security Engineer, DevOps Engineer, Infrastructure Engineer, IoT Engineer, MLOps Engineer
+- **ConsumerPersonas:** Cloud Engineer, Cloud Security Engineer, DevOps Engineer, Infrastructure Engineer, IoT Engineer, MLOps Engineer, Platform Engineer
 
 ---
 
@@ -375,7 +376,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Cloud Engineer, Cloud Security Engineer, DevOps Engineer, Infrastructure Engineer, IoT Engineer, MLOps Engineer
+- **PrimaryRecipient:** Cloud Engineer, Cloud Security Engineer, DevOps Engineer, Infrastructure Engineer, IoT Engineer, MLOps Engineer, Platform Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Cloud Architect
 - **ImplementationOwner:** — (the supervisor does not implement itself)

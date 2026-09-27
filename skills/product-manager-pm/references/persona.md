@@ -35,9 +35,11 @@
 - **Supporting:**
 - Coordination with consumers: Business Analyst (BA)
 - Coordination with consumers: Community Manager
+- Coordination with consumers: Content Strategist
 - Coordination with consumers: Data Analyst
 - Coordination with consumers: Data Scientist
 - Coordination with consumers: Documentation Specialist
+- Coordination with consumers: Game Designer
 - Coordination with consumers: Game Developer
 - Coordination with consumers: Localization Specialist
 - Coordination with consumers: Mobile Developer
@@ -114,7 +116,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Business Analyst (BA), Community Manager, Data Analyst, Data Scientist, Documentation Specialist, Game Developer, Localization Specialist, Mobile Developer, Product Analyst, Product Designer, Technical Writer, UI Designer, UX Designer, UX Researcher, UX Writer / Content Designer
+- **ConsumerPersonas:** Business Analyst (BA), Community Manager, Content Strategist, Data Analyst, Data Scientist, Documentation Specialist, Game Designer, Game Developer, Localization Specialist, Mobile Developer, Product Analyst, Product Designer, Technical Writer, UI Designer, UX Designer, UX Researcher, UX Writer / Content Designer
 
 ---
 
@@ -404,7 +406,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Business Analyst (BA), Community Manager, Data Analyst, Data Scientist, Documentation Specialist, Game Developer, Localization Specialist, Mobile Developer, Product Analyst, Product Designer, Technical Writer, UI Designer, UX Designer, UX Researcher, UX Writer / Content Designer
+- **PrimaryRecipient:** Business Analyst (BA), Community Manager, Content Strategist, Data Analyst, Data Scientist, Documentation Specialist, Game Designer, Game Developer, Localization Specialist, Mobile Developer, Product Analyst, Product Designer, Technical Writer, UI Designer, UX Designer, UX Researcher, UX Writer / Content Designer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Product Manager (PM)
 - **ImplementationOwner:** — (the supervisor does not implement itself)

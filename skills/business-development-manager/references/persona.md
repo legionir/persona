@@ -32,7 +32,7 @@
 - Consistency with strategy and market
 - Partnership effect and ROI
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Sales Manager
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -99,7 +99,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Sales Manager
 
 ---
 
@@ -368,7 +368,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Founder, Legal
+- **PrimaryRecipient:** Sales Manager
 - **SupportingRecipients:** —
 - **DecisionOwner:** Business Development Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

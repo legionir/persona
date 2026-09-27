@@ -218,7 +218,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Business Analyst (BA), Community Manager, Data Analyst, Data Scientist, Documentation Specialist, Game Developer, Localization Specialist, Mobile Developer, Product Analyst, Product Designer, Technical Writer, UI Designer, UX Designer, UX Researcher, UX Writer / Content Designer
+- **PrimaryRecipient:** Business Analyst (BA), Community Manager, Content Strategist, Data Analyst, Data Scientist, Documentation Specialist, Game Designer, Game Developer, Localization Specialist, Mobile Developer, Product Analyst, Product Designer, Technical Writer, UI Designer, UX Designer, UX Researcher, UX Writer / Content Designer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Product Manager (PM)
 - **ImplementationOwner:** — (the supervisor does not implement itself)

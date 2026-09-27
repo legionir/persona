@@ -206,7 +206,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** ASO Specialist, Marketing Specialist, SEO Specialist
+- **PrimaryRecipient:** ASO Specialist, Marketing Specialist, Revenue Operations (RevOps) Analyst, SEO Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Growth Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

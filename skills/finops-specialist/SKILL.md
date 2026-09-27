@@ -206,7 +206,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Cloud Architect, Finance
+- **PrimaryRecipient:** Cloud Engineer, Infrastructure Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** FinOps Specialist
 - **ImplementationOwner:** — (the supervisor does not implement itself)

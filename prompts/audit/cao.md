@@ -35,7 +35,8 @@
 - Quality of evidence, documentation, and finding classification
 - Effectiveness of audit-finding follow-up and closure
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Compliance Evidence Analyst
+- Coordination with consumers: SOC 2 & ISO 27001 Readiness Specialist
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -100,7 +101,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Compliance Evidence Analyst, SOC 2 & ISO 27001 Readiness Specialist
 
 ---
 
@@ -405,7 +406,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Board, CEO, and senior management
+- **PrimaryRecipient:** Compliance Evidence Analyst, SOC 2 & ISO 27001 Readiness Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Chief Audit Officer (CAO)
 - **ImplementationOwner:** — (the supervisor does not implement itself)

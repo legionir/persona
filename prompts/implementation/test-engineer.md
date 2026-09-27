@@ -33,6 +33,7 @@
 - Coordinating with dev/PM for triage
 - **Supporting:**
 - Coordination with the supervisor: QA Lead
+- Coordination with the supervisor: Quality Manager
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -92,9 +93,9 @@
 - **PrimaryOwner:** Test Engineer
 - **DecisionOwner:** QA Lead
 - **ImplementationOwner:** Test Engineer
-- **Reviewer:** QA Lead
-- **Approver:** QA Lead
-- **SupportingPersonas:** QA Lead
+- **Reviewer:** QA Lead, Quality Manager
+- **Approver:** QA Lead, Quality Manager
+- **SupportingPersonas:** QA Lead, Quality Manager
 - **ConsumerPersonas:** QA, Developer
 
 ---
@@ -375,7 +376,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** QA, Developer
-- **SupportingRecipients:** QA Lead
+- **SupportingRecipients:** QA Lead, Quality Manager
 - **DecisionOwner:** QA Lead
 - **ImplementationOwner:** Test Engineer
 - **RequiredArtifacts:** Test Results
@@ -391,7 +392,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** QA Lead
+- **TargetPersona:** QA Lead, Quality Manager
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

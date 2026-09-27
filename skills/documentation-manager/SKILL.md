@@ -226,7 +226,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Product, technical, and support
+- **PrimaryRecipient:** Content Strategist, Documentation Specialist, Technical Writer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Documentation Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

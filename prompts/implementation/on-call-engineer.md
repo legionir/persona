@@ -34,6 +34,7 @@
 - **Supporting:**
 - Coordination with the supervisor: Incident Manager
 - Coordination with the supervisor: DevOps Manager
+- Coordination with the supervisor: Incident Commander
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -93,9 +94,9 @@
 - **PrimaryOwner:** On-call Engineer
 - **DecisionOwner:** Incident Manager
 - **ImplementationOwner:** On-call Engineer
-- **Reviewer:** Incident Manager, DevOps Manager
-- **Approver:** Incident Manager, DevOps Manager
-- **SupportingPersonas:** Incident Manager, DevOps Manager
+- **Reviewer:** Incident Manager, DevOps Manager, Incident Commander
+- **Approver:** Incident Manager, DevOps Manager, Incident Commander
+- **SupportingPersonas:** Incident Manager, DevOps Manager, Incident Commander
 - **ConsumerPersonas:** Incident Manager
 
 ---
@@ -395,7 +396,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Incident Manager
-- **SupportingRecipients:** Incident Manager, DevOps Manager
+- **SupportingRecipients:** Incident Manager, DevOps Manager, Incident Commander
 - **DecisionOwner:** Incident Manager
 - **ImplementationOwner:** On-call Engineer
 - **RequiredArtifacts:** Incident Resolution
@@ -411,7 +412,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Incident Manager, DevOps Manager
+- **TargetPersona:** Incident Manager, DevOps Manager, Incident Commander
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

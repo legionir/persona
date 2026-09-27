@@ -32,7 +32,8 @@
 - Optimisation and right-sizing
 - Commitment to cost of value
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Cloud Engineer
+- Coordination with consumers: Infrastructure Engineer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -101,7 +102,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Cloud Engineer, Infrastructure Engineer
 
 ---
 
@@ -372,7 +373,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Cloud Architect, Finance
+- **PrimaryRecipient:** Cloud Engineer, Infrastructure Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** FinOps Specialist
 - **ImplementationOwner:** — (the supervisor does not implement itself)

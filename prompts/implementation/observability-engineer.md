@@ -34,6 +34,7 @@
 - Defining SLO, error budget, and accumulation
 - **Supporting:**
 - Coordination with the supervisor: DevOps Manager
+- Coordination with the supervisor: Incident Commander
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -93,9 +94,9 @@
 - **PrimaryOwner:** Observability Engineer
 - **DecisionOwner:** DevOps Manager
 - **ImplementationOwner:** Observability Engineer
-- **Reviewer:** DevOps Manager
-- **Approver:** DevOps Manager
-- **SupportingPersonas:** DevOps Manager
+- **Reviewer:** DevOps Manager, Incident Commander
+- **Approver:** DevOps Manager, Incident Commander
+- **SupportingPersonas:** DevOps Manager, Incident Commander
 - **ConsumerPersonas:** SRE, DevOps
 
 ---
@@ -394,7 +395,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** SRE, DevOps
-- **SupportingRecipients:** DevOps Manager
+- **SupportingRecipients:** DevOps Manager, Incident Commander
 - **DecisionOwner:** DevOps Manager
 - **ImplementationOwner:** Observability Engineer
 - **RequiredArtifacts:** Dashboards, Alerts
@@ -410,7 +411,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** DevOps Manager
+- **TargetPersona:** DevOps Manager, Incident Commander
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

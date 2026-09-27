@@ -33,12 +33,15 @@
 - Managing trust boundaries and data flows
 - Consistency with compliance
 - **Supporting:**
+- Coordination with consumers: AI Safety / Alignment Engineer
 - Coordination with consumers: Agent Safety Engineer
 - Coordination with consumers: Application Security Engineer
 - Coordination with consumers: Cloud Security Engineer
+- Coordination with consumers: Cryptography Engineer
 - Coordination with consumers: Database Security Specialist
 - Coordination with consumers: Decommission Engineer
 - Coordination with consumers: DevSecOps Engineer
+- Coordination with consumers: IAM / Identity Engineer
 - Coordination with consumers: Network Engineer
 - Coordination with consumers: Penetration Tester
 - Coordination with consumers: Security Engineer
@@ -109,7 +112,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Agent Safety Engineer, Application Security Engineer, Cloud Security Engineer, Database Security Specialist, Decommission Engineer, DevSecOps Engineer, Network Engineer, Penetration Tester, Security Engineer, System Administrator
+- **ConsumerPersonas:** AI Safety / Alignment Engineer, Agent Safety Engineer, Application Security Engineer, Cloud Security Engineer, Cryptography Engineer, Database Security Specialist, Decommission Engineer, DevSecOps Engineer, IAM / Identity Engineer, Network Engineer, Penetration Tester, Security Engineer, System Administrator
 
 ---
 
@@ -401,7 +404,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Agent Safety Engineer, Application Security Engineer, Cloud Security Engineer, Database Security Specialist, Decommission Engineer, DevSecOps Engineer, Network Engineer, Penetration Tester, Security Engineer, System Administrator
+- **PrimaryRecipient:** AI Safety / Alignment Engineer, Agent Safety Engineer, Application Security Engineer, Cloud Security Engineer, Cryptography Engineer, Database Security Specialist, Decommission Engineer, DevSecOps Engineer, IAM / Identity Engineer, Network Engineer, Penetration Tester, Security Engineer, System Administrator
 - **SupportingRecipients:** —
 - **DecisionOwner:** Security Architect
 - **ImplementationOwner:** — (the supervisor does not implement itself)

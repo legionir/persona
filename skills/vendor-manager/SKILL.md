@@ -206,7 +206,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Procurement, Legal
+- **PrimaryRecipient:** Procurement Specialist, Third-Party Integration Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Vendor Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

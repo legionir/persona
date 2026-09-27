@@ -225,7 +225,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** CTO, QA, manufacturing, and embedded team
+- **PrimaryRecipient:** Embedded Developer, Firmware Engineer, IoT Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Embedded Systems Lead
 - **ImplementationOwner:** — (the supervisor does not implement itself)

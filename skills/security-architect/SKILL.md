@@ -220,7 +220,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Agent Safety Engineer, Application Security Engineer, Cloud Security Engineer, Database Security Specialist, Decommission Engineer, DevSecOps Engineer, Network Engineer, Penetration Tester, Security Engineer, System Administrator
+- **PrimaryRecipient:** AI Safety / Alignment Engineer, Agent Safety Engineer, Application Security Engineer, Cloud Security Engineer, Cryptography Engineer, Database Security Specialist, Decommission Engineer, DevSecOps Engineer, IAM / Identity Engineer, Network Engineer, Penetration Tester, Security Engineer, System Administrator
 - **SupportingRecipients:** —
 - **DecisionOwner:** Security Architect
 - **ImplementationOwner:** — (the supervisor does not implement itself)

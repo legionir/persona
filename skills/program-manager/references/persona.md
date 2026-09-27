@@ -31,7 +31,8 @@
 - Allocating shared resources and managing capacity
 - Integrated programme reporting against risk/interval
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Product Owner (PO)
+- Coordination with consumers: Project Manager
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -97,7 +98,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Product Owner (PO), Project Manager
 
 ---
 
@@ -365,7 +366,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** PMs, Executives
+- **PrimaryRecipient:** Product Owner (PO), Project Manager
 - **SupportingRecipients:** —
 - **DecisionOwner:** Program Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

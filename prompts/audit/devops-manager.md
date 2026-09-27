@@ -35,6 +35,7 @@
 - Sufficiency of monitoring, incident response, and secret management
 - Consistency with development need and infrastructure scale
 - **Supporting:**
+- Coordination with consumers: Chaos Engineer
 - Coordination with consumers: Deployment Engineer
 - Coordination with consumers: DevSecOps Engineer
 - Coordination with consumers: Disaster Recovery Specialist
@@ -109,7 +110,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Deployment Engineer, DevSecOps Engineer, Disaster Recovery Specialist, MLOps Engineer, Observability Engineer, On-call Engineer, Performance Engineer, Test Automation Engineer
+- **ConsumerPersonas:** Chaos Engineer, Deployment Engineer, DevSecOps Engineer, Disaster Recovery Specialist, MLOps Engineer, Observability Engineer, On-call Engineer, Performance Engineer, Test Automation Engineer
 
 ---
 
@@ -414,7 +415,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Deployment Engineer, DevSecOps Engineer, Disaster Recovery Specialist, MLOps Engineer, Observability Engineer, On-call Engineer, Performance Engineer, Test Automation Engineer
+- **PrimaryRecipient:** Chaos Engineer, Deployment Engineer, DevSecOps Engineer, Disaster Recovery Specialist, MLOps Engineer, Observability Engineer, On-call Engineer, Performance Engineer, Test Automation Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** DevOps Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

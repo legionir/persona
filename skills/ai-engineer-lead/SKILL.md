@@ -229,7 +229,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** AI/ML Engineer, Agent Architect, Agent Evaluator, Agent Integration Engineer, Agent Safety Engineer, Agentic Prompt Specialist, MLOps Engineer, Prompt Engineer, Tool Developer
+- **PrimaryRecipient:** AI Safety / Alignment Engineer, AI/ML Engineer, Agent Architect, Agent Evaluator, Agent Integration Engineer, Agent Safety Engineer, Agentic Prompt Specialist, Fine-tuning Engineer, MLOps Engineer, Prompt Engineer, RAG / Retrieval Engineer, Tool Developer
 - **SupportingRecipients:** —
 - **DecisionOwner:** AI Engineer Lead
 - **ImplementationOwner:** — (the supervisor does not implement itself)

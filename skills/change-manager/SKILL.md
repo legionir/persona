@@ -219,7 +219,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** PM, PO, Team
+- **PrimaryRecipient:** Deployment Engineer, Release Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Change Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

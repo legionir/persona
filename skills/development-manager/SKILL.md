@@ -225,7 +225,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Engineering Manager, project managers, and technical stakeholders
+- **PrimaryRecipient:** Backend Developer, Frontend Developer, Full-Stack Developer, Software Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Development Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

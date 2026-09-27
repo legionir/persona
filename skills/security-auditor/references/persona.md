@@ -36,6 +36,7 @@
 - **Supporting:**
 - Coordination with the supervisor: Security Governance Manager
 - Coordination with the supervisor: Chief Information Security Officer (CISO)
+- Coordination with the supervisor: External Auditor
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -100,9 +101,9 @@
 - **PrimaryOwner:** Security Auditor
 - **DecisionOwner:** Security Governance Manager
 - **ImplementationOwner:** Security Auditor
-- **Reviewer:** Security Governance Manager, Chief Information Security Officer (CISO)
-- **Approver:** Security Governance Manager, Chief Information Security Officer (CISO)
-- **SupportingPersonas:** Security Governance Manager, Chief Information Security Officer (CISO)
+- **Reviewer:** Security Governance Manager, Chief Information Security Officer (CISO), External Auditor
+- **Approver:** Security Governance Manager, Chief Information Security Officer (CISO), External Auditor
+- **SupportingPersonas:** Security Governance Manager, Chief Information Security Officer (CISO), External Auditor
 - **ConsumerPersonas:** Security Governance Manager and CISO
 
 ---
@@ -419,7 +420,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Security Governance Manager and CISO
-- **SupportingRecipients:** Security Governance Manager, Chief Information Security Officer (CISO)
+- **SupportingRecipients:** Security Governance Manager, Chief Information Security Officer (CISO), External Auditor
 - **DecisionOwner:** Security Governance Manager
 - **ImplementationOwner:** Security Auditor
 - **RequiredArtifacts:** Audit report, findings, coverage
@@ -435,7 +436,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Security Governance Manager, Chief Information Security Officer (CISO)
+- **TargetPersona:** Security Governance Manager, Chief Information Security Officer (CISO), External Auditor
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

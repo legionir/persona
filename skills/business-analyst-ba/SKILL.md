@@ -210,7 +210,7 @@ metadata:
 
 ### 24. Handoff
 - **PrimaryRecipient:** PO, Architect, UX
-- **SupportingRecipients:** Product Owner (PO), Product Manager (PM)
+- **SupportingRecipients:** Product Owner (PO), Product Manager (PM), Risk Manager, Project Manager
 - **DecisionOwner:** Product Owner (PO)
 - **ImplementationOwner:** Business Analyst (BA)
 - **RequiredArtifacts:** Requirements, Use Cases
@@ -226,7 +226,7 @@ metadata:
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Product Owner (PO), Product Manager (PM)
+- **TargetPersona:** Product Owner (PO), Product Manager (PM), Risk Manager, Project Manager
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

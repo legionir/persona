@@ -226,7 +226,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** HR, team managers, and people operations
+- **PrimaryRecipient:** Recruiter, Technical Recruiter
 - **SupportingRecipients:** —
 - **DecisionOwner:** Recruitment Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

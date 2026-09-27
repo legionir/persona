@@ -35,7 +35,9 @@
 - Coverage of privacy, access, and data traceability
 - Compliance with data policies and regulations
 - **Supporting:**
+- Coordination with consumers: Analytics Engineer
 - Coordination with consumers: Data Engineer
+- Coordination with consumers: Data Steward
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -101,7 +103,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Data Engineer
+- **ConsumerPersonas:** Analytics Engineer, Data Engineer, Data Steward
 
 ---
 
@@ -404,7 +406,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Data Engineer
+- **PrimaryRecipient:** Analytics Engineer, Data Engineer, Data Steward
 - **SupportingRecipients:** —
 - **DecisionOwner:** Data Governance Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

@@ -32,7 +32,7 @@
 - Compliance with standards and criteria
 - Quality of reporting and follow-up
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: SOC 2 & ISO 27001 Readiness Specialist
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -98,7 +98,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** SOC 2 & ISO 27001 Readiness Specialist
 
 ---
 
@@ -386,7 +386,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Management
+- **PrimaryRecipient:** SOC 2 & ISO 27001 Readiness Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Audit Specialist
 - **ImplementationOwner:** — (the supervisor does not implement itself)

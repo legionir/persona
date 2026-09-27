@@ -35,7 +35,8 @@
 - Fairness, non-discrimination, and candidate experience
 - Coverage of skill gaps and team capacity supply
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Recruiter
+- Coordination with consumers: Technical Recruiter
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -102,7 +103,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Recruiter, Technical Recruiter
 
 ---
 
@@ -404,7 +405,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** HR, team managers, and people operations
+- **PrimaryRecipient:** Recruiter, Technical Recruiter
 - **SupportingRecipients:** —
 - **DecisionOwner:** Recruitment Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

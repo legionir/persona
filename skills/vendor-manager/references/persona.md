@@ -33,7 +33,8 @@
 - Management of vendor cost and relationship/strategy
 - Vendor offboarding and exit approach
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Procurement Specialist
+- Coordination with consumers: Third-Party Integration Specialist
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -97,7 +98,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Procurement Specialist, Third-Party Integration Specialist
 
 ---
 
@@ -367,7 +368,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Procurement, Legal
+- **PrimaryRecipient:** Procurement Specialist, Third-Party Integration Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Vendor Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

@@ -33,7 +33,7 @@
 - Compliance with laws and constraints
 - Quality of evidence and documentation
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Privacy Engineer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -97,7 +97,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Privacy Engineer
 
 ---
 
@@ -364,7 +364,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Founder, Compliance
+- **PrimaryRecipient:** Privacy Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Legal Advisor
 - **ImplementationOwner:** — (the supervisor does not implement itself)

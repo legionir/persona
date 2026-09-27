@@ -33,7 +33,7 @@
 - Coverage of escalation and renewal
 - Alignment with product and team
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Sales Representative
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -99,7 +99,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Sales Representative
 
 ---
 
@@ -367,7 +367,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Customer Success, Sales
+- **PrimaryRecipient:** Sales Representative
 - **SupportingRecipients:** —
 - **DecisionOwner:** Account Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

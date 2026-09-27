@@ -219,7 +219,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** AI Engineer, Backend Developer, Embedded Developer, Firmware Engineer, Full-Stack Developer, IoT Engineer, Legacy Modernization Engineer, Software Architect, System Architect, Third-party Integration Specialist
+- **PrimaryRecipient:** AI Engineer, Backend Developer, Embedded Developer, Firmware Engineer, Full-Stack Developer, IoT Engineer, Legacy Modernization Engineer, Payments / Billing Engineer, Search / Relevance Engineer, Software Architect, System Architect, Third-party Integration Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Solution Architect
 - **ImplementationOwner:** — (the supervisor does not implement itself)

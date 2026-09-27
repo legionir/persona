@@ -219,7 +219,7 @@ metadata:
 ## Delivery, Escalation, and Execution Plan
 
 ### 24. Handoff
-- **PrimaryRecipient:** Incident Response Engineer, On-call Engineer, Technical Support Engineer
+- **PrimaryRecipient:** Incident Commander, Incident Response Engineer, On-call Engineer, Technical Support Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Incident Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

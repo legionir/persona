@@ -32,7 +32,11 @@
 - Managing the quality plan and improvement
 - Consistency with standards
 - **Supporting:**
-- Receiving output from the executors and reviewing it within Scope
+- Coordination with consumers: Beta Tester
+- Coordination with consumers: Load / Stress Tester
+- Coordination with consumers: Performance Engineer
+- Coordination with consumers: QA Engineer
+- Coordination with consumers: Test Engineer
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -99,7 +103,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** NOT_APPLICABLE
+- **ConsumerPersonas:** Beta Tester, Load / Stress Tester, Performance Engineer, QA Engineer, Test Engineer
 
 ---
 
@@ -369,7 +373,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Management, QA Lead
+- **PrimaryRecipient:** Beta Tester, Load / Stress Tester, Performance Engineer, QA Engineer, Test Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Quality Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

@@ -35,6 +35,7 @@
 - **Supporting:**
 - Coordination with the supervisor: Solution Architect
 - Coordination with the supervisor: Technical Lead / Tech Lead
+- Coordination with the supervisor: Architecture Review Board
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -97,9 +98,9 @@
 - **PrimaryOwner:** Software Architect
 - **DecisionOwner:** Solution Architect
 - **ImplementationOwner:** Software Architect
-- **Reviewer:** Solution Architect, Technical Lead / Tech Lead
-- **Approver:** Solution Architect, Technical Lead / Tech Lead
-- **SupportingPersonas:** Solution Architect, Technical Lead / Tech Lead
+- **Reviewer:** Solution Architect, Technical Lead / Tech Lead, Architecture Review Board
+- **Approver:** Solution Architect, Technical Lead / Tech Lead, Architecture Review Board
+- **SupportingPersonas:** Solution Architect, Technical Lead / Tech Lead, Architecture Review Board
 - **ConsumerPersonas:** Tech Lead, Developers
 
 ---
@@ -403,7 +404,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Tech Lead, Developers
-- **SupportingRecipients:** Solution Architect, Technical Lead / Tech Lead
+- **SupportingRecipients:** Solution Architect, Technical Lead / Tech Lead, Architecture Review Board
 - **DecisionOwner:** Solution Architect
 - **ImplementationOwner:** Software Architect
 - **RequiredArtifacts:** Architecture, ADR
@@ -419,7 +420,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** Solution Architect, Technical Lead / Tech Lead
+- **TargetPersona:** Solution Architect, Technical Lead / Tech Lead, Architecture Review Board
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 

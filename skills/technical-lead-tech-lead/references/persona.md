@@ -39,13 +39,17 @@
 - Coordination with consumers: Desktop Developer
 - Coordination with consumers: DevOps Engineer
 - Coordination with consumers: Embedded Developer
+- Coordination with consumers: Fine-tuning Engineer
 - Coordination with consumers: Firmware Engineer
 - Coordination with consumers: Frontend Developer
 - Coordination with consumers: Full-Stack Developer
+- Coordination with consumers: Game Designer
 - Coordination with consumers: Game Developer
 - Coordination with consumers: Maintenance Engineer
 - Coordination with consumers: Mobile Developer
+- Coordination with consumers: Payments / Billing Engineer
 - Coordination with consumers: Refactoring Engineer
+- Coordination with consumers: Search / Relevance Engineer
 - Coordination with consumers: Software Architect
 - Coordination with consumers: Software Engineer
 - Coordination with consumers: Staff Engineer
@@ -118,7 +122,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Agent Architect, Backend Developer, Build Engineer, Design System Designer, Desktop Developer, DevOps Engineer, Embedded Developer, Firmware Engineer, Frontend Developer, Full-Stack Developer, Game Developer, Maintenance Engineer, Mobile Developer, Refactoring Engineer, Software Architect, Software Engineer, Staff Engineer, Technical Writer, Third-party Integration Specialist
+- **ConsumerPersonas:** Agent Architect, Backend Developer, Build Engineer, Design System Designer, Desktop Developer, DevOps Engineer, Embedded Developer, Fine-tuning Engineer, Firmware Engineer, Frontend Developer, Full-Stack Developer, Game Designer, Game Developer, Maintenance Engineer, Mobile Developer, Payments / Billing Engineer, Refactoring Engineer, Search / Relevance Engineer, Software Architect, Software Engineer, Staff Engineer, Technical Writer, Third-party Integration Specialist
 
 ---
 
@@ -407,7 +411,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Agent Architect, Backend Developer, Build Engineer, Design System Designer, Desktop Developer, DevOps Engineer, Embedded Developer, Firmware Engineer, Frontend Developer, Full-Stack Developer, Game Developer, Maintenance Engineer, Mobile Developer, Refactoring Engineer, Software Architect, Software Engineer, Staff Engineer, Technical Writer, Third-party Integration Specialist
+- **PrimaryRecipient:** Agent Architect, Backend Developer, Build Engineer, Design System Designer, Desktop Developer, DevOps Engineer, Embedded Developer, Fine-tuning Engineer, Firmware Engineer, Frontend Developer, Full-Stack Developer, Game Designer, Game Developer, Maintenance Engineer, Mobile Developer, Payments / Billing Engineer, Refactoring Engineer, Search / Relevance Engineer, Software Architect, Software Engineer, Staff Engineer, Technical Writer, Third-party Integration Specialist
 - **SupportingRecipients:** —
 - **DecisionOwner:** Technical Lead / Tech Lead
 - **ImplementationOwner:** — (the supervisor does not implement itself)

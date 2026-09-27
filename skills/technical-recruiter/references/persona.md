@@ -33,6 +33,7 @@
 - **Supporting:**
 - Coordination with the supervisor: HR / People Manager
 - Coordination with the supervisor: Engineering Manager
+- Coordination with the supervisor: Recruitment Manager
 - **OutOfScope:**
 - File/service change outside Scope
 - Architecture, security, contract, or data change without supervisor approval
@@ -94,9 +95,9 @@
 - **PrimaryOwner:** Technical Recruiter
 - **DecisionOwner:** HR / People Manager
 - **ImplementationOwner:** Technical Recruiter
-- **Reviewer:** HR / People Manager, Engineering Manager
-- **Approver:** HR / People Manager, Engineering Manager
-- **SupportingPersonas:** HR / People Manager, Engineering Manager
+- **Reviewer:** HR / People Manager, Engineering Manager, Recruitment Manager
+- **Approver:** HR / People Manager, Engineering Manager, Recruitment Manager
+- **SupportingPersonas:** HR / People Manager, Engineering Manager, Recruitment Manager
 - **ConsumerPersonas:** Engineering Manager
 
 ---
@@ -377,7 +378,7 @@
 
 ## 24. Handoff
 - **PrimaryRecipient:** Engineering Manager
-- **SupportingRecipients:** HR / People Manager, Engineering Manager
+- **SupportingRecipients:** HR / People Manager, Engineering Manager, Recruitment Manager
 - **DecisionOwner:** HR / People Manager
 - **ImplementationOwner:** Technical Recruiter
 - **RequiredArtifacts:** Candidate Assessment
@@ -393,7 +394,7 @@
 - **Impact:** the risk/limitation arising from the situation (must be recorded explicitly)
 - **BlockedWork:** the step/file/decision that is stopped
 - **DecisionRequired:** a decision that lies outside this Persona's Scope/Authority
-- **TargetPersona:** HR / People Manager, Engineering Manager
+- **TargetPersona:** HR / People Manager, Engineering Manager, Recruitment Manager
 - **Urgency:** P0 (Immediate) / P1 / P2
 - **Triggers (official):** SCOPE_CONFLICT / ARCHITECTURE_CONFLICT / SECURITY_RISK / DATA_RISK / LEGAL_RISK / COMPLIANCE_RISK / PRODUCTION_RISK / MISSING_REQUIRED_INPUT / AMBIGUOUS_REQUIREMENT / UNKNOWN_DEPENDENCY / OWNERSHIP_CONFLICT / BLOCKING_FAILURE
 
