@@ -1,19 +1,19 @@
-# قرارداد پراگماتیک — استخراج از The Pragmatic Programmer
+# Pragmatic Contract — extracted from The Pragmatic Programmer
 
-این سند توضیح می‌دهد قواعد کتاب «The Pragmatic Programmer» (Andrew Hunt و David Thomas) چگونه به
-**یک** قرارداد واحد تبدیل شده، کجا زندگی می‌کند، و چطور به personaها و skillها وصل می‌شود.
+This document explains how the rules of the book *The Pragmatic Programmer* (Andrew Hunt and David Thomas) were turned into
+**one** single contract, where it lives, and how it is wired into the personas and the skills.
 
-> خودِ قواعد اینجا تکرار **نشده‌اند**. منبع یگانه:
+> The rules themselves are **not** repeated here. The single source:
 > [`composites/blocks/95-pragmatic-contract.md`](../composites/blocks/95-pragmatic-contract.md)
-> (به انگلیسی، هم‌سبک با بقیهٔ بلوک‌ها). این سند فقط نقشهٔ استخراج و نحوهٔ اتصال است.
-> قرارداد رفکتورینگ (Refactoring.Guru): [`docs/refactoring-contract.md`](refactoring-contract.md).
-> قرارداد سیستم طراحی فرانت‌اند: [`docs/frontend-design-system-contract.md`](frontend-design-system-contract.md).
+> (in English, in the same style as the other blocks). This document is only the extraction map and the wiring.
+> The refactoring contract (Refactoring.Guru): [`docs/refactoring-contract.md`](refactoring-contract.md).
+> The frontend design-system contract: [`docs/frontend-design-system-contract.md`](frontend-design-system-contract.md).
 
 ---
 
-## ۱. نقشهٔ استخراج
+## 1. Extraction map
 
-| بخش بلوک ۹۵ | بخش کتاب |
+| Block 95 section | Book section |
 |---|---|
 | `Be pragmatic, not dogmatic` | Primary Directive + Own the Result + Think Beyond the Local Edit + Broken Windows Rule |
 | `DRY means duplicated knowledge, not duplicated text` | DRY Rules |
@@ -25,23 +25,23 @@
 | `Communication is part of the work` | Naming and Communication Rules + Text and Data Rules + Project and Team Rules |
 | `Pragmatic review gate` | Review Checklist |
 
-## ۲. چه چیزی عمداً نگرفتیم (تکرار با بلوک‌های موجود)
+## 2. What we deliberately left out (duplicating existing blocks)
 
-| محتوا | چرا نه | کجاست |
+| Content | Why not | Where it lives |
 |---|---|---|
-| Boy Scout Rule («کد را تمیزتر واگذار کن») | بلوک ۹۰ مالک آن است؛ ۹۵ فقط «ناحیه بهتر شود نه فقط خطوط لمس‌شده» را اضافه می‌کند | `90-construction-contract.md` §1 |
-| حذف تکراری کد و قاعدهٔ ترکیب/جدایی | بلوک ۹۰ و ۹۱ مالک آن‌ها هستند؛ ۹۵ تست *بین‌لایه‌ای* DRY را اضافه می‌کند (یک قانون = یک نمایندگی معتبر) | `90-construction-contract.md` §3 · `91-design-depth-contract.md` §10 |
-| استثنای «تکراری را حذف نکن که دو use case را به هم ببندد» | بلوک ۹۲ مالک آن است و ۹۵ به آن ارجاع می‌دهد | `92-clean-architecture-contract.md` §8 |
-| نام‌گذاری و مستندسازی | بلوک ۹۰ و ۹۳ مالک آن‌ها هستند | `90-construction-contract.md` §2 · §4 · `93-domain-model-contract.md` §2 |
-| تفکیک assertion / validation / خطای دامنه | بلوک ۹۰ مالک آن است | `90-construction-contract.md` §9 |
-| state مشترک و همزمانی | بلوک ۹۰ مالک آن است | `90-construction-contract.md` §13 |
-| Law of Demeter / train wreck | بلوک ۹۰ مالک آن است | `90-construction-contract.md` §8 |
-| بازگشت‌پذیری (reversibility) و DSL دامنه | بلوک ۹۲ (حفظ option) و ۹۳ (زبان دامنه) مالک آن‌ها هستند | `92-clean-architecture-contract.md` §13 · `93-domain-model-contract.md` §13 |
-| کیفیت تست و تست بی‌ادعا | بلوک ۹۰ مالک آن است | `90-construction-contract.md` §11 |
+| The Boy Scout Rule ("leave the code cleaner than you found it") | Block 90 owns it; 95 only adds "make the area better, not just the touched lines" | `90-construction-contract.md` §1 |
+| Removing code duplication and the combining/separating rule | Blocks 90 and 91 own them; 95 adds the *cross-layer* DRY test (one rule = one authoritative representation) | `90-construction-contract.md` §3 · `91-design-depth-contract.md` §10 |
+| The exception "do not remove duplication that would fuse two use cases" | Block 92 owns it and 95 refers to it | `92-clean-architecture-contract.md` §8 |
+| Naming and documentation | Blocks 90 and 93 own them | `90-construction-contract.md` §2 · §4 · `93-domain-model-contract.md` §2 |
+| The assertion / validation / domain-error split | Block 90 owns it | `90-construction-contract.md` §9 |
+| Shared state and concurrency | Block 90 owns it | `90-construction-contract.md` §13 |
+| Law of Demeter / train wreck | Block 90 owns it | `90-construction-contract.md` §8 |
+| Reversibility and a domain DSL | Blocks 92 (keeping options open) and 93 (domain language) own them | `92-clean-architecture-contract.md` §13 · `93-domain-model-contract.md` §13 |
+| Test quality and assertion-free tests | Block 90 owns it | `90-construction-contract.md` §11 |
 
-## ۳. کجا وصل شده
+## 3. Where it is wired in
 
-| جایگاه | ۹۵ (پراگماتیک) |
+| Location | 95 (pragmatic) |
 |---|---|
 | `Software Design & Architecture Review.md` | ✅ |
 | `Clean Code & Construction Review.md` | ✅ |
@@ -49,10 +49,10 @@
 | `Technical Debt & Modernization Audit.md` | ✅ |
 | `Testing & Quality Assurance Audit.md` | ✅ |
 
-`Data & Database Integrity Audit` و `API & Integration Contract Audit` عمداً آن را نگرفتند:
-آن دو personaها موضوع narrowly مشخصی دارند (داده و قرارداد) و بلوک ۹۴ را گرفته‌اند که موضوعشان است.
+`Data & Database Integrity Audit` and `API & Integration Contract Audit` deliberately do not take it:
+those two personas have a narrowly defined subject (data and contracts) and take block 94, which matches their subject.
 
-## ۴. بازتولید
+## 4. Regeneration
 
 ```bash
 python3 scripts/compose_persona.py --all
@@ -61,9 +61,9 @@ python3 scripts/validate_skills.py
 python3 scripts/validate_personas.py
 ```
 
-## ۵. اضافه‌کردن قانون تازه
+## 5. Adding a new rule
 
-1. قانون را در `composites/blocks/95-pragmatic-contract.md` بنویس (یک بار).
-2. بلوک را به `blocks` compositeهای مرتبط اضافه کن.
-3. بازتولید کن.
-4. اگر قانون با بلوک دیگری هم‌پوشانی داشت، از بلوک دیگر **حذف**ش کن — منبع یگانه حفظ شود.
+1. Write the rule in `composites/blocks/95-pragmatic-contract.md` (once).
+2. Add the block to the `blocks` of the related composites.
+3. Regenerate.
+4. If the rule overlaps another block, **remove** it from that other block — keep a single source.

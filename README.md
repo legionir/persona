@@ -1,23 +1,23 @@
 # AI Personas
 
-> 🔍 **یافتن سریع Persona:** [`index.html`](index.html) را در مرورگر باز کن (یا `python3 -m http.server 8000` و سپس `http://localhost:8000/index.html`). این صفحه فایل [`personas.json`](personas.json) را می‌خواند و با جستجو/فیلتر (نوع، حوزه، دسته، سطح) فایل پرامپت هر نقش را نشان می‌دهد.
+> 🔍 **Quick persona lookup:** open [`index.html`](index.html) in a browser (or run `python3 -m http.server 8000` and then `http://localhost:8000/index.html`). This page reads [`personas.json`](personas.json) and, through search and filters (type, domain, category, seniority), points at the prompt file of each role.
 >
-> 🌐 **نسخهٔ آنلاین (GitHub Pages):** پس از فعال‌سازی Pages (تنظیمات → Pages → Deploy from a branch → `main` → `/ (root)`)، سایت در `https://legionir.github.io/persona/` در دسترس خواهد بود. فایل `.nojekyll` در ریشهٔ مخزن اضافه شده تا فایل‌های Markdown/JSON بدون پردازش Jekyll دقیقاً همان‌طور که هستند سرو شوند.
+> 🌐 **Online version (GitHub Pages):** once Pages is enabled (Settings → Pages → Deploy from a branch → `main` → `/ (root)`), the site is available at `https://legionir.github.io/persona/`. A `.nojekyll` file is committed at the repository root so Markdown/JSON files are served exactly as they are, without Jekyll processing.
 >
-> 📦 **متادیتای API-ready:** [`personas.json`](personas.json) — بین ۱۷۰ نقش با فیلدهای `id`، `roleId`، `type`، `domain`، `category`، `seniority`، `mission`، `duties`، `supervisors`، `consumers`، `capabilities`، `path` و `facets` برای جستجو/دسته‌بندی. بازتولید: `python3 scripts/build_metadata.py`
+> 📦 **API-ready metadata:** [`personas.json`](personas.json) — 170 roles with the fields `id`, `roleId`, `type`, `domain`, `category`, `seniority`, `mission`, `duties`, `supervisors`, `consumers`, `capabilities`, `path`, and `facets` for search and grouping. Regenerate with `python3 scripts/build_metadata.py`
 
-## فهرست مطالب
-- [جدول کامل نقش‌ها](#جدول-کامل-نقشها)
-- [دسته‌بندی بر اساس حوزه](#دستهبندی-بر-اساس-حوزه)
-- [مپینگ ناظر-مجری](#مپینگ-ناظر-مجری)
-- [آمار و خلاصه](#آمار-و-خلاصه)
-- [Personaهای ترکیبی (Master Prompt)](#personaهای-ترکیبی-master-prompt)
-- [Skillها (Agent Skills)](#skillها-agent-skills)
-- [ساختار و بازتولید](#ساختار-و-بازتولید)
+## Table of Contents
+- [Complete role table](#complete-role-table)
+- [Grouping by domain](#grouping-by-domain)
+- [Supervisor-executor mapping](#supervisor-executor-mapping)
+- [Statistics and summary](#statistics-and-summary)
+- [Composite personas (Master Prompt)](#composite-personas-master-prompt)
+- [Skills (Agent Skills)](#skills-agent-skills)
+- [Structure and regeneration](#structure-and-regeneration)
 
-## جدول کامل نقش‌ها
+## Complete Role Table
 
-> ستون «توضیح وظایف» خلاصهٔ سریع نقش و ستون‌های ۹ به بعد جزئیات کامل هر نقش هستند (مأموریت، مسئولیت‌ها، اختیار، ورودی/خروجی، گام‌های اجرایی، قوانین تصمیم، ابزارهای مجاز/ممنوع، معیار پذیرش، شواهد، تحویل، Escalation، سطح دسترسی، Lifecycle، حافظه، KPI و …).
+> The *Duties Summary* column is a quick one-line summary of the role; the columns from 9 onward hold the full details of each role (mission, responsibilities, authority, inputs/outputs, execution steps, decision rules, allowed/forbidden tools, acceptance criteria, evidence, handoff, escalation, access level, lifecycle, memory, KPIs, and more).
 
 | Job Title | Duties Summary | Role (EXECUTOR / SUPERVISOR) | Primary Domain | Sub-Domain | Short Description | Supervisor | Prompt | Mission | Responsibilities | Scope of Authority | Required Inputs | Optional Inputs | Required Context | Preconditions | Procedure | Decision Rules | Allowed Tools | Restricted / Forbidden Tools | Outputs | Quality Gate | Required Evidence | Handoff | Escalation Conditions | Permissions | Lifecycle States | Required Memory | KPI / Performance Metric |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -192,9 +192,9 @@
 | Vulnerability Management Specialist | Manage vulnerabilities | EXECUTOR | Security | Vulnerability | Manage vulnerabilities | Security Governance Manager, Chief Information Security Officer (CISO) | [Implementation](prompts/implementation/vulnerability-management-specialist.md) | Identify, assess, and track vulnerabilities until resolved | Run scans, assess and prioritise, record findings with owners, track remediation and retest | Vulnerabilities and their remediation | Scan policy, asset inventory, SLO | Previous scan report | Scan scope and asset ownership are identified | Asset inventory, SLO, and scan policy are identified | Plan scan → Run → Assess → Record/track → Retest | PROCEED, PAUSE, BLOCK, ESCALATE | Security Scanner, SAST/DAST, SCA, IDE, Git, Documentation | Remediation without approval, hiding findings | Vulnerability report, findings, tracking | Correct severity/evidence, remediation with retest | Scan reports, evidence, tracking | Security Governance Manager and CISO | Critical vulnerability, owner non-cooperation | Repository/Infra Scan, access: Read-only + reporting | SCANNING → TRIAGING → TRACKING → RETESTING → CLOSED | Exploitability and priority assumptions | Closure rate, MTTR, scan coverage |
 | Security Auditor | Independent security audit | EXECUTOR | Security | Audit | Independent security audit | Security Governance Manager, Chief Information Security Officer (CISO) | [Implementation](prompts/implementation/security-auditor.md) | Independent, evidence-based audit of security controls | Define scope and control matrix, collect evidence, assess independently, record findings and follow up | In-scope security controls | Policies, reports, previous results | Documentation and scans | Audit scope and criteria are identified | Audit scope, criteria, and documentation/access are identified | Define scope → Collect evidence → Assess → Record findings → Report/follow up | PROCEED, PAUSE, BLOCK, ESCALATE | Audit Tools, Documentation, Analytics, Scanner | System changes, exposing sensitive information outside approved channels | Audit report, findings, coverage | Sufficient evidence, independence, accurate classification | Evidence, report, matrix | Security Governance Manager and CISO | Insufficient evidence, conflict of interest, incomplete scope | Read-only + documented access | SCOPING → EVIDENCE → ASSESSING → REPORTING → FOLLOW_UP → CLOSED | Compliance assumptions | Coverage, finding accuracy, closure |
 
-## دسته‌بندی بر اساس حوزه
+## Grouping by Domain
 
-### ناظرها (74 نقش)
+### Supervisors (74 roles)
 
 | Job Title | Primary Domain | Sub-Domain | Short Description |
 |---|---|---|---|
@@ -294,7 +294,7 @@
 
 ---
 
-### مجری‌ها (96 نقش)
+### Executors (96 roles)
 
 | Job Title | Primary Domain | Sub-Domain | Short Description | Supervisor |
 |---|---|---|---|---|
@@ -394,7 +394,7 @@
 | Vulnerability Management Specialist | Security | Vulnerability | Manage vulnerabilities | Security Governance Manager |
 | Security Auditor | Security | Audit | Independent security audit | Security Governance Manager |
 
-### محصول (10 ناظر + 5 مجری = 15)
+### Product (10 supervisors + 5 executors = 15)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -414,7 +414,7 @@
 
 ---
 
-### معماری نرم‌افزاری (9 ناظر + 2 مجری = 11)
+### Software Architecture (9 supervisors + 2 executors = 11)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -432,7 +432,7 @@
 
 ---
 
-### توسعه نرم‌افزار (1 ناظر + 15 مجری = 16)
+### Software Engineering (1 supervisor + 15 executors = 16)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -452,7 +452,7 @@
 
 ---
 
-### داده و هوش مصنوعی (2 ناظر + 6 مجری = 8)
+### Data & AI (2 supervisors + 6 executors = 8)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -467,7 +467,7 @@
 
 ---
 
-### امنیتی (2 ناظر + 6 مجری = 8)
+### Security (2 supervisors + 6 executors = 8)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -482,7 +482,7 @@
 
 ---
 
-### کیفیت و تست (3 ناظر + 7 مجری = 10)
+### Quality & Testing (3 supervisors + 7 executors = 10)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -498,7 +498,7 @@
 
 ---
 
-### طراحی و تجربه کاربری (2 ناظر + 10 مجری = 12)
+### Design & UX (2 supervisors + 10 executors = 12)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -517,7 +517,7 @@
 
 ---
 
-### عملیاتی و زیرساخت (3 ناظر + 7 مجری = 10)
+### Operations & Infrastructure (3 supervisors + 7 executors = 10)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -539,7 +539,7 @@
 
 ---
 
-### ابری (3 ناظر + 2 مجری = 5)
+### Cloud (3 supervisors + 2 executors = 5)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -551,7 +551,7 @@
 
 ---
 
-### شبکه (1 مجری)
+### Networking (1 executor)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -559,7 +559,7 @@
 
 ---
 
-### پایگاه داده (1 ناظر + 2 مجری = 3)
+### Database (1 supervisor + 2 executors = 3)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -569,7 +569,7 @@
 
 ---
 
-### DevOps و SRE (3 ناظر + 6 مجری = 9)
+### DevOps & SRE (3 supervisors + 6 executors = 9)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -585,7 +585,7 @@
 
 ---
 
-### بازاریابی و فروش (11 ناظر + 7 مجری = 18)
+### Marketing & Sales (11 supervisors + 7 executors = 18)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -610,7 +610,7 @@
 
 ---
 
-### پشتیبانی مشتری (1 ناظر + 2 مجری = 3)
+### Customer Support (1 supervisor + 2 executors = 3)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -620,7 +620,7 @@
 
 ---
 
-### حقوقی و انطباق (6 ناظر + 1 مجری = 7)
+### Legal & Compliance (6 supervisors + 1 executor = 7)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -635,7 +635,7 @@
 
 ---
 
-### مالی و تجاری (4 ناظر + 1 مجری = 5)
+### Finance & Commercial (4 supervisors + 1 executor = 5)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -647,7 +647,7 @@
 
 ---
 
-### منابع انسانی (2 ناظر + 3 مجری = 5)
+### Human Resources (2 supervisors + 3 executors = 5)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -658,7 +658,7 @@
 
 ---
 
-### تحقیق و آنالیز (1 ناظر + 6 مجری = 7)
+### Research & Analysis (1 supervisor + 6 executors = 7)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -672,7 +672,7 @@
 
 ---
 
-### مستندسازی (1 ناظر + 2 مجری = 3)
+### Documentation (1 supervisor + 2 executors = 3)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -682,7 +682,7 @@
 
 ---
 
-### Localization و ترجمه (1 ناظر + 2 مجری = 3)
+### Localization & Translation (1 supervisor + 2 executors = 3)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -692,7 +692,7 @@
 
 ---
 
-### سخت‌افزار و Embedded (1 ناظر + 3 مجری = 4)
+### Hardware & Embedded (1 supervisor + 3 executors = 4)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -702,7 +702,7 @@
 
 ---
 
-### Integration و Third-Party (2 مجری)
+### Integration & Third-Party (2 executors)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -711,7 +711,7 @@
 
 ---
 
-### Migration و Modernization (2 مجری)
+### Migration & Modernization (2 executors)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -720,7 +720,7 @@
 
 ---
 
-### Incident و Disaster Recovery (2 ناظر + 4 مجری = 6)
+### Incident & Disaster Recovery (2 supervisors + 4 executors = 6)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
@@ -733,94 +733,94 @@
 
 ---
 
-## مپینگ ناظر-مجری
+## Supervisor-Executor Mapping
 
-### تیم توسعه نرم‌افزار
+### Software Engineering Team
 - **Development Manager** → Software Engineer, Backend Developer, Frontend Developer, Full-Stack Developer, Mobile Developer, Desktop Developer, Game Developer
 - **Technical Lead** → Staff Engineer, Refactoring Engineer, Third-party Integration Specialist, Migration Specialist
 - **Principal Engineer** → Staff Engineer, AI/ML Engineer, MLOps Engineer, Legacy Modernization Engineer
 
-### تیم معماری
+### Architecture Team
 - **CTO** → Technical Lead, Principal Engineer, Solution Architect, Enterprise Architect
 - **Cloud Architect** → Cloud Engineer
 - **Enterprise Architect** → System Architect
 - **Data Architect** → Database Administrator, Database Engineer
 
-### تیم امنیتی
+### Security Team
 - **CISO** → Security Architect, Security Engineer, Application Security Engineer, Cybersecurity Engineer, Penetration Tester, DevSecOps Engineer
 - **Chief Privacy Officer** → Privacy Engineer
 
-### تیم کیفیت و تست
+### Quality & Testing Team
 - **QA Lead** → QA Engineer, Test Engineer, Test Automation Engineer, Beta Tester
 - **Quality Manager** → QA Lead
 - **Performance Engineering Lead** → Performance Engineer, Load/Stress Tester
 
-### تیم طراحی
+### Design Team
 - **Design Manager** → UI Designer, UX Designer, Product Designer, UX Researcher, UX Writer, Design System Designer, Graphic Designer, Motion Designer, Accessibility Specialist
 - **Chief Design Officer** → Design Manager
 
-### تیم عملیات و زیرساخت
+### Operations & Infrastructure Team
 - **Infrastructure Manager** → Infrastructure Engineer, System Administrator, Network Engineer, Maintenance Engineer, Backup Administrator, Decommission Engineer
 - **DevOps Manager** → DevOps Engineer, SRE, Release Engineer, Build Engineer, Deployment Engineer, Observability Engineer
 - **Incident Manager** → On-call Engineer
 - **Business Continuity Manager** → Disaster Recovery Specialist
 
-### تیم ابری
+### Cloud Team
 - **Cloud Architect** → Cloud Engineer
 
-### تیم بازاریابی و فروش
+### Marketing & Sales Team
 - **Product Marketing Manager** → Marketing Specialist, SEO Specialist, ASO Specialist
 - **Sales Manager** → Sales Representative
 - **Community Director** → Community Manager, DevRel, Technical Evangelist
 - **Support Manager** → Customer Support Agent, Technical Support Engineer
 
-### تیم مالی و تجاری
+### Finance & Commercial Team
 - **Finance Manager** → (no direct executors)
 - **Procurement Manager** → Procurement Specialist
 - **Vendor Manager** → (no direct executors)
 
-### تیم منابع انسانی
+### Human Resources Team
 - **HR / People Manager** → (no direct executors in list)
 - **Recruitment Manager** → Recruiter, Technical Recruiter
 
-### تیم تحقیق و آنالیز
+### Research & Analysis Team
 - **Product Manager** → Business Analyst, Product Analyst
 - **Design Manager** → UX Researcher
 - **Product Analyst Lead** → Data Analyst, BI Analyst
 
-### تیم مستندسازی
+### Documentation Team
 - **Documentation Manager** → Technical Writer, Documentation Specialist
 
-### تیم Localization
+### Localization Team
 - **Localization Manager** → Localization Specialist, Translator
 
-### تیم سخت‌افزار و Embedded
+### Hardware & Embedded Team
 - **Embedded Systems Lead** → Embedded Developer, Firmware Engineer, IoT Engineer
-### تیم Agent و هوش مصنوعی
+### Agent & AI Team
 - **AI Engineer Lead** → Agent Architect, Agent Integration Engineer, Tool Developer, Agent Evaluator, Agentic Prompt Specialist, Agent Safety Engineer
-- **Agent Architect** → Agent Evaluator (هماهنگی فنی)
+- **Agent Architect** → Agent Evaluator (technical coordination)
 
-### تیم امنیتی تکمیلی (§۶۴.۳)
+### Supplementary Security Team (§64.3)
 - **Security Governance Manager** → Vulnerability Management Specialist, Security Auditor
 - **CISO** → Cloud Security Engineer, SOC Analyst, Incident Response Engineer
 - **Security Architect** → Cloud Security Engineer, Database Security Specialist
 - **Incident Manager** → Incident Response Engineer
 
-### تیم انتشار و مالکیت
+### Release & Ownership Team
 - **Release Manager** → Release Engineer, Deployment Engineer
-- **Platform Owner** → Infrastructure Engineer (هم‌سویی پلتفرم)
+- **Platform Owner** → Infrastructure Engineer (platform alignment)
 - **Service Owner** → SRE (Site Reliability Engineer)
 
 ---
 
-## آمار و خلاصه
+## Statistics and Summary
 
-### بر اساس نقش
-- **ناظرها:** 74 نقش (شامل نقش‌های تکمیلی §۶۴.۳ و نقش‌های IT/Agent)
-- **مجری‌ها:** 96 نقش
-- **کل نقش‌ها:** 170 نقش
+### By role type
+- **Supervisors:** 74 roles (including the supplementary §64.3 roles and the IT/Agent roles)
+- **Executors:** 96 roles
+- **Total roles:** 170
 
-### بر اساس حوزه
+### By domain
 
 | Domain | SUPERVISOR | EXECUTOR | Total |
 |---|---|---|---|
@@ -856,13 +856,13 @@
 
 ---
 
-### نکات کلیدی:
-✅ **تمام 96 نقش مجری اکنون حداقل یک ناظر دارند**
-✅ **نقش‌های ناظر به 74 و مجری به 96 رسید (۱۲ نقش §۶۴.۳ اضافه شد + نقش‌های Agent/IT)**
-✅ **ساختار سازمانی کامل و متوازن**
-✅ **مپینگ کامل ناظر-مجری برای هر تیم**
+### Key notes:
+✅ **All 96 executor roles now have at least one supervisor**
+✅ **Supervisors reached 74 and executors 96 (12 supplementary §64.3 roles were added, plus the Agent/IT roles)**
+✅ **A complete and balanced organisational structure**
+✅ **A complete supervisor-executor mapping for every team**
 
-### ناظرهای جدید اضافه شده:
+### Newly added supervisors:
 1. Development Manager
 2. Engineering Manager
 3. CTO (Chief Technology Officer)
@@ -882,11 +882,10 @@
 17. Recruitment Manager
 
 
-## Personaهای ترکیبی (Master Prompt)
+## Composite Personas (Master Prompt)
 
-علاوه بر ۱۷۰ persona تک‌نقش، مخزن **۱۹ persona ترکیبی** دارد: master promptهایی که چند نقش را
-همزمان (به‌عنوان «عدسی») اجرا می‌کنند و یک پروتکل مشترکِ شواهدمحور روی آن‌ها حاکم است.
-۱۵ تا از این ۱۹ تا با `scripts/compose_persona.py` از بلوک‌های آماده ساخته می‌شوند.
+Besides the 170 single-role personas, the repository ships **19 composite personas**: master prompts that run several roles at once (as *lenses*) under one shared, evidence-driven protocol.
+15 of those 19 are built by `scripts/compose_persona.py` from ready-made blocks.
 
 | Composite Persona | Lenses | Focus | File | Skill |
 |---|---|---|---|---|
@@ -910,104 +909,104 @@
 | Cloud & Infrastructure Audit | 7 | IaC and drift, exposure, IAM, secrets, blast radius, cost | [`Cloud & Infrastructure Audit.md`](Cloud%20%26%20Infrastructure%20Audit.md) | [`cloud-infrastructure-audit`](skills/cloud-infrastructure-audit/SKILL.md) |
 | Privacy & Compliance Audit | 6 | Personal data flow, control-evidence, data-subject rights, third-party sharing | [`Privacy & Compliance Audit.md`](Privacy%20%26%20Compliance%20Audit.md) | [`privacy-compliance-audit`](skills/privacy-compliance-audit/SKILL.md) |
 
-ساخت composite تازه (از بلوک‌های آماده + spec):
+Building a new composite (from ready-made blocks + spec):
 
 ```bash
-python3 scripts/compose_persona.py --list                                  # بلوک‌ها و specها
-python3 scripts/compose_persona.py --spec composites/<slug>.json           # ساخت
-python3 scripts/compose_persona.py --all --check                           # اعتبارسنجی همه
+python3 scripts/compose_persona.py --list                                  # blocks and specs
+python3 scripts/compose_persona.py --spec composites/<slug>.json           # build one
+python3 scripts/compose_persona.py --all --check                           # validate all
 ```
 
-راهنمای کامل: [`docs/composite-personas.md`](docs/composite-personas.md) — بلوک‌ها در
-[`composites/blocks/`](composites/blocks/) و specها در [`composites/`](composites/) هستند.
+Full guide: [`docs/composite-personas.md`](docs/composite-personas.md) — the blocks live in
+[`composites/blocks/`](composites/blocks/) and the specs in [`composites/`](composites/).
 
-## Skillها (Agent Skills)
+## Skills (Agent Skills)
 
-هر persona به شکل **Agent Skill** هم منتشر می‌شود: `SKILL.md` کوچک (trigger + هستهٔ عملیاتی)
-به‌علاوهٔ متن کامل persona در `references/` (progressive disclosure).
+Every persona is also published as an **Agent Skill**: a small `SKILL.md` (trigger + operational core)
+plus the full persona text in `references/` (progressive disclosure).
 
 ```bash
-python3 scripts/build_skills.py                 # ساخت ۱۸۹ skill (۱۷۰ نقش + ۱۹ ترکیبی)
+python3 scripts/build_skills.py                 # build 189 skills (170 roles + 19 composites)
 python3 scripts/build_skills.py --only backend-developer
 python3 scripts/build_skills.py --source "prompts/audit/*.md"
-python3 scripts/validate_skills.py              # اعتبارسنجی frontmatter/لینک/اندازه
+python3 scripts/validate_skills.py              # validate frontmatter / links / size
 ```
 
-نصب در Claude Code:
+Install into Claude Code:
 
 ```bash
 mkdir -p .claude/skills && cp -r skills/backend-developer .claude/skills/
 ```
 
-فهرست و متادیتا: [`skills/README.md`](skills/README.md) و [`skills/index.json`](skills/index.json).
-راهنمای کامل: [`docs/persona-skills.md`](docs/persona-skills.md).
+Catalogue and metadata: [`skills/README.md`](skills/README.md) and [`skills/index.json`](skills/index.json).
+Full guide: [`docs/persona-skills.md`](docs/persona-skills.md).
 
-## ساختار و بازتولید
+## Structure and Regeneration
 
-### ساختار پوشهٔ prompts
+### Prompt folder layout
 
-- `prompts/audit/` — پرامپت‌های ممیزی برای نقش‌های **ناظر**. هدف: ارزیابی شواهد‌محور کیفیت، کامل‌بودن و انطباق خروجیِ حوزهٔ همان نقش.
-- `prompts/implementation/` — پرامپت‌های راهنمای پیاده‌سازی برای نقش‌های **مجری**. هدف: تبدیل تسک به یک پلن اجرایی دقیق، فاز‌به‌فاز، وابستگی‌آگاه و دارای معیار پذیرش.
-- `<ریشه>/*.md` — personaهای **ترکیبی** (master prompt): چند نقش با یک پروتکل مشترک.
-- `composites/blocks/` — بلوک‌های قابل استفادهٔ مجدد برای ساخت persona ترکیبی.
-- `composites/blocks/90-construction-contract.md` — قرارداد ساخت کد (ادغام یگانهٔ Clean Code و Code Complete).
-- `composites/blocks/91-` / `92-` — قرارداد عمق طراحی (Ousterhout) و مرزهای معماری (Clean Architecture).
-- `composites/blocks/95-change-findings.md` — شواهد الزامی برای یافته‌های «تغییر» (مشترک بین compositeهای تغییرمحور).
-- `composites/blocks/93-domain-model-contract.md` — قرارداد مدل دامنه (ادغام یگانهٔ DDD: زبان مشترک، bounded context، aggregate، …).
-- `composites/blocks/94-enterprise-patterns-contract.md` — قرارداد الگوهای سازمانی (ادغام یگانهٔ PoEAA: الگوی منطق کسب‌وکار، persistence، تراکنش، ORM، presentation).
-- `composites/blocks/95-pragmatic-contract.md` — قرارداد پراگماتیک (ادغام یگانهٔ The Pragmatic Programmer: DRY، orthogonality، خودکارسازی، بازخورد).
-- `composites/blocks/97-refactoring-contract.md` — قرارداد رفکتورینگ (ادغام یگانهٔ Refactoring.Guru: کاتالوگ بو با محرک→درمان، قواعد استثنا، شرط توقف).
-- `composites/blocks/98-frontend-design-system-contract.md` — قرارداد سیستم طراحی فرانت‌اند (ادغام یگانهٔ Doctrine of Visual & Interaction Consistency: توکن‌ها، یک مفهوم=یک کامپوننت، پوشش stateها، shell/template).
-- `composites/*.json` — spec هر persona ترکیبی (مأموریت، ورودی‌ها، عدسی‌ها، پیشتازی، بخش‌های اختصاصی).
-- `skills/<name>/SKILL.md` و `skills/<name>/references/` — خروجی تبدیل persona به Agent Skill.
-- `docs/` — راهنماهای فارسی: ساخت persona ترکیبی، تبدیل به skill، و قراردادهای فنی
-  - [`docs/composite-personas.md`](docs/composite-personas.md) — سازندهٔ persona ترکیبی (بلوک + spec)
-  - [`docs/persona-skills.md`](docs/persona-skills.md) — تبدیل persona به Agent Skill
-  - [`docs/construction-contract.md`](docs/construction-contract.md) — قرارداد ساخت کد (Clean Code + Code Complete)
-  - [`docs/design-architecture-contract.md`](docs/design-architecture-contract.md) — قرارداد طراحی و معماری (Ousterhout + Clean Architecture)
-  - [`docs/domain-driven-design-contract.md`](docs/domain-driven-design-contract.md) — قرارداد مدل دامنه (DDD: Evans + Vernon)
-  - [`docs/enterprise-patterns-contract.md`](docs/enterprise-patterns-contract.md) — قرارداد الگوهای سازمانی (PoEAA)
-  - [`docs/pragmatic-programmer-contract.md`](docs/pragmatic-programmer-contract.md) — قرارداد پراگماتیک (The Pragmatic Programmer)
-  - [`docs/refactoring-contract.md`](docs/refactoring-contract.md) — قرارداد رفکتورینگ (Refactoring.Guru)
-  - [`docs/frontend-design-system-contract.md`](docs/frontend-design-system-contract.md) — قرارداد سیستم طراحی فرانت‌اند (Visual & Interaction Consistency)
+- `prompts/audit/` — audit prompts for **supervisor** roles. Goal: an evidence-based assessment of the quality, completeness, and compliance of that domain's output.
+- `prompts/implementation/` — implementation guidance prompts for **executor** roles. Goal: turn a task into a precise, phase-by-phase, dependency-aware execution plan with acceptance criteria.
+- `<root>/*.md` — **composite** personas (master prompt): several roles under one shared protocol.
+- `composites/blocks/` — reusable blocks for building a composite persona.
+- `composites/blocks/90-construction-contract.md` — the code construction contract (single merge of Clean Code and Code Complete).
+- `composites/blocks/91-` / `92-` — the design-depth contract (Ousterhout) and the architecture-boundaries contract (Clean Architecture).
+- `composites/blocks/95-change-findings.md` — the evidence required for change findings (shared by the change-oriented composites).
+- `composites/blocks/93-domain-model-contract.md` — the domain-model contract (single merge of DDD: ubiquitous language, bounded context, aggregate, …).
+- `composites/blocks/94-enterprise-patterns-contract.md` — the enterprise-patterns contract (single merge of PoEAA: business-logic pattern, persistence, transactions, ORM, presentation).
+- `composites/blocks/95-pragmatic-contract.md` — the pragmatic contract (single merge of The Pragmatic Programmer: DRY, orthogonality, automation, feedback).
+- `composites/blocks/97-refactoring-contract.md` — the refactoring contract (single merge of Refactoring.Guru: the smell catalogue with trigger → treatment, the exception rules, the stop condition).
+- `composites/blocks/98-frontend-design-system-contract.md` — the frontend design-system contract (single merge of the Doctrine of Visual & Interaction Consistency: tokens, one concept = one component, state coverage, shell/template).
+- `composites/*.json` — the spec of each composite persona (mission, inputs, lenses, precedence, extra sections).
+- `skills/<name>/SKILL.md` and `skills/<name>/references/` — the output of turning a persona into an Agent Skill.
+- `docs/` — English guides: building a composite persona, converting to a skill, and the technical contracts
+  - [`docs/composite-personas.md`](docs/composite-personas.md) — the composite-persona builder (block + spec)
+  - [`docs/persona-skills.md`](docs/persona-skills.md) — converting a persona into an Agent Skill
+  - [`docs/construction-contract.md`](docs/construction-contract.md) — the code construction contract (Clean Code + Code Complete)
+  - [`docs/design-architecture-contract.md`](docs/design-architecture-contract.md) — the design and architecture contract (Ousterhout + Clean Architecture)
+  - [`docs/domain-driven-design-contract.md`](docs/domain-driven-design-contract.md) — the domain-model contract (DDD: Evans + Vernon)
+  - [`docs/enterprise-patterns-contract.md`](docs/enterprise-patterns-contract.md) — the enterprise-patterns contract (PoEAA)
+  - [`docs/pragmatic-programmer-contract.md`](docs/pragmatic-programmer-contract.md) — the pragmatic contract (The Pragmatic Programmer)
+  - [`docs/refactoring-contract.md`](docs/refactoring-contract.md) — the refactoring contract (Refactoring.Guru)
+  - [`docs/frontend-design-system-contract.md`](docs/frontend-design-system-contract.md) — the frontend design-system contract (Visual & Interaction Consistency)
 
-> همهٔ پرامپت‌های ناظر شامل بخش الزامی «قواعد تحلیل کد و کدبیس» هستند: ممنوعیت حدس و گمان، بررسی فایل‌به‌فایل و خط‌به‌خط، تحلیل دقیق ورکفلوها، مستندسازی کامل یافته‌ها (هر یافته با `FILE / LINE`)، و تقسیم پروژه‌های بزرگ به بخش‌های کوچک‌ترِ قابل بررسی (از طریق Coverage Manifest و Decomposition Table).
+> Every supervisor prompt contains the mandatory *code and codebase analysis rules* section: no guessing or assuming, file-by-file and line-by-line review, precise workflow analysis, complete documentation of findings (each one with `FILE / LINE`), and the decomposition of large projects into smaller reviewable parts (via the Coverage Manifest and the Decomposition Table).
 
-### نام‌گذاری
+### Naming
 
-هر فایل با اسلاگ (slug) انگلیسیِ عنوانِ شغلی نام‌گذاری شده است؛ مثلاً: `prompts/audit/founder.md` یا `prompts/implementation/backend-developer.md`.
+Each file is named with the English slug of its job title; for example `prompts/audit/founder.md` or `prompts/implementation/backend-developer.md`.
 
-### بازتولید
+### Regeneration
 
-همهٔ داده‌های نقش‌ها (هویت، نقش، حوزه‌ها، ناظر مربوطه و جزئیات ۲۰گانهٔ هر نقش) در جدول اصلی همین فایل `README.md` نگهداری می‌شوند و پرامپت‌ها دقیقاً بر اساس آن تولید می‌شوند:
+All role data (identity, role, domains, the relevant supervisor, and the 20 details of each role) is kept in the main table of this `README.md`, and the prompts are generated exactly from it:
 
 ```bash
 python3 scripts/generate_personas.py
 ```
 
-اعتبارسنجی ساختار همهٔ فایل‌ها:
+Validating the structure of every file:
 
 ```bash
 python3 scripts/validate_personas.py
 ```
 
-ساخت متادیتای جستجو/API (`personas.json`):
+Building the search/API metadata (`personas.json`):
 
 ```bash
 python3 scripts/build_metadata.py
 ```
 
-جستجوگر تعاملی: [`index.html`](index.html)
+Interactive finder: [`index.html`](index.html)
 
-این اسکریپت هم فایل‌های پرامپت را بازنویسی می‌کند و هم ستون `پرامپت` و لینک‌های جدول اصلی README را به‌روز نگه می‌دارد.
+This script rewrites the prompt files and keeps the `Prompt` column and the links of the README main table up to date.
 
-ساخت/بازساخت personaهای ترکیبی:
+Building / rebuilding composite personas:
 
 ```bash
 python3 scripts/compose_persona.py --all
 ```
 
-ساخت skillها از personaها (و اعتبارسنجی آن‌ها):
+Building skills from the personas (and validating them):
 
 ```bash
 python3 scripts/build_skills.py

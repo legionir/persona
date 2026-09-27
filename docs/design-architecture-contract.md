@@ -1,41 +1,41 @@
-# قرارداد طراحی و معماری — استخراج از A Philosophy of Software Design و Clean Architecture
+# Design and Architecture Contract — extracted from A Philosophy of Software Design and Clean Architecture
 
-این سند توضیح می‌دهد قواعد دو کتاب «A Philosophy of Software Design» (John Ousterhout) و
-«Clean Architecture» (Robert C. Martin) چگونه به **دو** قرارداد واحد تبدیل شده‌اند، کجا زندگی
-می‌کنند، و چطور به personaها و skillها وصل می‌شوند.
+This document explains how the rules of the two books *A Philosophy of Software Design* (John Ousterhout) and
+*Clean Architecture* (Robert C. Martin) were turned into **two** single contracts, where they live,
+and how they are wired into the personas and the skills.
 
-> خودِ قواعد اینجا تکرار **نشده‌اند**. منابع یگانه:
-> [`composites/blocks/91-design-depth-contract.md`](../composites/blocks/91-design-depth-contract.md) (Ousterhout) و
-> [`composites/blocks/92-clean-architecture-contract.md`](../composites/blocks/92-clean-architecture-contract.md) (Clean Architecture)،
-> به انگلیسی و هم‌سبک با بقیهٔ بلوک‌ها. این سند فقط نقشهٔ استخراج و نحوهٔ اتصال است.
-> قرارداد قبلی (Clean Code + Code Complete) در [`docs/construction-contract.md`](construction-contract.md) مستند شده است.
-> یک کتاب دیگر («Domain-Driven Design») جداگانه مستند شده است:
+> The rules themselves are **not** repeated here. The single sources:
+> [`composites/blocks/91-design-depth-contract.md`](../composites/blocks/91-design-depth-contract.md) (Ousterhout) and
+> [`composites/blocks/92-clean-architecture-contract.md`](../composites/blocks/92-clean-architecture-contract.md) (Clean Architecture),
+> in English and in the same style as the other blocks. This document is only the extraction map and the wiring.
+> The earlier contract (Clean Code + Code Complete) is documented in [`docs/construction-contract.md`](construction-contract.md).
+> One further book (*Domain-Driven Design*) is documented separately:
 > [`docs/domain-driven-design-contract.md`](domain-driven-design-contract.md).
-> الگوهای سازمانی (Fowler) و انضباط پراگماتیک (Hunt & Thomas):
+> Enterprise patterns (Fowler) and the pragmatic discipline (Hunt & Thomas):
 > [`docs/enterprise-patterns-contract.md`](enterprise-patterns-contract.md) ·
 > [`docs/pragmatic-programmer-contract.md`](pragmatic-programmer-contract.md).
-> قرارداد رفکتورینگ (Refactoring.Guru): [`docs/refactoring-contract.md`](refactoring-contract.md).
-> قرارداد سیستم طراحی فرانت‌اند: [`docs/frontend-design-system-contract.md`](frontend-design-system-contract.md).
+> The refactoring contract (Refactoring.Guru): [`docs/refactoring-contract.md`](refactoring-contract.md).
+> The frontend design-system contract: [`docs/frontend-design-system-contract.md`](frontend-design-system-contract.md).
 
 ---
 
-## ۱. چرا دو بلوک، نه یکی؟
+## 1. Why two blocks, not one?
 
-این دو کتاب دو سؤال مختلف را جواب می‌دهند و برای دو composite متفاوت به کار می‌آیند:
+These two books answer two different questions and serve two different composites:
 
-| بلوک | سؤالی که جواب می‌دهد | کتاب |
+| Block | The question it answers | Book |
 |---|---|---|
-| `91-design-depth-contract.md` | «این ماژول چقدر عمیق است و خواننده چقدر باید بداند؟» | A Philosophy of Software Design |
-| `92-clean-architecture-contract.md` | «این قانون در کدام لایه است و وابستگی‌ها به کدام سمت اشاره می‌کنند؟» | Clean Architecture |
+| `91-design-depth-contract.md` | "How deep is this module, and how much must the reader know?" | A Philosophy of Software Design |
+| `92-clean-architecture-contract.md` | "Which layer does this rule belong to, and which way do the dependencies point?" | Clean Architecture |
 
-یکی‌کردنشان یک بلوک ~۲۵۰خطی می‌ساخت که هیچ composite‌ای به تمامش نیاز ندارد. تفکیک باعث می‌شود
-هر composite فقط آن را include کند که موضوعش را دارد.
+Merging them would produce a ~250-line block that no composite needs in full. Keeping them apart means
+each composite includes only the one that matches its subject.
 
 ---
 
-## ۲. نقشهٔ استخراج — Ousterhout → `91-design-depth-contract.md`
+## 2. Extraction map — Ousterhout → `91-design-depth-contract.md`
 
-| بخش بلوک ۹۱ | بخش کتاب |
+| Block 91 section | Book section |
 |---|---|
 | `Complexity is the enemy` | Primary Directive + Symptoms of Complexity + Default Response |
 | `Module depth` | Module Depth Rules + Avoid Shallow Modules + Function and Variable Rules |
@@ -52,20 +52,20 @@
 | `Performance, trends, and tests` | Performance, Trends, and Tests |
 | `Design review gate` | Review Checklist |
 
-قواعد Code Generation و Testing کتاب هم در همین بلوک پخش شده‌اند (مثلًا «کدام مفهوم لایق مرز
-ماژول است» → `Module depth`، «تست رفتار عمومی را حفظ می‌کند» → `Performance, trends, and tests`)
-تا فهرست بلوک‌ها بی‌دلیل بزرگ نشود.
+The book's Code Generation and Testing rules were also distributed into this block (for example "which concept deserves a module
+boundary" → `Module depth`, "the test preserves public behaviour" → `Performance, trends, and tests`)
+so the block list does not grow for no reason.
 
-## ۳. نقشهٔ استخراج — Clean Architecture → `92-clean-architecture-contract.md`
+## 3. Extraction map — Clean Architecture → `92-clean-architecture-contract.md`
 
-| بخش بلوک ۹۲ | بخش کتاب |
+| Block 92 section | Book section |
 |---|---|
-| `The Dependency Rule` | Non-Negotiable Rules ۱ و ۱۰ + Architecture Heuristics (Dependency Direction) |
+| `The Dependency Rule` | Non-Negotiable Rules 1 and 10 + Architecture Heuristics (Dependency Direction) |
 | `Layer responsibilities` | Required Layer Responsibilities (Domain / Application / Interface Adapters / Infrastructure) |
-| `Use cases orchestrate` | Non-Negotiable Rules ۸ و ۹ + Code Generation Rules ۱ |
-| `Entities guard invariants` | Non-Negotiable Rules ۲ و ۹ |
-| `Ports, adapters, and wiring` | Code Generation Rules ۳–۶ + Use Explicit Boundaries |
-| `Organise by use case` | Non-Negotiable Rule ۷ + Feature First Structure + Naming Rules |
+| `Use cases orchestrate` | Non-Negotiable Rules 8 and 9 + Code Generation Rules 1 |
+| `Entities guard invariants` | Non-Negotiable Rules 2 and 9 |
+| `Ports, adapters, and wiring` | Code Generation Rules 3-6 + Use Explicit Boundaries |
+| `Organise by use case` | Non-Negotiable Rule 7 + Feature First Structure + Naming Rules |
 | `Component rules` | Paradigm and Component Rules |
 | `Boundary cost and deployment` | Boundary Cost, Deployment, and Operations + Architecture Economics |
 | `Services, remote calls, and embedded details` | Services, Distribution, and Embedded Boundaries |
@@ -75,56 +75,56 @@
 | `Architecture economics` | Architecture Economics and Priority |
 | `Architecture review gate` | Review Checklist |
 
-### چه چیزی عمداً نگرفتیم (تکرار با بلوک‌های موجود)
+### What we deliberately left out (duplicating existing blocks)
 
-| محتوا | چرا نه | کجاست |
+| Content | Why not | Where it lives |
 |---|---|---|
-| کامپوزیشن روت / جدا کردن ساخت از استفاده | همین قانون در قرارداد ساخت هست | `90-construction-contract.md` §Objects, modules, and boundaries |
-| «کلاس خدا» و هم‌بستگی پایین | در قرارداد ساخت به‌صورت بو آمد؛ اینجا فقط شکل *معماری*اش (`*Service` مالک چند use case) | `90-construction-contract.md` §Objects, modules, and boundaries |
-| نام‌گذاری معمولی (یک واژه per مفهوم) | Ousterhout فقط «نام، abstractions را نشان دهد نه مکانیزم» را اضافه می‌کند؛ بقیه تکرار بود | `90-construction-contract.md` §Naming |
-| کیفیت تست (قطعی‌بودن، ایزوله‌بودن، یک ایده per تست) | در قرارداد ساخت هست؛ Clean Architecture لِوَل درست تست را می‌گوید | `90-construction-contract.md` §Tests |
-| «ابهام/ناسازگاری معماری را پیدا کن» | فقط دامنهٔ نگاه است، قانون نیست | `55-specialized.md` §9.7 Architecture |
-| طبقه‌بندی بدهی | در بلوک بدهی می‌ماند | `65-debt.md` |
-| شدت/اطمینان/قالب یافته | بلوک Findings مالک آن است | `60-findings.md` |
+| Root composition / separating construction from use | Already in the construction contract | `90-construction-contract.md` §Objects, modules, and boundaries |
+| "God class" and low coupling | It appears as a smell in the construction contract; here only its *architectural* shape (`*Service` owning several use cases) | `90-construction-contract.md` §Objects, modules, and boundaries |
+| Ordinary naming (one word per concept) | Ousterhout only adds "a name should reveal abstractions, not the mechanism"; the rest was duplication | `90-construction-contract.md` §Naming |
+| Test quality (deterministic, isolated, one idea per test) | In the construction contract; Clean Architecture contributes the right test level | `90-construction-contract.md` §Tests |
+| "Find architectural ambiguity/inconsistency" | A field of view, not a rule | `55-specialized.md` §9.7 Architecture |
+| Debt classification | Stays in the debt block | `65-debt.md` |
+| Severity/confidence/finding format | The Findings block owns it | `60-findings.md` |
 
-### یک تضاد عمدی که مستند شد
+### One deliberate contradiction, documented
 
-قرارداد ساخت می‌گوید «تکرار را aggressive حذف کن»؛ Clean Architecture می‌گوید «تکراری را حذف نکن
-که دو use case با بازیگران متفاوت را به هم ببندد». این تضاد در `92-clean-architecture-contract.md`
-§Boundary cost صریح نوشته شده تا مدل مجبور به انتخاب آگاهانه شود، نه اینکه یک قانون دیگری را کپی کند.
-
----
-
-## ۴. بلوک مشترک `95-change-findings.md`
-
-وقتی persona ترکیبی «تغییر» پیشنهاد می‌دهد، یافته باید شواهد و پلن تغییر را داشته باشد. این قواعد
-یک بار در [`composites/blocks/95-change-findings.md`](../composites/blocks/95-change-findings.md) نوشته شده
-و توسط هر دو persona «تغییرمحور» include می‌شود:
-
-- `Clean Code & Construction Review` — قبلاً این دو بخش را به‌عنوان `extra_sections` در spec خودش داشت.
-- `Software Design & Architecture Review` — persona تازه.
-
-قبل از این تغییر، همان متن در دو جا کپی شده بود؛ حالا در بلوک زندگی می‌کند و severity را به
-روبيةٔ پایهٔ `60-findings.md` map می‌کند (روبیک severity را دوباره نمی‌نویسد).
+The construction contract says "remove duplication aggressively"; Clean Architecture says "do not remove duplication
+that would fuse two use cases with different actors". That contradiction is stated explicitly in `92-clean-architecture-contract.md`
+§Boundary cost so that the model is forced into a conscious choice instead of copying another rule.
 
 ---
 
-## ۵. کجا وصل شده
+## 4. The shared `95-change-findings.md` block
 
-| جایگاه | ۹۱ (عمق طراحی) | ۹۲ (مرزهای معماری) | ۹۵ (یافتهٔ تغییر) |
+When a composite persona proposes a change, the finding must carry the evidence and the change plan. These rules
+are written once in [`composites/blocks/95-change-findings.md`](../composites/blocks/95-change-findings.md)
+and included by both change-oriented personas:
+
+- `Clean Code & Construction Review` — previously carried these two sections as `extra_sections` in its own spec.
+- `Software Design & Architecture Review` — a new persona.
+
+Before this change the same text was copied in two places; now it lives in the block and maps severity onto the
+base rubric of `60-findings.md` (it does not rewrite the severity rubric).
+
+---
+
+## 5. Where it is wired in
+
+| Location | 91 (design depth) | 92 (architecture boundaries) | 95 (change finding) |
 |---|---|---|---|
-| `Software Design & Architecture Review.md` (persona ترکیبی تازه) | ✅ | ✅ | ✅ |
+| `Software Design & Architecture Review.md` (new composite persona) | Yes | Yes | Yes |
 | `Clean Code & Construction Review.md` | ✅ | — | ✅ |
 | `Technical Debt & Modernization Audit.md` | ✅ | ✅ | ✅ |
 | `API & Integration Contract Audit.md` | — | ✅ | — |
 | `Data & Database Integrity Audit.md` | — | ✅ | — |
 | `Testing & Quality Assurance Audit.md` | — | ✅ | — |
 
-بقیهٔ compositeها می‌توانند با اضافه‌کردن نام بلوک به `blocks` در spec خودشان include کنند.
+The other composites can include a block by adding its name to `blocks` in their own spec.
 
 ---
 
-## ۶. بازتولید
+## 6. Regeneration
 
 ```bash
 python3 scripts/compose_persona.py --all
@@ -133,9 +133,9 @@ python3 scripts/validate_skills.py
 python3 scripts/validate_personas.py
 ```
 
-## ۷. اضافه‌کردن قانون تازه
+## 7. Adding a new rule
 
-1. قانون را در بلوک مربوطه بنویس (یک بار).
-2. بلوک را به `blocks` compositeهای مرتبط اضافه کن.
-3. بازتولید کن.
-4. اگر قانون با بلوک دیگری هم‌پوشانی داشت، از بلوک دیگر **حذف**ش کن — منبع یگانه حفظ شود.
+1. Write the rule in the relevant block (once).
+2. Add the block to the `blocks` of the related composites.
+3. Regenerate.
+4. If the rule overlaps another block, **remove** it from that other block — keep a single source.

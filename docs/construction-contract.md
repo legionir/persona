@@ -1,112 +1,112 @@
-# قرارداد ساخت (Construction Contract) — استخراج از Clean Code و Code Complete
+# Construction Contract — extracted from Clean Code and Code Complete
 
-این سند توضیح می‌دهد قواعد دو کتاب «Clean Code» (Robert C. Martin) و «Code Complete»
-(Steve McConnell) چگونه به **یک** قرارداد واحد و بدون تکرار تبدیل شده‌اند، کجا زندگی می‌کنند،
-و چطور به personaها و skillها وصل می‌شوند.
+This document explains how the rules of the two books *Clean Code* (Robert C. Martin) and *Code Complete*
+(Steve McConnell) were turned into **one** contract with no duplication, where that contract lives,
+and how it is wired into the personas and the skills.
 
-> خودِ قواعد اینجا تکرار **نشده‌اند**. تنها منبع قواعد:
+> The rules themselves are **not** repeated here. The only source of the rules:
 > [`composites/blocks/90-construction-contract.md`](../composites/blocks/90-construction-contract.md)
-> (به انگلیسی، هم‌سبک با بقیهٔ بلوک‌های master prompt). این سند فقط نقشهٔ ادغام و نحوهٔ اتصال است.
-> دو کتاب دیگر («A Philosophy of Software Design» و «Clean Architecture») جداگانه مستند شده‌اند:
+> (in English, in the same style as the other master-prompt blocks). This document is only the merge map and the wiring.
+> Two further books (*A Philosophy of Software Design* and *Clean Architecture*) are documented separately:
 > [`docs/design-architecture-contract.md`](design-architecture-contract.md).
-> الگوهای سازمانی (Fowler) و انضباط پراگماتیک (Hunt & Thomas):
+> Enterprise patterns (Fowler) and the pragmatic discipline (Hunt & Thomas):
 > [`docs/enterprise-patterns-contract.md`](enterprise-patterns-contract.md) ·
 > [`docs/pragmatic-programmer-contract.md`](pragmatic-programmer-contract.md).
-> قرارداد رفکتورینگ (Refactoring.Guru): [`docs/refactoring-contract.md`](refactoring-contract.md).
-> قرارداد سیستم طراحی فرانت‌اند: [`docs/frontend-design-system-contract.md`](frontend-design-system-contract.md). شواهد الزامی برای یافته‌های
-> «تغییر» هم در بلوک مشترک `95-change-findings.md` زندگی می‌کند.
+> The refactoring contract (Refactoring.Guru): [`docs/refactoring-contract.md`](refactoring-contract.md).
+> The frontend design-system contract: [`docs/frontend-design-system-contract.md`](frontend-design-system-contract.md). The evidence required for
+> change findings lives in the shared `95-change-findings.md` block.
 
 ---
 
-## ۱. چرا یک بلوک، نه ۱۷۰ کپی؟
+## 1. Why one block, not 170 copies?
 
-معماری مخزن این است: پرامپت personaها **تولیدشده** هستند (`scripts/generate_personas.py` از دادهٔ README)
-و قرارداد مشترکِ ممیزی‌ها در **بلوک‌های قابل استفادهٔ مجدد** زندگی می‌کند (`composites/blocks/`).
-اگر قواعد ساخت را داخل ۱۷۰ فایل persona کپی می‌کردیم:
+The repository architecture is this: the persona prompts are **generated** (`scripts/generate_personas.py` from the README data)
+and the shared audit contract lives in **reusable blocks** (`composites/blocks/`).
+If we had copied the construction rules inside 170 persona files:
 
-- هر اصلاح قانون باید ۱۷۰ بار تکرار می‌شد (و ناهم‌خوان می‌شد)؛
-- بازتولید personaها محتوای دستی را پاک می‌کرد؛
-- حجم مخزن و کانتکست مدل بی‌دلیل دوبرابر می‌شد.
+- every rule fix would have to be repeated 170 times (and would drift apart);
+- regenerating the personas would wipe out manual edits;
+- the repository size and the model context would double for no reason.
 
-پس قانون طلایی این تغییر: **یک منبع، چند ارجاع.** قواعد یک جا نوشته می‌شوند و compositeهای
-مرتبط آن بلوک را include می‌کنند؛ skillها هم از طریق `references/` به همان متن واحد اشاره می‌کنند.
+So the golden rule of this change: **one source, many references.** The rules are written once and the related composites
+include that block; the skills point at the same single text through `references/`.
 
 ---
 
-## ۲. نقشهٔ ادغام (کدام بخش‌ها یکی شدند)
+## 2. Merge map (which sections became one)
 
-دو سند اصلی در بسیاری از نقاط یک چیز را با واژهٔ دیگری می‌گفتند. ادغام به این شکل انجام شد:
+The two source documents said the same thing with different words in many places. The merge was done like this:
 
-| بخش قرارداد | از Clean Code | از Code Complete | تصمیم ادغام |
+| Contract section | From Clean Code | From Code Complete | Merge decision |
 |---|---|---|---|
-| `Priority` | Priority and behavior، Implementation preferences | Primary Directive، Construction Prerequisites | هر دو یک چیز می‌گفتند: «خوانندهٔ بعدی مهم‌تر از باهوشی است» → یک بخش |
-| `Naming` | Naming rules | Variable and Data Rules (بخش نام‌ها) | یکی شد؛ قواعد «یک واژه per مفهوم» و «بدون encoding» فقط یک بار |
-| `Routines` | Function rules | Routine Design Rules | یکی شد؛ anti-patternهای مشترک یک بار |
-| `Comments` | Comment rules | Comment Rules | یکی شد؛ فهرست «کامنت خوب» یک بار |
-| `Formatting and structure` | Formatting and structure | Coding Standards Rules، Statement Rules (بخش چیدمان) | یکی شد |
-| `Data and types` | Objects, modules, and data structures (بخش داده) | Variable Rules، Data Type Rules | یکی شد؛ «مقدار جادویی/واحد/دامنه» یک بار |
-| `Control flow` | Function rules (بخش جریان کنترل) | Control Flow Rules، Statement/Conditional/Loop Rules | یکی شد |
-| `Objects, modules, and boundaries` | Objects and data structures، Boundaries | Class and Module Design، Boundaries | یکی شد؛ «god class» و «train wreck» یک بار |
-| `Errors and defensive programming` | Error handling | Defensive Programming، Error Handling، Preconditions/Postconditions | یکی شد؛ تفکیک assertion/validation/domain-error یک بار |
-| `Complexity and smells` | Smells to detect and eliminate | Complexity Management، Forbidden Patterns، Review Rules | یکی شد؛ فهرست بوها یک بار (طبقه‌بندی بدهی در بلوک `65-debt` مانده) |
-| `Tests` | Tests، TDD and clean test rules | Testing Rules | یکی شد؛ «تست = کد تولید» یک بار |
-| `Refactoring and change process` | Refactoring rules، Emergent design، Change Process | Incremental Construction، Quality/Refactoring | یکی شد؛ چک‌لیست فرایند تغییر یک بار |
-| `Concurrency` | Concurrency and async work | — (فقط در Code Complete نبود) | از Clean Code آمد، بدون تغییر معنایی |
-| `Construction review gate` | Review checklist | Review Checklist | دو چک‌لیست تقریباً یکسان بودند → **یکی** شد |
+| `Priority` | Priority and behavior, Implementation preferences | Primary Directive, Construction Prerequisites | Both said the same thing: "the next reader matters more than cleverness" → one section |
+| `Naming` | Naming rules | Variable and Data Rules (the naming part) | Merged; the "one word per concept" and "no encoding" rules appear once |
+| `Routines` | Function rules | Routine Design Rules | Merged; the shared anti-patterns appear once |
+| `Comments` | Comment rules | Comment Rules | Merged; the "good comment" list appears once |
+| `Formatting and structure` | Formatting and structure | Coding Standards Rules, Statement Rules (the layout part) | Merged |
+| `Data and types` | Objects, modules, and data structures (the data part) | Variable Rules, Data Type Rules | Merged; "magic value/unit/domain" appears once |
+| `Control flow` | Function rules (the control-flow part) | Control Flow Rules, Statement/Conditional/Loop Rules | Merged |
+| `Objects, modules, and boundaries` | Objects and data structures, Boundaries | Class and Module Design, Boundaries | Merged; "god class" and "train wreck" appear once |
+| `Errors and defensive programming` | Error handling | Defensive Programming, Error Handling, Preconditions/Postconditions | Merged; the assertion/validation/domain-error split appears once |
+| `Complexity and smells` | Smells to detect and eliminate | Complexity Management, Forbidden Patterns, Review Rules | Merged; the smell list appears once (debt classification stays in the `65-debt` block) |
+| `Tests` | Tests, TDD and clean test rules | Testing Rules | Merged; "tests are production code" appears once |
+| `Refactoring and change process` | Refactoring rules, Emergent design, Change Process | Incremental Construction, Quality/Refactoring | Merged; the change-process checklist appears once |
+| `Concurrency` | Concurrency and async work | — (absent from Code Complete) | Came from Clean Code, with no change of meaning |
+| `Construction review gate` | Review checklist | Review Checklist | The two checklists were nearly identical → merged into **one** |
 
-### چه چیزی عمداً حذف شد (برای جلوگیری از تکرار با بلوک‌های موجود)
+### What was deliberately dropped (to avoid duplicating existing blocks)
 
-| محتوا | چرا نگرفتیم | کجاست |
+| Content | Why we left it out | Where it lives |
 |---|---|---|
-| طبقه‌بندی بدهی فنی (accidental/architectural/testing/…) و قاعدهٔ «dead را repository-wide بررسی کن» | در قرارداد ساخت فقط به‌عنوان «بو» نام برده شد، بدون توضیح مجدد | `composites/blocks/65-debt.md` |
-| شکاف تست (چه چیزی تست نشده) | قرارداد ساخت فقط *کیفیت نوشتن تست* را می‌گوید؛ «چه چیزی کم است» در پاس تخصصی می‌ماند | `composites/blocks/55-specialized.md` (§9.6) |
-| قواعد شواهد و «هیچ حدس» | مبحث متفاوتی است: ادعا دربارهٔ کدبیس، نه کیفیت کد | `composites/blocks/10-prime-directive.md` |
-| Quality Gate نهایی ممیزی | گیت ما برای *خودِ تغییر* است، نه برای پوشش ممیزی | `composites/blocks/80-quality-gate.md` |
+| Technical-debt classification (accidental/architectural/testing/…) and the "check repository-wide before declaring dead" rule | Mentioned in the construction contract only as a *smell*, without restating it | `composites/blocks/65-debt.md` |
+| Test gaps (what is not tested) | The construction contract only covers *how well tests are written*; "what is missing" stays in the specialised pass | `composites/blocks/55-specialized.md` (§9.6) |
+| The evidence rules and "no guessing" | A different subject: claims about the codebase, not code quality | `composites/blocks/10-prime-directive.md` |
+| The audit's final Quality Gate | Our gate is for *the change itself*, not for audit coverage | `composites/blocks/80-quality-gate.md` |
 
 ---
 
-## ۳. کجا وصل شده
+## 3. Where it is wired in
 
-| جایگاه | وضعیت |
+| Location | Status |
 |---|---|
-| `composites/blocks/90-construction-contract.md` | ✅ منبع واحد قواعد |
-| `Clean Code & Construction Review.md` (persona ترکیبی تازه) | ✅ کل قرارداد + عدسی‌های Staff/Principal/Architect/Refactoring/Test-Automation/Docs |
-| `Technical Debt & Modernization Audit.md` | ✅ بلوک اضافه شد (بدهی ↔ قواعد ساخت) |
-| `Testing & Quality Assurance Audit.md` | ✅ بلوک اضافه شد (کیفیت تست) |
-| `skills/clean-code-construction-review/`, `skills/technical-debt-modernization-audit/`, `skills/testing-quality-assurance-audit/` | ✅ خودکار بازتولید شدند؛ `SKILL.md` فقط **نقشهٔ بخش‌ها** را دارد و قواعد را کپی نمی‌کند |
+| `composites/blocks/90-construction-contract.md` | The single source of the rules |
+| `Clean Code & Construction Review.md` (new composite persona) | The whole contract + the Staff/Principal/Architect/Refactoring/Test-Automation/Docs lenses |
+| `Technical Debt & Modernization Audit.md` | Block added (debt ↔ construction rules) |
+| `Testing & Quality Assurance Audit.md` | Block added (test quality) |
+| `skills/clean-code-construction-review/`, `skills/technical-debt-modernization-audit/`, `skills/testing-quality-assurance-audit/` | Regenerated automatically; `SKILL.md` carries only the **section map** and does not copy the rules |
 
-سایر compositeها می‌توانند با اضافه‌کردن `"90-construction-contract.md"` به `blocks` در spec خود
-این قرارداد را include کنند (پیش‌فرض include نشدهند تا محتوا تکراری نشود).
+The other composites can include this contract by adding `"90-construction-contract.md"` to the `blocks` of their own spec
+(they are not included by default, so no duplicated content appears).
 
-### چطور در skillها تکراری نشده
+### How duplication was avoided in the skills
 
-در `SKILL.md`ها فقط **فهرست بخش‌های master prompt** می‌آید (با نشان `◆` برای بخش‌های اختصاصی)،
-مثلاً:
+In the `SKILL.md` files only the **list of the master prompt's sections** appears (marked with `◆` for the persona-specific ones),
+for example:
 
 ```
-## نقشهٔ master prompt (در مرجع — ◆ = بخش اختصاصی این persona)
+## Master prompt map (in the reference — ◆ = section specific to this persona)
 - PRIME DIRECTIVE — ZERO ASSUMPTIONS
 - CONSTRUCTION CONTRACT — Clean Code + Code Complete (binding)
 - ◆ Construction Findings — required evidence
 ```
 
-خودِ قواعد فقط در `references/<persona>.md` هستند. این همان progressive disclosure است:
-مدل اول نقشه را می‌بیند و فقط وقتی به قواعد نیاز دارد مرجع را باز می‌کند.
+The rules themselves live only in `references/<persona>.md`. That is progressive disclosure:
+the model sees the map first and opens the reference only when it needs the rules.
 
 ---
 
-## ۴. بازتولید
+## 4. Regeneration
 
 ```bash
-python3 scripts/compose_persona.py --all          # ساخت master promptها از بلوک + spec
-python3 scripts/build_skills.py                   # بازتولید skillها
-python3 scripts/validate_skills.py                # اعتبارسنجی
-python3 scripts/validate_personas.py              # اعتبارسنجی personaهای نقش
+python3 scripts/compose_persona.py --all          # build the master prompts from block + spec
+python3 scripts/build_skills.py                   # regenerate the skills
+python3 scripts/validate_skills.py                # validate
+python3 scripts/validate_personas.py              # validate the role personas
 ```
 
-## ۵. اضافه‌کردن قانون تازه به قرارداد
+## 5. Adding a new rule to the contract
 
-1. قانون را در `composites/blocks/90-construction-contract.md` بنویس (یک بار).
-2. اگر persona ترکیبی تازه‌ای باید آن را داشته باشد، بلوک را به `blocks` specش اضافه کن.
+1. Write the rule in `composites/blocks/90-construction-contract.md` (once).
+2. If a new composite persona should have it, add the block to that spec's `blocks`.
 3. `python3 scripts/compose_persona.py --all && python3 scripts/build_skills.py`
-4. اگر قانون با بلوک دیگری هم‌پوشانی داشت، از بلوک دیگر **حذف**ش کن (نه اینجا کپی) — منبع یگانه حفظ شود.
+4. If the rule overlaps another block, **remove** it from that other block (do not copy it here) — keep a single source.
