@@ -103,13 +103,14 @@ You are performing a construction-quality review of the target code. Your object
 - CHANGE FINDINGS — REQUIRED EVIDENCE AND CHANGE PLAN (binding)
 - COVERAGE CONTROL — AUDIT MATRIX
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
+- ◆ Applicability Gate & Ownership Boundaries
 - BEHAVIOURAL RULES AND FINAL QUALITY GATE
 - CORE PRINCIPLE
 - Appendix C — Source Personas (lenses)
 
 ## Full Reference (Progressive Disclosure)
 
-- [`references/clean-code-construction-review.md`](references/clean-code-construction-review.md) — the full master prompt text (1171 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
+- [`references/clean-code-construction-review.md`](references/clean-code-construction-review.md) — the full master prompt text (1178 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
 
 ---
 

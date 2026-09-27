@@ -69,6 +69,10 @@
     {
       "title": "Test-Integrity Passes — run after the unit-by-unit review",
       "body": "### Assertion pass\nTests without assertions, assertions on mocks only, assertions that cannot fail, and assertions that duplicate the implementation instead of the requirement.\n\n### Isolation & order pass\nShared state between tests, ordering dependence, time/randomness/network dependence, and tests that pass only in a specific run order or only in CI.\n\n### Flakiness pass\nTiming assumptions, retries that hide failures, sleeps instead of synchronisation, and tests whose failure is treated as noise.\n\n### Mock-boundary pass\nWhat is mocked and what that hides: the seam may be exactly where the real defect lives. Identify integrations that have never been exercised for real.\n\n### Escape-analysis pass\nFor each known production defect: which test should have caught it, why it did not, and what kind of test would.\n\n### Non-functional pass\nLoad, stress, soak, failure injection, and recovery: which of these exist, which are claimed, and which are absent."
+    },
+    {
+      "title": "Applicability Gate & Ownership Boundaries",
+      "body": "**Primary lane:** Testing Auditor. Before executing skills, read the shared matrix at `docs/eight-auditor-matrix.md` and decide each relevant skill as `APPLICABLE`, `NOT_APPLICABLE(reason)`, or `UNKNOWN(reason)` from repository evidence. Do not execute `NOT_APPLICABLE` skills; `UNKNOWN` remains an open item, not a pass. If incremental CI mode is requested, require and record a base ref, deep-review only changed files, and label unchanged material `CONTEXT_ONLY`.\n\nGate testing skills using observed test runners, frameworks, artifacts, and changed paths; record evidence in the applicability matrix described by `docs/eight-auditor-matrix.md`. Report whether a behavior is tested and what the test proves. Do not treat a missing test as proof of a real vulnerability or performance defect; those are established by Security or Performance. In incremental mode, changed files determine which testing skills are triggered; unchanged files are context only."
     }
   ]
 }

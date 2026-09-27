@@ -95,13 +95,14 @@ You are performing a production-readiness and reliability audit of the target sy
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
 - ◆ Readiness Gates — one verdict per gate, evidence only
 - ◆ Specialised Passes — run after the unit-by-unit review
+- ◆ Applicability Gate & Ownership Boundaries
 - BEHAVIOURAL RULES AND FINAL QUALITY GATE
 - CORE PRINCIPLE
 - Appendix C — Source Personas (lenses)
 
 ## Full Reference (Progressive Disclosure)
 
-- [`references/production-readiness-reliability-audit.md`](references/production-readiness-reliability-audit.md) — the full master prompt text (405 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
+- [`references/production-readiness-reliability-audit.md`](references/production-readiness-reliability-audit.md) — the full master prompt text (413 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
 
 ---
 

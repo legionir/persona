@@ -7,9 +7,9 @@ as a static API. It contains basic search/categorization info for every role:
 id, role_id, type, domain/category/seniority, mission, duties, supervisors,
 consumers, capabilities, file path and keyword facets.
 
-It also carries a `composites` array with the 19 composite master prompts from
+It also carries a `composites` array with the 28 composite master prompts from
 `prompts/composite/`, so a consumer of this one file sees the whole library
-instead of only the 170 roles. A composite has no group / domain / seniority —
+instead of only the 190 roles. A composite has no group / domain / seniority —
 it runs several roles at once — so those fields are null by design.
 
 Usage:
@@ -261,7 +261,7 @@ def main() -> None:
             "details": r"README.md (full role table)",
             "generator": "scripts/generate_personas.py",
             "metadata_builder": "scripts/build_metadata.py",
-            "composites": "prompts/composite/*.md (+ composites/*.json for the 15 spec-driven ones)",
+            "composites": "prompts/composite/*.md (+ composites/*.json for the 24 spec-driven ones)",
         },
         "totals": {
             "roles": len(roles),

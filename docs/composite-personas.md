@@ -122,6 +122,10 @@ Suggested order for a full forensic audit:
 
 The automatic validation (`--check`) checks all of this: a non-empty title/mission, `inputs` entries that have a name, **2 to 12 lenses** (each one a valid, non-duplicated persona), the presence of every block, no duplicated block, a non-empty `precedence`, and that every `{{PLACEHOLDER}}` resolves.
 
+## 4.1 Eight-auditor codebase matrix
+
+For integrated codebase reviews, [`docs/eight-auditor-matrix.md`](eight-auditor-matrix.md) is the canonical scope and separation matrix for Security, Architecture, Code Quality, Performance, Reliability, Testing, Dependency, and DevOps. The [Codebase Integrity Audit Protocol](../prompts/composite/codebase-integrity-audit-protocol.md) applies it through an evidence-based applicability gate, supports changed-file CI runs, and consolidates cross-auditor findings before final severity calibration. Update the matrix first when scope ownership changes.
+
 ### Allowed placeholders
 
 `{{TITLE}}` `{{VERSION}}` `{{DATE}}` `{{MISSION}}` `{{INPUTS}}` `{{ORDER}}`

@@ -69,7 +69,7 @@ the severity table → the finding format → the report structure → the Quali
 ## 3. Commands
 
 ```bash
-# build every skill (170 role personas + the composites)
+# build every skill (190 role personas + the composites)
 python3 scripts/build_skills.py
 
 # only a few

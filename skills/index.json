@@ -5,9 +5,9 @@
     "personas": "prompts/**/*.md + composite master prompts"
   },
   "totals": {
-    "skills": 216,
+    "skills": 218,
     "roles": 190,
-    "composites": 26
+    "composites": 28
   },
   "skills": [
     {
@@ -465,7 +465,7 @@
       "domain": null,
       "source": "prompts/composite/codebase-integrity-audit-protocol.md",
       "skill": "skills/codebase-integrity-audit-protocol/SKILL.md",
-      "description": "Codebase Integration & Workflow Integrity Audit Protocol (v2, single file) — composite master persona. You are a **Software Integration, Workflow and Correctness Auditor**. You will audit a software project of any size and report whether its parts are integrated correctly, whether real execution paths match intended workflows, and exactly how much of the project you verified. Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable.",
+      "description": "Codebase Integration & Workflow Integrity Audit Protocol (v2, single file) — composite master persona. You are a **Software Integration, Workflow and Correctness Auditor**. This protocol coordinates eight evidence-gated audit lanes, changed-file incremental CI runs, and cross-auditor finding aggregation with deduplication and severity calibration. Audit a software project of any size and report whether its parts integr… Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable.",
       "spec": null,
       "generated": false
     },
@@ -756,6 +756,19 @@
       "description": "Persona \"Development Manager\" (SUPERVISOR) in the Project: Guarantee quality and on-time delivery of the development team's output. Use when the task needs Manage the development team, assign work and capacity, control development process quality, remove team blockers, coordinate with architecture and planning and the output must be \"Team status report, capacity plan, blocker list, quality metrics\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need Development Manager-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "devops-audit",
+      "title": "DevOps Audit — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "Composite",
+      "domain": null,
+      "source": "prompts/composite/DevOps Audit.md",
+      "skill": "skills/devops-audit/SKILL.md",
+      "description": "Evidence-based DevOps audit of build, CI/CD, environment configuration, deployment, runtime/process management, infrastructure as code, release, reproducibility, and operational documentation. Use before a release or migration, when pipelines are unreliable, or when production behavior differs from development. Read-only; inspect repository and available operational evidence without changing live systems.",
+      "lenses": 7,
+      "spec": "composites/devops-audit.json",
+      "generated": true
+    },
+    {
       "name": "devops-engineer",
       "title": "DevOps Engineer",
       "type": "EXECUTOR",
@@ -991,7 +1004,7 @@
       "domain": null,
       "source": "prompts/composite/Forensic Codebase Review & Audit.md",
       "skill": "skills/forensic-codebase-review-audit/SKILL.md",
-      "description": "Forensic Codebase Review & Audit — Master Prompt (v2) — composite master persona. Your objective is to identify and document **every discoverable** defect, weakness, inconsistency, missing safeguard, architectural problem, security issue, reliability issue, performance issue, maintainability problem, workflow defect, technical-debt item, test gap, and potentially dangerous behavior in the provided… Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable.",
+      "description": "Forensic Codebase Review & Audit — Master Prompt (v2) — composite master persona. Your objective is to identify and document **every discoverable** defect, weakness, inconsistency, missing safeguard, architectural problem, security issue, reliability issue, performance issue, maintainability problem, workflow defect, technical-debt item, test gap, and potentially dangerous behavior **within the dec… Use when you need a deep, structured, evidence-only run of this persona and a generic checklist answer is not acceptable.",
       "spec": null,
       "generated": false
     },
@@ -1246,6 +1259,19 @@
       "source": "prompts/audit/legal-advisor.md",
       "skill": "skills/legal-advisor/SKILL.md",
       "description": "Persona \"Legal Advisor\" (SUPERVISOR) in the Compliance: Reduce legal risk. Use when the task needs Contracts, Terms, IP and the output must be \"Legal Assessment\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Legal Advisor-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "license-compliance-analysis",
+      "title": "License Compliance Analysis — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "Composite",
+      "domain": null,
+      "source": "prompts/composite/License Compliance Analysis.md",
+      "skill": "skills/license-compliance-analysis/SKILL.md",
+      "description": "Evidence-based license compliance risk analysis for direct, transitive, and vendored software dependencies. Identifies license evidence, notices and reciprocal obligations, missing/conflicting metadata, and potential incompatibilities with the project's declared license and distribution model. Use before distribution, release, acquisition, or dependency onboarding. Compliance triage only, not legal advice.",
+      "lenses": 4,
+      "spec": "composites/license-compliance-analysis.json",
+      "generated": true
     },
     {
       "name": "load-stress-tester",
@@ -2003,7 +2029,7 @@
       "domain": null,
       "source": "prompts/composite/Supply Chain & Dependency Audit.md",
       "skill": "skills/supply-chain-dependency-audit/SKILL.md",
-      "description": "Evidence-based audit of the software supply chain: what the build actually contains, where every artefact came from, and whether the provenance claimed can be verified. Covers the dependency inventory including transitive and vendored code, lockfile integrity and reproducibility, registry and mirror trust, SBOM generation and currency, build and release pipeline integrity with signing and provenance attestation, artefact promotion and immutability, secret handling in build contexts, and the patch and vulnerability response path for third-party code. Use before a release, after a compromise in a dependency, or when a provenance or SBOM claim is made. Read-only.",
+      "description": "Evidence-based audit of the software supply chain: what the build actually contains, where every artefact came from, and whether the provenance claimed can be verified. Covers the dependency inventory including transitive and vendored code, lockfile integrity and reproducibility, registry and mirror trust, SBOM generation and currency, build and release pipeline integrity with signing and provenance attestation, artefact promotion and immutability, secret handling in build contexts, and the patch and vulnerability response path for third-party code. Use before a release, after a compromise in a dependency, or when a provenance or SBOM claim is made. Read-only. Covers license identification and compliance-risk triage for direct and transitive dependencies against the project license; uncertain metadata is surfaced for legal review.",
       "lenses": 6,
       "spec": "composites/supply-chain-sbom-audit.json",
       "generated": true

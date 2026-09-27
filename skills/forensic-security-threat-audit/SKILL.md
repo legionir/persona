@@ -99,13 +99,14 @@ You are performing a forensic security audit of the target system. Your objectiv
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
 - ◆ Attack-Surface and Trust-Boundary Model
 - ◆ Security Passes — run after the unit-by-unit review
+- ◆ Applicability Gate & Ownership Boundaries
 - BEHAVIOURAL RULES AND FINAL QUALITY GATE
 - CORE PRINCIPLE
 - Appendix C — Source Personas (lenses)
 
 ## Full Reference (Progressive Disclosure)
 
-- [`references/forensic-security-threat-audit.md`](references/forensic-security-threat-audit.md) — the full master prompt text (580 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
+- [`references/forensic-security-threat-audit.md`](references/forensic-security-threat-audit.md) — the full master prompt text (588 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
 
 ---
 

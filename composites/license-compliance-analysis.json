@@ -1,0 +1,73 @@
+{
+  "$schema": "composite-persona/v1",
+  "slug": "license-compliance-analysis",
+  "title": "License Compliance Analysis",
+  "version": "v1",
+  "language": "en",
+  "output": "License Compliance Analysis.md",
+  "description": "Evidence-based license compliance risk analysis for direct, transitive, and vendored software dependencies. Identifies license evidence, notices and reciprocal obligations, missing/conflicting metadata, and potential incompatibilities with the project's declared license and distribution model. Use before distribution, release, acquisition, or dependency onboarding. Compliance triage only, not legal advice.",
+  "mission": "You are performing a license compliance analysis. Build an evidence-backed inventory of the licenses and notices attached to software the project uses or distributes, compare documented obligations with the project's declared license and evidenced use/distribution model, and identify unresolved or potentially incompatible obligations for qualified legal review. Do not infer license terms or issue a legal conclusion.",
+  "order": "scope and project-license evidence → dependency/vendored inventory → license evidence collection → obligation and distribution-context mapping → conflict/unknown triage → verification → gated report",
+  "inputs": [
+    {"name": "TARGET", "hint": "repository path / URL, package, product, or attached files"},
+    {"name": "PROJECT_LICENSE", "hint": "declared project license and evidence source, or unknown"},
+    {"name": "DISTRIBUTION_MODEL", "hint": "SaaS/internal use, source distribution, binary/container, mobile, or other evidenced model"},
+    {"name": "DEPENDENCY_SOURCES", "hint": "manifests, lockfiles, SBOM, vendored source, notices, package metadata"},
+    {"name": "POLICY", "hint": "organization's approved/denied license policy, if available"},
+    {"name": "OUT_OF_SCOPE", "hint": "optional packages, artifacts, or topics excluded"},
+    {"name": "PERMISSIONS", "hint": "repository/artifact access and any approved read-only registry queries"},
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English"}
+  ],
+  "lenses": [
+    "prompts/audit/ip-copyright-specialist.md",
+    "prompts/audit/legal-advisor.md",
+    "prompts/implementation/procurement-specialist.md",
+    "prompts/implementation/compliance-evidence-analyst.md"
+  ],
+  "lens_focus": {
+    "IP / Copyright Specialist": "license identity, copyright notices, attribution, redistribution terms, and evidence provenance",
+    "Legal Advisor": "interpretation questions and escalation of potential incompatibilities; no unsupported legal conclusions",
+    "Procurement Specialist": "supplier/dependency provenance, contractual terms, and license evidence collection",
+    "Compliance Evidence Analyst": "traceable evidence register, policy mapping, and audit-ready obligation records"
+  },
+  "precedence": [
+    "The exact license file, package metadata, notice, or authoritative source outranks a package name, registry label, or secondary summary.",
+    "Unknown or conflicting license evidence is `UNKNOWN`; it is never treated as permissive or compatible by default.",
+    "The project's declared license and evidenced distribution/use model outrank assumptions about how the project is shipped.",
+    "This is compliance-risk triage, not legal advice. Material ambiguity or potential incompatibility is escalated to qualified counsel, not resolved by guesswork.",
+    "Keep license findings distinct from package vulnerabilities (Security), dependency graph/resolution health (Dependency), and installation/build/CI supply-chain controls (DevOps)."
+  ],
+  "blocks": [
+    "00-header.md",
+    "10-prime-directive.md",
+    "20-scope-artifacts.md",
+    "30-protocol.md",
+    "40-lenses.md",
+    "25-file-by-file.md",
+    "35-line-level.md",
+    "45-cross-file.md",
+    "55-specialized.md",
+    "50-coverage.md",
+    "60-findings.md",
+    "80-quality-gate.md"
+  ],
+  "insert_before": "80-quality-gate.md",
+  "extra_sections": [
+    {
+      "title": "License Compliance Skill Applicability Gate",
+      "body": "This is the standalone `License Compliance Analysis` subskill of the Dependency Auditor. Run it when project licensing/distribution is known or can be investigated and direct, transitive, vendored, or bundled components may carry license obligations. Record `APPLICABLE`, `NOT_APPLICABLE(reason)`, or `UNKNOWN(reason)` with evidence. A missing project license, unknown distribution model, or unavailable dependency metadata is an open question—not evidence of compliance.\n\n| Question | Evidence | Status | Effect on assessment |\n|---|---|---|---|\n| Project's declared license identified? | | | |\n| Direct and transitive dependencies inventoried? | | | |\n| Vendored/bundled components in scope? | | | |\n| Distribution/use model evidenced? | | | |\n| Organization policy supplied? | | | |"
+    },
+    {
+      "title": "Dependency License and Obligation Register",
+      "body": "| Component | Version | Direct / transitive / vendored | License identifier and evidence | Copyright/notice evidence | Project and distribution context | Obligations to verify | Compatibility status | Confidence |\n|---|---|---|---|---|---|---|---|---|---|\n\nUse `COMPATIBLE`, `POTENTIAL_CONFLICT`, `UNKNOWN`, or `NOT_ASSESSED`. Include the license file/metadata/notice path and exact component/version evidence. Check attribution and notice retention, source-offer or source-disclosure obligations, reciprocal/copyleft terms, patent/redistribution conditions, exceptions, dual/multiple licensing, and any organization policy only when supported by source evidence. Do not infer obligations from SPDX shorthand alone when the underlying license text is unavailable.\n\nNever conclude that a license is legally compatible or incompatible as a final legal determination. State the factual basis and the uncertainty, then route material cases to counsel. Do not reproduce copyrighted license text unnecessarily; cite its source and relevant identifier."
+    },
+    {
+      "title": "Boundary and Escalation Rules",
+      "body": "- Security Auditor owns known vulnerabilities in dependency code; this skill does not label a package vulnerable based on its license.\n- Dependency Auditor owns package presence, resolution, graph direction/cycles, versions, and usage; this skill consumes that inventory and flags gaps in it.\n- DevOps Auditor owns install/build/CI provenance and artifact controls; this skill records license metadata for shipped artifacts but does not assess pipeline integrity.\n- Missing/conflicting evidence remains `UNKNOWN`. Potentially incompatible terms, source-disclosure questions, unclear exceptions, commercial-use questions, or policy conflicts must be escalated to qualified counsel."
+    },
+    {
+      "title": "Applicability Gate & Ownership Boundaries",
+      "body": "**Primary lane:** Dependency Auditor — License Compliance Analysis. Before executing skills, read the shared matrix at `docs/eight-auditor-matrix.md` and decide each relevant skill as `APPLICABLE`, `NOT_APPLICABLE(reason)`, or `UNKNOWN(reason)` from repository evidence. Do not execute `NOT_APPLICABLE` skills; `UNKNOWN` remains an open item, not a pass. If incremental CI mode is requested, require and record a base ref, deep-review only changed files, and label unchanged material `CONTEXT_ONLY`.\n\nThis standalone skill implements the License Compliance Analysis subskill defined for the Dependency Auditor in `docs/eight-auditor-matrix.md`. Gate applicability on dependency inventory, project-license evidence, and distribution/use context. Unknown metadata or context remains open and is never treated as compatible. Keep legal interpretation with qualified counsel; this skill records evidence and triages risks only."
+    }
+  ]
+}

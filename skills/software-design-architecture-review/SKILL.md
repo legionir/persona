@@ -109,13 +109,14 @@ You are performing a design and architecture review of the target code. Your obj
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
 - ◆ Module Depth & Interface Register — one row per module
 - ◆ Design & Architecture Passes — run after the unit-by-unit review
+- ◆ Applicability Gate & Ownership Boundaries
 - BEHAVIOURAL RULES AND FINAL QUALITY GATE
 - CORE PRINCIPLE
 - Appendix C — Source Personas (lenses)
 
 ## Full Reference (Progressive Disclosure)
 
-- [`references/software-design-architecture-review.md`](references/software-design-architecture-review.md) — the full master prompt text (1745 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
+- [`references/software-design-architecture-review.md`](references/software-design-architecture-review.md) — the full master prompt text (1753 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
 
 ---
 

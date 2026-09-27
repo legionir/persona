@@ -1,29 +1,29 @@
 ---
-name: "supply-chain-dependency-audit"
-description: "Evidence-based audit of the software supply chain: what the build actually contains, where every artefact came from, and whether the provenance claimed can be verified. Covers the dependency inventory including transitive and vendored code, lockfile integrity and reproducibility, registry and mirror trust, SBOM generation and currency, build and release pipeline integrity with signing and provenance attestation, artefact promotion and immutability, secret handling in build contexts, and the patch and vulnerability response path for third-party code. Use before a release, after a compromise in a dependency, or when a provenance or SBOM claim is made. Read-only. Covers license identification and compliance-risk triage for direct and transitive dependencies against the project license; uncertain metadata is surfaced for legal review."
+name: "license-compliance-analysis"
+description: "Evidence-based license compliance risk analysis for direct, transitive, and vendored software dependencies. Identifies license evidence, notices and reciprocal obligations, missing/conflicting metadata, and potential incompatibilities with the project's declared license and distribution model. Use before distribution, release, acquisition, or dependency onboarding. Compliance triage only, not legal advice."
 metadata:
   version: "v1"
   type: "COMPOSITE"
   typeLabel: "Composite"
-  lenses: 6
-  source: "prompts/composite/Supply Chain & Dependency Audit.md"
+  lenses: 4
+  source: "prompts/composite/License Compliance Analysis.md"
   language: "en"
-  spec: "composites/supply-chain-sbom-audit.json"
+  spec: "composites/license-compliance-analysis.json"
   generated: true
 ---
 
-# Supply Chain & Dependency Audit — Master Prompt (v1) — Composite Persona Skill
+# License Compliance Analysis — Master Prompt (v1) — Composite Persona Skill
 
-> Type: **composite (Composite)** | lenses: 6 | Source: [`prompts/composite/Supply Chain & Dependency Audit.md`](../../prompts/composite/Supply Chain & Dependency Audit.md)
+> Type: **composite (Composite)** | lenses: 4 | Source: [`prompts/composite/License Compliance Analysis.md`](../../prompts/composite/License Compliance Analysis.md)
 
 ## When to Use (Trigger)
-- When the task's mission is: You are performing a supply chain and dependency audit.
+- When the task's mission is: You are performing a license compliance analysis.
 - When the output must be structured, evidence-based, and verifiable — not a generic checklist.
 - When you must know precisely what is missing, incorrect, or dangerous before deciding or acting.
 
 ## Mission
 
-You are performing a supply chain and dependency audit. Your objective is to establish, from evidence only, what this system is actually made of and whether each component's origin can be proven rather than assumed. You are not running a vulnerability scanner and not treating a lockfile as an inventory: you reconstruct the build from the configuration and the artefacts, enumerate every direct and transitive dependency, and report every place where code enters the product without verifiable provenance or an owner who can patch it. Every finding names the component or build step, the risk it carries, the evidence, and what it would take to verify or remove it. Every unproven concern is POTENTIAL or UNVERIFIED, and no package is called safe because it is popular.
+You are performing a license compliance analysis. Build an evidence-backed inventory of the licenses and notices attached to software the project uses or distributes, compare documented obligations with the project's declared license and evidenced use/distribution model, and identify unresolved or potentially incompatible obligations for qualified legal review. Do not infer license terms or issue a legal conclusion.
 
 ## Non-Negotiable Rules
 
@@ -97,9 +97,9 @@ You are performing a supply chain and dependency audit. Your objective is to est
 - SPECIALIZED AUDITS
 - COVERAGE CONTROL — AUDIT MATRIX
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
-- ◆ Dependency Inventory
-- ◆ Supply-Chain Passes — run after the unit-by-unit review
-- ◆ License Compliance Analysis
+- ◆ License Compliance Skill Applicability Gate
+- ◆ Dependency License and Obligation Register
+- ◆ Boundary and Escalation Rules
 - ◆ Applicability Gate & Ownership Boundaries
 - BEHAVIOURAL RULES AND FINAL QUALITY GATE
 - CORE PRINCIPLE
@@ -107,8 +107,8 @@ You are performing a supply chain and dependency audit. Your objective is to est
 
 ## Full Reference (Progressive Disclosure)
 
-- [`references/supply-chain-dependency-audit.md`](references/supply-chain-dependency-audit.md) — the full master prompt text (600 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
+- [`references/license-compliance-analysis.md`](references/license-compliance-analysis.md) — the full master prompt text (573 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
 
 ---
 
-_Generated by `scripts/build_skills.py` from `prompts/composite/Supply Chain & Dependency Audit.md` — 2026-09-27_
+_Generated by `scripts/build_skills.py` from `prompts/composite/License Compliance Analysis.md` — 2026-09-27_

@@ -4,7 +4,7 @@
 >
 > 🌐 **Online version (GitHub Pages):** once Pages is enabled (Settings → Pages → Deploy from a branch → `main` → `/ (root)`), the site is available at `https://legionir.github.io/persona/`. A `.nojekyll` file is committed at the repository root so Markdown/JSON files are served exactly as they are, without Jekyll processing.
 >
-> 📦 **API-ready metadata:** [`personas.json`](personas.json) — all **216 personas** (190 roles + 26 composite master prompts) with the fields `id`, `roleId`, `type`, `domain`, `category`, `seniority`, `mission`, `duties`, `supervisors`, `consumers`, `capabilities`, `path`, and `facets` for search and grouping. Regenerate with `python3 scripts/build_metadata.py`
+> 📦 **API-ready metadata:** [`personas.json`](personas.json) — all **218 personas** (190 roles + 28 composite master prompts) with the fields `id`, `roleId`, `type`, `domain`, `category`, `seniority`, `mission`, `duties`, `supervisors`, `consumers`, `capabilities`, `path`, and `facets` for search and grouping. Regenerate with `python3 scripts/build_metadata.py`
 >
 > 🔄 **Everything here is generated.** One command rebuilds every artifact from its source and validates the result:
 >
@@ -976,8 +976,8 @@
 
 ## Composite Personas (Master Prompt)
 
-Besides the 190 single-role personas, the repository ships **26 composite personas**: master prompts that run several roles at once (as *lenses*) under one shared, evidence-driven protocol.
-22 of those 26 are built by `scripts/compose_persona.py` from ready-made blocks; the other 4 are hand-maintained.
+Besides the 190 single-role personas, the repository ships **28 composite personas**: master prompts that run several roles at once (as *lenses*) under one shared, evidence-driven protocol.
+24 of those 28 are built by `scripts/compose_persona.py` from ready-made blocks; the other 4 are hand-maintained.
 
 | Composite Persona | Lenses | Focus | File | Skill |
 |---|---|---|---|---|
@@ -989,6 +989,7 @@ Besides the 190 single-role personas, the repository ships **26 composite person
 | Cloud & Infrastructure Audit | 7 | Evidence-based audit of cloud and infrastructure: IaC coverage and drift, network exposure and segmentation, IAM and least privilege, secrets and encryption, compute/container hardening, observability of infrastructure, cost drivers, and failure behaviour of the platform itself | [`Cloud & Infrastructure Audit.md`](prompts/composite/Cloud%20%26%20Infrastructure%20Audit.md) | [`cloud-infrastructure-audit`](skills/cloud-infrastructure-audit/SKILL.md) |
 | Cost & FinOps Audit | 6 | Evidence-based audit of cloud and infrastructure cost: what is actually being spent, on what, by whom, and whether each pound is buying something the business asked for | [`Cost & FinOps Audit.md`](prompts/composite/Cost%20%26%20FinOps%20Audit.md) | [`cost-finops-audit`](skills/cost-finops-audit/SKILL.md) |
 | Data & Database Integrity Audit | 6 | Evidence-based audit of data correctness and persistence: schema and migration safety, constraints and invariants, transactional boundaries, consistency between stores, backup and restore verification, retention and deletion, locking and concurrency effects on data, growth and cost | [`Data & Database Integrity Audit.md`](prompts/composite/Data%20%26%20Database%20Integrity%20Audit.md) | [`data-database-integrity-audit`](skills/data-database-integrity-audit/SKILL.md) |
+| DevOps Audit | 7 | Evidence-based audit of build, CI/CD, environment configuration, deployment, process/runtime management, release, artifact reproducibility, operations, recovery, and operational documentation | [`DevOps Audit.md`](prompts/composite/DevOps%20Audit.md) | [`devops-audit`](skills/devops-audit/SKILL.md) |
 | Documentation Quality Audit | 6 | Evidence-based audit of documentation as a working system: whether a reader can find the right page, trust it, and act on it | [`Documentation Quality Audit.md`](prompts/composite/Documentation%20Quality%20Audit.md) | [`documentation-quality-audit`](skills/documentation-quality-audit/SKILL.md) |
 | Domain Model & Context Review | 6 | Forensic review of the domain model and its boundaries: ubiquitous language, bounded contexts and context mapping, subdomain strategy, entities, value objects, aggregates, domain services and specifications, repositories, factories, and domain events — judged against Domain-Driven Design (Evans) and its practical distilled form (Vernon) | [`Domain Model & Context Review.md`](prompts/composite/Domain%20Model%20%26%20Context%20Review.md) | [`domain-model-context-review`](skills/domain-model-context-review/SKILL.md) |
 | Execution Plan Generator | — | Execution Plan Generator — Master Prompt — composite master persona | [`Execution Plan Generator.md`](prompts/composite/Execution%20Plan%20Generator.md) | [`execution-plan-generator`](skills/execution-plan-generator/SKILL.md) |
@@ -997,6 +998,7 @@ Besides the 190 single-role personas, the repository ships **26 composite person
 | Frontend & Design System Review | 6 | Forensic review of visual and interaction consistency: design tokens, the shared component library and its prop APIs, page shells and templates, state coverage, forms, tables, typography, colour, iconography, motion, responsiveness, accessibility, theming, and the mechanical enforcement that keeps the system coherent — judged against the Unified Design System Doctrine | [`Frontend & Design System Review.md`](prompts/composite/Frontend%20%26%20Design%20System%20Review.md) | [`frontend-design-system-review`](skills/frontend-design-system-review/SKILL.md) |
 | Identity & Access Management Audit | 6 | Evidence-based audit of identity and access management: who can do what, how that is decided, and whether the decision can be proven | [`Identity & Access Management Audit.md`](prompts/composite/Identity%20%26%20Access%20Management%20Audit.md) | [`identity-access-management-audit`](skills/identity-access-management-audit/SKILL.md) |
 | Incident Forensic Review & Postmortem | 6 | Forensic review of an incident or outage from available evidence: timeline reconstruction, root cause versus contributing factors, detection and response gaps, blast radius, recovery path, and the actions that prevent recurrence | [`Incident Forensic Review & Postmortem.md`](prompts/composite/Incident%20Forensic%20Review%20%26%20Postmortem.md) | [`incident-forensic-review-postmortem`](skills/incident-forensic-review-postmortem/SKILL.md) |
+| License Compliance Analysis | 4 | Evidence-based compliance-risk triage for direct, transitive, and vendored dependency licenses, notices, attribution, reciprocal obligations, and unresolved compatibility questions | [`License Compliance Analysis.md`](prompts/composite/License%20Compliance%20Analysis.md) | [`license-compliance-analysis`](skills/license-compliance-analysis/SKILL.md) |
 | Localisation & i18n Audit | 6 | Evidence-based audit of internationalisation and localisation: whether the product can actually be translated and whether the translations that exist are correct and complete | [`Localisation & i18n Audit.md`](prompts/composite/Localisation%20%26%20i18n%20Audit.md) | [`localisation-i18n-audit`](skills/localisation-i18n-audit/SKILL.md) |
 | Observability & Monitoring Audit | 6 | Evidence-based audit of observability: whether the signals needed to detect, diagnose, and recover from failure actually exist and actually fire | [`Observability & Monitoring Audit.md`](prompts/composite/Observability%20%26%20Monitoring%20Audit.md) | [`observability-monitoring-audit`](skills/observability-monitoring-audit/SKILL.md) |
 | Performance & Scalability Audit | 6 | Evidence-based performance and scalability audit: hot paths, complexity and N+1 patterns, I/O and caching correctness, concurrency limits, database and query behaviour, resource ceilings, and what breaks first at 10x and 100x | [`Performance & Scalability Audit.md`](prompts/composite/Performance%20%26%20Scalability%20Audit.md) | [`performance-scalability-audit`](skills/performance-scalability-audit/SKILL.md) |
@@ -1025,7 +1027,7 @@ Every persona is also published as an **Agent Skill**: a small `SKILL.md` (trigg
 plus the full persona text in `references/` (progressive disclosure).
 
 ```bash
-python3 scripts/build_skills.py                 # build 216 skills (190 roles + 26 composites)
+python3 scripts/build_skills.py                 # build 218 skills (190 roles + 28 composites)
 python3 scripts/build_skills.py --only backend-developer
 python3 scripts/build_skills.py --source "prompts/audit/*.md"
 python3 scripts/validate_skills.py              # validate frontmatter / links / size
@@ -1064,6 +1066,7 @@ Full guide: [`docs/persona-skills.md`](docs/persona-skills.md).
 - [`LICENSE`](LICENSE) (Apache-2.0), [`CONTRIBUTING.md`](CONTRIBUTING.md), [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md), [`SECURITY.md`](SECURITY.md).
 - `docs/` — English guides: building a composite persona, converting to a skill, and the technical contracts
   - [`docs/composite-personas.md`](docs/composite-personas.md) — the composite-persona builder (block + spec)
+  - [`docs/eight-auditor-matrix.md`](docs/eight-auditor-matrix.md) — eight audit lanes, skill scope, and ownership boundaries
   - [`docs/persona-skills.md`](docs/persona-skills.md) — converting a persona into an Agent Skill
   - [`docs/construction-contract.md`](docs/construction-contract.md) — the code construction contract (Clean Code + Code Complete)
   - [`docs/design-architecture-contract.md`](docs/design-architecture-contract.md) — the design and architecture contract (Ousterhout + Clean Architecture)
@@ -1097,9 +1100,9 @@ The same thing step by step:
 
 ```bash
 python3 scripts/generate_personas.py     # 190 role prompts + the README Prompt column and links
-python3 scripts/build_metadata.py        # personas.json (190 roles + 26 composites)
-python3 scripts/compose_persona.py --all # the 22 spec-driven composite master prompts
-python3 scripts/build_skills.py          # 216 Agent Skills + skills/index.json + skills/README.md
+python3 scripts/build_metadata.py        # personas.json (190 roles + 28 composites)
+python3 scripts/compose_persona.py --all # the 24 spec-driven composite master prompts
+python3 scripts/build_skills.py          # 218 Agent Skills + skills/index.json + skills/README.md
 ```
 
 `generate_personas.py` rewrites the prompt files and keeps the `Prompt` column and the links
@@ -1116,10 +1119,10 @@ of the README main table up to date.
 |---|---|
 | `python3 scripts/validate_personas.py` | 190 prompts match the README table; slugs and links agree |
 | `python3 scripts/validate_composites.py` | all 19 master prompts are English-only, copy-paste ready, and substantive |
-| `python3 scripts/validate_skills.py` | 216 skills have valid frontmatter, resolvable links, and a `references/` copy byte-identical to its source |
-| `python3 scripts/compose_persona.py --all --check` | the 22 spec-driven composites re-render byte-for-byte |
+| `python3 scripts/validate_skills.py` | 218 skills have valid frontmatter, resolvable links, and a `references/` copy byte-identical to its source |
+| `python3 scripts/compose_persona.py --all --check` | the 24 spec-driven composites re-render byte-for-byte |
 | `python3 scripts/build_skills.py --check` | the skills on disk match what the builder would produce |
-| `node scripts/test_web.js` | `index.html` renders all 216 personas and its filters, sort, and search work |
+| `node scripts/test_web.js` | `index.html` renders all 218 personas and its filters, sort, and search work |
 
 CI runs all of them on every push and pull request (see
 [`.github/workflows/ci.yml`](.github/workflows/ci.yml)), and additionally fails if a

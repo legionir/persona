@@ -2,7 +2,7 @@
   "name": "persona",
   "version": "1.0.0",
   "private": true,
-  "description": "Persona library: 170 role prompts, 19 composite master prompts, and 189 Agent Skills",
+  "description": "Persona library: 190 role prompts, 28 composite master prompts, and 218 Agent Skills",
   "license": "Apache-2.0",
   "scripts": {
     "test": "node scripts/test_web.js"

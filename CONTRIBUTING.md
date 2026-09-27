@@ -37,12 +37,12 @@ make check    # validate structure, composites, skills, and the web page
 
 | Gate | What it guarantees |
 |---|---|
-| `validate_personas.py` | 170 prompts match the README table, slugs and links agree |
+| `validate_personas.py` | 190 prompts match the README table, slugs and links agree |
 | `validate_composites.py` | all 19 master prompts are English-only, copy-paste ready, and substantive |
-| `validate_skills.py` | 189 skills have valid frontmatter, resolvable links, and a reference copy identical to its source |
-| `compose_persona.py --all --check` | the 15 spec-driven composites re-render byte-for-byte |
+| `validate_skills.py` | 218 skills have valid frontmatter, resolvable links, and a reference copy identical to its source |
+| `compose_persona.py --all --check` | the 24 spec-driven composites re-render byte-for-byte |
 | `build_skills.py --check` | the skills on disk match what the builder would produce |
-| `scripts/test_web.js` | `index.html` renders all 189 personas, filters, sorts, and searches |
+| `scripts/test_web.js` | `index.html` renders all 218 personas, filters, sorts, and searches |
 
 The web test needs `npm install` first (it is the only Node dependency in the repo;
 the site itself has none).

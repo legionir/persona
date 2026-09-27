@@ -30,11 +30,11 @@ prompts:
 metadata:
 	$(PY) $(SCRIPTS)/build_metadata.py
 
-## composites: the 22 spec-driven composite master prompts
+## composites: the 24 spec-driven composite master prompts
 composites:
 	$(PY) $(SCRIPTS)/compose_persona.py --all
 
-## skills: 216 Agent Skills + skills/index.json + skills/README.md
+## skills: 218 Agent Skills + skills/index.json + skills/README.md
 skills:
 	$(PY) $(SCRIPTS)/build_skills.py
 

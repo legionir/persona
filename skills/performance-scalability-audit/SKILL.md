@@ -99,13 +99,14 @@ You are performing a performance and scalability audit. Your objective is to est
 - FINDINGS — VALIDATION, SEVERITY, CONFIDENCE, FORMAT
 - ◆ Scaling Model — what happens at 10x and 100x
 - ◆ Performance Passes — run after the unit-by-unit review
+- ◆ Applicability Gate & Ownership Boundaries
 - BEHAVIOURAL RULES AND FINAL QUALITY GATE
 - CORE PRINCIPLE
 - Appendix C — Source Personas (lenses)
 
 ## Full Reference (Progressive Disclosure)
 
-- [`references/performance-scalability-audit.md`](references/performance-scalability-audit.md) — the full master prompt text (570 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
+- [`references/performance-scalability-audit.md`](references/performance-scalability-audit.md) — the full master prompt text (578 lines). Open it only when you need protocol details, the assessment scope, or the output formats.
 
 ---
 
