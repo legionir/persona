@@ -305,102 +305,6 @@
 | Platform Owner | Cloud | Platform Ownership | Platform owner and its contracts |
 | Incident Commander | Incident and disaster recovery | Command | Command live incident response and coordinate responders |
 
-| Job Title | Primary Domain | Sub-Domain | Short Description |
-|---|---|---|---|
-| Founder | Management & Strategy | Business | Generate the idea and set overall business direction |
-| Product Visionary | Product | Strategy | Define the product vision |
-| Investor | Finance & Business | Investment | Raise capital and monitor return on investment |
-| Board of Directors | Management & Strategy | Governance | Strategic decision-making and oversight |
-| Project Sponsor | Management & Strategy | Financial | Financial and organizational support |
-| Domain Expert (SME) | Research & Analysis | Specialist | Provide domain expertise |
-| Product Manager (PM) | Product | Management | Product management and prioritization |
-| Product Owner (PO) | Product | Backlog | Manage the product backlog |
-| Project Manager | Management & Strategy | Project | Manage time, resources, scope, risk |
-| Program Manager | Management & Strategy | Program | Manage several related projects |
-| PMO | Management & Strategy | Process | Standardize project management processes |
-| Scrum Master | Management & Strategy | Agile | Facilitate Agile/Scrum |
-| Agile Coach | Management & Strategy | Agile | Improve the Agile process |
-| Technical Project Manager | Management & Strategy | Technical | Manage the project with a technical focus |
-| Solution Architect | Software Architecture | Solutions | Design high-level system solutions |
-| Enterprise Architect | Software Architecture | Enterprise | Align architecture with the enterprise |
-| Technical Lead / Tech Lead | Software Engineering | Leadership | Lead the team technically |
-| **Development Manager** | Software Engineering | Management | Manage the software development team |
-| **Engineering Manager** | Management & Strategy | Engineering | Manage the engineering team |
-| **Chief Technology Officer (CTO)** | Software Architecture | Strategic | Provide strategic technology leadership |
-| Principal Engineer | Software Architecture | Strategic | Provide technical leadership at enterprise level |
-| Data Architect | Software Architecture | Data | Design high-level data architecture |
-| Cloud Architect | Cloud | Architecture | Design cloud architecture |
-| Security Architect | Security | Architecture | Design and review security architecture |
-| **Chief Information Security Officer (CISO)** | Security | Strategic | Provide strategic security leadership |
-| QA Lead | Quality & Testing | Management | Manage the QA team and process |
-| **Quality Manager** | Quality & Testing | Management | Control the quality of the whole process |
-| **Performance Engineering Lead** | Quality & Testing | Performance | Lead the performance optimization team |
-| Legal Advisor | Legal & Compliance | Legal | Review legal matters |
-| IP / Copyright Specialist | Legal & Compliance | Intellectual Property | Manage intellectual property |
-| Privacy / Compliance Officer | Legal & Compliance | Privacy | Compliance with laws and regulations |
-| **Chief Privacy Officer** | Legal & Compliance | Privacy | Provide strategic privacy leadership |
-| Contract Manager | Legal & Compliance | Contracts | Manage contracts |
-| Finance Manager | Finance & Business | Budget | Manage budget and cost |
-| **Procurement Manager** | Finance & Business | Procurement | Manage procurement and supply |
-| HR / People Manager | Human Resources | Management | Manage people |
-| **Recruitment Manager** | Human Resources | Recruiting | Manage the recruiting process |
-| Customer Success Manager | Marketing & Sales | Customer Success | Customer success with the product |
-| Product Marketing Manager | Marketing & Sales | Product | Product marketing strategy |
-| Growth Manager | Marketing & Sales | Growth | Design the growth strategy |
-| Sales Manager | Marketing & Sales | Sales | Manage sales |
-| Account Manager | Marketing & Sales | Customers | Manage key accounts |
-| Business Development Manager | Marketing & Sales | Business Development | Create commercial opportunities |
-| Partnership Manager | Marketing & Sales | Partnership | Manage partner collaboration |
-| Operations Manager | Operations & Infrastructure | Operations | Maintain operational continuity |
-| **Infrastructure Manager** | Operations & Infrastructure | Management | Manage infrastructure and operations |
-| **DevOps Manager** | DevOps & SRE | Management | Manage the DevOps team |
-| Incident Manager | Incident and disaster recovery | Management | Manage incidents |
-| FinOps Specialist | Cloud | Financial | Control cloud cost |
-| Business Continuity Manager | Incident and disaster recovery | Business Continuity | Guarantee business continuity |
-| Product Owner (Post-Release) | Product | Post-Release | Manage product evolution |
-| End-of-Life Manager | Product | End-of-Life | Manage safe product retirement |
-| Risk Manager | Management & Strategy | Risk | Identify and manage risk |
-| Change Manager | Management & Strategy | Change | Manage scope change |
-| Audit Specialist | Legal & Compliance | Audit | Independently review processes |
-| External Auditor | Legal & Compliance | External Audit | Independent audit outside the team |
-| Vendor Manager | Finance & Business | Vendors | Manage vendors |
-| **Support Manager** | Customer Support | Management | Manage the support team |
-| **Community Director** | Marketing & Sales | Community | Provide strategic community leadership |
-| **Design Manager** | Design & UX | Management | Manage the design team |
-| **Chief Design Officer (CDO)** | Design & UX | Strategic | Provide strategic design leadership |
-| **Documentation Manager** | Documentation | Management | Manage the documentation team |
-| **Localization Manager** | Localization & Translation | Management | Manage the localization team |
-| **Embedded Systems Lead** | Hardware & Embedded | Leadership | Lead the embedded/IoT team |  | AI Engineer Lead | Data & AI | Leadership | Lead the AI/agent team and orchestration |
-| Product Analyst Lead | Research & Analysis | Leadership | Lead the product analytics team and data-driven decision-making |
-| Chief Information Officer (CIO) | Management & Strategy | Technology | Provide strategic IT and infrastructure leadership |
-| Chief Audit Officer (CAO) | Legal & Compliance | Internal Audit | Lead internal audit and control |
-| Architecture Review Board | Software Architecture | Governance | Review and approve architecture decisions |
-| Data Governance Manager | Database | Governance | Manage data governance |
-| Security Governance Manager | Security | Governance | Manage security governance |
-| Release Manager | DevOps & SRE | Release | Manage release delivery |
-| Service Owner | Operations & Infrastructure | Service Ownership | Service owner and its SLA |
-| Platform Owner | Cloud | Platform Ownership | Platform owner and its contracts |
-
-| Job Title | Role | Supervisor |
-|---|---|---|
-| Founder | SUPERVISOR | - |
-| Board of Directors | SUPERVISOR | - |
-| Project Sponsor | SUPERVISOR | - |
-| Project Manager | SUPERVISOR | - |
-| Program Manager | SUPERVISOR | - |
-| PMO | SUPERVISOR | - |
-| Scrum Master | SUPERVISOR | - |
-| Agile Coach | SUPERVISOR | - |
-| Technical Project Manager | SUPERVISOR | - |
-| Engineering Manager | SUPERVISOR | - |
-| Development Manager | SUPERVISOR | - |
-| Risk Manager | SUPERVISOR | - |
-| Change Manager | SUPERVISOR | - |
-| Quality Manager | SUPERVISOR | - |
-| Operations Manager | SUPERVISOR | - |
-| Incident Manager | SUPERVISOR | - |
-| Business Continuity Manager | SUPERVISOR | - |
-
 ---
 
 ### Executors (115 roles)
@@ -523,205 +427,116 @@
 | Revenue Operations (RevOps) Analyst | Marketing & Sales | Revenue Operations | Operate the revenue data, tooling, and forecast model | Sales Manager, Growth Manager |
 | Game Designer | Game Development | Design | Design gameplay systems, loops, and content rules | Product Manager (PM), Technical Lead / Tech Lead |
 
-| Job Title | Primary Domain | Sub-Domain | Short Description | Supervisor |
-|---|---|---|---|---|
-| Business Analyst (BA) | Research & Analysis | Business | Extract business needs | Product Manager |
-| Software Architect | Software Architecture | Software | Design the internal structure of the software | CTO / Technical Lead |
-| System Architect | Software Architecture | Systems | Design the overall system architecture | Enterprise Architect |
-| Staff Engineer | Software Engineering | Specialist | Solve complex technical problems | Principal Engineer |
-| Software Engineer | Software Engineering | General | Design and implement features | Development Manager |
-| Backend Developer | Software Engineering | Backend | Develop APIs and backend | Development Manager |
-| Frontend Developer | Software Engineering | Frontend | Develop the user interface | Development Manager |
-| Full-Stack Developer | Software Engineering | Full-Stack | Deliver an end-to-end feature | Development Manager |
-| Mobile Developer | Software Engineering | Mobile | Develop mobile applications | Development Manager |
-| Desktop Developer | Software Engineering | Desktop | Develop desktop applications | Development Manager |
-| Game Developer | Game Development | Development | Produce gameplay and game systems | Development Manager |
-| Embedded Developer | Hardware & Embedded | Software | Execute device logic | Embedded Systems Lead |
-| Firmware Engineer | Hardware & Embedded | Firmware | Control hardware through firmware | Embedded Systems Lead |
-| IoT Engineer | Hardware & Embedded | IoT | Connect the device to the platform | Embedded Systems Lead |
-| AI/ML Engineer | Data & AI | Engineering | Develop AI/ML models | Principal Engineer |
-| Data Scientist | Data & AI | Data Science | Analyze data and build models | Data Architect |
-| Data Engineer | Data & AI | Data Engineering | Build data pipelines | Data Architect |
-| MLOps Engineer | Data & AI | MLOps | Deploy and manage the ML model lifecycle | Principal Engineer |
-| Prompt Engineer | Data & AI | Prompt | Optimize model behaviour | AI Engineer Lead |
-| AI Engineer | Data & AI | AI Engineering | Design LLM, agent, and RAG systems | Principal Engineer |
-| Database Administrator (DBA) | Database | Management | Database availability and integrity | Data Architect |
-| Database Engineer | Database | Engineering | Design schema and queries | Data Architect |
-| DevOps Engineer | DevOps & SRE | DevOps | Automate Delivery | DevOps Manager |
-| SRE (Site Reliability Engineer) | DevOps & SRE | SRE | Guarantee reliability and availability | DevOps Manager |
-| Cloud Engineer | Cloud | Engineering | Manage cloud infrastructure | Cloud Architect |
-| Infrastructure Engineer | Operations & Infrastructure | Infrastructure | Provide stable infrastructure | Infrastructure Manager |
-| Network Engineer | Networking | Engineering | Design and manage the network | Infrastructure Manager |
-| System Administrator | Operations & Infrastructure | System Administration | Health of base systems | Infrastructure Manager |
-| Release Engineer | DevOps & SRE | Release | Controlled software release | DevOps Manager |
-| Build Engineer | DevOps & SRE | Build | Produce releasable artifacts | DevOps Manager |
-| QA Engineer | Quality & Testing | Engineering | Design and execute software tests | QA Lead |
-| Test Engineer | Quality & Testing | Test Execution | Detect defects | QA Lead |
-| Test Automation Engineer | Quality & Testing | Automation | Create automated tests | QA Lead |
-| Performance Engineer | Quality & Testing | Performance | Test and optimize performance | Performance Engineering Lead |
-| Load/Stress Tester | Quality & Testing | Load & Stress | Test the system under stress | Performance Engineering Lead |
-| Security Engineer | Security | Engineering | Implement security controls | CISO |
-| Application Security Engineer | Security | Application | Review application security | CISO |
-| Cybersecurity Engineer | Security | General | Protect systems and infrastructure | CISO |
-| Penetration Tester | Security | Penetration Testing | Authorized penetration testing | CISO |
-| DevSecOps Engineer | Security | DevSecOps | Integrate security into CI/CD | CISO |
-| Privacy Engineer | Legal & Compliance | Privacy | Design for privacy and data protection | Chief Privacy Officer |
-| UI Designer | Design & UX | UI | Create usable and consistent UI | Design Manager |
-| UX Designer | Design & UX | UX | Create an appropriate user experience | Design Manager |
-| Product Designer | Design & UX | Product | Combine UX/UI and product needs | Design Manager |
-| UX Researcher | Research & Analysis | UX | Research user behaviour | Design Manager |
-| UX Writer / Content Designer | Design & UX | Content | Create clear product communication | Design Manager |
-| Design System Designer | Design & UX | Design System | Create and maintain the design system | Design Manager |
-| Graphic Designer | Design & UX | Graphics | Create visual assets | Design Manager |
-| Motion Designer | Design & UX | Motion | Improve interaction feedback | Design Manager |
-| Accessibility Specialist | Design & UX | Accessibility | Review accessibility | Design Manager |
-| Technical Writer | Documentation | Technical | Transfer technical knowledge | Documentation Manager |
-| Documentation Specialist | Documentation | User | Make the product understandable | Documentation Manager |
-| Localization Specialist | Localization & Translation | Localization | Adapt the product to the target market | Localization Manager |
-| Translator | Localization & Translation | Translation | Accurate, natural translation | Localization Manager |
-| Procurement Specialist | Finance & Business | Procurement | Provide needed resources | Procurement Manager |
-| Recruiter | Human Resources | Recruiting | Provide needed personnel | Recruitment Manager |
-| Technical Recruiter | Human Resources | Technical Recruiting | Recruit technical talent | Recruitment Manager |
-| Scrum Product Team | Software Engineering | Team | Run iterative development | Product Owner |
-| UI/UX Research Participants | Research & Analysis | UX | Provide user feedback | UX Researcher |
-| Beta Tester | Quality & Testing | Beta | Discover issues before release | QA Lead |
-| End User | Research & Analysis | End User | Generate real signal from product usage | Product Manager |
-| Customer Support Agent | Customer Support | General | Resolve user issues | Support Manager |
-| Technical Support Engineer | Customer Support | Technical | Fix technical issues | Support Manager |
-| Community Manager | Marketing & Sales | Community | Build healthy engagement with users | Community Director |
-| Marketing Specialist | Marketing & Sales | Campaign | Acquire and activate users | Product Marketing Manager |
-| SEO Specialist | Marketing & Sales | SEO | Increase organic acquisition | Product Marketing Manager |
-| ASO Specialist | Marketing & Sales | ASO | Increase app discovery | Product Marketing Manager |
-| Sales Representative | Marketing & Sales | Representation | Convert leads into customers | Sales Manager |
-| DevRel | Marketing & Sales | Developer Relations | Grow the developer ecosystem | Community Director |
-| Technical Evangelist | Marketing & Sales | Technology | Increase technical adoption | Community Director |
-| On-call Engineer | Incident and disaster recovery | On-call | Respond immediately to production issues | Incident Manager |
-| Maintenance Engineer | Operations & Infrastructure | Maintenance | Maintain system health | Infrastructure Manager |
-| Refactoring Engineer | Software Engineering | Refactoring | Improve code structure | Technical Lead |
-| Legacy Modernization Engineer | Migration & Modernization | Legacy | Reduce legacy risk | Principal Engineer |
-| Observability Engineer | DevOps & SRE | Observability | Logging, metrics, tracing, and monitoring | DevOps Manager |
-| Data Analyst | Research & Analysis | Data | Analyze user behaviour and KPIs | Product Analyst Lead |
-| BI Analyst | Research & Analysis | BI | Build management reports and dashboards | Product Analyst Lead |
-| Product Analyst | Research & Analysis | Product | Support product decisions | Product Manager |
-| Third-party Integration Specialist | Integration & Third-Party | API | Reliable service connectivity | Technical Lead |
-| Migration Specialist | Migration & Modernization | Migration | Migrate data and systems | Technical Lead |
-| Deployment Engineer | DevOps & SRE | Deployment | Deploy releases | DevOps Manager |
-| Disaster Recovery Specialist | Incident and disaster recovery | DR | Design and test recovery | Business Continuity Manager |
-| Backup Administrator | Incident and disaster recovery | Backup | Manage backup and restore | Infrastructure Manager |
-| Decommission Engineer | Migration & Modernization | Decommission | Safely decommission services | Infrastructure Manager |  | Agent Architect | Data & AI | Agent | Design agent architecture | AI Engineer Lead |
-| Agent Integration Engineer | Data & AI | Agent | Implement agent integration | AI Engineer Lead |
-| Tool Developer | Data & AI | Agent | Agent tools and API wrappers | AI Engineer Lead |
-| Agent Evaluator | Data & AI | Agent | Evaluate agent behaviour and safety | AI Engineer Lead |
-| Agentic Prompt Specialist | Data & AI | Agent | Design prompts and few-shot examples | AI Engineer Lead |
-| Agent Safety Engineer | Data & AI | Agent | Guardrails, jailbreak, and budget | AI Engineer Lead |
-| Cloud Security Engineer | Security | Cloud | Cloud service security | Security Architect |
-| Database Security Specialist | Security | Database | Database security | Security Architect |
-| SOC Analyst | Security | SOC | Analyse and give first response to alerts | CISO |
-| Incident Response Engineer | Security | Incident Response | Respond to security incidents | Incident Manager |
-| Vulnerability Management Specialist | Security | Vulnerability | Manage vulnerabilities | Security Governance Manager |
-| Security Auditor | Security | Audit | Independent security audit | Security Governance Manager |
-
-### Product (10 supervisors + 5 executors = 15)
-
-| Job Title | Role | Supervisor |
-|---|---|---|
-| Product Visionary | SUPERVISOR | - |
-| Product Manager (PM) | SUPERVISOR | - |
-| Product Owner (PO) | SUPERVISOR | - |
-| Customer Success Manager | SUPERVISOR | - |
-| Product Marketing Manager | SUPERVISOR | - |
-| Growth Manager | SUPERVISOR | - |
-| Product Owner (Post-Release) | SUPERVISOR | - |
-| End-of-Life Manager | SUPERVISOR | - |
-| Business Analyst (BA) | EXECUTOR | Product Manager |
-| Product Designer | EXECUTOR | Design Manager |
-| Product Analyst | EXECUTOR | Product Manager |
-| Scrum Product Team | EXECUTOR | Product Owner |
-| End User | EXECUTOR | Product Manager |
-
 ---
 
-### Software Architecture (9 supervisors + 2 executors = 11)
+### Data & AI (1 supervisor + 17 executors = 18)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Solution Architect | SUPERVISOR | - |
-| Enterprise Architect | SUPERVISOR | - |
-| CTO | SUPERVISOR | - |
-| Principal Engineer | SUPERVISOR | - |
-| Technical Lead / Tech Lead | SUPERVISOR | - |
-| Data Architect | SUPERVISOR | - |
-| Cloud Architect | SUPERVISOR | - |
-| Security Architect | SUPERVISOR | - |
-| CISO | SUPERVISOR | - |
-| Software Architect | EXECUTOR | CTO / Technical Lead |
-| System Architect | EXECUTOR | Enterprise Architect |
-
----
-
-### Software Engineering (1 supervisor + 15 executors = 16)
-
-| Job Title | Role | Supervisor |
-|---|---|---|
-| Development Manager | SUPERVISOR | - |
-| Software Engineer | EXECUTOR | Development Manager |
-| Backend Developer | EXECUTOR | Development Manager |
-| Frontend Developer | EXECUTOR | Development Manager |
-| Full-Stack Developer | EXECUTOR | Development Manager |
-| Mobile Developer | EXECUTOR | Development Manager |
-| Desktop Developer | EXECUTOR | Development Manager |
-| Game Developer | EXECUTOR | Development Manager |
-| Staff Engineer | EXECUTOR | Principal Engineer |
-| Refactoring Engineer | EXECUTOR | Technical Lead |
-| Legacy Modernization Engineer | EXECUTOR | Principal Engineer |
-| Third-party Integration Specialist | EXECUTOR | Technical Lead |
-| Migration Specialist | EXECUTOR | Technical Lead |
-
----
-
-### Data & AI (2 supervisors + 6 executors = 8)
-
-| Job Title | Role | Supervisor |
-|---|---|---|
-| Data Architect | SUPERVISOR | - |
-| Principal Engineer | SUPERVISOR | - |
-| AI/ML Engineer | EXECUTOR | Principal Engineer |
-| Data Scientist | EXECUTOR | Data Architect |
-| Data Engineer | EXECUTOR | Data Architect |
-| MLOps Engineer | EXECUTOR | Principal Engineer |
+| AI Engineer Lead | SUPERVISOR | — |
+| AI Engineer | EXECUTOR | Solution Architect, Principal Engineer |
+| AI Safety / Alignment Engineer | EXECUTOR | AI Engineer Lead, Security Architect |
+| AI/ML Engineer | EXECUTOR | AI Engineer Lead, Principal Engineer |
+| Agent Architect | EXECUTOR | AI Engineer Lead, Technical Lead / Tech Lead |
+| Agent Evaluator | EXECUTOR | AI Engineer Lead, QA Lead |
+| Agent Integration Engineer | EXECUTOR | AI Engineer Lead |
+| Agent Safety Engineer | EXECUTOR | AI Engineer Lead, Security Architect |
+| Agentic Prompt Specialist | EXECUTOR | AI Engineer Lead |
+| Analytics Engineer | EXECUTOR | Data Architect, Data Governance Manager |
+| Data Engineer | EXECUTOR | Data Architect, Data Governance Manager |
+| Data Scientist | EXECUTOR | Data Architect, Product Manager (PM) |
+| Data Steward | EXECUTOR | Data Governance Manager, Data Architect |
+| Fine-tuning Engineer | EXECUTOR | AI Engineer Lead, Technical Lead / Tech Lead |
+| MLOps Engineer | EXECUTOR | AI Engineer Lead, Cloud Architect, DevOps Manager |
 | Prompt Engineer | EXECUTOR | AI Engineer Lead |
-| AI Engineer | EXECUTOR | Principal Engineer |
+| RAG / Retrieval Engineer | EXECUTOR | AI Engineer Lead, Solution Architect |
+| Tool Developer | EXECUTOR | AI Engineer Lead |
 
 ---
 
-### Security (2 supervisors + 6 executors = 8)
+### Marketing & Sales (8 supervisors + 8 executors = 16)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| CISO | SUPERVISOR | - |
-| Security Architect | SUPERVISOR | - |
-| Security Engineer | EXECUTOR | CISO |
-| Application Security Engineer | EXECUTOR | CISO |
-| Cybersecurity Engineer | EXECUTOR | CISO |
-| Penetration Tester | EXECUTOR | CISO |
-| DevSecOps Engineer | EXECUTOR | CISO |
-| Privacy Engineer | EXECUTOR | Chief Privacy Officer |
+| Account Manager | SUPERVISOR | — |
+| Business Development Manager | SUPERVISOR | — |
+| Community Director | SUPERVISOR | — |
+| Customer Success Manager | SUPERVISOR | — |
+| Growth Manager | SUPERVISOR | — |
+| Partnership Manager | SUPERVISOR | — |
+| Product Marketing Manager | SUPERVISOR | — |
+| Sales Manager | SUPERVISOR | — |
+| ASO Specialist | EXECUTOR | Product Marketing Manager, Growth Manager |
+| Community Manager | EXECUTOR | Product Manager (PM), Product Marketing Manager |
+| DevRel | EXECUTOR | Community Director, Product Marketing Manager |
+| Marketing Specialist | EXECUTOR | Product Marketing Manager, Growth Manager |
+| Revenue Operations (RevOps) Analyst | EXECUTOR | Sales Manager, Growth Manager |
+| SEO Specialist | EXECUTOR | Product Marketing Manager, Growth Manager |
+| Sales Representative | EXECUTOR | Sales Manager |
+| Technical Evangelist | EXECUTOR | Community Director |
 
 ---
 
-### Quality & Testing (3 supervisors + 7 executors = 10)
+### Security (3 supervisors + 13 executors = 16)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| QA Lead | SUPERVISOR | - |
-| Quality Manager | SUPERVISOR | - |
-| Performance Engineering Lead | SUPERVISOR | - |
-| QA Engineer | EXECUTOR | QA Lead |
-| Test Engineer | EXECUTOR | QA Lead |
-| Test Automation Engineer | EXECUTOR | QA Lead |
-| Performance Engineer | EXECUTOR | Performance Engineering Lead |
-| Load/Stress Tester | EXECUTOR | Performance Engineering Lead |
-| Beta Tester | EXECUTOR | QA Lead |
+| Chief Information Security Officer (CISO) | SUPERVISOR | — |
+| Security Architect | SUPERVISOR | — |
+| Security Governance Manager | SUPERVISOR | — |
+| Application Security Engineer | EXECUTOR | Security Architect, Chief Information Security Officer (CISO) |
+| Cloud Security Engineer | EXECUTOR | Security Architect, Cloud Architect, Chief Information Security Officer (CISO) |
+| Cryptography Engineer | EXECUTOR | Security Architect, Chief Information Security Officer (CISO) |
+| Cybersecurity Engineer | EXECUTOR | Chief Information Security Officer (CISO), Security Governance Manager |
+| Database Security Specialist | EXECUTOR | Security Architect, Data Architect |
+| DevSecOps Engineer | EXECUTOR | Security Architect, DevOps Manager |
+| IAM / Identity Engineer | EXECUTOR | Security Architect, Chief Information Security Officer (CISO) |
+| Incident Response Engineer | EXECUTOR | Incident Manager, Chief Information Security Officer (CISO) |
+| Penetration Tester | EXECUTOR | Security Architect, Chief Information Security Officer (CISO) |
+| SOC Analyst | EXECUTOR | Chief Information Security Officer (CISO), Security Governance Manager |
+| Security Auditor | EXECUTOR | Security Governance Manager, Chief Information Security Officer (CISO) |
+| Security Engineer | EXECUTOR | Security Architect, Chief Information Security Officer (CISO) |
+| Vulnerability Management Specialist | EXECUTOR | Security Governance Manager, Chief Information Security Officer (CISO) |
+
+---
+
+### Management & Strategy (13 supervisors)
+
+| Job Title | Role | Supervisor |
+|---|---|---|
+| Agile Coach | SUPERVISOR | — |
+| Board of Directors | SUPERVISOR | — |
+| Change Manager | SUPERVISOR | — |
+| Chief Information Officer (CIO) | SUPERVISOR | — |
+| Engineering Manager | SUPERVISOR | — |
+| Founder | SUPERVISOR | — |
+| PMO | SUPERVISOR | — |
+| Program Manager | SUPERVISOR | — |
+| Project Manager | SUPERVISOR | — |
+| Project Sponsor | SUPERVISOR | — |
+| Risk Manager | SUPERVISOR | — |
+| Scrum Master | SUPERVISOR | — |
+| Technical Project Manager | SUPERVISOR | — |
+
+---
+
+### Software Engineering (2 supervisors + 11 executors = 13)
+
+| Job Title | Role | Supervisor |
+|---|---|---|
+| Development Manager | SUPERVISOR | — |
+| Technical Lead / Tech Lead | SUPERVISOR | — |
+| Backend Developer | EXECUTOR | Technical Lead / Tech Lead, Solution Architect |
+| Desktop Developer | EXECUTOR | Technical Lead / Tech Lead |
+| Frontend Developer | EXECUTOR | Technical Lead / Tech Lead, Product Owner (PO) |
+| Full-Stack Developer | EXECUTOR | Technical Lead / Tech Lead, Solution Architect |
+| Mobile Developer | EXECUTOR | Technical Lead / Tech Lead, Product Manager (PM) |
+| Payments / Billing Engineer | EXECUTOR | Solution Architect, Technical Lead / Tech Lead |
+| Refactoring Engineer | EXECUTOR | Technical Lead / Tech Lead |
+| Scrum Product Team | EXECUTOR | Product Owner (PO), Scrum Master |
+| Search / Relevance Engineer | EXECUTOR | Solution Architect, Technical Lead / Tech Lead |
+| Software Engineer | EXECUTOR | Technical Lead / Tech Lead, Engineering Manager |
+| Staff Engineer | EXECUTOR | Technical Lead / Tech Lead, Principal Engineer |
 
 ---
 
@@ -729,193 +544,173 @@
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Design Manager | SUPERVISOR | - |
-| Chief Design Officer (CDO) | SUPERVISOR | - |
-| UI Designer | EXECUTOR | Design Manager |
-| UX Designer | EXECUTOR | Design Manager |
-| Product Designer | EXECUTOR | Design Manager |
-| UX Researcher | EXECUTOR | Design Manager |
-| UX Writer / Content Designer | EXECUTOR | Design Manager |
-| Design System Designer | EXECUTOR | Design Manager |
-| Graphic Designer | EXECUTOR | Design Manager |
+| Chief Design Officer (CDO) | SUPERVISOR | — |
+| Design Manager | SUPERVISOR | — |
+| Accessibility Specialist | EXECUTOR | Design Manager, QA Lead |
+| Brand Designer | EXECUTOR | Design Manager, Chief Design Officer (CDO) |
+| Design System Designer | EXECUTOR | Design Manager, Technical Lead / Tech Lead |
+| DesignOps Engineer | EXECUTOR | Design Manager, Chief Design Officer (CDO) |
+| Graphic Designer | EXECUTOR | Product Marketing Manager, Design Manager |
 | Motion Designer | EXECUTOR | Design Manager |
-| Accessibility Specialist | EXECUTOR | Design Manager |
-| UI/UX Research Participants | EXECUTOR | UX Researcher |
+| Product Designer | EXECUTOR | Product Manager (PM) |
+| UI Designer | EXECUTOR | Design Manager, Product Manager (PM) |
+| UX Designer | EXECUTOR | Design Manager, Product Manager (PM) |
+| UX Writer / Content Designer | EXECUTOR | Design Manager, Product Manager (PM) |
 
 ---
 
-### Operations & Infrastructure (3 supervisors + 7 executors = 10)
+### Legal & Compliance (8 supervisors + 4 executors = 12)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Operations Manager | SUPERVISOR | - |
-| Infrastructure Manager | SUPERVISOR | - |
-| DevOps Manager | SUPERVISOR | - |
-| Infrastructure Engineer | EXECUTOR | Infrastructure Manager |
-| System Administrator | EXECUTOR | Infrastructure Manager |
-| Network Engineer | EXECUTOR | Infrastructure Manager |
-| Maintenance Engineer | EXECUTOR | Infrastructure Manager |
-| DevOps Engineer | EXECUTOR | DevOps Manager |
-| SRE (Site Reliability Engineer) | EXECUTOR | DevOps Manager |
-| Cloud Engineer | EXECUTOR | Cloud Architect |
-| Backup Administrator | EXECUTOR | Infrastructure Manager |
-| Deploy Engineer | EXECUTOR | DevOps Manager |
-| On-call Engineer | EXECUTOR | Incident Manager |
+| Audit Specialist | SUPERVISOR | — |
+| Chief Audit Officer (CAO) | SUPERVISOR | — |
+| Chief Privacy Officer | SUPERVISOR | — |
+| Contract Manager | SUPERVISOR | — |
+| External Auditor | SUPERVISOR | — |
+| IP / Copyright Specialist | SUPERVISOR | — |
+| Legal Advisor | SUPERVISOR | — |
+| Privacy / Compliance Officer | SUPERVISOR | — |
+| Compliance Evidence Analyst | EXECUTOR | Privacy / Compliance Officer, Chief Audit Officer (CAO) |
+| KYC / AML Specialist | EXECUTOR | Privacy / Compliance Officer, Chief Privacy Officer |
+| Privacy Engineer | EXECUTOR | Privacy / Compliance Officer |
+| SOC 2 & ISO 27001 Readiness Specialist | EXECUTOR | Chief Audit Officer (CAO), Audit Specialist |
+
+---
+
+### DevOps & SRE (2 supervisors + 8 executors = 10)
+
+| Job Title | Role | Supervisor |
+|---|---|---|
+| DevOps Manager | SUPERVISOR | — |
+| Release Manager | SUPERVISOR | — |
+| Build Engineer | EXECUTOR | Release Manager, Technical Lead / Tech Lead |
+| Chaos Engineer | EXECUTOR | Platform Owner, DevOps Manager |
+| Deployment Engineer | EXECUTOR | Release Manager, DevOps Manager |
+| DevOps Engineer | EXECUTOR | Technical Lead / Tech Lead, Cloud Architect |
 | Observability Engineer | EXECUTOR | DevOps Manager |
-| Decommission Engineer | EXECUTOR | Infrastructure Manager |
+| Platform Engineer | EXECUTOR | Platform Owner, Cloud Architect |
+| Release Engineer | EXECUTOR | Release Manager, QA Lead |
+| SRE (Site Reliability Engineer) | EXECUTOR | Service Owner, Engineering Manager |
 
 ---
 
-### Cloud (3 supervisors + 2 executors = 5)
+### Quality & Testing (3 supervisors + 6 executors = 9)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Cloud Architect | SUPERVISOR | - |
-| FinOps Specialist | SUPERVISOR | - |
-| CTO | SUPERVISOR | - |
-| Cloud Engineer | EXECUTOR | Cloud Architect |
-| Observability Engineer | EXECUTOR | DevOps Manager |
+| Performance Engineering Lead | SUPERVISOR | — |
+| QA Lead | SUPERVISOR | — |
+| Quality Manager | SUPERVISOR | — |
+| Beta Tester | EXECUTOR | QA Lead |
+| Load/Stress Tester | EXECUTOR | Performance Engineering Lead, QA Lead |
+| Performance Engineer | EXECUTOR | Performance Engineering Lead, DevOps Manager |
+| QA Engineer | EXECUTOR | QA Lead |
+| Test Automation Engineer | EXECUTOR | QA Lead, DevOps Manager |
+| Test Engineer | EXECUTOR | QA Lead |
 
 ---
 
-### Networking (1 executor)
+### Research & Analysis (2 supervisors + 7 executors = 9)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Network Engineer | EXECUTOR | Infrastructure Manager |
+| Domain Expert (SME) | SUPERVISOR | — |
+| Product Analyst Lead | SUPERVISOR | — |
+| BI Analyst | EXECUTOR | Data Architect, Finance Manager |
+| Business Analyst (BA) | EXECUTOR | Product Owner (PO), Product Manager (PM) |
+| Data Analyst | EXECUTOR | Product Analyst Lead, Product Manager (PM) |
+| End User | EXECUTOR | Product Owner (Post-Release) |
+| Product Analyst | EXECUTOR | Product Manager (PM) |
+| UI/UX Research Participants | EXECUTOR | Design Manager |
+| UX Researcher | EXECUTOR | Product Manager (PM), Design Manager |
 
 ---
 
-### Database (1 supervisor + 2 executors = 3)
+### Software Architecture (6 supervisors + 2 executors = 8)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Data Architect | SUPERVISOR | - |
-| Database Administrator (DBA) | EXECUTOR | Data Architect |
-| Database Engineer | EXECUTOR | Data Architect |
+| Architecture Review Board | SUPERVISOR | — |
+| Chief Technology Officer (CTO) | SUPERVISOR | — |
+| Data Architect | SUPERVISOR | — |
+| Enterprise Architect | SUPERVISOR | — |
+| Principal Engineer | SUPERVISOR | — |
+| Solution Architect | SUPERVISOR | — |
+| Software Architect | EXECUTOR | Solution Architect, Technical Lead / Tech Lead |
+| System Architect | EXECUTOR | Solution Architect, Enterprise Architect |
 
 ---
 
-### DevOps & SRE (3 supervisors + 6 executors = 9)
+### Incident and disaster recovery (3 supervisors + 3 executors = 6)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| DevOps Manager | SUPERVISOR | - |
-| Infrastructure Manager | SUPERVISOR | - |
-| Incident Manager | SUPERVISOR | - |
-| DevOps Engineer | EXECUTOR | DevOps Manager |
-| SRE (Site Reliability Engineer) | EXECUTOR | DevOps Manager |
-| Release Engineer | EXECUTOR | DevOps Manager |
-| Build Engineer | EXECUTOR | DevOps Manager |
-| Deployment Engineer | EXECUTOR | DevOps Manager |
-| On-call Engineer | EXECUTOR | Incident Manager |
+| Business Continuity Manager | SUPERVISOR | — |
+| Incident Commander | SUPERVISOR | — |
+| Incident Manager | SUPERVISOR | — |
+| Backup Administrator | EXECUTOR | Business Continuity Manager |
+| Disaster Recovery Specialist | EXECUTOR | Business Continuity Manager, DevOps Manager |
+| On-call Engineer | EXECUTOR | Incident Manager, DevOps Manager |
 
 ---
 
-### Marketing & Sales (11 supervisors + 7 executors = 18)
+### Operations & Infrastructure (3 supervisors + 3 executors = 6)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Investor | SUPERVISOR | - |
-| Customer Success Manager | SUPERVISOR | - |
-| Product Marketing Manager | SUPERVISOR | - |
-| Growth Manager | SUPERVISOR | - |
-| Sales Manager | SUPERVISOR | - |
-| Account Manager | SUPERVISOR | - |
-| Business Development Manager | SUPERVISOR | - |
-| Partnership Manager | SUPERVISOR | - |
-| Vendor Manager | SUPERVISOR | - |
-| Community Director | SUPERVISOR | - |
-| Support Manager | SUPERVISOR | - |
-| Marketing Specialist | EXECUTOR | Product Marketing Manager |
-| SEO Specialist | EXECUTOR | Product Marketing Manager |
-| ASO Specialist | EXECUTOR | Product Marketing Manager |
-| Sales Representative | EXECUTOR | Sales Manager |
-| DevRel | EXECUTOR | Community Director |
-| Technical Evangelist | EXECUTOR | Community Director |
-| Community Manager | EXECUTOR | Community Director |
+| Infrastructure Manager | SUPERVISOR | — |
+| Operations Manager | SUPERVISOR | — |
+| Service Owner | SUPERVISOR | — |
+| Infrastructure Engineer | EXECUTOR | Cloud Architect, Platform Owner |
+| Maintenance Engineer | EXECUTOR | Technical Lead / Tech Lead, Engineering Manager |
+| System Administrator | EXECUTOR | Infrastructure Manager, Security Architect |
 
 ---
 
-### Customer Support (1 supervisor + 2 executors = 3)
+### Finance & Business (4 supervisors + 1 executor = 5)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Support Manager | SUPERVISOR | - |
-| Customer Support Agent | EXECUTOR | Support Manager |
-| Technical Support Engineer | EXECUTOR | Support Manager |
-
----
-
-### Legal & Compliance (6 supervisors + 1 executor = 7)
-
-| Job Title | Role | Supervisor |
-|---|---|---|
-| Legal Advisor | SUPERVISOR | - |
-| IP / Copyright Specialist | SUPERVISOR | - |
-| Privacy / Compliance Officer | SUPERVISOR | - |
-| Chief Privacy Officer | SUPERVISOR | - |
-| Contract Manager | SUPERVISOR | - |
-| Audit Specialist | SUPERVISOR | - |
-| External Auditor | SUPERVISOR | - |
-| Privacy Engineer | EXECUTOR | Chief Privacy Officer |
-
----
-
-### Finance & Commercial (4 supervisors + 1 executor = 5)
-
-| Job Title | Role | Supervisor |
-|---|---|---|
-| Investor | SUPERVISOR | - |
-| Finance Manager | SUPERVISOR | - |
-| Procurement Manager | SUPERVISOR | - |
-| Vendor Manager | SUPERVISOR | - |
+| Finance Manager | SUPERVISOR | — |
+| Investor | SUPERVISOR | — |
+| Procurement Manager | SUPERVISOR | — |
+| Vendor Manager | SUPERVISOR | — |
 | Procurement Specialist | EXECUTOR | Procurement Manager |
 
 ---
 
-### Human Resources (2 supervisors + 3 executors = 5)
+### Product (5 supervisors)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| HR / People Manager | SUPERVISOR | - |
-| Recruitment Manager | SUPERVISOR | - |
-| Recruiter | EXECUTOR | Recruitment Manager |
-| Technical Recruiter | EXECUTOR | Recruitment Manager |
+| End-of-Life Manager | SUPERVISOR | — |
+| Product Manager (PM) | SUPERVISOR | — |
+| Product Owner (PO) | SUPERVISOR | — |
+| Product Owner (Post-Release) | SUPERVISOR | — |
+| Product Visionary | SUPERVISOR | — |
 
 ---
 
-### Research & Analysis (1 supervisor + 6 executors = 7)
+### Cloud (3 supervisors + 1 executor = 4)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Domain Expert (SME) | SUPERVISOR | - |
-| Business Analyst (BA) | EXECUTOR | Product Manager |
-| Data Analyst | EXECUTOR | Product Analyst Lead |
-| BI Analyst | EXECUTOR | Product Analyst Lead |
-| Product Analyst | EXECUTOR | Product Manager |
-| UX Researcher | EXECUTOR | Design Manager |
-| UI/UX Research Participants | EXECUTOR | UX Researcher |
+| Cloud Architect | SUPERVISOR | — |
+| FinOps Specialist | SUPERVISOR | — |
+| Platform Owner | SUPERVISOR | — |
+| Cloud Engineer | EXECUTOR | Cloud Architect |
 
 ---
 
-### Documentation (1 supervisor + 2 executors = 3)
+### Documentation (1 supervisor + 3 executors = 4)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Documentation Manager | SUPERVISOR | - |
-| Technical Writer | EXECUTOR | Documentation Manager |
-| Documentation Specialist | EXECUTOR | Documentation Manager |
-
----
-
-### Localization & Translation (1 supervisor + 2 executors = 3)
-
-| Job Title | Role | Supervisor |
-|---|---|---|
-| Localization Manager | SUPERVISOR | - |
-| Localization Specialist | EXECUTOR | Localization Manager |
-| Translator | EXECUTOR | Localization Manager |
+| Documentation Manager | SUPERVISOR | — |
+| Content Strategist | EXECUTOR | Documentation Manager, Product Manager (PM) |
+| Documentation Specialist | EXECUTOR | Product Manager (PM) |
+| Technical Writer | EXECUTOR | Technical Lead / Tech Lead, Product Manager (PM) |
 
 ---
 
@@ -923,42 +718,89 @@
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Embedded Systems Lead | SUPERVISOR | - |  | Embedded Developer | EXECUTOR | Embedded Systems Lead |
-| Firmware Engineer | EXECUTOR | Embedded Systems Lead |
-| IoT Engineer | EXECUTOR | Embedded Systems Lead |
+| Embedded Systems Lead | SUPERVISOR | — |
+| Embedded Developer | EXECUTOR | Solution Architect, Technical Lead / Tech Lead |
+| Firmware Engineer | EXECUTOR | Solution Architect, Technical Lead / Tech Lead |
+| IoT Engineer | EXECUTOR | Solution Architect, Cloud Architect |
 
 ---
 
-### Integration & Third-Party (2 executors)
+### Human Resources (2 supervisors + 2 executors = 4)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Third-party Integration Specialist | EXECUTOR | Technical Lead |
-| Migration Specialist | EXECUTOR | Technical Lead |
+| HR / People Manager | SUPERVISOR | — |
+| Recruitment Manager | SUPERVISOR | — |
+| Recruiter | EXECUTOR | HR / People Manager |
+| Technical Recruiter | EXECUTOR | HR / People Manager, Engineering Manager |
 
 ---
 
-### Migration & Modernization (2 executors)
+### Customer Support (1 supervisor + 2 executors = 3)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Legacy Modernization Engineer | EXECUTOR | Principal Engineer |
-| Decommission Engineer | EXECUTOR | Infrastructure Manager |
+| Support Manager | SUPERVISOR | — |
+| Customer Support Agent | EXECUTOR | Customer Success Manager, Operations Manager |
+| Technical Support Engineer | EXECUTOR | Operations Manager, Incident Manager |
 
 ---
 
-### Incident & Disaster Recovery (2 supervisors + 4 executors = 6)
+### Database (1 supervisor + 2 executors = 3)
 
 | Job Title | Role | Supervisor |
 |---|---|---|
-| Incident Manager | SUPERVISOR | - |
-| Business Continuity Manager | SUPERVISOR | - |
-| On-call Engineer | EXECUTOR | Incident Manager |
-| Disaster Recovery Specialist | EXECUTOR | Business Continuity Manager |
-| Backup Administrator | EXECUTOR | Infrastructure Manager |
-| Decommission Engineer | EXECUTOR | Infrastructure Manager |
+| Data Governance Manager | SUPERVISOR | — |
+| Database Administrator (DBA) | EXECUTOR | Data Architect |
+| Database Engineer | EXECUTOR | Data Architect |
 
 ---
+
+### Localization & Translation (1 supervisor + 2 executors = 3)
+
+| Job Title | Role | Supervisor |
+|---|---|---|
+| Localization Manager | SUPERVISOR | — |
+| Localization Specialist | EXECUTOR | Product Manager (PM), Product Marketing Manager |
+| Translator | EXECUTOR | Localization Manager |
+
+---
+
+### Migration & Modernization (3 executors)
+
+| Job Title | Role | Supervisor |
+|---|---|---|
+| Decommission Engineer | EXECUTOR | End-of-Life Manager, Operations Manager, Security Architect |
+| Legacy Modernization Engineer | EXECUTOR | Solution Architect, Enterprise Architect |
+| Migration Specialist | EXECUTOR | Data Architect |
+
+---
+
+### Game Development (2 executors)
+
+| Job Title | Role | Supervisor |
+|---|---|---|
+| Game Designer | EXECUTOR | Product Manager (PM), Technical Lead / Tech Lead |
+| Game Developer | EXECUTOR | Technical Lead / Tech Lead, Product Manager (PM) |
+
+---
+
+### Integration & Third-Party (1 executor)
+
+| Job Title | Role | Supervisor |
+|---|---|---|
+| Third-party Integration Specialist | EXECUTOR | Solution Architect, Technical Lead / Tech Lead |
+
+---
+
+### Networking (1 executor)
+
+| Job Title | Role | Supervisor |
+|---|---|---|
+| Network Engineer | EXECUTOR | Infrastructure Manager, Security Architect |
+
+---
+
 
 ## Supervisor-Executor Mapping
 

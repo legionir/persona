@@ -1,6 +1,6 @@
 {
   "$schema": "personas-metadata/v1",
-  "generated_at": "2026-09-27T13:27:41+00:00",
+  "generated_at": "2026-09-27T13:31:53+00:00",
   "source": {
     "schema": "README.md (full role table) + prompts/composite/*.md",
     "readme": "README.md",
