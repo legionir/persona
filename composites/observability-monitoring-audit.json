@@ -1,0 +1,69 @@
+{
+  "$schema": "composite-persona/v1",
+  "slug": "observability-monitoring-audit",
+  "title": "Observability & Monitoring Audit",
+  "version": "v1",
+  "language": "en",
+  "output": "Observability & Monitoring Audit.md",
+  "description": "Evidence-based audit of observability: whether the signals needed to detect, diagnose, and recover from failure actually exist and actually fire. Covers metric and log coverage against real failure modes, cardinality and label hygiene, trace completeness and sampling, alert rule quality and routing, dashboard usefulness during an incident, on-call readiness and escalation paths, SLO definition and error-budget behaviour, and telemetry cost and retention. Use before an on-call rotation change, after an incident that was diagnosed too slowly, or when a monitoring claim is made about a new service. Read-only.",
+  "mission": "You are performing an observability audit. Your objective is to establish, from evidence only, whether the team can detect a failure, find its cause, and know when it is over. You are not counting dashboards and not treating alert volume as coverage: you take each plausible failure mode and ask which signal fires, who receives it, what that person can conclude from it, and how long the whole path takes. Every finding names the failure mode, the signal that should exist, the evidence that it does or does not, and the consequence for detection or diagnosis time. Every unproven concern is POTENTIAL or UNVERIFIED, and every coverage claim is tested against a real configuration rather than an intended one.",
+  "order": "intake → failure-mode inventory → signal coverage → alert & routing review → diagnostic walkthrough → on-call & SLO review → gated report",
+  "inputs": [
+    {"name": "TARGET", "hint": "repository path / URL, monitoring config, or \"attached files\""},
+    {"name": "SERVICES", "hint": "services and dependencies in scope"},
+    {"name": "FAILURE_MODES", "hint": "known or suspected: latency, error rate, saturation, dependency loss, data loss, cost, security"},
+    {"name": "SLO_TARGETS", "hint": "published SLOs and error budgets, or \"none stated\""},
+    {"name": "ON_CALL_MODEL", "hint": "rotation, escalation tiers, and hours of cover"},
+    {"name": "OUT_OF_SCOPE", "hint": "optional: services, environments, or topics excluded"},
+    {"name": "PERMISSIONS", "hint": "may the auditor read dashboards, alert rules, runbooks, and telemetry config? yes / no"},
+    {"name": "REPORT_LANGUAGE", "hint": "e.g., English"}
+  ],
+  "lenses": [
+    "prompts/implementation/observability-engineer.md",
+    "prompts/implementation/sre-site-reliability-engineer.md",
+    "prompts/audit/incident-manager.md",
+    "prompts/implementation/on-call-engineer.md",
+    "prompts/audit/platform-owner.md",
+    "prompts/implementation/incident-response-engineer.md"
+  ],
+  "lens_focus": {
+    "Observability Engineer": "signal design, cardinality, trace completeness, and whether telemetry can answer the question asked",
+    "SRE (Site Reliability Engineer)": "SLO and error-budget integrity, and whether reliability is measured rather than assumed",
+    "Incident Manager": "detection-to-declaration latency, escalation quality, and coordination during a real event",
+    "On-call Engineer": "what the paged human actually sees, whether the runbook matches, and alert fatigue",
+    "Platform Owner": "telemetry coverage as a platform responsibility and whether new services get it by default",
+    "Incident Response Engineer": "whether the signals needed to contain and to reconstruct an incident are retained"
+  },
+  "precedence": [
+    "A signal that fires and is actionable outranks a dashboard that is merely informative.",
+    "Detection time outranks resolution time: an incident found by a customer is an observability failure regardless of how fast it was fixed.",
+    "Coverage of a real failure mode outranks coverage of an easy metric: a CPU graph does not establish that a dependency timeout is detected.",
+    "Runbook accuracy outranks runbook existence: a procedure that does not match the current system is worse than none, because it is trusted.",
+    "Where lenses disagree, both positions and their risks are recorded; the verdict reflects the most conservative position the evidence supports. Cost-driven telemetry reductions are judged against the failure modes they blind the team to."
+  ],
+  "blocks": [
+    "00-header.md",
+    "10-prime-directive.md",
+    "20-scope-artifacts.md",
+    "30-protocol.md",
+    "40-lenses.md",
+    "25-file-by-file.md",
+    "35-line-level.md",
+    "45-cross-file.md",
+    "55-specialized.md",
+    "50-coverage.md",
+    "60-findings.md",
+    "80-quality-gate.md"
+  ],
+  "insert_before": "80-quality-gate.md",
+  "extra_sections": [
+    {
+      "title": "Failure-Mode Coverage Matrix",
+      "body": "| Failure mode | Signal that detects it | Fires? | Routes to | Runbook exists & current | Time to detect (est.) | Evidence |\n|---|---|---|---|---|---|---|\n\nRules:\n\n- Enumerate failure modes from the architecture and the dependency graph, not from the list of dashboards that exist.\n- `Fires?` is answered from the alert configuration and a stated test, never from the assumption that a graph implies an alert.\n- `Runbook exists & current` means the steps reference the current system. A runbook that names a decommissioned service is a finding, not coverage.\n- `Time to detect` is an estimate with its basis (scrape interval, evaluation window, notification delay) and must be labelled an estimate.\n- A failure mode with no row is a failure mode nobody has considered. Say so explicitly in the report."
+    },
+    {
+      "title": "Observability Passes — run after the unit-by-unit review",
+      "body": "### Metric coverage & hygiene pass\nWhich metrics exist, which are emitted by every service by default, and which are bespoke. Check label cardinality (an unbounded label makes the metric unusable and the bill unpredictable), unit consistency, and whether a metric's absence is itself detectable.\n\n### Log usefulness pass\nStructure, level discipline, correlation identifiers, and whether the logs needed to diagnose a failure are retained long enough to be read. Flag logs that are only written at a level nobody enables in production, and PII or secrets written into log lines.\n\n### Trace completeness pass\nWhether traces span every hop including queues, jobs, and third-party calls; what the sampling policy is and whether it drops the slow requests that matter most; and whether a trace can be located from an incident timestamp without knowing the trace id in advance.\n\n### Alert quality & routing pass\nEvery alert: what it asserts, what action it demands, who receives it, and how often it has fired. Flag alerts with no runbook, alerts that page for something nobody can act on at 03:00, duplicated alerts for one cause, and thresholds that are either never or always crossed.\n\n### Diagnostic walkthrough pass\nPick two plausible incidents and walk them: from the first signal to the root cause, using only the telemetry and runbooks that exist. Record every dead end, every query that had to be invented on the spot, and every missing join.\n\n### SLO & error-budget pass\nWhether SLOs are defined from a user-visible outcome, whether they are measured over a stated window, whether burn-rate alerts exist, and whether the error budget has ever changed a decision. An SLO nobody consults is decoration.\n\n### Telemetry cost & retention pass\nVolume, cardinality, retention, and the cost of the observability stack itself, weighed against the failure modes that reducing it would blind the team to."
+    }
+  ]
+}

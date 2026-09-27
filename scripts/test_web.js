@@ -106,7 +106,7 @@ setTimeout(() => {
   ok("Composite -> 19 cards", cards().length === skills.totals.composites,
      `${cards().length} cards`);
   ok("count line reflects the whole library",
-     $("count").textContent === `19 of ${personas.totals.roles + skills.totals.composites} results`,
+     $("count").textContent === `${skills.totals.composites} of ${personas.totals.roles + skills.totals.composites} results`,
      $("count").textContent);
   ok("role-only facets disabled", ROLE_ONLY.every((id) => $(id).disabled === true));
   ok("role-only facets cleared", ROLE_ONLY.every((id) => $(id).value === ""));

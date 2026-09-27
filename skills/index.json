@@ -6,9 +6,9 @@
     "personas": "prompts/**/*.md + composite master prompts"
   },
   "totals": {
-    "skills": 209,
+    "skills": 216,
     "roles": 190,
-    "composites": 19
+    "composites": 26
   },
   "skills": [
     {
@@ -20,6 +20,19 @@
       "source": "prompts/implementation/accessibility-specialist.md",
       "skill": "skills/accessibility-specialist/SKILL.md",
       "description": "Persona \"Accessibility Specialist\" (EXECUTOR) in the Design: Guarantee accessibility. Use when the task needs WCAG, Keyboard, Screen Reader and the output must be \"Accessibility Report\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Accessibility Specialist-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "accessibility-wcag-audit",
+      "title": "Accessibility & WCAG Audit — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "Composite",
+      "domain": null,
+      "source": "prompts/composite/Accessibility & WCAG Audit.md",
+      "skill": "skills/accessibility-wcag-audit/SKILL.md",
+      "description": "Evidence-based accessibility audit of a product surface against WCAG 2.2 AA: perceivable, operable, understandable, and robust criteria verified in the rendered output rather than asserted in a checklist. Covers keyboard and focus order, name/role/value exposure to assistive technology, contrast and text spacing, dynamic content and live regions, forms and error handling, motion and timing, and the accessibility of interactive widgets and custom components. Use before an accessibility claim, a public-sector procurement, or a launch in a market with accessibility law. Read-only; automated scans alone never close this audit.",
+      "lenses": 6,
+      "spec": "composites/accessibility-wcag-audit.json",
+      "generated": true
     },
     {
       "name": "account-manager",
@@ -508,6 +521,19 @@
       "description": "Persona \"Contract Manager\" (SUPERVISOR) in the Compliance: Control contractual obligations. Use when the task needs Contracts, Deliverables and the output must be \"Contract Status\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need Contract Manager-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "cost-finops-audit",
+      "title": "Cost & FinOps Audit — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "Composite",
+      "domain": null,
+      "source": "prompts/composite/Cost & FinOps Audit.md",
+      "skill": "skills/cost-finops-audit/SKILL.md",
+      "description": "Evidence-based audit of cloud and infrastructure cost: what is actually being spent, on what, by whom, and whether each pound is buying something the business asked for. Covers resource inventory and idle or orphaned capacity, right-sizing against measured utilisation, storage growth and lifecycle rules, data transfer and egress paths, reserved and committed coverage, environment parity between production and non-production, per-tenant and per-workload attribution, tagging and chargeback integrity, and the cost consequence of every change path. Use before a budget cycle, after a cost spike, or when a scaling change is proposed. Read-only.",
+      "lenses": 6,
+      "spec": "composites/cost-finops-audit.json",
+      "generated": true
+    },
+    {
       "name": "cryptography-engineer",
       "title": "Cryptography Engineer",
       "type": "EXECUTOR",
@@ -789,6 +815,19 @@
       "source": "prompts/audit/documentation-manager.md",
       "skill": "skills/documentation-manager/SKILL.md",
       "description": "Persona \"Documentation Manager\" (SUPERVISOR) in the Documentation: Guarantee documentation is accurate, complete, and current. Use when the task needs Documentation standard and structure, produce/review cycle, quality control, alignment with product/technical and the output must be \"Quality report, documentation structure, updates\"; this skill enforces the domain, the authority (APPROVE / REJECT / RECOMMEND / DEFER / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need Documentation Manager-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "documentation-quality-audit",
+      "title": "Documentation Quality Audit — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "Composite",
+      "domain": null,
+      "source": "prompts/composite/Documentation Quality Audit.md",
+      "skill": "skills/documentation-quality-audit/SKILL.md",
+      "description": "Evidence-based audit of documentation as a working system: whether a reader can find the right page, trust it, and act on it. Covers the content inventory and its structure, accuracy against the current code and behaviour, findability through navigation and search, duplication and contradiction between overlapping pages, worked examples and copy-paste readiness, terminology and voice consistency, accessibility of the documentation itself, and the lifecycle that keeps it true — ownership, review cadence, staleness signals, and retirement. Use before a docs launch, when support load suggests the docs are failing, or when an accuracy claim is made. Read-only.",
+      "lenses": 6,
+      "spec": "composites/documentation-quality-audit.json",
+      "generated": true
     },
     {
       "name": "documentation-specialist",
@@ -1074,6 +1113,19 @@
       "description": "Persona \"IAM / Identity Engineer\" (EXECUTOR) in the Security: Make every access decision explicit, least-privilege, and provable. Use when the task needs Coverage of authentication, authorisation, and session management across every entry point, Least-privilege and separation of duties in every role, group, and policy definition, Lifecycle of accounts, keys, tokens, and… and the output must be \"Domain Output\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 4 execution steps, and the final Quality Gate. Use when you need IAM / Identity Engineer-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "identity-access-management-audit",
+      "title": "Identity & Access Management Audit — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "Composite",
+      "domain": null,
+      "source": "prompts/composite/Identity & Access Management Audit.md",
+      "skill": "skills/identity-access-management-audit/SKILL.md",
+      "description": "Evidence-based audit of identity and access management: who can do what, how that is decided, and whether the decision can be proven. Covers the identity model and subject types, authentication strength and session handling, authorisation checks at every boundary, role and policy design against least privilege and separation of duties, service and machine credentials, privileged and break-glass access, the joiner / mover / leaver lifecycle, and access review and revocation capability. Use before an access certification, after a privilege-escalation incident, or when a least-privilege claim is made. Read-only.",
+      "lenses": 6,
+      "spec": "composites/identity-access-management-audit.json",
+      "generated": true
+    },
+    {
       "name": "incident-commander",
       "title": "Incident Commander",
       "type": "SUPERVISOR",
@@ -1207,6 +1259,19 @@
       "description": "Persona \"Load/Stress Tester\" (EXECUTOR) in the Testing: Discover capacity and failure points. Use when the task needs Load, Stress, Capacity and the output must be \"Load Report\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need Load/Stress Tester-level judgment with evidence and a fixed scope."
     },
     {
+      "name": "localisation-i18n-audit",
+      "title": "Localisation & i18n Audit — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "Composite",
+      "domain": null,
+      "source": "prompts/composite/Localisation & i18n Audit.md",
+      "skill": "skills/localisation-i18n-audit/SKILL.md",
+      "description": "Evidence-based audit of internationalisation and localisation: whether the product can actually be translated and whether the translations that exist are correct and complete. Covers externalisation of every user-visible string, locale and language negotiation, formatting of dates, numbers, currency, and units, plural and gender rules, bidirectional and complex-script layout, locale-aware collation and search, pseudo-localisation readiness, translation memory and glossary enforcement, and the completeness and divergence of each locale. Use before entering a new market, when a locale ships partial, or when an i18n readiness claim is made. Read-only.",
+      "lenses": 6,
+      "spec": "composites/localisation-i18n-audit.json",
+      "generated": true
+    },
+    {
       "name": "localization-manager",
       "title": "Localization Manager",
       "type": "SUPERVISOR",
@@ -1305,6 +1370,19 @@
       "source": "prompts/implementation/observability-engineer.md",
       "skill": "skills/observability-engineer/SKILL.md",
       "description": "Persona \"Observability Engineer\" (EXECUTOR) in the DevOps: Make system health observable. Use when the task needs Metrics, Logs, Traces and the output must be \"Dashboards, Alerts\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need Observability Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "observability-monitoring-audit",
+      "title": "Observability & Monitoring Audit — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "Composite",
+      "domain": null,
+      "source": "prompts/composite/Observability & Monitoring Audit.md",
+      "skill": "skills/observability-monitoring-audit/SKILL.md",
+      "description": "Evidence-based audit of observability: whether the signals needed to detect, diagnose, and recover from failure actually exist and actually fire. Covers metric and log coverage against real failure modes, cardinality and label hygiene, trace completeness and sampling, alert rule quality and routing, dashboard usefulness during an incident, on-call readiness and escalation paths, SLO definition and error-budget behaviour, and telemetry cost and retention. Use before an on-call rotation change, after an incident that was diagnosed too slowly, or when a monitoring claim is made about a new service. Read-only.",
+      "lenses": 6,
+      "spec": "composites/observability-monitoring-audit.json",
+      "generated": true
     },
     {
       "name": "on-call-engineer",
@@ -1917,6 +1995,19 @@
       "source": "prompts/implementation/staff-engineer.md",
       "skill": "skills/staff-engineer/SKILL.md",
       "description": "Persona \"Staff Engineer\" (EXECUTOR) in the Software: Solve complex technical problems. Use when the task needs Architecture, Technical Investigation and the output must be \"Technical Solution\"; this skill enforces the domain, the authority (PROCEED / PAUSE / RETRY / ROLLBACK / BLOCK / ESCALATE), the 5 execution steps, and the final Quality Gate. Use when you need Staff Engineer-level judgment with evidence and a fixed scope."
+    },
+    {
+      "name": "supply-chain-dependency-audit",
+      "title": "Supply Chain & Dependency Audit — Master Prompt (v1)",
+      "type": "COMPOSITE",
+      "typeLabel": "Composite",
+      "domain": null,
+      "source": "prompts/composite/Supply Chain & Dependency Audit.md",
+      "skill": "skills/supply-chain-dependency-audit/SKILL.md",
+      "description": "Evidence-based audit of the software supply chain: what the build actually contains, where every artefact came from, and whether the provenance claimed can be verified. Covers the dependency inventory including transitive and vendored code, lockfile integrity and reproducibility, registry and mirror trust, SBOM generation and currency, build and release pipeline integrity with signing and provenance attestation, artefact promotion and immutability, secret handling in build contexts, and the patch and vulnerability response path for third-party code. Use before a release, after a compromise in a dependency, or when a provenance or SBOM claim is made. Read-only.",
+      "lenses": 6,
+      "spec": "composites/supply-chain-sbom-audit.json",
+      "generated": true
     },
     {
       "name": "support-manager",

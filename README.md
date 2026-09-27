@@ -4,7 +4,7 @@
 >
 > 🌐 **Online version (GitHub Pages):** once Pages is enabled (Settings → Pages → Deploy from a branch → `main` → `/ (root)`), the site is available at `https://legionir.github.io/persona/`. A `.nojekyll` file is committed at the repository root so Markdown/JSON files are served exactly as they are, without Jekyll processing.
 >
-> 📦 **API-ready metadata:** [`personas.json`](personas.json) — all **189 personas** (170 roles + 19 composite master prompts) with the fields `id`, `roleId`, `type`, `domain`, `category`, `seniority`, `mission`, `duties`, `supervisors`, `consumers`, `capabilities`, `path`, and `facets` for search and grouping. Regenerate with `python3 scripts/build_metadata.py`
+> 📦 **API-ready metadata:** [`personas.json`](personas.json) — all **216 personas** (190 roles + 26 composite master prompts) with the fields `id`, `roleId`, `type`, `domain`, `category`, `seniority`, `mission`, `duties`, `supervisors`, `consumers`, `capabilities`, `path`, and `facets` for search and grouping. Regenerate with `python3 scripts/build_metadata.py`
 >
 > 🔄 **Everything here is generated.** One command rebuilds every artifact from its source and validates the result:
 >
@@ -225,7 +225,85 @@
 
 ## Grouping by Domain
 
-### Supervisors (74 roles)
+### Supervisors (75 roles)
+
+| Job Title | Primary Domain | Sub-Domain | Short Description |
+|---|---|---|---|
+| Founder | Management & Strategy | Business | Generate the idea and set overall business direction |
+| Product Visionary | Product | Strategy | Define the product vision |
+| Investor | Finance & Business | Investment | Raise capital and monitor return on investment |
+| Board of Directors | Management & Strategy | Governance | Strategic decision-making and oversight |
+| Project Sponsor | Management & Strategy | Financial | Financial and organizational support |
+| Domain Expert (SME) | Research & Analysis | Specialist | Provide domain expertise |
+| Product Manager (PM) | Product | Management | Product management and prioritization |
+| Product Owner (PO) | Product | Backlog | Manage the product backlog |
+| Project Manager | Management & Strategy | Project | Manage time, resources, scope, risk |
+| Program Manager | Management & Strategy | Program | Manage several related projects |
+| PMO | Management & Strategy | Process | Standardize project management processes |
+| Scrum Master | Management & Strategy | Agile | Facilitate Agile/Scrum |
+| Agile Coach | Management & Strategy | Agile | Improve the Agile process |
+| Technical Project Manager | Management & Strategy | Technical | Manage the project with a technical focus |
+| Solution Architect | Software Architecture | Solutions | Design high-level system solutions |
+| Enterprise Architect | Software Architecture | Enterprise | Align architecture with the enterprise |
+| Technical Lead / Tech Lead | Software Engineering | Leadership | Lead the team technically |
+| Development Manager | Software Engineering | Management | Manage the software development team |
+| Engineering Manager | Management & Strategy | Engineering | Manage the engineering team |
+| Chief Technology Officer (CTO) | Software Architecture | Strategic | Provide strategic technology leadership |
+| Principal Engineer | Software Architecture | Strategic | Provide technical leadership at enterprise level |
+| AI Engineer Lead | Data & AI | Leadership | Lead the AI/agent team and orchestration |
+| Data Architect | Software Architecture | Data | Design high-level data architecture |
+| Cloud Architect | Cloud | Architecture | Design cloud architecture |
+| QA Lead | Quality & Testing | Management | Manage the QA team and process |
+| Security Architect | Security | Architecture | Design and review security architecture |
+| Legal Advisor | Legal & Compliance | Legal | Review legal matters |
+| IP / Copyright Specialist | Legal & Compliance | Intellectual Property | Manage intellectual property |
+| Privacy / Compliance Officer | Legal & Compliance | Privacy | Compliance with laws and regulations |
+| Contract Manager | Legal & Compliance | Contracts | Manage contracts |
+| Finance Manager | Finance & Business | Budget | Manage budget and cost |
+| HR / People Manager | Human Resources | Management | Manage people |
+| Customer Success Manager | Marketing & Sales | Customer Success | Customer success with the product |
+| Product Marketing Manager | Marketing & Sales | Product | Product marketing strategy |
+| Growth Manager | Marketing & Sales | Growth | Design the growth strategy |
+| Sales Manager | Marketing & Sales | Sales | Manage sales |
+| Account Manager | Marketing & Sales | Customers | Manage key accounts |
+| Business Development Manager | Marketing & Sales | Business Development | Create commercial opportunities |
+| Partnership Manager | Marketing & Sales | Partnership | Manage partner collaboration |
+| Operations Manager | Operations & Infrastructure | Operations | Maintain operational continuity |
+| Incident Manager | Incident and disaster recovery | Management | Manage incidents |
+| FinOps Specialist | Cloud | Financial | Control cloud cost |
+| Product Analyst Lead | Research & Analysis | Leadership | Lead the product analytics team and data-driven decision-making |
+| Risk Manager | Management & Strategy | Risk | Identify and manage risk |
+| Change Manager | Management & Strategy | Change | Manage scope change |
+| Quality Manager | Quality & Testing | Management | Control the quality of the whole process |
+| Audit Specialist | Legal & Compliance | Audit | Independently review processes |
+| External Auditor | Legal & Compliance | External Audit | Independent audit outside the team |
+| Vendor Manager | Finance & Business | Vendors | Manage vendors |
+| Business Continuity Manager | Incident and disaster recovery | Business Continuity | Guarantee business continuity |
+| Product Owner (Post-Release) | Product | Post-Release | Manage product evolution |
+| End-of-Life Manager | Product | End-of-Life | Manage safe product retirement |
+| Chief Information Officer (CIO) | Management & Strategy | Technology | Provide strategic IT and infrastructure leadership |
+| Chief Audit Officer (CAO) | Legal & Compliance | Internal Audit | Lead internal audit and control |
+| Chief Information Security Officer (CISO) | Security | Strategic | Provide strategic security leadership |
+| Chief Privacy Officer | Legal & Compliance | Privacy | Provide strategic privacy leadership |
+| Chief Design Officer (CDO) | Design & UX | Strategic | Provide strategic design leadership |
+| Community Director | Marketing & Sales | Community | Provide strategic community leadership |
+| Design Manager | Design & UX | Management | Manage the design team |
+| DevOps Manager | DevOps & SRE | Management | Manage the DevOps team |
+| Documentation Manager | Documentation | Management | Manage the documentation team |
+| Embedded Systems Lead | Hardware & Embedded | Leadership | Lead the embedded/IoT team |
+| Infrastructure Manager | Operations & Infrastructure | Management | Manage infrastructure and operations |
+| Localization Manager | Localization & Translation | Management | Manage the localization team |
+| Performance Engineering Lead | Quality & Testing | Performance | Lead the performance optimization team |
+| Procurement Manager | Finance & Business | Procurement | Manage procurement and supply |
+| Recruitment Manager | Human Resources | Recruiting | Manage the recruiting process |
+| Support Manager | Customer Support | Management | Manage the support team |
+| Architecture Review Board | Software Architecture | Governance | Review and approve architecture decisions |
+| Data Governance Manager | Database | Governance | Manage data governance |
+| Security Governance Manager | Security | Governance | Manage security governance |
+| Release Manager | DevOps & SRE | Release | Manage release delivery |
+| Service Owner | Operations & Infrastructure | Service Ownership | Service owner and its SLA |
+| Platform Owner | Cloud | Platform Ownership | Platform owner and its contracts |
+| Incident Commander | Incident and disaster recovery | Command | Command live incident response and coordinate responders |
 
 | Job Title | Primary Domain | Sub-Domain | Short Description |
 |---|---|---|---|
@@ -325,7 +403,125 @@
 
 ---
 
-### Executors (96 roles)
+### Executors (115 roles)
+
+| Job Title | Primary Domain | Sub-Domain | Short Description | Supervisor |
+|---|---|---|---|---|
+| Business Analyst (BA) | Research & Analysis | Business | Extract business needs | Product Owner (PO), Product Manager (PM) |
+| Software Architect | Software Architecture | Software | Design the internal structure of the software | Solution Architect, Technical Lead / Tech Lead |
+| System Architect | Software Architecture | Systems | Design the overall system architecture | Solution Architect, Enterprise Architect |
+| Staff Engineer | Software Engineering | Specialist | Solve complex technical problems | Technical Lead / Tech Lead, Principal Engineer |
+| Software Engineer | Software Engineering | General | Design and implement features | Technical Lead / Tech Lead, Engineering Manager |
+| Backend Developer | Software Engineering | Backend | Develop APIs and backend | Technical Lead / Tech Lead, Solution Architect |
+| Frontend Developer | Software Engineering | Frontend | Develop the user interface | Technical Lead / Tech Lead, Product Owner (PO) |
+| Full-Stack Developer | Software Engineering | Full-Stack | Deliver an end-to-end feature | Technical Lead / Tech Lead, Solution Architect |
+| Mobile Developer | Software Engineering | Mobile | Develop mobile applications | Technical Lead / Tech Lead, Product Manager (PM) |
+| Desktop Developer | Software Engineering | Desktop | Develop desktop applications | Technical Lead / Tech Lead |
+| Game Developer | Game Development | Development | Produce gameplay and game systems | Technical Lead / Tech Lead, Product Manager (PM) |
+| Embedded Developer | Hardware & Embedded | Software | Execute device logic | Solution Architect, Technical Lead / Tech Lead |
+| Firmware Engineer | Hardware & Embedded | Firmware | Control hardware through firmware | Solution Architect, Technical Lead / Tech Lead |
+| IoT Engineer | Hardware & Embedded | IoT | Connect the device to the platform | Solution Architect, Cloud Architect |
+| AI/ML Engineer | Data & AI | Engineering | Develop AI/ML models | AI Engineer Lead, Principal Engineer |
+| Data Scientist | Data & AI | Data Science | Analyze data and build models | Data Architect, Product Manager (PM) |
+| Data Engineer | Data & AI | Data Engineering | Build data pipelines | Data Architect, Data Governance Manager |
+| MLOps Engineer | Data & AI | MLOps | Deploy and manage the ML model lifecycle | AI Engineer Lead, Cloud Architect, DevOps Manager |
+| Prompt Engineer | Data & AI | Prompt | Optimize model behaviour | AI Engineer Lead |
+| AI Engineer | Data & AI | AI Engineering | Design LLM, agent, and RAG systems | Solution Architect, Principal Engineer |
+| Database Administrator (DBA) | Database | Management | Database availability and integrity | Data Architect |
+| Database Engineer | Database | Engineering | Design schema and queries | Data Architect |
+| DevOps Engineer | DevOps & SRE | DevOps | Automate Delivery | Technical Lead / Tech Lead, Cloud Architect |
+| SRE (Site Reliability Engineer) | DevOps & SRE | SRE | Guarantee reliability and availability | Service Owner, Engineering Manager |
+| Cloud Engineer | Cloud | Engineering | Manage cloud infrastructure | Cloud Architect |
+| Infrastructure Engineer | Operations & Infrastructure | Infrastructure | Provide stable infrastructure | Cloud Architect, Platform Owner |
+| Network Engineer | Networking | Engineering | Design and manage the network | Infrastructure Manager, Security Architect |
+| System Administrator | Operations & Infrastructure | System Administration | Health of base systems | Infrastructure Manager, Security Architect |
+| Release Engineer | DevOps & SRE | Release | Controlled software release | Release Manager, QA Lead |
+| Build Engineer | DevOps & SRE | Build | Produce releasable artifacts | Release Manager, Technical Lead / Tech Lead |
+| QA Engineer | Quality & Testing | Engineering | Design and execute software tests | QA Lead |
+| Test Engineer | Quality & Testing | Test Execution | Detect defects | QA Lead |
+| Test Automation Engineer | Quality & Testing | Automation | Create automated tests | QA Lead, DevOps Manager |
+| Performance Engineer | Quality & Testing | Performance | Test and optimize performance | Performance Engineering Lead, DevOps Manager |
+| Load/Stress Tester | Quality & Testing | Load & Stress | Test the system under stress | Performance Engineering Lead, QA Lead |
+| Security Engineer | Security | Engineering | Implement security controls | Security Architect, Chief Information Security Officer (CISO) |
+| Application Security Engineer | Security | Application | Review application security | Security Architect, Chief Information Security Officer (CISO) |
+| Cybersecurity Engineer | Security | General | Protect systems and infrastructure | Chief Information Security Officer (CISO), Security Governance Manager |
+| Penetration Tester | Security | Penetration Testing | Authorized penetration testing | Security Architect, Chief Information Security Officer (CISO) |
+| DevSecOps Engineer | Security | DevSecOps | Integrate security into CI/CD | Security Architect, DevOps Manager |
+| Privacy Engineer | Legal & Compliance | Privacy | Design for privacy and data protection | Privacy / Compliance Officer |
+| UI Designer | Design & UX | UI | Create usable and consistent UI | Design Manager, Product Manager (PM) |
+| UX Designer | Design & UX | UX | Create an appropriate user experience | Design Manager, Product Manager (PM) |
+| Product Designer | Design & UX | Product | Combine UX/UI and product needs | Product Manager (PM) |
+| UX Researcher | Research & Analysis | UX | Research user behaviour | Product Manager (PM), Design Manager |
+| UX Writer / Content Designer | Design & UX | Content | Create clear product communication | Design Manager, Product Manager (PM) |
+| Design System Designer | Design & UX | Design System | Create and maintain the design system | Design Manager, Technical Lead / Tech Lead |
+| Graphic Designer | Design & UX | Graphics | Create visual assets | Product Marketing Manager, Design Manager |
+| Motion Designer | Design & UX | Motion | Improve interaction feedback | Design Manager |
+| Accessibility Specialist | Design & UX | Accessibility | Review accessibility | Design Manager, QA Lead |
+| Technical Writer | Documentation | Technical | Transfer technical knowledge | Technical Lead / Tech Lead, Product Manager (PM) |
+| Documentation Specialist | Documentation | User | Make the product understandable | Product Manager (PM) |
+| Localization Specialist | Localization & Translation | Localization | Adapt the product to the target market | Product Manager (PM), Product Marketing Manager |
+| Translator | Localization & Translation | Translation | Accurate, natural translation | Localization Manager |
+| Procurement Specialist | Finance & Business | Procurement | Provide needed resources | Procurement Manager |
+| Recruiter | Human Resources | Recruiting | Provide needed personnel | HR / People Manager |
+| Technical Recruiter | Human Resources | Technical Recruiting | Recruit technical talent | HR / People Manager, Engineering Manager |
+| Scrum Product Team | Software Engineering | Team | Run iterative development | Product Owner (PO), Scrum Master |
+| UI/UX Research Participants | Research & Analysis | UX | Provide user feedback | Design Manager |
+| Beta Tester | Quality & Testing | Beta | Discover issues before release | QA Lead |
+| End User | Research & Analysis | End User | Generate real signal from product usage | Product Owner (Post-Release) |
+| Customer Support Agent | Customer Support | General | Resolve user issues | Customer Success Manager, Operations Manager |
+| Technical Support Engineer | Customer Support | Technical | Fix technical issues | Operations Manager, Incident Manager |
+| Community Manager | Marketing & Sales | Community | Build healthy engagement with users | Product Manager (PM), Product Marketing Manager |
+| Marketing Specialist | Marketing & Sales | Campaign | Acquire and activate users | Product Marketing Manager, Growth Manager |
+| SEO Specialist | Marketing & Sales | SEO | Increase organic acquisition | Product Marketing Manager, Growth Manager |
+| ASO Specialist | Marketing & Sales | ASO | Increase app discovery | Product Marketing Manager, Growth Manager |
+| Sales Representative | Marketing & Sales | Representation | Convert leads into customers | Sales Manager |
+| DevRel | Marketing & Sales | Developer Relations | Grow the developer ecosystem | Community Director, Product Marketing Manager |
+| Technical Evangelist | Marketing & Sales | Technology | Increase technical adoption | Community Director |
+| On-call Engineer | Incident and disaster recovery | On-call | Respond immediately to production issues | Incident Manager, DevOps Manager |
+| Maintenance Engineer | Operations & Infrastructure | Maintenance | Maintain system health | Technical Lead / Tech Lead, Engineering Manager |
+| Refactoring Engineer | Software Engineering | Refactoring | Improve code structure | Technical Lead / Tech Lead |
+| Legacy Modernization Engineer | Migration & Modernization | Legacy | Reduce legacy risk | Solution Architect, Enterprise Architect |
+| Observability Engineer | DevOps & SRE | Observability | Logging, metrics, tracing, and monitoring | DevOps Manager |
+| Data Analyst | Research & Analysis | Data | Analyze user behaviour and KPIs | Product Analyst Lead, Product Manager (PM) |
+| BI Analyst | Research & Analysis | BI | Build management reports and dashboards | Data Architect, Finance Manager |
+| Product Analyst | Research & Analysis | Product | Support product decisions | Product Manager (PM) |
+| Third-party Integration Specialist | Integration & Third-Party | API | Reliable service connectivity | Solution Architect, Technical Lead / Tech Lead |
+| Migration Specialist | Migration & Modernization | Migration | Migrate data and systems | Data Architect |
+| Deployment Engineer | DevOps & SRE | Deployment | Deploy releases | Release Manager, DevOps Manager |
+| Disaster Recovery Specialist | Incident and disaster recovery | DR | Design and test recovery | Business Continuity Manager, DevOps Manager |
+| Backup Administrator | Incident and disaster recovery | Backup | Manage backup and restore | Business Continuity Manager |
+| Decommission Engineer | Migration & Modernization | Decommission | Safely decommission services | End-of-Life Manager, Operations Manager, Security Architect |
+| Agent Architect | Data & AI | Agent | Design agent architecture | AI Engineer Lead, Technical Lead / Tech Lead |
+| Agent Integration Engineer | Data & AI | Agent | Implement agent integration | AI Engineer Lead |
+| Tool Developer | Data & AI | Agent | Agent tools and API wrappers | AI Engineer Lead |
+| Agent Evaluator | Data & AI | Agent | Evaluate agent behaviour and safety | AI Engineer Lead, QA Lead |
+| Agentic Prompt Specialist | Data & AI | Agent | Design prompts and few-shot examples | AI Engineer Lead |
+| Agent Safety Engineer | Data & AI | Agent | Guardrails, jailbreak, and budget | AI Engineer Lead, Security Architect |
+| Cloud Security Engineer | Security | Cloud | Cloud service security | Security Architect, Cloud Architect, Chief Information Security Officer (CISO) |
+| Database Security Specialist | Security | Database | Database security | Security Architect, Data Architect |
+| SOC Analyst | Security | SOC | Analyse and give first response to alerts | Chief Information Security Officer (CISO), Security Governance Manager |
+| Incident Response Engineer | Security | Incident Response | Respond to security incidents | Incident Manager, Chief Information Security Officer (CISO) |
+| Vulnerability Management Specialist | Security | Vulnerability | Manage vulnerabilities | Security Governance Manager, Chief Information Security Officer (CISO) |
+| Security Auditor | Security | Audit | Independent security audit | Security Governance Manager, Chief Information Security Officer (CISO) |
+| IAM / Identity Engineer | Security | Identity | Design and operate identity and access management | Security Architect, Chief Information Security Officer (CISO) |
+| Cryptography Engineer | Security | Cryptography | Design and review cryptographic controls | Security Architect, Chief Information Security Officer (CISO) |
+| SOC 2 & ISO 27001 Readiness Specialist | Legal & Compliance | Assurance Readiness | Prepare and evidence SOC 2 and ISO 27001 readiness | Chief Audit Officer (CAO), Audit Specialist |
+| Compliance Evidence Analyst | Legal & Compliance | Evidence | Collect, verify, and maintain compliance evidence | Privacy / Compliance Officer, Chief Audit Officer (CAO) |
+| KYC / AML Specialist | Legal & Compliance | Financial Crime | Operate know-your-customer and anti-money-laundering controls | Privacy / Compliance Officer, Chief Privacy Officer |
+| Payments / Billing Engineer | Software Engineering | Payments | Build and protect payment, billing, and invoicing flows | Solution Architect, Technical Lead / Tech Lead |
+| Search / Relevance Engineer | Software Engineering | Search | Build and tune search, ranking, and relevance | Solution Architect, Technical Lead / Tech Lead |
+| Platform Engineer | DevOps & SRE | Platform | Build the internal platform and paved-road tooling | Platform Owner, Cloud Architect |
+| Chaos Engineer | DevOps & SRE | Resilience | Prove resilience with controlled failure injection | Platform Owner, DevOps Manager |
+| Analytics Engineer | Data & AI | Analytics Engineering | Build the modelling layer between raw data and analysis | Data Architect, Data Governance Manager |
+| Data Steward | Data & AI | Data Governance | Own data quality, definitions, and access at the domain level | Data Governance Manager, Data Architect |
+| DesignOps Engineer | Design & UX | Design Operations | Operate the design system, tooling, and handoff pipeline | Design Manager, Chief Design Officer (CDO) |
+| Brand Designer | Design & UX | Brand | Define and protect the visual and verbal brand system | Design Manager, Chief Design Officer (CDO) |
+| Content Strategist | Documentation | Content Strategy | Define content structure, voice, and lifecycle | Documentation Manager, Product Manager (PM) |
+| AI Safety / Alignment Engineer | Data & AI | AI Safety | Evaluate and harden model behaviour against misuse and failure | AI Engineer Lead, Security Architect |
+| RAG / Retrieval Engineer | Data & AI | Retrieval | Build retrieval pipelines that ground generation in the right sources | AI Engineer Lead, Software Architect |
+| Fine-tuning Engineer | Data & AI | Model Adaptation | Adapt models with supervised and preference fine-tuning | AI Engineer Lead, Technical Lead / Tech Lead |
+| Revenue Operations (RevOps) Analyst | Marketing & Sales | Revenue Operations | Operate the revenue data, tooling, and forecast model | Sales Manager, Growth Manager |
+| Game Designer | Game Development | Design | Design gameplay systems, loops, and content rules | Product Manager (PM), Technical Lead / Tech Lead |
 
 | Job Title | Primary Domain | Sub-Domain | Short Description | Supervisor |
 |---|---|---|---|---|
@@ -766,179 +962,209 @@
 
 ## Supervisor-Executor Mapping
 
-### Software Engineering Team
-- **Development Manager** → Software Engineer, Backend Developer, Frontend Developer, Full-Stack Developer, Mobile Developer, Desktop Developer, Game Developer
-- **Technical Lead** → Staff Engineer, Refactoring Engineer, Third-party Integration Specialist, Migration Specialist
-- **Principal Engineer** → Staff Engineer, AI/ML Engineer, MLOps Engineer, Legacy Modernization Engineer
+### Management & Strategy (13 supervisors)
+- **Agile Coach** → Scrum Master
+- **Board of Directors** → _no direct executor: top of the reporting line_
+- **Change Manager** → Deployment Engineer, Release Engineer
+- **Chief Information Officer (CIO)** → _no direct executor: top of the reporting line_
+- **Engineering Manager** → Maintenance Engineer, SRE (Site Reliability Engineer), Software Engineer, Technical Recruiter
+- **Founder** → _no direct executor: top of the reporting line_
+- **PMO** → Scrum Master
+- **Program Manager** → Product Owner (PO), Project Manager
+- **Project Manager** → Business Analyst (BA), Product Analyst
+- **Project Sponsor** → _no direct executor: top of the reporting line_
+- **Risk Manager** → Business Analyst (BA), Domain Expert (SME), Product Analyst
+- **Scrum Master** → Scrum Product Team
+- **Technical Project Manager** → Project Manager
 
-### Architecture Team
-- **CTO** → Technical Lead, Principal Engineer, Solution Architect, Enterprise Architect
-- **Cloud Architect** → Cloud Engineer
-- **Enterprise Architect** → System Architect
-- **Data Architect** → Database Administrator, Database Engineer
+### Legal & Compliance (8 supervisors)
+- **Audit Specialist** → SOC 2 & ISO 27001 Readiness Specialist
+- **Chief Audit Officer (CAO)** → Compliance Evidence Analyst, SOC 2 & ISO 27001 Readiness Specialist
+- **Chief Privacy Officer** → KYC / AML Specialist
+- **Contract Manager** → Procurement Specialist
+- **External Auditor** → Security Auditor
+- **IP / Copyright Specialist** → _no direct executor_
+- **Legal Advisor** → Privacy Engineer
+- **Privacy / Compliance Officer** → Compliance Evidence Analyst, KYC / AML Specialist, Privacy Engineer
 
-### Security Team
-- **CISO** → Security Architect, Security Engineer, Application Security Engineer, Cybersecurity Engineer, Penetration Tester, DevSecOps Engineer
-- **Chief Privacy Officer** → Privacy Engineer
+### Marketing & Sales (8 supervisors)
+- **Account Manager** → Sales Representative
+- **Business Development Manager** → Sales Manager
+- **Community Director** → DevRel, Technical Evangelist
+- **Customer Success Manager** → Customer Support Agent
+- **Growth Manager** → ASO Specialist, Marketing Specialist, Revenue Operations (RevOps) Analyst, SEO Specialist
+- **Partnership Manager** → Sales Manager
+- **Product Marketing Manager** → ASO Specialist, Community Manager, DevRel, Graphic Designer, Localization Specialist, Marketing Specialist, SEO Specialist
+- **Sales Manager** → Revenue Operations (RevOps) Analyst, Sales Representative
 
-### Quality & Testing Team
-- **QA Lead** → QA Engineer, Test Engineer, Test Automation Engineer, Beta Tester
-- **Quality Manager** → QA Lead
-- **Performance Engineering Lead** → Performance Engineer, Load/Stress Tester
+### Software Architecture (6 supervisors)
+- **Architecture Review Board** → Enterprise Architect, Software Architect, Solution Architect, System Architect
+- **Chief Technology Officer (CTO)** → _no direct executor_
+- **Data Architect** → Analytics Engineer, BI Analyst, Data Engineer, Data Scientist, Data Steward, Database Administrator (DBA), Database Engineer, Database Security Specialist, Migration Specialist
+- **Enterprise Architect** → Legacy Modernization Engineer, System Architect
+- **Principal Engineer** → AI Engineer, AI/ML Engineer, Staff Engineer
+- **Solution Architect** → AI Engineer, Backend Developer, Embedded Developer, Firmware Engineer, Full-Stack Developer, IoT Engineer, Legacy Modernization Engineer, Payments / Billing Engineer, Search / Relevance Engineer, Software Architect, System Architect, Third-party Integration Specialist
 
-### Design Team
-- **Design Manager** → UI Designer, UX Designer, Product Designer, UX Researcher, UX Writer, Design System Designer, Graphic Designer, Motion Designer, Accessibility Specialist
-- **Chief Design Officer** → Design Manager
+### Product (5 supervisors)
+- **End-of-Life Manager** → Decommission Engineer
+- **Product Manager (PM)** → Business Analyst (BA), Community Manager, Content Strategist, Data Analyst, Data Scientist, Documentation Specialist, Game Designer, Game Developer, Localization Specialist, Mobile Developer, Product Analyst, Product Designer, Technical Writer, UI Designer, UX Designer, UX Researcher, UX Writer / Content Designer
+- **Product Owner (PO)** → Business Analyst (BA), Frontend Developer, Scrum Product Team
+- **Product Owner (Post-Release)** → End User
+- **Product Visionary** → _no direct executor_
 
-### Operations & Infrastructure Team
-- **Infrastructure Manager** → Infrastructure Engineer, System Administrator, Network Engineer, Maintenance Engineer, Backup Administrator, Decommission Engineer
-- **DevOps Manager** → DevOps Engineer, SRE, Release Engineer, Build Engineer, Deployment Engineer, Observability Engineer
-- **Incident Manager** → On-call Engineer
-- **Business Continuity Manager** → Disaster Recovery Specialist
-
-### Cloud Team
-- **Cloud Architect** → Cloud Engineer
-
-### Marketing & Sales Team
-- **Product Marketing Manager** → Marketing Specialist, SEO Specialist, ASO Specialist
-- **Sales Manager** → Sales Representative
-- **Community Director** → Community Manager, DevRel, Technical Evangelist
-- **Support Manager** → Customer Support Agent, Technical Support Engineer
-
-### Finance & Commercial Team
-- **Finance Manager** → (no direct executors)
+### Finance & Business (4 supervisors)
+- **Finance Manager** → BI Analyst
+- **Investor** → _no direct executor_
 - **Procurement Manager** → Procurement Specialist
-- **Vendor Manager** → (no direct executors)
+- **Vendor Manager** → Procurement Specialist, Third-Party Integration Specialist
 
-### Human Resources Team
-- **HR / People Manager** → (no direct executors in list)
+### Cloud (3 supervisors)
+- **Cloud Architect** → Cloud Engineer, Cloud Security Engineer, DevOps Engineer, Infrastructure Engineer, IoT Engineer, MLOps Engineer, Platform Engineer
+- **FinOps Specialist** → Cloud Engineer, Infrastructure Engineer
+- **Platform Owner** → Chaos Engineer, Infrastructure Engineer, Platform Engineer
+
+### Incident and disaster recovery (3 supervisors)
+- **Business Continuity Manager** → Backup Administrator, Disaster Recovery Specialist
+- **Incident Commander** → Incident Response Engineer, Observability Engineer, On-call Engineer
+- **Incident Manager** → Incident Commander, Incident Response Engineer, On-call Engineer, Technical Support Engineer
+
+### Operations & Infrastructure (3 supervisors)
+- **Infrastructure Manager** → Network Engineer, System Administrator
+- **Operations Manager** → Customer Support Agent, Decommission Engineer, Technical Support Engineer
+- **Service Owner** → SRE (Site Reliability Engineer)
+
+### Quality & Testing (3 supervisors)
+- **Performance Engineering Lead** → Load/Stress Tester, Performance Engineer
+- **QA Lead** → Accessibility Specialist, Agent Evaluator, Beta Tester, Load/Stress Tester, QA Engineer, Release Engineer, Test Automation Engineer, Test Engineer
+- **Quality Manager** → Beta Tester, Load / Stress Tester, Performance Engineer, QA Engineer, Test Engineer
+
+### Security (3 supervisors)
+- **Chief Information Security Officer (CISO)** → Application Security Engineer, Cloud Security Engineer, Cryptography Engineer, Cybersecurity Engineer, IAM / Identity Engineer, Incident Response Engineer, Penetration Tester, SOC Analyst, Security Auditor, Security Engineer, Vulnerability Management Specialist
+- **Security Architect** → AI Safety / Alignment Engineer, Agent Safety Engineer, Application Security Engineer, Cloud Security Engineer, Cryptography Engineer, Database Security Specialist, Decommission Engineer, DevSecOps Engineer, IAM / Identity Engineer, Network Engineer, Penetration Tester, Security Engineer, System Administrator
+- **Security Governance Manager** → Cybersecurity Engineer, SOC Analyst, Security Auditor, Vulnerability Management Specialist
+
+### Design & UX (2 supervisors)
+- **Chief Design Officer (CDO)** → Brand Designer, DesignOps Engineer
+- **Design Manager** → Accessibility Specialist, Brand Designer, Design System Designer, DesignOps Engineer, Graphic Designer, Motion Designer, UI Designer, UI/UX Research Participants, UX Designer, UX Researcher, UX Writer / Content Designer
+
+### DevOps & SRE (2 supervisors)
+- **DevOps Manager** → Chaos Engineer, Deployment Engineer, DevSecOps Engineer, Disaster Recovery Specialist, MLOps Engineer, Observability Engineer, On-call Engineer, Performance Engineer, Test Automation Engineer
+- **Release Manager** → Build Engineer, Deployment Engineer, Release Engineer
+
+### Human Resources (2 supervisors)
+- **HR / People Manager** → Recruiter, Technical Recruiter
 - **Recruitment Manager** → Recruiter, Technical Recruiter
 
-### Research & Analysis Team
-- **Product Manager** → Business Analyst, Product Analyst
-- **Design Manager** → UX Researcher
-- **Product Analyst Lead** → Data Analyst, BI Analyst
+### Research & Analysis (2 supervisors)
+- **Domain Expert (SME)** → _no direct executor_
+- **Product Analyst Lead** → Data Analyst
 
-### Documentation Team
-- **Documentation Manager** → Technical Writer, Documentation Specialist
+### Software Engineering (2 supervisors)
+- **Development Manager** → Backend Developer, Frontend Developer, Full-Stack Developer, Software Engineer
+- **Technical Lead / Tech Lead** → Agent Architect, Backend Developer, Build Engineer, Design System Designer, Desktop Developer, DevOps Engineer, Embedded Developer, Fine-tuning Engineer, Firmware Engineer, Frontend Developer, Full-Stack Developer, Game Designer, Game Developer, Maintenance Engineer, Mobile Developer, Payments / Billing Engineer, Refactoring Engineer, Search / Relevance Engineer, Software Architect, Software Engineer, Staff Engineer, Technical Writer, Third-party Integration Specialist
 
-### Localization Team
-- **Localization Manager** → Localization Specialist, Translator
+### Customer Support (1 supervisor)
+- **Support Manager** → Customer Support Agent, Technical Support Engineer
 
-### Hardware & Embedded Team
+### Data & AI (1 supervisor)
+- **AI Engineer Lead** → AI Safety / Alignment Engineer, AI/ML Engineer, Agent Architect, Agent Evaluator, Agent Integration Engineer, Agent Safety Engineer, Agentic Prompt Specialist, Fine-tuning Engineer, MLOps Engineer, Prompt Engineer, RAG / Retrieval Engineer, Tool Developer
+
+### Database (1 supervisor)
+- **Data Governance Manager** → Analytics Engineer, Data Engineer, Data Steward
+
+### Documentation (1 supervisor)
+- **Documentation Manager** → Content Strategist, Documentation Specialist, Technical Writer
+
+### Hardware & Embedded (1 supervisor)
 - **Embedded Systems Lead** → Embedded Developer, Firmware Engineer, IoT Engineer
-### Agent & AI Team
-- **AI Engineer Lead** → Agent Architect, Agent Integration Engineer, Tool Developer, Agent Evaluator, Agentic Prompt Specialist, Agent Safety Engineer
-- **Agent Architect** → Agent Evaluator (technical coordination)
 
-### Supplementary Security Team (§64.3)
-- **Security Governance Manager** → Vulnerability Management Specialist, Security Auditor
-- **CISO** → Cloud Security Engineer, SOC Analyst, Incident Response Engineer
-- **Security Architect** → Cloud Security Engineer, Database Security Specialist
-- **Incident Manager** → Incident Response Engineer
+### Localization & Translation (1 supervisor)
+- **Localization Manager** → Translator
 
-### Release & Ownership Team
-- **Release Manager** → Release Engineer, Deployment Engineer
-- **Platform Owner** → Infrastructure Engineer (platform alignment)
-- **Service Owner** → SRE (Site Reliability Engineer)
 
 ---
 
 ## Statistics and Summary
 
 ### By role type
-- **Supervisors:** 74 roles (including the supplementary §64.3 roles and the IT/Agent roles)
-- **Executors:** 96 roles
-- **Total roles:** 170
+- **Supervisors:** 75 roles (including the supplementary §64.3 roles and the IT/Agent roles)
+- **Executors:** 115 roles
+- **Total roles:** 190
 
 ### By domain
 
 | Domain | SUPERVISOR | EXECUTOR | Total |
 |---|---|---|---|
-| --- | 1 | 1 | 2 |
-| DevOps & SRE | 2 | 6 | 8 |
-| Incident and disaster recovery | 2 | 3 | 5 |
-| Integration & Third-Party | 0 | 1 | 1 |
-| Localization & Translation | 1 | 2 | 3 |
-| Migration & Modernization | 0 | 3 | 3 |
-| Cloud | 3 | 1 | 4 |
-| Security | 3 | 11 | 14 |
-| Marketing & Sales | 8 | 7 | 15 |
+| Data & AI | 1 | 17 | 18 |
+| Marketing & Sales | 8 | 8 | 16 |
+| Security | 3 | 13 | 16 |
+| Management & Strategy | 13 | 0 | 13 |
+| Software Engineering | 2 | 11 | 13 |
+| Design & UX | 2 | 10 | 12 |
+| Legal & Compliance | 8 | 4 | 12 |
+| DevOps & SRE | 2 | 8 | 10 |
+| Quality & Testing | 3 | 6 | 9 |
 | Research & Analysis | 2 | 7 | 9 |
-| Game Development | 0 | 1 | 1 |
-| Software Engineering | 2 | 9 | 11 |
-| Legal & Compliance | 8 | 1 | 9 |
-| Data & AI | 0 | 11 | 11 |
-| Hardware & Embedded | 1 | 3 | 4 |
-| Networking | 0 | 1 | 1 |
-| Design & UX | 2 | 8 | 10 |
+| Software Architecture | 6 | 2 | 8 |
+| Incident and disaster recovery | 3 | 3 | 6 |
 | Operations & Infrastructure | 3 | 3 | 6 |
 | Finance & Business | 4 | 1 | 5 |
 | Product | 5 | 0 | 5 |
-| Management & Strategy | 13 | 0 | 13 |
-| Documentation | 1 | 2 | 3 |
-| Software Architecture | 6 | 2 | 8 |
+| Cloud | 3 | 1 | 4 |
+| Documentation | 1 | 3 | 4 |
+| Hardware & Embedded | 1 | 3 | 4 |
 | Human Resources | 2 | 2 | 4 |
-| Database | 1 | 2 | 3 |
 | Customer Support | 1 | 2 | 3 |
-| Quality & Testing | 3 | 6 | 9 |
-| **Total** | **74** | **96** | **170** |
-
+| Database | 1 | 2 | 3 |
+| Localization & Translation | 1 | 2 | 3 |
+| Migration & Modernization | 0 | 3 | 3 |
+| Game Development | 0 | 2 | 2 |
+| Integration & Third-Party | 0 | 1 | 1 |
+| Networking | 0 | 1 | 1 |
+| **Total** | **75** | **115** | **190** |
 
 ---
 
 ### Key notes:
-✅ **All 96 executor roles now have at least one supervisor**
-✅ **Supervisors reached 74 and executors 96 (12 supplementary §64.3 roles were added, plus the Agent/IT roles)**
-✅ **A complete and balanced organisational structure**
+✅ **All 115 executor roles have at least one registered supervisor**
+✅ **Supervisors 75, executors 115, total 190**
 ✅ **A complete supervisor-executor mapping for every team**
 
-### Newly added supervisors:
-1. Development Manager
-2. Engineering Manager
-3. CTO (Chief Technology Officer)
-4. CISO (Chief Information Security Officer)
-5. Chief Privacy Officer
-6. Performance Engineering Lead
-7. Infrastructure Manager
-8. DevOps Manager
-9. Support Manager
-10. Community Director
-11. Design Manager
-12. Chief Design Officer (CDO)
-13. Documentation Manager
-14. Localization Manager
-15. Embedded Systems Lead
-16. Procurement Manager
-17. Recruitment Manager
-
+---
 
 ## Composite Personas (Master Prompt)
 
-Besides the 170 single-role personas, the repository ships **19 composite personas**: master prompts that run several roles at once (as *lenses*) under one shared, evidence-driven protocol.
-15 of those 19 are built by `scripts/compose_persona.py` from ready-made blocks.
+Besides the 190 single-role personas, the repository ships **26 composite personas**: master prompts that run several roles at once (as *lenses*) under one shared, evidence-driven protocol.
+22 of those 26 are built by `scripts/compose_persona.py` from ready-made blocks; the other 4 are hand-maintained.
 
 | Composite Persona | Lenses | Focus | File | Skill |
 |---|---|---|---|---|
-| Forensic Codebase Review & Audit | — | Forensic codebase review: file by file and line by line, no guessing, with a Coverage Matrix | [`Forensic Codebase Review & Audit.md`](prompts/composite/Forensic%20Codebase%20Review%20%26%20Audit.md) | [`forensic-codebase-review-audit`](skills/forensic-codebase-review-audit/SKILL.md) |
-| Architecture Review & Architecture Audit | — | Architecture review with Tier/Size classification, 0-100 scoring, and a verdict | [`Architecture Review & Architecture Audit.md`](prompts/composite/Architecture%20Review%20%26%20Architecture%20Audit.md) | [`architecture-review-architecture-audit`](skills/architecture-review-architecture-audit/SKILL.md) |
-| Codebase Integration & Workflow Integrity Audit Protocol (v2, single file) | — | Consistency and workflow, phase by phase (P0-P10), resumable on a large codebase | [`codebase-integrity-audit-protocol.md`](prompts/composite/codebase-integrity-audit-protocol.md) | [`codebase-integrity-audit-protocol`](skills/codebase-integrity-audit-protocol/SKILL.md) |
-| Execution Plan Generator | — | Turn a large task into a phased, verifiable execution plan | [`Execution Plan Generator.md`](prompts/composite/Execution%20Plan%20Generator.md) | [`execution-plan-generator`](skills/execution-plan-generator/SKILL.md) |
-| Clean Code & Construction Review | 6 | Code construction quality per the Clean Code + Code Complete contract | [`Clean Code & Construction Review.md`](prompts/composite/Clean%20Code%20%26%20Construction%20Review.md) | [`clean-code-construction-review`](skills/clean-code-construction-review/SKILL.md) |
-| Software Design & Architecture Review | 6 | Design depth and dependency direction per Philosophy of Software Design + Clean Architecture | [`Software Design & Architecture Review.md`](prompts/composite/Software%20Design%20%26%20Architecture%20Review.md) | [`software-design-architecture-review`](skills/software-design-architecture-review/SKILL.md) |
-| Domain Model & Context Review | 6 | Shared language, bounded context, and domain model per DDD (Evans / Vernon) | [`Domain Model & Context Review.md`](prompts/composite/Domain%20Model%20%26%20Context%20Review.md) | [`domain-model-context-review`](skills/domain-model-context-review/SKILL.md) |
-| Frontend & Design System Review | 6 | Tokens, the component library, shell/template, and state coverage in the frontend | [`Frontend & Design System Review.md`](prompts/composite/Frontend%20%26%20Design%20System%20Review.md) | [`frontend-design-system-review`](skills/frontend-design-system-review/SKILL.md) |
-| Production Readiness & Reliability Audit | 7 | Production readiness: Rollback/Restore/Migration/Observability/SLO | [`Production Readiness & Reliability Audit.md`](prompts/composite/Production%20Readiness%20%26%20Reliability%20Audit.md) | [`production-readiness-reliability-audit`](skills/production-readiness-reliability-audit/SKILL.md) |
-| Forensic Security & Threat Audit | 8 | Attack surface and trust boundaries; separating exploitable from theoretical | [`Forensic Security & Threat Audit.md`](prompts/composite/Forensic%20Security%20%26%20Threat%20Audit.md) | [`forensic-security-threat-audit`](skills/forensic-security-threat-audit/SKILL.md) |
-| Data & Database Integrity Audit | 6 | Data consistency, invariants, migration, transactions, backup/restore | [`Data & Database Integrity Audit.md`](prompts/composite/Data%20%26%20Database%20Integrity%20Audit.md) | [`data-database-integrity-audit`](skills/data-database-integrity-audit/SKILL.md) |
-| API & Integration Contract Audit | 6 | API contract and integration; documentation-implementation drift | [`API & Integration Contract Audit.md`](prompts/composite/API%20%26%20Integration%20Contract%20Audit.md) | [`api-integration-contract-audit`](skills/api-integration-contract-audit/SKILL.md) |
-| AI Agent System Audit & Hardening | 6 | LLM/Agent system: tools and permissions, evals, unsafe paths | [`AI Agent System Audit & Hardening.md`](prompts/composite/AI%20Agent%20System%20Audit%20%26%20Hardening.md) | [`ai-agent-system-audit-hardening`](skills/ai-agent-system-audit-hardening/SKILL.md) |
-| Performance & Scalability Audit | 6 | Bottlenecks, resource ceilings, behaviour at 10x and 100x | [`Performance & Scalability Audit.md`](prompts/composite/Performance%20%26%20Scalability%20Audit.md) | [`performance-scalability-audit`](skills/performance-scalability-audit/SKILL.md) |
-| Technical Debt & Modernization Audit | 6 | Technical debt by cost of change; gradual and safe migration path | [`Technical Debt & Modernization Audit.md`](prompts/composite/Technical%20Debt%20%26%20Modernization%20Audit.md) | [`technical-debt-modernization-audit`](skills/technical-debt-modernization-audit/SKILL.md) |
-| Testing & Quality Assurance Audit | 6 | What the suite actually proves; tests with no assertion and coverage gaps | [`Testing & Quality Assurance Audit.md`](prompts/composite/Testing%20%26%20Quality%20Assurance%20Audit.md) | [`testing-quality-assurance-audit`](skills/testing-quality-assurance-audit/SKILL.md) |
-| Incident Forensic Review & Postmortem | 6 | Timeline reconstruction, causal chain, detection and recovery gaps | [`Incident Forensic Review & Postmortem.md`](prompts/composite/Incident%20Forensic%20Review%20%26%20Postmortem.md) | [`incident-forensic-review-postmortem`](skills/incident-forensic-review-postmortem/SKILL.md) |
-| Cloud & Infrastructure Audit | 7 | IaC and drift, exposure, IAM, secrets, blast radius, cost | [`Cloud & Infrastructure Audit.md`](prompts/composite/Cloud%20%26%20Infrastructure%20Audit.md) | [`cloud-infrastructure-audit`](skills/cloud-infrastructure-audit/SKILL.md) |
-| Privacy & Compliance Audit | 6 | Personal data flow, control-evidence, data-subject rights, third-party sharing | [`Privacy & Compliance Audit.md`](prompts/composite/Privacy%20%26%20Compliance%20Audit.md) | [`privacy-compliance-audit`](skills/privacy-compliance-audit/SKILL.md) |
+| AI Agent System Audit & Hardening | 6 | Forensic audit of LLM/agent systems: prompt and tool contracts, tool-call safety and permissions, output validation, eval coverage and regression, hallucination and unsafe-action paths, cost and latency behaviour, fallback and failure handling | [`AI Agent System Audit & Hardening.md`](prompts/composite/AI%20Agent%20System%20Audit%20%26%20Hardening.md) | [`ai-agent-system-audit-hardening`](skills/ai-agent-system-audit-hardening/SKILL.md) |
+| API & Integration Contract Audit | 6 | Evidence-based audit of API and integration contracts: endpoint inventory, request/response validation, error formats, versioning and backwards compatibility, idempotency and retries, timeouts and pagination, authN/authZ per endpoint, webhooks and third-party integrations, and drift between documentation and behaviour | [`API & Integration Contract Audit.md`](prompts/composite/API%20%26%20Integration%20Contract%20Audit.md) | [`api-integration-contract-audit`](skills/api-integration-contract-audit/SKILL.md) |
+| Accessibility & WCAG Audit | 6 | Evidence-based accessibility audit of a product surface against WCAG 2.2 AA: perceivable, operable, understandable, and robust criteria verified in the rendered output rather than asserted in a checklist | [`Accessibility & WCAG Audit.md`](prompts/composite/Accessibility%20%26%20WCAG%20Audit.md) | [`accessibility-wcag-audit`](skills/accessibility-wcag-audit/SKILL.md) |
+| Architecture Review & Architecture Audit | — | Architecture Review & Architecture Audit — composite master persona | [`Architecture Review & Architecture Audit.md`](prompts/composite/Architecture%20Review%20%26%20Architecture%20Audit.md) | [`architecture-review-architecture-audit`](skills/architecture-review-architecture-audit/SKILL.md) |
+| Clean Code & Construction Review | 6 | Forensic review of construction quality: naming, routine boundaries, data and control flow, error handling, boundaries and coupling, test quality, and complexity — judged against the Clean Code + Code Complete construction contract | [`Clean Code & Construction Review.md`](prompts/composite/Clean%20Code%20%26%20Construction%20Review.md) | [`clean-code-construction-review`](skills/clean-code-construction-review/SKILL.md) |
+| Cloud & Infrastructure Audit | 7 | Evidence-based audit of cloud and infrastructure: IaC coverage and drift, network exposure and segmentation, IAM and least privilege, secrets and encryption, compute/container hardening, observability of infrastructure, cost drivers, and failure behaviour of the platform itself | [`Cloud & Infrastructure Audit.md`](prompts/composite/Cloud%20%26%20Infrastructure%20Audit.md) | [`cloud-infrastructure-audit`](skills/cloud-infrastructure-audit/SKILL.md) |
+| Cost & FinOps Audit | 6 | Evidence-based audit of cloud and infrastructure cost: what is actually being spent, on what, by whom, and whether each pound is buying something the business asked for | [`Cost & FinOps Audit.md`](prompts/composite/Cost%20%26%20FinOps%20Audit.md) | [`cost-finops-audit`](skills/cost-finops-audit/SKILL.md) |
+| Data & Database Integrity Audit | 6 | Evidence-based audit of data correctness and persistence: schema and migration safety, constraints and invariants, transactional boundaries, consistency between stores, backup and restore verification, retention and deletion, locking and concurrency effects on data, growth and cost | [`Data & Database Integrity Audit.md`](prompts/composite/Data%20%26%20Database%20Integrity%20Audit.md) | [`data-database-integrity-audit`](skills/data-database-integrity-audit/SKILL.md) |
+| Documentation Quality Audit | 6 | Evidence-based audit of documentation as a working system: whether a reader can find the right page, trust it, and act on it | [`Documentation Quality Audit.md`](prompts/composite/Documentation%20Quality%20Audit.md) | [`documentation-quality-audit`](skills/documentation-quality-audit/SKILL.md) |
+| Domain Model & Context Review | 6 | Forensic review of the domain model and its boundaries: ubiquitous language, bounded contexts and context mapping, subdomain strategy, entities, value objects, aggregates, domain services and specifications, repositories, factories, and domain events — judged against Domain-Driven Design (Evans) and its practical distilled form (Vernon) | [`Domain Model & Context Review.md`](prompts/composite/Domain%20Model%20%26%20Context%20Review.md) | [`domain-model-context-review`](skills/domain-model-context-review/SKILL.md) |
+| Execution Plan Generator | — | Execution Plan Generator — Master Prompt — composite master persona | [`Execution Plan Generator.md`](prompts/composite/Execution%20Plan%20Generator.md) | [`execution-plan-generator`](skills/execution-plan-generator/SKILL.md) |
+| Forensic Codebase Review & Audit | — | Forensic Codebase Review & Audit — Master Prompt (v2) — composite master persona | [`Forensic Codebase Review & Audit.md`](prompts/composite/Forensic%20Codebase%20Review%20%26%20Audit.md) | [`forensic-codebase-review-audit`](skills/forensic-codebase-review-audit/SKILL.md) |
+| Forensic Security & Threat Audit | 8 | Forensic, evidence-only security audit of a software system: attack surface and trust boundaries, authentication/authorization, secrets and crypto, injection and SSRF/XSS/CSRF paths, dependency and supply-chain risk, data exposure, and exploitable vs theoretical findings | [`Forensic Security & Threat Audit.md`](prompts/composite/Forensic%20Security%20%26%20Threat%20Audit.md) | [`forensic-security-threat-audit`](skills/forensic-security-threat-audit/SKILL.md) |
+| Frontend & Design System Review | 6 | Forensic review of visual and interaction consistency: design tokens, the shared component library and its prop APIs, page shells and templates, state coverage, forms, tables, typography, colour, iconography, motion, responsiveness, accessibility, theming, and the mechanical enforcement that keeps the system coherent — judged against the Unified Design System Doctrine | [`Frontend & Design System Review.md`](prompts/composite/Frontend%20%26%20Design%20System%20Review.md) | [`frontend-design-system-review`](skills/frontend-design-system-review/SKILL.md) |
+| Identity & Access Management Audit | 6 | Evidence-based audit of identity and access management: who can do what, how that is decided, and whether the decision can be proven | [`Identity & Access Management Audit.md`](prompts/composite/Identity%20%26%20Access%20Management%20Audit.md) | [`identity-access-management-audit`](skills/identity-access-management-audit/SKILL.md) |
+| Incident Forensic Review & Postmortem | 6 | Forensic review of an incident or outage from available evidence: timeline reconstruction, root cause versus contributing factors, detection and response gaps, blast radius, recovery path, and the actions that prevent recurrence | [`Incident Forensic Review & Postmortem.md`](prompts/composite/Incident%20Forensic%20Review%20%26%20Postmortem.md) | [`incident-forensic-review-postmortem`](skills/incident-forensic-review-postmortem/SKILL.md) |
+| Localisation & i18n Audit | 6 | Evidence-based audit of internationalisation and localisation: whether the product can actually be translated and whether the translations that exist are correct and complete | [`Localisation & i18n Audit.md`](prompts/composite/Localisation%20%26%20i18n%20Audit.md) | [`localisation-i18n-audit`](skills/localisation-i18n-audit/SKILL.md) |
+| Observability & Monitoring Audit | 6 | Evidence-based audit of observability: whether the signals needed to detect, diagnose, and recover from failure actually exist and actually fire | [`Observability & Monitoring Audit.md`](prompts/composite/Observability%20%26%20Monitoring%20Audit.md) | [`observability-monitoring-audit`](skills/observability-monitoring-audit/SKILL.md) |
+| Performance & Scalability Audit | 6 | Evidence-based performance and scalability audit: hot paths, complexity and N+1 patterns, I/O and caching correctness, concurrency limits, database and query behaviour, resource ceilings, and what breaks first at 10x and 100x | [`Performance & Scalability Audit.md`](prompts/composite/Performance%20%26%20Scalability%20Audit.md) | [`performance-scalability-audit`](skills/performance-scalability-audit/SKILL.md) |
+| Privacy & Compliance Audit | 6 | Evidence-based audit of privacy and compliance posture: personal-data inventory and flows, lawful basis and consent, retention and deletion, access control and audit logging, DSAR/erasure capability, third-party and cross-border transfers, and control-to-evidence traceability | [`Privacy & Compliance Audit.md`](prompts/composite/Privacy%20%26%20Compliance%20Audit.md) | [`privacy-compliance-audit`](skills/privacy-compliance-audit/SKILL.md) |
+| Production Readiness & Reliability Audit | 7 | Evidence-based production-readiness and reliability audit of a software system: rollback and restore paths, failure modes, observability, alerting, SLOs, release gates, migrations, capacity and operational cost | [`Production Readiness & Reliability Audit.md`](prompts/composite/Production%20Readiness%20%26%20Reliability%20Audit.md) | [`production-readiness-reliability-audit`](skills/production-readiness-reliability-audit/SKILL.md) |
+| Software Design & Architecture Review | 6 | Forensic review of design depth and dependency direction: complexity symptoms, module depth, information hiding, interface width, strategic vs tactical patching, layer ownership, ports and adapters, and boundary cost — judged against A Philosophy of Software Design and Clean Architecture | [`Software Design & Architecture Review.md`](prompts/composite/Software%20Design%20%26%20Architecture%20Review.md) | [`software-design-architecture-review`](skills/software-design-architecture-review/SKILL.md) |
+| Supply Chain & Dependency Audit | 6 | Evidence-based audit of the software supply chain: what the build actually contains, where every artefact came from, and whether the provenance claimed can be verified | [`Supply Chain & Dependency Audit.md`](prompts/composite/Supply%20Chain%20%26%20Dependency%20Audit.md) | [`supply-chain-dependency-audit`](skills/supply-chain-dependency-audit/SKILL.md) |
+| Technical Debt & Modernization Audit | 6 | Evidence-based audit of technical debt and modernization risk: debt inventory with impact and cost, dead and duplicated code, change risk and blast radius, safe incremental migration paths, and what must NOT be rewritten | [`Technical Debt & Modernization Audit.md`](prompts/composite/Technical%20Debt%20%26%20Modernization%20Audit.md) | [`technical-debt-modernization-audit`](skills/technical-debt-modernization-audit/SKILL.md) |
+| Testing & Quality Assurance Audit | 6 | Evidence-based audit of test and verification quality: what is actually tested, which critical behaviours have no test, assertion-free and mocked-away tests, flakiness and ordering dependence, coverage that measures the wrong thing, and regression risk | [`Testing & Quality Assurance Audit.md`](prompts/composite/Testing%20%26%20Quality%20Assurance%20Audit.md) | [`testing-quality-assurance-audit`](skills/testing-quality-assurance-audit/SKILL.md) |
+| Codebase Integration & Workflow Integrity Audit Protocol (v2, single file) | — | Codebase Integration & Workflow Integrity Audit Protocol (v2, single file) — composite master persona | [`codebase-integrity-audit-protocol.md`](prompts/composite/codebase-integrity-audit-protocol.md) | [`codebase-integrity-audit-protocol`](skills/codebase-integrity-audit-protocol/SKILL.md) |
 
 Building a new composite (from ready-made blocks + spec):
 
@@ -957,7 +1183,7 @@ Every persona is also published as an **Agent Skill**: a small `SKILL.md` (trigg
 plus the full persona text in `references/` (progressive disclosure).
 
 ```bash
-python3 scripts/build_skills.py                 # build 189 skills (170 roles + 19 composites)
+python3 scripts/build_skills.py                 # build 216 skills (190 roles + 26 composites)
 python3 scripts/build_skills.py --only backend-developer
 python3 scripts/build_skills.py --source "prompts/audit/*.md"
 python3 scripts/validate_skills.py              # validate frontmatter / links / size
@@ -1028,10 +1254,10 @@ make serve      # local preview at http://localhost:8000
 The same thing step by step:
 
 ```bash
-python3 scripts/generate_personas.py     # 170 role prompts + the README Prompt column and links
-python3 scripts/build_metadata.py        # personas.json (170 roles + 19 composites)
-python3 scripts/compose_persona.py --all # the 15 spec-driven composite master prompts
-python3 scripts/build_skills.py          # 189 Agent Skills + skills/index.json + skills/README.md
+python3 scripts/generate_personas.py     # 190 role prompts + the README Prompt column and links
+python3 scripts/build_metadata.py        # personas.json (190 roles + 26 composites)
+python3 scripts/compose_persona.py --all # the 22 spec-driven composite master prompts
+python3 scripts/build_skills.py          # 216 Agent Skills + skills/index.json + skills/README.md
 ```
 
 `generate_personas.py` rewrites the prompt files and keeps the `Prompt` column and the links
@@ -1046,12 +1272,12 @@ of the README main table up to date.
 
 | Command | What it guarantees |
 |---|---|
-| `python3 scripts/validate_personas.py` | 170 prompts match the README table; slugs and links agree |
+| `python3 scripts/validate_personas.py` | 190 prompts match the README table; slugs and links agree |
 | `python3 scripts/validate_composites.py` | all 19 master prompts are English-only, copy-paste ready, and substantive |
-| `python3 scripts/validate_skills.py` | 189 skills have valid frontmatter, resolvable links, and a `references/` copy byte-identical to its source |
-| `python3 scripts/compose_persona.py --all --check` | the 15 spec-driven composites re-render byte-for-byte |
+| `python3 scripts/validate_skills.py` | 216 skills have valid frontmatter, resolvable links, and a `references/` copy byte-identical to its source |
+| `python3 scripts/compose_persona.py --all --check` | the 22 spec-driven composites re-render byte-for-byte |
 | `python3 scripts/build_skills.py --check` | the skills on disk match what the builder would produce |
-| `node scripts/test_web.js` | `index.html` renders all 189 personas and its filters, sort, and search work |
+| `node scripts/test_web.js` | `index.html` renders all 216 personas and its filters, sort, and search work |
 
 CI runs all of them on every push and pull request (see
 [`.github/workflows/ci.yml`](.github/workflows/ci.yml)), and additionally fails if a
