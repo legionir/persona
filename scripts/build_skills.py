@@ -389,7 +389,8 @@ def write_catalog(entries: dict[str, dict]) -> None:
                         "title": s.get("title", s["name"]),
                         "description": s.get("description", ""),
                         "meta": {"type": s.get("type"), "typeLabel": s.get("typeLabel"),
-                                 "domain": s.get("domain")},
+                                 "domain": s.get("domain"),
+                                 "lenses": s.get("lenses")},
                         "source": s.get("source", ""),
                         "path": s.get("skill", f"skills/{s['name']}/SKILL.md"),
                         "lines": len((SKILLS / s["name"] / "SKILL.md").read_text(encoding="utf-8").splitlines()),
@@ -411,7 +412,9 @@ def write_catalog(entries: dict[str, dict]) -> None:
             {"name": n, "title": e["title"], "type": e["meta"].get("type"),
              "typeLabel": e["meta"].get("typeLabel"), "domain": e["meta"].get("domain"),
              "source": e["source"], "skill": e.get("path", f"skills/{n}/SKILL.md"),
-             "description": e["description"]}
+             "description": e["description"],
+             **({"lenses": e["meta"]["lenses"]}
+                if e["meta"].get("lenses") else {})}
             for n, e in sorted(merged.items())
         ],
     }
