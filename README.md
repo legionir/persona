@@ -969,6 +969,7 @@ Full guide: [`docs/persona-skills.md`](docs/persona-skills.md).
 - `composites/blocks/97-refactoring-contract.md` — the refactoring contract (single merge of Refactoring.Guru: the smell catalogue with trigger → treatment, the exception rules, the stop condition).
 - `composites/blocks/98-frontend-design-system-contract.md` — the frontend design-system contract (single merge of the Doctrine of Visual & Interaction Consistency: tokens, one concept = one component, state coverage, shell/template).
 - `composites/*.json` — the spec of each composite persona (mission, inputs, lenses, precedence, extra sections).
+- `audits/` — **runtime output, created on demand and git-ignored.** The personas write their execution plans and audit reports here (`audits/<slug>-execution-plan.md`, `audits/<slug>-audit.md`). Nothing in the repository is committed there.
 - `skills/<name>/SKILL.md` and `skills/<name>/references/` — the output of turning a persona into an Agent Skill.
 - `Makefile` — one entry point for the whole pipeline (`make all`, `make check`, `make test`, `make serve`).
 - `.github/workflows/ci.yml` — CI: regenerate everything, fail on drift, then run every validation gate.
