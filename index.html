@@ -137,16 +137,9 @@
   .filters[hidden], .tabs[hidden], .grid[hidden], .meta-line[hidden] { display: none; }
   .badge.comp { color: #ffc46b; background: var(--comp-bg); border-color: rgba(255,196,107,.4); }
 
-  /* ---------- role / composite tabs ---------- */
-  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
-  .tab {
-    border: 1px solid var(--border); background: var(--panel-2); color: var(--muted);
-    border-radius: 999px; padding: 8px 16px; cursor: pointer; font: inherit; font-size: 13px;
-    display: inline-flex; align-items: center; gap: 8px; transition: all .15s ease;
-  }
-  .tab:hover { color: var(--text); border-color: var(--accent); }
-  .tab[aria-selected="true"] { color: var(--text); border-color: var(--accent); background: rgba(91,141,255,.14); }
-  .tab .n { font-size: 11.5px; font-weight: 700; opacity: .8; }
+  /* a facet that does not apply to the current type is dimmed, not removed */
+  .filters .off { opacity: .4; }
+  .filters select:disabled { cursor: not-allowed; }
 
   /* related roles — clickable chips that scroll to the target role */
   .rel { font-size: 12.5px; color: var(--muted); line-height: 1.9; display: flex; flex-direction: column; gap: 6px; max-width: 100%; }
@@ -213,23 +206,14 @@
 <div class="wrap">
   <header>
     <h1>⚡ Find a <span>Persona</span></h1>
-    <p>Search 170 role prompts and 19 composite master prompts — by title, mission, duties, domain, keywords, and supervisor/executor</p>
+    <p>Search 189 personas — 170 role prompts and 19 composite master prompts — by title, mission, duties, domain, keywords, and type</p>
     <div class="stats" id="stats"></div>
   </header>
 
   <div class="searchbar">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9aa3c0" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-    <input id="q" type="search" placeholder="e.g. backend, security, Agent, UX, or slug: backend-developer ..." autocomplete="off">
+    <input id="q" type="search" placeholder="e.g. backend, security, forensic, readiness, or slug: backend-developer ..." autocomplete="off">
     <button class="clear-btn" id="clearQ" title="Clear">✕</button>
-  </div>
-
-  <div class="tabs" role="tablist" aria-label="Persona kind">
-    <button class="tab" id="tabRoles" role="tab" aria-selected="true" aria-controls="grid">
-      Role personas <span class="n" id="nRoles"></span>
-    </button>
-    <button class="tab" id="tabComposite" role="tab" aria-selected="false" aria-controls="grid">
-      Composite master prompts <span class="n" id="nComposite"></span>
-    </button>
   </div>
 
   <div class="filters" id="filters">
@@ -266,10 +250,36 @@
 "use strict";
 
 const GITHUB_BASE = "https://github.com/legionir/persona/blob/main/";
-let DATA = null;      // personas.json  — 170 role personas
+let DATA = null;      // personas.json    — 170 role personas
 let SKILLS = null;    // skills/index.json — 189 skills (170 roles + 19 composites)
+let ALL = [];         // one unified list: 170 roles + 19 composites
 let TITLE_ID = null;  // Map: role title -> id (to scroll to that role's card)
-let MODE = "roles";   // "roles" | "composite"
+
+/* Facets that only role personas carry. They are dimmed when the selected
+   type is Composite, because a composite has no group / domain / seniority. */
+const ROLE_ONLY_FACETS = ["fGroup", "fDomain", "fCategory", "fSeniority"];
+
+/* A composite skill, reshaped to look like a role persona so one renderer,
+   one filter and one sort handle both. */
+function compositeToPersona(s){
+  return {
+    id: s.name,
+    title: String(s.title || "").replace(/\s*—\s*Master Prompt\s*(\(v\d+\))?\s*$/i, "").trim() || s.name,
+    type: "COMPOSITE",
+    typeLabel: "Composite",
+    roleId: null,
+    mission: s.description || "",
+    duties: "",
+    group: null, domain: null, category: null, seniority: null,
+    supervisors: [], consumers: [], capabilities: [],
+    path: s.source,
+    file: String(s.source || "").split("/").pop(),
+    skill: s.skill,
+    lenses: s.lenses || null,
+    isComposite: true,
+    keywords: []
+  };
+}
 
 const $ = (id) => document.getElementById(id);
 
@@ -290,6 +300,8 @@ function initFacets(data){
         `<option value="${val}">${label}</option>`);
   };
   fill("fType", data.facets.types.map(t => [t.id, t.label]));
+  // personas.json only knows SUPERVISOR / EXECUTOR; composites come from skills/index.json
+  fill("fType", [["COMPOSITE", "Composite"]]);
   fill("fGroup", data.facets.groups.map(g => [g[0], g[1]]));
   fill("fDomain", data.facets.domains.map(d => [d[0], d[1]]));
   fill("fCategory", data.facets.categories.map(c => [c[0], c[1]]));
@@ -299,21 +311,23 @@ function initFacets(data){
 function renderStats(t){
   const comp = (SKILLS && SKILLS.totals.composites) || 0;
   $("stats").innerHTML = `
+    <span class="stat">Total personas: <b>${faDigits(t.roles + comp)}</b></span>
     <span class="stat">Role prompts: <b>${faDigits(t.roles)}</b></span>
     <span class="stat">Composite prompts: <b>${faDigits(comp)}</b></span>
     <span class="stat">Supervisors: <b>${faDigits(t.supervisors)}</b></span>
     <span class="stat">Executors: <b>${faDigits(t.executors)}</b></span>`;
 }
 
-function matches(role, q){
+function matches(p, q){
   if (!q) return true;
   const hay = norm([
-    role.title, role.id, role.mission, role.duties,
-    role.typeLabel, role.domainLabel, role.categoryLabel,
-    role.groupLabel, role.seniorityLabel,
-    (role.supervisors || []).join(" "),
-    (role.consumers || []).join(" "),
-    (role.keywords || []).join(" ")
+    p.title, p.id, p.mission, p.duties,
+    p.typeLabel, p.domainLabel, p.categoryLabel,
+    p.groupLabel, p.seniorityLabel,
+    p.skill || "", p.lenses ? p.lenses + " lenses" : "",
+    (p.supervisors || []).join(" "),
+    (p.consumers || []).join(" "),
+    (p.keywords || []).join(" ")
   ].join(" "));
   return q.split(/\s+/).every(token => hay.includes(token));
 }
@@ -321,13 +335,14 @@ function matches(role, q){
 function getFiltered(){
   const q = norm($("q").value);
   const fType = $("fType").value;
-  const fGroup = $("fGroup").value;
-  const fDomain = $("fDomain").value;
-  const fCategory = $("fCategory").value;
-  const fSeniority = $("fSeniority").value;
+  const composite = fType === "COMPOSITE";
+  const fGroup = composite ? "" : $("fGroup").value;
+  const fDomain = composite ? "" : $("fDomain").value;
+  const fCategory = composite ? "" : $("fCategory").value;
+  const fSeniority = composite ? "" : $("fSeniority").value;
   const sort = $("fSort").value;
 
-  let list = DATA.roles.filter(r =>
+  let list = ALL.filter(r =>
     matches(r, q) &&
     (!fType || r.type === fType) &&
     (!fGroup || r.group === fGroup) &&
@@ -345,38 +360,41 @@ function getFiltered(){
 
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 
-/* ---------- composite master prompts (from skills/index.json) ---------- */
-function compositeMatches(s, q){
-  if (!q) return true;
-  const hay = norm([s.name, s.title, s.description, s.source, s.typeLabel].join(" "));
-  return q.split(/\s+/).every(tok => hay.includes(tok));
+/* A composite has no group / domain / category / seniority — grey those four
+   selects out instead of letting the user build a filter that matches nothing. */
+function syncRoleOnlyFacets(){
+  const composite = $("fType").value === "COMPOSITE";
+  ROLE_ONLY_FACETS.forEach(id => {
+    const el = $(id);
+    el.disabled = composite;
+    if (composite) el.value = "";
+    const wrap = el.closest("div");
+    if (wrap) wrap.classList.toggle("off", composite);
+  });
 }
 
-function getFilteredComposites(){
-  const q = norm($("q").value);
-  return SKILLS.skills.filter(s => s.type === "COMPOSITE" && compositeMatches(s, q));
-}
-
-function compositeCardHTML(s){
-  const ghUrl = GITHUB_BASE + s.source;
-  const lensChip = s.lenses
-    ? `<span class="chip k">${faDigits(s.lenses)} lenses</span>` : "";
+/* Composite master prompts render with the same card, but no group / domain /
+   seniority and an extra lens count — see compositeToPersona() above. */
+function compositeCardHTML(r){
+  const ghUrl = GITHUB_BASE + r.path;
+  const lensChip = r.lenses
+    ? `<span class="chip k">${faDigits(r.lenses)} lenses</span>` : "";
   return `
-  <article class="card" id="comp-${esc(s.name)}">
+  <article class="card" id="role-${esc(r.id)}">
     <div class="top">
-      <h2><a href="${esc(s.source)}" target="_blank" title="Open the master prompt">${esc(s.title)}</a></h2>
+      <h2><a href="${esc(r.path)}" target="_blank" title="Open the master prompt">${esc(r.title)}</a></h2>
       <span class="badge comp">Composite</span>
     </div>
-    <div class="mission">${esc(s.description)}</div>
+    <div class="mission">${esc(r.mission)}</div>
     <div class="chips">
       <span class="chip">Master prompt</span>
       ${lensChip}
-      <span class="chip k">${esc(s.name)}</span>
+      <span class="chip k">${esc(r.id)}</span>
     </div>
     <div class="foot">
-      <span class="path" title="${esc(s.source)}">${esc(s.source)}</span>
-      <button class="icon-btn" data-copy="${esc(s.source)}" title="Copy path">⧉</button>
-      <a class="icon-btn" href="${esc(s.skill)}" target="_blank" title="Open the Agent Skill">Skill</a>
+      <span class="path" title="${esc(r.path)}">${esc(r.path)}</span>
+      <button class="icon-btn" data-copy="${esc(r.path)}" title="Copy path">⧉</button>
+      <a class="icon-btn" href="${esc(r.skill)}" target="_blank" title="Open the Agent Skill">Skill</a>
       <a class="icon-btn primary" href="${ghUrl}" target="_blank" title="View on GitHub">GitHub</a>
     </div>
   </article>`;
@@ -392,6 +410,7 @@ function relLinks(names){
 }
 
 function cardHTML(r){
+  if (r.isComposite) return compositeCardHTML(r);
   const badge = r.type === "SUPERVISOR"
     ? `<span class="badge sup">Supervisor ${esc(r.roleId)}</span>`
     : `<span class="badge exe">Executor ${esc(r.roleId)}</span>`;
@@ -428,23 +447,11 @@ function cardHTML(r){
 }
 
 function render(){
-  const composite = MODE === "composite";
-  $("filters").hidden = composite;              // facets only apply to role personas
-  const list = composite ? getFilteredComposites() : getFiltered();
-  $("grid").innerHTML = list.map(composite ? compositeCardHTML : cardHTML).join("");
+  syncRoleOnlyFacets();
+  const list = getFiltered();
+  $("grid").innerHTML = list.map(cardHTML).join("");
   $("empty").hidden = list.length > 0;
-  const total = composite ? SKILLS.totals.composites : DATA.totals.roles;
-  $("count").textContent = `${faDigits(list.length)} of ${faDigits(total)} results`;
-}
-
-function setMode(mode){
-  MODE = mode;
-  $("tabRoles").setAttribute("aria-selected", String(mode === "roles"));
-  $("tabComposite").setAttribute("aria-selected", String(mode === "composite"));
-  $("q").placeholder = mode === "composite"
-    ? "e.g. forensic, security, performance, readiness, testing ..."
-    : "e.g. backend, security, Agent, UX, or slug: backend-developer ...";
-  render();
+  $("count").textContent = `${faDigits(list.length)} of ${faDigits(ALL.length)} results`;
 }
 
 function scrollToRole(id){
@@ -459,8 +466,6 @@ function scrollToRole(id){
 function bindEvents(){
   let t;
   $("q").addEventListener("input", () => { clearTimeout(t); t = setTimeout(render, 120); });
-  $("tabRoles").addEventListener("click", () => setMode("roles"));
-  $("tabComposite").addEventListener("click", () => setMode("composite"));
   $("clearQ").addEventListener("click", () => { $("q").value = ""; render(); $("q").focus(); });
   ["fType","fGroup","fDomain","fCategory","fSeniority","fSort"].forEach(id => {
     $(id).addEventListener("change", render);
@@ -497,12 +502,13 @@ Promise.all([
     DATA = personas;
     SKILLS = skills;
     TITLE_ID = new Map(DATA.roles.map(r => [r.title, r.id]));
-    $("nRoles").textContent = faDigits(DATA.totals.roles);
-    $("nComposite").textContent = faDigits(SKILLS.totals.composites);
+    ALL = [...DATA.roles, ...SKILLS.skills
+             .filter(s => s.type === "COMPOSITE")
+             .map(compositeToPersona)];
     renderStats(DATA.totals);
     initFacets(DATA);
     bindEvents();
-    setMode("roles");
+    render();
   })
   .catch(err => {
     $("empty").hidden = false;
