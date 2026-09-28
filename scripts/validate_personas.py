@@ -7,9 +7,9 @@ Checks:
   2. SUPERVISOR files additionally contain the 10 headings of section 62.
   3. EXECUTOR files additionally contain the 12 headings of section 63.
   4. Every file matches a README row and no README row is orphaned.
-  5. Every supervisor named in a README row is a registered SUPERVISOR row.
-  5. Every executor has at least one registered supervisor.
-  6. No legacy headers / legacy state machines remain.
+  5. Canonical supervisor registry equals README, prompt, and metadata relationships.
+  6. Every executor has at least one registered supervisor.
+  7. No legacy headers / legacy state machines remain.
 
 Usage:
     python3 scripts/validate_personas.py
@@ -17,6 +17,7 @@ Usage:
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -60,6 +61,100 @@ def read_rows(path: Path) -> list[tuple[str, str, str, str]]:
                 rows.append((title, cells[2], m.group(1), m.group(2)))
                 break
     return rows
+
+
+def read_main_table(path: Path) -> list[list[str]]:
+    """Read only the first contiguous Markdown table (the 28-column role table)."""
+    rows: list[list[str]] = []
+    started = False
+    for line in path.read_text(encoding="utf-8").splitlines():
+        text = line.strip()
+        if text.startswith("|"):
+            started = True
+            cells = [c.strip() for c in text.split("|")]
+            if cells and cells[0] == "": cells = cells[1:]
+            if cells and cells[-1] == "": cells = cells[:-1]
+            if len(cells) == MAIN_COLS and not all(set(c) <= set("-: ") for c in cells):
+                rows.append(cells)
+        elif started:
+            break
+    return rows
+
+
+def validate_supervisor_parity(problems: list[str], rows: list[tuple[str, str, str, str]]) -> None:
+    registry_path = ROOT / "data" / "supervisor-map.json"
+    try:
+        data = json.loads(registry_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        problems.append(f"cannot read canonical supervisor registry: {exc}")
+        return
+    main_rows = read_main_table(README)
+    if not main_rows or main_rows[0][0] != "Job Title":
+        problems.append("main README role table is missing or malformed")
+        return
+    role_rows = [r for r in main_rows[1:] if r[2] in ("SUPERVISOR", "EXECUTOR")]
+    expected_ids = {r[0]: f"EXE-{i:03d}" for i, r in enumerate([x for x in role_rows if x[2] == "EXECUTOR"], 1)}
+    canonical: dict[str, list[str]] = {}
+    for item in data.get("roles", []):
+        title, supervisors = item.get("title"), item.get("supervisors")
+        if title in canonical or title not in expected_ids:
+            problems.append(f"supervisor registry has duplicate/unknown executor: {title!r}")
+            continue
+        if item.get("roleId") != expected_ids[title]:
+            problems.append(f"supervisor registry roleId mismatch for {title}: {item.get('roleId')!r}")
+        if not isinstance(supervisors, list) or any(not isinstance(x, str) for x in supervisors):
+            problems.append(f"supervisor registry entry for {title} must contain a string array")
+            continue
+        if len(supervisors) != len(set(supervisors)):
+            problems.append(f"supervisor registry entry for {title} contains duplicates")
+        canonical[title] = supervisors
+    if set(canonical) != set(expected_ids):
+        problems.append(f"supervisor registry coverage mismatch: expected {len(expected_ids)}, got {len(canonical)}")
+    registered = {r[0] for r in role_rows if r[2] == "SUPERVISOR"}
+    for title, sups in canonical.items():
+        for sup in sups:
+            if sup not in registered:
+                problems.append(f"canonical supervisor for {title} is not a registered SUPERVISOR: {sup}")
+    for cells in role_rows:
+        title, role_type = cells[0], cells[2]
+        if role_type != "EXECUTOR":
+            continue
+        expected = canonical.get(title)
+        if expected is None:
+            continue
+        readme_sups = [x.strip() for x in cells[6].split(",") if x.strip()]
+        if readme_sups != expected:
+            problems.append(f"README supervisor mismatch for {title}: {readme_sups!r} != {expected!r}")
+        slug_match = next((r[3] for r in rows if r[0] == title), None)
+        if not slug_match:
+            continue
+        prompt = ROOT / "prompts" / "implementation" / f"{slug_match}.md"
+        try:
+            text = prompt.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        section = re.search(r"## 6\. Stakeholders & Ownership\n(.*?)(?:\n\n## 7\.)", text, re.S)
+        if not section:
+            problems.append(f"{prompt.relative_to(ROOT)}: missing ownership section")
+            continue
+        fields = {m.group(1): m.group(2).strip() for m in re.finditer(r"^- \*\*([^:]+):\*\* (.*)$", section.group(1), re.M)}
+        expected_join = ", ".join(expected)
+        for field in ("Reviewer", "Approver", "SupportingPersonas"):
+            if fields.get(field) != (expected_join or "Unknown / Requires Verification"):
+                problems.append(f"{prompt.relative_to(ROOT)}: {field} differs from canonical supervisor map")
+        expected_owner = expected[0] if expected else "Unknown / Requires Verification: the supervisor must exist in the Registry"
+        if fields.get("DecisionOwner") != expected_owner:
+            problems.append(f"{prompt.relative_to(ROOT)}: DecisionOwner differs from canonical supervisor map")
+    metadata_path = ROOT / "personas.json"
+    try:
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        meta_roles = {r.get("title"): r for r in metadata.get("roles", []) if r.get("type") == "EXECUTOR"}
+        for title, sups in canonical.items():
+            row = meta_roles.get(title)
+            if row is None or row.get("supervisors") != sups:
+                problems.append(f"personas.json supervisor mismatch for {title}")
+    except (OSError, json.JSONDecodeError) as exc:
+        problems.append(f"cannot read personas.json for supervisor parity: {exc}")
 
 
 def main() -> int:
@@ -126,6 +221,8 @@ def main() -> int:
         problems.append(f"orphan file without README row: prompts/{d}/{s}.md")
     for d, s in sorted(orphan_rows):
         problems.append(f"README row without file: {d}/{s}")
+
+    validate_supervisor_parity(problems, rows)
 
     # supervisor mapping sanity
     sup_files = {p.stem for p in (PROMPTS / "audit").glob("*.md")}

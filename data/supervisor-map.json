@@ -1,0 +1,936 @@
+{
+  "$schema": "persona-supervisor-map/v1",
+  "source": "Canonical supervisor relationships; preserve the effective mappings from personas.json at baseline 5cac70cef1c33f8b393ef05d1aacd1ab8adcc701.",
+  "roles": [
+    {
+      "roleId": "EXE-001",
+      "title": "Business Analyst (BA)",
+      "supervisors": [
+        "Product Owner (PO)",
+        "Product Manager (PM)",
+        "Risk Manager",
+        "Project Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-002",
+      "title": "Software Architect",
+      "supervisors": [
+        "Solution Architect",
+        "Technical Lead / Tech Lead",
+        "Architecture Review Board"
+      ]
+    },
+    {
+      "roleId": "EXE-003",
+      "title": "System Architect",
+      "supervisors": [
+        "Solution Architect",
+        "Enterprise Architect",
+        "Architecture Review Board"
+      ]
+    },
+    {
+      "roleId": "EXE-004",
+      "title": "Staff Engineer",
+      "supervisors": [
+        "Technical Lead / Tech Lead",
+        "Principal Engineer"
+      ]
+    },
+    {
+      "roleId": "EXE-005",
+      "title": "Software Engineer",
+      "supervisors": [
+        "Technical Lead / Tech Lead",
+        "Engineering Manager",
+        "Development Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-006",
+      "title": "Backend Developer",
+      "supervisors": [
+        "Technical Lead / Tech Lead",
+        "Solution Architect",
+        "Development Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-007",
+      "title": "Frontend Developer",
+      "supervisors": [
+        "Technical Lead / Tech Lead",
+        "Product Owner (PO)",
+        "Development Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-008",
+      "title": "Full-Stack Developer",
+      "supervisors": [
+        "Technical Lead / Tech Lead",
+        "Solution Architect",
+        "Development Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-009",
+      "title": "Mobile Developer",
+      "supervisors": [
+        "Technical Lead / Tech Lead",
+        "Product Manager (PM)"
+      ]
+    },
+    {
+      "roleId": "EXE-010",
+      "title": "Desktop Developer",
+      "supervisors": [
+        "Technical Lead / Tech Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-011",
+      "title": "Game Developer",
+      "supervisors": [
+        "Technical Lead / Tech Lead",
+        "Product Manager (PM)"
+      ]
+    },
+    {
+      "roleId": "EXE-012",
+      "title": "Embedded Developer",
+      "supervisors": [
+        "Solution Architect",
+        "Technical Lead / Tech Lead",
+        "Embedded Systems Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-013",
+      "title": "Firmware Engineer",
+      "supervisors": [
+        "Solution Architect",
+        "Technical Lead / Tech Lead",
+        "Embedded Systems Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-014",
+      "title": "IoT Engineer",
+      "supervisors": [
+        "Solution Architect",
+        "Cloud Architect",
+        "Embedded Systems Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-015",
+      "title": "AI/ML Engineer",
+      "supervisors": [
+        "AI Engineer Lead",
+        "Principal Engineer"
+      ]
+    },
+    {
+      "roleId": "EXE-016",
+      "title": "Data Scientist",
+      "supervisors": [
+        "Data Architect",
+        "Product Manager (PM)"
+      ]
+    },
+    {
+      "roleId": "EXE-017",
+      "title": "Data Engineer",
+      "supervisors": [
+        "Data Architect",
+        "Data Governance Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-018",
+      "title": "MLOps Engineer",
+      "supervisors": [
+        "AI Engineer Lead",
+        "Cloud Architect",
+        "DevOps Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-019",
+      "title": "Prompt Engineer",
+      "supervisors": [
+        "AI Engineer Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-020",
+      "title": "AI Engineer",
+      "supervisors": [
+        "Solution Architect",
+        "Principal Engineer"
+      ]
+    },
+    {
+      "roleId": "EXE-021",
+      "title": "Database Administrator (DBA)",
+      "supervisors": [
+        "Data Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-022",
+      "title": "Database Engineer",
+      "supervisors": [
+        "Data Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-023",
+      "title": "DevOps Engineer",
+      "supervisors": [
+        "Technical Lead / Tech Lead",
+        "Cloud Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-024",
+      "title": "SRE (Site Reliability Engineer)",
+      "supervisors": [
+        "Service Owner",
+        "Engineering Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-025",
+      "title": "Cloud Engineer",
+      "supervisors": [
+        "Cloud Architect",
+        "FinOps Specialist"
+      ]
+    },
+    {
+      "roleId": "EXE-026",
+      "title": "Infrastructure Engineer",
+      "supervisors": [
+        "Cloud Architect",
+        "Platform Owner",
+        "FinOps Specialist"
+      ]
+    },
+    {
+      "roleId": "EXE-027",
+      "title": "Network Engineer",
+      "supervisors": [
+        "Infrastructure Manager",
+        "Security Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-028",
+      "title": "System Administrator",
+      "supervisors": [
+        "Infrastructure Manager",
+        "Security Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-029",
+      "title": "Release Engineer",
+      "supervisors": [
+        "Release Manager",
+        "QA Lead",
+        "Change Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-030",
+      "title": "Build Engineer",
+      "supervisors": [
+        "Release Manager",
+        "Technical Lead / Tech Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-031",
+      "title": "QA Engineer",
+      "supervisors": [
+        "QA Lead",
+        "Quality Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-032",
+      "title": "Test Engineer",
+      "supervisors": [
+        "QA Lead",
+        "Quality Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-033",
+      "title": "Test Automation Engineer",
+      "supervisors": [
+        "QA Lead",
+        "DevOps Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-034",
+      "title": "Performance Engineer",
+      "supervisors": [
+        "Performance Engineering Lead",
+        "DevOps Manager",
+        "Quality Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-035",
+      "title": "Load/Stress Tester",
+      "supervisors": [
+        "Performance Engineering Lead",
+        "QA Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-036",
+      "title": "Security Engineer",
+      "supervisors": [
+        "Security Architect",
+        "Chief Information Security Officer (CISO)"
+      ]
+    },
+    {
+      "roleId": "EXE-037",
+      "title": "Application Security Engineer",
+      "supervisors": [
+        "Security Architect",
+        "Chief Information Security Officer (CISO)"
+      ]
+    },
+    {
+      "roleId": "EXE-038",
+      "title": "Cybersecurity Engineer",
+      "supervisors": [
+        "Chief Information Security Officer (CISO)",
+        "Security Governance Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-039",
+      "title": "Penetration Tester",
+      "supervisors": [
+        "Security Architect",
+        "Chief Information Security Officer (CISO)"
+      ]
+    },
+    {
+      "roleId": "EXE-040",
+      "title": "DevSecOps Engineer",
+      "supervisors": [
+        "Security Architect",
+        "DevOps Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-041",
+      "title": "Privacy Engineer",
+      "supervisors": [
+        "Privacy / Compliance Officer",
+        "Legal Advisor"
+      ]
+    },
+    {
+      "roleId": "EXE-042",
+      "title": "UI Designer",
+      "supervisors": [
+        "Design Manager",
+        "Product Manager (PM)"
+      ]
+    },
+    {
+      "roleId": "EXE-043",
+      "title": "UX Designer",
+      "supervisors": [
+        "Design Manager",
+        "Product Manager (PM)"
+      ]
+    },
+    {
+      "roleId": "EXE-044",
+      "title": "Product Designer",
+      "supervisors": [
+        "Product Manager (PM)"
+      ]
+    },
+    {
+      "roleId": "EXE-045",
+      "title": "UX Researcher",
+      "supervisors": [
+        "Product Manager (PM)",
+        "Design Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-046",
+      "title": "UX Writer / Content Designer",
+      "supervisors": [
+        "Design Manager",
+        "Product Manager (PM)"
+      ]
+    },
+    {
+      "roleId": "EXE-047",
+      "title": "Design System Designer",
+      "supervisors": [
+        "Design Manager",
+        "Technical Lead / Tech Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-048",
+      "title": "Graphic Designer",
+      "supervisors": [
+        "Product Marketing Manager",
+        "Design Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-049",
+      "title": "Motion Designer",
+      "supervisors": [
+        "Design Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-050",
+      "title": "Accessibility Specialist",
+      "supervisors": [
+        "Design Manager",
+        "QA Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-051",
+      "title": "Technical Writer",
+      "supervisors": [
+        "Technical Lead / Tech Lead",
+        "Product Manager (PM)",
+        "Documentation Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-052",
+      "title": "Documentation Specialist",
+      "supervisors": [
+        "Product Manager (PM)",
+        "Documentation Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-053",
+      "title": "Localization Specialist",
+      "supervisors": [
+        "Product Manager (PM)",
+        "Product Marketing Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-054",
+      "title": "Translator",
+      "supervisors": [
+        "Localization Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-055",
+      "title": "Procurement Specialist",
+      "supervisors": [
+        "Procurement Manager",
+        "Contract Manager",
+        "Vendor Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-056",
+      "title": "Recruiter",
+      "supervisors": [
+        "HR / People Manager",
+        "Recruitment Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-057",
+      "title": "Technical Recruiter",
+      "supervisors": [
+        "HR / People Manager",
+        "Engineering Manager",
+        "Recruitment Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-058",
+      "title": "Scrum Product Team",
+      "supervisors": [
+        "Product Owner (PO)",
+        "Scrum Master"
+      ]
+    },
+    {
+      "roleId": "EXE-059",
+      "title": "UI/UX Research Participants",
+      "supervisors": [
+        "Design Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-060",
+      "title": "Beta Tester",
+      "supervisors": [
+        "QA Lead",
+        "Quality Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-061",
+      "title": "End User",
+      "supervisors": [
+        "Product Owner (Post-Release)"
+      ]
+    },
+    {
+      "roleId": "EXE-062",
+      "title": "Customer Support Agent",
+      "supervisors": [
+        "Customer Success Manager",
+        "Operations Manager",
+        "Support Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-063",
+      "title": "Technical Support Engineer",
+      "supervisors": [
+        "Operations Manager",
+        "Incident Manager",
+        "Support Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-064",
+      "title": "Community Manager",
+      "supervisors": [
+        "Product Manager (PM)",
+        "Product Marketing Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-065",
+      "title": "Marketing Specialist",
+      "supervisors": [
+        "Product Marketing Manager",
+        "Growth Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-066",
+      "title": "SEO Specialist",
+      "supervisors": [
+        "Product Marketing Manager",
+        "Growth Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-067",
+      "title": "ASO Specialist",
+      "supervisors": [
+        "Product Marketing Manager",
+        "Growth Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-068",
+      "title": "Sales Representative",
+      "supervisors": [
+        "Sales Manager",
+        "Account Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-069",
+      "title": "DevRel",
+      "supervisors": [
+        "Community Director",
+        "Product Marketing Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-070",
+      "title": "Technical Evangelist",
+      "supervisors": [
+        "Community Director"
+      ]
+    },
+    {
+      "roleId": "EXE-071",
+      "title": "On-call Engineer",
+      "supervisors": [
+        "Incident Manager",
+        "DevOps Manager",
+        "Incident Commander"
+      ]
+    },
+    {
+      "roleId": "EXE-072",
+      "title": "Maintenance Engineer",
+      "supervisors": [
+        "Technical Lead / Tech Lead",
+        "Engineering Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-073",
+      "title": "Refactoring Engineer",
+      "supervisors": [
+        "Technical Lead / Tech Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-074",
+      "title": "Legacy Modernization Engineer",
+      "supervisors": [
+        "Solution Architect",
+        "Enterprise Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-075",
+      "title": "Observability Engineer",
+      "supervisors": [
+        "DevOps Manager",
+        "Incident Commander"
+      ]
+    },
+    {
+      "roleId": "EXE-076",
+      "title": "Data Analyst",
+      "supervisors": [
+        "Product Analyst Lead",
+        "Product Manager (PM)"
+      ]
+    },
+    {
+      "roleId": "EXE-077",
+      "title": "BI Analyst",
+      "supervisors": [
+        "Data Architect",
+        "Finance Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-078",
+      "title": "Product Analyst",
+      "supervisors": [
+        "Product Manager (PM)",
+        "Risk Manager",
+        "Project Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-079",
+      "title": "Third-party Integration Specialist",
+      "supervisors": [
+        "Solution Architect",
+        "Technical Lead / Tech Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-080",
+      "title": "Migration Specialist",
+      "supervisors": [
+        "Data Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-081",
+      "title": "Deployment Engineer",
+      "supervisors": [
+        "Release Manager",
+        "DevOps Manager",
+        "Change Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-082",
+      "title": "Disaster Recovery Specialist",
+      "supervisors": [
+        "Business Continuity Manager",
+        "DevOps Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-083",
+      "title": "Backup Administrator",
+      "supervisors": [
+        "Business Continuity Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-084",
+      "title": "Decommission Engineer",
+      "supervisors": [
+        "End-of-Life Manager",
+        "Operations Manager",
+        "Security Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-085",
+      "title": "Agent Architect",
+      "supervisors": [
+        "AI Engineer Lead",
+        "Technical Lead / Tech Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-086",
+      "title": "Agent Integration Engineer",
+      "supervisors": [
+        "AI Engineer Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-087",
+      "title": "Tool Developer",
+      "supervisors": [
+        "AI Engineer Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-088",
+      "title": "Agent Evaluator",
+      "supervisors": [
+        "AI Engineer Lead",
+        "QA Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-089",
+      "title": "Agentic Prompt Specialist",
+      "supervisors": [
+        "AI Engineer Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-090",
+      "title": "Agent Safety Engineer",
+      "supervisors": [
+        "AI Engineer Lead",
+        "Security Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-091",
+      "title": "Cloud Security Engineer",
+      "supervisors": [
+        "Security Architect",
+        "Cloud Architect",
+        "Chief Information Security Officer (CISO)"
+      ]
+    },
+    {
+      "roleId": "EXE-092",
+      "title": "Database Security Specialist",
+      "supervisors": [
+        "Security Architect",
+        "Data Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-093",
+      "title": "SOC Analyst",
+      "supervisors": [
+        "Chief Information Security Officer (CISO)",
+        "Security Governance Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-094",
+      "title": "Incident Response Engineer",
+      "supervisors": [
+        "Incident Manager",
+        "Chief Information Security Officer (CISO)",
+        "Incident Commander"
+      ]
+    },
+    {
+      "roleId": "EXE-095",
+      "title": "Vulnerability Management Specialist",
+      "supervisors": [
+        "Security Governance Manager",
+        "Chief Information Security Officer (CISO)"
+      ]
+    },
+    {
+      "roleId": "EXE-096",
+      "title": "Security Auditor",
+      "supervisors": [
+        "Security Governance Manager",
+        "Chief Information Security Officer (CISO)",
+        "External Auditor"
+      ]
+    },
+    {
+      "roleId": "EXE-097",
+      "title": "IAM / Identity Engineer",
+      "supervisors": [
+        "Security Architect",
+        "Chief Information Security Officer (CISO)"
+      ]
+    },
+    {
+      "roleId": "EXE-098",
+      "title": "Cryptography Engineer",
+      "supervisors": [
+        "Security Architect",
+        "Chief Information Security Officer (CISO)"
+      ]
+    },
+    {
+      "roleId": "EXE-099",
+      "title": "SOC 2 & ISO 27001 Readiness Specialist",
+      "supervisors": [
+        "Chief Audit Officer (CAO)",
+        "Audit Specialist"
+      ]
+    },
+    {
+      "roleId": "EXE-100",
+      "title": "Compliance Evidence Analyst",
+      "supervisors": [
+        "Privacy / Compliance Officer",
+        "Chief Audit Officer (CAO)"
+      ]
+    },
+    {
+      "roleId": "EXE-101",
+      "title": "KYC / AML Specialist",
+      "supervisors": [
+        "Privacy / Compliance Officer",
+        "Chief Privacy Officer"
+      ]
+    },
+    {
+      "roleId": "EXE-102",
+      "title": "Payments / Billing Engineer",
+      "supervisors": [
+        "Solution Architect",
+        "Technical Lead / Tech Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-103",
+      "title": "Search / Relevance Engineer",
+      "supervisors": [
+        "Solution Architect",
+        "Technical Lead / Tech Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-104",
+      "title": "Platform Engineer",
+      "supervisors": [
+        "Platform Owner",
+        "Cloud Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-105",
+      "title": "Chaos Engineer",
+      "supervisors": [
+        "Platform Owner",
+        "DevOps Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-106",
+      "title": "Analytics Engineer",
+      "supervisors": [
+        "Data Architect",
+        "Data Governance Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-107",
+      "title": "Data Steward",
+      "supervisors": [
+        "Data Governance Manager",
+        "Data Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-108",
+      "title": "DesignOps Engineer",
+      "supervisors": [
+        "Design Manager",
+        "Chief Design Officer (CDO)"
+      ]
+    },
+    {
+      "roleId": "EXE-109",
+      "title": "Brand Designer",
+      "supervisors": [
+        "Design Manager",
+        "Chief Design Officer (CDO)"
+      ]
+    },
+    {
+      "roleId": "EXE-110",
+      "title": "Content Strategist",
+      "supervisors": [
+        "Documentation Manager",
+        "Product Manager (PM)"
+      ]
+    },
+    {
+      "roleId": "EXE-111",
+      "title": "AI Safety / Alignment Engineer",
+      "supervisors": [
+        "AI Engineer Lead",
+        "Security Architect"
+      ]
+    },
+    {
+      "roleId": "EXE-112",
+      "title": "RAG / Retrieval Engineer",
+      "supervisors": [
+        "AI Engineer Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-113",
+      "title": "Fine-tuning Engineer",
+      "supervisors": [
+        "AI Engineer Lead",
+        "Technical Lead / Tech Lead"
+      ]
+    },
+    {
+      "roleId": "EXE-114",
+      "title": "Revenue Operations (RevOps) Analyst",
+      "supervisors": [
+        "Sales Manager",
+        "Growth Manager"
+      ]
+    },
+    {
+      "roleId": "EXE-115",
+      "title": "Game Designer",
+      "supervisors": [
+        "Product Manager (PM)",
+        "Technical Lead / Tech Lead"
+      ]
+    }
+  ]
+}

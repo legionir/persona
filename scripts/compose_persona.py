@@ -16,7 +16,7 @@ Generated master prompts are written to prompts/composite/ (override with --out-
 
 Placeholders available inside blocks / spec text:
 
-  {{TITLE}} {{VERSION}} {{DATE}} {{MISSION}} {{INPUTS}} {{ORDER}}
+  {{TITLE}} {{VERSION}} {{MISSION}} {{INPUTS}} {{ORDER}}
   {{LENS_TABLE}} {{LENS_COUNT}} {{PRECEDENCE}} {{EXTRA_SECTIONS}}
 
 Usage:
@@ -39,7 +39,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from persona_lib import (  # noqa: E402
     BLOCKS, COMPOSITES, MASTERS, PROMPTS, ROOT, RolePersona, bullets_of, clip,
-    fields_of, frontmatter_problems, load_doc, rel, slugify, today,
+    fields_of, frontmatter_problems, load_doc, rel, slugify,
 )
 
 SCHEMA = "composite-persona/v1"
@@ -245,7 +245,6 @@ def render(spec: dict, out_dir: Path | None = None) -> tuple[str, list[dict], li
     values = {
         "{{TITLE}}": spec.get("title", ""),
         "{{VERSION}}": spec.get("version", "v1"),
-        "{{DATE}}": today(),
         "{{MISSION}}": (spec.get("mission") or "").strip(),
         "{{INPUTS}}": render_inputs(spec.get("inputs") or [{"name": "TARGET", "hint": "what to audit"}]),
         "{{ORDER}}": spec.get("order", "intake → discovery → deep review → synthesis → report"),
@@ -293,11 +292,19 @@ def list_all() -> None:
         print(f"  {s.name:44} {spec.get('title')} — {len(rows)} lenses")
 
 
+def output_matches(path: Path, rendered: str) -> bool:
+    """Check exact canonical bytes without creating or mutating the target."""
+    try:
+        return path.read_bytes() == (rendered.rstrip() + "\n").encode("utf-8")
+    except OSError:
+        return False
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--spec", help="path to a composite spec JSON")
     ap.add_argument("--all", action="store_true", help="build every spec in composites/")
-    ap.add_argument("--check", action="store_true", help="validate only, do not write")
+    ap.add_argument("--check", action="store_true", help="render and compare exact output; do not write")
     ap.add_argument("--list", action="store_true", help="list blocks and specs")
     ap.add_argument("--out-dir", default=str(PROMPTS / "composite"),
                     help="output directory (default: prompts/composite)")
@@ -337,11 +344,15 @@ def main() -> int:
             for pr in problems:
                 print("   -", pr)
             continue
-        if args.check:
-            print(f"[OK]   {title} — {len(rows)} lenses, "
-                  f"{len(spec.get('blocks', []))} blocks, {len(text.splitlines())} lines")
-            continue
         out = out_dir / (spec.get("output") or f"{title}.md")
+        if args.check:
+            if not output_matches(out, text):
+                failures += 1
+                print(f"[FAIL] {title} — missing or different from rendered output: {rel(out)}")
+            else:
+                print(f"[OK]   {title} — exact output match, {len(rows)} lenses, "
+                      f"{len(spec.get('blocks', []))} blocks, {len(text.splitlines())} lines")
+            continue
         out.write_text(text.rstrip() + "\n", encoding="utf-8")
         print(f"[OK]   {title}\n       -> {rel(out)} "
               f"({len(rows)} lenses, {len(spec.get('blocks', []))} blocks, "

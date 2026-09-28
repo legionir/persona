@@ -33,7 +33,6 @@
 - Consistency with standards
 - **Supporting:**
 - Coordination with consumers: Beta Tester
-- Coordination with consumers: Load / Stress Tester
 - Coordination with consumers: Performance Engineer
 - Coordination with consumers: QA Engineer
 - Coordination with consumers: Test Engineer
@@ -103,7 +102,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Beta Tester, Load / Stress Tester, Performance Engineer, QA Engineer, Test Engineer
+- **ConsumerPersonas:** Beta Tester, Performance Engineer, QA Engineer, Test Engineer
 
 ---
 
@@ -373,7 +372,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Beta Tester, Load / Stress Tester, Performance Engineer, QA Engineer, Test Engineer
+- **PrimaryRecipient:** Beta Tester, Performance Engineer, QA Engineer, Test Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Quality Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

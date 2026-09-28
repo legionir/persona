@@ -888,10 +888,7 @@
       "mission": "Portfolio / program coordination",
       "duties": "Manage several related projects together",
       "supervisors": [],
-      "consumers": [
-        "Product Owner (PO)",
-        "Project Manager"
-      ],
+      "consumers": [],
       "capabilities": [
         "Assess",
         "Audit",
@@ -942,9 +939,7 @@
       "mission": "Governance and standardization",
       "duties": "Standardize and control project management processes",
       "supervisors": [],
-      "consumers": [
-        "Scrum Master"
-      ],
+      "consumers": [],
       "capabilities": [
         "Assess",
         "Audit",
@@ -1048,9 +1043,7 @@
       "mission": "Improve Organizational Agility",
       "duties": "Improve the Agile process at team or organization level",
       "supervisors": [],
-      "consumers": [
-        "Scrum Master"
-      ],
+      "consumers": [],
       "capabilities": [
         "Assess",
         "Audit",
@@ -1102,9 +1095,7 @@
       "mission": "Coordinate technical delivery",
       "duties": "Manage the project with a deeper focus on technical matters",
       "supervisors": [],
-      "consumers": [
-        "Project Manager"
-      ],
+      "consumers": [],
       "capabilities": [
         "Assess",
         "Audit",
@@ -6454,9 +6445,7 @@
       "mission": "Develop business opportunities",
       "duties": "Build partnerships and commercial opportunities",
       "supervisors": [],
-      "consumers": [
-        "Sales Manager"
-      ],
+      "consumers": [],
       "capabilities": [
         "Assess",
         "Audit",
@@ -6508,9 +6497,7 @@
       "mission": "Build durable partnerships",
       "duties": "Manage collaboration with other companies and services",
       "supervisors": [],
-      "consumers": [
-        "Sales Manager"
-      ],
+      "consumers": [],
       "capabilities": [
         "Assess",
         "Audit",
@@ -6731,7 +6718,6 @@
       "duties": "Manage production incidents",
       "supervisors": [],
       "consumers": [
-        "Incident Commander",
         "Incident Response Engineer",
         "On-call Engineer",
         "Technical Support Engineer"
@@ -7367,7 +7353,6 @@
       "supervisors": [],
       "consumers": [
         "Business Analyst (BA)",
-        "Domain Expert (SME)",
         "Product Analyst"
       ],
       "capabilities": [
@@ -7473,7 +7458,6 @@
       "supervisors": [],
       "consumers": [
         "Beta Tester",
-        "Load / Stress Tester",
         "Performance Engineer",
         "QA Engineer",
         "Test Engineer"
@@ -7638,8 +7622,7 @@
       "duties": "Manage external companies and vendors",
       "supervisors": [],
       "consumers": [
-        "Procurement Specialist",
-        "Third-Party Integration Specialist"
+        "Procurement Specialist"
       ],
       "capabilities": [
         "Assess",
@@ -9546,9 +9529,7 @@
       "duties": "Review and approve architecture decisions",
       "supervisors": [],
       "consumers": [
-        "Enterprise Architect",
         "Software Architect",
-        "Solution Architect",
         "System Architect"
       ],
       "capabilities": [

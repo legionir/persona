@@ -78,15 +78,15 @@ python3 scripts/build_skills.py --only backend-developer --only audit-specialist
 # only a subset (a glob relative to the root)
 python3 scripts/build_skills.py --source "prompts/audit/*.md"
 
-# without copying the full text (SKILL.md only, lighter)
-python3 scripts/build_skills.py --no-bundle
+# safe isolated output without reference copies (must be an empty top-level sibling of skills/)
+python3 scripts/build_skills.py --no-bundle --out skills-unbundled
 
 # validate without writing anything
 python3 scripts/validate_skills.py
 python3 scripts/build_skills.py --check
 ```
 
-Orphaned structures (skills whose persona was deleted) are pruned automatically on a full run.
+Orphaned skill folders are pruned on a full bundled run. `--no-bundle` is non-destructive, requires a separate empty top-level output directory, and never updates the canonical index or README.
 
 ---
 

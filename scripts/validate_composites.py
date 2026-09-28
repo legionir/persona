@@ -3,8 +3,8 @@
 """Validate the composite master prompts in prompts/composite/.
 
 `compose_persona.py --all --check` covers the 24 spec-driven composites: it
-re-renders them from `composites/blocks/` + `composites/<slug>.json` and fails
-if the file on disk differs. The 4 hand-maintained composites have no spec and
+re-renders them from `composites/blocks/` + `composites/<slug>.json`, compares exact
+bytes with the committed file, and fails on missing or stale output without writing. The 4 hand-maintained composites have no spec and
 are therefore invisible to that check.
 
 This script covers all 28 and asserts the properties the pipeline itself does
