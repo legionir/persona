@@ -994,7 +994,8 @@ def main() -> None:
         (out_dir / f"{slug}.md").write_text(content, encoding="utf-8")
         written.append((slug, role_type))
         label = "Audit" if role_type == r"SUPERVISOR" else "Implementation"
-        links[title] = f"[{label}](prompts/{'audit' if role_type == r"SUPERVISOR" else 'implementation'}/{slug}.md)"
+        link_dir = "audit" if role_type == r"SUPERVISOR" else "implementation"
+        links[title] = f"[{label}](prompts/{link_dir}/{slug}.md)"
 
     sync_readme_projection(links, sup_map)
 
