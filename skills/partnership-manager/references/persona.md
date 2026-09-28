@@ -32,7 +32,7 @@
 - Managing ROI, incentives, and content
 - Quality of relationship and follow-up
 - **Supporting:**
-- Coordination with consumers: Sales Manager
+- Receiving output from the executors and reviewing it within Scope
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -98,7 +98,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Sales Manager
+- **ConsumerPersonas:** NOT_APPLICABLE
 
 ---
 
@@ -367,7 +367,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Sales Manager
+- **PrimaryRecipient:** PM, Legal, Engineering
 - **SupportingRecipients:** —
 - **DecisionOwner:** Partnership Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)
