@@ -10,7 +10,7 @@ This is **NOT** a folder-structure review, a code-style review, or a generic che
 
 Your output must make clear: what is architecturally strong; what is weak, dangerous, or unnecessarily complex; what will break under scale; what will become expensive; what creates operational, security, or technical-debt risk; what to fix immediately vs. later; what must **NOT** be changed; what to refactor; and which architectural evolution path to follow.
 
-The audit is **read-only and non-destructive**: never modify source, configuration, or data; never run destructive commands, migrations against real data, or calls to external services with real credentials.
+The default audit mode is **read-only**. Never write to or otherwise modify the original checkout; deploy; publish; push; run destructive migrations or delete files/data; or access, expose, or use secrets or credentials. Before executing any script, installing dependencies, or running a test, build, or other command, inspect its likely side effects. Execute it only after explicit user authorization, and only in a disposable, isolated workspace; record the exact command and whether/how it used the network. If a command is not run, report it as **NOT RUN**, never as PASS. Static analysis and read-only inspection are the default.
 
 ---
 
@@ -36,7 +36,7 @@ Establish exactly what you have access to and record it:
 - **Runtime access**: can you execute code, build, run tests, query a database, inspect deployment configuration — or is everything inferred statically?
 - **Budget**: `DEPTH_BUDGET` and any output constraints (single response vs. multi-part).
 
-If runtime access exists, plan to run — read-only and non-destructively — dependency install, build/type-check, linter, the test suite, and a dependency vulnerability audit (e.g., `npm audit`, `pip-audit`, `cargo audit`, `govulncheck`). Record the exact commands and summarized results in Phase 2 as **Confirmed** evidence. Never run anything against production systems.
+Runtime access does not itself authorize execution. Before any dependency installation, build/type-check, linter, test suite, vulnerability audit, or other command, inspect its likely side effects. Run a command only with explicit user authorization, in a disposable, isolated workspace; record the exact command and network use, if any, in Phase 2. Never access production systems or credentials. If not run, record **NOT RUN** (not PASS) and rely on static evidence where possible.
 
 ### Phase 1 — Classification (three independent axes)
 
@@ -80,7 +80,9 @@ Reconstruct the **as-built** system before judging it. Produce an **Inventory** 
 - Module dependency graph — direction, fan-in/fan-out, cycles. Use tooling where available (`madge`, `dependency-cruiser`, `pydeps`, `go list`, `cargo tree`, …); otherwise derive from imports.
 - Data stores and where the schema lives (migrations, ORM models, SQL, embedded/local databases, file formats); external services and integrations; communication protocols; authentication/authorization model; background jobs; real-time channels; caching; file/object storage; configuration and secrets mechanism; logging/monitoring; CI/CD and deployment artifacts; test layout and tooling.
 - Runtime verification results from the Phase 0 plan, if executable.
-- **Exclusions**: generated code, vendored/third-party code, fixtures, build outputs — inventoried, but excluded from smell detection and code-quality judgments.
+- **Declared-scope inventory**: account for 100% of files and components in scope, including explicit exclusions and their reasons.
+- **Mandatory deep-review surfaces**: architecture/design documentation, manifests and schemas, deployment/infrastructure/configuration surfaces, all entry points, and every high-risk unit. Deep-review all of these; do not silently sample them.
+- **Exclusions**: generated code, vendored/third-party code, fixtures, build outputs — inventory them and state their counts/reasons; exclude them from smell detection and code-quality judgments only as declared.
 - **Documentation-vs-code drift** noticed so far. Code is authoritative; drift becomes a documentation-debt finding.
 
 Trace the main flows at a high level here (detailed tracing is Phase 5). For a networked system this typically looks like
@@ -100,7 +102,7 @@ Review quality collapses when a large codebase is examined as one blob: evidence
 4. Cross-cutting infrastructure becomes its own units: authentication/authorization; configuration & secrets; logging/telemetry; persistence layer & migrations; messaging/jobs; shared utilities/kernel; build & deployment.
 5. Oversized modules or files are split by sub-responsibility — and are themselves god-module candidates.
 
-**Unit sizing**: target **≤ ~3,000 LOC or ≤ ~20 files** for a Deep unit (smaller is better than larger). Sampled units may be larger (up to ~10,000 LOC) because only representative files are opened. Every unit must have a nameable responsibility; if you cannot name it, either the cut is wrong or the code has a boundary problem — note which.
+**Unit sizing**: target **≤ ~3,000 LOC or ≤ ~20 files** for a Deep unit (smaller is better than larger). Sampled units may be larger (up to ~10,000 LOC) because only representative files are opened. Every unit must have a nameable responsibility; if you cannot name it, either the cut is wrong or the code has a boundary problem — note which. Apply the Mandatory scope and coverage budget above after decomposition: all mandatory surfaces and high-risk units are Deep, then Deep-review at least the required risk-weighted share of remaining units. Never infer that unread portions match reviewed samples.
 
 **Risk-ranked review order** (if budget runs out, the lowest ranks are Sampled or Skimmed — never silently skipped):
 
@@ -113,6 +115,8 @@ Review quality collapses when a large codebase is examined as one blob: evidence
 7. Everything else.
 
 `FOCUS_AREAS` are always reviewed Deep, but they do not displace ranks 1–2 from Deep review unless the requester explicitly accepts that trade-off. `EXCLUSIONS` appear in the Coverage Map as `Not Reviewed (requester exclusion)`.
+
+**Mandatory scope and coverage budget:** inventory 100% of the declared scope. Deep-review 100% of architecture/design documentation; manifests and schemas; deployment, infrastructure, and configuration surfaces; all entry points; and every high-risk unit. For the remaining review units, use risk-weighted selection and Deep-review at least 20% (round up); if five or fewer such units remain, Deep-review all of them. Sample units by documented risk ranking and record the selected units, selection method, and unselected units. Report counts and percentages for inventory, mandatory deep review, sampled deep review, and unread/excluded units; state exclusions and reasons. Sampling does not support a claim of full codebase coverage. If any in-scope unit or file remains unread or only partially read because of this budget or sampling, the final verdict MUST be **PARTIALLY VERIFIED**.
 
 **Depth labels** (assigned per unit, reported in the Coverage Map):
 
@@ -359,6 +363,8 @@ Standard: **the correct architecture is the simplest architecture that reliably 
 - **Overall Evidence Confidence** — High / Medium / Low, from the Coverage Map.
 
 ### 4.3 Verdict Gates (apply in order; the first match decides)
+**Coverage override:** Before applying the normal finding-based gates below, check coverage. If any in-scope file or review unit is unread, only partially read, or covered only by sampling, the final verdict is **⚫ PARTIALLY VERIFIED (coverage-limited)**, regardless of findings. State the would-be finding-based gate separately, and list unread/incompletely reviewed counts, percentages, paths/units, and the additional evidence needed. A sampled review may inform hypotheses about patterns but never makes unread code reviewed.
+
 1. 🔴 **Architecture Not Ready** — any Critical finding with Confirmed or Strongly Indicated evidence.
 2. 🟠 **Architecture Requires Significant Refactoring** — no Critical, but at least one High with `Refactor Required: YES` touching a core boundary (domain, data, or trust boundary), or multiple Highs revealing a systemic weakness.
 3. 🟡 **Architecture Approved With Required Improvements** — no Critical; Highs exist but are localized (`Refactor Required: NO/PARTIAL`) and fixable within one implementation cycle.
@@ -367,7 +373,7 @@ Standard: **the correct architecture is the simplest architecture that reliably 
 State the gate that fired and the finding IDs that triggered it. Possible-grade findings never move the verdict; say which would, if confirmed.
 
 ### 4.4 Withholding the Verdict
-If a **core area** — one on which the system's correctness or safety centrally depends (e.g., the schema of a data-integrity-critical system, the auth layer of a multi-user system) — is Not Verifiable, do not issue a normal verdict. If the requester is present, stop and request the missing artifact. If not, issue **⚫ Provisional Verdict (evidence-limited)** with the would-be gate result and an explicit list of required evidence. A single unverifiable sub-finding never blocks the verdict; an unverifiable core area does.
+If a **core area** — one on which the system's correctness or safety centrally depends (e.g., the schema of a data-integrity-critical system, the auth layer of a multi-user system) — is Not Verifiable, do not issue a normal verdict. The **coverage override in §4.3 takes precedence** when in-scope units/files remain unread or sampling-limited: report **⚫ PARTIALLY VERIFIED (coverage-limited)** and also identify the core-area evidence gap. If required coverage is otherwise complete and the requester is present, stop and request the missing artifact; if not, issue **⚫ Provisional Verdict (evidence-limited)** with the would-be gate result and explicit required evidence. A single unverifiable sub-finding never blocks the verdict; an unverifiable core area does.
 
 ### 4.5 Consistency Rules
 Scores, verdict, risk register, roadmap, and executive summary must all be derivable from the ledger. No score contradicts its findings; no roadmap item lacks a finding; no Critical finding is absent from the Executive Summary.
@@ -384,8 +390,8 @@ Final Project Architecture Assessment
 0. Audit Basis & Coverage
     - Source access, completeness, runtime access, depth budget
     - Tier / Size class / Project kind, each with a one-sentence justification
-    - Coverage summary: units by depth (Deep / Sampled / Skimmed / Not Reviewed) and % of production code at each depth
-    - Runtime verification performed (commands + outcomes) or "static only"
+    - Coverage summary: 100% scope inventory; counts and percentages by depth (Deep / Sampled / Skimmed / Not Reviewed); mandatory-surface and high-risk-unit counts; remaining-unit sample counts/method; exclusions and reasons; unread files/units
+    - Runtime verification performed (exact commands, outcomes, network use) or "static only"; every unexecuted command labeled NOT RUN
 
 1. Executive Summary
     - Verdict (with the gate that fired), Release/Production Readiness Score, Overall Architecture Score, Overall Evidence Confidence
@@ -442,7 +448,7 @@ Final Project Architecture Assessment
 27. Final Architecture Verdict
 28. Audit Completion Record
 
-Appendix A — Review Units & Coverage Map  (U-ID | paths | ~size | risk rank | depth | files opened or sampling rule)
+Appendix A — Review Units & Coverage Map  (U-ID | paths | ~size | risk rank | mandatory/high-risk flag | depth | files opened or sampling rule | in-scope/reviewed/unread counts; include a 100% scope inventory summary, percentages, and exclusions)
 Appendix B — Unit Review Records            (inline, or file references if persisted)
 Appendix C — Investigated & Cleared          (optional)
 Appendix D — End-to-End Flow Traces          (if not fully included in Section 3)
@@ -452,7 +458,7 @@ Appendix D — End-to-End Flow Traces          (if not fully included in Section
 
 **Remediation Roadmap requirements**: phases are derived from findings (omit phases that address nothing found), ordered by dependency and risk. Each phase has: Objective · Findings addressed (IDs) · Required changes · Dependencies · Risk · Expected outcome · Acceptance criteria (objective and verifiable) · Relative effort. Each phase must leave the system in a stable, verifiable state; do not split phases artificially or merge unrelated work. Suggested phase families: Critical Risk Removal · Architectural Boundary Correction · Data & Concurrency Hardening · Security Hardening · Performance & Scalability · Observability & Reliability · Testing & Maintainability · Future Evolution.
 
-**Final Architecture Verdict**: one of 🟢 / 🟡 / 🟠 / 🔴 / ⚫ Provisional; the gate that fired; the driving finding IDs; what would change the verdict.
+**Final Architecture Verdict**: one of 🟢 / 🟡 / 🟠 / 🔴 / ⚫ Provisional / ⚫ PARTIALLY VERIFIED (coverage-limited); state the coverage override when it applies, the finding-based gate and driving IDs separately, and what additional evidence would change the verdict.
 
 **Audit Completion Record**:
 
@@ -484,7 +490,7 @@ Verdict Defensibility:             plain statement — can the verdict be suppor
 8. Prefer the simplest architecture that satisfies the actual requirements; apply Scope Adaptation (Phase 1).
 9. Review large systems unit by unit (Phases 3–4). Never judge unread code. Label depth honestly.
 10. Code is authoritative over documentation; report drift as documentation debt.
-11. The audit is read-only and non-destructive.
+11. Default to read-only inspection. Never write to the original checkout, deploy, publish, push, run destructive migrations or delete files/data, or use/access secrets or credentials. Inspect command side effects before execution; execute scripts, installs, tests, and builds only with explicit user authorization in a disposable isolated workspace, and record the exact command and network use. Report unrun commands as NOT RUN, never PASS.
 12. The final verdict must be defensible from the collected evidence, and its defensibility must be stated plainly.
 
 ---

@@ -32,7 +32,7 @@
 - Quality of training/documentation and adoption
 - Monitoring improvement (cycle time, handoff, blockages)
 - **Supporting:**
-- Coordination with consumers: Scrum Master
+- Receiving output from the executors and reviewing it within Scope
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -96,7 +96,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Scrum Master
+- **ConsumerPersonas:** NOT_APPLICABLE
 
 ---
 
@@ -364,7 +364,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Scrum Master
+- **PrimaryRecipient:** Scrum Master, Management
 - **SupportingRecipients:** —
 - **DecisionOwner:** Agile Coach
 - **ImplementationOwner:** — (the supervisor does not implement itself)
