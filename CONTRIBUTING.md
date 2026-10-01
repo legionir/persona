@@ -11,7 +11,7 @@ and CI fails the build if they drift:
 | Generated | Rebuilt by | From |
 |---|---|---|
 | `prompts/audit/*.md`, `prompts/implementation/*.md` | `scripts/generate_personas.py` | the role table in `README.md` |
-| `prompts/composite/*.md` (15 of them) | `scripts/compose_persona.py` | `composites/blocks/` + `composites/*.json` |
+| `prompts/composite/*.md` (24 spec-generated + 4 hand-maintained = 28 total) | `scripts/compose_persona.py` | `composites/blocks/` + `composites/*.json` |
 | `personas.json` | `scripts/build_metadata.py` | `README.md` + `prompts/composite/` |
 | `skills/**` | `scripts/build_skills.py` | `prompts/**` |
 
@@ -33,16 +33,16 @@ make all      # regenerate everything from source
 make check    # validate structure, composites, skills, and the web page
 ```
 
-`make check` runs five gates:
+`make check` runs five validation commands plus the web test:
 
 | Gate | What it guarantees |
 |---|---|
-| `validate_personas.py` | 170 prompts match the README table, slugs and links agree |
-| `validate_composites.py` | all 19 master prompts are English-only, copy-paste ready, and substantive |
-| `validate_skills.py` | 189 skills have valid frontmatter, resolvable links, and a reference copy identical to its source |
-| `compose_persona.py --all --check` | the 15 spec-driven composites re-render byte-for-byte |
-| `build_skills.py --check` | the skills on disk match what the builder would produce |
-| `scripts/test_web.js` | `index.html` renders all 189 personas, filters, sorts, and searches |
+| `validate_personas.py` | 190 prompts match the README table, slugs and links agree |
+| `validate_composites.py` | all 28 composite prompts (24 spec-generated + 4 hand-maintained) are English-only, copy-paste ready, and substantive |
+| `validate_skills.py` | 218 skills have valid frontmatter, resolvable links, and a reference copy identical to its source |
+| `compose_persona.py --all --check` | the 24 spec-driven composites match their rendered files byte-for-byte |
+| `build_skills.py --check` | the complete skills tree matches the builder output byte-for-byte without writing |
+| `scripts/test_web.js` | `index.html` renders all 218 personas, filters, sorts, and searches |
 
 The web test needs `npm install` first (it is the only Node dependency in the repo;
 the site itself has none).

@@ -206,7 +206,7 @@
 <div class="wrap">
   <header>
     <h1>⚡ Find a <span>Persona</span></h1>
-    <p>Search 189 personas — 170 role prompts and 19 composite master prompts — by title, mission, duties, domain, keywords, and type</p>
+    <p>Search 218 personas — 190 role prompts and 28 composite master prompts — by title, mission, duties, domain, keywords, and type</p>
     <div class="stats" id="stats"></div>
   </header>
 
@@ -240,7 +240,7 @@
   <div class="empty" id="empty" hidden><b>No results found.</b><br>Try another phrase or reset the filters.</div>
 
   <footer>
-    Data: <code>personas.json</code> (API-ready metadata for all 189 personas) — regenerate with <code>python3 scripts/build_metadata.py</code>
+    Data: <code>personas.json</code> (API-ready metadata for all 218 personas) — regenerate with <code>python3 scripts/build_metadata.py</code>
     <br>The prompt files are generated from the role tables in <code>README.md</code>.
   </footer>
 </div>
@@ -249,7 +249,7 @@
 "use strict";
 
 const GITHUB_BASE = "https://github.com/legionir/persona/blob/main/";
-let DATA = null;      // personas.json — 170 role personas + 19 composite master prompts
+let DATA = null;      // personas.json — 190 role personas + 28 composite master prompts
 let ALL = [];         // one unified list: DATA.roles + DATA.composites
 let TITLE_ID = null;  // Map: role title -> id (to scroll to that role's card)
 

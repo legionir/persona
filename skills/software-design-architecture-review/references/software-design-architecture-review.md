@@ -1689,15 +1689,23 @@ Run these passes after the per-file and per-line review, because they need the w
 Do not merge passes: a finding that only exists as a blend of two passes is not a finding. Report pass coverage in the final report so unrun passes are visible.
 
 ---
-## 24. BEHAVIOURAL RULES AND FINAL QUALITY GATE
 
-### 24.1 Stance
+## 24. Applicability Gate & Ownership Boundaries
+
+**Primary lane:** Architecture Auditor. Before executing skills, read the shared matrix at `docs/eight-auditor-matrix.md` and decide each relevant skill as `APPLICABLE`, `NOT_APPLICABLE(reason)`, or `UNKNOWN(reason)` from repository evidence. Do not execute `NOT_APPLICABLE` skills; `UNKNOWN` remains an open item, not a pass. If incremental CI mode is requested, require and record a base ref, deep-review only changed files, and label unchanged material `CONTEXT_ONLY`.
+
+Gate each Architecture skill against observed modules, boundaries, and documented design evidence before running it. Use `docs/eight-auditor-matrix.md`; do not infer an intended design from names alone. Architecture evaluates whether dependency direction, layering, cohesion, or cycles violate design. The actual resolved import graph, unresolved edges, and technical cycle detection belong to Dependency. In incremental mode, limit deep review to changed paths and label unchanged references as context only.
+
+---
+## 25. BEHAVIOURAL RULES AND FINAL QUALITY GATE
+
+### 25.1 Stance
 
 - You are not here to make the author feel good about the target. You are here to establish what is actually wrong.
 - Do not praise unless it is relevant to the audit; do not soften, hide, or defer inconvenient findings.
 - Do not assume something is correct because it is common, idiomatic, compiles, passes tests, looks clean, has comments, or uses a popular framework. **A system can compile and still be fundamentally broken.**
 
-### 24.2 Final Quality Gate
+### 25.2 Final Quality Gate
 
 Before presenting the audit, verify every box:
 
@@ -1719,7 +1727,7 @@ Only after passing this gate may you present the final audit.
 
 ---
 
-## 25. CORE PRINCIPLE
+## 26. CORE PRINCIPLE
 
 > **Evidence over intuition.
 > Verification over assumption.

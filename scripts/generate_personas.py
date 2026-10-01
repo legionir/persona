@@ -29,14 +29,14 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from generate_role_prompts import (  # noqa: E402
-    ROOT, README, AUDIT_DIR, IMPL_DIR, DETAILS,
+    ROOT, README, AUDIT_DIR, IMPL_DIR, DETAILS, MAIN_COLS,
     SPECS, GROUP_OF, GROUP_SPEC, sp, spec_for, _slug,
     _bullets, _steps, _norm_persona, read_rows, load_details,
 )
 
 import role_extras  # noqa: E402
 from role_extras import (  # noqa: E402
-    EXTRA_SPECS, EXTRA_GROUP_OF, EXTRA_SUPERVISORS, SLUG_OVERRIDES,
+    EXTRA_SPECS, EXTRA_GROUP_OF, SLUG_OVERRIDES,
 )
 
 # ---------------------------------------------------------------------------
@@ -45,7 +45,6 @@ from role_extras import (  # noqa: E402
 SPECS.update({k: sp(v[0], v[1], v[2], v[3], v[4]) for k, v in EXTRA_SPECS.items()})
 GROUP_OF.update(EXTRA_GROUP_OF)
 
-MASTER = ROOT / "Master Persona Schema & Generator Prompt.md"
 
 # ---------------------------------------------------------------------------
 # Master role registry (section 64) + supervisor map (section 65)
@@ -63,148 +62,49 @@ def _bullets_of(text: str) -> list[str]:
             for ln in text.splitlines() if re.match(r"^\s*-\s+", ln)]
 
 
-def load_master_registry() -> tuple[dict[str, str], dict[str, str]]:
-    """Return (supervisor_titles_by_slug, executor_titles_by_slug) from Master 64.
+def load_supervisor_map(sup_titles: set[str]) -> dict[str, list[str]]:
+    """Load the sole canonical executor -> supervisor map.
 
-    Returns empty dicts when the Master file is not present (its role registry
-    is derived from the README role table instead).
+    The registry is an explicit input. Generated artifacts (including
+    personas.json) are never used as fallback inputs.
     """
-    if not MASTER.exists():
-        return {}, {}
-    text = MASTER.read_text(encoding="utf-8")
-    sup = _bullets_of(_between(text, r"SUPERVISOR_ROLES:\s*\n", r"\n---\n\n64\.2"))
-    exe = _bullets_of(_between(text, r"EXECUTOR_ROLES:\s*\n", r"\n---\n\n64\.3"))
-    raw = _between(text, r"ADDITIONAL_ROLES:\s*\n", r"\n---\n\n65\.")
-    mode = None
-    for chunk in re.split(r"^\s*(SUPERVISOR|EXECUTOR):\s*$", raw, flags=re.M):
-        c = chunk.strip()
-        if c in ("SUPERVISOR", "EXECUTOR"):
-            mode = c
-            continue
-        if mode and c:
-            target = sup if mode == "SUPERVISOR" else exe
-            target.extend(_bullets_of(chunk))
-    sup_slug = {_slug(t): t for t in sup}
-    exe_slug = {_slug(t): t for t in exe}
-    # Master abbreviates some titles; map to the canonical prompt titles.
-    canon = {
-        "cto": "Chief Technology Officer (CTO)",
-        "ciso": "Chief Information Security Officer (CISO)",
-        "privacy-compliance-officer": "Privacy / Compliance Officer",
-        "product-owner-release": r"Product Owner (Post-Release)",
-    }
-    for s, t in list(sup_slug.items()):
-        if s in canon:
-            sup_slug[s] = canon[s]
-    return sup_slug, exe_slug
+    path = ROOT / "data" / "supervisor-map.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"Cannot load canonical supervisor registry {path}: {exc}")
+    if data.get("$schema") != "persona-supervisor-map/v1":
+        raise SystemExit("Unsupported supervisor registry schema")
 
-
-def load_master_map() -> dict[str, list[str]]:
-    """Parse section 65: executor title -> [supervisor titles].
-
-    When the Master file is absent (it was removed from the repo), the map is
-    derived from the generated personas.json so regeneration stays idempotent.
-    """
-    if MASTER.exists():
-        text = MASTER.read_text(encoding="utf-8")
-        body = _between(text, r"SUPERVISOR_MAP:\s*\n", r"\nNote:")
-        result: dict[str, list[str]] = {}
-        cur = None
-        for ln in body.splitlines():
-            ln = ln.strip()
-            if not ln:
-                continue
-            if re.match(r"^[^-\s].*:$", ln):
-                cur = ln[:-1].strip()
-                result.setdefault(cur, [])
-                continue
-            m = re.match(r"^-\s+(.+)$", ln)
-            if m and cur:
-                result[cur].append(m.group(1).strip())
-        return result
-    pj = ROOT / "personas.json"
-    if pj.exists():
-        data = json.loads(pj.read_text(encoding="utf-8"))
-        return {r["title"]: list(r["supervisors"]) for r in data["roles"] if r["supervisors"]}
-    return {}
-
-
-# Executor roles used by Master 65 as supervisors but registered as EXECUTOR:
-# normalize them to the project's registered supervisor equivalents.
-SUPERVISOR_ALIAS = {
-    "System Architect (Embedded)": "Embedded Systems Lead",
-    "System Architect": "Solution Architect",
-    "AI Engineer": "AI Engineer Lead",
-    "SRE (Site Reliability Engineer)": "DevOps Manager",
-    "Database Engineer": "Data Architect",
-    "Infrastructure Engineer": "Infrastructure Manager",
-    "Release Engineer": "Release Manager",
-    "DevOps Engineer": "DevOps Manager",
-    "Performance Engineer": "Performance Engineering Lead",
-    "Product Designer": "Design Manager",
-    "Localization Specialist": "Localization Manager",
-    "UX Researcher": "Design Manager",
-    "DevRel": "Community Director",
-    "Product Analyst": "Product Analyst Lead",
-    "Disaster Recovery Specialist": "Business Continuity Manager",
-    "Infrastructure Owner": "Platform Owner",
-    "Performance Owner": "Performance Engineering Lead",
-    "Marketing Manager": "Product Marketing Manager",
-    "Developer Relations Manager": "Community Director",
-    "DBA": "Database Administrator (DBA)",
-    "CISO / Chief Information Security Officer": "Chief Information Security Officer (CISO)",
-    "Product Owner (PO)": "Product Owner (PO)",
-    "Product Manager (PM)": "Product Manager (PM)",
-    "Technical Lead / Tech Lead": "Technical Lead / Tech Lead",
-    "Cloud Architect": "Cloud Architect",
-    "Security Architect": "Security Architect",
-    "Data Architect": "Data Architect",
-    "QA Lead": "QA Lead",
-    "Engineering Manager": "Engineering Manager",
-    "Principal Engineer": "Principal Engineer",
-    "Solution Architect": "Solution Architect",
-    "Enterprise Architect": "Enterprise Architect",
-    "Incident Manager": "Incident Manager",
-    "Privacy / Compliance Officer": "Privacy / Compliance Officer",
-    "Product Marketing Manager": "Product Marketing Manager",
-    "Growth Manager": "Growth Manager",
-    "Sales Manager": "Sales Manager",
-    "Recruitment Manager": "Recruitment Manager",
-    "HR / People Manager": "HR / People Manager",
-    "Operations Manager": "Operations Manager",
-    "Scrum Master": "Scrum Master",
-    "Customer Success Manager": "Customer Success Manager",
-    "Finance Manager": "Finance Manager",
-    "End-of-Life Manager": "End-of-Life Manager",
-    "Business Continuity Manager": "Business Continuity Manager",
-    "Product Owner (Post-Release)": "Product Owner (Post-Release)",
-}
-
-
-def resolve_supervisor(name: str) -> str:
-    if name in SUPERVISOR_ALIAS:
-        return SUPERVISOR_ALIAS[name]
-    if name.startswith("System Architect"):
-        return SUPERVISOR_ALIAS["System Architect (Embedded)"]
-    return name
+    rows = read_rows()[1:]
+    executors = [r[0] for r in rows if r[2] == r"EXECUTOR"]
+    ids = {title: f"EXE-{i:03d}" for i, title in enumerate(executors, 1)}
+    result: dict[str, list[str]] = {}
+    for row in data.get("roles", []):
+        title = row.get("title")
+        if not isinstance(title, str) or title in result:
+            raise SystemExit(f"Invalid or duplicate supervisor-map role: {title!r}")
+        supervisors = row.get("supervisors")
+        if not isinstance(supervisors, list) or any(not isinstance(x, str) for x in supervisors):
+            raise SystemExit(f"{title}: supervisors must be an explicit string array")
+        if row.get("roleId") != ids.get(title):
+            raise SystemExit(f"{title}: roleId must be {ids.get(title)!r}, got {row.get('roleId')!r}")
+        if len(supervisors) != len(set(supervisors)):
+            raise SystemExit(f"{title}: duplicate supervisor in canonical map")
+        unknown = [name for name in supervisors if name not in sup_titles]
+        if unknown:
+            raise SystemExit(f"{title}: unregistered supervisor(s): {unknown}")
+        result[title] = supervisors
+    if set(result) != set(executors):
+        missing = sorted(set(executors) - set(result))
+        extra = sorted(set(result) - set(executors))
+        raise SystemExit(f"Supervisor registry role coverage mismatch; missing={missing}, extra={extra}")
+    return result
 
 
 def build_supervisor_map(sup_titles: set[str]) -> dict[str, list[str]]:
-    """Executor title -> [real registered supervisor titles]."""
-    master = load_master_map()
-    result: dict[str, list[str]] = {}
-    for exe_title, sups in master.items():
-        resolved = []
-        for s in sups:
-            rs = resolve_supervisor(s)
-            if rs in sup_titles and rs not in resolved:
-                resolved.append(rs)
-        if resolved:
-            result[exe_title] = resolved
-    for exe_title, sups in EXTRA_SUPERVISORS.items():
-        resolved = [s for s in sups if s in sup_titles]
-        result.setdefault(exe_title, []).extend(x for x in resolved if x not in result.get(exe_title, []))
-    return result
+    """Return the validated canonical supervisor map, including explicit empty lists."""
+    return load_supervisor_map(sup_titles)
 
 
 # ---------------------------------------------------------------------------
@@ -976,6 +876,35 @@ def build_persona(title: str, role_type: str, p: dict, spec: dict, meta: dict) -
     return head + "\n\n---\n\n".join(parts) + "\n"
 
 
+def sync_readme_projection(links: dict[str, str], supervisor_map: dict[str, list[str]]) -> None:
+    """Update only the managed Prompt-link and Supervisor columns of the main table."""
+    lines = README.read_text(encoding="utf-8").splitlines()
+    out: list[str] = []
+    in_main_table = False
+    completed = False
+    for line in lines:
+        stripped = line.strip()
+        if not completed and stripped.startswith("|"):
+            in_main_table = True
+            cells = [c.strip() for c in stripped.split("|")]
+            if cells and cells[0] == "": cells = cells[1:]
+            if cells and cells[-1] == "": cells = cells[:-1]
+            if len(cells) == MAIN_COLS and cells[0] not in ("Job Title",) and not all(set(c) <= set("-: ") for c in cells):
+                title, role_type = cells[0], cells[2]
+                cells[6] = ", ".join(supervisor_map.get(title, [])) if role_type == r"EXECUTOR" else ""
+                cells[7] = links[title]
+                line = "| " + " | ".join(cells) + " |"
+            out.append(line)
+            continue
+        if in_main_table:
+            in_main_table = False
+            completed = True
+        out.append(line)
+    if not completed and not in_main_table:
+        raise SystemExit("Could not locate the main README role table")
+    README.write_text("\n".join(out) + "\n", encoding="utf-8")
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -1021,7 +950,6 @@ def main() -> None:
     IMPL_DIR.mkdir(parents=True, exist_ok=True)
     (ROOT / "audits").mkdir(parents=True, exist_ok=True)
 
-    master_sup, _master_exe = load_master_registry()
     # Registered supervisor titles (canonical) = rows of README with role supervisor
     rows = read_rows()
     data_rows = [r for r in rows[1:]]
@@ -1039,6 +967,7 @@ def main() -> None:
 
     written = []
     warn_supervisor_missing = []
+    links: dict[str, str] = {}
     for r in data_rows:
         title, _duty, role_type = r[0], r[1], r[2]
         slug = SLUG_OVERRIDES.get(title, _slug(title))
@@ -1064,8 +993,12 @@ def main() -> None:
         out_dir = AUDIT_DIR if role_type == r"SUPERVISOR" else IMPL_DIR
         (out_dir / f"{slug}.md").write_text(content, encoding="utf-8")
         written.append((slug, role_type))
+        label = "Audit" if role_type == r"SUPERVISOR" else "Implementation"
+        link_dir = "audit" if role_type == r"SUPERVISOR" else "implementation"
+        links[title] = f"[{label}](prompts/{link_dir}/{slug}.md)"
 
-    # ---- legacy README link labels are already in README ----
+    sync_readme_projection(links, sup_map)
+
     print(f"Personas written: {len(written)}")
     sup_n = sum(1 for _, t in written if t == r"SUPERVISOR")
     exe_n = sum(1 for _, t in written if t == r"EXECUTOR")

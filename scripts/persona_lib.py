@@ -22,7 +22,6 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -296,8 +295,6 @@ def slugify(text: str, max_len: int = NAME_MAX) -> str:
     return (s[:max_len].strip("-") or "persona")
 
 
-def today() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
 
 def rel(path: Path) -> str:

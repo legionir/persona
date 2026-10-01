@@ -3,7 +3,7 @@
  * Functional test for index.html (the Persona Finder).
  *
  * index.html is a single static file that fetches personas.json and
- * skills/index.json and renders 209 personas (190 roles + 19 composites).
+ * skills/index.json and renders 218 personas (190 roles + 28 composites).
  * Nothing in the Python pipeline touches it, so without this harness a
  * regression in the page ships silently.
  *
@@ -83,7 +83,7 @@ const ROLE_ONLY = ["fGroup", "fDomain", "fCategory", "fSeniority"];
 setTimeout(() => {
   // ---------- boot ----------
   ok("both data files load",
-     $("stats").textContent.includes("190") && $("stats").textContent.includes("19"),
+     $("stats").textContent.includes("190") && $("stats").textContent.includes("28"),
      $("stats").textContent.replace(/\s+/g, " ").trim());
   ok("no error banner", $("empty").hidden === true);
 
@@ -103,7 +103,7 @@ setTimeout(() => {
   // ---------- Composite ----------
   $("fType").value = "COMPOSITE";
   fire($("fType"));
-  ok("Composite -> 19 cards", cards().length === skills.totals.composites,
+  ok("Composite -> 28 cards", cards().length === skills.totals.composites,
      `${cards().length} cards`);
   ok("count line reflects the whole library",
      $("count").textContent === `${skills.totals.composites} of ${personas.totals.roles + skills.totals.composites} results`,

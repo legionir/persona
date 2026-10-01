@@ -32,7 +32,7 @@
 - Coordination between the technical team and non-technical stakeholders
 - Coverage of technical dependencies and infrastructure readiness
 - **Supporting:**
-- Coordination with consumers: Project Manager
+- Receiving output from the executors and reviewing it within Scope
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
 - Financial/legal/security decisions outside Scope — ESCALATE
@@ -98,7 +98,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Project Manager
+- **ConsumerPersonas:** NOT_APPLICABLE
 
 ---
 
@@ -387,7 +387,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Project Manager
+- **PrimaryRecipient:** Tech Lead, PM
 - **SupportingRecipients:** —
 - **DecisionOwner:** Technical Project Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

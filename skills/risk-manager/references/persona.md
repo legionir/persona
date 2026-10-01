@@ -33,7 +33,6 @@
 - Currency of and reporting on risk throughout the project
 - **Supporting:**
 - Coordination with consumers: Business Analyst (BA)
-- Coordination with consumers: Domain Expert (SME)
 - Coordination with consumers: Product Analyst
 - **OutOfScope:**
 - Direct implementation (Implementation) outside Authority
@@ -98,7 +97,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Business Analyst (BA), Domain Expert (SME), Product Analyst
+- **ConsumerPersonas:** Business Analyst (BA), Product Analyst
 
 ---
 
@@ -365,7 +364,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Business Analyst (BA), Domain Expert (SME), Product Analyst
+- **PrimaryRecipient:** Business Analyst (BA), Product Analyst
 - **SupportingRecipients:** —
 - **DecisionOwner:** Risk Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

@@ -33,7 +33,6 @@
 - Quality of communication during an incident
 - Quality of the post-mortem and action follow-up
 - **Supporting:**
-- Coordination with consumers: Incident Commander
 - Coordination with consumers: Incident Response Engineer
 - Coordination with consumers: On-call Engineer
 - Coordination with consumers: Technical Support Engineer
@@ -100,7 +99,7 @@
 - **Reviewer:** NOT_APPLICABLE
 - **Approver:** NOT_APPLICABLE
 - **SupportingPersonas:** Consumers (supervised executors)
-- **ConsumerPersonas:** Incident Commander, Incident Response Engineer, On-call Engineer, Technical Support Engineer
+- **ConsumerPersonas:** Incident Response Engineer, On-call Engineer, Technical Support Engineer
 
 ---
 
@@ -389,7 +388,7 @@
 ---
 
 ## 24. Handoff
-- **PrimaryRecipient:** Incident Commander, Incident Response Engineer, On-call Engineer, Technical Support Engineer
+- **PrimaryRecipient:** Incident Response Engineer, On-call Engineer, Technical Support Engineer
 - **SupportingRecipients:** —
 - **DecisionOwner:** Incident Manager
 - **ImplementationOwner:** — (the supervisor does not implement itself)

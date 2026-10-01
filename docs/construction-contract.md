@@ -18,13 +18,13 @@ and how it is wired into the personas and the skills.
 
 ---
 
-## 1. Why one block, not 170 copies?
+## 1. Why one block, not 190 copies?
 
 The repository architecture is this: the persona prompts are **generated** (`scripts/generate_personas.py` from the README data)
 and the shared audit contract lives in **reusable blocks** (`composites/blocks/`).
-If we had copied the construction rules inside 170 persona files:
+If we had copied the construction rules inside 190 persona files:
 
-- every rule fix would have to be repeated 170 times (and would drift apart);
+- every rule fix would have to be repeated 190 times (and would drift apart);
 - regenerating the personas would wipe out manual edits;
 - the repository size and the model context would double for no reason.
 

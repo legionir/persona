@@ -7,9 +7,9 @@ as a static API. It contains basic search/categorization info for every role:
 id, role_id, type, domain/category/seniority, mission, duties, supervisors,
 consumers, capabilities, file path and keyword facets.
 
-It also carries a `composites` array with the 19 composite master prompts from
+It also carries a `composites` array with the 28 composite master prompts from
 `prompts/composite/`, so a consumer of this one file sees the whole library
-instead of only the 170 roles. A composite has no group / domain / seniority —
+instead of only the 190 roles. A composite has no group / domain / seniority —
 it runs several roles at once — so those fields are null by design.
 
 Usage:
@@ -30,7 +30,7 @@ from generate_personas import (  # noqa: E402
     ROOT, README, SPECS, GROUP_OF, GROUP_SPEC,
     TYPE_CAPS, CAPS_BY_GROUP, STEP_CAP, _step_kind,
     _slug, _steps, read_rows, load_details, spec_for,
-    build_supervisor_map, load_master_registry, seniority_of,
+    build_supervisor_map, seniority_of,
     GROUP_DOMAIN, GROUP_CATEGORY,
 )
 from persona_lib import (  # noqa: E402
@@ -183,7 +183,6 @@ def main() -> None:
     rows = read_rows()
     data_rows = [r for r in rows[1:]]
     details = load_details()
-    _ms, _me = load_master_registry()
     sup_titles = {r[0] for r in data_rows if r[2] == r"SUPERVISOR"}
     sup_map = build_supervisor_map(sup_titles)
     by_supervisor: dict[str, list[str]] = {}
@@ -261,7 +260,7 @@ def main() -> None:
             "details": r"README.md (full role table)",
             "generator": "scripts/generate_personas.py",
             "metadata_builder": "scripts/build_metadata.py",
-            "composites": "prompts/composite/*.md (+ composites/*.json for the 15 spec-driven ones)",
+            "composites": "prompts/composite/*.md (+ composites/*.json for the 24 spec-driven ones)",
         },
         "totals": {
             "roles": len(roles),

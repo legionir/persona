@@ -1,7 +1,7 @@
 # Persona library — one entry point for the whole generation pipeline.
 #
 # The canonical order matters: personas come from the README table, composites
-# are derived from the personas, and metadata and skills are derived from both.
+# are derived from role prompts, then metadata and skills are built in dependency order.
 # Running the targets out of order produces stale output — build_metadata.py
 # globs prompts/composite/*.md, so it must run AFTER compose_persona.py.
 #
@@ -22,7 +22,7 @@ SCRIPTS := scripts
 ## all: regenerate every artifact from its source, then validate
 all: prompts composites metadata skills validate test
 
-## prompts: role prompts + README links, from the README role table
+## prompts: role prompts + README Prompt links/Supervisor projection, from role data and canonical registry
 prompts:
 	$(PY) $(SCRIPTS)/generate_personas.py
 
@@ -30,21 +30,22 @@ prompts:
 metadata:
 	$(PY) $(SCRIPTS)/build_metadata.py
 
-## composites: the 22 spec-driven composite master prompts
+## composites: the 24 spec-driven composite master prompts
 composites:
 	$(PY) $(SCRIPTS)/compose_persona.py --all
 
-## skills: 216 Agent Skills + skills/index.json + skills/README.md
+## skills: 218 Agent Skills + skills/index.json + skills/README.md
 skills:
 	$(PY) $(SCRIPTS)/build_skills.py
 
-## validate: every structural check, without writing anything
+## validate: structural checks, exact parity checks, and generator safety tests (no repo writes)
 validate:
 	$(PY) $(SCRIPTS)/validate_personas.py
 	$(PY) $(SCRIPTS)/validate_composites.py
 	$(PY) $(SCRIPTS)/validate_skills.py
 	$(PY) $(SCRIPTS)/compose_persona.py --all --check
 	$(PY) $(SCRIPTS)/build_skills.py --check
+	$(PY) $(SCRIPTS)/test_generation.py
 
 ## check: validate and test, without writing anything
 check: validate test

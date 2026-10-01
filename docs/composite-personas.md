@@ -122,14 +122,27 @@ Suggested order for a full forensic audit:
 
 The automatic validation (`--check`) checks all of this: a non-empty title/mission, `inputs` entries that have a name, **2 to 12 lenses** (each one a valid, non-duplicated persona), the presence of every block, no duplicated block, a non-empty `precedence`, and that every `{{PLACEHOLDER}}` resolves.
 
+## 4.1 Eight-auditor codebase matrix
+
+For integrated codebase reviews, [`docs/eight-auditor-matrix.md`](eight-auditor-matrix.md) is the canonical scope and separation matrix for Security, Architecture, Code Quality, Performance, Reliability, Testing, Dependency, and DevOps. The [Codebase Integrity Audit Protocol](../prompts/composite/codebase-integrity-audit-protocol.md) applies it through an evidence-based applicability gate, supports changed-file CI runs, and consolidates cross-auditor findings before final severity calibration. Update the matrix first when scope ownership changes.
+
 ### Allowed placeholders
 
-`{{TITLE}}` `{{VERSION}}` `{{DATE}}` `{{MISSION}}` `{{INPUTS}}` `{{ORDER}}`
+`{{TITLE}}` `{{VERSION}}` `{{MISSION}}` `{{INPUTS}}` `{{ORDER}}`
 `{{LENS_TABLE}}` `{{LENS_COUNT}}` `{{PRECEDENCE}}` `{{EXTRA_SECTIONS}}`
 
 ---
 
-## 5. Build and regeneration
+## 5. Decisions for the four hand-maintained composites
+
+The following operating decisions apply to the four hand-maintained protocols in `prompts/composite/` and are recorded for this revision in [`composite-persona-decisions.md`](composite-persona-decisions.md):
+
+- Coverage is budgeted explicitly and reported with counts; sampling or unread in-scope material prevents a full-verification verdict.
+- Tool execution is opt-in: inspect side effects first, require explicit authorization, use a disposable isolated workspace, record exact commands/network use, and label unrun commands `NOT RUN`.
+- Execution plans separate repository implementation evidence from plan progress; new plan steps begin `UNASSESSED` / `NOT STARTED` unless evidence supports another state.
+- Binary assets and unchanged context-only files are inventoried and counted in distinct, non-overlapping classes; neither is silently counted as deeply reviewed.
+
+## 6. Build and regeneration
 
 ```bash
 # list the blocks and specs
@@ -147,7 +160,7 @@ The default output is written to `prompts/composite/` (`output` in the spec name
 
 ---
 
-## 6. Quality checklist before publishing a composite
+## 7. Quality checklist before publishing a composite
 
 - [ ] The mission is **one** compound sentence and is not attributable to any single lens.
 - [ ] 2 to 12 lenses, all from `prompts/`, all genuinely needed (not decorative).
@@ -176,7 +189,7 @@ The default output is written to `prompts/composite/` (`output` in the spec name
 
 ---
 
-## 7. Example: `Production Readiness & Reliability Audit`
+## 8. Example: `Production Readiness & Reliability Audit`
 
 Practical style:
 
@@ -190,7 +203,7 @@ DevOps Engineer, Observability Engineer, DBA), 12 "readiness gates" (Rollback/Re
 each of which takes `PASS/FAIL/BLOCKED/NOT_APPLICABLE`, and 6 specialised passes
 (failure-mode, recovery, observability, data, release/ops, cost).
 
-## 8. The repository's composite catalogue
+## 9. The repository's composite catalogue
 
 | Composite | Lenses | Focus |
 |---|---|---|
@@ -214,7 +227,7 @@ each of which takes `PASS/FAIL/BLOCKED/NOT_APPLICABLE`, and 6 specialised passes
 | `cloud-infrastructure-audit` | 7 | IaC and drift, exposure, IAM, secrets, blast radius, cost |
 | `privacy-compliance-audit` | 6 | Personal-data flow, control-evidence, data-subject rights, third-party sharing |
 
-## 9. Building a new composite
+## 10. Building a new composite
 
 1. `cp composites/production-readiness-reliability-audit.json composites/<slug>.json`
 2. Write `title`/`mission`/`inputs`/`lenses`/`lens_focus`/`precedence`/`extra_sections`.

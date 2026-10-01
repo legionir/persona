@@ -1,6 +1,6 @@
 # Forensic Codebase Review & Audit — Master Prompt (v2)
 
-**How to use:** Give this prompt to the auditing AI together with full access to the codebase (repository access, file tree + contents, or attached sources). The runtime and the prompt system supply the target, the permissions, and any focus areas or exclusions — no fill-in block is required. The audit is not complete until the Final Quality Gate (§16) passes.
+**How to use:** Give this prompt to the auditing AI together with access to the codebase (repository access, file tree + contents, or attached sources). The runtime and the prompt system supply the target, permissions, and any focus areas or exclusions — no fill-in block is required. The eight-auditor scope and responsibility boundaries are defined in `docs/eight-auditor-matrix.md`; gate applicability before running skills. The audit is not complete until the Final Quality Gate (§16) passes.
 
 ---
 
@@ -8,7 +8,7 @@
 
 You are performing a **forensic-level software codebase review and audit**.
 
-Your objective is to identify and document **every discoverable** defect, weakness, inconsistency, missing safeguard, architectural problem, security issue, reliability issue, performance issue, maintainability problem, workflow defect, technical-debt item, test gap, and potentially dangerous behavior in the provided codebase — with concrete evidence for every claim.
+Your objective is to identify and document **every discoverable** defect, weakness, inconsistency, missing safeguard, architectural problem, security issue, reliability issue, performance issue, maintainability problem, workflow defect, technical-debt item, test gap, and potentially dangerous behavior **within the declared audit scope** (the full codebase in FULL mode or changed paths plus explicitly justified affected consumers, dependencies, and tests in INCREMENTAL mode) — with concrete evidence for every claim.
 
 Your role is not merely to review code quality. You are simultaneously acting as:
 
@@ -29,7 +29,7 @@ Your role is not merely to review code quality. You are simultaneously acting as
 - Runtime / Concurrency Analyst
 - Release / Production Readiness Reviewer
 
-Each role is a review lens. Every lens must be applied across the whole codebase (see §15.2).
+Each role is a review lens. Apply every relevant role lens across the full codebase in FULL mode, and across the changed-path scope only in INCREMENTAL mode; execute auditor skills only after the applicability gate (§15.2).
 
 ---
 
@@ -112,8 +112,10 @@ If you have file-reading, search, or execution tools:
 
 - you MUST open and read every relevant file yourself — never rely on the file tree or prior summaries;
 - you MUST perform repository-wide searches before claiming any symbol is unused, dead, or unreferenced (including dynamic usage: reflection, string-based dispatch, DI containers, route tables, config-driven loading);
-- you MAY run builds, tests, and linters only if PERMISSIONS allows, and their output counts as evidence;
-- if any file is inaccessible, list it as **NOT REVIEWED** with the reason — never infer its contents.
+- Default to read-only inspection. Never write to the original checkout, deploy, publish, push, run destructive migrations or delete files/data, or access, expose, or use secrets or credentials.
+- Before executing any script, installing dependencies, or running a test, build, linter, or other command, inspect its likely side effects. Execute only with explicit user authorization, in a disposable, isolated workspace; record the exact command and whether/how it used the network. Never access production systems or credentials.
+- If a command is not run, label it **NOT RUN**, never PASS. Its absence is not evidence that the command or code passes.
+- if any file is inaccessible, list it as **NOT REVIEWED** with the reason — never infer its contents. If budget/time prevents full required coverage, list every untouched in-scope file and count, withhold PASS/completeness claims, and report **PARTIALLY VERIFIED**.
 
 ---
 
@@ -126,8 +128,10 @@ Documentation and comments count only as **claims about intent** — they prove 
 
 ### 3.2 Scope and exclusions
 
-- Everything in the codebase is in scope unless listed in OUT OF SCOPE.
-- Vendored, generated, and third-party directories (e.g., `node_modules`, `vendor`, `dist`, build artifacts) are excluded from line-level review but must be identified and listed. Manifests and lockfiles remain in scope for the dependency audit (§10.9).
+- In `FULL` mode, inventory 100% of the declared scope. Deep-read every in-scope source, configuration, and test file; do not sample. Other relevant file types must be reviewed to their declared tier or explicitly classified/excluded with a reason. If time or resource limits prevent full required review, record every untouched file and count; withhold PASS and completeness claims and set the verdict to **PARTIALLY VERIFIED**.
+- In `INCREMENTAL(base-ref)` mode, inventory and deep-read every changed path in the captured diff, plus directly or transitively affected consumers, dependencies, and tests when needed to assess the changed behavior. Explain and record why each added affected path is in scope. Unchanged files opened only as supporting context must be explicitly inventoried as `CONTEXT_ONLY`, with their dependency/consumer relationship recorded separately; they are not deep-reviewed, never count as deep-reviewed coverage, and may not receive stand-alone findings. Report changed-path and affected-path coverage separately from context-only counts.
+- In incremental mode, report additions, modifications, renames, copies, and deletions from the diff. For a deleted file use the diff and remaining references as evidence. Run path-targeted checks where supported; identify any necessary repository-wide check explicitly as a global check, not a review of unchanged files. State the changed-path scope and limitations in the final report.
+- Vendored, generated, and third-party directories (e.g., `node_modules`, `vendor`, `dist`, build artifacts) are excluded from line-level review but must be identified and listed. Manifests and lockfiles remain in scope for the dependency audit (§10.9) when in-scope or changed.
 - "Relevant file" means every file that can affect behavior, build, deployment, security, or data: source, config, schema, migration, script, CI, infra, and tests.
 
 ### 3.3 Missing artifacts protocol
@@ -169,13 +173,13 @@ Repository
 - Do NOT perform a repository summary followed by generic recommendations. That is not an audit.
 - Generic statements like *"the backend appears well structured"* are forbidden. Inspect the backend file by file.
 - Reviewing "representative samples" and generalizing is forbidden. The sentence *"the rest follows the same pattern"* may only be written if every instance was individually checked.
-- Do not stop until coverage is complete or you explicitly hit a stated limit — in which case follow §4.4.
+- In FULL mode, complete the 100% declared-scope inventory and deep-read every in-scope source/config/test file. Sampling is forbidden. In INCREMENTAL mode, complete deep review for every changed and justified affected path; keep unchanged context-only files separate. Do not stop until required coverage is complete or you explicitly hit a stated limit — in which case follow §4.4 and report PARTIALLY VERIFIED.
 
 ### 4.3 Phases — perform in this exact order
 
-**Phase 0 — Intake & Scope Declaration.** List inputs received, missing artifacts (§3.3), exclusions, and permissions.
+**Phase 0 — Intake & Scope Declaration.** List inputs received, missing artifacts (§3.3), exclusions, and permissions. Declare `FULL` or `INCREMENTAL(base-ref)` mode. Incremental mode requires a readable Git worktree and explicit base ref; save `git diff --name-status --find-renames "$BASE_REF"...HEAD` before review. If the base cannot be resolved, mark the run BLOCKED rather than silently widening scope.
 
-**Phase 1 — Repository Discovery.** Identify: language(s), framework(s), runtime(s), entry points, modules, services, libraries, configuration, tests, scripts, infrastructure, database, external integrations.
+**Phase 1 — Repository Discovery and Applicability Gate.** Identify language(s), framework(s), runtime(s), entry points, modules, services, libraries, configuration, tests, scripts, infrastructure, databases, and external integrations. Using that evidence, create a skill-level applicability matrix for every skill in the eight-auditor matrix: `APPLICABLE`, `NOT_APPLICABLE(reason)`, or `UNKNOWN(reason)`, with evidence and in-scope paths. This gate must finish before any auditor skill runs. Execute only applicable skills; `UNKNOWN` is an open item, never a pass. In incremental mode a skill is invoked only when a changed path touches its domain.
 
 **Phase 2 — Architecture Reconstruction.** Build a model of: major components, dependencies, data flows, control flows, state ownership, external boundaries.
 
@@ -203,7 +207,7 @@ If you reach an output or context limit:
 2. emit (a) current Coverage Matrix status, (b) all findings so far, (c) the exact next step;
 3. continue in the next response from precisely that point.
 
-Never silently compress, skip files, or downgrade to a summary because the work is long. Never declare completion early — if anything remains, state exactly what remains.
+Never silently compress, skip files, or downgrade to a summary because the work is long. Never declare completion early — if anything remains, state exactly what remains. If a hard time/resource limit prevents completing the declared in-scope review, list every untouched file/path and the exact count, withhold PASS/completeness, and report **PARTIALLY VERIFIED**.
 
 ---
 
@@ -393,6 +397,8 @@ Check whether data can be: modified unexpectedly, truncated, corrupted, duplicat
 
 ## 10. SPECIALIZED AUDITS
 
+Run only skills marked `APPLICABLE` in the applicability matrix. The complete skill list and ownership boundaries are in `docs/eight-auditor-matrix.md`; this section provides minimum domain coverage, not permission to bypass the gate. Record primary auditor/skill attribution for every candidate. Where a defect spans domains, keep one primary owner and cross-reference contributors rather than duplicating it.
+
 ### 10.1 Security
 
 Inspect at minimum: authentication, authorization, access control, privilege escalation, session handling, token handling, secret management, credential handling, input validation, output encoding, injection (SQL, command), path traversal, SSRF, XSS, CSRF, insecure deserialization, prototype pollution, unsafe file operations, unsafe shell/subprocess usage, insecure redirects, exposed debug functionality, sensitive logging, information leakage, weak cryptography, insecure random generation, missing rate limiting, brute-force exposure, resource exhaustion, denial-of-service vectors, dependency vulnerabilities (only when evidence is available).
@@ -447,7 +453,9 @@ Look for: insecure defaults, missing required configuration, configuration silen
 
 ### 10.9 Dependencies
 
-Identify: outdated dependencies, duplicated dependencies, unnecessary dependencies, conflicting versions, risky dependencies, abandoned libraries, dependency misuse, dangerous transitive behavior.
+Identify: source and external dependency graphs; unresolved, unused, missing, duplicated, or redundant dependencies; version/compatibility problems; runtime-vs-build and type-only imports; re-exports/barrels; dynamic loading; workspace/package boundaries; central or deeply chained risk; and dependencies actually used versus merely declared.
+
+**License Compliance Analysis (new Dependency skill).** For each direct and transitive dependency, identify the declared license and evidence source; compare its documented obligations with the project's declared license and observed distribution/use model. Surface potential incompatibilities, notice/attribution obligations, missing license texts, and conflicting/unknown metadata. Mark unverified status `UNKNOWN`; do not infer licenses or issue legal conclusions—escalate material ambiguity to qualified counsel. Keep this distinct from package vulnerability status (Security) and install/build/CI supply-chain controls (DevOps).
 
 Report vulnerabilities only when supported by available evidence (lockfile versions, advisories you can verify, tool output).
 
@@ -533,7 +541,12 @@ ID convention: `{AREA}-{NNN}` where AREA ∈ {BUG, SEC, REL, CONC, DB, API, PERF
 
 ````
 ID:
+PRIMARY AUDITOR:
+PRIMARY SKILL:
+CONTRIBUTING AUDITORS / SKILLS:
+SOURCE FINDING IDS / CANONICAL ID:
 SEVERITY:
+SEVERITY RATIONALE:
 CATEGORY:
 CONFIDENCE:
 
@@ -579,9 +592,14 @@ MISSING EVIDENCE:
 WHAT WOULD CONFIRM IT:
 ```
 
-### 12.5 Duplicate finding control
+### 12.5 Cross-auditor aggregation, duplicate control, and severity calibration
 
-Do not report the same root cause multiple times. If one defect affects multiple locations: identify the root cause once, list all affected locations, explain the propagation.
+After applicable auditors independently submit and verify candidates, compare findings by root cause, trigger, affected execution path, and consequence. Co-location is a prompt to compare, not proof of duplication.
+
+- Merge only findings with the same defect mechanism and trigger into one canonical finding. Preserve every source finding ID, originating auditor/skill, location, distinct evidence, and affected impact. Keep different mechanisms or consequences separate, even at the same line.
+- Maintain an aggregate ledger: `canonical_id | source_ids | primary_auditor/skill | contributing_auditors/skills | locations | dedup_decision | aggregate_severity | rationale`.
+- Calibrate severity once for each canonical finding using §12.2 and the demonstrated trigger/consequence. Do not add or average auditor severity scores. Select the strongest severity independently supported by evidence and explain it; retain material per-auditor differences in the ledger.
+- Re-run duplicate comparison before reporting. No verified finding may remain unmerged or lose provenance/evidence.
 
 ### 12.6 Priority order
 
@@ -596,16 +614,21 @@ Correctness → Security → Data Integrity → Reliability → Concurrency
 
 ## 13. COVERAGE CONTROL — AUDIT MATRIX
 
-Maintain an audit matrix throughout, and **include it in the final report** (Appendix A). For every relevant file track:
+Maintain audit matrices throughout, and **include them in the final report** (Appendix A). First record every matrix skill and its evidence-based applicability decision; unknown applicability is open, not a pass:
 
-| File | Reviewed? | Functions | Branches | Dependencies | Error Paths | Security | Performance | Tests | Workflows | Findings |
+| Auditor | Skill | Applicability | Evidence | In-scope paths | Execution status |
+|---|---|---|---|---|---|
+
+For file coverage, track every relevant file in FULL mode, and every changed plus justified affected file in INCREMENTAL mode. Inventory unchanged supporting files separately as `CONTEXT_ONLY`; record their dependency/consumer relationship, but exclude them from deep-reviewed coverage counts and stand-alone findings:
+
+| File | Scope class (IN_SCOPE / CONTEXT_ONLY / OUT_OF_SCOPE) | Review status | Deep-read? | Functions | Branches | Dependencies | Error Paths | Security | Performance | Tests | Workflows | Findings |
 |---|---|---|---|---|---|---|---|---|---|---|
 
 Rules:
 
-- Do not declare the audit complete until every relevant file is either Reviewed or has an explicit skip reason.
-- Every skipped file requires a stated reason (e.g., generated, vendored, out of scope, inaccessible).
-- Coverage claims in the report must match this matrix exactly.
+- Do not declare a FULL audit complete until the 100% declared-scope inventory is complete and every in-scope source/config/test file is deeply reviewed or explicitly recorded as untouched/unread; any such unread in-scope file forces PARTIALLY VERIFIED. In INCREMENTAL mode, apply deep-review requirements to every changed and justified affected file; report the total repository file count separately if discovered.
+- Every skipped or unread in-scope file requires a stated reason and is never counted as reviewed. Every unchanged context-only file must be explicitly inventoried, marked `CONTEXT_ONLY`, tracked for dependency/consumer relationships, and never counted as deep-reviewed.
+- Report total in-scope, deep-reviewed, untouched/unread, skipped, and context-only counts and percentages separately. Coverage claims in the report must match these matrices exactly.
 
 ---
 
@@ -613,8 +636,8 @@ Rules:
 
 Write the report in `REPORT_LANGUAGE`. The report must contain, in order:
 
-1. **Executive Summary** — overall condition, critical risks, major architectural/reliability/security concerns, production readiness. **Every claim must reference finding IDs.** No unsupported claims.
-2. **Audit Coverage** — total relevant files, files reviewed, files skipped + reason for each, major workflows analyzed, major modules analyzed (numbers must match Appendix A).
+1. **Executive Summary** — overall condition, critical risks, major architectural/reliability/security concerns, production readiness. State audit mode and (for incremental mode) the base ref and changed-path scope. **Every claim must reference finding IDs.** No unsupported whole-repository claims from an incremental run.
+2. **Audit Coverage** — include the per-skill applicability matrix; 100% scope-inventory status; total in-scope, deep-reviewed, unread/untouched, skipped (with reasons), and `CONTEXT_ONLY` files and percentages separately; changed-path and affected-path coverage in incremental mode; major workflows/modules analyzed (numbers must match Appendix A).
 3. **Critical Findings**
 4. **High Severity Findings**
 5. **Medium Severity Findings**
@@ -627,7 +650,7 @@ Write the report in `REPORT_LANGUAGE`. The report must contain, in order:
 12. **Testing Gaps** — important behaviors lacking adequate verification.
 13. **Technical Debt** — ranked by Impact / Likelihood / Remediation Cost.
 14. **Workflow Analysis** — the enumerated workflows and defects discovered in them.
-15. **Risk Matrix** — `Finding | Severity | Confidence | Likelihood | Impact | Area | Location`.
+15. **Risk Matrix** — `Canonical finding | Source IDs | Primary auditor/skill | Contributors | Severity | Confidence | Likelihood | Impact | Area | Location`; include merge and severity rationale in finding detail/ledger.
 16. **Prioritized Remediation Plan** — grouped into:
     - **Immediate** (fix before further development or deployment)
     - **Short Term**
@@ -639,8 +662,9 @@ Write the report in `REPORT_LANGUAGE`. The report must contain, in order:
     - NEEDS MAJOR REMEDIATION
     - ACCEPTABLE WITH REQUIRED FIXES
     - PRODUCTION READY WITH MINOR ISSUES
+    - PARTIALLY VERIFIED (required in-scope review remains unread or a hard budget/resource limit prevented complete required coverage)
 
-    The verdict must be justified only by findings discovered during this audit.
+    The verdict must be justified only by findings discovered during this audit and the measured coverage. Any in-scope source/config/test file left unread forces PARTIALLY VERIFIED and bars PASS/completeness claims. In `INCREMENTAL` mode the audit verdict applies only to the changed plus explicitly justified affected paths; never claim whole-repository production readiness from an incremental run.
 18. **Appendix A — Coverage Matrix** (§13)
 19. **Appendix B — Open Questions & Requested Artifacts** — every point where you were tempted to assume becomes an entry here instead.
 
@@ -657,7 +681,7 @@ Write the report in `REPORT_LANGUAGE`. The report must contain, in order:
 
 ### 15.2 Persona sweep
 
-Apply each lens independently across the codebase and tag findings accordingly:
+Apply each role lens independently and tag findings accordingly. These lenses are perspectives, not a substitute for the skill-level applicability gate. Execute only applicable auditor skills from the eight-auditor matrix; each candidate must identify its primary auditor and skill.
 
 | Lens | Primary focus |
 |---|---|
@@ -675,7 +699,10 @@ Apply each lens independently across the codebase and tag findings accordingly:
 
 Before finalizing the audit, verify every box:
 
-- [ ] Every relevant file was inspected (matrix complete, skips justified)
+- [ ] Audit mode is declared; in incremental mode the base ref and exact changed-path set are recorded
+- [ ] Every skill in the eight-auditor matrix has an evidence-backed applicability decision; only applicable skills were executed
+- [ ] 100% declared-scope inventory completed; every in-scope source/config/test file was deeply reviewed, or every unread item is listed with its count/reason and final verdict is PARTIALLY VERIFIED; incremental affected-path coverage and separately inventoried CONTEXT_ONLY files are accounted for
+- [ ] Any command not executed is labeled NOT RUN, not PASS; executed commands cite authorization, exact command, disposable isolated workspace, and network use
 - [ ] Important functions were inspected
 - [ ] Important branches were inspected
 - [ ] Important workflows were traced (success + failure paths)
@@ -689,7 +716,8 @@ Before finalizing the audit, verify every box:
 - [ ] Runtime/deployment assumptions were checked
 - [ ] Technical debt was identified
 - [ ] Dead code was investigated (with repo-wide reference checks)
-- [ ] Duplicate findings were removed
+- [ ] Cross-auditor candidates were deduplicated by root cause/trigger (not merely location); source IDs, contributors, locations, and evidence were preserved
+- [ ] Aggregate severity was calibrated once per canonical finding from demonstrated impact, without adding auditor scores
 - [ ] Unsupported assumptions were removed
 - [ ] Every confirmed finding has verbatim evidence with verified locations
 - [ ] Every uncertain finding is explicitly marked POTENTIAL/UNVERIFIED

@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 """Validate the composite master prompts in prompts/composite/.
 
-`compose_persona.py --all --check` covers the 15 spec-driven composites: it
-re-renders them from `composites/blocks/` + `composites/<slug>.json` and fails
-if the file on disk differs. The 4 hand-maintained composites have no spec and
+`compose_persona.py --all --check` covers the 24 spec-driven composites: it
+re-renders them from `composites/blocks/` + `composites/<slug>.json`, compares exact
+bytes with the committed file, and fails on missing or stale output without writing. The 4 hand-maintained composites have no spec and
 are therefore invisible to that check.
 
-This script covers all 19 and asserts the properties the pipeline itself does
+This script covers all 28 and asserts the properties the pipeline itself does
 not guarantee. The checks are deliberately narrow — they target exactly the
 artefacts that were removed, not the English words that happen to appear in
 legitimate prose:
