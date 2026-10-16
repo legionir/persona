@@ -17,6 +17,8 @@
 >
 > 📄 Licensed under [Apache-2.0](LICENSE).
 
+> **Claude Code:** skills, subagents and plugin manifests are ready to use — see [docs/claude-code.md](docs/claude-code.md).
+
 ## Table of Contents
 - [Complete role table](#complete-role-table)
 - [Grouping by domain](#grouping-by-domain)

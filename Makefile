@@ -17,10 +17,10 @@ PORT    ?= 8000
 SCRIPTS := scripts
 
 .DEFAULT_GOAL := all
-.PHONY: all prompts metadata composites skills validate check test serve clean help
+.PHONY: all prompts metadata composites skills claude-code validate check test serve clean help
 
 ## all: regenerate every artifact from its source, then validate
-all: prompts composites metadata skills validate test
+all: prompts composites metadata skills claude-code validate test
 
 ## prompts: role prompts + README Prompt links/Supervisor projection, from role data and canonical registry
 prompts:
@@ -38,6 +38,10 @@ composites:
 skills:
 	$(PY) $(SCRIPTS)/build_skills.py
 
+## claude-code: subagents (agents/), plugin manifests and .claude/ symlinks from skills/
+claude-code:
+	$(PY) $(SCRIPTS)/build_claude_code.py
+
 ## validate: structural checks, exact parity checks, and generator safety tests (no repo writes)
 validate:
 	$(PY) $(SCRIPTS)/validate_personas.py
@@ -45,6 +49,7 @@ validate:
 	$(PY) $(SCRIPTS)/validate_skills.py
 	$(PY) $(SCRIPTS)/compose_persona.py --all --check
 	$(PY) $(SCRIPTS)/build_skills.py --check
+	$(PY) $(SCRIPTS)/build_claude_code.py --check
 	$(PY) $(SCRIPTS)/test_generation.py
 
 ## check: validate and test, without writing anything

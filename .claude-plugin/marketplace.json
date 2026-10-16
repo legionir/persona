@@ -1,0 +1,20 @@
+{
+  "name": "persona",
+  "owner": {
+    "name": "legionir"
+  },
+  "plugins": [
+    {
+      "name": "persona",
+      "version": "1.0.0",
+      "description": "190 role personas as subagents and 218 persona/audit skills",
+      "keywords": [
+        "persona",
+        "audit",
+        "agents",
+        "skills"
+      ],
+      "source": "./"
+    }
+  ]
+}

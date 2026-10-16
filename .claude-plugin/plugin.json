@@ -1,0 +1,12 @@
+{
+  "name": "persona",
+  "version": "1.0.0",
+  "description": "190 role personas as subagents and 218 persona/audit skills",
+  "license": "Apache-2.0",
+  "keywords": [
+    "persona",
+    "audit",
+    "agents",
+    "skills"
+  ]
+}
